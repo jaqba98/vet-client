@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@vet-client/lib-page": ["libs/page/src/index.ts"],
+      "@vet-client/lib-route": ["libs/route/src/index.ts"],
       "@vet-client/lib-vet-client": ["libs/vet-client/src/index.ts"]
     }
   },
