@@ -17,7 +17,8 @@
     "paths": {
       "@vet-client/lib-page": ["libs/page/src/index.ts"],
       "@vet-client/lib-route": ["libs/route/src/index.ts"],
-      "@vet-client/lib-vet-client": ["libs/vet-client/src/index.ts"]
+      "@vet-client/lib-vet-client": ["libs/vet-client/src/index.ts"],
+      "@vet-client/lib-view": ["libs/view/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
