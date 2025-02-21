@@ -1,1 +1,2 @@
-export * from './lib/lib-vet-client/lib-vet-client.component';
+export * from './lib/app.component';
+export * from './lib/app.config';

@@ -1,6 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+
+import { AppComponent, appConfig } from '@vet-client/lib-vet-client';
 
 bootstrapApplication(AppComponent, appConfig).catch((err) =>
   console.error(err)
