@@ -1,9 +1,1 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div>
-    <input type="text" formControlName="login">
-  </div>
-  <div>
-    <input type="text" formControlName="password">
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<lib-base-form [baseForm]="loginForm"></lib-base-form>
