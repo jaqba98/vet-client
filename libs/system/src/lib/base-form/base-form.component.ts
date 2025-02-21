@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { BaseFormControlModel, BaseFormModel } from './base-form.model';
+import { ButtonControlComponent, InputControlComponent } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-base-form',
-  imports: [CommonModule ,ReactiveFormsModule],
+  imports: [CommonModule ,ReactiveFormsModule, InputControlComponent, ButtonControlComponent],
   templateUrl: './base-form.component.html'
 })
 export class BaseFormComponent implements OnInit {
