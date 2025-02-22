@@ -11,7 +11,8 @@ import { BaseFormModel, ControlInputModel, ControlKindEnum, ControlType } from '
   templateUrl: './base-form.component.html'
 })
 export class BaseFormComponent implements OnInit {
-  @Input({ required: true }) baseForm!: BaseFormModel;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input({ required: true }) baseForm!: BaseFormModel<any>;
 
   readonly formGroup: FormGroup;
 
@@ -24,7 +25,8 @@ export class BaseFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.baseForm.onSubmit(this.formGroup);
+    const model = this.formGroup.getRawValue();
+    this.baseForm.onSubmit(model);
   }
 
   private addControls() {

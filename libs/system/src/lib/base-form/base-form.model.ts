@@ -1,5 +1,4 @@
 import { ButtonControlModel, InputControlModel } from '@vet-client/lib-control';
-import { FormGroup } from '@angular/forms';
 
 export enum ControlKindEnum {
   input = 'input',
@@ -16,7 +15,7 @@ export interface ControlButtonModel extends ButtonControlModel {
 
 export type ControlType = ControlInputModel | ControlButtonModel;
 
-export interface BaseFormModel {
+export interface BaseFormModel<TModel> {
   controls: ControlType[];
-  onSubmit: (formGroup: FormGroup) => void;
+  onSubmit: (model: TModel) => void;
 }
