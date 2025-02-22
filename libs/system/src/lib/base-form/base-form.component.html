@@ -1,14 +1,14 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+<form [formGroup]="getFormGroup()" (ngSubmit)="onSubmit()">
   <ng-container *ngFor="let control of baseForm.controls">
-    <!-- Input control-->
+    <!-- Input-->
     <ng-container *ngIf="control.kind === 'input'">
       <lib-input-control
-        [formGroup]="formGroup"
+        [formGroup]="getFormGroup()"
         [controlName]="control.name"
         [model]="control"
       ></lib-input-control>
     </ng-container>
-    <!-- Button control -->
+    <!-- Button -->
     <ng-container *ngIf="control.kind === 'button'">
       <lib-button-control [model]="control"></lib-button-control>
     </ng-container>

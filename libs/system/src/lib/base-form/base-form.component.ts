@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ButtonControlComponent, InputControlComponent } from '@vet-client/lib-control';
-import { BaseFormModel, ControlInputModel, ControlKindEnum, ControlType } from './base-form.model';
+import { InputControlComponent, ButtonControlComponent } from '@vet-client/lib-control';
+import { BaseFormModel, ControlKindEnum, ControlType } from './base-form.model';
 
 @Component({
   selector: 'lib-base-form',
@@ -11,10 +11,9 @@ import { BaseFormModel, ControlInputModel, ControlKindEnum, ControlType } from '
   templateUrl: './base-form.component.html'
 })
 export class BaseFormComponent implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input({ required: true }) baseForm!: BaseFormModel<any>;
+  @Input({ required: true }) baseForm!: BaseFormModel;
 
-  readonly formGroup: FormGroup;
+  private readonly formGroup: FormGroup;
 
   constructor() {
     this.formGroup = new FormGroup({});
@@ -29,6 +28,10 @@ export class BaseFormComponent implements OnInit {
     this.baseForm.onSubmit(model);
   }
 
+  getFormGroup() {
+    return this.formGroup;
+  }
+
   private addControls() {
     this.baseForm.controls.forEach(control => this.addControl(control));
   }
@@ -36,21 +39,13 @@ export class BaseFormComponent implements OnInit {
   private addControl(control: ControlType) {
     switch (control.kind) {
       case ControlKindEnum.input:
-        this.formGroup.addControl(control.name, this.createInputFormControl(control));
+        this.formGroup.addControl(control.name, new FormControl(control.defaultValue));
         break;
       case ControlKindEnum.button:
-        this.formGroup.addControl(control.name, this.createButtonFormControl());
+        this.formGroup.addControl(control.name, new FormControl(control.defaultValue));
         break;
       default:
         throw new Error(`The control kind is not supported.`);
     }
-  }
-
-  private createInputFormControl(input: ControlInputModel) {
-    return new FormControl(input.defaultValue);
-  }
-
-  private createButtonFormControl() {
-    return new FormControl();
   }
 }
