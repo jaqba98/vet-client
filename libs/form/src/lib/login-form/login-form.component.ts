@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { BaseFormComponent, BaseFormModel, BaseFormService, TControlsArray } from '@vet-client/lib-system';
-import { LoginFormModel } from './login-form.model';
+import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
   imports: [BaseFormComponent],
   templateUrl: './login-form.component.html'
 })
-export class LoginFormComponent extends BaseFormService {
+export class LoginFormComponent extends BaseFormService<LoginFormDataModel> {
   protected readonly loginForm: BaseFormModel<LoginFormModel> = {
     controls: {
       email: {
@@ -38,5 +38,9 @@ export class LoginFormComponent extends BaseFormService {
     super();
     this.formGroup = this.createFormGroup(this.loginForm);
     this.controlsArray = this.getControlsArray(this.loginForm);
+  }
+
+  override onSubmit(model: LoginFormDataModel) {
+    console.log(model);
   }
 }

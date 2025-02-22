@@ -5,3 +5,9 @@ export interface LoginFormModel {
   password: ControlType;
   login: ControlType;
 }
+
+export interface LoginFormDataModel {
+  email: string;
+  password: string;
+  login: boolean;
+}

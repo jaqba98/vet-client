@@ -15,8 +15,11 @@ export class BaseFormComponent {
 
   @Input({ required: true}) controlsArray!: TControlsArray;
 
-  onSubmit() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input({ required: true }) onSubmit!: (model: any) => void;
+
+  onBaseSubmit() {
     const rawValue = this.formGroup.getRawValue();
-    console.log(rawValue);
+    this.onSubmit(rawValue);
   }
 }
