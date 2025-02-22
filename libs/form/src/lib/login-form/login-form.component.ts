@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { BaseFormComponent, BaseFormModel } from '@vet-client/lib-system';
+import { BaseFormComponent, BaseFormModel, ControlKindEnum } from '@vet-client/lib-system';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'lib-login-form',
@@ -10,9 +11,29 @@ import { BaseFormComponent, BaseFormModel } from '@vet-client/lib-system';
 export class LoginFormComponent {
   loginForm: BaseFormModel = {
     controls: [
-      { name: 'email' },
-      { name: 'password' }
+      {
+        kind: ControlKindEnum.input,
+        name: 'email',
+        type: 'email',
+        placeholder: 'Email',
+        defaultValue: ''
+      },
+      {
+        kind: ControlKindEnum.input,
+        name: 'password',
+        type: 'password',
+        placeholder: 'Password',
+        defaultValue: ''
+      },
+      {
+        kind: ControlKindEnum.button,
+        name: 'login',
+        type: 'submit',
+        text: 'Log in'
+      }
     ],
-    submit: 'Log in'
+    onSubmit: (formGroup: FormGroup) => {
+      console.log(formGroup);
+    },
   };
 }

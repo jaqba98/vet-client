@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { ButtonControlModel } from './button-control.model';
 
 @Component({
   selector: 'lib-button-control',
   templateUrl: './button-control.component.html'
 })
 export class ButtonControlComponent {
+  @Input({ required: true }) model!: ButtonControlModel;
 }

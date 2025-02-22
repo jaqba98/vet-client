@@ -1,6 +1,16 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <ng-container *ngFor="let control of baseForm.controls">
-      <lib-input-control [formGroup]="formGroup" [controlName]="control.name"></lib-input-control>
+    <!-- Input control-->
+    <ng-container *ngIf="control.kind === 'input'">
+      <lib-input-control
+        [formGroup]="formGroup"
+        [controlName]="control.name"
+        [model]="control"
+      ></lib-input-control>
+    </ng-container>
+    <!-- Button control -->
+    <ng-container *ngIf="control.kind === 'button'">
+      <lib-button-control [model]="control"></lib-button-control>
+    </ng-container>
   </ng-container>
-  <lib-button-control></lib-button-control>
 </form>
