@@ -1,4 +1,7 @@
+import { ControlType } from '@vet-client/lib-system';
+
 export interface LoginFormModel {
-  email: string;
-  password: string;
+  email: ControlType;
+  password: ControlType;
+  login: ControlType;
 }

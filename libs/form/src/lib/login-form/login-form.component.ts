@@ -1,43 +1,42 @@
 import { Component } from '@angular/core';
 
-import { BaseFormComponent, BaseFormModel, ControlKindEnum } from '@vet-client/lib-system';
+import { BaseFormComponent, BaseFormModel, BaseFormService, TControlsArray } from '@vet-client/lib-system';
 import { LoginFormModel } from './login-form.model';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'lib-login-form',
   imports: [BaseFormComponent],
   templateUrl: './login-form.component.html'
 })
-export class LoginFormComponent {
-  loginForm: BaseFormModel<LoginFormModel> = {
-    controls: [
-      {
-        kind: ControlKindEnum.input,
-        name: 'email',
-        type: 'email',
-        placeholder: 'Email',
-        defaultValue: '',
-        isInModel: true
+export class LoginFormComponent extends BaseFormService {
+  protected readonly loginForm: BaseFormModel<LoginFormModel> = {
+    controls: {
+      email: {
+        kind: 'input',
+        type: 'text',
+        placeholder: 'Email'
       },
-      {
-        kind: ControlKindEnum.input,
-        name: 'password',
+      password: {
+        kind: 'input',
         type: 'password',
-        placeholder: 'Password',
-        defaultValue: '',
-        isInModel: true
+        placeholder: 'Password'
       },
-      {
-        kind: ControlKindEnum.button,
-        name: 'login',
+      login: {
+        kind: 'button',
         type: 'submit',
-        text: 'Log in',
-        defaultValue: true,
-        isInModel: false
+        text: 'Log in'
       }
-    ],
-    onSubmit: (model: LoginFormModel) => {
-      console.log(`Email: ${model.email}, Password: ${model.password}`);
     }
   };
+
+  formGroup: FormGroup;
+
+  controlsArray: TControlsArray;
+
+  constructor() {
+    super();
+    this.formGroup = this.createFormGroup(this.loginForm);
+    this.controlsArray = this.getControlsArray(this.loginForm);
+  }
 }
