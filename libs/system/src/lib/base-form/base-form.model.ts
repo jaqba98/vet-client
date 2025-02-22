@@ -8,6 +8,7 @@ export enum ControlKindEnum {
 export interface ControlBaseModel<TDefaultValue> {
   name: string;
   defaultValue: TDefaultValue;
+  isInModel: boolean;
 }
 
 export interface ControlInputModel extends ControlBaseModel<string>, InputControlModel {
@@ -20,7 +21,7 @@ export interface ControlButtonModel extends ControlBaseModel<boolean>, ButtonCon
 
 export type ControlType = ControlInputModel | ControlButtonModel;
 
-export interface BaseFormModel {
+export interface BaseFormModel<TModel> {
   controls: ControlType[];
-  onSubmit: (model: unknown) => void;
+  onSubmit: (model: TModel) => void;
 }

@@ -11,7 +11,8 @@ import { BaseFormModel, ControlKindEnum, ControlType } from './base-form.model';
   templateUrl: './base-form.component.html'
 })
 export class BaseFormComponent implements OnInit {
-  @Input({ required: true }) baseForm!: BaseFormModel;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input({ required: true }) baseForm!: BaseFormModel<any>;
 
   private readonly formGroup: FormGroup;
 
@@ -25,7 +26,13 @@ export class BaseFormComponent implements OnInit {
 
   onSubmit() {
     const model = this.formGroup.getRawValue();
+    for (const control of this.baseForm.controls) {
+      if (control.isInModel) continue;
+      delete model[control.name];
+    }
     this.baseForm.onSubmit(model);
+    this.formGroup.reset();
+    this.formGroup.markAllAsTouched();
   }
 
   getFormGroup() {
