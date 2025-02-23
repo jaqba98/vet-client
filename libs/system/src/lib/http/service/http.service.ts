@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpModel } from '../model/http.model';
 import { PostService } from './post.service';
-import { HttpMethod } from '../enum/http-method.enum';
+import { HttpMethodEnum } from '../enum/http-method.enum';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
@@ -10,12 +10,11 @@ export class HttpService {
   }
 
   execute(model: HttpModel) {
-    switch (model.kind) {
-      case HttpMethod.post:
-        this.post.execute(model.type);
-        break;
+    switch (model.method) {
+      case HttpMethodEnum.post:
+        return this.post.execute(model.type);
       default:
-        throw new Error(`Unsupported kind ${model.kind}`);
+        throw new Error(`Unsupported kind ${model.method}`);
     }
   }
 }

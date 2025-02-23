@@ -1,10 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { InputControlComponent, ButtonControlComponent } from '@vet-client/lib-control';
 import { ControlsArrayType } from './base-form.model';
-import { HttpService } from '../http/service/http.service';
 
 @Component({
   selector: 'lib-base-form',
@@ -12,18 +11,14 @@ import { HttpService } from '../http/service/http.service';
   templateUrl: './base-form.component.html'
 })
 export class BaseFormComponent {
+  @Output() event = new EventEmitter();
+
   @Input({ required: true }) formGroup!: FormGroup;
 
   @Input({ required: true}) controlsArray!: ControlsArrayType;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input({ required: true }) onSubmit!: (http: HttpService, model: any) => void;
-
-  constructor(private readonly http: HttpService) {
-  }
-
-  onBaseFormSubmit() {
+  onSubmit() {
     const model = this.formGroup.getRawValue();
-    this.onSubmit(this.http, model);
+    this.event.emit(model);
   }
 }

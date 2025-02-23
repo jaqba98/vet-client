@@ -1,3 +1,3 @@
-export enum HttpEndpoint {
+export enum HttpEndpointEnum {
   login = 'login'
 }

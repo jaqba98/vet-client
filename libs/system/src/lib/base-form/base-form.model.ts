@@ -10,8 +10,6 @@ export interface ControlButtonModel extends ButtonControlModel {
 
 export type ControlType = ControlInputModel | ControlButtonModel;
 
-export interface BaseFormModel<TKey> {
-  controls: Record<keyof TKey, ControlType>;
-}
+export type BaseFormModel<TKey> = Record<keyof TKey, ControlType>;
 
 export type ControlsArrayType = { name: string, model: ControlType }[];

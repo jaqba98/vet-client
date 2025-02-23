@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" (ngSubmit)="onBaseFormSubmit()">
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <ng-container *ngFor="let control of controlsArray">
     <!-- Input-->
     <ng-container *ngIf="control.model.kind === 'input'">

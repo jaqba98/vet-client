@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { BaseFormModel, ControlType, ControlsArrayType } from './base-form.model';
-import { HttpService } from '../http/service/http.service';
 
 @Injectable()
 export class BaseFormService<TFormModel ,TFormDataModel> {
@@ -17,7 +16,7 @@ export class BaseFormService<TFormModel ,TFormDataModel> {
 
   createFormGroup(baseForm: BaseFormModel<TFormModel>): FormGroup {
     const formGroup = new FormGroup({});
-    Object.entries(baseForm.controls as Record<string, ControlType>).forEach(([key, control]) => {
+    Object.entries(baseForm as Record<string, ControlType>).forEach(([key, control]) => {
       switch (control.kind) {
         case 'input':
           formGroup.addControl(key, this.createInputFormControl());
@@ -33,12 +32,12 @@ export class BaseFormService<TFormModel ,TFormDataModel> {
   }
 
   getControlsArray(baseForm: BaseFormModel<TFormModel>): ControlsArrayType {
-    return Object.entries(baseForm.controls as Record<string, ControlType>)
+    return Object.entries(baseForm as Record<string, ControlType>)
       .map(([key, value]) => ({ name: key, model: value }));
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onSubmit(http: HttpService, model: TFormDataModel) {
+  onSubmit(model: TFormDataModel) {
     throw new Error('Unimplemented method name!');
   }
 

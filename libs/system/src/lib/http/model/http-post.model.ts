@@ -1,15 +1,15 @@
-import { HttpMethod } from '../enum/http-method.enum';
-import { HttpEndpoint } from '../enum/http-endpoint.enum';
-import { LoginPostHttpDtoModel } from './http-dto.model';
+import { HttpMethodEnum } from '../enum/http-method.enum';
+import { HttpEndpointEnum } from '../enum/http-endpoint.enum';
+import { LoginPostHttpRequestModel } from './http-request.model';
 
 interface LoginHttpPostModel {
-  kind: HttpEndpoint.login;
-  dto: LoginPostHttpDtoModel;
+  endpoint: HttpEndpointEnum.login;
+  request: LoginPostHttpRequestModel;
 }
 
 export type HttpPostType = LoginHttpPostModel;
 
 export interface HttpPostModel {
-  kind: HttpMethod.post;
+  method: HttpMethodEnum.post;
   type: HttpPostType;
 }
