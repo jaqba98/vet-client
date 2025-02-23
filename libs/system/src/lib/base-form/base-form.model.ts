@@ -14,4 +14,4 @@ export interface BaseFormModel<TKey> {
   controls: Record<keyof TKey, ControlType>;
 }
 
-export type TControlsArray = { name: string, model: ControlType }[];
+export type ControlsArrayType = { name: string, model: ControlType }[];

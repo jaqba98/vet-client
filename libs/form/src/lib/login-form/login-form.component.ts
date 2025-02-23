@@ -1,46 +1,52 @@
 import { Component } from '@angular/core';
 
-import { BaseFormComponent, BaseFormModel, BaseFormService, TControlsArray } from '@vet-client/lib-system';
+import {
+  BaseFormComponent,
+  BaseFormService,
+  HttpEndpoint,
+  HttpMethod,
+  HttpService,
+} from '@vet-client/lib-system';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'lib-login-form',
   imports: [BaseFormComponent],
   templateUrl: './login-form.component.html'
 })
-export class LoginFormComponent extends BaseFormService<LoginFormDataModel> {
-  protected readonly loginForm: BaseFormModel<LoginFormModel> = {
-    controls: {
-      email: {
-        kind: 'input',
-        type: 'text',
-        placeholder: 'Email'
-      },
-      password: {
-        kind: 'input',
-        type: 'password',
-        placeholder: 'Password'
-      },
-      login: {
-        kind: 'button',
-        type: 'submit',
-        text: 'Log in'
-      }
-    }
-  };
-
-  formGroup: FormGroup;
-
-  controlsArray: TControlsArray;
-
+export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFormDataModel> {
   constructor() {
-    super();
-    this.formGroup = this.createFormGroup(this.loginForm);
-    this.controlsArray = this.getControlsArray(this.loginForm);
+    super({
+      controls: {
+        email: {
+          kind: 'input',
+          type: 'text',
+          placeholder: 'Email'
+        },
+        password: {
+          kind: 'input',
+          type: 'password',
+          placeholder: 'Password'
+        },
+        login: {
+          kind: 'button',
+          type: 'submit',
+          text: 'Log in'
+        }
+      }
+    });
   }
 
-  override onSubmit(model: LoginFormDataModel) {
-    console.log(model);
+  override onSubmit(http: HttpService, model: LoginFormDataModel) {
+    http.execute({
+      kind: HttpMethod.post,
+      type: {
+        kind: HttpEndpoint.login,
+        dto: {
+          email: model.email,
+          password: model.password
+        }
+      }
+    });
   }
 }
