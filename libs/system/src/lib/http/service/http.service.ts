@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 
 import { HttpModel } from '../model/http.model';
-import { PostService } from './post.service';
 import { HttpMethodEnum } from '../enum/http-method.enum';
+import { HttpUtil } from '../util/http.util';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
-  constructor(private readonly post: PostService) {
+  constructor(private readonly http: HttpUtil) {
   }
 
-  execute(model: HttpModel) {
+  execute<T>(model: HttpModel) {
     switch (model.method) {
       case HttpMethodEnum.post:
-        return this.post.execute(model.type);
+        return this.http.post<T>(model.type);
       default:
         throw new Error(`Unsupported kind ${model.method}`);
     }

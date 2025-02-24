@@ -5,7 +5,8 @@ import {
   BaseFormService,
   HttpEndpointEnum,
   HttpMethodEnum,
-  HttpService
+  HttpService,
+  RegistrationPostHttpResponseModel
 } from '@vet-client/lib-system';
 import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
 
@@ -56,22 +57,23 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
   }
 
   override onSubmit(model: RegistrationFormDataModel) {
-    this.http.execute({
-      method: HttpMethodEnum.post,
-      type: {
-        endpoint: HttpEndpointEnum.registration,
-        request: {
-          email: model.email,
-          password: model.password,
-          confirmPassword: model.confirmPassword,
-          firstName: model.firstName,
-          lastName: model.lastName,
-          role: model.role
+    this.http
+      .execute<RegistrationPostHttpResponseModel>({
+        method: HttpMethodEnum.post,
+        type: {
+          endpoint: HttpEndpointEnum.registration,
+          request: {
+            email: model.email,
+            password: model.password,
+            confirmPassword: model.confirmPassword,
+            firstName: model.firstName,
+            lastName: model.lastName,
+            role: model.role
+          }
         }
-      }
-      // todo: Fix the response type it is wrong!
-    }).subscribe(response => {
-      console.log(response);
-    });
+      })
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 }
