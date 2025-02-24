@@ -5,7 +5,7 @@ import {
   BaseFormService,
   HttpEndpointEnum,
   HttpMethodEnum,
-  HttpService
+  HttpService, LoginPostHttpResponseModel
 } from '@vet-client/lib-system';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 
@@ -36,17 +36,18 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
   }
 
   override onSubmit(model: LoginFormDataModel) {
-    this.http.execute({
-      method: HttpMethodEnum.post,
-      type: {
-        endpoint: HttpEndpointEnum.login,
-        request: {
-          email: model.email,
-          password: model.password
+    this.http
+      .execute<LoginPostHttpResponseModel>({
+        method: HttpMethodEnum.post,
+        type: {
+          endpoint: HttpEndpointEnum.login,
+          request: {
+            email: model.email,
+            password: model.password
+          }
         }
-      }
-    }).subscribe(response => {
-      console.log(response);
-    });
+      }).subscribe(response => {
+        console.log(response);
+      });
   }
 }
