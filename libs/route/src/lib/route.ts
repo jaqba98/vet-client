@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { HomePageComponent, RegistrationPageComponent } from '@vet-client/lib-page';
+import { DashboardPageComponent, HomePageComponent, RegistrationPageComponent } from '@vet-client/lib-page';
 
 export const route: Route[] = [
   {
@@ -15,6 +15,10 @@ export const route: Route[] = [
   {
     path: 'registration',
     component: RegistrationPageComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardPageComponent
   },
   {
     path: '**',
