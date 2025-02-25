@@ -6,7 +6,7 @@ import { AuthGuard } from '@vet-client/lib-system';
 export const route: Route[] = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
@@ -24,7 +24,7 @@ export const route: Route[] = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
