@@ -34,7 +34,7 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "outputDir": "dist/storybook/sb",
+        "outputDir": "dist/storybook/lib-sb",
         "configDir": "libs/sb/.storybook",
         "browserTarget": "lib-sb:build-storybook",
         "compodoc": false
@@ -56,7 +56,7 @@
       "dependsOn": ["build-storybook"],
       "options": {
         "buildTarget": "lib-sb:build-storybook",
-        "staticFilePath": "dist/storybook/sb",
+        "staticFilePath": "dist/storybook/lib-sb",
         "spa": true
       },
       "configurations": {
