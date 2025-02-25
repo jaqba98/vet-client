@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   AuthPostHttpResponseModel,
@@ -19,7 +20,8 @@ import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFormDataModel> {
   constructor(
     private readonly http: HttpService,
-    private readonly cookie: CookieService
+    private readonly cookie: CookieService,
+    private readonly route: Router
   ) {
     super({
       email: {
@@ -55,19 +57,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         const { success, token } = response;
         if (success) {
           this.cookie.saveToCookie('token', token, 1);
-          const value = this.cookie.getCookie('token');
-          this.http
-            .execute<AuthPostHttpResponseModel>({
-              method: HttpMethodEnum.post,
-              type: {
-                endpoint: HttpEndpointEnum.auth,
-                request: {
-                  token: value
-                }
-              }
-            }).subscribe(response => {
-              console.log(response.isAuth);
-            });
+          this.route.navigate(['/dashboard']);
         }
       });
   }
