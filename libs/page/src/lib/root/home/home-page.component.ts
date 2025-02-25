@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-
-import { LoginViewComponent } from '@vet-client/lib-view';
+import { Component } from "@angular/core";
 
 @Component({
   selector: 'lib-home-page',
-  imports: [LoginViewComponent],
   templateUrl: './home-page.component.html'
 })
-export class HomePageComponent {}
+export class HomePageComponent {
+  title = 'home works!';
+}
