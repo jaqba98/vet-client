@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import { RootPageComponent } from '@vet-client/lib-page';
 
 const meta: Meta<RootPageComponent> = {
