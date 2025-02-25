@@ -9,7 +9,7 @@ import { HttpEndpointEnum } from '../http/enum/http-endpoint.enum';
 import { AuthPostHttpResponseModel } from '../http/model/http-response.model';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class DashboardGuard implements CanActivate {
   constructor(
     private readonly cookie: CookieService,
     private readonly http: HttpService,
@@ -19,7 +19,8 @@ export class AuthGuard implements CanActivate {
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     const token = this.cookie.getCookie('token');
     if (!token) {
-      this.router.navigate(['/']).then(() => of(false));
+      this.router.navigate(['/home']).then(() => of(false));
+      return false;
     }
     return this.http.execute<AuthPostHttpResponseModel>({
       method: HttpMethodEnum.post,
@@ -30,7 +31,7 @@ export class AuthGuard implements CanActivate {
     }).pipe(
       map(response => {
         if (response.isAuth) return true;
-        this.router.navigate(['/']).then(() => of(false));
+        this.router.navigate(['/home']).then(() => of(false));
         return false;
       })
     );

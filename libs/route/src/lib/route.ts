@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 
 import { DashboardPageComponent, HomePageComponent, RegistrationPageComponent } from '@vet-client/lib-page';
-import { AuthGuard } from '@vet-client/lib-system';
+import { DashboardGuard, OutsideGuard } from '@vet-client/lib-system';
 
 export const route: Route[] = [
   {
@@ -11,16 +11,18 @@ export const route: Route[] = [
   },
   {
     path: 'home',
-    component: HomePageComponent
+    component: HomePageComponent,
+    canActivate: [OutsideGuard]
   },
   {
     path: 'registration',
-    component: RegistrationPageComponent
+    component: RegistrationPageComponent,
+    canActivate: [OutsideGuard]
   },
   {
     path: 'dashboard',
     component: DashboardPageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [DashboardGuard]
   },
   {
     path: '**',
