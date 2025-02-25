@@ -1,5 +1,6 @@
 export interface LoginPostHttpResponseModel {
   success: boolean;
+  token: string;
 }
 
 export interface RegistrationPostHttpResponseModel {

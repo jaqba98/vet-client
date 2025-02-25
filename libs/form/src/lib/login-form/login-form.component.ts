@@ -47,7 +47,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           }
         }
       }).subscribe(response => {
-        console.log(response);
+        console.log(`Success: ${response.success}, token: ${response.token}`);
       });
   }
 }
