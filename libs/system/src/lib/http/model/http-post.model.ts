@@ -3,6 +3,7 @@ import { HttpEndpointEnum } from '../enum/http-endpoint.enum';
 import {
   AuthPostHttpRequestModel,
   LoginPostHttpRequestModel,
+  LogoutPostHttpRequestModel,
   RegistrationPostHttpRequestModel
 } from './http-request.model';
 
@@ -21,7 +22,12 @@ interface AuthHttpPostModel {
   request: AuthPostHttpRequestModel;
 }
 
-export type HttpPostType = LoginHttpPostModel | RegistrationHttpPostModel | AuthHttpPostModel;
+interface LogoutHttpPostModel {
+  endpoint: HttpEndpointEnum.logout;
+  request: LogoutPostHttpRequestModel;
+}
+
+export type HttpPostType = LoginHttpPostModel | RegistrationHttpPostModel | AuthHttpPostModel | LogoutHttpPostModel;
 
 export interface HttpPostModel {
   method: HttpMethodEnum.post;

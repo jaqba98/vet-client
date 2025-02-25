@@ -11,3 +11,7 @@ export interface RegistrationPostHttpResponseModel {
 export interface AuthPostHttpResponseModel {
   isAuth: boolean;
 }
+
+export interface LogoutPostHttpResponseModel {
+  logout: boolean;
+}

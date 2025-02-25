@@ -9,6 +9,10 @@ export class CookieService {
     document.cookie = `${key}=${value};${expires};path=/`;
   }
 
+  deleteCookie(name: string): void {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  }
+
   getCookie(key: string): string | null {
     const decodedCookie = decodeURIComponent(document.cookie);
     const cookiesArray = decodedCookie.split(';');

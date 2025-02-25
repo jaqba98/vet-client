@@ -15,3 +15,7 @@ export interface RegistrationPostHttpRequestModel {
 export interface AuthPostHttpRequestModel {
   token: string | null;
 }
+
+export interface LogoutPostHttpRequestModel {
+  logout: boolean;
+}

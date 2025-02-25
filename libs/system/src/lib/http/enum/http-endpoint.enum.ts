@@ -1,5 +1,6 @@
 export enum HttpEndpointEnum {
   login = 'login',
   registration = 'registration',
-  auth = 'auth'
+  auth = 'auth',
+  logout = 'logout'
 }
