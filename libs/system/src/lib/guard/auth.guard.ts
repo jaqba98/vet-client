@@ -1,5 +1,5 @@
 import { CanActivate, Router } from '@angular/router';
-import { catchError, map, Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { CookieService } from '../cookie/cookie.service';
@@ -18,7 +18,10 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     const token = this.cookie.getCookie('token');
-    if (!token) return false;
+    if (token === null) {
+      this.router.navigate(['/login']);
+      return of(false);
+    }
     return this.http.execute<AuthPostHttpResponseModel>({
       method: HttpMethodEnum.post,
       type: {
@@ -26,10 +29,12 @@ export class AuthGuard implements CanActivate {
         request: { token }
       }
     }).pipe(
-      map(res => res.isAuthorized),
-      catchError(() => {
-        this.router.navigate(['/'])
-        return of(false);
+      map(res => {
+        if (!res.isAuthorized) {
+          this.router.navigate(['/login']);
+          return false
+        }
+        return true;
       })
     );
   }
