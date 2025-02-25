@@ -5,3 +5,4 @@ export * from './lib/http/enum/http-endpoint.enum';
 export * from './lib/http/enum/http-method.enum';
 export * from './lib/http/service/http.service';
 export * from './lib/http/model/http-response.model';
+export * from './lib/cookie/cookie.service';

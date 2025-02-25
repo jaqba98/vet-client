@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {
   BaseFormComponent,
   BaseFormService,
+  CookieService,
   HttpEndpointEnum,
   HttpMethodEnum,
   HttpService, LoginPostHttpResponseModel
@@ -15,7 +16,10 @@ import { LoginFormDataModel, LoginFormModel } from './login-form.model';
   templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFormDataModel> {
-  constructor(private readonly http: HttpService) {
+  constructor(
+    private readonly http: HttpService,
+    private readonly cookie: CookieService
+  ) {
     super({
       email: {
         kind: 'input',
@@ -47,7 +51,12 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           }
         }
       }).subscribe(response => {
-        console.log(`Success: ${response.success}, token: ${response.token}`);
+        const { success, token } = response;
+        if (success) {
+          this.cookie.saveToCookie('token', token, 1);
+          const value = this.cookie.getCookie('token');
+          console.log(value);
+        }
       });
   }
 }
