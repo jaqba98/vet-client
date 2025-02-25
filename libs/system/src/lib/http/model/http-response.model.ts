@@ -9,5 +9,5 @@ export interface RegistrationPostHttpResponseModel {
 }
 
 export interface AuthPostHttpResponseModel {
-  isAuthorized: boolean;
+  isAuth: boolean;
 }

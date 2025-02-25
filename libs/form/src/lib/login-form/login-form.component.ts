@@ -66,7 +66,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
                 }
               }
             }).subscribe(response => {
-              console.log(response.isAuthorized);
+              console.log(response.isAuth);
             });
         }
       });

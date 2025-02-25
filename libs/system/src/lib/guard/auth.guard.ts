@@ -18,10 +18,8 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     const token = this.cookie.getCookie('token');
-    if (token === null) {
-      this.router.navigate(['/login']).then(() => {
-        return of(false);
-      });
+    if (!token) {
+      this.router.navigate(['/']).then(() => of(false));
     }
     return this.http.execute<AuthPostHttpResponseModel>({
       method: HttpMethodEnum.post,
@@ -30,13 +28,10 @@ export class AuthGuard implements CanActivate {
         request: { token }
       }
     }).pipe(
-      map(res => {
-        if (!res.isAuthorized) {
-          this.router.navigate(['/login']).then(() => {
-            return false
-          });
-        }
-        return true;
+      map(response => {
+        if (response.isAuth) return true;
+        this.router.navigate(['/']).then(() => of(false));
+        return false;
       })
     );
   }
