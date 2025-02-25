@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import {
+  AuthPostHttpResponseModel,
   BaseFormComponent,
   BaseFormService,
   CookieService,
@@ -55,7 +56,18 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         if (success) {
           this.cookie.saveToCookie('token', token, 1);
           const value = this.cookie.getCookie('token');
-          console.log(value);
+          this.http
+            .execute<AuthPostHttpResponseModel>({
+              method: HttpMethodEnum.post,
+              type: {
+                endpoint: HttpEndpointEnum.auth,
+                request: {
+                  token: value
+                }
+              }
+            }).subscribe(response => {
+              console.log(response.isAuthorized);
+            });
         }
       });
   }

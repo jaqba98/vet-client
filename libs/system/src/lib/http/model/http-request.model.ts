@@ -11,3 +11,7 @@ export interface RegistrationPostHttpRequestModel {
   lastName: string;
   role: string;
 }
+
+export interface AuthPostHttpRequestModel {
+  token: string | null;
+}
