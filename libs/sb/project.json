@@ -1,5 +1,5 @@
 {
-  "name": "sb",
+  "name": "lib-sb",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/sb/src",
   "prefix": "lib",
@@ -21,7 +21,7 @@
       "options": {
         "port": 4400,
         "configDir": "libs/sb/.storybook",
-        "browserTarget": "sb:build-storybook",
+        "browserTarget": "lib-sb:build-storybook",
         "compodoc": false
       },
       "configurations": {
@@ -36,7 +36,7 @@
       "options": {
         "outputDir": "dist/storybook/sb",
         "configDir": "libs/sb/.storybook",
-        "browserTarget": "sb:build-storybook",
+        "browserTarget": "lib-sb:build-storybook",
         "compodoc": false
       },
       "configurations": {
@@ -55,13 +55,13 @@
       "executor": "@nx/web:file-server",
       "dependsOn": ["build-storybook"],
       "options": {
-        "buildTarget": "sb:build-storybook",
+        "buildTarget": "lib-sb:build-storybook",
         "staticFilePath": "dist/storybook/sb",
         "spa": true
       },
       "configurations": {
         "ci": {
-          "buildTarget": "sb:build-storybook:ci"
+          "buildTarget": "lib-sb:build-storybook:ci"
         }
       }
     }

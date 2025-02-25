@@ -19,10 +19,10 @@
       "@vet-client/lib-form": ["libs/form/src/index.ts"],
       "@vet-client/lib-page": ["libs/page/src/index.ts"],
       "@vet-client/lib-route": ["libs/route/src/index.ts"],
+      "@vet-client/lib-sb": ["libs/sb/src/index.ts"],
       "@vet-client/lib-system": ["libs/system/src/index.ts"],
       "@vet-client/lib-vet-client": ["libs/vet-client/src/index.ts"],
-      "@vet-client/lib-view": ["libs/view/src/index.ts"],
-      "@vet-client/sb": ["libs/sb/src/index.ts"]
+      "@vet-client/lib-view": ["libs/view/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
