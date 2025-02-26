@@ -2,22 +2,26 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
-  AuthPostHttpResponseModel,
   BaseFormComponent,
   BaseFormService,
   CookieService,
   HttpEndpointEnum,
   HttpMethodEnum,
-  HttpService, LoginPostHttpResponseModel
+  HttpService,
+  LoginPostHttpResponseModel,
 } from '@vet-client/lib-system';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
+import { ButtonValueTypeEnum } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-login-form',
   imports: [BaseFormComponent],
-  templateUrl: './login-form.component.html'
+  templateUrl: './login-form.component.html',
 })
-export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFormDataModel> {
+export class LoginFormComponent extends BaseFormService<
+  LoginFormModel,
+  LoginFormDataModel
+> {
   constructor(
     private readonly http: HttpService,
     private readonly cookie: CookieService,
@@ -27,18 +31,21 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
       email: {
         kind: 'input',
         type: 'text',
-        placeholder: 'Email'
+        placeholder: 'Email',
       },
       password: {
         kind: 'input',
         type: 'password',
-        placeholder: 'Password'
+        placeholder: 'Password',
       },
       login: {
         kind: 'button',
         type: 'submit',
-        text: 'Log in'
-      }
+        value: {
+          valueType: ButtonValueTypeEnum.text,
+          text: 'Login',
+        },
+      },
     });
   }
 
@@ -50,10 +57,11 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           endpoint: HttpEndpointEnum.login,
           request: {
             email: model.email,
-            password: model.password
-          }
-        }
-      }).subscribe(response => {
+            password: model.password,
+          },
+        },
+      })
+      .subscribe((response) => {
         const { success, token } = response;
         if (success) {
           this.cookie.saveToCookie('token', token, 1);

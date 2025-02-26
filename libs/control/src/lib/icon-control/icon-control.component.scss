@@ -1,0 +1,5 @@
+@use 'libs/scss/src/base/colors';
+
+.icon {
+  color: colors.$color-text-light-primary;
+}

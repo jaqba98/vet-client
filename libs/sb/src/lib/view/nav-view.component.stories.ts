@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import { NavViewComponent } from '@vet-client/lib-view';
+import { ButtonValueTypeEnum } from '@vet-client/lib-control';
 
 const meta: Meta<NavViewComponent> = {
   component: NavViewComponent,
@@ -13,11 +14,26 @@ export const Default: Story = {
   args: {
     model: {
       options: [
-        { type: 'button', text: 'Button 1' },
-        { type: 'button', text: 'Button 2' },
-        { type: 'button', text: 'Button 3' },
-        { type: 'button', text: 'Button 4' },
-        { type: 'button', text: 'Button 5' },
+        {
+          type: 'button',
+          value: { valueType: ButtonValueTypeEnum.text, text: 'Button 1' }
+        },
+        {
+          type: 'button',
+          value: { valueType: ButtonValueTypeEnum.text, text: 'Button 2' }
+        },
+        {
+          type: 'button',
+          value: { valueType: ButtonValueTypeEnum.text, text: 'Button 3' }
+        },
+        {
+          type: 'button',
+          value: { valueType: ButtonValueTypeEnum.text, text: 'Button 4' }
+        },
+        {
+          type: 'button',
+          value: { valueType: ButtonValueTypeEnum.text, text: 'Button 5' }
+        }
       ]
     }
   }

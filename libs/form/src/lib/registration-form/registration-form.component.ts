@@ -6,53 +6,63 @@ import {
   HttpEndpointEnum,
   HttpMethodEnum,
   HttpService,
-  RegistrationPostHttpResponseModel
+  RegistrationPostHttpResponseModel,
 } from '@vet-client/lib-system';
-import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
+import {
+  RegistrationFormDataModel,
+  RegistrationFormModel,
+} from './registration-form.model';
+import { ButtonValueTypeEnum } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-registration-form',
   imports: [BaseFormComponent],
-  templateUrl: './registration-form.component.html'
+  templateUrl: './registration-form.component.html',
 })
-export class RegistrationFormComponent extends BaseFormService<RegistrationFormModel, RegistrationFormDataModel> {
+export class RegistrationFormComponent extends BaseFormService<
+  RegistrationFormModel,
+  RegistrationFormDataModel
+> {
   constructor(private readonly http: HttpService) {
     super({
       email: {
         kind: 'input',
         type: 'text',
-        placeholder: 'Email'
+        placeholder: 'Email',
       },
       password: {
         kind: 'input',
         type: 'password',
-        placeholder: 'Password'
+        placeholder: 'Password',
       },
       confirmPassword: {
         kind: 'input',
         type: 'password',
-        placeholder: 'Confirm password'
+        placeholder: 'Confirm password',
       },
       firstName: {
         kind: 'input',
         type: 'text',
-        placeholder: 'First name'
+        placeholder: 'First name',
       },
       lastName: {
         kind: 'input',
         type: 'text',
-        placeholder: 'Last name'
+        placeholder: 'Last name',
       },
       role: {
         kind: 'input',
         type: 'text',
-        placeholder: 'Role'
+        placeholder: 'Role',
       },
       register: {
         kind: 'button',
         type: 'submit',
-        text: 'Register'
-      }
+        value: {
+          valueType: ButtonValueTypeEnum.text,
+          text: 'Register',
+        },
+      },
     });
   }
 
@@ -68,11 +78,11 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
             confirmPassword: model.confirmPassword,
             firstName: model.firstName,
             lastName: model.lastName,
-            role: model.role
-          }
-        }
+            role: model.role,
+          },
+        },
       })
-      .subscribe(response => {
+      .subscribe((response) => {
         console.log(response);
       });
   }
