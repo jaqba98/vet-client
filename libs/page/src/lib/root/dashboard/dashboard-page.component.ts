@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NAV_VIEW_DASHBOARD, NavViewComponent } from '@vet-client/lib-view';
+import { NavViewComponent, NavViewModel } from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-dashboard-page',
@@ -8,5 +8,28 @@ import { NAV_VIEW_DASHBOARD, NavViewComponent } from '@vet-client/lib-view';
   templateUrl: './dashboard-page.component.html'
 })
 export class DashboardPageComponent {
-  model = NAV_VIEW_DASHBOARD;
+  model: NavViewModel = {
+    options: [
+      {
+        id: 'dashboard_1',
+        type: 'button',
+        value: { type: 'text', text: 'Dashboard 1' }
+      },
+      {
+        id: 'dashboard_2',
+        type: 'button',
+        value: { type: 'text', text: 'Dashboard 2' }
+      },
+      {
+        id: 'dashboard_3',
+        type: 'button',
+        value: { type: 'text', text: 'Dashboard 3' }
+      },
+      {
+        id: 'dashboard_4',
+        type: 'button',
+        value: { type: 'text', text: 'Dashboard 4' }
+      }
+    ]
+  };
 }
