@@ -1,11 +1,8 @@
-<!-- Button Text -->
-<ng-container *ngIf="model.value.valueType === 'text'">
-  <button class="button-control" [type]="model.type">{{ model.value.text }}</button>
-</ng-container>
-
-<!-- Button Icon -->
-<ng-container *ngIf="model.value.valueType === 'icon'">
-  <button class="button-control" [type]="model.type">
-    <lib-icon-control [model]="model.value.model"></lib-icon-control>
-  </button>
-</ng-container>
+<button class="button-control" [type]="model.type" (click)="onClick(model.id)">
+  <!-- Text -->
+  <ng-container *ngIf="model.value.type === 'text'">{{ model.value.text }}</ng-container>
+  <!-- Icon -->
+  <ng-container *ngIf="model.value.type === 'icon'">
+    <lib-icon-control [model]="model.value.icon"></lib-icon-control>
+  </ng-container>
+</button>

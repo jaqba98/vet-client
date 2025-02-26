@@ -11,7 +11,6 @@ import {
   LoginPostHttpResponseModel,
 } from '@vet-client/lib-system';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
-import { ButtonValueTypeEnum } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-login-form',
@@ -39,10 +38,11 @@ export class LoginFormComponent extends BaseFormService<
         placeholder: 'Password',
       },
       login: {
+        id: 'login',
         kind: 'button',
         type: 'submit',
         value: {
-          valueType: ButtonValueTypeEnum.text,
+          type: 'text',
           text: 'Login',
         },
       },

@@ -1,23 +1,19 @@
 import { IconControlModel } from '../icon-control/icon-control.model';
 
-export enum ButtonValueTypeEnum {
-  text = 'text',
-  icon = 'icon'
-}
-
-interface ButtonValueTextModel {
-  valueType: ButtonValueTypeEnum.text;
+interface TextValueModel {
+  type: 'text';
   text: string;
 }
 
-interface ButtonValueIconModel {
-  valueType: ButtonValueTypeEnum.icon;
-  model: IconControlModel;
+interface IconValueModel {
+  type: 'icon';
+  icon: IconControlModel;
 }
 
-type ButtonValueType = ButtonValueTextModel | ButtonValueIconModel;
+type ValueType = TextValueModel | IconValueModel;
 
 export interface ButtonControlModel {
+  id: string;
   type: 'button' | 'submit' | 'reset';
-  value: ButtonValueType;
+  value: ValueType;
 }

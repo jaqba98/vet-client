@@ -11,7 +11,6 @@ import {
   LogoutPostHttpResponseModel,
 } from '@vet-client/lib-system';
 import { LogoutFormDataModel, LogoutFormModel } from './logout-form.model';
-import { ButtonValueTypeEnum } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-logout-form',
@@ -29,10 +28,11 @@ export class LogoutFormComponent extends BaseFormService<
   ) {
     super({
       logout: {
+        id: 'logout',
         kind: 'button',
         type: 'submit',
         value: {
-          valueType: ButtonValueTypeEnum.text,
+          type: 'text',
           text: 'Logout'
         },
       },
