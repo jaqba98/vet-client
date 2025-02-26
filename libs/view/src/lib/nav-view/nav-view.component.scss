@@ -1,10 +1,10 @@
 @use 'libs/scss';
 
-.top-nav {
+.nav-view {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: red;
+  background-color: scss.$primary-color;
   padding: 1rem;
 
   @include scss.breakpoint(md, min) {
