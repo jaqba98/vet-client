@@ -4,6 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: scss.$color-red;
+  background-color: red;
   padding: 1rem;
+
+  @include scss.breakpoint(md, min) {
+    justify-content: space-around;
+  }
 }

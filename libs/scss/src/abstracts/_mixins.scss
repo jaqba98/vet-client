@@ -1,0 +1,29 @@
+@use "variables";
+
+@mixin breakpoint($breakpoint, $mode) {
+  $breakpoint-scope: max-width;
+  @if ($mode == min) {
+    $breakpoint-scope: min-width;
+  } @else if ($mode == max) {
+    $breakpoint-scope: max-width;
+  } @else {
+    @error 'Invalid mode: #{$mode}! Valid modes are: min, max!';
+  }
+  @if $breakpoint == xs {
+    @media ($breakpoint-scope: variables.$breakpoint-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media ($breakpoint-scope: variables.$breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media ($breakpoint-scope: variables.$breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media ($breakpoint-scope: variables.$breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media ($breakpoint-scope: variables.$breakpoint-xl) { @content; }
+  } @else if $breakpoint == xxl {
+    @media ($breakpoint-scope: variables.$breakpoint-xxl) { @content; }
+  } @else if $breakpoint == tv {
+    @media ($breakpoint-scope: variables.$breakpoint-tv) { @content; }
+  } @else {
+    @error "Invalid breakpoint: #{$breakpoint}. Valid breakpoints are: xs: $breakpoint-xs (max 320px), sm: $breakpoint-sm (max 480px), md: $breakpoint-md (max 768px), lg: $breakpoint-lg (max 1024px), xl: $breakpoint-xl (max 1280px), xxl: $breakpoint-xxl (max 1440px), tv: $breakpoint-tv (min 1441px)";
+  }
+}
