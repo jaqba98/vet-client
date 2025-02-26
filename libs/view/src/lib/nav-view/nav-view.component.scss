@@ -6,7 +6,12 @@
   align-items: center;
   justify-content: space-between;
   background-color: colors.$color-surface;
-  padding: 0.5rem;
+  padding: 0.75rem;
+
+  &__menu {
+    display: flex;
+    gap: 0.5rem;
+  }
 
   @include mixins.breakpoint(md, min) {
     justify-content: space-around;

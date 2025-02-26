@@ -12,8 +12,8 @@ type Story = StoryObj<ButtonControlComponent>;
 export const Default: Story = {
   args: {
     model: {
-      type: 'submit',
-      text: 'Submit'
+      type: 'button',
+      text: 'Click me!'
     }
   }
 };

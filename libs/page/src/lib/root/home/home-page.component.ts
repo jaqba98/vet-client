@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { NavViewComponent } from '@vet-client/lib-view';
+import { NAV_VIEW_OUTSIDE, NavViewComponent } from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-home-page',
@@ -8,5 +8,5 @@ import { NavViewComponent } from '@vet-client/lib-view';
   templateUrl: './home-page.component.html'
 })
 export class HomePageComponent {
-  title = 'home works!';
+  model = NAV_VIEW_OUTSIDE;
 }

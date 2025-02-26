@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control';
+import { ButtonControlComponent } from '@vet-client/lib-control';
+import { NavViewModel } from './nav-view.model';
 
 @Component({
   selector: 'lib-nav-view',
-  imports: [ButtonControlComponent],
+  imports: [CommonModule, ButtonControlComponent],
   templateUrl: './nav-view.component.html',
-  styleUrl: './nav-view.component.scss'
+  styleUrl: './nav-view.component.scss',
 })
 export class NavViewComponent {
-  buttonModel: ButtonControlModel = {
-    type: 'button',
-    text: 'Hello'
-  };
+  @Input({ required: true }) model!: NavViewModel;
 }

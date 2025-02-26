@@ -1,7 +1,9 @@
 <nav class="nav-view">
-  <div>1</div>
-  <div>2</div>
-  <div>
-    <lib-button-control [model]="buttonModel"></lib-button-control>
+  <div class="nav-view__menu">
+    <ng-container *ngFor="let option of model.options">
+      <lib-button-control [model]="option"></lib-button-control>
+    </ng-container>
   </div>
+  <div>2</div>
+  <div>3</div>
 </nav>

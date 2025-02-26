@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavViewComponent } from '@vet-client/lib-view';
+import { NAV_VIEW_DASHBOARD, NavViewComponent } from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-dashboard-page',
@@ -8,5 +8,5 @@ import { NavViewComponent } from '@vet-client/lib-view';
   templateUrl: './dashboard-page.component.html'
 })
 export class DashboardPageComponent {
-  title = 'dashboard works';
+  model = NAV_VIEW_DASHBOARD;
 }
