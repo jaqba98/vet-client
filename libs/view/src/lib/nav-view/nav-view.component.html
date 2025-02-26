@@ -1,9 +1,19 @@
 <nav class="nav-view">
+  <!-- Menu -->
   <div class="nav-view__menu">
-    <ng-container *ngFor="let option of model.options">
-      <lib-button-control [model]="option"></lib-button-control>
-    </ng-container>
+    <!-- Hamburger -->
+    <div class="nav-view__menu--hamburger">
+      <lib-button-control [model]="hamburgerModel" (event)="onHamburgerEvent($event)"></lib-button-control>
+    </div>
+    <!-- Options -->
+    <div class="nav-view__menu--options">
+      <ng-container *ngFor="let option of model.options">
+        <lib-button-control [model]="option" (event)="onOptionEvent($event)"></lib-button-control>
+      </ng-container>
+    </div>
   </div>
-  <div>2</div>
-  <div>3</div>
+  <!-- Logo -->
+  <div class="nav-view__logo">2</div>
+  <!-- Dynamic content-->
+  <div class="nav-view__dynamic">3</div>
 </nav>

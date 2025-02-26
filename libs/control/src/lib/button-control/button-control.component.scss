@@ -1,13 +1,18 @@
 @use 'libs/scss/src/base/colors';
 
 .button-control {
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 0.5rem;
   border-radius: 0.25rem;
   background-color: colors.$color-primary;
   color: colors.$color-text-light-primary;
   border: none;
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
+
+  &__icon {
+    width: 35px;
+    height: 35px;
+  }
 
   &:hover {
     outline: 2px solid colors.$color-primary;

@@ -18,4 +18,11 @@ export class ButtonControlComponent {
   onClick(event: string) {
     this.event.emit(event);
   }
+
+  getClassList() {
+    return {
+      'button-control': true,
+      'button-control__icon': this.model.value.type === 'icon'
+    };
+  }
 }
