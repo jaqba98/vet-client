@@ -1,0 +1,28 @@
+@use 'libs/scss/src/base/colors';
+
+.header {
+  background-image: url('../../../../../apps/vet-client/public/guinea-pig.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 500px;
+
+  &__color {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-color: rgba(colors.$color-primary, 0.75);
+    width: 100%;
+    height: 100%;
+    color: colors.$color-text-light-primary;
+  }
+
+  &__title {
+    font-size: 4em;
+    font-weight: 800;
+  }
+
+  &__logo {
+    font-size: 5em;
+  }
+}
