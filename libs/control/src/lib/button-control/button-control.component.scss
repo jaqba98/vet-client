@@ -1,0 +1,14 @@
+@use 'libs/scss';
+
+.button-control {
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  background-color: scss.$primary-dark;
+  color: scss.$primary-text-color-light;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: scss.$primary-light;
+  }
+}

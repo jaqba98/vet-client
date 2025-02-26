@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: scss.$primary-color;
-  padding: 1rem;
+  padding: 0.5rem;
 
   @include scss.breakpoint(md, min) {
     justify-content: space-around;
