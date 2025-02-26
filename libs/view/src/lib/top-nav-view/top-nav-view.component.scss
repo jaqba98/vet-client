@@ -1,0 +1,9 @@
+@use 'libs/scss';
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: scss.$color-red;
+  padding: 1rem;
+}
