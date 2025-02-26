@@ -1,13 +1,14 @@
-@use 'libs/scss';
+@use 'libs/scss/src/abstracts/mixins';
+@use 'libs/scss/src/base/colors';
 
 .nav-view {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: scss.$primary-color;
+  background-color: colors.$color-surface;
   padding: 0.5rem;
 
-  @include scss.breakpoint(md, min) {
+  @include mixins.breakpoint(md, min) {
     justify-content: space-around;
   }
 }

@@ -1,56 +1,40 @@
 // Primary Colors
-$primary-color: #4CAF50; // Green, a calming color for the vet theme
-$primary-dark: #388E3C; // Dark green for buttons or call-to-action
-$primary-light: #81C784; // Soft light green with more intensity for better visibility
-
-// Secondary Colors
-$secondary-color: #FF9800; // Orange, gives a sense of warmth and attention
-$secondary-dark: #F57C00; // Darker orange for accents and borders
-$secondary-light: #FFC947; // Lighter orange for hover states
+$color-primary: #007bff; // Main color (e.g. buttons, headers)
+$color-secondary: #6c757d; // Secondary color (e.g. icons, secondary buttons)
 
 // Background Colors
-$background-color: #F5F5F5; // Light gray for the overall background
-$section-background: #FFFFFF; // White for content sections
-$card-background: #FAFAFA; // Slightly off-white for cards or containers
+$color-background: #ffffff; // Background color (e.g. page background, section background)
+$color-surface: #f8f9fa; // Surface color (e.g. cards, panels, forms)
 
-// Text Colors
-$text-color: #212121; // Dark gray for normal text (easy on the eyes)
-$heading-color: #333333; // Darker gray for headings
-$muted-text: #757575; // Lighter gray for secondary text or placeholders
-$primary-text-color-light: #F5F5F5; // Light gray text for better contrast on primary background
+// Accent Colors
+$color-accent: #e0e0e0; // Accent color (e.g. hover backgrounds, borders)
 
 // Status Colors
-$success-color: #4CAF50; // Green for success messages or states
-$error-color: #F44336; // Red for error messages or alerts
-$warning-color: #FF9800; // Orange for warnings or important alerts
-$info-color: #2196F3; // Blue for informational messages
+$color-error: #dc3545; // Error color (e.g. error messages, validation)
+$color-success: #28a745; // Success color (e.g. success messages, positive states)
+$color-warning: #ffc107; // Warning color (e.g. warning messages)
+$color-info: #17a2b8; // Info color (e.g. informational messages)
 
-// Button Colors
-$button-primary-bg: $primary-color; // Background color for primary buttons
-$button-primary-text: #FFFFFF; // White text for buttons
-$button-secondary-bg: $secondary-color; // Background color for secondary buttons
-$button-secondary-text: #FFFFFF; // White text for secondary buttons
+// Text Colors
+$color-text-dark-primary: #212529; // Primary dark text color (e.g. body text, headings)
+$color-text-dark-secondary: #6c757d; // Secondary dark text color (e.g. hints, small text)
+$color-text-dark-disabled: #adb5bd; // Disabled dark text color (e.g. text for disabled elements)
+$color-text-light-primary: #ffffff; // Primary light text color (e.g. body text, headings on dark background)
+$color-text-light-secondary: #f8f9fa; // Secondary light text color (e.g. hints, small text on dark background)
+$color-text-light-disabled: #e0e0e0; // Disabled light text color (e.g. text for disabled elements on dark background)
 
-// Link Colors
-$link-color: $primary-color; // Color for links
-$link-hover-color: $primary-dark; // Darker shade for hover state
+// Border and Divider Colors
+$color-border: #dee2e6; // Border color (e.g. borders, section dividers)
+$color-divider: #ced4da; // Divider color (e.g. lines separating sections, headers)
 
-// Border Colors
-$border-light: #E0E0E0; // Light border for subtle elements like inputs, cards
-$border-dark: #BDBDBD; // Darker border for emphasized elements like sections
-$border-muted: #F5F5F5; // Very light border for non-emphasized elements
+// Shadow Color
+$color-shadow: rgba(0, 0, 0, 0.1); // Shadow color (e.g. shadows under cards, modals)
 
-// Form Inputs
-$input-background: #FFFFFF; // White background for inputs
-$input-border: $border-light; // Border color for input fields
-$input-text-color: $text-color; // Text color inside input fields
-$input-placeholder-color: $muted-text; // Color for input placeholders
+// Overlay Color
+$color-overlay: rgba(0, 0, 0, 0.5); // Overlay color (e.g. modal backgrounds, pop-up overlays)
 
-// Navigation Colors
-$nav-background: #4CAF50; // Green background for navigation bar
-$nav-text: #FFFFFF; // White text for navigation items
-$nav-hover: #388E3C; // Dark green for hover state on navigation
+// Link Color
+$color-link: #007bff; // Link color (e.g. links, navigation buttons)
 
-// Footer Colors
-$footer-background: #333333; // Dark footer background
-$footer-text: #FFFFFF; // White text for footer
+// Disabled Color
+$color-disabled: #e0e0e0; // Disabled element color (e.g. disabled buttons, form fields)
