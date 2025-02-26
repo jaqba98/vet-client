@@ -4,7 +4,7 @@ import { RegistrationPageComponent } from '@vet-client/lib-page';
 
 const meta: Meta<RegistrationPageComponent> = {
   component: RegistrationPageComponent,
-  title: 'Page/Registration',
+  title: 'Page/Home/Registration',
 };
 export default meta;
 type Story = StoryObj<RegistrationPageComponent>;

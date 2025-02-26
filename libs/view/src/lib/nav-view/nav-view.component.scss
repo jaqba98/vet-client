@@ -32,4 +32,11 @@
       }
     }
   }
+
+  &__logo {
+    display: flex;
+    gap: 0.5rem;
+    color: colors.$color-primary;
+    font-size: 1.25em;
+  }
 }

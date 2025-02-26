@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPaw } from '@fortawesome/free-solid-svg-icons';
 
-import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control';
+import {
+  ButtonControlComponent,
+  ButtonControlModel,
+  IconControlComponent,
+  IconControlModel
+} from '@vet-client/lib-control';
 import { NavViewModel } from './nav-view.model';
 
 @Component({
   selector: 'lib-nav-view',
-  imports: [CommonModule, ButtonControlComponent],
+  imports: [CommonModule, ButtonControlComponent, IconControlComponent],
   templateUrl: './nav-view.component.html',
   styleUrl: './nav-view.component.scss',
 })
@@ -21,6 +26,10 @@ export class NavViewComponent {
       type: 'icon',
       icon: { icon: faBars }
     }
+  };
+
+  readonly logoModel: IconControlModel = {
+    icon: faPaw
   };
 
   onHamburgerEvent(id: string) {
