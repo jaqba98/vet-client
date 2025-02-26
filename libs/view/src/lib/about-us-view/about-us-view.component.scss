@@ -1,0 +1,10 @@
+@use 'libs/scss/src/base/colors';
+
+.title {
+  color: colors.$color-text-dark-primary;
+}
+
+.paragraph {
+  color: colors.$color-text-dark-secondary;
+  line-height: 2;
+}

@@ -2,30 +2,14 @@
 @use 'libs/scss/src/abstracts/mixins';
 
 .header {
-  background-image: url('../../../../../apps/vet-client/public/guinea-pig.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  justify-content: space-around;
 
-  &__background {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(colors.$color-primary, 0.8);
-    min-height: 640px;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    justify-content: space-around;
-    padding: 2rem;
-
-    @include mixins.breakpoint(lg, min) {
-      flex-direction: row;
-    }
+  @include mixins.breakpoint(lg, min) {
+    flex-direction: row;
   }
 
   &__logo {

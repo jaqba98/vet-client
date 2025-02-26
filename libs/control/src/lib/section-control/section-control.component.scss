@@ -1,0 +1,51 @@
+@use 'libs/scss/src/base/colors';
+@use 'libs/scss/src/abstracts/mixins';
+
+.section {
+  &--background-image-guinea-pig {
+    background-image: url("../../../../../apps/vet-client/public/guinea-pig.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &--min-height640 {
+    min-height: 640px;
+  }
+
+  &__background {
+    &--primary {
+      background-color: colors.$color-primary;
+    }
+
+    &--surface {
+      background-color: colors.$color-surface;
+    }
+
+    &--primary80 {
+      background-color: rgba(colors.$color-primary, 0.8);
+    }
+
+    &--min-height640 {
+      min-height: 640px;
+    }
+  }
+
+  &__content {
+    padding: 6rem 3rem;
+
+    &--margin-auto-max-960px {
+      margin: auto;
+      max-width: 960px;
+    }
+
+    &--min-height640 {
+      min-height: 640px;
+    }
+
+    &--flex-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

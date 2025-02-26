@@ -1,15 +1,19 @@
-<header class="header">
-  <div class="header__background">
-    <div class="header__content">
-      <div class="header__logo">
-        <lib-icon-control class="header__logo--image" [model]="logoModel"></lib-icon-control>
-        <h1 class="header__logo--title">{{ title }}</h1>
-      </div>
-      <div class="header__motto">
-        <p class="header__motto--title">Connecting vets and owners.</p>
-        <p class="header__motto--paragraph">Creating a space for effective collaboration between vets and pet owners.</p>
-        <p class="header__motto--paragraph">Caring for better communication and animal well-being.</p>
-      </div>
+<lib-section-control
+  [marginAutoMax960px]="true"
+  [backgroundPrimary80]="true"
+  [backgroundImageGuineaPig]="true"
+  [minHeight640]="true"
+  [flexCenter]="true"
+>
+  <div class="header">
+    <div class="header__logo">
+      <lib-icon-control class="header__logo--image" [model]="logoModel"></lib-icon-control>
+      <h1 class="header__logo--title">{{ title }}</h1>
+    </div>
+    <div class="header__motto">
+      <p class="header__motto--title">Connecting vets and owners.</p>
+      <p class="header__motto--paragraph">Creating a space for effective collaboration between vets and pet owners.</p>
+      <p class="header__motto--paragraph">Caring for better communication and animal well-being.</p>
     </div>
   </div>
-</header>
+</lib-section-control>

@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 
-import { HeaderViewComponent } from '@vet-client/lib-view';
+import { AboutUsViewComponent, HeaderViewComponent } from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-home-index-page',
-  imports: [HeaderViewComponent],
+  imports: [HeaderViewComponent, AboutUsViewComponent],
   templateUrl: './home-index-page.component.html'
 })
 export class HomeIndexPageComponent {}
