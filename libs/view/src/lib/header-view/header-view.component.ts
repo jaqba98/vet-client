@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
+import { TITLE } from '@vet-client/lib-const';
 import { IconControlComponent, IconControlModel } from '@vet-client/lib-control';
 
 @Component({
@@ -10,5 +11,7 @@ import { IconControlComponent, IconControlModel } from '@vet-client/lib-control'
   styleUrl: './header-view.component.scss'
 })
 export class HeaderViewComponent {
+  readonly title = TITLE;
+
   readonly logoModel: IconControlModel = { icon: faPaw };
 }

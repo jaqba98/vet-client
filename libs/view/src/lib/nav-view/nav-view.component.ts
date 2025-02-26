@@ -8,6 +8,7 @@ import {
   IconControlComponent,
   IconControlModel
 } from '@vet-client/lib-control';
+import { TITLE } from '@vet-client/lib-const';
 import { NavViewModel } from './nav-view.model';
 
 @Component({
@@ -18,6 +19,8 @@ import { NavViewModel } from './nav-view.model';
 })
 export class NavViewComponent {
   @Input({ required: true }) model!: NavViewModel;
+
+  readonly title = TITLE;
 
   readonly hamburgerModel: ButtonControlModel = {
     id: 'hamburger',
