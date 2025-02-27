@@ -13,7 +13,15 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 export class CardControlComponent {
   @Input() title = '';
 
+  @Input() width = '100%';
+
   isTitle() {
     return this.title !== '';
+  }
+
+  getStyleList() {
+    return {
+      width: this.width
+    };
   }
 }

@@ -1,20 +1,14 @@
-<lib-card-control>
+<lib-card-control width="280px">
   <div class="price">
-    <h2>Standard</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-    <p>$ 5.00</p>
+    <h2 class="price__type">{{ type }}</h2>
+    <p class="price__description">{{ description }}</p>
+    <p class="price__money">$ {{ money }}</p>
     <hr>
-    <ul>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
-      <li>aaaaaaa</li>
+    <ul class="price__list">
+      <ng-container *ngFor="let el of elements">
+        <li class="price__element">{{ el }}</li>
+      </ng-container>
     </ul>
+    <lib-button-control [model]="buttonModel"></lib-button-control>
   </div>
 </lib-card-control>

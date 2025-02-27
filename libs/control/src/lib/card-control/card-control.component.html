@@ -1,4 +1,4 @@
-<div class="card-control">
+<div class="card-control" [ngStyle]="getStyleList()">
   <ng-container *ngIf="isTitle()">
     <h2 class="card-control__title">{{ title }}</h2>
   </ng-container>
