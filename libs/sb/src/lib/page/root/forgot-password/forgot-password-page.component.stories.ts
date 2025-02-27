@@ -4,7 +4,7 @@ import { ForgotPasswordPageComponent } from '@vet-client/lib-page';
 
 const meta: Meta<ForgotPasswordPageComponent> = {
   component: ForgotPasswordPageComponent,
-  title: 'Page/Home/ForgotPassword',
+  title: 'Page/ForgotPassword',
 };
 export default meta;
 type Story = StoryObj<ForgotPasswordPageComponent>;

@@ -16,7 +16,7 @@ import { ButtonControlTypeEnum } from '@vet-client/lib-control';
   templateUrl: './menu-options-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
-/** Hamburger Form */
+/** Menu Options Form */
 export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormModel, MenuOptionsFormDataModel> {
   @Output() event = new EventEmitter();
 

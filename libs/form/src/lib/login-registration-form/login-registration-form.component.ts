@@ -1,22 +1,17 @@
 import { Component } from '@angular/core';
 
-import {
-  BaseFormComponent,
-  BaseFormService,
-  RouterEnum,
-  RouterService,
-} from '@vet-client/lib-system';
-import {
-  LoginRegistrationFormDataModel,
-  LoginRegistrationFormModel,
-} from './login-registration-form.model';
+import { BaseFormComponent, BaseFormService, RouterEnum, RouterService } from '@vet-client/lib-system';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ButtonControlTypeEnum } from '@vet-client/lib-control';
+import { LoginRegistrationFormDataModel, LoginRegistrationFormModel } from './login-registration-form.model';
 
 @Component({
   selector: 'lib-login-registration-form',
   imports: [BaseFormComponent],
   templateUrl: './login-registration-form.component.html',
+  hostDirectives: [BaseComponentDirective]
 })
+/** Login Registration Form */
 export class LoginRegistrationFormComponent extends BaseFormService<
   LoginRegistrationFormModel,
   LoginRegistrationFormDataModel
@@ -26,13 +21,19 @@ export class LoginRegistrationFormComponent extends BaseFormService<
       login: {
         id: 'login',
         kind: 'button',
-        value: { type: ButtonControlTypeEnum.text, text: 'Login' },
+        value: {
+          type: ButtonControlTypeEnum.text,
+          text: 'Login'
+        },
         defaultValue: false,
       },
       registration: {
         id: 'registration',
         kind: 'button',
-        value: { type: ButtonControlTypeEnum.text, text: 'Registration' },
+        value: {
+          type: ButtonControlTypeEnum.text,
+          text: 'Registration'
+        },
         defaultValue: false,
       },
     });

@@ -5,7 +5,7 @@ import { StorybookUtilsService } from '../../../utils/storybook-utils.service';
 
 const meta: Meta<LoginPageComponent> = {
   component: LoginPageComponent,
-  title: 'Page/Home/Login',
+  title: 'Page/Login',
   ...StorybookUtilsService.getPageConfiguration()
 };
 export default meta;
