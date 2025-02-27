@@ -14,6 +14,8 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 export class SectionControlComponent {
   @Input({ required: true }) sectionId!: string;
 
+  @Input() sectionBackgroundPrimary = false;
+
   @Input() sectionContentMarginAuto = false;
 
   @Input() sectionContentMaxWidth480px = false;
@@ -26,7 +28,8 @@ export class SectionControlComponent {
 
   getSectionBackgroundClassList() {
     return {
-      section__background: true
+      section__background: true,
+      'section__background--primary': this.sectionBackgroundPrimary
     };
   }
 

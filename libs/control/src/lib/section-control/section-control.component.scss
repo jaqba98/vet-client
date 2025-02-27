@@ -5,6 +5,10 @@
   &__background {
     background-color: colors.$color-background;
     padding: 6rem 2rem;
+
+    &--primary {
+      background-color: colors.$color-primary;
+    }
   }
 
   &__content {

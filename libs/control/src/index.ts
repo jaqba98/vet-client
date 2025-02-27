@@ -10,3 +10,4 @@ export * from './lib/input-control/input-control.model';
 export * from './lib/small-logo-control/small-logo-control.component';
 export * from './lib/section-control/section-control.component';
 export * from './lib/text-control/text-control.component';
+export * from './lib/error-control/error-control.component';
