@@ -10,6 +10,7 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
   styleUrl: './section-control.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
+/** Section Control */
 export class SectionControlComponent {
   @Input({ required: true }) id!: string;
 

@@ -1,3 +1,4 @@
+export * from './lib/big-logo-control/big-logo-control.component';
 export * from './lib/button-control/button-control.component';
 export * from './lib/button-control/button-control.model';
 export * from './lib/button-control/button-control-type.enum';

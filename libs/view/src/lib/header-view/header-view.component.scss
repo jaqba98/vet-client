@@ -5,38 +5,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2rem;
-  justify-content: space-around;
 
-  @include mixins.breakpoint(lg, min) {
-    flex-direction: row;
-  }
-
-  &__logo {
-    color: colors.$color-text-light-primary;
-    text-align: center;
-    flex: 1;
-
-    &--image {
-      font-size: 4rem;
-    }
-
-    &--title {
-      font-size: 2rem;
-      font-weight: 700;
-    }
-  }
+  &__logo {}
 
   &__motto {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
-    flex: 2;
-
-    @include mixins.breakpoint(lg, min) {
-      text-align: left;
-    }
 
     &--title,
     &--paragraph {
@@ -45,11 +23,6 @@
 
     &--title {
       color: colors.$color-text-light-primary;
-      font-size: 1.25rem;
-
-      @include mixins.breakpoint(lg, min) {
-        font-size: 2rem;
-      }
     }
 
     &--paragraph {
