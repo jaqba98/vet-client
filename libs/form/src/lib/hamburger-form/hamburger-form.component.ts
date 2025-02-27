@@ -12,6 +12,7 @@ import { HamburgerFormDataModel, HamburgerFormModel } from './hamburger-form.mod
   templateUrl: './hamburger-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
+/** Hamburger Form */
 export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, HamburgerFormDataModel> {
   @Output() event = new EventEmitter<boolean>();
 
