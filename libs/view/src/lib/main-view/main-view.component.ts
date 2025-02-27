@@ -5,4 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './main-view.component.html',
   styleUrl: './main-view.component.scss'
 })
+/** Main View */
 export class MainViewComponent {}

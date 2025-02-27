@@ -5,6 +5,7 @@ export * from './lib/button-control/button-control-type.enum';
 export * from './lib/card-control/card-control.component';
 export * from './lib/icon-control/icon-control.component';
 export * from './lib/icon-control/icon-control.model';
+export * from './lib/price-control/price-control.component';
 export * from './lib/input-control/input-control.component';
 export * from './lib/input-control/input-control.model';
 export * from './lib/input-control/input-control-type.enum';

@@ -1,6 +1,12 @@
 import { Component } from "@angular/core";
 
-import { AboutUsViewComponent, HeaderViewComponent, MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
+import {
+  AboutUsViewComponent,
+  HeaderViewComponent,
+  MainViewComponent,
+  NavViewComponent,
+  PriceViewComponent
+} from '@vet-client/lib-view';
 import { LoginRegistrationFormComponent, LoginRegistrationSmallFormComponent } from '@vet-client/lib-form';
 
 @Component({
@@ -12,6 +18,7 @@ import { LoginRegistrationFormComponent, LoginRegistrationSmallFormComponent } f
     LoginRegistrationFormComponent,
     MainViewComponent,
     LoginRegistrationSmallFormComponent,
+    PriceViewComponent
   ],
   templateUrl: './home-page.component.html',
 })

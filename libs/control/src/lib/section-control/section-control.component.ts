@@ -20,6 +20,8 @@ export class SectionControlComponent {
 
   @Input() backgroundPrimary = false;
 
+  @Input() background = false;
+
   @Input() backgroundSurface = false;
 
   @Input() backgroundPrimary80 = false;
@@ -43,6 +45,7 @@ export class SectionControlComponent {
   getSectionBackgroundClassList() {
     return {
       'section__background--primary': this.backgroundPrimary,
+      'section__background--background': this.background,
       'section__background--surface': this.backgroundSurface,
       'section__background--primary80': this.backgroundPrimary80,
       'section__background--min-height640': this.minHeight640,

@@ -25,6 +25,10 @@
       background-color: colors.$color-surface;
     }
 
+    &--background {
+      background-color: colors.$color-background;
+    }
+
     &--primary80 {
       background-color: rgba(colors.$color-primary, 0.85);
     }
@@ -44,10 +48,23 @@
     &--margin-auto-max-960px {
       margin: auto;
       max-width: 960px;
+
+      @include mixins.breakpoint(md, max) {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+      }
     }
 
     &--min-height640 {
       min-height: 640px;
+
+      @include mixins.breakpoint(md, max) {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
     }
 
     &--flex-center {
