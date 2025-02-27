@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 import { AboutUsViewComponent, HeaderViewComponent, MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
-import { LoginRegistrationFormComponent } from '@vet-client/lib-form';
+import { LoginRegistrationFormComponent, LoginRegistrationSmallFormComponent } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-home-page',
@@ -10,8 +10,9 @@ import { LoginRegistrationFormComponent } from '@vet-client/lib-form';
     HeaderViewComponent,
     AboutUsViewComponent,
     LoginRegistrationFormComponent,
-    MainViewComponent
+    MainViewComponent,
+    LoginRegistrationSmallFormComponent,
   ],
-  templateUrl: './home-page.component.html'
+  templateUrl: './home-page.component.html',
 })
 export class HomePageComponent {}

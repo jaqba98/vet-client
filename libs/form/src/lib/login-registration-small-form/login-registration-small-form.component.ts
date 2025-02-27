@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
+import { faRightFromBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseFormComponent, BaseFormService, RouterEnum, RouterService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ButtonControlTypeEnum } from '@vet-client/lib-control';
-import { LoginRegistrationFormDataModel, LoginRegistrationFormModel } from './login-registration-form.model';
+import { LoginRegistrationSmallFormDataModel, LoginRegistrationSmallFormModel } from './login-registration-small-form.model';
 
 @Component({
-  selector: 'lib-login-registration-form',
+  selector: 'lib-login-registration-small-form',
   imports: [BaseFormComponent],
-  templateUrl: './login-registration-form.component.html',
-  styleUrl: './login-registration-form.component.scss',
+  templateUrl: './login-registration-small-form.component.html',
+  styleUrl: './login-registration-small-form.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
-/** Login Registration Form */
-export class LoginRegistrationFormComponent extends BaseFormService<
-  LoginRegistrationFormModel,
-  LoginRegistrationFormDataModel
+/** Login Registration Small Form */
+export class LoginRegistrationSmallFormComponent extends BaseFormService<
+  LoginRegistrationSmallFormModel,
+  LoginRegistrationSmallFormDataModel
 > {
   constructor(private readonly router: RouterService) {
     super({
@@ -23,8 +24,10 @@ export class LoginRegistrationFormComponent extends BaseFormService<
         id: 'login',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.text,
-          text: 'Login'
+          type: ButtonControlTypeEnum.icon,
+          icon: {
+            icon: faRightFromBracket
+          }
         },
         defaultValue: false,
       },
@@ -32,15 +35,17 @@ export class LoginRegistrationFormComponent extends BaseFormService<
         id: 'registration',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.text,
-          text: 'Registration'
+          type: ButtonControlTypeEnum.icon,
+          icon: {
+            icon: faUserPlus
+          }
         },
         defaultValue: false,
       },
     });
   }
 
-  override onSubmit(model: LoginRegistrationFormDataModel) {
+  override onSubmit(model: LoginRegistrationSmallFormDataModel) {
     if (model.login) {
       this.router.redirect(RouterEnum.login);
     } else if (model.registration) {

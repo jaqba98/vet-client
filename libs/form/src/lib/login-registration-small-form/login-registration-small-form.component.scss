@@ -1,0 +1,7 @@
+@use 'libs/scss/src/abstracts/mixins';
+
+.login-registration-small-form {
+  @include mixins.breakpoint(sm, min) {
+    display: none;
+  }
+}

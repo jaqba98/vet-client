@@ -1,7 +1,11 @@
 import { Component } from "@angular/core";
 
 import { MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
-import { LoginFormComponent, LoginRegistrationFormComponent } from '@vet-client/lib-form';
+import {
+  LoginFormComponent,
+  LoginRegistrationFormComponent,
+  LoginRegistrationSmallFormComponent
+} from '@vet-client/lib-form';
 import { SectionControlComponent } from '@vet-client/lib-control';
 
 @Component({
@@ -11,9 +15,10 @@ import { SectionControlComponent } from '@vet-client/lib-control';
     LoginRegistrationFormComponent,
     LoginFormComponent,
     SectionControlComponent,
-    MainViewComponent
+    MainViewComponent,
+    LoginRegistrationSmallFormComponent,
   ],
-  templateUrl: './login-page.component.html'
+  templateUrl: './login-page.component.html',
 })
 export class LoginPageComponent {
   title = 'login works!';
