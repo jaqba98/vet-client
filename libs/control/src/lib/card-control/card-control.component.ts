@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 
@@ -10,4 +10,10 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
   styleUrl: './card-control.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
-export class CardControlComponent {}
+export class CardControlComponent {
+  @Input() title = '';
+
+  isTitle() {
+    return this.title !== '';
+  }
+}

@@ -6,4 +6,9 @@
   padding: 2rem;
   border-radius: 0.5rem;
   border: 1px solid colors.$color-border;
+
+  &__title {
+    color: colors.$color-text-dark-primary;
+    padding: 5px 5px 1rem;
+  }
 }
