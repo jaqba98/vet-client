@@ -1,9 +1,9 @@
 @use 'libs/scss/src/base/colors';
 
 .card-control {
+  width: 100%;
   background-color: colors.$color-surface;
-  padding: 4rem 2rem;
-  border-radius: 1rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
   border: 1px solid colors.$color-border;
-  box-shadow: 0 0 10px colors.$color-shadow;
 }

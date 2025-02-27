@@ -4,11 +4,10 @@
 
 .base-form {
   display: flex;
-  gap: 0.5rem;
 
   &__flex-direction {
     &--column {
-      flex-direction: column;
+      display: block;
       width: 100%;
     }
   }

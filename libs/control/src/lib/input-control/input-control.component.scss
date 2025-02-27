@@ -1,6 +1,7 @@
 @use 'libs/scss/src/base/colors';
 
 .input-control {
+  margin: 5px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

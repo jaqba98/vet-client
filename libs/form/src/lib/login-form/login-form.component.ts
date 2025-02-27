@@ -1,49 +1,35 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
-import {
-  BaseFormComponent,
-  BaseFormService,
-  CookieService,
-  HttpEndpointEnum,
-  HttpMethodEnum,
-  HttpService,
-  LoginPostHttpResponseModel,
-} from '@vet-client/lib-system';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
 import {
   ButtonControlTypeEnum,
   CardControlComponent,
   InputControlTypeEnum,
 } from '@vet-client/lib-control';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 
 @Component({
   selector: 'lib-login-form',
   imports: [BaseFormComponent, CardControlComponent],
   templateUrl: './login-form.component.html',
+  hostDirectives: [BaseComponentDirective]
 })
-export class LoginFormComponent extends BaseFormService<
-  LoginFormModel,
-  LoginFormDataModel
-> {
-  constructor(
-    private readonly http: HttpService,
-    private readonly cookie: CookieService,
-    private readonly route: Router
-  ) {
+export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFormDataModel> {
+  constructor() {
     super({
       email: {
         kind: 'input',
         type: InputControlTypeEnum.text,
-        label: '',
-        placeholder: 'Email',
+        label: 'Email',
+        placeholder: '',
         defaultValue: '',
       },
       password: {
         kind: 'input',
         type: InputControlTypeEnum.password,
-        label: '',
-        placeholder: 'Password',
+        label: 'Password',
+        placeholder: '',
         defaultValue: '',
       },
       login: {
@@ -59,23 +45,6 @@ export class LoginFormComponent extends BaseFormService<
   }
 
   override onSubmit(model: LoginFormDataModel) {
-    this.http
-      .execute<LoginPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.login,
-          request: {
-            email: model.email,
-            password: model.password,
-          },
-        },
-      })
-      .subscribe((response) => {
-        const { success, token } = response;
-        if (success) {
-          this.cookie.saveToCookie('token', token, 1);
-          this.route.navigate(['/dashboard']);
-        }
-      });
+    console.log(model);
   }
 }

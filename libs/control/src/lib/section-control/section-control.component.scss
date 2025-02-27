@@ -26,7 +26,7 @@
     }
 
     &--primary80 {
-      background-color: rgba(colors.$color-primary, 0.8);
+      background-color: rgba(colors.$color-primary, 0.85);
     }
 
     &--min-height640 {
@@ -46,13 +46,17 @@
       max-width: 960px;
     }
 
+    &--margin-auto-max-960px {
+      margin: auto;
+      max-width: 480px;
+    }
+
     &--min-height640 {
       min-height: 640px;
     }
 
     &--flex-center {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 1rem;
