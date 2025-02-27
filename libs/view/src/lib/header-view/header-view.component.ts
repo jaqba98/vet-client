@@ -5,8 +5,7 @@ import { SectionControlComponent, BigLogoControlComponent } from '@vet-client/li
 @Component({
   selector: 'lib-header-view',
   imports: [SectionControlComponent, BigLogoControlComponent],
-  templateUrl: './header-view.component.html',
-  styleUrl: './header-view.component.scss'
+  templateUrl: './header-view.component.html'
 })
 /** Header View */
 export class HeaderViewComponent {}
