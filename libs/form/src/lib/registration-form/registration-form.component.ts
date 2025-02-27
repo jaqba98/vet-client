@@ -28,31 +28,37 @@ export class RegistrationFormComponent extends BaseFormService<
         kind: 'input',
         type: 'text',
         placeholder: 'Email',
+        defaultValue: ''
       },
       password: {
         kind: 'input',
         type: 'password',
         placeholder: 'Password',
+        defaultValue: ''
       },
       confirmPassword: {
         kind: 'input',
         type: 'password',
         placeholder: 'Confirm password',
+        defaultValue: ''
       },
       firstName: {
         kind: 'input',
         type: 'text',
         placeholder: 'First name',
+        defaultValue: ''
       },
       lastName: {
         kind: 'input',
         type: 'text',
         placeholder: 'Last name',
+        defaultValue: ''
       },
       role: {
         kind: 'input',
         type: 'text',
         placeholder: 'Role',
+        defaultValue: ''
       },
       register: {
         id: 'register',
@@ -62,6 +68,7 @@ export class RegistrationFormComponent extends BaseFormService<
           type: 'text',
           text: 'Register'
         },
+        defaultValue: false
       },
     });
   }

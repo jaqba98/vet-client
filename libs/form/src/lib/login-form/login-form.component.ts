@@ -31,11 +31,13 @@ export class LoginFormComponent extends BaseFormService<
         kind: 'input',
         type: 'text',
         placeholder: 'Email',
+        defaultValue: ''
       },
       password: {
         kind: 'input',
         type: 'password',
         placeholder: 'Password',
+        defaultValue: ''
       },
       login: {
         id: 'login',
@@ -45,6 +47,7 @@ export class LoginFormComponent extends BaseFormService<
           type: 'text',
           text: 'Login',
         },
+        defaultValue: false
       },
     });
   }

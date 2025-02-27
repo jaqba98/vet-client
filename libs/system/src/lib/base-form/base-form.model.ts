@@ -1,10 +1,14 @@
 import { ButtonControlModel, InputControlModel } from '@vet-client/lib-control';
 
-export interface ControlInputModel extends InputControlModel {
+export interface ControlBaseModel<TDefaultValue> {
+  defaultValue: TDefaultValue;
+}
+
+export interface ControlInputModel extends ControlBaseModel<string>, InputControlModel {
   kind: 'input';
 }
 
-export interface ControlButtonModel extends ButtonControlModel {
+export interface ControlButtonModel extends ControlBaseModel<boolean>, ButtonControlModel {
   kind: 'button';
 }
 
