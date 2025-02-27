@@ -28,14 +28,20 @@ export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormMod
         id: 'home',
         kind: 'button',
         value: { type: ButtonControlTypeEnum.text, text: 'Home' },
-        defaultValue: false,
+        defaultValue: false
       },
       aboutUs: {
         id: 'aboutUs',
         kind: 'button',
         value: { type: ButtonControlTypeEnum.text, text: 'About us' },
-        defaultValue: false,
+        defaultValue: false
       },
+      price: {
+        id: 'price',
+        kind: 'button',
+        value: { type: ButtonControlTypeEnum.text, text: 'Price' },
+        defaultValue: false
+      }
     });
   }
 
@@ -44,6 +50,8 @@ export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormMod
       this.router.redirect(RouterEnum.home, 'home');
     } else if (model.aboutUs) {
       this.router.redirect(RouterEnum.home, 'about-us');
+    } else if (model.price) {
+      this.router.redirect(RouterEnum.home, 'price');
     }
     this.event.emit();
   }

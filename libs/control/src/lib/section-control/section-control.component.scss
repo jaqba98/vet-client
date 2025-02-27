@@ -43,7 +43,9 @@
   }
 
   &__content {
-    padding: 6rem 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4rem 2rem;
 
     &--margin-auto-max-960px {
       margin: auto;
@@ -52,7 +54,6 @@
       @include mixins.breakpoint(md, max) {
         display: flex;
         flex-direction: column;
-        width: 400px;
       }
     }
 
