@@ -1,3 +1,4 @@
+export * from './lib/contact-view/contact-view.component';
 export * from './lib/header-view/header-view.component';
 export * from './lib/footer-view/footer-view.component';
 export * from './lib/about-us-view/about-us-view.component';
