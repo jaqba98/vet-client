@@ -12,7 +12,7 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 })
 /** Section Control */
 export class SectionControlComponent {
-  @Input({ required: true }) id!: string;
+  @Input({ required: true }) sectionId!: string;
 
   @Input() marginAutoMax960px = false;
 

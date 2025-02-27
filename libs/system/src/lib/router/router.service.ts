@@ -10,9 +10,13 @@ export class RouterService {
 
   redirect(route: RouterEnum, id = '') {
     this.router.navigate([route]).then(() => {
+      console.log(123);
       setTimeout(() => {
+        console.log(321);
         if (id !== '') {
+          console.log(222);
           const element = document.getElementById(id);
+          console.log(element);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
           }
