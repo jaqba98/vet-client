@@ -9,26 +9,4 @@ const meta: Meta<NavViewComponent> = {
 export default meta;
 type Story = StoryObj<NavViewComponent>;
 
-export const Default: Story = {
-  args: {
-    model: {
-      options: [
-        {
-          id: 'button_1',
-          type: 'button',
-          value: { type: 'text', text: 'Button 1' }
-        },
-        {
-          id: 'button_2',
-          type: 'button',
-          value: { type: 'text', text: 'Button 2' }
-        },
-        {
-          id: 'button_3',
-          type: 'button',
-          value: { type: 'text', text: 'Button 3' }
-        }
-      ]
-    }
-  }
-};
+export const Default: Story = {};
