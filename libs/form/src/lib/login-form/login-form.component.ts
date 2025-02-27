@@ -10,7 +10,11 @@ import {
   HttpService,
   LoginPostHttpResponseModel,
 } from '@vet-client/lib-system';
-import { CardControlComponent, InputControlTypeEnum } from '@vet-client/lib-control';
+import {
+  ButtonControlTypeEnum,
+  CardControlComponent,
+  InputControlTypeEnum,
+} from '@vet-client/lib-control';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 
 @Component({
@@ -33,24 +37,23 @@ export class LoginFormComponent extends BaseFormService<
         type: InputControlTypeEnum.text,
         label: '',
         placeholder: 'Email',
-        defaultValue: ''
+        defaultValue: '',
       },
       password: {
         kind: 'input',
         type: InputControlTypeEnum.password,
         label: '',
         placeholder: 'Password',
-        defaultValue: ''
+        defaultValue: '',
       },
       login: {
         id: 'login',
         kind: 'button',
-        type: 'submit',
         value: {
-          type: 'text',
+          type: ButtonControlTypeEnum.text,
           text: 'Login',
         },
-        defaultValue: false
+        defaultValue: false,
       },
     });
   }

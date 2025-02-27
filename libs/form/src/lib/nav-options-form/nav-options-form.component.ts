@@ -10,12 +10,13 @@ import {
   NavOptionsFormDataModel,
   NavOptionsFormModel,
 } from './nav-options-form.model';
+import { ButtonControlTypeEnum } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-nav-options-form',
   imports: [BaseFormComponent],
   templateUrl: './nav-options-form.component.html',
-  styleUrl: './nav-options-form.component.scss'
+  styleUrl: './nav-options-form.component.scss',
 })
 export class NavOptionsFormComponent extends BaseFormService<
   NavOptionsFormModel,
@@ -28,9 +29,8 @@ export class NavOptionsFormComponent extends BaseFormService<
       home: {
         id: 'home',
         kind: 'button',
-        type: 'submit',
         value: {
-          type: 'text',
+          type: ButtonControlTypeEnum.text,
           text: 'Home',
         },
         defaultValue: false,
@@ -38,13 +38,12 @@ export class NavOptionsFormComponent extends BaseFormService<
       aboutUs: {
         id: 'aboutUs',
         kind: 'button',
-        type: 'submit',
         value: {
-          type: 'text',
+          type: ButtonControlTypeEnum.text,
           text: 'About us',
         },
         defaultValue: false,
-      }
+      },
     });
   }
 

@@ -5,15 +5,21 @@ import { faBars, faPaw } from '@fortawesome/free-solid-svg-icons';
 import {
   ButtonControlComponent,
   ButtonControlModel,
+  ButtonControlTypeEnum,
   IconControlComponent,
-  IconControlModel
+  IconControlModel,
 } from '@vet-client/lib-control';
 import { TITLE } from '@vet-client/lib-const';
 import { NavOptionsFormComponent } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-nav-view',
-  imports: [CommonModule, ButtonControlComponent, IconControlComponent, NavOptionsFormComponent],
+  imports: [
+    CommonModule,
+    ButtonControlComponent,
+    IconControlComponent,
+    NavOptionsFormComponent,
+  ],
   templateUrl: './nav-view.component.html',
   styleUrl: './nav-view.component.scss',
 })
@@ -22,17 +28,16 @@ export class NavViewComponent {
 
   readonly hamburgerModel: ButtonControlModel = {
     id: 'hamburger',
-    type: 'button',
     value: {
-      type: 'icon',
-      icon: { icon: faBars }
-    }
+      type: ButtonControlTypeEnum.icon,
+      icon: { icon: faBars },
+    },
   };
 
   mobileOptionsIsOpen = false;
 
   readonly logoModel: IconControlModel = {
-    icon: faPaw
+    icon: faPaw,
   };
 
   onHamburgerEvent() {

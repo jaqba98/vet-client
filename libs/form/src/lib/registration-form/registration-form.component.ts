@@ -9,6 +9,7 @@ import {
   RegistrationPostHttpResponseModel,
 } from '@vet-client/lib-system';
 import {
+  ButtonControlTypeEnum,
   CardControlComponent,
   InputControlTypeEnum,
 } from '@vet-client/lib-control';
@@ -73,9 +74,8 @@ export class RegistrationFormComponent extends BaseFormService<
       register: {
         id: 'register',
         kind: 'button',
-        type: 'submit',
         value: {
-          type: 'text',
+          type: ButtonControlTypeEnum.text,
           text: 'Register',
         },
         defaultValue: false,

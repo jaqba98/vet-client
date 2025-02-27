@@ -10,6 +10,7 @@ import {
   LoginRegistrationFormDataModel,
   LoginRegistrationFormModel,
 } from './login-registration-form.model';
+import { ButtonControlTypeEnum } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-login-registration-form',
@@ -25,15 +26,13 @@ export class LoginRegistrationFormComponent extends BaseFormService<
       login: {
         id: 'login',
         kind: 'button',
-        type: 'submit',
-        value: { type: 'text', text: 'Login' },
+        value: { type: ButtonControlTypeEnum.text, text: 'Login' },
         defaultValue: false,
       },
       registration: {
         id: 'registration',
         kind: 'button',
-        type: 'submit',
-        value: { type: 'text', text: 'Registration' },
+        value: { type: ButtonControlTypeEnum.text, text: 'Registration' },
         defaultValue: false,
       },
     });

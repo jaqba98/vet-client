@@ -1,4 +1,4 @@
-<button [ngClass]="getClassList()" [type]="model.type" (click)="onClick(model.id)">
+<button [ngClass]="getClassList()" type="submit" (click)="onClick(model.id)">
   <!-- Text -->
   <ng-container *ngIf="model.value.type === 'text'">{{ model.value.text }}</ng-container>
   <!-- Icon -->
