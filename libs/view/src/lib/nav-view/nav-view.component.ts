@@ -1,35 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
-import {
-  IconControlModel,
-  SmallLogoControlComponent
-} from '@vet-client/lib-control';
-import { TITLE } from '@vet-client/lib-const';
 import { HamburgerFormComponent, MenuOptionsFormComponent } from '@vet-client/lib-form';
+import { SmallLogoControlComponent } from '@vet-client/lib-control';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
 
 @Component({
   selector: 'lib-nav-view',
   imports: [
     CommonModule,
-    SmallLogoControlComponent,
+    HamburgerFormComponent,
     MenuOptionsFormComponent,
-    HamburgerFormComponent
+    SmallLogoControlComponent
   ],
   templateUrl: './nav-view.component.html',
   styleUrl: './nav-view.component.scss',
+  hostDirectives: [BaseComponentDirective]
 })
+/** Nav view */
 export class NavViewComponent {
-  readonly title = TITLE;
-
-  mobileOptionsIsOpen = false;
-
-  readonly logoModel: IconControlModel = {
-    icon: faPaw,
-  };
+  mobileMenuIsOpen = false;
 
   onHamburgerEvent() {
-    this.mobileOptionsIsOpen = !this.mobileOptionsIsOpen;
+    this.mobileMenuIsOpen = !this.mobileMenuIsOpen;
+  }
+
+  onMenuOptionsFormEvent() {
+    this.mobileMenuIsOpen = false;
   }
 }

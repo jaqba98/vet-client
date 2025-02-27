@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import {
   BaseFormComponent,
@@ -18,6 +18,8 @@ import { ButtonControlTypeEnum } from '@vet-client/lib-control';
 })
 /** Hamburger Form */
 export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormModel, MenuOptionsFormDataModel> {
+  @Output() event = new EventEmitter();
+
   @Input() flexDirectionColumn = false;
 
   constructor(private readonly router: RouterService) {
@@ -40,11 +42,9 @@ export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormMod
   override onSubmit(model: MenuOptionsFormDataModel) {
     if (model.home) {
       this.router.redirect(RouterEnum.home, 'home');
-      return;
-    }
-    if (model.aboutUs) {
+    } else if (model.aboutUs) {
       this.router.redirect(RouterEnum.home, 'about-us');
-      return;
     }
+    this.event.emit();
   }
 }

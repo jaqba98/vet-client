@@ -14,17 +14,8 @@
     <ng-content></ng-content>
   </div>
 </nav>
-
-<!--<nav class="nav-view">-->
-<!--  <div class="nav-view__logo">-->
-<!--    <lib-icon-control [model]="logoModel"></lib-icon-control>-->
-<!--    <p>{{ title }}</p>-->
-<!--  </div>-->
-<!--</nav>-->
-
-<!--&lt;!&ndash; Mobile options &ndash;&gt;-->
-<!--<ng-container *ngIf="mobileOptionsIsOpen">-->
-<!--  <div class="mobile-options">-->
-<!--    <lib-nav-options-form [flexDirectionColumn]="true"></lib-nav-options-form>-->
-<!--  </div>-->
-<!--</ng-container>-->
+<ng-container *ngIf="mobileMenuIsOpen">
+  <div class="nav-view__mobile-menu">
+    <lib-menu-options-form [flexDirectionColumn]="true" (event)="onMenuOptionsFormEvent()"></lib-menu-options-form>
+  </div>
+</ng-container>

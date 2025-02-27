@@ -13,15 +13,10 @@
     color: colors.$color-text-light-primary;
     border: none;
     cursor: pointer;
-    transition: transform 0.1s ease-in-out;
-
-    &:hover {
-      outline: 2px solid colors.$color-primary;
-      outline-offset: 2px;
-    }
 
     &:active {
-      transform: scale(0.95);
+      outline: 2px solid colors.$color-primary;
+      outline-offset: 2px;
     }
   }
 
