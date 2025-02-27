@@ -7,9 +7,7 @@
     </div>
     <!-- Options -->
     <div class="nav-view__menu--options">
-      <ng-container *ngFor="let option of model.options">
-        <lib-button-control [model]="option" (event)="onOptionEvent($event)"></lib-button-control>
-      </ng-container>
+      <lib-nav-options-form></lib-nav-options-form>
     </div>
   </div>
   <!-- Logo -->

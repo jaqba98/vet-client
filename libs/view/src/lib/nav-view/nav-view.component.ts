@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { faBars, faPaw } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -9,17 +9,15 @@ import {
   IconControlModel
 } from '@vet-client/lib-control';
 import { TITLE } from '@vet-client/lib-const';
-import { NavViewModel } from './nav-view.model';
+import { NavOptionsFormComponent } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-nav-view',
-  imports: [CommonModule, ButtonControlComponent, IconControlComponent],
+  imports: [CommonModule, ButtonControlComponent, IconControlComponent, NavOptionsFormComponent],
   templateUrl: './nav-view.component.html',
   styleUrl: './nav-view.component.scss',
 })
 export class NavViewComponent {
-  @Input({ required: true }) model!: NavViewModel;
-
   readonly title = TITLE;
 
   readonly hamburgerModel: ButtonControlModel = {
@@ -37,9 +35,5 @@ export class NavViewComponent {
 
   onHamburgerEvent(id: string) {
     console.log('onHamburgerEvent', id);
-  }
-
-  onOptionEvent(id: string) {
-    console.log('onOptionEvent', id);
   }
 }
