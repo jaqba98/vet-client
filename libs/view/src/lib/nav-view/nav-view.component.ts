@@ -3,22 +3,21 @@ import { Component } from '@angular/core';
 import { faBars, faPaw } from '@fortawesome/free-solid-svg-icons';
 
 import {
-  ButtonControlComponent,
   ButtonControlModel,
   ButtonControlTypeEnum,
   IconControlComponent,
   IconControlModel,
 } from '@vet-client/lib-control';
 import { TITLE } from '@vet-client/lib-const';
-import { NavOptionsFormComponent } from '@vet-client/lib-form';
+import { HamburgerFormComponent, NavOptionsFormComponent } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-nav-view',
   imports: [
     CommonModule,
-    ButtonControlComponent,
     IconControlComponent,
     NavOptionsFormComponent,
+    HamburgerFormComponent
   ],
   templateUrl: './nav-view.component.html',
   styleUrl: './nav-view.component.scss',
@@ -31,7 +30,6 @@ export class NavViewComponent {
     value: {
       type: ButtonControlTypeEnum.icon,
       icon: { icon: faBars },
-      position: 'left'
     },
   };
 

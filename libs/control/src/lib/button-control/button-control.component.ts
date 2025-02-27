@@ -30,14 +30,6 @@ export class ButtonControlComponent {
     };
   }
 
-  getButtonControlClassList() {
-    return {
-      'button-control__left': this.model.value.position === 'left',
-      'button-control__center': this.model.value.position === 'center',
-      'button-control__right': this.model.value.position === 'right'
-    };
-  }
-
   private isIcon() {
     return this.model.value.type === ButtonControlTypeEnum.icon;
   }

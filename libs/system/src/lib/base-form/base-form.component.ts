@@ -8,8 +8,7 @@ import { ControlsArrayType } from './base-form.model';
 @Component({
   selector: 'lib-base-form',
   imports: [CommonModule, ReactiveFormsModule, InputControlComponent, ButtonControlComponent],
-  templateUrl: './base-form.component.html',
-  styleUrl: './base-form.component.scss'
+  templateUrl: './base-form.component.html'
 })
 export class BaseFormComponent {
   @Output() event = new EventEmitter();

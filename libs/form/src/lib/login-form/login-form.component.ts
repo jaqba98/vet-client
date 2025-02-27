@@ -39,7 +39,6 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           type: ButtonControlTypeEnum.link,
           text: 'Forgot your password?',
           tip: "",
-          position: 'right'
         },
         defaultValue: false,
       },
@@ -49,7 +48,6 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         value: {
           type: ButtonControlTypeEnum.text,
           text: 'Login',
-          position: 'left'
         },
         defaultValue: false,
       },
@@ -60,7 +58,6 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           type: ButtonControlTypeEnum.link,
           text: "Don't have an account?",
           tip: "",
-          position: 'left'
         },
         defaultValue: false,
       },

@@ -77,7 +77,6 @@ export class RegistrationFormComponent extends BaseFormService<
         value: {
           type: ButtonControlTypeEnum.text,
           text: 'Register',
-          position: 'left'
         },
         defaultValue: false,
       },

@@ -4,19 +4,6 @@
 .button-control {
   display: flex;
   gap: 0.25rem;
-  margin-bottom: 1rem;
-
-  &__left {
-    justify-content: flex-start;
-  }
-
-  &__center {
-    justify-content: center;
-  }
-
-  &__right {
-    justify-content: flex-end;
-  }
 
   &__button {
     padding: 0.6rem 0.5rem;

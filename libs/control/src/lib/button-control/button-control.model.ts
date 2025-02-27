@@ -1,21 +1,17 @@
 import { IconControlModel } from '../icon-control/icon-control.model';
 import { ButtonControlTypeEnum } from './button-control-type.enum';
 
-interface BaseModel {
-  position: 'left' | 'center' | 'right';
-}
-
-interface TextValueModel extends BaseModel {
+interface TextValueModel {
   type: ButtonControlTypeEnum.text;
   text: string;
 }
 
-interface IconValueModel extends BaseModel {
+interface IconValueModel {
   type: ButtonControlTypeEnum.icon;
   icon: IconControlModel;
 }
 
-interface LinkValueModel extends BaseModel {
+interface LinkValueModel {
   type: ButtonControlTypeEnum.link;
   tip: string;
   text: string;

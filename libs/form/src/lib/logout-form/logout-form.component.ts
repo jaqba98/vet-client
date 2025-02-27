@@ -34,7 +34,6 @@ export class LogoutFormComponent extends BaseFormService<
         value: {
           type: ButtonControlTypeEnum.text,
           text: 'Logout',
-          position: 'left'
         },
         defaultValue: false,
       },

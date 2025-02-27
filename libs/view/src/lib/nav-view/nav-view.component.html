@@ -1,28 +1,24 @@
 <nav class="nav-view">
-  <!-- Menu -->
   <div class="nav-view__menu">
-    <!-- Hamburger -->
     <div class="nav-view__menu--hamburger">
-      <lib-button-control [model]="hamburgerModel" (event)="onHamburgerEvent()"></lib-button-control>
+      <lib-hamburger-form (event)="onHamburgerEvent()"></lib-hamburger-form>
     </div>
-    <!-- Options -->
     <div class="nav-view__menu--options">
       <lib-nav-options-form></lib-nav-options-form>
     </div>
   </div>
-  <!-- Logo -->
   <div class="nav-view__logo">
     <lib-icon-control [model]="logoModel"></lib-icon-control>
     <p>{{ title }}</p>
   </div>
-  <!-- Dynamic content-->
   <div class="nav-view__dynamic">
     <ng-content></ng-content>
   </div>
-  <!-- Mobile options -->
-  <ng-container *ngIf="mobileOptionsIsOpen">
-    <div class="mobile-options">
-      <lib-nav-options-form [flexDirectionColumn]="true"></lib-nav-options-form>
-    </div>
-  </ng-container>
 </nav>
+
+<!--&lt;!&ndash; Mobile options &ndash;&gt;-->
+<!--<ng-container *ngIf="mobileOptionsIsOpen">-->
+<!--  <div class="mobile-options">-->
+<!--    <lib-nav-options-form [flexDirectionColumn]="true"></lib-nav-options-form>-->
+<!--  </div>-->
+<!--</ng-container>-->
