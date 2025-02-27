@@ -16,9 +16,13 @@
       border-radius: 0.25rem;
       height: 40px;
 
-      &:active {
+      &:focus {
         outline: 2px solid colors.$color-primary;
         outline-offset: 2px;
+      }
+
+      &:active {
+        transform: scale(0.95);
       }
     }
 

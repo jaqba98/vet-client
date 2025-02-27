@@ -1,82 +1,19 @@
+// done
 @use 'libs/scss/src/base/colors';
-@use 'libs/scss/src/abstracts/mixins';
 
 .section {
-  &--background-image-guinea-pig {
-    background-image: url("../../../../../apps/vet-client/public/guinea-pig.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  &--min-height640 {
-    min-height: 640px;
-  }
-
-  &--full-height-with-nav {
-    min-height: calc(100svh - 60px);
-  }
-
   &__background {
-    &--primary {
-      background-color: colors.$color-primary;
-    }
-
-    &--surface {
-      background-color: colors.$color-surface;
-    }
-
-    &--background {
-      background-color: colors.$color-background;
-    }
-
-    &--primary80 {
-      background-color: rgba(colors.$color-primary, 0.85);
-    }
-
-    &--min-height640 {
-      min-height: 640px;
-    }
-
-    &--full-height-with-nav {
-      min-height: calc(100svh - 60px);
-    }
+    background-color: colors.$color-background;
+    padding: 6rem 2rem;
   }
 
   &__content {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 4rem 2rem;
-
-    &--margin-auto-max-960px {
+    &--margin-auto {
       margin: auto;
-      max-width: 960px;
-
-      @include mixins.breakpoint(md, max) {
-        display: flex;
-        flex-direction: column;
-      }
     }
 
-    &--min-height640 {
-      min-height: 640px;
-
-      @include mixins.breakpoint(md, max) {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-    }
-
-    &--flex-center {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    &--full-height-with-nav {
-      min-height: calc(100svh - 60px);
+    &--max-width-480px {
+      max-width: 480px;
     }
   }
 }
