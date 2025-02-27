@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { InputControlComponent, ButtonControlComponent } from '@vet-client/lib-control';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ControlsArrayType } from './base-form.model';
 
 @Component({
   selector: 'lib-base-form',
   imports: [CommonModule, ReactiveFormsModule, InputControlComponent, ButtonControlComponent],
-  templateUrl: './base-form.component.html'
+  templateUrl: './base-form.component.html',
+  styleUrl: './base-form.component.scss',
+  hostDirectives: [BaseComponentDirective]
 })
 export class BaseFormComponent {
   @Output() event = new EventEmitter();

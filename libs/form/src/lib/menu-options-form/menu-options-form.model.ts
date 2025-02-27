@@ -1,11 +1,11 @@
 import { ControlType } from '@vet-client/lib-system';
 
-export interface NavOptionsFormModel {
+export interface MenuOptionsFormModel {
   home: ControlType;
   aboutUs: ControlType;
 }
 
-export interface NavOptionsFormDataModel {
+export interface MenuOptionsFormDataModel {
   home: boolean;
   aboutUs: boolean;
 }

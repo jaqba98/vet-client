@@ -9,14 +9,14 @@ import {
   IconControlModel,
 } from '@vet-client/lib-control';
 import { TITLE } from '@vet-client/lib-const';
-import { HamburgerFormComponent, NavOptionsFormComponent } from '@vet-client/lib-form';
+import { HamburgerFormComponent, MenuOptionsFormComponent } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-nav-view',
   imports: [
     CommonModule,
     IconControlComponent,
-    NavOptionsFormComponent,
+    MenuOptionsFormComponent,
     HamburgerFormComponent
   ],
   templateUrl: './nav-view.component.html',

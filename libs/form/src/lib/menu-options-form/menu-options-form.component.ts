@@ -6,22 +6,18 @@ import {
   RouterEnum,
   RouterService,
 } from '@vet-client/lib-system';
-import {
-  NavOptionsFormDataModel,
-  NavOptionsFormModel,
-} from './nav-options-form.model';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { MenuOptionsFormDataModel, MenuOptionsFormModel } from './menu-options-form.model';
 import { ButtonControlTypeEnum } from '@vet-client/lib-control';
 
 @Component({
-  selector: 'lib-nav-options-form',
+  selector: 'lib-menu-options-form',
   imports: [BaseFormComponent],
-  templateUrl: './nav-options-form.component.html',
-  styleUrl: './nav-options-form.component.scss',
+  templateUrl: './menu-options-form.component.html',
+  hostDirectives: [BaseComponentDirective]
 })
-export class NavOptionsFormComponent extends BaseFormService<
-  NavOptionsFormModel,
-  NavOptionsFormDataModel
-> {
+/** Hamburger Form */
+export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormModel, MenuOptionsFormDataModel> {
   @Input() flexDirectionColumn = false;
 
   constructor(private readonly router: RouterService) {
@@ -29,29 +25,26 @@ export class NavOptionsFormComponent extends BaseFormService<
       home: {
         id: 'home',
         kind: 'button',
-        value: {
-          type: ButtonControlTypeEnum.text,
-          text: 'Home',
-        },
+        value: { type: ButtonControlTypeEnum.text, text: 'Home' },
         defaultValue: false,
       },
       aboutUs: {
         id: 'aboutUs',
         kind: 'button',
-        value: {
-          type: ButtonControlTypeEnum.text,
-          text: 'About us',
-        },
+        value: { type: ButtonControlTypeEnum.text, text: 'About us' },
         defaultValue: false,
       },
     });
   }
 
-  override onSubmit(model: NavOptionsFormDataModel) {
+  override onSubmit(model: MenuOptionsFormDataModel) {
     if (model.home) {
       this.router.redirect(RouterEnum.home, 'home');
-    } else if (model.aboutUs) {
+      return;
+    }
+    if (model.aboutUs) {
       this.router.redirect(RouterEnum.home, 'about-us');
+      return;
     }
   }
 }
