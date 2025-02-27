@@ -26,13 +26,13 @@ export class LoginRegistrationFormComponent extends BaseFormService<
       login: {
         id: 'login',
         kind: 'button',
-        value: { type: ButtonControlTypeEnum.text, text: 'Login' },
+        value: { type: ButtonControlTypeEnum.text, text: 'Login', position: 'left' },
         defaultValue: false,
       },
       registration: {
         id: 'registration',
         kind: 'button',
-        value: { type: ButtonControlTypeEnum.text, text: 'Registration' },
+        value: { type: ButtonControlTypeEnum.text, text: 'Registration', position: 'left' },
         defaultValue: false,
       },
     });

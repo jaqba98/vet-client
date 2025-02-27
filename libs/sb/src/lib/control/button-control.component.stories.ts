@@ -20,6 +20,7 @@ export const Default: Story = {
       value: {
         type: ButtonControlTypeEnum.text,
         text: 'Click me',
+        position: 'left'
       }
     }
   }
@@ -31,9 +32,22 @@ export const Icon: Story = {
       id: 'click',
       value: {
         type: ButtonControlTypeEnum.icon,
-        icon: {
-          icon: faBars
-        }
+        icon: { icon: faBars },
+        position: 'left'
+      }
+    }
+  }
+};
+
+export const Link: Story = {
+  args: {
+    model: {
+      id: 'click',
+      value: {
+        type: ButtonControlTypeEnum.link,
+        text: 'Click me',
+        tip: 'Hello',
+        position: 'left'
       }
     }
   }

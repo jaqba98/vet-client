@@ -32,12 +32,35 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         placeholder: '',
         defaultValue: '',
       },
+      forgotPassword: {
+        id: 'forgotPassword',
+        kind: 'button',
+        value: {
+          type: ButtonControlTypeEnum.link,
+          text: 'Forgot your password?',
+          tip: "",
+          position: 'right'
+        },
+        defaultValue: false,
+      },
       login: {
         id: 'login',
         kind: 'button',
         value: {
           type: ButtonControlTypeEnum.text,
           text: 'Login',
+          position: 'left'
+        },
+        defaultValue: false,
+      },
+      registration: {
+        id: 'registration',
+        kind: 'button',
+        value: {
+          type: ButtonControlTypeEnum.link,
+          text: "Don't have an account?",
+          tip: "",
+          position: 'left'
         },
         defaultValue: false,
       },

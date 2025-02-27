@@ -24,12 +24,25 @@ export class ButtonControlComponent {
 
   getClassList() {
     return {
-      'button-control': true,
+      'button-control__button': true,
       'button-control__icon': this.isIcon(),
+      'button-control__link': this.isLink()
+    };
+  }
+
+  getButtonControlClassList() {
+    return {
+      'button-control__left': this.model.value.position === 'left',
+      'button-control__center': this.model.value.position === 'center',
+      'button-control__right': this.model.value.position === 'right'
     };
   }
 
   private isIcon() {
     return this.model.value.type === ButtonControlTypeEnum.icon;
+  }
+
+  private isLink() {
+    return this.model.value.type === ButtonControlTypeEnum.link;
   }
 }

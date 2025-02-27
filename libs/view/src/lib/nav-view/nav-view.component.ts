@@ -31,6 +31,7 @@ export class NavViewComponent {
     value: {
       type: ButtonControlTypeEnum.icon,
       icon: { icon: faBars },
+      position: 'left'
     },
   };
 

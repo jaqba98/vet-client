@@ -32,6 +32,7 @@ export class NavOptionsFormComponent extends BaseFormService<
         value: {
           type: ButtonControlTypeEnum.text,
           text: 'Home',
+          position: 'left'
         },
         defaultValue: false,
       },
@@ -41,6 +42,7 @@ export class NavOptionsFormComponent extends BaseFormService<
         value: {
           type: ButtonControlTypeEnum.text,
           text: 'About us',
+          position: 'left'
         },
         defaultValue: false,
       },

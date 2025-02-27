@@ -1,4 +1,5 @@
 export enum ButtonControlTypeEnum {
   text = 'text',
-  icon = 'icon'
+  icon = 'icon',
+  link = 'link'
 }

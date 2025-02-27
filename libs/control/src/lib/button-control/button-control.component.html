@@ -1,8 +1,15 @@
-<button [ngClass]="getClassList()" type="submit" (click)="onClick(model.id)">
-  <!-- Text -->
-  <ng-container *ngIf="model.value.type === 'text'">{{ model.value.text }}</ng-container>
-  <!-- Icon -->
-  <ng-container *ngIf="model.value.type === 'icon'">
-    <lib-icon-control [model]="model.value.icon"></lib-icon-control>
+<div class="button-control" [ngClass]="getButtonControlClassList()">
+  <ng-container *ngIf="model.value.type === 'link'">
+    <p class="button-control__tip">{{ model.value.tip }}</p>
   </ng-container>
-</button>
+  <button [ngClass]="getClassList()" type="submit" (click)="onClick(model.id)">
+    <!-- Text -->
+    <ng-container *ngIf="model.value.type === 'text'">{{ model.value.text }}</ng-container>
+    <!-- Icon -->
+    <ng-container *ngIf="model.value.type === 'icon'">
+      <lib-icon-control [model]="model.value.icon"></lib-icon-control>
+    </ng-container>
+    <!-- Link -->
+    <ng-container *ngIf="model.value.type === 'link'">{{ model.value.text }}</ng-container>
+  </button>
+</div>
