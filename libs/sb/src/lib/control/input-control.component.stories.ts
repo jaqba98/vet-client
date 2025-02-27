@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { InputControlComponent, InputControlTypeEnum } from '@vet-client/lib-control';
+import { InputControlComponent } from '@vet-client/lib-control';
 import { FormGroup } from '@angular/forms';
 
 const meta: Meta<InputControlComponent> = {
@@ -13,7 +13,7 @@ type Story = StoryObj<InputControlComponent>;
 export const Default: Story = {
   args: {
     model: {
-      type: InputControlTypeEnum.text,
+      type: 'text',
       label: 'Login',
       placeholder: 'Enter your login'
     },

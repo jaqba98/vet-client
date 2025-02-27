@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
-import {
-  ButtonControlTypeEnum,
-  CardControlComponent,
-  InputControlTypeEnum,
-} from '@vet-client/lib-control';
+import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 
@@ -20,14 +16,14 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
     super({
       email: {
         kind: 'input',
-        type: InputControlTypeEnum.text,
+        type: 'text',
         label: 'Email',
         placeholder: '',
         defaultValue: '',
       },
       password: {
         kind: 'input',
-        type: InputControlTypeEnum.password,
+        type: 'password',
         label: 'Password',
         placeholder: '',
         defaultValue: '',
@@ -36,9 +32,8 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         id: 'forgotPassword',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.link,
-          text: 'Forgot your password?',
-          tip: "",
+          type: 'link',
+          text: 'Forgot your password?'
         },
         defaultValue: false,
       },
@@ -46,7 +41,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         id: 'login',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.text,
+          type: 'text',
           text: 'Login',
         },
         defaultValue: false,
@@ -55,9 +50,8 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         id: 'registration',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.link,
-          text: "Don't have an account?",
-          tip: "",
+          type: 'link',
+          text: "Don't have an account?"
         },
         defaultValue: false,
       },

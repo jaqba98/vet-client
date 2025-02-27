@@ -1,47 +1,39 @@
+// done
 @use 'libs/scss/src/base/colors';
-@use 'libs/scss/src/abstracts/mixins';
 
 .button-control {
-  display: flex;
-  gap: 0.25rem;
-
   &__button {
-    flex: 1;
-    padding: 0.6rem 0.5rem;
-    border-radius: 0.25rem;
-    background-color: colors.$color-primary;
-    color: colors.$color-text-light-primary;
-    border: none;
-    cursor: pointer;
-
-    &:active {
-      outline: 2px solid colors.$color-primary;
-      outline-offset: 2px;
-    }
-  }
-
-  &__icon {
-    width: 35px;
-    height: 35px;
-    color: colors.$color-text-light-primary;
-  }
-
-  &__link {
-    padding: 0;
-    background-color: transparent;
-    color: colors.$color-primary;
-    text-decoration: underline;
-
-    &:hover {
-      outline: none;
+    &--text,
+    &--icon,
+    &--link {
+      cursor: pointer;
     }
 
-    &:active {
-      transform: none;
-    }
- }
+    &--text,
+    &--icon {
+      background-color: colors.$color-primary;
+      border: 1px solid colors.$color-primary;
+      border-radius: 0.25rem;
+      height: 40px;
 
-  &__tip {
-    color: colors.$color-text-dark-secondary;
+      &:active {
+        outline: 2px solid colors.$color-primary;
+        outline-offset: 2px;
+      }
+    }
+
+    &--text {
+      font-weight: 700;
+      padding: 0.6rem 0.7rem;
+    }
+
+    &--icon {
+      width: 40px;
+    }
+
+    &--link {
+      background-color: transparent;
+      border: none;
+    }
   }
 }

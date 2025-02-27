@@ -1,13 +1,12 @@
+// done
 @use 'libs/scss/src/base/colors';
 
 .card-control {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 0.25rem;
   background-color: colors.$color-surface;
-  padding: 2rem;
-  border-radius: 0.5rem;
   border: 1px solid colors.$color-border;
-
-  &__title {
-    color: colors.$color-text-dark-primary;
-    margin-bottom: 2rem;
-  }
 }

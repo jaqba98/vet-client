@@ -1,15 +1,17 @@
+<!-- done -->
 <div class="button-control">
-  <ng-container *ngIf="model.value.type === 'link'">
-    <p class="button-control__tip">{{ model.value.tip }}</p>
-  </ng-container>
-  <button [ngClass]="getClassList()" type="submit" (click)="onClick(model.id)">
-    <!-- Text -->
-    <ng-container *ngIf="model.value.type === 'text'">{{ model.value.text }}</ng-container>
-    <!-- Icon -->
-    <ng-container *ngIf="model.value.type === 'icon'">
-      <lib-icon-control [model]="model.value.icon"></lib-icon-control>
+  <button class="button-control__button" type="submit" [ngClass]="getClassList()" (click)="onClick(model.id)">
+    <!-- Text-->
+    <ng-container *ngIf="model.value.type === 'text'">
+      <lib-text-control tag="p" [content]="model.value.text" color="text__light-primary"></lib-text-control>
     </ng-container>
-    <!-- Link -->
-    <ng-container *ngIf="model.value.type === 'link'">{{ model.value.text }}</ng-container>
+    <!-- Icon-->
+    <ng-container *ngIf="model.value.type === 'icon'">
+      <lib-icon-control [model]="model.value.icon" color="icon__light-primary"></lib-icon-control>
+    </ng-container>
+    <!-- Link-->
+    <ng-container *ngIf="model.value.type === 'link'">
+      <lib-text-control tag="p" [content]="model.value.text" color="text__primary"></lib-text-control>
+    </ng-container>
   </button>
 </div>

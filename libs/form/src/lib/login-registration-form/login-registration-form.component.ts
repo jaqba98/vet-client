@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { BaseFormComponent, BaseFormService, RouterEnum, RouterService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ButtonControlTypeEnum } from '@vet-client/lib-control';
 import { LoginRegistrationFormDataModel, LoginRegistrationFormModel } from './login-registration-form.model';
 
 @Component({
@@ -23,7 +22,7 @@ export class LoginRegistrationFormComponent extends BaseFormService<
         id: 'login',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.text,
+          type: 'text',
           text: 'Login'
         },
         defaultValue: false,
@@ -32,7 +31,7 @@ export class LoginRegistrationFormComponent extends BaseFormService<
         id: 'registration',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.text,
+          type: 'text',
           text: 'Registration'
         },
         defaultValue: false,

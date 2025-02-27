@@ -1,10 +1,8 @@
+// done
 import type { Meta, StoryObj } from '@storybook/angular';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import {
-  ButtonControlComponent,
-  ButtonControlTypeEnum,
-} from '@vet-client/lib-control';
+import { ButtonControlComponent } from '@vet-client/lib-control';
 
 const meta: Meta<ButtonControlComponent> = {
   component: ButtonControlComponent,
@@ -18,8 +16,8 @@ export const Default: Story = {
     model: {
       id: 'click',
       value: {
-        type: ButtonControlTypeEnum.text,
-        text: 'Click me',
+        type: 'text',
+        text: 'Click'
       }
     }
   }
@@ -30,8 +28,11 @@ export const Icon: Story = {
     model: {
       id: 'click',
       value: {
-        type: ButtonControlTypeEnum.icon,
-        icon: { icon: faBars },
+        type: 'icon',
+        icon: {
+          icon: faBars,
+          color: 'icon__primary'
+        }
       }
     }
   }
@@ -42,9 +43,8 @@ export const Link: Story = {
     model: {
       id: 'click',
       value: {
-        type: ButtonControlTypeEnum.link,
-        text: 'Click me',
-        tip: 'Hello',
+        type: 'link',
+        text: 'Click'
       }
     }
   }

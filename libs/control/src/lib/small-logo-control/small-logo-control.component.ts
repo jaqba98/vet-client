@@ -18,5 +18,5 @@ import { IconControlModel } from '../icon-control/icon-control.model';
 export class SmallLogoControlComponent {
   readonly title = TITLE;
 
-  logoModel: IconControlModel = { icon: faPaw };
+  logoModel: IconControlModel = { icon: faPaw, color: 'icon__dark-primary' };
 }

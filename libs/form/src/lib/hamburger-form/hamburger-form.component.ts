@@ -3,7 +3,6 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ButtonControlTypeEnum } from '@vet-client/lib-control';
 import { HamburgerFormDataModel, HamburgerFormModel } from './hamburger-form.model';
 
 @Component({
@@ -22,9 +21,10 @@ export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, 
         id: 'hamburger',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.icon,
+          type: 'icon',
           icon: {
-            icon: faBars
+            icon: faBars,
+            color: 'icon__dark-primary'
           }
         },
         defaultValue: false,

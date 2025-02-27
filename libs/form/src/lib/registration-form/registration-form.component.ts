@@ -8,11 +8,7 @@ import {
   HttpService,
   RegistrationPostHttpResponseModel,
 } from '@vet-client/lib-system';
-import {
-  ButtonControlTypeEnum,
-  CardControlComponent,
-  InputControlTypeEnum,
-} from '@vet-client/lib-control';
+import { CardControlComponent } from '@vet-client/lib-control';
 import {
   RegistrationFormDataModel,
   RegistrationFormModel,
@@ -31,42 +27,42 @@ export class RegistrationFormComponent extends BaseFormService<
     super({
       email: {
         kind: 'input',
-        type: InputControlTypeEnum.text,
+        type: 'text',
         label: '',
         placeholder: 'Email',
         defaultValue: '',
       },
       password: {
         kind: 'input',
-        type: InputControlTypeEnum.password,
+        type: 'password',
         label: '',
         placeholder: 'Password',
         defaultValue: '',
       },
       confirmPassword: {
         kind: 'input',
-        type: InputControlTypeEnum.password,
+        type: 'password',
         label: '',
         placeholder: 'Confirm password',
         defaultValue: '',
       },
       firstName: {
         kind: 'input',
-        type: InputControlTypeEnum.text,
+        type: 'text',
         label: '',
         placeholder: 'First name',
         defaultValue: '',
       },
       lastName: {
         kind: 'input',
-        type: InputControlTypeEnum.text,
+        type: 'text',
         label: '',
         placeholder: 'Last name',
         defaultValue: '',
       },
       role: {
         kind: 'input',
-        type: InputControlTypeEnum.text,
+        type: 'text',
         label: '',
         placeholder: 'Role',
         defaultValue: '',
@@ -75,7 +71,7 @@ export class RegistrationFormComponent extends BaseFormService<
         id: 'register',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.text,
+          type: 'text',
           text: 'Register',
         },
         defaultValue: false,

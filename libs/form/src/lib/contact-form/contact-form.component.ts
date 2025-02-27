@@ -1,65 +1,66 @@
+// done
 import { Component } from '@angular/core';
 
+import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
-import {
-  ButtonControlTypeEnum,
-  CardControlComponent,
-  InputControlTypeEnum,
-} from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ContactFormDataModel, ContactFormModel } from './contact-form.model';
 
 @Component({
   selector: 'lib-contact-form',
-  imports: [BaseFormComponent, CardControlComponent],
+  imports: [CardControlComponent, BaseFormComponent],
   templateUrl: './contact-form.component.html',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
-export class ContactFormComponent extends BaseFormService<ContactFormModel, ContactFormDataModel> {
+export class ContactFormComponent extends BaseFormService<
+  ContactFormModel,
+  ContactFormDataModel
+> {
   constructor() {
     super({
+      firstName: {
+        kind: 'input',
+        defaultValue: '',
+        type: 'text',
+        label: 'First name',
+        placeholder: '',
+      },
+      lastName: {
+        kind: 'input',
+        defaultValue: '',
+        type: 'text',
+        label: 'Last name',
+        placeholder: '',
+      },
       email: {
         kind: 'input',
-        type: InputControlTypeEnum.text,
+        defaultValue: '',
+        type: 'text',
         label: 'Email',
         placeholder: '',
-        defaultValue: '',
       },
-      password: {
+      subject: {
         kind: 'input',
-        type: InputControlTypeEnum.password,
-        label: 'Password',
-        placeholder: '',
         defaultValue: '',
+        type: 'text',
+        label: 'Subject',
+        placeholder: '',
       },
-      forgotPassword: {
-        id: 'forgotPassword',
-        kind: 'button',
-        value: {
-          type: ButtonControlTypeEnum.link,
-          text: 'Forgot your password?',
-          tip: "",
-        },
-        defaultValue: false,
+      message: {
+        kind: 'input',
+        defaultValue: '',
+        type: 'text',
+        label: 'Message',
+        placeholder: '',
       },
-      login: {
-        id: 'login',
+      send: {
         kind: 'button',
-        value: {
-          type: ButtonControlTypeEnum.text,
-          text: 'Login',
-        },
         defaultValue: false,
-      },
-      registration: {
-        id: 'registration',
-        kind: 'button',
+        id: 'send',
         value: {
-          type: ButtonControlTypeEnum.link,
-          text: "Don't have an account?",
-          tip: "",
+          type: 'text',
+          text: 'Send',
         },
-        defaultValue: false,
       },
     });
   }

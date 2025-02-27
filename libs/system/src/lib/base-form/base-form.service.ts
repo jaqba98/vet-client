@@ -1,10 +1,17 @@
+// done
 import { Inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { BaseFormModel, ControlType, ControlsArrayType } from './base-form.model';
+import {
+  BaseFormModel,
+  ControlType,
+  ControlsArrayType,
+  ControlInputModel,
+  ControlButtonModel
+} from './base-form.model';
 
 @Injectable()
-export class BaseFormService<TFormModel ,TFormDataModel> {
+export class BaseFormService<TFormModel, TFormDataModel> {
   formGroup: FormGroup;
 
   controlsArray: ControlsArrayType;
@@ -19,10 +26,10 @@ export class BaseFormService<TFormModel ,TFormDataModel> {
     Object.entries(baseForm as Record<string, ControlType>).forEach(([key, control]) => {
       switch (control.kind) {
         case 'input':
-          formGroup.addControl(key, this.createInputFormControl());
+          formGroup.addControl(key, this.createInputFormControl(control));
           break;
         case 'button':
-          formGroup.addControl(key, this.createButtonFormControl());
+          formGroup.addControl(key, this.createButtonFormControl(control));
           break;
         default:
           throw new Error('Unknown control type!');
@@ -41,11 +48,11 @@ export class BaseFormService<TFormModel ,TFormDataModel> {
     throw new Error('Unimplemented method name!');
   }
 
-  private createInputFormControl() {
-    return new FormControl('');
+  private createInputFormControl(control: ControlInputModel) {
+    return new FormControl(control.defaultValue);
   }
 
-  private createButtonFormControl() {
-    return new FormControl(false);
+  private createButtonFormControl(control: ControlButtonModel) {
+    return new FormControl(control.defaultValue);
   }
 }

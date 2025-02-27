@@ -1,19 +1,18 @@
+// done
 import { IconControlModel } from '../icon-control/icon-control.model';
-import { ButtonControlTypeEnum } from './button-control-type.enum';
 
 interface TextValueModel {
-  type: ButtonControlTypeEnum.text;
+  type: 'text';
   text: string;
 }
 
 interface IconValueModel {
-  type: ButtonControlTypeEnum.icon;
+  type: 'icon';
   icon: IconControlModel;
 }
 
 interface LinkValueModel {
-  type: ButtonControlTypeEnum.link;
-  tip: string;
+  type: 'link';
   text: string;
 }
 

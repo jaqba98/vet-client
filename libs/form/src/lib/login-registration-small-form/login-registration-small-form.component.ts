@@ -3,8 +3,10 @@ import { faRightFromBracket, faUserPlus } from '@fortawesome/free-solid-svg-icon
 
 import { BaseFormComponent, BaseFormService, RouterEnum, RouterService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ButtonControlTypeEnum } from '@vet-client/lib-control';
-import { LoginRegistrationSmallFormDataModel, LoginRegistrationSmallFormModel } from './login-registration-small-form.model';
+import {
+  LoginRegistrationSmallFormDataModel,
+  LoginRegistrationSmallFormModel
+} from './login-registration-small-form.model';
 
 @Component({
   selector: 'lib-login-registration-small-form',
@@ -24,9 +26,10 @@ export class LoginRegistrationSmallFormComponent extends BaseFormService<
         id: 'login',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.icon,
+          type: 'icon',
           icon: {
-            icon: faRightFromBracket
+            icon: faRightFromBracket,
+            color: 'icon__dark-primary'
           }
         },
         defaultValue: false,
@@ -35,9 +38,10 @@ export class LoginRegistrationSmallFormComponent extends BaseFormService<
         id: 'registration',
         kind: 'button',
         value: {
-          type: ButtonControlTypeEnum.icon,
+          type: 'icon',
           icon: {
-            icon: faUserPlus
+            icon: faUserPlus,
+            color: 'icon__dark-primary'
           }
         },
         defaultValue: false,

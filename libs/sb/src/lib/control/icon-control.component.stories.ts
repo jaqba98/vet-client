@@ -1,3 +1,4 @@
+// done
 import type { Meta, StoryObj } from '@storybook/angular';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,7 +14,8 @@ type Story = StoryObj<IconControlComponent>;
 export const Default: Story = {
   args: {
     model: {
-      icon: faCoffee
+      icon: faCoffee,
+      color: 'icon__dark-primary'
     }
   }
 };

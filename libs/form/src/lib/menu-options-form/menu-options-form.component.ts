@@ -8,7 +8,6 @@ import {
 } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { MenuOptionsFormDataModel, MenuOptionsFormModel } from './menu-options-form.model';
-import { ButtonControlTypeEnum } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-menu-options-form',
@@ -27,19 +26,19 @@ export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormMod
       home: {
         id: 'home',
         kind: 'button',
-        value: { type: ButtonControlTypeEnum.text, text: 'Home' },
+        value: { type: 'text', text: 'Home' },
         defaultValue: false
       },
       aboutUs: {
         id: 'aboutUs',
         kind: 'button',
-        value: { type: ButtonControlTypeEnum.text, text: 'About us' },
+        value: { type: 'text', text: 'About us' },
         defaultValue: false
       },
       price: {
         id: 'price',
         kind: 'button',
-        value: { type: ButtonControlTypeEnum.text, text: 'Price' },
+        value: { type: 'text', text: 'Price' },
         defaultValue: false
       }
     });

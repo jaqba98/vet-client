@@ -1,11 +1,13 @@
-import { CommonModule } from '@angular/common';
+// done
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { TextControlComponent } from '../text-control/text-control.component';
 
 @Component({
   selector: 'lib-card-control',
-  imports: [CommonModule],
+  imports: [CommonModule, TextControlComponent],
   templateUrl: './card-control.component.html',
   styleUrl: './card-control.component.scss',
   hostDirectives: [BaseComponentDirective]
@@ -13,15 +15,7 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 export class CardControlComponent {
   @Input() title = '';
 
-  @Input() width = '100%';
-
-  isTitle() {
+  isTitleSet() {
     return this.title !== '';
-  }
-
-  getStyleList() {
-    return {
-      width: this.width
-    };
   }
 }

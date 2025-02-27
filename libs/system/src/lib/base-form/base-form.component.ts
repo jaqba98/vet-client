@@ -1,8 +1,9 @@
+// done
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { InputControlComponent, ButtonControlComponent } from '@vet-client/lib-control';
+import { ButtonControlComponent, InputControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ControlsArrayType } from './base-form.model';
 
@@ -20,7 +21,7 @@ export class BaseFormComponent {
 
   @Input({ required: true}) controlsArray!: ControlsArrayType;
 
-  @Input() flexDirectionColumn = false;
+  @Input() horizontal = false;
 
   onSubmit() {
     const model = this.formGroup.getRawValue();
@@ -34,7 +35,7 @@ export class BaseFormComponent {
 
   getClassList() {
     return {
-      'base-form__flex-direction--column': this.flexDirectionColumn
+      'base-form__horizontal': this.horizontal
     };
   }
 

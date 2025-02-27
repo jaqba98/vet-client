@@ -1,6 +1,7 @@
-<div class="card-control" [ngStyle]="getStyleList()">
-  <ng-container *ngIf="isTitle()">
-    <h2 class="card-control__title">{{ title }}</h2>
+<!-- done -->
+<div class="card-control">
+  <ng-container *ngIf="isTitleSet()">
+    <lib-text-control tag="h3" [content]="title"></lib-text-control>
   </ng-container>
   <ng-content></ng-content>
 </div>

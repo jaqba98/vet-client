@@ -1,22 +1,23 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+// done
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ButtonControlModel } from './button-control.model';
 import { IconControlComponent } from '../icon-control/icon-control.component';
-import { ButtonControlTypeEnum } from './button-control-type.enum';
+import { ButtonControlModel } from './button-control.model';
+import { TextControlComponent } from '../text-control/text-control.component';
 
 @Component({
   selector: 'lib-button-control',
-  imports: [CommonModule, IconControlComponent],
+  imports: [CommonModule, IconControlComponent, TextControlComponent],
   templateUrl: './button-control.component.html',
   styleUrl: './button-control.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
 export class ButtonControlComponent {
-  @Input({ required: true }) model!: ButtonControlModel;
-
   @Output() event = new EventEmitter<string>();
+
+  @Input({ required: true }) model!: ButtonControlModel;
 
   onClick(event: string) {
     this.event.emit(event);
@@ -24,17 +25,9 @@ export class ButtonControlComponent {
 
   getClassList() {
     return {
-      'button-control__button': true,
-      'button-control__icon': this.isIcon(),
-      'button-control__link': this.isLink()
+      'button-control__button--text': this.model.value.type === 'text',
+      'button-control__button--icon': this.model.value.type === 'icon',
+      'button-control__button--link': this.model.value.type === 'link'
     };
-  }
-
-  private isIcon() {
-    return this.model.value.type === ButtonControlTypeEnum.icon;
-  }
-
-  private isLink() {
-    return this.model.value.type === ButtonControlTypeEnum.link;
   }
 }
