@@ -8,7 +8,16 @@ export class RouterService {
   constructor(private readonly router: Router) {
   }
 
-  redirect(route: RouterEnum) {
-    this.router.navigate([route])
+  redirect(route: RouterEnum, id = '') {
+    this.router.navigate([route]).then(() => {
+      setTimeout(() => {
+        if (id !== '') {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 100);
+    });
   }
 }

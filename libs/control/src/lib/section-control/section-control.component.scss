@@ -12,6 +12,10 @@
     min-height: 640px;
   }
 
+  &--full-height-with-nav {
+    min-height: calc(100svh - 60px);
+  }
+
   &__background {
     &--primary {
       background-color: colors.$color-primary;
@@ -27,6 +31,10 @@
 
     &--min-height640 {
       min-height: 640px;
+    }
+
+    &--full-height-with-nav {
+      min-height: calc(100svh - 60px);
     }
   }
 
@@ -45,8 +53,13 @@
     &--flex-center {
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
       gap: 1rem;
+    }
+
+    &--full-height-with-nav {
+      min-height: calc(100svh - 60px);
     }
   }
 }

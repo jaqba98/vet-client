@@ -32,12 +32,25 @@ export class NavOptionsFormComponent extends BaseFormService<
         },
         defaultValue: false,
       },
+      aboutUs: {
+        id: 'aboutUs',
+        kind: 'button',
+        type: 'submit',
+        value: {
+          type: 'text',
+          text: 'About us',
+        },
+        defaultValue: false,
+      }
     });
   }
 
   override onSubmit(model: NavOptionsFormDataModel) {
+    console.log(model);
     if (model.home) {
       this.router.redirect(RouterEnum.home);
+    } else if (model.aboutUs) {
+      this.router.redirect(RouterEnum.home, 'about-us');
     }
   }
 }

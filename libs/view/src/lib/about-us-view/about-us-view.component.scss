@@ -1,5 +1,10 @@
 @use 'libs/scss/src/base/colors';
 
+.title,
+.paragraph {
+  width: 100%;
+}
+
 .title {
   color: colors.$color-text-dark-primary;
 }

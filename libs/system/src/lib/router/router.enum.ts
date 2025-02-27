@@ -3,3 +3,4 @@ export enum RouterEnum {
   login = '/login',
   registration = '/registration'
 }
+

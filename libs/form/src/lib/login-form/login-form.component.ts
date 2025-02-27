@@ -10,11 +10,12 @@ import {
   HttpService,
   LoginPostHttpResponseModel,
 } from '@vet-client/lib-system';
+import { CardControlComponent } from '@vet-client/lib-control';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 
 @Component({
   selector: 'lib-login-form',
-  imports: [BaseFormComponent],
+  imports: [BaseFormComponent, CardControlComponent],
   templateUrl: './login-form.component.html',
 })
 export class LoginFormComponent extends BaseFormService<

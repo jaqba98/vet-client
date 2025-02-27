@@ -8,6 +8,7 @@ import {
   HttpService,
   RegistrationPostHttpResponseModel,
 } from '@vet-client/lib-system';
+import { CardControlComponent } from '@vet-client/lib-control';
 import {
   RegistrationFormDataModel,
   RegistrationFormModel,
@@ -15,7 +16,7 @@ import {
 
 @Component({
   selector: 'lib-registration-form',
-  imports: [BaseFormComponent],
+  imports: [BaseFormComponent, CardControlComponent],
   templateUrl: './registration-form.component.html',
 })
 export class RegistrationFormComponent extends BaseFormService<

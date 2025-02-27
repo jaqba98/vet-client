@@ -1,4 +1,12 @@
 <lib-nav-view>
   <lib-login-registration-form></lib-login-registration-form>
 </lib-nav-view>
-<p>{{ title }}</p>
+<lib-section-control
+  id="registration"
+  [fullHeightWithNav]="true"
+  [flexCenter]="true"
+  [backgroundPrimary80]="true"
+  [backgroundImageGuineaPig]="true"
+>
+  <lib-registration-form></lib-registration-form>
+</lib-section-control>
