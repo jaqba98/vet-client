@@ -2,7 +2,7 @@
 
 .title,
 .paragraph {
-  width: 100%;
+  padding: 1rem;
 }
 
 .title {
@@ -12,4 +12,5 @@
 .paragraph {
   color: colors.$color-text-dark-secondary;
   line-height: 2;
+  text-align: justify;
 }
