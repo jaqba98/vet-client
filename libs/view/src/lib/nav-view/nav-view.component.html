@@ -3,7 +3,7 @@
   <div class="nav-view__menu">
     <!-- Hamburger -->
     <div class="nav-view__menu--hamburger">
-      <lib-button-control [model]="hamburgerModel" (event)="onHamburgerEvent($event)"></lib-button-control>
+      <lib-button-control [model]="hamburgerModel" (event)="onHamburgerEvent()"></lib-button-control>
     </div>
     <!-- Options -->
     <div class="nav-view__menu--options">
@@ -19,4 +19,10 @@
   <div class="nav-view__dynamic">
     <ng-content></ng-content>
   </div>
+  <!-- Mobile options -->
+  <ng-container *ngIf="mobileOptionsIsOpen">
+    <div class="mobile-options">
+      <lib-nav-options-form [flexDirectionColumn]="true"></lib-nav-options-form>
+    </div>
+  </ng-container>
 </nav>

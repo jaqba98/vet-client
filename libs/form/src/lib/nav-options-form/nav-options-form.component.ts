@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import {
   BaseFormComponent,
@@ -15,11 +15,14 @@ import {
   selector: 'lib-nav-options-form',
   imports: [BaseFormComponent],
   templateUrl: './nav-options-form.component.html',
+  styleUrl: './nav-options-form.component.scss'
 })
 export class NavOptionsFormComponent extends BaseFormService<
   NavOptionsFormModel,
   NavOptionsFormDataModel
 > {
+  @Input() flexDirectionColumn = false;
+
   constructor(private readonly router: RouterService) {
     super({
       home: {
@@ -46,9 +49,8 @@ export class NavOptionsFormComponent extends BaseFormService<
   }
 
   override onSubmit(model: NavOptionsFormDataModel) {
-    console.log(model);
     if (model.home) {
-      this.router.redirect(RouterEnum.home);
+      this.router.redirect(RouterEnum.home, 'home');
     } else if (model.aboutUs) {
       this.router.redirect(RouterEnum.home, 'about-us');
     }

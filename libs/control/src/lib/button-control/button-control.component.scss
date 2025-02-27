@@ -1,5 +1,9 @@
 @use 'libs/scss/src/base/colors';
 
+:host {
+  display: contents;
+}
+
 .button-control {
   padding: 0.6rem 0.5rem;
   border-radius: 0.25rem;

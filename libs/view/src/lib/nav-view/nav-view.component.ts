@@ -29,11 +29,13 @@ export class NavViewComponent {
     }
   };
 
+  mobileOptionsIsOpen = false;
+
   readonly logoModel: IconControlModel = {
     icon: faPaw
   };
 
-  onHamburgerEvent(id: string) {
-    console.log('onHamburgerEvent', id);
+  onHamburgerEvent() {
+    this.mobileOptionsIsOpen = !this.mobileOptionsIsOpen;
   }
 }
