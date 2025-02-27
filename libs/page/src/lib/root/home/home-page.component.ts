@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 import {
-  AboutUsViewComponent,
+  AboutUsViewComponent, FooterViewComponent,
   HeaderViewComponent,
   MainViewComponent,
   NavViewComponent,
@@ -18,7 +18,8 @@ import { LoginRegistrationFormComponent, LoginRegistrationSmallFormComponent } f
     LoginRegistrationFormComponent,
     MainViewComponent,
     LoginRegistrationSmallFormComponent,
-    PriceViewComponent
+    PriceViewComponent,
+    FooterViewComponent
   ],
   templateUrl: './home-page.component.html',
 })

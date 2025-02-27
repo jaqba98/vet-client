@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
+import { FooterViewComponent, MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
 import {
   LoginFormComponent,
   LoginRegistrationFormComponent,
@@ -17,6 +17,7 @@ import { SectionControlComponent } from '@vet-client/lib-control';
     SectionControlComponent,
     MainViewComponent,
     LoginRegistrationSmallFormComponent,
+    FooterViewComponent
   ],
   templateUrl: './login-page.component.html',
 })

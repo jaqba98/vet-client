@@ -1,0 +1,12 @@
+@use 'libs/scss/src/base/colors';
+
+.footer-view {
+  padding: 1rem;
+  background-color: colors.$color-surface;
+
+  &__text {
+    text-align: center;
+    font-size: 0.9em;
+    color: colors.$color-text-dark-primary;
+  }
+}
