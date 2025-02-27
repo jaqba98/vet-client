@@ -1,4 +1,7 @@
+import { InputControlTypeEnum } from './input-control-type.enum';
+
 export interface InputControlModel {
-  type: 'text' | 'password' | 'email';
+  type: InputControlTypeEnum;
+  label: string;
   placeholder: string;
 }

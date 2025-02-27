@@ -8,7 +8,10 @@ import {
   HttpService,
   RegistrationPostHttpResponseModel,
 } from '@vet-client/lib-system';
-import { CardControlComponent } from '@vet-client/lib-control';
+import {
+  CardControlComponent,
+  InputControlTypeEnum,
+} from '@vet-client/lib-control';
 import {
   RegistrationFormDataModel,
   RegistrationFormModel,
@@ -27,39 +30,45 @@ export class RegistrationFormComponent extends BaseFormService<
     super({
       email: {
         kind: 'input',
-        type: 'text',
+        type: InputControlTypeEnum.text,
+        label: '',
         placeholder: 'Email',
-        defaultValue: ''
+        defaultValue: '',
       },
       password: {
         kind: 'input',
-        type: 'password',
+        type: InputControlTypeEnum.password,
+        label: '',
         placeholder: 'Password',
-        defaultValue: ''
+        defaultValue: '',
       },
       confirmPassword: {
         kind: 'input',
-        type: 'password',
+        type: InputControlTypeEnum.password,
+        label: '',
         placeholder: 'Confirm password',
-        defaultValue: ''
+        defaultValue: '',
       },
       firstName: {
         kind: 'input',
-        type: 'text',
+        type: InputControlTypeEnum.text,
+        label: '',
         placeholder: 'First name',
-        defaultValue: ''
+        defaultValue: '',
       },
       lastName: {
         kind: 'input',
-        type: 'text',
+        type: InputControlTypeEnum.text,
+        label: '',
         placeholder: 'Last name',
-        defaultValue: ''
+        defaultValue: '',
       },
       role: {
         kind: 'input',
-        type: 'text',
+        type: InputControlTypeEnum.text,
+        label: '',
         placeholder: 'Role',
-        defaultValue: ''
+        defaultValue: '',
       },
       register: {
         id: 'register',
@@ -67,9 +76,9 @@ export class RegistrationFormComponent extends BaseFormService<
         type: 'submit',
         value: {
           type: 'text',
-          text: 'Register'
+          text: 'Register',
         },
-        defaultValue: false
+        defaultValue: false,
       },
     });
   }

@@ -22,6 +22,7 @@
       "@vet-client/lib-route": ["libs/route/src/index.ts"],
       "@vet-client/lib-sb": ["libs/sb/src/index.ts"],
       "@vet-client/lib-system": ["libs/system/src/index.ts"],
+      "@vet-client/lib-utils": ["libs/utils/src/index.ts"],
       "@vet-client/lib-vet-client": ["libs/vet-client/src/index.ts"],
       "@vet-client/lib-view": ["libs/view/src/index.ts"]
     }

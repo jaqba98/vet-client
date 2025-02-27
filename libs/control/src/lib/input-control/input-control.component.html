@@ -1,3 +1,12 @@
-<div [formGroup]="formGroup">
-  <input [formControlName]="controlName" [type]="model.type" [placeholder]="model.placeholder">
+<div class="input-control" [formGroup]="formGroup">
+  <ng-container *ngIf="isLabel()">
+    <label class="input-control__label" [for]="controlName">{{ model.label }}</label>
+  </ng-container>
+  <input
+    class="input-control__input"
+    [id]="controlName"
+    [formControlName]="controlName"
+    [type]="model.type"
+    [placeholder]="model.placeholder"
+  >
 </div>
