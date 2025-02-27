@@ -7,4 +7,5 @@ export * from './lib/icon-control/icon-control.model';
 export * from './lib/input-control/input-control.component';
 export * from './lib/input-control/input-control.model';
 export * from './lib/input-control/input-control-type.enum';
+export * from './lib/small-logo-control/small-logo-control.component';
 export * from './lib/section-control/section-control.component';

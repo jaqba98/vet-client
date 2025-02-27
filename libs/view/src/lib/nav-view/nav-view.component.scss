@@ -2,20 +2,20 @@
 @use 'libs/scss/src/base/colors';
 
 .nav-view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background-color: colors.$color-surface;
+  height: 60px;
   padding: 0.75rem;
 
   &__menu {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 0.5rem;
 
     &--hamburger {
@@ -25,40 +25,50 @@
     }
 
     &--options {
-      display: flex;
-      gap: 0.5rem;
-
       @include mixins.breakpoint(md, max) {
         display: none;
       }
     }
   }
-
-  &__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: colors.$color-primary;
-    font-size: 1.25em;
-    flex: 1;
-  }
-
-  &__dynamic {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
 }
 
-.mobile-options {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 55px;
-  left: 0;
-  width: 100%;
-  padding: 1rem;
-  background-color: colors.$color-surface;
-}
+//.nav-view {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+//
+//  &__menu {
+//    display: flex;
+//    align-items: center;
+//    justify-content: flex-start;
+//    gap: 0.5rem;
+//  }
+//
+//  &__logo {
+//    display: flex;
+//    align-items: center;
+//    justify-content: center;
+//    gap: 0.5rem;
+//    color: colors.$color-primary;
+//    font-size: 1.25em;
+//    flex: 1;
+//  }
+//
+//  &__dynamic {
+//    display: flex;
+//    align-items: center;
+//    justify-content: flex-end;
+//  }
+//}
+//
+//.mobile-options {
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  position: fixed;
+//  top: 55px;
+//  left: 0;
+//  width: 100%;
+//  padding: 1rem;
+//  background-color: colors.$color-surface;
+//}

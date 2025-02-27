@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { faBars, faPaw } from '@fortawesome/free-solid-svg-icons';
+import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
 import {
-  ButtonControlModel,
-  ButtonControlTypeEnum,
-  IconControlComponent,
   IconControlModel,
+  SmallLogoControlComponent
 } from '@vet-client/lib-control';
 import { TITLE } from '@vet-client/lib-const';
 import { HamburgerFormComponent, MenuOptionsFormComponent } from '@vet-client/lib-form';
@@ -15,7 +13,7 @@ import { HamburgerFormComponent, MenuOptionsFormComponent } from '@vet-client/li
   selector: 'lib-nav-view',
   imports: [
     CommonModule,
-    IconControlComponent,
+    SmallLogoControlComponent,
     MenuOptionsFormComponent,
     HamburgerFormComponent
   ],
@@ -24,14 +22,6 @@ import { HamburgerFormComponent, MenuOptionsFormComponent } from '@vet-client/li
 })
 export class NavViewComponent {
   readonly title = TITLE;
-
-  readonly hamburgerModel: ButtonControlModel = {
-    id: 'hamburger',
-    value: {
-      type: ButtonControlTypeEnum.icon,
-      icon: { icon: faBars },
-    },
-  };
 
   mobileOptionsIsOpen = false;
 
