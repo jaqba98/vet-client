@@ -3,7 +3,6 @@ import { Route } from '@angular/router';
 import {
   DashboardPageComponent,
   ForgotPasswordPageComponent,
-  HomeIndexPageComponent,
   HomePageComponent,
   LoginPageComponent,
   RegistrationPageComponent
@@ -17,29 +16,19 @@ export const route: Route[] = [
   },
   {
     path: 'home',
-    component: HomePageComponent,
-    children: [
-      {
-        path: '',
-        component: HomeIndexPageComponent
-      },
-      {
-        path: 'login',
-        component: LoginPageComponent
-      },
-      {
-        path: 'registration',
-        component: RegistrationPageComponent
-      },
-      {
-        path: 'forgot-password',
-        component: ForgotPasswordPageComponent
-      },
-      {
-        path: '**',
-        redirectTo: '/home'
-      }
-    ]
+    component: HomePageComponent
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent
+  },
+  {
+    path: 'registration',
+    component: RegistrationPageComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordPageComponent
   },
   {
     path: 'dashboard',
