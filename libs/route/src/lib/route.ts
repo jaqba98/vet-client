@@ -2,7 +2,6 @@ import { Route } from '@angular/router';
 
 import {
   DashboardPageComponent,
-  ForgotPasswordPageComponent,
   HomePageComponent,
   LoginPageComponent,
   RegistrationPageComponent
@@ -25,10 +24,6 @@ export const route: Route[] = [
   {
     path: 'registration',
     component: RegistrationPageComponent
-  },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordPageComponent
   },
   {
     path: 'dashboard',
