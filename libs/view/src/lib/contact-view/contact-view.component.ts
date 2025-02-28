@@ -1,3 +1,4 @@
+// done
 import { Component } from "@angular/core";
 
 import { SectionControlComponent } from '@vet-client/lib-control';
@@ -8,7 +9,6 @@ import { ContactFormComponent } from '@vet-client/lib-form';
   selector: 'lib-contact-view',
   imports: [SectionControlComponent, ContactFormComponent],
   templateUrl: './contact-view.component.html',
-  styleUrl: './contact-view.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
 export class ContactViewComponent {}
