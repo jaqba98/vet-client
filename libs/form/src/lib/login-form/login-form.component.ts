@@ -1,7 +1,17 @@
 // done
 import { Component } from '@angular/core';
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
+import {
+  BaseFormComponent,
+  BaseFormService,
+  CookieService,
+  HttpEndpointEnum,
+  HttpMethodEnum,
+  HttpService,
+  LoginPostHttpResponseModel,
+  RouterEnum,
+  RouterService,
+} from '@vet-client/lib-system';
 import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
@@ -10,10 +20,17 @@ import { LoginFormDataModel, LoginFormModel } from './login-form.model';
   selector: 'lib-login-form',
   imports: [BaseFormComponent, CardControlComponent],
   templateUrl: './login-form.component.html',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
-export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFormDataModel> {
-  constructor() {
+export class LoginFormComponent extends BaseFormService<
+  LoginFormModel,
+  LoginFormDataModel
+> {
+  constructor(
+    private readonly http: HttpService,
+    private readonly cookie: CookieService,
+    private readonly router: RouterService
+  ) {
     super({
       email: {
         kind: 'input',
@@ -21,7 +38,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         label: 'Email',
         placeholder: '',
         defaultValue: '',
-        validators: []
+        validators: [],
       },
       password: {
         kind: 'input',
@@ -29,7 +46,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         label: 'Password',
         placeholder: '',
         defaultValue: '',
-        validators: []
+        validators: [],
       },
       login: {
         id: 'login',
@@ -39,12 +56,28 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           text: 'Login',
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: false,
       },
     });
   }
 
   override onSubmit(model: LoginFormDataModel) {
-    console.log(model);
+    return this.http
+      .execute<LoginPostHttpResponseModel>({
+        method: HttpMethodEnum.post,
+        type: {
+          endpoint: HttpEndpointEnum.login,
+          request: {
+            email: model.email,
+            password: model.password,
+          },
+        },
+      })
+      .subscribe((response) => {
+        if (response.success) {
+          this.cookie.saveToCookie('token', response.token, 1);
+          this.router.redirect(RouterEnum.dashboard);
+        }
+      });
   }
 }
