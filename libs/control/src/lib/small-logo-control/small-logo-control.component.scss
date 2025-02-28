@@ -1,12 +1,9 @@
+// done
 @use 'libs/scss/src/base/colors';
 
 .small-logo-control {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  color: colors.$color-primary;
-  font-size: 1.25em;
-
-  &__title {
-    font-weight: 700;
-  }
 }
