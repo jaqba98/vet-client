@@ -22,6 +22,8 @@ export class TextControlComponent implements OnInit {
 
   @Input() justify = false;
 
+  @Input() bold = false;
+
   constructor(
     private readonly renderer: Renderer2,
     private readonly elementRef: ElementRef,
@@ -32,12 +34,9 @@ export class TextControlComponent implements OnInit {
     const element = this.renderer.createElement(this.tag);
     const text = this.renderer.createText(this.content);
     this.renderer.addClass(element, this.color);
-    if (this.lineHeight) {
-      this.renderer.addClass(element, 'line-height');
-    }
-    if (this.justify) {
-      this.renderer.addClass(element, 'justify');
-    }
+    if (this.lineHeight) this.renderer.addClass(element, 'line-height');
+    if (this.justify) this.renderer.addClass(element, 'justify');
+    if (this.bold) this.renderer.addClass(element, 'bold');
     this.renderer.appendChild(element, text);
     this.elementRef.nativeElement.appendChild(element);
   }

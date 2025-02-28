@@ -14,7 +14,11 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 export class SectionControlComponent {
   @Input({ required: true }) sectionId!: string;
 
+  @Input() sectionGuineaPig = false;
+
   @Input() sectionBackgroundPrimary = false;
+
+  @Input() sectionBackgroundPrimary80 = false;
 
   @Input() sectionBackgroundSurface = false;
 
@@ -38,7 +42,8 @@ export class SectionControlComponent {
 
   getSectionClassList() {
     return {
-      section: true
+      section: true,
+      'section__guinea-pig': this.sectionGuineaPig,
     };
   }
 
@@ -46,6 +51,7 @@ export class SectionControlComponent {
     return {
       section__background: true,
       'section__background--primary': this.sectionBackgroundPrimary,
+      'section__background--primary80': this.sectionBackgroundPrimary80,
       'section__background--surface': this.sectionBackgroundSurface
     };
   }

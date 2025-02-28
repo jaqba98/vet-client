@@ -1,3 +1,4 @@
+// done
 import { Component } from "@angular/core";
 
 import { SectionControlComponent, BigLogoControlComponent } from '@vet-client/lib-control';
@@ -7,5 +8,4 @@ import { SectionControlComponent, BigLogoControlComponent } from '@vet-client/li
   imports: [SectionControlComponent, BigLogoControlComponent],
   templateUrl: './header-view.component.html'
 })
-/** Header View */
 export class HeaderViewComponent {}

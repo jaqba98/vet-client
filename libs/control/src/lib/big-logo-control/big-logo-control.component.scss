@@ -1,18 +1,6 @@
-@use 'libs/scss/src/base/colors';
-
+// done
 .big-logo-control {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  color: colors.$color-text-light-primary;
-
-  &__icon {
-    font-size: 6rem;
-  }
-
-  &__title {
-    font-weight: 700;
-    font-size: 3em;
-  }
 }

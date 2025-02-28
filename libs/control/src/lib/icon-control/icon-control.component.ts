@@ -13,4 +13,6 @@ import { IconControlModel } from './icon-control.model';
 })
 export class IconControlComponent {
   @Input({ required: true }) model!: IconControlModel;
+
+  @Input() fontSize = '1em';
 }
