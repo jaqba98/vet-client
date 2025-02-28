@@ -40,6 +40,8 @@ export class SectionControlComponent {
 
   @Input() sectionContentMaxWidth960px = false;
 
+  @Input() sectionContentMinHeightOnePage = false;
+
   getSectionClassList() {
     return {
       section: true,
@@ -68,6 +70,7 @@ export class SectionControlComponent {
       'section__content--margin-auto': this.sectionContentMarginAuto,
       'section__content--max-width-480px': this.sectionContentMaxWidth480px,
       'section__content--max-width-960px': this.sectionContentMaxWidth960px,
+      'section__content--min-height-one-page': this.sectionContentMinHeightOnePage
     };
   }
 }

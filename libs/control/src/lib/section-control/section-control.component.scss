@@ -68,5 +68,13 @@
     &--max-width-960px {
       max-width: 960px;
     }
+
+    &--min-height-one-page {
+      min-height: calc(100svh - 60px - 50px - 8rem);
+
+      @include mixins.breakpoint(md, min) {
+        min-height: calc(100svh - 60px - 50px - 12rem);
+      }
+    }
   }
 }
