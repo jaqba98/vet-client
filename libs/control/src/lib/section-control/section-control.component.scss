@@ -9,6 +9,10 @@
     &--primary {
       background-color: colors.$color-primary;
     }
+
+    &--surface {
+      background-color: colors.$color-surface;
+    }
   }
 
   &__content {

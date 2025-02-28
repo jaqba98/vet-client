@@ -16,6 +16,8 @@ export class SectionControlComponent {
 
   @Input() sectionBackgroundPrimary = false;
 
+  @Input() sectionBackgroundSurface = false;
+
   @Input() sectionContentFlex = false;
 
   @Input() sectionContentAlignCenter = false;
@@ -43,7 +45,8 @@ export class SectionControlComponent {
   getSectionBackgroundClassList() {
     return {
       section__background: true,
-      'section__background--primary': this.sectionBackgroundPrimary
+      'section__background--primary': this.sectionBackgroundPrimary,
+      'section__background--surface': this.sectionBackgroundSurface
     };
   }
 

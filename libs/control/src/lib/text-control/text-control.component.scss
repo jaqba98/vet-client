@@ -1,6 +1,10 @@
 // done
 @use 'libs/scss/src/base/colors';
 
+p {
+  line-height: 2;
+}
+
 .dark-primary {
   color: colors.$color-text-dark-primary;
 }
