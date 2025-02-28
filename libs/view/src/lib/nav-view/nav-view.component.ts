@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
-import { HamburgerFormComponent, MenuOptionsFormComponent } from '@vet-client/lib-form';
+import { HamburgerFormComponent } from '@vet-client/lib-form';
 import { SmallLogoControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 
@@ -10,7 +10,6 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
   imports: [
     CommonModule,
     HamburgerFormComponent,
-    MenuOptionsFormComponent,
     SmallLogoControlComponent
   ],
   templateUrl: './nav-view.component.html',
@@ -23,9 +22,5 @@ export class NavViewComponent {
 
   onHamburgerEvent() {
     this.mobileMenuIsOpen = !this.mobileMenuIsOpen;
-  }
-
-  onMenuOptionsFormEvent() {
-    this.mobileMenuIsOpen = false;
   }
 }

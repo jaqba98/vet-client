@@ -9,7 +9,7 @@ import {
 } from '@vet-client/lib-view';
 import {
   LoginRegistrationFormComponent,
-  LoginRegistrationSmallFormComponent
+  LoginRegistrationSmallFormComponent, MenuOptionsFormComponent
 } from '@vet-client/lib-form';
 
 @Component({
@@ -21,6 +21,7 @@ import {
     MainViewComponent,
     FooterViewComponent,
     RegistrationViewComponent,
+    MenuOptionsFormComponent,
   ],
   templateUrl: './registration-page.component.html',
 })

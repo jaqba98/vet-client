@@ -4,7 +4,7 @@ import { Component } from "@angular/core";
 import { FooterViewComponent, LoginViewComponent, MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
 import {
   LoginRegistrationFormComponent,
-  LoginRegistrationSmallFormComponent
+  LoginRegistrationSmallFormComponent, MenuOptionsFormComponent
 } from '@vet-client/lib-form';
 
 @Component({
@@ -16,6 +16,7 @@ import {
     MainViewComponent,
     FooterViewComponent,
     LoginViewComponent,
+    MenuOptionsFormComponent,
   ],
   templateUrl: './login-page.component.html',
 })

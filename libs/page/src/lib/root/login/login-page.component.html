@@ -1,7 +1,11 @@
 <!-- done -->
 <lib-nav-view>
-  <lib-login-registration-form></lib-login-registration-form>
-  <lib-login-registration-small-form></lib-login-registration-small-form>
+  <lib-menu-options-form menu></lib-menu-options-form>
+  <div dynamic>
+    <lib-login-registration-form></lib-login-registration-form>
+    <lib-login-registration-small-form></lib-login-registration-small-form>
+  </div>
+  <lib-menu-options-form menu-mobile [flexDirectionColumn]="true"></lib-menu-options-form>
 </lib-nav-view>
 <lib-main-view [fullHeight]="true">
   <lib-login-view></lib-login-view>

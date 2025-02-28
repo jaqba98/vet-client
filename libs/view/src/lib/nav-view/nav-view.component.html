@@ -4,18 +4,18 @@
       <lib-hamburger-form (event)="onHamburgerEvent()"></lib-hamburger-form>
     </div>
     <div class="nav-view__menu--options">
-      <lib-menu-options-form></lib-menu-options-form>
+      <ng-content select="[menu]"></ng-content>
     </div>
   </div>
   <div class="nav-view__logo">
     <lib-small-logo-control></lib-small-logo-control>
   </div>
   <div class="nav-view__dynamic">
-    <ng-content></ng-content>
+    <ng-content select="[dynamic]"></ng-content>
   </div>
 </nav>
 <ng-container *ngIf="mobileMenuIsOpen">
   <div class="nav-view__mobile-menu">
-    <lib-menu-options-form [flexDirectionColumn]="true" (event)="onMenuOptionsFormEvent()"></lib-menu-options-form>
+    <ng-content select="[menu-mobile]"></ng-content>
   </div>
 </ng-container>
