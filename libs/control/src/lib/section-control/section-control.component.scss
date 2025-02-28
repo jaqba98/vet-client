@@ -1,10 +1,15 @@
 // done
 @use 'libs/scss/src/base/colors';
+@use 'libs/scss/src/abstracts/mixins';
 
 .section {
   &__background {
     background-color: colors.$color-background;
     padding: 4rem 2rem;
+
+    @include mixins.breakpoint(md, min) {
+      padding: 6rem 2rem;
+    }
 
     &--primary {
       background-color: colors.$color-primary;

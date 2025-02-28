@@ -16,6 +16,8 @@ export class TextControlComponent implements OnInit {
 
   @Input() content = '';
 
+  @Input() lineHeight = false;
+
   @Input() color: 'dark-primary' | 'dark-secondary' | 'light-primary' | 'primary' | 'error' | 'success' = 'dark-primary';
 
   constructor(
@@ -28,6 +30,9 @@ export class TextControlComponent implements OnInit {
     const element = this.renderer.createElement(this.tag);
     const text = this.renderer.createText(this.content);
     this.renderer.addClass(element, this.color);
+    if (this.lineHeight) {
+      this.renderer.addClass(element, 'line-height');
+    }
     this.renderer.appendChild(element, text);
     this.elementRef.nativeElement.appendChild(element);
   }
