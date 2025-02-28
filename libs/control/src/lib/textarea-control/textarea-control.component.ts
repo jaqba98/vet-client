@@ -4,18 +4,18 @@ import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { InputControlModel } from './input-control.model';
+import { TextareaControlModel } from './textarea-control.model';
 import { TextControlComponent } from '../text-control/text-control.component';
 
 @Component({
-  selector: 'lib-input-control',
+  selector: 'lib-textarea-control',
   imports: [CommonModule, ReactiveFormsModule, TextControlComponent],
-  templateUrl: './input-control.component.html',
-  styleUrl: './input-control.component.scss',
+  templateUrl: './textarea-control.component.html',
+  styleUrl: './textarea-control.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class InputControlComponent {
-  @Input({ required: true }) model!: InputControlModel;
+export class TextareaControlComponent {
+  @Input({ required: true }) model!: TextareaControlModel;
 
   @Input({ required: true }) formGroup!: FormGroup;
 

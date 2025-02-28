@@ -25,7 +25,7 @@ export class LoginRegistrationFormComponent extends BaseFormService<
           type: 'text',
           text: 'Login'
         },
-        defaultValue: false,
+        defaultValue: false
       },
       registration: {
         id: 'registration',
@@ -34,7 +34,7 @@ export class LoginRegistrationFormComponent extends BaseFormService<
           type: 'text',
           text: 'Registration'
         },
-        defaultValue: false,
+        defaultValue: false
       },
     });
   }

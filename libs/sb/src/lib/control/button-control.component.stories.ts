@@ -31,7 +31,7 @@ export const Icon: Story = {
         type: 'icon',
         icon: {
           icon: faBars,
-          color: 'icon__primary'
+          color: 'icon__light-primary'
         }
       }
     }

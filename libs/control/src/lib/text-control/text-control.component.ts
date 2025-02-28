@@ -16,7 +16,7 @@ export class TextControlComponent implements OnInit {
 
   @Input() content = '';
 
-  @Input() color: 'text__dark-primary' | 'text__light-primary' | 'text__primary' = 'text__dark-primary';
+  @Input() color: 'dark-primary' | 'dark-secondary' | 'light-primary' | 'primary' | 'error' | 'success' = 'dark-primary';
 
   constructor(
     private readonly renderer: Renderer2,

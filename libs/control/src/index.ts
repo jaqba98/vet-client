@@ -11,3 +11,5 @@ export * from './lib/small-logo-control/small-logo-control.component';
 export * from './lib/section-control/section-control.component';
 export * from './lib/text-control/text-control.component';
 export * from './lib/error-control/error-control.component';
+export * from './lib/textarea-control/textarea-control.component';
+export * from './lib/textarea-control/textarea-control.model';

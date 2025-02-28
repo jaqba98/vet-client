@@ -2,7 +2,14 @@
 .base-form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
+
+  &__input,
+  &__textarea {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
 
   &__horizontal {
     flex-direction: row;

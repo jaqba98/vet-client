@@ -5,6 +5,7 @@ import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ContactFormDataModel, ContactFormModel } from './contact-form.model';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'lib-contact-form',
@@ -24,6 +25,7 @@ export class ContactFormComponent extends BaseFormService<
         type: 'text',
         label: 'First name',
         placeholder: '',
+        validators: [Validators.required]
       },
       lastName: {
         kind: 'input',
@@ -31,6 +33,7 @@ export class ContactFormComponent extends BaseFormService<
         type: 'text',
         label: 'Last name',
         placeholder: '',
+        validators: [Validators.required]
       },
       email: {
         kind: 'input',
@@ -38,6 +41,7 @@ export class ContactFormComponent extends BaseFormService<
         type: 'text',
         label: 'Email',
         placeholder: '',
+        validators: [Validators.required, Validators.email]
       },
       subject: {
         kind: 'input',
@@ -45,13 +49,15 @@ export class ContactFormComponent extends BaseFormService<
         type: 'text',
         label: 'Subject',
         placeholder: '',
+        validators: [Validators.required]
       },
       message: {
-        kind: 'input',
+        kind: 'textarea',
         defaultValue: '',
-        type: 'text',
         label: 'Message',
         placeholder: '',
+        height: '300px',
+        validators: [Validators.required]
       },
       send: {
         kind: 'button',
@@ -60,7 +66,7 @@ export class ContactFormComponent extends BaseFormService<
         value: {
           type: 'text',
           text: 'Send',
-        },
+        }
       },
     });
   }

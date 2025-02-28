@@ -3,11 +3,31 @@
   <ng-container *ngFor="let control of controlsArray">
     <!-- Input-->
     <ng-container *ngIf="control.model.kind === 'input'">
-      <lib-input-control
-        [formGroup]="formGroup"
-        [controlName]="control.name"
-        [model]="control.model"
-      ></lib-input-control>
+      <div class="base-form__input">
+        <lib-input-control
+          [formGroup]="formGroup"
+          [controlName]="control.name"
+          [model]="control.model"
+          [isError]="isControlError(control.name)"
+        ></lib-input-control>
+        <ng-container *ngIf="isControlError(control.name)">
+          <lib-error-control [message]="getErrorMessage(control.name)"></lib-error-control>
+        </ng-container>
+      </div>
+    </ng-container>
+    <!-- Textarea -->
+    <ng-container *ngIf="control.model.kind === 'textarea'">
+      <div class="base-form__textarea">
+        <lib-textarea-control
+          [formGroup]="formGroup"
+          [controlName]="control.name"
+          [model]="control.model"
+          [isError]="isControlError(control.name)"
+        ></lib-textarea-control>
+        <ng-container *ngIf="isControlError(control.name)">
+          <lib-error-control [message]="getErrorMessage(control.name)"></lib-error-control>
+        </ng-container>
+      </div>
     </ng-container>
     <!-- Button -->
     <ng-container *ngIf="control.model.kind === 'button'">

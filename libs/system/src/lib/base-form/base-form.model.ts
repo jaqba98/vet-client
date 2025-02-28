@@ -1,5 +1,7 @@
 // done
-import { ButtonControlModel, InputControlModel } from '@vet-client/lib-control';
+import { ValidatorFn } from '@angular/forms';
+
+import { ButtonControlModel, InputControlModel, TextareaControlModel } from '@vet-client/lib-control';
 
 export interface ControlBaseModel<TDefaultValue> {
   defaultValue: TDefaultValue;
@@ -7,13 +9,19 @@ export interface ControlBaseModel<TDefaultValue> {
 
 export interface ControlInputModel extends ControlBaseModel<string>, InputControlModel {
   kind: 'input';
+  validators: ValidatorFn[];
 }
 
 export interface ControlButtonModel extends ControlBaseModel<boolean>, ButtonControlModel {
   kind: 'button';
 }
 
-export type ControlType = ControlInputModel | ControlButtonModel;
+export interface ControlTextareaModel extends ControlBaseModel<string>, TextareaControlModel {
+  kind: 'textarea';
+  validators: ValidatorFn[];
+}
+
+export type ControlType = ControlInputModel | ControlButtonModel | ControlTextareaModel;
 
 export type BaseFormModel<TKey> = Record<keyof TKey, ControlType>;
 

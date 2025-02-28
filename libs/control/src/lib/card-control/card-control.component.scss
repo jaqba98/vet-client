@@ -4,9 +4,21 @@
 .card-control {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 1.5rem;
   border-radius: 0.25rem;
   background-color: colors.$color-surface;
   border: 1px solid colors.$color-border;
+  overflow: hidden;
+
+  &__headline {
+    padding: 1rem;
+    background-color: colors.$color-surface;
+    border-bottom: 1px solid colors.$color-border;
+  }
+
+  &__context {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
 }

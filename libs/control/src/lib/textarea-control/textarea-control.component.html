@@ -1,5 +1,5 @@
 <!-- done -->
-<div class="input-control" [formGroup]="formGroup">
+<div class="textarea-control" [formGroup]="formGroup">
   <ng-container *ngIf="isLabel()">
     <label [for]="controlName">
       <ng-container *ngIf="isError; else notErrorLabel">
@@ -10,12 +10,12 @@
       </ng-template>
     </label>
   </ng-container>
-  <input
-    class="input-control__input"
+  <textarea
+    class="textarea-control__textarea"
     [id]="controlName"
     [formControlName]="controlName"
-    [type]="model.type"
     [placeholder]="model.placeholder"
-    [ngClass]="{ 'input-control__input--error': isError }"
-  >
+    [ngClass]="{ 'textarea-control__textarea--error': isError }"
+    [ngStyle]="{ height: model.height }"
+  ></textarea>
 </div>

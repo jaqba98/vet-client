@@ -20,6 +20,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         label: 'Email',
         placeholder: '',
         defaultValue: '',
+        validators: []
       },
       password: {
         kind: 'input',
@@ -27,6 +28,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         label: 'Password',
         placeholder: '',
         defaultValue: '',
+        validators: []
       },
       forgotPassword: {
         id: 'forgotPassword',
@@ -35,7 +37,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           type: 'link',
           text: 'Forgot your password?'
         },
-        defaultValue: false,
+        defaultValue: false
       },
       login: {
         id: 'login',
@@ -44,7 +46,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           type: 'text',
           text: 'Login',
         },
-        defaultValue: false,
+        defaultValue: false
       },
       registration: {
         id: 'registration',
@@ -53,7 +55,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           type: 'link',
           text: "Don't have an account?"
         },
-        defaultValue: false,
+        defaultValue: false
       },
     });
   }

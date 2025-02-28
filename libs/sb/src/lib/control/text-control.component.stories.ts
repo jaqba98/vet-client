@@ -14,7 +14,7 @@ export const Paragraph: Story = {
   args: {
     tag: 'p',
     content: 'Hello world',
-    color: 'text__dark-primary'
+    color: 'dark-primary'
   }
 };
 
@@ -22,7 +22,7 @@ export const Header1: Story = {
   args: {
     tag: 'h1',
     content: 'Hello world',
-    color: 'text__light-primary'
+    color: 'light-primary'
   }
 };
 
@@ -30,7 +30,7 @@ export const Header2: Story = {
   args: {
     tag: 'h2',
     content: 'Hello world',
-    color: 'text__primary'
+    color: 'primary'
   }
 };
 
@@ -38,7 +38,7 @@ export const Header3: Story = {
   args: {
     tag: 'h3',
     content: 'Hello world',
-    color: 'text__dark-primary'
+    color: 'dark-primary'
   }
 };
 
@@ -46,7 +46,7 @@ export const Header4: Story = {
   args: {
     tag: 'h4',
     content: 'Hello world',
-    color: 'text__light-primary'
+    color: 'light-primary'
   }
 };
 
@@ -54,7 +54,7 @@ export const Header5: Story = {
   args: {
     tag: 'h5',
     content: 'Hello world',
-    color: 'text__primary'
+    color: 'primary'
   }
 };
 

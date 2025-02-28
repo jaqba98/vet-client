@@ -13,9 +13,5 @@ import { TextControlComponent } from '../text-control/text-control.component';
   hostDirectives: [BaseComponentDirective]
 })
 export class CardControlComponent {
-  @Input() title = '';
-
-  isTitleSet() {
-    return this.title !== '';
-  }
+  @Input({ required: true }) title!: string;
 }

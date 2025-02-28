@@ -31,6 +31,7 @@ export class RegistrationFormComponent extends BaseFormService<
         label: '',
         placeholder: 'Email',
         defaultValue: '',
+        validators: []
       },
       password: {
         kind: 'input',
@@ -38,6 +39,7 @@ export class RegistrationFormComponent extends BaseFormService<
         label: '',
         placeholder: 'Password',
         defaultValue: '',
+        validators: []
       },
       confirmPassword: {
         kind: 'input',
@@ -45,6 +47,7 @@ export class RegistrationFormComponent extends BaseFormService<
         label: '',
         placeholder: 'Confirm password',
         defaultValue: '',
+        validators: []
       },
       firstName: {
         kind: 'input',
@@ -52,6 +55,7 @@ export class RegistrationFormComponent extends BaseFormService<
         label: '',
         placeholder: 'First name',
         defaultValue: '',
+        validators: []
       },
       lastName: {
         kind: 'input',
@@ -59,6 +63,7 @@ export class RegistrationFormComponent extends BaseFormService<
         label: '',
         placeholder: 'Last name',
         defaultValue: '',
+        validators: []
       },
       role: {
         kind: 'input',
@@ -66,6 +71,7 @@ export class RegistrationFormComponent extends BaseFormService<
         label: '',
         placeholder: 'Role',
         defaultValue: '',
+        validators: []
       },
       register: {
         id: 'register',
@@ -74,7 +80,7 @@ export class RegistrationFormComponent extends BaseFormService<
           type: 'text',
           text: 'Register',
         },
-        defaultValue: false,
+        defaultValue: false
       },
     });
   }
