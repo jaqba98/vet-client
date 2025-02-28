@@ -1,3 +1,4 @@
+// done
 import { Component } from '@angular/core';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
@@ -30,32 +31,12 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
         defaultValue: '',
         validators: []
       },
-      forgotPassword: {
-        id: 'forgotPassword',
-        kind: 'button',
-        value: {
-          type: 'link',
-          text: 'Forgot your password?'
-        },
-        defaultValue: false,
-        fullWidth: false
-      },
       login: {
         id: 'login',
         kind: 'button',
         value: {
           type: 'text',
           text: 'Login',
-        },
-        defaultValue: false,
-        fullWidth: false
-      },
-      registration: {
-        id: 'registration',
-        kind: 'button',
-        value: {
-          type: 'link',
-          text: "Don't have an account?"
         },
         defaultValue: false,
         fullWidth: false
