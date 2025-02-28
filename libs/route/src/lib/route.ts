@@ -6,6 +6,7 @@ import {
   LoginPageComponent,
   RegistrationPageComponent
 } from '@vet-client/lib-page';
+import { LoggedInGuard, LoggedOutGuard } from '@vet-client/lib-system';
 
 export const route: Route[] = [
   {
@@ -15,19 +16,23 @@ export const route: Route[] = [
   },
   {
     path: 'home',
-    component: HomePageComponent
+    component: HomePageComponent,
+    canActivate: [LoggedOutGuard]
   },
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
+    canActivate: [LoggedOutGuard]
   },
   {
     path: 'registration',
-    component: RegistrationPageComponent
+    component: RegistrationPageComponent,
+    canActivate: [LoggedOutGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardPageComponent
+    component: DashboardPageComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: '**',
