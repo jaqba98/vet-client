@@ -38,6 +38,9 @@ importers:
       '@fortawesome/free-solid-svg-icons':
         specifier: ^6.7.2
         version: 6.7.2
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
       rxjs:
         specifier: ~7.8.0
         version: 7.8.1

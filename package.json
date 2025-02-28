@@ -2,7 +2,10 @@
   "name": "@vet-client/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "node server.js",
+    "heroku-postbuild": "nx run vet-client:build --configuration=production"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~19.1.0",
@@ -15,6 +18,7 @@
     "@angular/router": "~19.1.0",
     "@fortawesome/angular-fontawesome": "^1.0.0",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "express": "^4.21.2",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"
   },
@@ -62,5 +66,8 @@
     "tslib": "^2.3.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.19.0"
+  },
+  "engines": {
+    "node": "20.18.x"
   }
 }
