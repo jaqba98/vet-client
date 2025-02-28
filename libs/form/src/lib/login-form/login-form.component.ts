@@ -1,5 +1,6 @@
 // done
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import {
   BaseFormComponent,
@@ -12,20 +13,19 @@ import {
   RouterEnum,
   RouterService,
 } from '@vet-client/lib-system';
-import { CardControlComponent } from '@vet-client/lib-control';
+import { CardControlComponent, TextControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 
 @Component({
   selector: 'lib-login-form',
-  imports: [BaseFormComponent, CardControlComponent],
+  imports: [CommonModule ,BaseFormComponent, CardControlComponent, TextControlComponent],
   templateUrl: './login-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class LoginFormComponent extends BaseFormService<
-  LoginFormModel,
-  LoginFormDataModel
-> {
+export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFormDataModel> {
+  isLoginError = false;
+
   constructor(
     private readonly http: HttpService,
     private readonly cookie: CookieService,
@@ -75,8 +75,11 @@ export class LoginFormComponent extends BaseFormService<
       })
       .subscribe((response) => {
         if (response.success) {
+          this.isLoginError = false;
           this.cookie.saveToCookie('token', response.token, 1);
           this.router.redirect(RouterEnum.dashboard);
+        } else {
+          this.isLoginError = true;
         }
       });
   }

@@ -1,17 +1,17 @@
 // done
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 
 @Component({
   selector: 'lib-text-control',
   imports: [CommonModule],
-  template: '',
+  templateUrl: './text-control.component.html',
   styleUrl: './text-control.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
-export class TextControlComponent implements OnInit {
+export class TextControlComponent {
   @Input() tag: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'p';
 
   @Input() content = '';
@@ -24,20 +24,17 @@ export class TextControlComponent implements OnInit {
 
   @Input() bold = false;
 
-  constructor(
-    private readonly renderer: Renderer2,
-    private readonly elementRef: ElementRef,
-  ) {
-  }
-
-  ngOnInit() {
-    const element = this.renderer.createElement(this.tag);
-    const text = this.renderer.createText(this.content);
-    this.renderer.addClass(element, this.color);
-    if (this.lineHeight) this.renderer.addClass(element, 'line-height');
-    if (this.justify) this.renderer.addClass(element, 'justify');
-    if (this.bold) this.renderer.addClass(element, 'bold');
-    this.renderer.appendChild(element, text);
-    this.elementRef.nativeElement.appendChild(element);
+  getClassList() {
+    return {
+      'line-height': this.lineHeight,
+      'justify': this.justify,
+      'bold': this.bold,
+      'dark-primary': this.color === 'dark-primary',
+      'dark-secondary': this.color === 'dark-secondary',
+      'light-primary': this.color === 'light-primary',
+      'primary': this.color === 'primary',
+      'error': this.color === 'error',
+      'success': this.color === 'success',
+    };
   }
 }

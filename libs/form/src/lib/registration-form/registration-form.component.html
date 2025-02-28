@@ -5,4 +5,10 @@
     [controlsArray]="controlsArray"
     (event)="onSubmit($event)"
   ></lib-base-form>
+  <ng-container *ngIf="isRegistrationSuccess">
+    <lib-text-control color="success" [content]="registrationSuccess"></lib-text-control>
+  </ng-container>
+  <ng-container *ngIf="isRegistrationError">
+    <lib-text-control color="error" [content]="registrationError"></lib-text-control>
+  </ng-container>
 </lib-card-control>

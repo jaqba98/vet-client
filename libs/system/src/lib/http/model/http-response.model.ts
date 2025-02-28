@@ -5,7 +5,7 @@ export interface LoginPostHttpResponseModel {
 
 export interface RegistrationPostHttpResponseModel {
   success: boolean;
-  errors: Record<string, string[]>;
+  errors: string[];
 }
 
 export interface AuthPostHttpResponseModel {

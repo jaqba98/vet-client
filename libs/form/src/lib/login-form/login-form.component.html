@@ -5,4 +5,7 @@
     [controlsArray]="controlsArray"
     (event)="onSubmit($event)"
   ></lib-base-form>
+  <ng-container *ngIf="isLoginError">
+    <lib-text-control color="error" content="Incorrect email address or password!"></lib-text-control>
+  </ng-container>
 </lib-card-control>

@@ -10,18 +10,35 @@ import {
   HttpService,
   RegistrationPostHttpResponseModel,
 } from '@vet-client/lib-system';
-import { CardControlComponent } from '@vet-client/lib-control';
+import { CardControlComponent, TextControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 
 import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'lib-registration-form',
-  imports: [BaseFormComponent, CardControlComponent],
+  imports: [
+    BaseFormComponent,
+    CardControlComponent,
+    NgIf,
+    TextControlComponent,
+  ],
   templateUrl: './registration-form.component.html',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
-export class RegistrationFormComponent extends BaseFormService<RegistrationFormModel, RegistrationFormDataModel> {
+export class RegistrationFormComponent extends BaseFormService<
+  RegistrationFormModel,
+  RegistrationFormDataModel
+> {
+  isRegistrationError = false;
+
+  isRegistrationSuccess = false;
+
+  registrationError = '';
+
+  registrationSuccess = '';
+
   constructor(private readonly http: HttpService) {
     super({
       email: {
@@ -30,7 +47,11 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         label: 'Email',
         placeholder: '',
         defaultValue: '',
-        validators: [Validators.required, Validators.email, Validators.maxLength(255)],
+        validators: [
+          Validators.required,
+          Validators.email,
+          Validators.maxLength(255),
+        ],
       },
       password: {
         kind: 'input',
@@ -77,10 +98,10 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Register'
+          text: 'Register',
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: false,
       },
     });
   }
@@ -97,12 +118,23 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
             confirmPassword: model.confirmPassword,
             firstName: model.firstName,
             lastName: model.lastName,
-            role: model.role
+            role: model.role,
           },
         },
       })
-      .subscribe(response => {
+      .subscribe((response) => {
         console.log(response);
-      })
+        this.isRegistrationSuccess = false;
+        this.isRegistrationError = false;
+        this.registrationSuccess = '';
+        this.registrationError = '';
+        if (response.success) {
+          this.isRegistrationSuccess = true;
+          this.registrationSuccess = 'New account created successfully!';
+        } else {
+          this.isRegistrationError = true;
+          this.registrationError = response.errors[0];
+        }
+      });
   }
 }
