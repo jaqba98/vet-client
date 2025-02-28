@@ -68,10 +68,8 @@ export class BaseFormComponent {
     if (control.hasError('required')) {
       return 'This field is required!';
     }
-    if (control.hasError('minlength')) {
-      return `Minimum length is ${
-        control.getError('minlength').requiredLength
-      } characters`;
+    if (control.hasError('maxlength')) {
+      return `Minimum length is ${control.getError('maxlength').requiredLength} characters`;
     }
     if (control.hasError('email')) {
       return 'Please enter a valid email address';

@@ -14,7 +14,6 @@ import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 
 import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'lib-registration-form',
@@ -102,10 +101,8 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
           },
         },
       })
-      .pipe(
-        map((response) => {
-          console.log(response);
-        })
-      );
+      .subscribe(response => {
+        console.log(response);
+      })
   }
 }
