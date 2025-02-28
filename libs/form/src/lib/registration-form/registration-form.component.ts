@@ -22,7 +22,7 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         label: 'Email',
         placeholder: '',
         defaultValue: '',
-        validators: [Validators.required, Validators.email]
+        validators: [Validators.required, Validators.email, Validators.maxLength(255)],
       },
       password: {
         kind: 'input',
@@ -30,7 +30,7 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         label: 'Password',
         placeholder: '',
         defaultValue: '',
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(255)],
       },
       confirmPassword: {
         kind: 'input',
@@ -38,7 +38,7 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         label: 'Confirm password',
         placeholder: '',
         defaultValue: '',
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(255)],
       },
       firstName: {
         kind: 'input',
@@ -46,7 +46,7 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         label: 'First name',
         placeholder: '',
         defaultValue: '',
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(50)],
       },
       lastName: {
         kind: 'input',
@@ -54,7 +54,7 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         label: 'Last name',
         placeholder: '',
         defaultValue: '',
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(100)],
       },
       role: {
         kind: 'input',
@@ -62,7 +62,7 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         label: 'Role',
         placeholder: '',
         defaultValue: '',
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(6)],
       },
       register: {
         id: 'register',
