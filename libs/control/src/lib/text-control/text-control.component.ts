@@ -16,9 +16,11 @@ export class TextControlComponent implements OnInit {
 
   @Input() content = '';
 
+  @Input() color: 'dark-primary' | 'dark-secondary' | 'light-primary' | 'primary' | 'error' | 'success' = 'dark-primary';
+
   @Input() lineHeight = false;
 
-  @Input() color: 'dark-primary' | 'dark-secondary' | 'light-primary' | 'primary' | 'error' | 'success' = 'dark-primary';
+  @Input() justify = false;
 
   constructor(
     private readonly renderer: Renderer2,
@@ -32,6 +34,9 @@ export class TextControlComponent implements OnInit {
     this.renderer.addClass(element, this.color);
     if (this.lineHeight) {
       this.renderer.addClass(element, 'line-height');
+    }
+    if (this.justify) {
+      this.renderer.addClass(element, 'justify');
     }
     this.renderer.appendChild(element, text);
     this.elementRef.nativeElement.appendChild(element);

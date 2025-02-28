@@ -14,7 +14,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -22,13 +22,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: colors.$color-primary;
-  border: 3px solid colors.$color-background;
-  border-radius: 6px;
+  background: darken(colors.$color-primary, 5);
+  border-radius: 0.1rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: colors.$color-primary;
+  background: darken(colors.$color-primary, 10);
 }
 
 body {

@@ -1,3 +1,4 @@
+// done
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import {
@@ -15,7 +16,6 @@ import { MenuOptionsFormDataModel, MenuOptionsFormModel } from './menu-options-f
   templateUrl: './menu-options-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
-/** Menu Options Form */
 export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormModel, MenuOptionsFormDataModel> {
   @Output() event = new EventEmitter();
 
@@ -43,6 +43,13 @@ export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormMod
         value: { type: 'text', text: 'Price' },
         defaultValue: false,
         fullWidth: false
+      },
+      contact: {
+        id: 'contact',
+        kind: 'button',
+        value: { type: 'text', text: 'Contact' },
+        defaultValue: false,
+        fullWidth: false
       }
     });
   }
@@ -54,6 +61,8 @@ export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormMod
       this.router.redirect(RouterEnum.home, 'about-us');
     } else if (model.price) {
       this.router.redirect(RouterEnum.home, 'price');
+    } else if (model.contact) {
+      this.router.redirect(RouterEnum.home, 'contact');
     }
     this.event.emit();
   }
