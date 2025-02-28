@@ -1,84 +1,75 @@
+// done
 import { Component } from '@angular/core';
 
-import {
-  BaseFormComponent,
-  BaseFormService,
-  HttpEndpointEnum,
-  HttpMethodEnum,
-  HttpService,
-  RegistrationPostHttpResponseModel,
-} from '@vet-client/lib-system';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
 import { CardControlComponent } from '@vet-client/lib-control';
-import {
-  RegistrationFormDataModel,
-  RegistrationFormModel,
-} from './registration-form.model';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'lib-registration-form',
   imports: [BaseFormComponent, CardControlComponent],
   templateUrl: './registration-form.component.html',
+  hostDirectives: [BaseComponentDirective]
 })
-export class RegistrationFormComponent extends BaseFormService<
-  RegistrationFormModel,
-  RegistrationFormDataModel
-> {
-  constructor(private readonly http: HttpService) {
+export class RegistrationFormComponent extends BaseFormService<RegistrationFormModel, RegistrationFormDataModel> {
+  constructor() {
     super({
       email: {
         kind: 'input',
         type: 'text',
-        label: '',
-        placeholder: 'Email',
+        label: 'Email',
+        placeholder: '',
         defaultValue: '',
-        validators: []
+        validators: [Validators.required, Validators.email]
       },
       password: {
         kind: 'input',
         type: 'password',
-        label: '',
-        placeholder: 'Password',
+        label: 'Password',
+        placeholder: '',
         defaultValue: '',
-        validators: []
+        validators: [Validators.required]
       },
       confirmPassword: {
         kind: 'input',
         type: 'password',
-        label: '',
-        placeholder: 'Confirm password',
+        label: 'Confirm password',
+        placeholder: '',
         defaultValue: '',
-        validators: []
+        validators: [Validators.required]
       },
       firstName: {
         kind: 'input',
         type: 'text',
-        label: '',
-        placeholder: 'First name',
+        label: 'First name',
+        placeholder: '',
         defaultValue: '',
-        validators: []
+        validators: [Validators.required]
       },
       lastName: {
         kind: 'input',
         type: 'text',
-        label: '',
-        placeholder: 'Last name',
+        label: 'Last name',
+        placeholder: '',
         defaultValue: '',
-        validators: []
+        validators: [Validators.required]
       },
       role: {
         kind: 'input',
         type: 'text',
-        label: '',
-        placeholder: 'Role',
+        label: 'Role',
+        placeholder: '',
         defaultValue: '',
-        validators: []
+        validators: [Validators.required]
       },
       register: {
         id: 'register',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Register',
+          text: 'Register'
         },
         defaultValue: false,
         fullWidth: false
@@ -87,23 +78,6 @@ export class RegistrationFormComponent extends BaseFormService<
   }
 
   override onSubmit(model: RegistrationFormDataModel) {
-    this.http
-      .execute<RegistrationPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.registration,
-          request: {
-            email: model.email,
-            password: model.password,
-            confirmPassword: model.confirmPassword,
-            firstName: model.firstName,
-            lastName: model.lastName,
-            role: model.role,
-          },
-        },
-      })
-      .subscribe((response) => {
-        console.log(response);
-      });
+    console.log(model);
   }
 }
