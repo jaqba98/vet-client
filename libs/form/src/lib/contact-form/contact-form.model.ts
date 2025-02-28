@@ -2,8 +2,6 @@
 import { ControlType } from '@vet-client/lib-system';
 
 export interface ContactFormModel {
-  firstName: ControlType;
-  lastName: ControlType;
   email: ControlType;
   subject: ControlType;
   message: ControlType;
@@ -11,8 +9,6 @@ export interface ContactFormModel {
 }
 
 export interface ContactFormDataModel {
-  firstName: string;
-  lastName: string;
   email: string;
   subject: string;
   message: string;

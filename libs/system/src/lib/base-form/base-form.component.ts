@@ -54,7 +54,7 @@ export class BaseFormComponent {
 
   getClassList() {
     return {
-      'base-form__horizontal': this.horizontal,
+      'base-form--horizontal': this.horizontal,
     };
   }
 

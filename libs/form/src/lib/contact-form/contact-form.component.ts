@@ -19,22 +19,6 @@ export class ContactFormComponent extends BaseFormService<
 > {
   constructor() {
     super({
-      firstName: {
-        kind: 'input',
-        defaultValue: '',
-        type: 'text',
-        label: 'First name',
-        placeholder: '',
-        validators: [Validators.required]
-      },
-      lastName: {
-        kind: 'input',
-        defaultValue: '',
-        type: 'text',
-        label: 'Last name',
-        placeholder: '',
-        validators: [Validators.required]
-      },
       email: {
         kind: 'input',
         defaultValue: '',
