@@ -18,7 +18,8 @@ export const Default: Story = {
       value: {
         type: 'text',
         text: 'Click'
-      }
+      },
+      fullWidth: false
     }
   }
 };
@@ -33,7 +34,8 @@ export const Icon: Story = {
           icon: faBars,
           color: 'icon__light-primary'
         }
-      }
+      },
+      fullWidth: false
     }
   }
 };
@@ -45,7 +47,8 @@ export const Link: Story = {
       value: {
         type: 'link',
         text: 'Click'
-      }
+      },
+      fullWidth: false
     }
   }
 };

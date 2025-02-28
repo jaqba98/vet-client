@@ -12,12 +12,41 @@
   }
 
   &__content {
+    &--flex {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &--align-center {
+      align-items: center;
+    }
+
+    &--justify-center {
+      justify-content: center;
+    }
+
+    &--justify-space-around {
+      justify-content: space-between;
+    }
+
+    &--gap-1rem {
+      gap: 1rem;
+    }
+
+    &--gap-2rem {
+      gap: 2rem;
+    }
+
     &--margin-auto {
       margin: auto;
     }
 
     &--max-width-480px {
       max-width: 480px;
+    }
+
+    &--max-width-960px {
+      max-width: 960px;
     }
   }
 }

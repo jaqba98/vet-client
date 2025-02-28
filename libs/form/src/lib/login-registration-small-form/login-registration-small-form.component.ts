@@ -32,7 +32,8 @@ export class LoginRegistrationSmallFormComponent extends BaseFormService<
             color: 'icon__dark-primary'
           }
         },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
       registration: {
         id: 'registration',
@@ -44,7 +45,8 @@ export class LoginRegistrationSmallFormComponent extends BaseFormService<
             color: 'icon__dark-primary'
           }
         },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
     });
   }

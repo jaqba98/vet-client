@@ -21,4 +21,5 @@ type ValueType = TextValueModel | IconValueModel | LinkValueModel;
 export interface ButtonControlModel {
   id: string;
   value: ValueType;
+  fullWidth: boolean;
 }

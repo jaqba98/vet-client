@@ -27,7 +27,8 @@ export class ButtonControlComponent {
     return {
       'button-control__button--text': this.model.value.type === 'text',
       'button-control__button--icon': this.model.value.type === 'icon',
-      'button-control__button--link': this.model.value.type === 'link'
+      'button-control__button--link': this.model.value.type === 'link',
+      'button-control__button--full-width': this.model.fullWidth
     };
   }
 }

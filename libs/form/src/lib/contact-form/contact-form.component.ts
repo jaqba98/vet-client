@@ -50,7 +50,8 @@ export class ContactFormComponent extends BaseFormService<
         value: {
           type: 'text',
           text: 'Send',
-        }
+        },
+        fullWidth: false
       },
     });
   }

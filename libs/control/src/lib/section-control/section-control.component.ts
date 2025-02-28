@@ -16,9 +16,23 @@ export class SectionControlComponent {
 
   @Input() sectionBackgroundPrimary = false;
 
+  @Input() sectionContentFlex = false;
+
+  @Input() sectionContentAlignCenter = false;
+
+  @Input() sectionContentJustifyCenter = false;
+
+  @Input() sectionContentJustifySpaceAround = false;
+
+  @Input() sectionContentGap1rem = false;
+
+  @Input() sectionContentGap2rem = false;
+
   @Input() sectionContentMarginAuto = false;
 
   @Input() sectionContentMaxWidth480px = false;
+
+  @Input() sectionContentMaxWidth960px = false;
 
   getSectionClassList() {
     return {
@@ -36,8 +50,15 @@ export class SectionControlComponent {
   getSectionContentClassList() {
     return {
       section__content: true,
+      'section__content--flex': this.sectionContentFlex,
+      'section__content--align-center': this.sectionContentAlignCenter,
+      'section__content--justify-center': this.sectionContentJustifyCenter,
+      'section__content--justify-space-around': this.sectionContentJustifySpaceAround,
+      'section__content--gap-1rem': this.sectionContentGap1rem,
+      'section__content--gap-2rem': this.sectionContentGap2rem,
       'section__content--margin-auto': this.sectionContentMarginAuto,
       'section__content--max-width-480px': this.sectionContentMaxWidth480px,
+      'section__content--max-width-960px': this.sectionContentMaxWidth960px,
     };
   }
 }

@@ -17,3 +17,10 @@ export const Title: Story = {
     title: 'Hello'
   }
 };
+
+export const MaxWidth640px: Story = {
+  args: {
+    title: 'Hello',
+    maxWidth: '640px'
+  }
+};

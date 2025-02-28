@@ -37,7 +37,8 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           type: 'link',
           text: 'Forgot your password?'
         },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
       login: {
         id: 'login',
@@ -46,7 +47,8 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           type: 'text',
           text: 'Login',
         },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
       registration: {
         id: 'registration',
@@ -55,7 +57,8 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
           type: 'link',
           text: "Don't have an account?"
         },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
     });
   }

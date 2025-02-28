@@ -1,14 +1,14 @@
-<lib-card-control title="">
-  <div class="price">
-    <h2 class="price__type">{{ type }}</h2>
-    <p class="price__description">{{ description }}</p>
-    <p class="price__money">$ {{ money }}</p>
-    <hr>
-    <ul class="price__list">
-      <ng-container *ngFor="let el of elements">
-        <li class="price__element">{{ el }}</li>
-      </ng-container>
-    </ul>
-    <lib-button-control [model]="buttonModel"></lib-button-control>
-  </div>
+<!-- done -->
+<lib-card-control [title]="title" maxWidth="300px">
+  <lib-text-control tag="h1" [content]="price" color="primary"></lib-text-control>
+  <lib-text-control [content]="description" color="dark-secondary"></lib-text-control>
+  <hr>
+  <ul class="list">
+    <ng-container *ngFor="let element of elements">
+      <li class="list__element">
+        <lib-text-control color="dark-secondary" [content]="element"></lib-text-control>
+      </li>
+    </ng-container>
+  </ul>
+  <lib-button-control [model]="buttonModel"></lib-button-control>
 </lib-card-control>

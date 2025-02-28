@@ -80,7 +80,8 @@ export class RegistrationFormComponent extends BaseFormService<
           type: 'text',
           text: 'Register',
         },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
     });
   }

@@ -14,4 +14,6 @@ import { TextControlComponent } from '../text-control/text-control.component';
 })
 export class CardControlComponent {
   @Input({ required: true }) title!: string;
+
+  @Input() maxWidth = '100%';
 }

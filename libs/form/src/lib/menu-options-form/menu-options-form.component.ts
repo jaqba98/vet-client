@@ -27,19 +27,22 @@ export class MenuOptionsFormComponent extends BaseFormService<MenuOptionsFormMod
         id: 'home',
         kind: 'button',
         value: { type: 'text', text: 'Home' },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
       aboutUs: {
         id: 'aboutUs',
         kind: 'button',
         value: { type: 'text', text: 'About us' },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
       price: {
         id: 'price',
         kind: 'button',
         value: { type: 'text', text: 'Price' },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       }
     });
   }

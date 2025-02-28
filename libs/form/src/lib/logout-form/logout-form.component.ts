@@ -34,7 +34,8 @@ export class LogoutFormComponent extends BaseFormService<
           type: 'text',
           text: 'Logout',
         },
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: false
       },
     });
   }
