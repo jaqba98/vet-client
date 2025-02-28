@@ -1,12 +1,9 @@
+<!-- done -->
 <lib-nav-view>
   <lib-login-registration-form></lib-login-registration-form>
   <lib-login-registration-small-form></lib-login-registration-small-form>
 </lib-nav-view>
-<lib-main-view>
-  <lib-section-control
-    sectionId="registration"
-  >
-    <lib-registration-form></lib-registration-form>
-  </lib-section-control>
-  <lib-footer-view></lib-footer-view>
+<lib-main-view [fullHeight]="true">
+  <lib-registration-view></lib-registration-view>
 </lib-main-view>
+<lib-footer-view></lib-footer-view>

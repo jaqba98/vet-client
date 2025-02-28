@@ -1,12 +1,16 @@
+// done
 import { Component } from "@angular/core";
 
-import { FooterViewComponent, MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
+import {
+  FooterViewComponent,
+  MainViewComponent,
+  NavViewComponent,
+  RegistrationViewComponent
+} from '@vet-client/lib-view';
 import {
   LoginRegistrationFormComponent,
-  LoginRegistrationSmallFormComponent,
-  RegistrationFormComponent
+  LoginRegistrationSmallFormComponent
 } from '@vet-client/lib-form';
-import { SectionControlComponent } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-registration-page',
@@ -14,13 +18,10 @@ import { SectionControlComponent } from '@vet-client/lib-control';
     NavViewComponent,
     LoginRegistrationFormComponent,
     LoginRegistrationSmallFormComponent,
-    SectionControlComponent,
-    RegistrationFormComponent,
     MainViewComponent,
-    FooterViewComponent
+    FooterViewComponent,
+    RegistrationViewComponent,
   ],
-  templateUrl: './registration-page.component.html'
+  templateUrl: './registration-page.component.html',
 })
-export class RegistrationPageComponent {
-  title = 'registration works';
-}
+export class RegistrationPageComponent {}
