@@ -1,31 +1,19 @@
+// done
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
-import {
-  BaseFormComponent,
-  BaseFormService,
-  CookieService,
-  HttpEndpointEnum,
-  HttpMethodEnum,
-  HttpService,
-  LogoutPostHttpResponseModel,
-} from '@vet-client/lib-system';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
 import { LogoutFormDataModel, LogoutFormModel } from './logout-form.model';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
 
 @Component({
   selector: 'lib-logout-form',
   imports: [BaseFormComponent],
   templateUrl: './logout-form.component.html',
+  styleUrl: './logout-form.component.scss',
+  hostDirectives: [BaseComponentDirective]
 })
-export class LogoutFormComponent extends BaseFormService<
-  LogoutFormModel,
-  LogoutFormDataModel
-> {
-  constructor(
-    private readonly http: HttpService,
-    private readonly cookie: CookieService,
-    private readonly route: Router
-  ) {
+export class LogoutFormComponent extends BaseFormService<LogoutFormModel, LogoutFormDataModel> {
+  constructor() {
     super({
       logout: {
         id: 'logout',
@@ -41,20 +29,6 @@ export class LogoutFormComponent extends BaseFormService<
   }
 
   override onSubmit(model: LogoutFormDataModel) {
-    this.http
-      .execute<LogoutPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.logout,
-          request: { logout: model.logout },
-        },
-      })
-      .subscribe((response) => {
-        const { logout } = response;
-        if (logout) {
-          this.cookie.deleteCookie('token');
-          this.route.navigate(['/home']);
-        }
-      });
+    console.log(model);
   }
 }

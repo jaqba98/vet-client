@@ -1,0 +1,8 @@
+// done
+@use '../../../../scss/src/abstracts/mixins';
+
+.logout-form {
+  @include mixins.breakpoint(sm, max) {
+    display: none;
+  }
+}
