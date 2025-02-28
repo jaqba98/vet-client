@@ -1,11 +1,20 @@
 // done
 import { Component } from '@angular/core';
+import { Validators } from '@angular/forms';
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
+import {
+  BaseFormComponent,
+  BaseFormService,
+  HttpEndpointEnum,
+  HttpMethodEnum,
+  HttpService,
+  RegistrationPostHttpResponseModel,
+} from '@vet-client/lib-system';
 import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
+
 import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
-import { Validators } from '@angular/forms';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'lib-registration-form',
@@ -14,7 +23,7 @@ import { Validators } from '@angular/forms';
   hostDirectives: [BaseComponentDirective]
 })
 export class RegistrationFormComponent extends BaseFormService<RegistrationFormModel, RegistrationFormDataModel> {
-  constructor() {
+  constructor(private readonly http: HttpService) {
     super({
       email: {
         kind: 'input',
@@ -78,6 +87,25 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
   }
 
   override onSubmit(model: RegistrationFormDataModel) {
-    console.log(model);
+    return this.http
+      .execute<RegistrationPostHttpResponseModel>({
+        method: HttpMethodEnum.post,
+        type: {
+          endpoint: HttpEndpointEnum.registration,
+          request: {
+            email: model.email,
+            password: model.password,
+            confirmPassword: model.confirmPassword,
+            firstName: model.firstName,
+            lastName: model.lastName,
+            role: model.role
+          },
+        },
+      })
+      .pipe(
+        map((response) => {
+          console.log(response);
+        })
+      );
   }
 }
