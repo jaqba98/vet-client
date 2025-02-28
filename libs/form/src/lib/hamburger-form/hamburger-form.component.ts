@@ -1,3 +1,4 @@
+// done
 import { Component, EventEmitter, Output } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +12,6 @@ import { HamburgerFormDataModel, HamburgerFormModel } from './hamburger-form.mod
   templateUrl: './hamburger-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
-/** Hamburger Form */
 export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, HamburgerFormDataModel> {
   @Output() event = new EventEmitter<boolean>();
 
@@ -24,7 +24,7 @@ export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, 
           type: 'icon',
           icon: {
             icon: faBars,
-            color: 'icon__dark-primary'
+            color: 'icon__light-primary'
           }
         },
         defaultValue: false,

@@ -1,3 +1,4 @@
+// done
 import { Component } from '@angular/core';
 import { faRightFromBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,7 +16,6 @@ import {
   styleUrl: './login-registration-small-form.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
-/** Login Registration Small Form */
 export class LoginRegistrationSmallFormComponent extends BaseFormService<
   LoginRegistrationSmallFormModel,
   LoginRegistrationSmallFormDataModel
@@ -29,7 +29,7 @@ export class LoginRegistrationSmallFormComponent extends BaseFormService<
           type: 'icon',
           icon: {
             icon: faRightFromBracket,
-            color: 'icon__dark-primary'
+            color: 'icon__light-primary'
           }
         },
         defaultValue: false,
@@ -42,7 +42,7 @@ export class LoginRegistrationSmallFormComponent extends BaseFormService<
           type: 'icon',
           icon: {
             icon: faUserPlus,
-            color: 'icon__dark-primary'
+            color: 'icon__light-primary'
           }
         },
         defaultValue: false,

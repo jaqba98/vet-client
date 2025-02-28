@@ -1,7 +1,9 @@
+// done
 import { Component } from "@angular/core";
-
 import {
-  AboutUsViewComponent, ContactViewComponent, FooterViewComponent,
+  AboutUsViewComponent,
+  ContactViewComponent,
+  FooterViewComponent,
   HeaderViewComponent,
   MainViewComponent,
   NavViewComponent,
@@ -13,14 +15,14 @@ import { LoginRegistrationFormComponent, LoginRegistrationSmallFormComponent } f
   selector: 'lib-home-page',
   imports: [
     NavViewComponent,
+    LoginRegistrationFormComponent,
+    LoginRegistrationSmallFormComponent,
+    MainViewComponent,
     HeaderViewComponent,
     AboutUsViewComponent,
-    LoginRegistrationFormComponent,
-    MainViewComponent,
-    LoginRegistrationSmallFormComponent,
     PriceViewComponent,
     ContactViewComponent,
-    FooterViewComponent
+    FooterViewComponent,
   ],
   templateUrl: './home-page.component.html',
 })

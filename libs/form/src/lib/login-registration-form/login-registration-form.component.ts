@@ -1,3 +1,4 @@
+// done
 import { Component } from '@angular/core';
 
 import { BaseFormComponent, BaseFormService, RouterEnum, RouterService } from '@vet-client/lib-system';
@@ -11,7 +12,6 @@ import { LoginRegistrationFormDataModel, LoginRegistrationFormModel } from './lo
   styleUrl: './login-registration-form.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
-/** Login Registration Form */
 export class LoginRegistrationFormComponent extends BaseFormService<
   LoginRegistrationFormModel,
   LoginRegistrationFormDataModel

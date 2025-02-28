@@ -1,4 +1,6 @@
+// done
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import { LoginRegistrationFormComponent } from '@vet-client/lib-form';
 
 const meta: Meta<LoginRegistrationFormComponent> = {
