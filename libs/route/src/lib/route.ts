@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 
 import {
-  ChooseRolePageComponent,
+  ChooseRolePageComponent, DashboardMainPageComponent,
   DashboardPageComponent,
   HomePageComponent,
   LoginPageComponent,
@@ -37,7 +37,7 @@ export const route: Route[] = [
     children: [
       {
         path: '',
-        component: DashboardPageComponent,
+        component: DashboardMainPageComponent,
         canActivate: [HasRoleGuard]
       },
       {
