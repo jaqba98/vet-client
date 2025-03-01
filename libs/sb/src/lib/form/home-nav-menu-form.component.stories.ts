@@ -1,21 +1,21 @@
 // done
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { MenuOptionsFormComponent } from '@vet-client/lib-form';
+import { HomeNavMenuFormComponent } from '@vet-client/lib-form';
 import { StorybookUtilsService } from '../utils/storybook-utils.service';
 
-const meta: Meta<MenuOptionsFormComponent> = {
-  component: MenuOptionsFormComponent,
-  title: 'Form/MenuOptions',
+const meta: Meta<HomeNavMenuFormComponent> = {
+  component: HomeNavMenuFormComponent,
+  title: 'Form/HomeNavMenu',
   ...StorybookUtilsService.getFormConfiguration()
 };
 export default meta;
-type Story = StoryObj<MenuOptionsFormComponent>;
+type Story = StoryObj<HomeNavMenuFormComponent>;
 
 export const Default: Story = {};
 
 export const FlexDirectionColumn: Story = {
   args: {
-    flexDirectionColumn: true
+    isHorizontal: true
   }
 };
