@@ -1,27 +1,36 @@
 // done
 import { Component } from '@angular/core';
 
+import { CookieService, RouterService } from '@vet-client/lib-system';
 import {
-  CookieService,
-  RouterEnum,
-  RouterService
-} from '@vet-client/lib-system';
-import { LogoutSmallFormDataModel, LogoutSmallFormModel } from './logout-small-form.model';
+  LogoutSmallFormDataModel,
+  LogoutSmallFormModel,
+} from './logout-small-form.model';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { LogoutFormDataModel } from '../logout-form/logout-form.model';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { Store } from '@ngrx/store';
+import {
+  RoutePageEnum,
+  RouteSectionEnum,
+  RouteStoreModel, setRoute
+} from '@vet-client/lib-store';
 
 @Component({
   selector: 'lib-logout-small-form',
   imports: [BaseFormComponent],
   templateUrl: './logout-small-form.component.html',
   styleUrl: './logout-small-form.component.scss',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
-export class LogoutSmallFormComponent extends BaseFormService<LogoutSmallFormModel, LogoutSmallFormDataModel> {
+export class LogoutSmallFormComponent extends BaseFormService<
+  LogoutSmallFormModel,
+  LogoutSmallFormDataModel
+> {
   constructor(
+    private readonly store: Store<RouteStoreModel>,
     private readonly http: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly router: RouterService
@@ -34,11 +43,11 @@ export class LogoutSmallFormComponent extends BaseFormService<LogoutSmallFormMod
           type: 'icon',
           icon: {
             icon: faRightFromBracket,
-            color: 'icon__light-primary'
-          }
+            color: 'icon__light-primary',
+          },
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: false,
       },
     });
   }
@@ -47,12 +56,16 @@ export class LogoutSmallFormComponent extends BaseFormService<LogoutSmallFormMod
     if (model.logout) {
       const token = this.cookie.getCookie('token');
       if (!token) return;
-      this.http.logoutPost({ token }, res => {
-        if (res.success) {
-          this.cookie.deleteCookie('token');
-          this.router.redirect(RouterEnum.home);
-        }
-      }).subscribe();
+      this.http
+        .logoutPost({ token }, (res) => {
+          if (res.success) {
+            this.cookie.deleteCookie('token');
+            this.store.dispatch(
+              setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home })
+            );
+          }
+        })
+        .subscribe();
     }
   }
 }

@@ -3,16 +3,16 @@ import { CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { CookieService } from '../cookie/cookie.service';
-import { RouterService } from '../router/router.service';
-import { RouterEnum } from '../router/router.enum';
 import { HttpPostAppService } from '@vet-client/lib-http';
+import { Store } from '@ngrx/store';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class IsClientRoleGuard implements CanActivate {
   constructor(
+    private readonly store: Store<{ route: RouteStoreModel }>,
     private readonly cookie: CookieService,
-    private readonly http: HttpPostAppService,
-    private readonly router: RouterService
+    private readonly http: HttpPostAppService
   ) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
@@ -20,7 +20,7 @@ export class IsClientRoleGuard implements CanActivate {
     if (!token) return false;
     return this.http.isClientPost({ token }, res => {
       if (res.success) {
-        this.router.redirect(RouterEnum.dashboardClient);
+        this.store.dispatch(setRoute({ page: RoutePageEnum.dashboardClient, section: RouteSectionEnum.dashboardClient }));
         return true;
       }
       return true;

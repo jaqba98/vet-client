@@ -4,12 +4,14 @@ import { Observable } from 'rxjs';
 
 import { CookieService } from '../cookie/cookie.service';
 import { RouterService } from '../router/router.service';
-import { RouterEnum } from '../router/router.enum';
 import { HttpPostAppService } from '@vet-client/lib-http';
+import { Store } from '@ngrx/store';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class HasRoleGuard implements CanActivate {
   constructor(
+    private readonly store: Store<{ route: RouteStoreModel }>,
     private readonly cookie: CookieService,
     private readonly http: HttpPostAppService,
     private readonly router: RouterService
@@ -22,7 +24,7 @@ export class HasRoleGuard implements CanActivate {
       if (res.success) {
         return true;
       }
-      this.router.redirect(RouterEnum.dashboardChooseRole);
+      this.store.dispatch(setRoute({ page: RoutePageEnum.dashboardChooseRole, section: RouteSectionEnum.dashboardChooseRole }));
       return true;
     });
   }

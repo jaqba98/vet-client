@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import {
   CookieService,
-  RouterEnum,
   RouterService,
 } from '@vet-client/lib-system';
 import { CardControlComponent, TextControlComponent } from '@vet-client/lib-control';
@@ -12,6 +11,8 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'lib-login-form',
@@ -25,7 +26,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
   constructor(
     private readonly http: HttpPostAppService,
     private readonly cookie: CookieService,
-    private readonly router: RouterService
+    private readonly store: Store<RouteStoreModel>
   ) {
     super({
       email: {
@@ -63,7 +64,9 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
       if (res.success) {
         this.isLoginError = false;
         this.cookie.saveToCookie('token', res.token, 1);
-        this.router.redirect(RouterEnum.dashboard);
+        this.store.dispatch(
+          setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard })
+        );
       } else {
         this.isLoginError = true;
       }

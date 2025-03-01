@@ -1,10 +1,12 @@
 // done
 import { Component } from '@angular/core';
 
-import { RouterEnum, RouterService } from '@vet-client/lib-system';
+import { RouterService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginRegistrationFormDataModel, LoginRegistrationFormModel } from './login-registration-form.model';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'lib-login-registration-form',
@@ -17,7 +19,10 @@ export class LoginRegistrationFormComponent extends BaseFormService<
   LoginRegistrationFormModel,
   LoginRegistrationFormDataModel
 > {
-  constructor(private readonly router: RouterService) {
+  constructor(
+    private readonly store: Store<RouteStoreModel>,
+    private readonly router: RouterService
+) {
     super({
       login: {
         id: 'login',
@@ -44,9 +49,13 @@ export class LoginRegistrationFormComponent extends BaseFormService<
 
   override onSubmit(model: LoginRegistrationFormDataModel) {
     if (model.login) {
-      this.router.redirect(RouterEnum.login);
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.login, section: RouteSectionEnum.login })
+      );
     } else if (model.registration) {
-      this.router.redirect(RouterEnum.registration);
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.registration, section: RouteSectionEnum.registration })
+      );
     }
   }
 }

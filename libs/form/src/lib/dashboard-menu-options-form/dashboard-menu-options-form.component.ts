@@ -1,13 +1,11 @@
 // done
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import {
-  RouterEnum,
-  RouterService,
-} from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { DashboardMenuOptionsFormDataModel, DashboardMenuOptionsFormModel } from './dashboard-menu-options-form.model';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'lib-dashboard-menu-options-form',
@@ -23,7 +21,7 @@ export class DashboardMenuOptionsFormComponent extends BaseFormService<
 
   @Input() flexDirectionColumn = false;
 
-  constructor(private readonly router: RouterService) {
+  constructor(private readonly store: Store<RouteStoreModel>) {
     super({
       dashboard: {
         id: 'home',
@@ -37,7 +35,9 @@ export class DashboardMenuOptionsFormComponent extends BaseFormService<
 
   override onSubmit(model: DashboardMenuOptionsFormDataModel) {
     if (model.dashboard) {
-      this.router.redirect(RouterEnum.dashboard);
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard })
+      );
     }
     this.event.emit();
   }

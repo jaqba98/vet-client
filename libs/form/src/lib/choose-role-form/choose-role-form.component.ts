@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import {
   CookieService,
-  RouterEnum,
   RouterService
 } from '@vet-client/lib-system';
 import { CardControlComponent } from '@vet-client/lib-control';
@@ -11,6 +10,8 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ChooseRoleFormDataModel, ChooseRoleFormModel } from './choose-role-form.model';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'lib-choose-role-form',
@@ -20,6 +21,7 @@ import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 })
 export class ChooseRoleFormComponent extends BaseFormService<ChooseRoleFormModel, ChooseRoleFormDataModel> {
   constructor(
+    private readonly store: Store<RouteStoreModel>,
     private readonly http: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly router: RouterService
@@ -54,11 +56,17 @@ export class ChooseRoleFormComponent extends BaseFormService<ChooseRoleFormModel
     this.http.chooseRolePost({ token, role }, res => {
       if (res.success) {
         if (res.role === 'vet') {
-          this.router.redirect(RouterEnum.dashboardVet);
+          this.store.dispatch(
+            setRoute({ page: RoutePageEnum.dashboardVet, section: RouteSectionEnum.dashboardVet })
+          );
         } else if (res.role === 'client') {
-          this.router.redirect(RouterEnum.dashboardClient);
+          this.store.dispatch(
+            setRoute({ page: RoutePageEnum.dashboardClient, section: RouteSectionEnum.dashboardClient })
+          );
         } else {
-          this.router.redirect(RouterEnum.dashboard);
+          this.store.dispatch(
+            setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard })
+          );
         }
       }
     }).subscribe();

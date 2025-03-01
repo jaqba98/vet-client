@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { RouterEnum } from './router.enum';
+import { RoutePageEnum, RouteSectionEnum } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class RouterService {
   constructor(private readonly router: Router) {
   }
 
-  redirect(route: RouterEnum, id = '') {
-    this.router.navigate([route]).then(() => {
+  navigate(page: RoutePageEnum, section: RouteSectionEnum) {
+    console.log(page + section);
+    this.router.navigate([page]).then(() => {
       setTimeout(() => {
-        if (id !== '') {
-          const element = document.getElementById(id);
-          console.log(element);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
+        const element = document.getElementById(section);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
     });

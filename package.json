@@ -19,6 +19,7 @@
     "@fortawesome/angular-fontawesome": "^1.0.0",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@ngrx/store": "^19.0.1",
+    "@ngrx/store-devtools": "^19.0.1",
     "express": "^4.21.2",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"

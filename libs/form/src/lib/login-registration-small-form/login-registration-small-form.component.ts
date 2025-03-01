@@ -2,13 +2,14 @@
 import { Component } from '@angular/core';
 import { faRightFromBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { RouterEnum, RouterService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import {
   LoginRegistrationSmallFormDataModel,
   LoginRegistrationSmallFormModel
 } from './login-registration-small-form.model';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { Store } from '@ngrx/store';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
 
 @Component({
   selector: 'lib-login-registration-small-form',
@@ -21,7 +22,7 @@ export class LoginRegistrationSmallFormComponent extends BaseFormService<
   LoginRegistrationSmallFormModel,
   LoginRegistrationSmallFormDataModel
 > {
-  constructor(private readonly router: RouterService) {
+  constructor(private readonly store: Store<RouteStoreModel>) {
     super({
       login: {
         id: 'login',
@@ -54,9 +55,13 @@ export class LoginRegistrationSmallFormComponent extends BaseFormService<
 
   override onSubmit(model: LoginRegistrationSmallFormDataModel) {
     if (model.login) {
-      this.router.redirect(RouterEnum.login);
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.login, section: RouteSectionEnum.login })
+      );
     } else if (model.registration) {
-      this.router.redirect(RouterEnum.registration);
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.registration, section: RouteSectionEnum.registration })
+      );
     }
   }
 }

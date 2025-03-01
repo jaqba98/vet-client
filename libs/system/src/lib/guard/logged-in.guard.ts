@@ -1,16 +1,18 @@
 // done
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { CookieService } from '../cookie/cookie.service';
 import { RouterService } from '../router/router.service';
-import { RouterEnum } from '../router/router.enum';
 import { HttpPostAppService } from '@vet-client/lib-http';
+import { Store } from '@ngrx/store';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedInGuard implements CanActivate {
   constructor(
+    private readonly store: Store<{ route: RouteStoreModel }>,
     private readonly cookie: CookieService,
     private readonly http: HttpPostAppService,
     private readonly router: RouterService
@@ -19,12 +21,12 @@ export class LoggedInGuard implements CanActivate {
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     const token = this.cookie.getCookie('token');
     if (!token) {
-      this.router.redirect(RouterEnum.home);
+      this.store.dispatch(setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }));
       return false;
     }
     return this.http.authPost({ token }, res => {
       if (!res.success) {
-        this.router.redirect(RouterEnum.home);
+        this.store.dispatch(setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }));
         return false;
       }
       return true;
