@@ -47,7 +47,14 @@
     </ng-container>
   </ng-container>
   <!-- Message -->
-  <div class="base-form__message">
-    <lib-error-control message="Hello"></lib-error-control>
-  </div>
+  <ng-container *ngIf="success !== ''">
+    <div class="base-form__message">
+      <lib-success-control [message]="success"></lib-success-control>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="error !== ''">
+    <div class="base-form__message">
+      <lib-error-control [message]="error"></lib-error-control>
+    </div>
+  </ng-container>
 </form>

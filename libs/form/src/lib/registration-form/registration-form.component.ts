@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import { CardControlComponent } from '@vet-client/lib-control';
@@ -16,7 +16,9 @@ import {
   templateUrl: './registration-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class RegistrationFormComponent extends BaseFormService<RegistrationFormModel, RegistrationModel> {
+export class RegistrationFormComponent
+  extends BaseFormService<RegistrationFormModel, RegistrationModel>
+  implements OnInit {
   constructor(private readonly http: HttpPostAppService) {
     super({
       email: {
@@ -25,7 +27,11 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         label: 'Email',
         placeholder: '',
         defaultValue: '',
-        validators: [Validators.required, Validators.email, Validators.maxLength(255)]
+        validators: [
+          Validators.required,
+          Validators.email,
+          Validators.maxLength(255),
+        ],
       },
       password: {
         kind: 'input',
@@ -72,15 +78,27 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
     });
   }
 
+  ngOnInit() {
+    this.initBaseForm();
+  }
+
   override onSubmit(model: RegistrationModel) {
-    this.http.registrationPost({
-      email: model.email,
-      password: model.password,
-      confirmPassword: model.confirmPassword,
-      firstName: model.firstName,
-      lastName: model.lastName
-    }).subscribe(response => {
-      console.log(response);
-    });
+    this.http
+      .registrationPost({
+        email: model.email,
+        password: model.password,
+        confirmPassword: model.confirmPassword,
+        firstName: model.firstName,
+        lastName: model.lastName,
+      })
+      .subscribe((response) => {
+        this.initBaseForm();
+        const { success, errors } = response;
+        if (success) {
+          this.success = 'Success! Your account has been created.';
+        } else {
+          this.error = errors[0];
+        }
+      });
   }
 }

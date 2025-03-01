@@ -2,6 +2,9 @@
   <lib-base-form
     [formGroup]="formGroup"
     [controlsArray]="controlsArray"
+    [success]="success"
+    [error]="error"
     (event)="onSubmit($event)"
+    (resetEvent)="initBaseForm()"
   ></lib-base-form>
 </lib-card-control>

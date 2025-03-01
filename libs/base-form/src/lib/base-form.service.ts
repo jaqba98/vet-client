@@ -4,8 +4,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import {
   BaseFormModel,
   ControlButtonModel,
-  ControlInputModel, ControlRadioButtonModel,
-  ControlsArrayType, ControlTextareaModel,
+  ControlInputModel,
+  ControlRadioButtonModel,
+  ControlsArrayType,
+  ControlTextareaModel,
   ControlType
 } from './base-form.model';
 
@@ -15,9 +17,18 @@ export class BaseFormService<TFormModel, TModel> {
 
   controlsArray: ControlsArrayType;
 
+  success = '';
+
+  error = '';
+
   constructor(@Inject('baseForm') baseForm: BaseFormModel<TFormModel>) {
     this.formGroup = this.createFormGroup(baseForm);
     this.controlsArray = this.getControlsArray(baseForm);
+  }
+
+  initBaseForm() {
+    this.success = '';
+    this.error = '';
   }
 
   createFormGroup(baseForm: BaseFormModel<TFormModel>): FormGroup {

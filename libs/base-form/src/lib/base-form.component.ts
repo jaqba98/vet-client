@@ -6,8 +6,8 @@ import {
   ButtonControlComponent,
   ErrorControlComponent,
   InputControlComponent,
-  RadioButtonControlComponent,
-  TextareaControlComponent,
+  RadioButtonControlComponent, SuccessControlComponent,
+  TextareaControlComponent
 } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ControlsArrayType } from './base-form.model';
@@ -22,12 +22,15 @@ import { ControlsArrayType } from './base-form.model';
     TextareaControlComponent,
     RadioButtonControlComponent,
     ErrorControlComponent,
+    SuccessControlComponent,
   ],
   templateUrl: './base-form.component.html',
   styleUrl: './base-form.component.scss',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
 export class BaseFormComponent {
+  @Output() resetEvent = new EventEmitter();
+
   @Output() event = new EventEmitter();
 
   @Input({ required: true }) formGroup!: FormGroup;
@@ -36,7 +39,12 @@ export class BaseFormComponent {
 
   @Input() isHorizontal = false;
 
+  @Input() error = '';
+
+  @Input() success = '';
+
   onSubmit() {
+    this.resetEvent.emit();
     if (this.isBaseFormValid()) {
       const model = this.formGroup.getRawValue();
       this.event.emit(model);
@@ -52,7 +60,7 @@ export class BaseFormComponent {
 
   getClassList() {
     return {
-      'base-form--horizontal': this.isHorizontal
+      'base-form--horizontal': this.isHorizontal,
     };
   }
 
@@ -68,7 +76,9 @@ export class BaseFormComponent {
       return 'This field is required!';
     }
     if (control.hasError('maxlength')) {
-      return `Minimum length is ${control.getError('maxlength').requiredLength} characters!`;
+      return `Minimum length is ${
+        control.getError('maxlength').requiredLength
+      } characters!`;
     }
     if (control.hasError('email')) {
       return 'Please enter a valid email address';
@@ -89,7 +99,9 @@ export class BaseFormComponent {
 
   private resetBaseForm() {
     this.controlsArray.forEach((control) => {
-      this.formGroup.controls[control.name].patchValue(control.model.defaultValue);
+      this.formGroup.controls[control.name].patchValue(
+        control.model.defaultValue
+      );
     });
     this.formGroup.markAsUntouched();
   }
