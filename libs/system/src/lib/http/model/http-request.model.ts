@@ -27,3 +27,11 @@ export interface ChooseRolePostHttpRequestModel {
   token: string | null;
   role: string;
 }
+
+export interface IsVetPostHttpRequestModel {
+  token: string | null;
+}
+
+export interface IsClientPostHttpRequestModel {
+  token: string | null;
+}

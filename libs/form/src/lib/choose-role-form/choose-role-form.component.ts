@@ -4,9 +4,12 @@ import { CommonModule } from '@angular/common';
 import {
   BaseFormComponent,
   BaseFormService,
-  CookieService, HttpEndpointEnum, HttpMethodEnum,
+  ChooseRolePostHttpResponseModel,
+  CookieService,
+  HttpEndpointEnum,
+  HttpMethodEnum,
   HttpService,
-  LoginPostHttpResponseModel, RouterEnum,
+  RouterEnum,
   RouterService
 } from '@vet-client/lib-system';
 import { CardControlComponent } from '@vet-client/lib-control';
@@ -55,7 +58,7 @@ export class ChooseRoleFormComponent extends BaseFormService<ChooseRoleFormModel
       return;
     }
     return this.http
-      .execute<LoginPostHttpResponseModel>({
+      .execute<ChooseRolePostHttpResponseModel>({
         method: HttpMethodEnum.post,
         type: {
           endpoint: HttpEndpointEnum.chooseRole,
@@ -67,7 +70,13 @@ export class ChooseRoleFormComponent extends BaseFormService<ChooseRoleFormModel
       })
       .subscribe((response) => {
         if (response.success) {
-          this.router.redirect(RouterEnum.dashboard);
+          if (response.role === 'vet') {
+            this.router.redirect(RouterEnum.dashboardVet);
+          } else if (response.role === 'client') {
+            this.router.redirect(RouterEnum.dashboardClient);
+          } else {
+            this.router.redirect(RouterEnum.dashboard);
+          }
         }
       });
   }

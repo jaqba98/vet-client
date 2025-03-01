@@ -4,5 +4,7 @@ export enum HttpEndpointEnum {
   auth = 'auth',
   logout = 'logout',
   hasRole = 'has-role',
-  chooseRole = 'choose-role'
+  chooseRole = 'choose-role',
+  isVet = 'is-vet',
+  isClient = 'is-client'
 }

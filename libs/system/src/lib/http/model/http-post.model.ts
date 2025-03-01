@@ -1,7 +1,11 @@
 import { HttpMethodEnum } from '../enum/http-method.enum';
 import { HttpEndpointEnum } from '../enum/http-endpoint.enum';
 import {
-  AuthPostHttpRequestModel, ChooseRolePostHttpRequestModel, HasRolePostHttpRequestModel,
+  AuthPostHttpRequestModel,
+  ChooseRolePostHttpRequestModel,
+  HasRolePostHttpRequestModel,
+  IsClientPostHttpRequestModel,
+  IsVetPostHttpRequestModel,
   LoginPostHttpRequestModel,
   LogoutPostHttpRequestModel,
   RegistrationPostHttpRequestModel
@@ -37,13 +41,25 @@ interface ChooseRoleHttpPostModel {
   request: ChooseRolePostHttpRequestModel;
 }
 
+interface IsVetHttpPostModel {
+  endpoint: HttpEndpointEnum.isVet;
+  request: IsVetPostHttpRequestModel;
+}
+
+interface IsClientHttpPostModel {
+  endpoint: HttpEndpointEnum.isClient;
+  request: IsClientPostHttpRequestModel;
+}
+
 export type HttpPostType =
   LoginHttpPostModel |
   RegistrationHttpPostModel |
   AuthHttpPostModel |
   LogoutHttpPostModel |
   HasRoleHttpPostModel |
-  ChooseRoleHttpPostModel;
+  ChooseRoleHttpPostModel |
+  IsVetHttpPostModel |
+  IsClientHttpPostModel;
 
 export interface HttpPostModel {
   method: HttpMethodEnum.post;

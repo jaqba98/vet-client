@@ -3,5 +3,7 @@ export enum RouterEnum {
   login = '/login',
   registration = '/registration',
   dashboard = '/dashboard',
-  dashboardChooseRole = '/dashboard/choose-role'
+  dashboardChooseRole = '/dashboard/choose-role',
+  dashboardVet = '/dashboard/vet',
+  dashboardClient = '/dashboard/client'
 }

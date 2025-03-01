@@ -7,7 +7,13 @@ import {
   LoginPageComponent,
   RegistrationPageComponent, VetPageComponent
 } from '@vet-client/lib-page';
-import { HasRoleGuard, LoggedInGuard, LoggedOutGuard, NotHasRoleGuard } from '@vet-client/lib-system';
+import {
+  HasRoleGuard,
+  IsClientRoleGuard, IsVetRoleGuard,
+  LoggedInGuard,
+  LoggedOutGuard,
+  NotHasRoleGuard
+} from '@vet-client/lib-system';
 
 export const route: Route[] = [
   {
@@ -38,7 +44,7 @@ export const route: Route[] = [
       {
         path: '',
         component: DashboardMainPageComponent,
-        canActivate: [HasRoleGuard]
+        canActivate: [HasRoleGuard, IsClientRoleGuard, IsVetRoleGuard]
       },
       {
         path: 'choose-role',
@@ -48,10 +54,12 @@ export const route: Route[] = [
       {
         path: 'vet',
         component: VetPageComponent,
+        canActivate: [HasRoleGuard, IsClientRoleGuard]
       },
       {
         path: 'client',
         component: ClientPageComponent,
+        canActivate: [HasRoleGuard, IsVetRoleGuard]
       },
     ]
   },

@@ -22,4 +22,13 @@ export interface HasRolePostHttpResponseModel {
 
 export interface ChooseRolePostHttpResponseModel {
   success: boolean;
+  role: string;
+}
+
+export interface IsVetPostHttpResponseModel {
+  isVet: boolean;
+}
+
+export interface IsClientPostHttpResponseModel {
+  isClient: boolean;
 }
