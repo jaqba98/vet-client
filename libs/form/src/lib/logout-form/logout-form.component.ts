@@ -5,15 +5,12 @@ import {
   BaseFormComponent,
   BaseFormService,
   CookieService,
-  HttpEndpointEnum,
-  HttpMethodEnum,
-  HttpService,
-  LogoutPostHttpResponseModel,
   RouterEnum,
   RouterService,
 } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LogoutFormDataModel, LogoutFormModel } from './logout-form.model';
+import { HttpPostAppService } from '@vet-client/lib-http';
 
 @Component({
   selector: 'lib-logout-form',
@@ -24,7 +21,7 @@ import { LogoutFormDataModel, LogoutFormModel } from './logout-form.model';
 })
 export class LogoutFormComponent extends BaseFormService<LogoutFormModel, LogoutFormDataModel> {
   constructor(
-    private readonly http: HttpService,
+    private readonly http: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly router: RouterService
   ) {
@@ -43,19 +40,15 @@ export class LogoutFormComponent extends BaseFormService<LogoutFormModel, Logout
   }
 
   override onSubmit(model: LogoutFormDataModel) {
-    this.http
-      .execute<LogoutPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.logout,
-          request: { logout: model.logout },
-        },
-      })
-      .subscribe((response) => {
-        if (response.logout) {
+    if (model.logout) {
+      const token = this.cookie.getCookie('token');
+      if (!token) return;
+      this.http.logoutPost({ token }, res => {
+        if (res.success) {
           this.cookie.deleteCookie('token');
           this.router.redirect(RouterEnum.home);
         }
-      });
+      }).subscribe();
+    }
   }
 }

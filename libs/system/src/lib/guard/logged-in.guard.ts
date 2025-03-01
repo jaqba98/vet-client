@@ -4,18 +4,15 @@ import { CanActivate } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
 import { CookieService } from '../cookie/cookie.service';
-import { HttpService } from '../http/service/http.service';
 import { RouterService } from '../router/router.service';
-import { AuthPostHttpResponseModel } from '../http/model/http-response.model';
-import { HttpMethodEnum } from '../http/enum/http-method.enum';
-import { HttpEndpointEnum } from '../http/enum/http-endpoint.enum';
 import { RouterEnum } from '../router/router.enum';
+import { HttpPostAppService } from '@vet-client/lib-http';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedInGuard implements CanActivate {
   constructor(
     private readonly cookie: CookieService,
-    private readonly http: HttpService,
+    private readonly http: HttpPostAppService,
     private readonly router: RouterService
   ) {}
 
@@ -25,22 +22,12 @@ export class LoggedInGuard implements CanActivate {
       this.router.redirect(RouterEnum.home);
       return false;
     }
-    return this.http
-      .execute<AuthPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.auth,
-          request: { token },
-        },
-      })
-      .pipe(
-        map((response) => {
-          if (!response.isAuth) {
-            this.router.redirect(RouterEnum.home);
-            return false;
-          }
-          return true;
-        })
-      );
+    return this.http.authPost({ token }, res => {
+      if (!res.success) {
+        this.router.redirect(RouterEnum.home);
+        return false;
+      }
+      return true;
+    });
   }
 }

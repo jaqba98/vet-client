@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import {
-  ChooseRoleViewComponent,
   FooterViewComponent,
   MainViewComponent,
   NavViewComponent
@@ -22,7 +21,6 @@ import {
     LogoutSmallFormComponent,
     DashboardMenuOptionsFormComponent,
     RouterOutlet,
-    ChooseRoleViewComponent,
     MainViewComponent,
     FooterViewComponent,
   ],

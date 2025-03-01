@@ -7,10 +7,7 @@ import { RegistrationFormComponent } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-registration-view',
-  imports: [
-    SectionControlComponent,
-    RegistrationFormComponent,
-  ],
+  imports: [SectionControlComponent, RegistrationFormComponent],
   templateUrl: './registration-view.component.html',
   hostDirectives: [BaseComponentDirective],
 })

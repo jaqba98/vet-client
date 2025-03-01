@@ -1,48 +1,29 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { CookieService } from '../cookie/cookie.service';
-import { HttpService } from '../http/service/http.service';
 import { RouterService } from '../router/router.service';
-import {
-  HasRolePostHttpResponseModel,
-  IsClientPostHttpResponseModel,
-  IsVetPostHttpResponseModel
-} from '../http/model/http-response.model';
-import { HttpMethodEnum } from '../http/enum/http-method.enum';
-import { HttpEndpointEnum } from '../http/enum/http-endpoint.enum';
 import { RouterEnum } from '../router/router.enum';
+import { HttpPostAppService } from '@vet-client/lib-http';
 
 @Injectable({ providedIn: 'root' })
 export class IsClientRoleGuard implements CanActivate {
   constructor(
     private readonly cookie: CookieService,
-    private readonly http: HttpService,
+    private readonly http: HttpPostAppService,
     private readonly router: RouterService
   ) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     const token = this.cookie.getCookie('token');
-    if (!token) {
-      return false;
-    }
-    return this.http
-      .execute<IsClientPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.isClient,
-          request: { token },
-        },
-      })
-      .pipe(
-        map((response) => {
-          if (response.isClient) {
-            this.router.redirect(RouterEnum.dashboardClient);
-            return true;
-          }
-          return true;
-        })
-      );
+    if (!token) return false;
+    return this.http.isClientPost({ token }, res => {
+      if (res.success) {
+        this.router.redirect(RouterEnum.dashboardClient);
+        return true;
+      }
+      return true;
+    });
   }
 }

@@ -4,15 +4,15 @@ import { Component } from '@angular/core';
 import {
   BaseFormComponent,
   BaseFormService,
-  CookieService, HttpEndpointEnum, HttpMethodEnum,
-  HttpService,
-  LogoutPostHttpResponseModel, RouterEnum,
+  CookieService,
+  RouterEnum,
   RouterService
 } from '@vet-client/lib-system';
 import { LogoutSmallFormDataModel, LogoutSmallFormModel } from './logout-small-form.model';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { LogoutFormDataModel } from '../logout-form/logout-form.model';
+import { HttpPostAppService } from '@vet-client/lib-http';
 
 @Component({
   selector: 'lib-logout-small-form',
@@ -23,7 +23,7 @@ import { LogoutFormDataModel } from '../logout-form/logout-form.model';
 })
 export class LogoutSmallFormComponent extends BaseFormService<LogoutSmallFormModel, LogoutSmallFormDataModel> {
   constructor(
-    private readonly http: HttpService,
+    private readonly http: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly router: RouterService
   ) {
@@ -45,19 +45,15 @@ export class LogoutSmallFormComponent extends BaseFormService<LogoutSmallFormMod
   }
 
   override onSubmit(model: LogoutFormDataModel) {
-    this.http
-      .execute<LogoutPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.logout,
-          request: { logout: model.logout },
-        },
-      })
-      .subscribe((response) => {
-        if (response.logout) {
+    if (model.logout) {
+      const token = this.cookie.getCookie('token');
+      if (!token) return;
+      this.http.logoutPost({ token }, res => {
+        if (res.success) {
           this.cookie.deleteCookie('token');
           this.router.redirect(RouterEnum.home);
         }
-      });
+      }).subscribe();
+    }
   }
 }

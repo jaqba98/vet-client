@@ -5,16 +5,13 @@ import { Validators } from '@angular/forms';
 import {
   BaseFormComponent,
   BaseFormService,
-  HttpEndpointEnum,
-  HttpMethodEnum,
-  HttpService,
-  RegistrationPostHttpResponseModel,
 } from '@vet-client/lib-system';
 import { CardControlComponent, TextControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 
 import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
 import { NgIf } from '@angular/common';
+import { HttpPostAppService } from '@vet-client/lib-http';
 
 @Component({
   selector: 'lib-registration-form',
@@ -39,7 +36,7 @@ export class RegistrationFormComponent extends BaseFormService<
 
   registrationSuccess = '';
 
-  constructor(private readonly http: HttpService) {
+  constructor(private readonly http: HttpPostAppService) {
     super({
       email: {
         kind: 'input',
@@ -99,32 +96,24 @@ export class RegistrationFormComponent extends BaseFormService<
   }
 
   override onSubmit(model: RegistrationFormDataModel) {
-    return this.http
-      .execute<RegistrationPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.registration,
-          request: {
-            email: model.email,
-            password: model.password,
-            confirmPassword: model.confirmPassword,
-            firstName: model.firstName,
-            lastName: model.lastName
-          },
-        },
-      })
-      .subscribe((response) => {
-        this.isRegistrationSuccess = false;
-        this.isRegistrationError = false;
-        this.registrationSuccess = '';
-        this.registrationError = '';
-        if (response.success) {
-          this.isRegistrationSuccess = true;
-          this.registrationSuccess = 'New account created successfully!';
-        } else {
-          this.isRegistrationError = true;
-          this.registrationError = response.errors[0];
-        }
-      });
+    this.http.registrationPost({
+      email: model.email,
+      password: model.password,
+      confirmPassword: model.confirmPassword,
+      firstName: model.firstName,
+      lastName: model.lastName
+    }, res => {
+      this.isRegistrationSuccess = false;
+      this.isRegistrationError = false;
+      this.registrationSuccess = '';
+      this.registrationError = '';
+      if (res.success) {
+        this.isRegistrationSuccess = true;
+        this.registrationSuccess = 'New account created successfully!';
+      } else {
+        this.isRegistrationError = true;
+        this.registrationError = res.errors[0];
+      }
+    }).subscribe();
   }
 }

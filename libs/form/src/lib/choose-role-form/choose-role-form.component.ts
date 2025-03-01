@@ -4,17 +4,14 @@ import { CommonModule } from '@angular/common';
 import {
   BaseFormComponent,
   BaseFormService,
-  ChooseRolePostHttpResponseModel,
   CookieService,
-  HttpEndpointEnum,
-  HttpMethodEnum,
-  HttpService,
   RouterEnum,
   RouterService
 } from '@vet-client/lib-system';
 import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ChooseRoleFormDataModel, ChooseRoleFormModel } from './choose-role-form.model';
+import { HttpPostAppService } from '@vet-client/lib-http';
 
 @Component({
   selector: 'lib-choose-role-form',
@@ -24,7 +21,7 @@ import { ChooseRoleFormDataModel, ChooseRoleFormModel } from './choose-role-form
 })
 export class ChooseRoleFormComponent extends BaseFormService<ChooseRoleFormModel, ChooseRoleFormDataModel> {
   constructor(
-    private readonly http: HttpService,
+    private readonly http: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly router: RouterService
   ) {
@@ -54,30 +51,18 @@ export class ChooseRoleFormComponent extends BaseFormService<ChooseRoleFormModel
 
   override onSubmit(model: ChooseRoleFormDataModel) {
     const token = this.cookie.getCookie('token');
-    if (!token) {
-      return;
-    }
-    return this.http
-      .execute<ChooseRolePostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.chooseRole,
-          request: {
-            token,
-            role: model.role
-          },
-        },
-      })
-      .subscribe((response) => {
-        if (response.success) {
-          if (response.role === 'vet') {
-            this.router.redirect(RouterEnum.dashboardVet);
-          } else if (response.role === 'client') {
-            this.router.redirect(RouterEnum.dashboardClient);
-          } else {
-            this.router.redirect(RouterEnum.dashboard);
-          }
+    if (!token) return;
+    const { role } = model;
+    this.http.chooseRolePost({ token, role }, res => {
+      if (res.success) {
+        if (res.role === 'vet') {
+          this.router.redirect(RouterEnum.dashboardVet);
+        } else if (res.role === 'client') {
+          this.router.redirect(RouterEnum.dashboardClient);
+        } else {
+          this.router.redirect(RouterEnum.dashboard);
         }
-      });
+      }
+    }).subscribe();
   }
 }

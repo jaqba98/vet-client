@@ -6,16 +6,13 @@ import {
   BaseFormComponent,
   BaseFormService,
   CookieService,
-  HttpEndpointEnum,
-  HttpMethodEnum,
-  HttpService,
-  LoginPostHttpResponseModel,
   RouterEnum,
   RouterService,
 } from '@vet-client/lib-system';
 import { CardControlComponent, TextControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
+import { HttpPostAppService } from '@vet-client/lib-http';
 
 @Component({
   selector: 'lib-login-form',
@@ -27,7 +24,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
   isLoginError = false;
 
   constructor(
-    private readonly http: HttpService,
+    private readonly http: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly router: RouterService
   ) {
@@ -62,25 +59,15 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
   }
 
   override onSubmit(model: LoginFormDataModel) {
-    return this.http
-      .execute<LoginPostHttpResponseModel>({
-        method: HttpMethodEnum.post,
-        type: {
-          endpoint: HttpEndpointEnum.login,
-          request: {
-            email: model.email,
-            password: model.password,
-          },
-        },
-      })
-      .subscribe((response) => {
-        if (response.success) {
-          this.isLoginError = false;
-          this.cookie.saveToCookie('token', response.token, 1);
-          this.router.redirect(RouterEnum.dashboard);
-        } else {
-          this.isLoginError = true;
-        }
-      });
+    const { email, password } = model;
+    this.http.loginPost({ email, password }, res => {
+      if (res.success) {
+        this.isLoginError = false;
+        this.cookie.saveToCookie('token', res.token, 1);
+        this.router.redirect(RouterEnum.dashboard);
+      } else {
+        this.isLoginError = true;
+      }
+    }).subscribe();
   }
 }
