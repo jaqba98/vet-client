@@ -1,9 +1,13 @@
 <!-- done -->
 <lib-nav-view>
-  <div menu>1</div>
+  <div menu>
+    <lib-dashboard-menu-options-form></lib-dashboard-menu-options-form>
+  </div>
   <div dynamic>
     <lib-logout-form></lib-logout-form>
     <lib-logout-small-form></lib-logout-small-form>
   </div>
-  <div menu-mobile>2</div>
+  <div menu-mobile>
+    <lib-dashboard-menu-options-form [flexDirectionColumn]="true"></lib-dashboard-menu-options-form>
+  </div>
 </lib-nav-view>

@@ -85,14 +85,6 @@ export class RegistrationFormComponent extends BaseFormService<
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(100)],
       },
-      role: {
-        kind: 'input',
-        type: 'text',
-        label: 'Role',
-        placeholder: '',
-        defaultValue: '',
-        validators: [Validators.required, Validators.maxLength(6)],
-      },
       register: {
         id: 'register',
         kind: 'button',
@@ -117,8 +109,7 @@ export class RegistrationFormComponent extends BaseFormService<
             password: model.password,
             confirmPassword: model.confirmPassword,
             firstName: model.firstName,
-            lastName: model.lastName,
-            role: model.role,
+            lastName: model.lastName
           },
         },
       })

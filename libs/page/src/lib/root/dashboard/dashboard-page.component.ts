@@ -2,14 +2,19 @@
 import { Component } from '@angular/core';
 
 import { NavViewComponent } from '@vet-client/lib-view';
-import { LogoutFormComponent, LogoutSmallFormComponent } from '@vet-client/lib-form';
+import {
+  DashboardMenuOptionsFormComponent,
+  LogoutFormComponent,
+  LogoutSmallFormComponent
+} from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-dashboard-page',
   imports: [
     NavViewComponent,
     LogoutFormComponent,
-    LogoutSmallFormComponent
+    LogoutSmallFormComponent,
+    DashboardMenuOptionsFormComponent
   ],
   templateUrl: './dashboard-page.component.html',
 })

@@ -7,7 +7,6 @@ export interface RegistrationFormModel {
   confirmPassword: ControlType;
   firstName: ControlType;
   lastName: ControlType;
-  role: ControlType;
   register: ControlType;
 }
 
@@ -17,6 +16,5 @@ export interface RegistrationFormDataModel {
   confirmPassword: string;
   firstName: string;
   lastName: string;
-  role: string;
   register: boolean;
 }
