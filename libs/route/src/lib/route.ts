@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
 
 import {
-  ChooseRolePageComponent, DashboardMainPageComponent,
+  ChooseRolePageComponent, ClientPageComponent, DashboardMainPageComponent,
   DashboardPageComponent,
   HomePageComponent,
   LoginPageComponent,
-  RegistrationPageComponent
+  RegistrationPageComponent, VetPageComponent
 } from '@vet-client/lib-page';
 import { HasRoleGuard, LoggedInGuard, LoggedOutGuard, NotHasRoleGuard } from '@vet-client/lib-system';
 
@@ -44,6 +44,14 @@ export const route: Route[] = [
         path: 'choose-role',
         component: ChooseRolePageComponent,
         canActivate: [NotHasRoleGuard]
+      },
+      {
+        path: 'vet',
+        component: VetPageComponent,
+      },
+      {
+        path: 'client',
+        component: ClientPageComponent,
       },
     ]
   },

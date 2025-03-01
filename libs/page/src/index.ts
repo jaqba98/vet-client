@@ -5,3 +5,5 @@ export * from './lib/root/registration/registration-page.component';
 export * from './lib/root/root-page.component';
 export * from './lib/root/dashboard/choose-role/choose-role-page.component';
 export * from './lib/root/dashboard/dashboard-main/dashboard-main-page.component';
+export * from './lib/root/dashboard/vet/vet-page.component';
+export * from './lib/root/dashboard/client/client-page.component';
