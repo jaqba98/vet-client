@@ -1,7 +1,13 @@
 // done
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import { NavViewComponent } from '@vet-client/lib-view';
+import {
+  ChooseRoleViewComponent,
+  FooterViewComponent,
+  MainViewComponent,
+  NavViewComponent
+} from '@vet-client/lib-view';
 import {
   DashboardMenuOptionsFormComponent,
   LogoutFormComponent,
@@ -14,7 +20,11 @@ import {
     NavViewComponent,
     LogoutFormComponent,
     LogoutSmallFormComponent,
-    DashboardMenuOptionsFormComponent
+    DashboardMenuOptionsFormComponent,
+    RouterOutlet,
+    ChooseRoleViewComponent,
+    MainViewComponent,
+    FooterViewComponent,
   ],
   templateUrl: './dashboard-page.component.html',
 })

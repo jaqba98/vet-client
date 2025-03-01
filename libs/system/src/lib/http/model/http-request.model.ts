@@ -18,3 +18,12 @@ export interface AuthPostHttpRequestModel {
 export interface LogoutPostHttpRequestModel {
   logout: boolean;
 }
+
+export interface HasRolePostHttpRequestModel {
+  token: string | null;
+}
+
+export interface ChooseRolePostHttpRequestModel {
+  token: string | null;
+  role: string;
+}

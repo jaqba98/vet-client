@@ -2,5 +2,7 @@ export enum HttpEndpointEnum {
   login = 'login',
   registration = 'registration',
   auth = 'auth',
-  logout = 'logout'
+  logout = 'logout',
+  hasRole = 'has-role',
+  chooseRole = 'choose-role'
 }

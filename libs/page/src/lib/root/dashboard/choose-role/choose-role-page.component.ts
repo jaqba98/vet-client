@@ -1,10 +1,11 @@
 // done
 import { Component } from '@angular/core';
-import { ChooseRoleFormComponent } from '@vet-client/lib-form';
+
+import { ChooseRoleViewComponent } from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-choose-role-page',
-  imports: [ChooseRoleFormComponent],
+  imports: [ChooseRoleViewComponent],
   templateUrl: './choose-role-page.component.html',
 })
 export class ChooseRolePageComponent {}

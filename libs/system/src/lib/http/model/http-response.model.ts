@@ -15,3 +15,11 @@ export interface AuthPostHttpResponseModel {
 export interface LogoutPostHttpResponseModel {
   logout: boolean;
 }
+
+export interface HasRolePostHttpResponseModel {
+  hasRole: boolean;
+}
+
+export interface ChooseRolePostHttpResponseModel {
+  success: boolean;
+}

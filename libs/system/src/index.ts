@@ -10,3 +10,5 @@ export * from './lib/http/model/http-response.model';
 export * from './lib/cookie/cookie.service';
 export * from './lib/router/router.service';
 export * from './lib/router/router.enum';
+export * from './lib/guard/has-role.guard';
+export * from './lib/guard/not-has-role.guard';

@@ -114,7 +114,6 @@ export class RegistrationFormComponent extends BaseFormService<
         },
       })
       .subscribe((response) => {
-        console.log(response);
         this.isRegistrationSuccess = false;
         this.isRegistrationError = false;
         this.registrationSuccess = '';
