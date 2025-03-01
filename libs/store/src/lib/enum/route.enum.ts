@@ -1,14 +1,16 @@
 export enum RoutePageEnum {
-  home = '/home',
-  login = '/login',
-  registration = '/registration',
-  dashboard = '/dashboard',
-  dashboardVet = '/dashboard/vet',
-  dashboardClient = '/dashboard/client',
-  dashboardChooseRole = '/dashboard/choose-role'
+  home = '/home/',
+  login = '/login/',
+  registration = '/registration/',
+  dashboard = '/dashboard/',
+  dashboardVet = '/dashboard/vet/',
+  dashboardClient = '/dashboard/client/',
+  dashboardChooseRole = '/dashboard/choose-role/',
+  logout = '/logout/'
 }
 
 export enum RouteSectionEnum {
+  empty = '',
   home = 'home',
   aboutUs = 'about-us',
   price = 'price',

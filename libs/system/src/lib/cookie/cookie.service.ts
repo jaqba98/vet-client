@@ -24,4 +24,8 @@ export class CookieService {
     }
     return null;
   }
+
+  getToken() {
+    return this.getCookie('token');
+  }
 }

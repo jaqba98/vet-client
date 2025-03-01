@@ -34,13 +34,10 @@ export class HttpPostAppService {
       );
   }
 
-  chooseRolePost<T>(request: ChooseRoleRequestModel, fn: (response: ChooseRoleResponseModel) => T) {
+  chooseRolePost(request: ChooseRoleRequestModel) {
     return this.httpExecute
       .exec<ChooseRoleResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.chooseRole, request } })
-      .pipe(
-        take(1),
-        map(res => fn(res))
-      );
+      .pipe(take(1));
   }
 
   hasRolePost<T>(request: HasRoleRequestModel, fn: (response: HasRoleResponseModel) => T) {

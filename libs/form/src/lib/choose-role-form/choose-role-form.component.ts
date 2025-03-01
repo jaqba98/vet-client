@@ -1,74 +1,92 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import {
-  CookieService,
-  RouterService
-} from '@vet-client/lib-system';
-import { CardControlComponent } from '@vet-client/lib-control';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ChooseRoleFormDataModel, ChooseRoleFormModel } from './choose-role-form.model';
-import { HttpPostAppService } from '@vet-client/lib-http';
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
 import { Store } from '@ngrx/store';
+
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { CardControlComponent } from '@vet-client/lib-control';
+import {
+  BaseComponentDirective,
+  TextConvertUtils,
+} from '@vet-client/lib-utils';
+import { RoleDomainEnum } from '@vet-client/lib-domain';
+import { HttpPostAppService } from '@vet-client/lib-http';
+import { CookieService } from '@vet-client/lib-system';
+import {
+  RoutePageEnum,
+  RouteSectionEnum,
+  RouteStoreModel,
+  setRoute,
+} from '@vet-client/lib-store';
+import { ChooseRoleFormModel, ChooseRoleModel } from './choose-role-form.model';
 
 @Component({
   selector: 'lib-choose-role-form',
-  imports: [CommonModule ,BaseFormComponent, CardControlComponent],
+  imports: [CardControlComponent, BaseFormComponent],
   templateUrl: './choose-role-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class ChooseRoleFormComponent extends BaseFormService<ChooseRoleFormModel, ChooseRoleFormDataModel> {
+export class ChooseRoleFormComponent extends BaseFormService<
+  ChooseRoleFormModel,
+  ChooseRoleModel
+> {
   constructor(
-    private readonly store: Store<RouteStoreModel>,
-    private readonly http: HttpPostAppService,
+    private readonly httpPost: HttpPostAppService,
     private readonly cookie: CookieService,
-    private readonly router: RouterService
+    private readonly store: Store<RouteStoreModel>
   ) {
     super({
       role: {
         kind: 'radio-button',
         name: 'role',
         options: [
-          { id: 'vet', value: 'Vet' },
-          { id: 'client', value: 'Client' }
+          {
+            id: RoleDomainEnum.vet,
+            value: TextConvertUtils.firstLetterUppercase(RoleDomainEnum.vet),
+          },
+          {
+            id: RoleDomainEnum.client,
+            value: TextConvertUtils.firstLetterUppercase(RoleDomainEnum.client),
+          },
         ],
-        defaultValue: 'vet'
+        defaultValue: RoleDomainEnum.vet,
       },
       save: {
         kind: 'button',
-        defaultValue: false,
         id: 'save',
         value: {
           type: 'text',
           text: 'Save',
         },
-        fullWidth: false
+        defaultValue: false,
+        fullWidth: false,
       },
     });
   }
 
-  override onSubmit(model: ChooseRoleFormDataModel) {
-    const token = this.cookie.getCookie('token');
-    if (!token) return;
-    const { role } = model;
-    this.http.chooseRolePost({ token, role }, res => {
-      if (res.success) {
-        if (res.role === 'vet') {
-          this.store.dispatch(
-            setRoute({ page: RoutePageEnum.dashboardVet, section: RouteSectionEnum.dashboardVet })
-          );
-        } else if (res.role === 'client') {
-          this.store.dispatch(
-            setRoute({ page: RoutePageEnum.dashboardClient, section: RouteSectionEnum.dashboardClient })
-          );
-        } else {
-          this.store.dispatch(
-            setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard })
-          );
+  override onSubmit(model: ChooseRoleModel) {
+    const token = this.cookie.getToken();
+    if (token === null) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.logout, section: RouteSectionEnum.empty })
+      );
+      return;
+    }
+    this.httpPost
+      .chooseRolePost({ token, role: model.role })
+      .subscribe(response => {
+        const { success, role } = response;
+        if (success) {
+          if (role === RoleDomainEnum.vet) {
+            this.store.dispatch(
+              setRoute({ page: RoutePageEnum.dashboardVet, section: RouteSectionEnum.dashboardVet })
+            );
+          } else if (role === RoleDomainEnum.client) {
+            this.store.dispatch(
+              setRoute({ page: RoutePageEnum.dashboardClient, section: RouteSectionEnum.dashboardClient })
+            );
+          } else {
+            throw new Error('Not supported role!');
+          }
         }
-      }
-    }).subscribe();
+      });
   }
 }

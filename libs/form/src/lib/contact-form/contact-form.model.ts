@@ -1,4 +1,3 @@
-// done
 import { ControlType } from '@vet-client/lib-base-form';
 
 export interface ContactFormModel {
@@ -8,7 +7,7 @@ export interface ContactFormModel {
   send: ControlType;
 }
 
-export interface ContactFormDataModel {
+export interface ContactModel {
   email: string;
   subject: string;
   message: string;

@@ -8,7 +8,7 @@ import {
   NavViewComponent
 } from '@vet-client/lib-view';
 import {
-  DashboardMenuOptionsFormComponent,
+  DashboardNavMenuFormComponent,
   LogoutFormComponent,
   LogoutSmallFormComponent
 } from '@vet-client/lib-form';
@@ -19,10 +19,10 @@ import {
     NavViewComponent,
     LogoutFormComponent,
     LogoutSmallFormComponent,
-    DashboardMenuOptionsFormComponent,
     RouterOutlet,
     MainViewComponent,
     FooterViewComponent,
+    DashboardNavMenuFormComponent,
   ],
   templateUrl: './dashboard-page.component.html',
 })

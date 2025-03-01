@@ -1,10 +1,9 @@
-// done
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { HamburgerFormDataModel, HamburgerFormModel } from './hamburger-form.model';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model';
 
 @Component({
   selector: 'lib-hamburger-form',
@@ -12,9 +11,7 @@ import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
   templateUrl: './hamburger-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
-export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, HamburgerFormDataModel> {
-  @Output() event = new EventEmitter<boolean>();
-
+export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, HamburgerModel> {
   constructor() {
     super({
       hamburger: {
@@ -33,7 +30,7 @@ export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, 
     });
   }
 
-  override onSubmit(model: HamburgerFormDataModel) {
-    this.event.emit(model.hamburger);
+  override onSubmit(model: HamburgerModel) {
+    console.log(model);
   }
 }

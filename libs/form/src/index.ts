@@ -7,5 +7,5 @@ export * from './lib/logout-form/logout-form.component';
 export * from './lib/logout-small-form/logout-small-form.component';
 export * from './lib/menu-options-form/menu-options-form.component';
 export * from './lib/registration-form/registration-form.component';
-export * from './lib/dashboard-menu-options-form/dashboard-menu-options-form.component';
+export * from './lib/dashboard-nav-menu-form/dashboard-nav-menu-form.component';
 export * from './lib/choose-role-form/choose-role-form.component';

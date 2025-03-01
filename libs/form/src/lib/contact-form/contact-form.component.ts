@@ -1,11 +1,10 @@
-// done
 import { Component } from '@angular/core';
+import { Validators } from '@angular/forms';
 
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ContactFormDataModel, ContactFormModel } from './contact-form.model';
-import { Validators } from '@angular/forms';
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { ContactFormModel, ContactModel } from './contact-form.model';
 
 @Component({
   selector: 'lib-contact-form',
@@ -13,50 +12,47 @@ import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
   templateUrl: './contact-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class ContactFormComponent extends BaseFormService<
-  ContactFormModel,
-  ContactFormDataModel
-> {
+export class ContactFormComponent extends BaseFormService<ContactFormModel, ContactModel> {
   constructor() {
     super({
       email: {
         kind: 'input',
-        defaultValue: '',
         type: 'text',
         label: 'Email',
         placeholder: '',
-        validators: [Validators.required, Validators.email]
+        validators: [Validators.required, Validators.email],
+        defaultValue: ''
       },
       subject: {
         kind: 'input',
-        defaultValue: '',
         type: 'text',
         label: 'Subject',
         placeholder: '',
-        validators: [Validators.required]
+        validators: [Validators.required],
+        defaultValue: ''
       },
       message: {
         kind: 'textarea',
-        defaultValue: '',
         label: 'Message',
         placeholder: '',
         height: '300px',
-        validators: [Validators.required]
+        validators: [Validators.required],
+        defaultValue: ''
       },
       send: {
         kind: 'button',
-        defaultValue: false,
         id: 'send',
         value: {
           type: 'text',
           text: 'Send',
         },
-        fullWidth: false
+        fullWidth: false,
+        defaultValue: false
       },
     });
   }
 
-  override onSubmit(model: ContactFormDataModel) {
+  override onSubmit(model: ContactModel) {
     console.log(model);
   }
 }

@@ -1,10 +1,9 @@
-// done
 import { ControlType } from '@vet-client/lib-base-form';
 
-export interface DashboardMenuOptionsFormModel {
+export interface DashboardNavMenuFormModel {
   dashboard: ControlType;
 }
 
-export interface DashboardMenuOptionsFormDataModel {
+export interface DashboardNavMenuModel {
   dashboard: boolean;
 }
