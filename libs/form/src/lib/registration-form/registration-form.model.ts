@@ -9,7 +9,7 @@ export interface RegistrationFormModel {
   register: ControlType;
 }
 
-export interface RegistrationFormDataModel {
+export interface RegistrationModel {
   email: string;
   password: string;
   confirmPassword: string;

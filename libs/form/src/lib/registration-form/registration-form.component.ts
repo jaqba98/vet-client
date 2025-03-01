@@ -1,38 +1,22 @@
-// done
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { CardControlComponent, TextControlComponent } from '@vet-client/lib-control';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-
-import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
-import { NgIf } from '@angular/common';
-import { HttpPostAppService } from '@vet-client/lib-http';
+import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { HttpPostAppService } from '@vet-client/lib-http';
+import {
+  RegistrationFormModel,
+  RegistrationModel,
+} from './registration-form.model';
 
 @Component({
   selector: 'lib-registration-form',
-  imports: [
-    BaseFormComponent,
-    CardControlComponent,
-    NgIf,
-    TextControlComponent,
-  ],
+  imports: [CardControlComponent, BaseFormComponent],
   templateUrl: './registration-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class RegistrationFormComponent extends BaseFormService<
-  RegistrationFormModel,
-  RegistrationFormDataModel
-> {
-  isRegistrationError = false;
-
-  isRegistrationSuccess = false;
-
-  registrationError = '';
-
-  registrationSuccess = '';
-
+export class RegistrationFormComponent extends BaseFormService<RegistrationFormModel, RegistrationModel> {
   constructor(private readonly http: HttpPostAppService) {
     super({
       email: {
@@ -41,11 +25,7 @@ export class RegistrationFormComponent extends BaseFormService<
         label: 'Email',
         placeholder: '',
         defaultValue: '',
-        validators: [
-          Validators.required,
-          Validators.email,
-          Validators.maxLength(255),
-        ],
+        validators: [Validators.required, Validators.email, Validators.maxLength(255)]
       },
       password: {
         kind: 'input',
@@ -92,25 +72,15 @@ export class RegistrationFormComponent extends BaseFormService<
     });
   }
 
-  override onSubmit(model: RegistrationFormDataModel) {
+  override onSubmit(model: RegistrationModel) {
     this.http.registrationPost({
       email: model.email,
       password: model.password,
       confirmPassword: model.confirmPassword,
       firstName: model.firstName,
       lastName: model.lastName
-    }, res => {
-      this.isRegistrationSuccess = false;
-      this.isRegistrationError = false;
-      this.registrationSuccess = '';
-      this.registrationError = '';
-      if (res.success) {
-        this.isRegistrationSuccess = true;
-        this.registrationSuccess = 'New account created successfully!';
-      } else {
-        this.isRegistrationError = true;
-        this.registrationError = res.errors[0];
-      }
-    }).subscribe();
+    }).subscribe(response => {
+      console.log(response);
+    });
   }
 }

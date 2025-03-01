@@ -1,10 +1,10 @@
 @use 'libs/scss/src/base/colors';
 
-.error-control {
+.success-control {
   display: flex;
   align-items: center;
   gap: 0.25rem;
   padding: 0.25rem 0.5rem;
-  background-color: colors.$color-error;
+  background-color: colors.$color-success;
   border-radius: 0.25rem;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, take } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 
 import { HttpExecuteService } from '../infrastructure/http-execute.service';
 import { MethodEnum } from '../enum/method.enum';
@@ -85,15 +85,12 @@ export class HttpPostAppService {
       );
   }
 
-  registrationPost<T>(request: RegistrationRequestModel, fn: (response: RegistrationResponseModel) => T) {
+  registrationPost(request: RegistrationRequestModel): Observable<RegistrationResponseModel> {
     return this.httpExecute
       .exec<RegistrationResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.registration, request }
       })
-      .pipe(
-        take(1),
-        map(res => fn(res))
-      );
+      .pipe(take(1));
   }
 }
