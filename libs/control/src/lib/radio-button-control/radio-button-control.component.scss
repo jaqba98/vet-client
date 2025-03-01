@@ -1,0 +1,10 @@
+.radio-button-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__radio {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

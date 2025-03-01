@@ -29,6 +29,14 @@
         </ng-container>
       </div>
     </ng-container>
+    <!-- Radio button -->
+    <ng-container *ngIf="control.model.kind === 'radio-button'">
+      <lib-radio-button-control
+        [formGroup]="formGroup"
+        [controlName]="control.name"
+        [model]="control.model"
+      ></lib-radio-button-control>
+    </ng-container>
     <!-- Button -->
     <ng-container *ngIf="control.model.kind === 'button'">
       <lib-button-control [model]="control.model" (event)="onButtonEvent(control.name)"></lib-button-control>

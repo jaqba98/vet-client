@@ -6,7 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   ButtonControlComponent,
   ErrorControlComponent,
-  InputControlComponent,
+  InputControlComponent, RadioButtonControlComponent,
   TextareaControlComponent
 } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
@@ -21,6 +21,7 @@ import { ControlsArrayType } from './base-form.model';
     ButtonControlComponent,
     ErrorControlComponent,
     TextareaControlComponent,
+    RadioButtonControlComponent,
   ],
   templateUrl: './base-form.component.html',
   styleUrl: './base-form.component.scss',
@@ -69,7 +70,9 @@ export class BaseFormComponent {
       return 'This field is required!';
     }
     if (control.hasError('maxlength')) {
-      return `Minimum length is ${control.getError('maxlength').requiredLength} characters`;
+      return `Minimum length is ${
+        control.getError('maxlength').requiredLength
+      } characters`;
     }
     if (control.hasError('email')) {
       return 'Please enter a valid email address';

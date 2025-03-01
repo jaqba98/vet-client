@@ -7,6 +7,7 @@ import {
   RegistrationPageComponent
 } from '@vet-client/lib-page';
 import { LoggedInGuard, LoggedOutGuard } from '@vet-client/lib-system';
+import { ChooseRoleFormComponent } from '@vet-client/lib-form';
 
 export const route: Route[] = [
   {
@@ -32,7 +33,14 @@ export const route: Route[] = [
   {
     path: 'dashboard',
     component: DashboardPageComponent,
-    canActivate: [LoggedInGuard]
+    canActivate: [LoggedInGuard],
+    children: [
+      {
+        path: 'choose-role',
+        component: ChooseRoleFormComponent,
+        canActivate: [LoggedInGuard]
+      },
+    ]
   },
   {
     path: '**',

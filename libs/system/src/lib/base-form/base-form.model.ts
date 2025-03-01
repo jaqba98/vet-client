@@ -2,6 +2,7 @@
 import { ValidatorFn } from '@angular/forms';
 
 import { ButtonControlModel, InputControlModel, TextareaControlModel } from '@vet-client/lib-control';
+import { RadioButtonControlModel } from '@vet-client/lib-control';
 
 export interface ControlBaseModel<TDefaultValue> {
   defaultValue: TDefaultValue;
@@ -21,7 +22,12 @@ export interface ControlTextareaModel extends ControlBaseModel<string>, Textarea
   validators: ValidatorFn[];
 }
 
-export type ControlType = ControlInputModel | ControlButtonModel | ControlTextareaModel;
+export interface ControlRadioButtonModel extends ControlBaseModel<string>, RadioButtonControlModel {
+  kind: 'radio-button';
+  validators: ValidatorFn[];
+}
+
+export type ControlType = ControlInputModel | ControlButtonModel | ControlTextareaModel | ControlRadioButtonModel;
 
 export type BaseFormModel<TKey> = Record<keyof TKey, ControlType>;
 

@@ -7,7 +7,7 @@ import {
   ControlType,
   ControlsArrayType,
   ControlInputModel,
-  ControlButtonModel, ControlTextareaModel
+  ControlButtonModel, ControlTextareaModel, ControlRadioButtonModel
 } from './base-form.model';
 
 @Injectable()
@@ -33,6 +33,9 @@ export class BaseFormService<TFormModel, TFormDataModel> {
           break;
         case 'textarea':
           formGroup.addControl(key, this.createTextareaFormControl(control));
+          break;
+        case 'radio-button':
+          formGroup.addControl(key, this.createRadioButtonFormControl(control));
           break;
         default:
           throw new Error('Unknown control type!');
@@ -61,5 +64,9 @@ export class BaseFormService<TFormModel, TFormDataModel> {
 
   private createTextareaFormControl(control: ControlTextareaModel) {
     return new FormControl(control.defaultValue, control.validators);
+  }
+
+  private createRadioButtonFormControl(control: ControlRadioButtonModel) {
+    return new FormControl(control.defaultValue);
   }
 }
