@@ -1,6 +1,3 @@
-export * from './lib/base-form/base-form.component';
-export * from './lib/base-form/base-form.model';
-export * from './lib/base-form/base-form.service';
 export * from './lib/guard/logged-in.guard';
 export * from './lib/guard/logged-out.guard';
 export * from './lib/cookie/cookie.service';

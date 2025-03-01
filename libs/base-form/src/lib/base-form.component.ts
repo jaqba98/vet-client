@@ -1,13 +1,13 @@
-// done
-import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import {
   ButtonControlComponent,
   ErrorControlComponent,
-  InputControlComponent, RadioButtonControlComponent,
-  TextareaControlComponent
+  InputControlComponent,
+  RadioButtonControlComponent,
+  TextareaControlComponent,
 } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ControlsArrayType } from './base-form.model';
@@ -19,13 +19,13 @@ import { ControlsArrayType } from './base-form.model';
     ReactiveFormsModule,
     InputControlComponent,
     ButtonControlComponent,
-    ErrorControlComponent,
     TextareaControlComponent,
     RadioButtonControlComponent,
+    ErrorControlComponent,
   ],
   templateUrl: './base-form.component.html',
   styleUrl: './base-form.component.scss',
-  hostDirectives: [BaseComponentDirective],
+  hostDirectives: [BaseComponentDirective]
 })
 export class BaseFormComponent {
   @Output() event = new EventEmitter();
@@ -34,45 +34,41 @@ export class BaseFormComponent {
 
   @Input({ required: true }) controlsArray!: ControlsArrayType;
 
-  @Input() horizontal = false;
-
-  isFormValid = false;
+  @Input() isHorizontal = false;
 
   onSubmit() {
-    const model = this.formGroup.getRawValue();
-    this.isFormValid = this.formGroup.valid;
-    if (this.isFormValid) {
-      this.resetFormGroup();
+    if (this.isBaseFormValid()) {
+      const model = this.formGroup.getRawValue();
       this.event.emit(model);
-    } else {
-      this.setFormNotValid();
+      this.resetBaseForm();
+      return;
     }
+    this.setBaseFormNotValid();
   }
 
-  onButtonEvent(control: string) {
-    this.formGroup.setControl(control, new FormControl(true));
+  onButtonEvent(controlName: string) {
+    this.formGroup.controls[controlName].patchValue(true);
   }
 
   getClassList() {
     return {
-      'base-form--horizontal': this.horizontal,
+      'base-form--horizontal': this.isHorizontal
     };
   }
 
   isControlError(controlName: string) {
     const control = this.formGroup.controls[controlName];
-    return control.invalid && control.touched;
+    const { touched, invalid } = control;
+    return touched && invalid;
   }
 
-  getErrorMessage(controlName: string): string {
+  getControlErrorMessage(controlName: string) {
     const control = this.formGroup.controls[controlName];
     if (control.hasError('required')) {
       return 'This field is required!';
     }
     if (control.hasError('maxlength')) {
-      return `Minimum length is ${
-        control.getError('maxlength').requiredLength
-      } characters`;
+      return `Minimum length is ${control.getError('maxlength').requiredLength} characters!`;
     }
     if (control.hasError('email')) {
       return 'Please enter a valid email address';
@@ -80,18 +76,21 @@ export class BaseFormComponent {
     return '';
   }
 
-  private resetFormGroup() {
-    this.controlsArray.forEach((control) => {
-      this.formGroup.controls[control.name].patchValue(
-        control.model.defaultValue
-      );
-    });
-    this.formGroup.markAsUntouched();
+  private isBaseFormValid() {
+    return this.formGroup.valid;
   }
 
-  private setFormNotValid() {
+  private setBaseFormNotValid() {
     this.controlsArray.forEach((control) => {
-      this.formGroup.controls[control.name].markAsTouched();
+      this.formGroup.controls[control.name].markAsUntouched();
     });
+    this.formGroup.markAllAsTouched();
+  }
+
+  private resetBaseForm() {
+    this.controlsArray.forEach((control) => {
+      this.formGroup.controls[control.name].patchValue(control.model.defaultValue);
+    });
+    this.formGroup.markAsUntouched();
   }
 }

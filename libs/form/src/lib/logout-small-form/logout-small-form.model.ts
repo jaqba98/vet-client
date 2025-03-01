@@ -1,5 +1,4 @@
-// done
-import { ControlType } from '@vet-client/lib-system';
+import { ControlType } from '@vet-client/lib-base-form';
 
 export interface LogoutSmallFormModel {
   logout: ControlType;

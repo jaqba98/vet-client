@@ -1,6 +1,6 @@
-// done
-import { ControlType } from '@vet-client/lib-system';
+import { ControlType } from '@vet-client/lib-base-form';
 
+// done
 export interface LoginRegistrationSmallFormModel {
   login: ControlType;
   registration: ControlType;

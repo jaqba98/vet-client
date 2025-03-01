@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  BaseFormComponent,
-  BaseFormService,
   CookieService,
   RouterEnum,
   RouterService
@@ -12,6 +10,7 @@ import { CardControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ChooseRoleFormDataModel, ChooseRoleFormModel } from './choose-role-form.model';
 import { HttpPostAppService } from '@vet-client/lib-http';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-choose-role-form',
@@ -33,8 +32,7 @@ export class ChooseRoleFormComponent extends BaseFormService<ChooseRoleFormModel
           { id: 'vet', value: 'Vet' },
           { id: 'client', value: 'Client' }
         ],
-        defaultValue: 'vet',
-        validators: [],
+        defaultValue: 'vet'
       },
       save: {
         kind: 'button',

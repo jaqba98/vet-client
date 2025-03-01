@@ -2,10 +2,10 @@
 import { Component } from '@angular/core';
 
 import { CardControlComponent } from '@vet-client/lib-control';
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ContactFormDataModel, ContactFormModel } from './contact-form.model';
 import { Validators } from '@angular/forms';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-contact-form',

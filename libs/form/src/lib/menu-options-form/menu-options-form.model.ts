@@ -1,6 +1,6 @@
-// done
-import { ControlType } from '@vet-client/lib-system';
+import { ControlType } from '@vet-client/lib-base-form';
 
+// done
 export interface MenuOptionsFormModel {
   home: ControlType;
   aboutUs: ControlType;

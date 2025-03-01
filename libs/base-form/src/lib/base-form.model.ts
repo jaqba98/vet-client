@@ -1,4 +1,3 @@
-// done
 import { ValidatorFn } from '@angular/forms';
 
 import { ButtonControlModel, InputControlModel, TextareaControlModel } from '@vet-client/lib-control';
@@ -24,10 +23,13 @@ export interface ControlTextareaModel extends ControlBaseModel<string>, Textarea
 
 export interface ControlRadioButtonModel extends ControlBaseModel<string>, RadioButtonControlModel {
   kind: 'radio-button';
-  validators: ValidatorFn[];
 }
 
-export type ControlType = ControlInputModel | ControlButtonModel | ControlTextareaModel | ControlRadioButtonModel;
+export type ControlType =
+  | ControlInputModel
+  | ControlButtonModel
+  | ControlTextareaModel
+  | ControlRadioButtonModel;
 
 export type BaseFormModel<TKey> = Record<keyof TKey, ControlType>;
 

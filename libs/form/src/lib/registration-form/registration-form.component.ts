@@ -2,16 +2,13 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import {
-  BaseFormComponent,
-  BaseFormService,
-} from '@vet-client/lib-system';
 import { CardControlComponent, TextControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 
 import { RegistrationFormDataModel, RegistrationFormModel } from './registration-form.model';
 import { NgIf } from '@angular/common';
 import { HttpPostAppService } from '@vet-client/lib-http';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-registration-form',

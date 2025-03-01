@@ -1,17 +1,16 @@
-// done
 import { Inject, Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import {
   BaseFormModel,
-  ControlType,
-  ControlsArrayType,
-  ControlInputModel,
-  ControlButtonModel, ControlTextareaModel, ControlRadioButtonModel
+  ControlButtonModel,
+  ControlInputModel, ControlRadioButtonModel,
+  ControlsArrayType, ControlTextareaModel,
+  ControlType
 } from './base-form.model';
 
 @Injectable()
-export class BaseFormService<TFormModel, TFormDataModel> {
+export class BaseFormService<TFormModel, TModel> {
   formGroup: FormGroup;
 
   controlsArray: ControlsArrayType;
@@ -23,24 +22,25 @@ export class BaseFormService<TFormModel, TFormDataModel> {
 
   createFormGroup(baseForm: BaseFormModel<TFormModel>): FormGroup {
     const formGroup = new FormGroup({});
-    Object.entries(baseForm as Record<string, ControlType>).forEach(([key, control]) => {
-      switch (control.kind) {
-        case 'input':
-          formGroup.addControl(key, this.createInputFormControl(control));
-          break;
-        case 'button':
-          formGroup.addControl(key, this.createButtonFormControl(control));
-          break;
-        case 'textarea':
-          formGroup.addControl(key, this.createTextareaFormControl(control));
-          break;
-        case 'radio-button':
-          formGroup.addControl(key, this.createRadioButtonFormControl(control));
-          break;
-        default:
-          throw new Error('Unknown control type!');
-      }
-    });
+    Object.entries(baseForm as Record<string, ControlType>)
+      .forEach(([key, control]) => {
+        switch (control.kind) {
+          case 'input':
+            formGroup.addControl(key, this.createInputFormControl(control));
+            break;
+          case 'button':
+            formGroup.addControl(key, this.createButtonFormControl(control));
+            break;
+          case 'textarea':
+            formGroup.addControl(key, this.createTextareaFormControl(control));
+            break;
+          case 'radio-button':
+            formGroup.addControl(key, this.createRadioButtonFormControl(control));
+            break;
+          default:
+            throw new Error('Unknown control kind!');
+        }
+      });
     return formGroup;
   }
 
@@ -50,7 +50,7 @@ export class BaseFormService<TFormModel, TFormDataModel> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onSubmit(model: TFormDataModel) {
+  onSubmit(model: TModel) {
     throw new Error('Unimplemented method name!');
   }
 

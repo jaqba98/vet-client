@@ -1,9 +1,10 @@
 // done
 import { Component } from '@angular/core';
 
-import { BaseFormComponent, BaseFormService, RouterEnum, RouterService } from '@vet-client/lib-system';
+import { RouterEnum, RouterService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginRegistrationFormDataModel, LoginRegistrationFormModel } from './login-registration-form.model';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-login-registration-form',

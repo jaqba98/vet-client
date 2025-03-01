@@ -2,13 +2,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import {
-  BaseFormComponent,
-  BaseFormService,
   RouterEnum,
   RouterService,
 } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { DashboardMenuOptionsFormDataModel, DashboardMenuOptionsFormModel } from './dashboard-menu-options-form.model';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-dashboard-menu-options-form',

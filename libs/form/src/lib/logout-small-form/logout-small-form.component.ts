@@ -2,8 +2,6 @@
 import { Component } from '@angular/core';
 
 import {
-  BaseFormComponent,
-  BaseFormService,
   CookieService,
   RouterEnum,
   RouterService
@@ -13,6 +11,7 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { LogoutFormDataModel } from '../logout-form/logout-form.model';
 import { HttpPostAppService } from '@vet-client/lib-http';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-logout-small-form',

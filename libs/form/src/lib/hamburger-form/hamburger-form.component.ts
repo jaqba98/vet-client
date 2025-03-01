@@ -2,9 +2,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { HamburgerFormDataModel, HamburgerFormModel } from './hamburger-form.model';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-hamburger-form',

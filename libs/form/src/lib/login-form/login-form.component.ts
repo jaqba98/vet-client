@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  BaseFormComponent,
-  BaseFormService,
   CookieService,
   RouterEnum,
   RouterService,
@@ -13,6 +11,7 @@ import { CardControlComponent, TextControlComponent } from '@vet-client/lib-cont
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LoginFormDataModel, LoginFormModel } from './login-form.model';
 import { HttpPostAppService } from '@vet-client/lib-http';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-login-form',

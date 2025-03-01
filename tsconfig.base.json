@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@vet-client/lib-base-form": ["libs/base-form/src/index.ts"],
       "@vet-client/lib-const": ["libs/const/src/index.ts"],
       "@vet-client/lib-control": ["libs/control/src/index.ts"],
       "@vet-client/lib-form": ["libs/form/src/index.ts"],

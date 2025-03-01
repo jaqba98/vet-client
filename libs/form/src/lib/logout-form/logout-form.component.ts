@@ -2,8 +2,6 @@
 import { Component } from '@angular/core';
 
 import {
-  BaseFormComponent,
-  BaseFormService,
   CookieService,
   RouterEnum,
   RouterService,
@@ -11,6 +9,7 @@ import {
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { LogoutFormDataModel, LogoutFormModel } from './logout-form.model';
 import { HttpPostAppService } from '@vet-client/lib-http';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-logout-form',

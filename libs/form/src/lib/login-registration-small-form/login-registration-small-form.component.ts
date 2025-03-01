@@ -2,12 +2,13 @@
 import { Component } from '@angular/core';
 import { faRightFromBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { BaseFormComponent, BaseFormService, RouterEnum, RouterService } from '@vet-client/lib-system';
+import { RouterEnum, RouterService } from '@vet-client/lib-system';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import {
   LoginRegistrationSmallFormDataModel,
   LoginRegistrationSmallFormModel
 } from './login-registration-small-form.model';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 
 @Component({
   selector: 'lib-login-registration-small-form',
