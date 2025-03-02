@@ -1,10 +1,9 @@
-// done
 import { ControlType } from '@vet-client/lib-base-form';
 
-export interface LogoutFormModel {
+export interface BaseLogoutFormModel {
   logout: ControlType;
 }
 
-export interface LogoutFormDataModel {
+export interface BaseLogoutModel {
   logout: boolean;
 }

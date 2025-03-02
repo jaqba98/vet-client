@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { CookieService } from '../cookie/cookie.service';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { Store } from '@ngrx/store';
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
+import { RouteStoreModel } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedOutGuard implements CanActivate {
@@ -19,12 +19,13 @@ export class LoggedOutGuard implements CanActivate {
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     const token = this.cookie.getCookie('token');
     if (!token) return true;
-    return this.http.authPost({ token }, res => {
-      if (!res.success) {
-        return true;
-      }
-      this.store.dispatch(setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard }));
-      return false;
-    });
+    return false;
+    // return this.http.authPost({ token }, res => {
+    //   if (!res.success) {
+    //     return true;
+    //   }
+    //   this.store.dispatch(setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard }));
+    //   return false;
+    // });
   }
 }

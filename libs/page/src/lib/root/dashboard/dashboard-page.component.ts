@@ -8,21 +8,21 @@ import {
   NavViewComponent
 } from '@vet-client/lib-view';
 import {
+  BigLogoutFormComponent,
   DashboardNavMenuFormComponent,
-  LogoutFormComponent,
-  LogoutSmallFormComponent
+  SmallLogoutFormComponent
 } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-dashboard-page',
   imports: [
     NavViewComponent,
-    LogoutFormComponent,
-    LogoutSmallFormComponent,
     RouterOutlet,
     MainViewComponent,
     FooterViewComponent,
     DashboardNavMenuFormComponent,
+    SmallLogoutFormComponent,
+    BigLogoutFormComponent,
   ],
   templateUrl: './dashboard-page.component.html',
 })

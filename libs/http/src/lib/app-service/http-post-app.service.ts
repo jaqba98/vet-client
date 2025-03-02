@@ -25,13 +25,10 @@ import { RegistrationResponseModel } from '../model/response/registration-respon
 export class HttpPostAppService {
   constructor(private readonly httpExecute: HttpExecuteService) {}
 
-  authPost<T>(request: AuthRequestModel, fn: (response: AuthResponseModel) => T) {
+  authPost(request: AuthRequestModel) {
     return this.httpExecute
       .exec<AuthResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.auth, request } })
-      .pipe(
-        take(1),
-        map(res => fn(res))
-      );
+      .pipe(take(1));
   }
 
   chooseRolePost(request: ChooseRoleRequestModel) {
@@ -40,49 +37,34 @@ export class HttpPostAppService {
       .pipe(take(1));
   }
 
-  hasRolePost<T>(request: HasRoleRequestModel, fn: (response: HasRoleResponseModel) => T) {
+  hasRolePost(request: HasRoleRequestModel) {
     return this.httpExecute
       .exec<HasRoleResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.hasRole, request } })
-      .pipe(
-        take(1),
-        map(res => fn(res))
-      );
+      .pipe(take(1));
   }
 
-  isClientPost<T>(request: IsClientRequestModel, fn: (response: IsClientResponseModel) => T)  {
+  isClientPost(request: IsClientRequestModel)  {
     return this.httpExecute
       .exec<IsClientResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.isClient, request } })
-      .pipe(
-        take(1),
-        map(res => fn(res))
-      );
+      .pipe(take(1));
   }
 
-  isVetPost<T>(request: IsVetRequestModel, fn: (response: IsClientResponseModel) => T) {
+  isVetPost(request: IsVetRequestModel) {
     return this.httpExecute
       .exec<IsVetResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.isVet, request } })
-      .pipe(
-        take(1),
-        map(res => fn(res))
-      );
+      .pipe(take(1));
   }
 
-  loginPost<T>(request: LoginRequestModel, fn: (response: LoginResponseModel) => T) {
+  loginPost(request: LoginRequestModel) {
     return this.httpExecute
       .exec<LoginResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
-      .pipe(
-        take(1),
-        map(res => fn(res))
-      );
+      .pipe(take(1));
   }
 
-  logoutPost<T>(request: LogoutRequestModel, fn: (response: LogoutResponseModel) => T) {
+  logoutPost(request: LogoutRequestModel) {
     return this.httpExecute
       .exec<LogoutResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.logout, request } })
-      .pipe(
-        take(1),
-        map(res => fn(res))
-      );
+      .pipe(take(1));
   }
 
   registrationPost(request: RegistrationRequestModel): Observable<RegistrationResponseModel> {

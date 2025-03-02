@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { CookieService } from '../cookie/cookie.service';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { Store } from '@ngrx/store';
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
+import { RouteStoreModel } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class IsVetRoleGuard implements CanActivate {
@@ -18,12 +18,13 @@ export class IsVetRoleGuard implements CanActivate {
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     const token = this.cookie.getCookie('token');
     if (!token) return false;
-    return this.http.isVetPost({ token }, res => {
-      if (res.success) {
-        this.store.dispatch(setRoute({ page: RoutePageEnum.dashboardVet, section: RouteSectionEnum.dashboardVet }));
-        return true;
-      }
-      return true;
-    });
+    return true;
+    // return this.http.isVetPost({ token }, res => {
+    //   if (res.success) {
+    //     this.store.dispatch(setRoute({ page: RoutePageEnum.dashboardVet, section: RouteSectionEnum.dashboardVet }));
+    //     return true;
+    //   }
+    //   return true;
+    // });
   }
 }

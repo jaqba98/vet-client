@@ -60,7 +60,7 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
 
   override onSubmit(model: LoginFormDataModel) {
     const { email, password } = model;
-    this.http.loginPost({ email, password }, res => {
+    this.http.loginPost({ email, password }).subscribe(res => {
       if (res.success) {
         this.isLoginError = false;
         this.cookie.saveToCookie('token', res.token, 1);
@@ -70,6 +70,6 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
       } else {
         this.isLoginError = true;
       }
-    }).subscribe();
+    });
   }
 }

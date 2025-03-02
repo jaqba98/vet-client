@@ -24,12 +24,13 @@ export class LoggedInGuard implements CanActivate {
       this.store.dispatch(setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }));
       return false;
     }
-    return this.http.authPost({ token }, res => {
-      if (!res.success) {
-        this.store.dispatch(setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }));
-        return false;
-      }
-      return true;
-    });
+    return true;
+    // return this.http.authPost({ token }, res => {
+    //   if (!res.success) {
+    //     this.store.dispatch(setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }));
+    //     return false;
+    //   }
+    //   return true;
+    // });
   }
 }
