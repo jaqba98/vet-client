@@ -3,7 +3,7 @@
   <button class="button-control__button" type="submit" [ngClass]="getClassList()" (click)="onClick(model.id)">
     <!-- Text-->
     <ng-container *ngIf="model.value.type === 'text'">
-      <lib-text-control tag="p" [content]="model.value.text" color="light-primary"></lib-text-control>
+      <lib-text-control tag="p" color="light-primary">{{model.value.text}}</lib-text-control>
     </ng-container>
     <!-- Icon-->
     <ng-container *ngIf="model.value.type === 'icon'">
@@ -11,7 +11,7 @@
     </ng-container>
     <!-- Link-->
     <ng-container *ngIf="model.value.type === 'link'">
-      <lib-text-control tag="p" [content]="model.value.text" color="primary"></lib-text-control>
+      <lib-text-control tag="p" color="primary">{{model.value.text}}</lib-text-control>
     </ng-container>
   </button>
 </div>

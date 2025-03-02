@@ -1,12 +1,12 @@
 <!-- done -->
 <lib-card-control [title]="title" maxWidth="300px">
-  <lib-text-control tag="h1" [content]="price" color="primary"></lib-text-control>
-  <lib-text-control [content]="description" color="dark-secondary"></lib-text-control>
+  <lib-text-control tag="h1" color="primary">{{price}}</lib-text-control>
+  <lib-text-control color="dark-secondary">{{description}}</lib-text-control>
   <hr>
   <ul class="list">
     <ng-container *ngFor="let element of elements">
       <li class="list__element">
-        <lib-text-control color="dark-secondary" [content]="element"></lib-text-control>
+        <lib-text-control color="dark-secondary">{{element}}</lib-text-control>
       </li>
     </ng-container>
   </ul>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { RouteSectionEnum } from '@vet-client/lib-store';
 
 @Component({
   selector: 'lib-section-control',
@@ -12,7 +13,7 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
   hostDirectives: [BaseComponentDirective]
 })
 export class SectionControlComponent {
-  @Input({ required: true }) sectionId!: string;
+  @Input({ required: true }) sectionId!: RouteSectionEnum;
 
   @Input() sectionGuineaPig = false;
 

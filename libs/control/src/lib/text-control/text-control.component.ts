@@ -14,8 +14,6 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 export class TextControlComponent {
   @Input() tag: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'p';
 
-  @Input() content = '';
-
   @Input() color: 'dark-primary' | 'dark-secondary' | 'light-primary' | 'primary' | 'error' | 'success' = 'dark-primary';
 
   @Input() lineHeight = false;

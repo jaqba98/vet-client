@@ -3,10 +3,10 @@
   <ng-container *ngIf="isLabel()">
     <label [for]="controlName">
       <ng-container *ngIf="isError; else notErrorLabel">
-        <lib-text-control color="error" [content]="model.label"></lib-text-control>
+        <lib-text-control color="error">{{model.label}}</lib-text-control>
       </ng-container>
       <ng-template #notErrorLabel>
-        <lib-text-control color="dark-secondary" [content]="model.label"></lib-text-control>
+        <lib-text-control color="dark-secondary">{{model.label}}</lib-text-control>
       </ng-template>
     </label>
   </ng-container>

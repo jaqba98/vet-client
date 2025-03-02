@@ -1,7 +1,7 @@
 <!-- done -->
 <div class="card-control" [ngStyle]="{ width: maxWidth }">
   <div class="card-control__headline">
-    <lib-text-control tag="h2" [content]="title" color="dark-secondary"></lib-text-control>
+    <lib-text-control tag="h2" color="dark-secondary">{{title}}</lib-text-control>
   </div>
   <div class="card-control__context">
     <ng-content></ng-content>
