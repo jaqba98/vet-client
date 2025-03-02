@@ -1,13 +1,13 @@
 // done
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { LoginRegistrationFormComponent } from '@vet-client/lib-form';
+import { BigLoginRegistrationFormComponent } from '@vet-client/lib-form';
 
-const meta: Meta<LoginRegistrationFormComponent> = {
-  component: LoginRegistrationFormComponent,
+const meta: Meta<BigLoginRegistrationFormComponent> = {
+  component: BigLoginRegistrationFormComponent,
   title: 'Form/LoginRegistration'
 };
 export default meta;
-type Story = StoryObj<LoginRegistrationFormComponent>;
+type Story = StoryObj<BigLoginRegistrationFormComponent>;
 
 export const Default: Story = {};

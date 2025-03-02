@@ -1,13 +1,13 @@
 // done
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { LoginRegistrationSmallFormComponent } from '@vet-client/lib-form';
+import { SmallLoginRegistrationFormComponent } from '@vet-client/lib-form';
 
-const meta: Meta<LoginRegistrationSmallFormComponent> = {
-  component: LoginRegistrationSmallFormComponent,
+const meta: Meta<SmallLoginRegistrationFormComponent> = {
+  component: SmallLoginRegistrationFormComponent,
   title: 'Form/LoginRegistrationSmall'
 };
 export default meta;
-type Story = StoryObj<LoginRegistrationSmallFormComponent>;
+type Story = StoryObj<SmallLoginRegistrationFormComponent>;
 
 export const Default: Story = {};
