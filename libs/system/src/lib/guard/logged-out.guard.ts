@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
 import { CookieService } from '../cookie/cookie.service';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { Store } from '@ngrx/store';
-import { RouteStoreModel } from '@vet-client/lib-store';
+import { RouteStoreType } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedOutGuard implements CanActivate {
   constructor(
-    private readonly store: Store<{ route: RouteStoreModel }>,
+    private readonly store: Store<RouteStoreType>,
     private readonly cookie: CookieService,
     private readonly http: HttpPostAppService
   ) {}

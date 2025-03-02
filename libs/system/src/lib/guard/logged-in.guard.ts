@@ -7,12 +7,12 @@ import { CookieService } from '../cookie/cookie.service';
 import { RouterService } from '../router/router.service';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { Store } from '@ngrx/store';
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreType, setRoute } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedInGuard implements CanActivate {
   constructor(
-    private readonly store: Store<{ route: RouteStoreModel }>,
+    private readonly store: Store<RouteStoreType>,
     private readonly cookie: CookieService,
     private readonly http: HttpPostAppService,
     private readonly router: RouterService

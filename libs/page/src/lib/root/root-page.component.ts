@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { RouteStoreModel } from '@vet-client/lib-store';
+import { RouteStoreType } from '@vet-client/lib-store';
 import { RouterService } from '@vet-client/lib-system';
 
 @Component({
@@ -15,7 +15,7 @@ export class RootPageComponent implements OnInit, OnDestroy {
   private sub!: Subscription;
 
   constructor(
-    private readonly store: Store<{ route: RouteStoreModel }>,
+    private readonly store: Store<RouteStoreType>,
     private readonly router: RouterService
   ) {}
 

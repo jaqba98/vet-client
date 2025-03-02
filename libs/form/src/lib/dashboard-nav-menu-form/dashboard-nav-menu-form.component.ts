@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import {
   RoutePageEnum,
   RouteSectionEnum,
-  RouteStoreModel,
-  setRoute,
+  RouteStoreType,
+  setRoute
 } from '@vet-client/lib-store';
-
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import {
@@ -24,9 +24,9 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
   DashboardNavMenuFormModel,
   DashboardNavMenuModel
 > {
-  @Input() isHorizontal = false;
+  @Input() isHorizontal = true;
 
-  constructor(private readonly store: Store<RouteStoreModel>) {
+  constructor(private readonly store: Store<RouteStoreType>) {
     super({
       dashboard: {
         kind: 'button',
@@ -36,8 +36,8 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
           text: 'Dashboard',
         },
         fullWidth: false,
-        defaultValue: false,
-      },
+        defaultValue: false
+      }
     });
   }
 

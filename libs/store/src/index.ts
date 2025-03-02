@@ -6,4 +6,5 @@ export * from './lib/model/nav-store.model';
 export * from './lib/reducer/route.reducer';
 export * from './lib/reducer/nav.reducer';
 export * from './lib/type/nav-store.type';
+export * from './lib/type/route-store.type';
 export * from './lib/store.config';
