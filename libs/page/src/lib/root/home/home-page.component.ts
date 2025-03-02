@@ -10,17 +10,15 @@ import {
   PriceViewComponent
 } from '@vet-client/lib-view';
 import {
+  BigLoginRegistrationFormComponent,
   HomeNavMenuFormComponent,
-  LoginRegistrationFormComponent,
-  LoginRegistrationSmallFormComponent
+  SmallLoginRegistrationFormComponent
 } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-home-page',
   imports: [
     NavViewComponent,
-    LoginRegistrationFormComponent,
-    LoginRegistrationSmallFormComponent,
     MainViewComponent,
     HeaderViewComponent,
     AboutUsViewComponent,
@@ -28,6 +26,8 @@ import {
     ContactViewComponent,
     FooterViewComponent,
     HomeNavMenuFormComponent,
+    SmallLoginRegistrationFormComponent,
+    BigLoginRegistrationFormComponent,
   ],
   templateUrl: './home-page.component.html',
 })

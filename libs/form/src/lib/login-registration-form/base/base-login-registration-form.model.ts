@@ -1,12 +1,11 @@
-// done
 import { ControlType } from '@vet-client/lib-base-form';
 
-export interface LoginRegistrationFormModel {
+export interface BaseLoginRegistrationFormModel {
   login: ControlType;
   registration: ControlType;
 }
 
-export interface LoginRegistrationFormDataModel {
+export interface BaseLoginRegistrationModel {
   login: boolean;
   registration: boolean;
 }

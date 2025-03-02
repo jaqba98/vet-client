@@ -1,0 +1,15 @@
+@use 'libs/scss/src/abstracts/mixins';
+
+.base-login-registration-form {
+  &--big {
+    @include mixins.breakpoint(sm, max) {
+      display: none;
+    }
+  }
+
+  &--small {
+    @include mixins.breakpoint(sm, min) {
+      display: none;
+    }
+  }
+}

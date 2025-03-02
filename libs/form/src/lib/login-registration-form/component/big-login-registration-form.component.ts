@@ -1,0 +1,50 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model';
+import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service';
+
+@Component({
+  selector: 'lib-big-login-registration-form',
+  imports: [CommonModule ,BaseFormComponent],
+  templateUrl: '../base/base-login-registration-form.component.html',
+  styleUrl: '../base/base-login-registration-form.component.scss',
+  hostDirectives: [BaseComponentDirective]
+})
+export class BigLoginRegistrationFormComponent extends BaseFormService<
+  BaseLoginRegistrationFormModel,
+  BaseLoginRegistrationModel
+> {
+  loginRegistrationFormClass = 'base-login-registration-form--big';
+
+  constructor(private readonly baseLoginRegistrationForm: BaseLoginRegistrationFormService) {
+    super({
+      login: {
+        id: 'login',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Login'
+        },
+        defaultValue: false,
+        fullWidth: false
+      },
+      registration: {
+        id: 'registration',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Registration'
+        },
+        defaultValue: false,
+        fullWidth: false
+      },
+    });
+  }
+
+  override onSubmit(model: BaseLoginRegistrationModel) {
+    this.baseLoginRegistrationForm.onSubmit(model);
+  }
+}
