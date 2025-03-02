@@ -25,6 +25,10 @@ export class CookieService {
     return null;
   }
 
+  updateToken(token: string) {
+    this.saveToCookie('token', token, 1);
+  }
+
   getToken() {
     return this.getCookie('token');
   }

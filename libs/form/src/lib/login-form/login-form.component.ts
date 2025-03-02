@@ -1,30 +1,28 @@
-// done
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
 
 import {
-  CookieService,
-  RouterService,
-} from '@vet-client/lib-system';
-import { CardControlComponent, TextControlComponent } from '@vet-client/lib-control';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { LoginFormDataModel, LoginFormModel } from './login-form.model';
+  RoutePageEnum,
+  RouteSectionEnum,
+  RouteStoreModel,
+  setRoute,
+} from '@vet-client/lib-store';
+import { CookieService } from '@vet-client/lib-system';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
-import { Store } from '@ngrx/store';
+import { CardControlComponent } from '@vet-client/lib-control';
+import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { LoginFormModel, LoginModel } from './login-form.model';
 
 @Component({
   selector: 'lib-login-form',
-  imports: [CommonModule ,BaseFormComponent, CardControlComponent, TextControlComponent],
+  imports: [BaseFormComponent, CardControlComponent],
   templateUrl: './login-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFormDataModel> {
-  isLoginError = false;
-
+export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginModel> {
   constructor(
-    private readonly http: HttpPostAppService,
+    private readonly httpPost: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly store: Store<RouteStoreModel>
   ) {
@@ -58,17 +56,21 @@ export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginFor
     });
   }
 
-  override onSubmit(model: LoginFormDataModel) {
+  override onSubmit(model: LoginModel) {
     const { email, password } = model;
-    this.http.loginPost({ email, password }).subscribe(res => {
-      if (res.success) {
-        this.isLoginError = false;
-        this.cookie.saveToCookie('token', res.token, 1);
+    this.httpPost.loginPost({ email, password }).subscribe((response) => {
+      this.initBaseForm();
+      const { success, token } = response;
+      if (success) {
+        this.cookie.updateToken(token);
         this.store.dispatch(
-          setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard })
+          setRoute({
+            page: RoutePageEnum.dashboard,
+            section: RouteSectionEnum.dashboard,
+          })
         );
       } else {
-        this.isLoginError = true;
+        this.error = 'Incorrect email address or password!';
       }
     });
   }

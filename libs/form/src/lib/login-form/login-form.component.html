@@ -1,12 +1,10 @@
-<!-- todo: I am here -->
-<!-- done -->
 <lib-card-control title="Login">
   <lib-base-form
     [formGroup]="formGroup"
     [controlsArray]="controlsArray"
+    [success]="success"
+    [error]="error"
     (event)="onSubmit($event)"
+    (resetEvent)="initBaseForm()"
   ></lib-base-form>
-  <ng-container *ngIf="isLoginError">
-    <lib-text-control color="error" content="Incorrect email address or password!"></lib-text-control>
-  </ng-container>
 </lib-card-control>

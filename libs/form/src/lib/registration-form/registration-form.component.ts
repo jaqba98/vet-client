@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import { CardControlComponent } from '@vet-client/lib-control';
@@ -16,10 +16,8 @@ import {
   templateUrl: './registration-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class RegistrationFormComponent
-  extends BaseFormService<RegistrationFormModel, RegistrationModel>
-  implements OnInit {
-  constructor(private readonly http: HttpPostAppService) {
+export class RegistrationFormComponent extends BaseFormService<RegistrationFormModel, RegistrationModel> {
+  constructor(private readonly httpPost: HttpPostAppService) {
     super({
       email: {
         kind: 'input',
@@ -78,12 +76,8 @@ export class RegistrationFormComponent
     });
   }
 
-  ngOnInit() {
-    this.initBaseForm();
-  }
-
   override onSubmit(model: RegistrationModel) {
-    this.http
+    this.httpPost
       .registrationPost({
         email: model.email,
         password: model.password,

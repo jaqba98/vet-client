@@ -15,7 +15,7 @@ import { BaseLogoutModel } from '../base/base-logout-form.model';
 export class BaseLogoutFormService {
   constructor(
     private readonly cookie: CookieService,
-    private readonly http: HttpPostAppService,
+    private readonly httpPost: HttpPostAppService,
     private readonly store: Store<RouteStoreModel>
   ) {}
 
@@ -25,7 +25,7 @@ export class BaseLogoutFormService {
       if (token === null) {
         return;
       }
-      this.http.logoutPost({ token }).subscribe((response) => {
+      this.httpPost.logoutPost({ token }).subscribe((response) => {
         if (response.success) {
           this.cookie.deleteCookie('token');
           this.store.dispatch(

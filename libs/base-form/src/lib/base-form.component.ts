@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import {
@@ -28,7 +28,7 @@ import { ControlsArrayType } from './base-form.model';
   styleUrl: './base-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class BaseFormComponent {
+export class BaseFormComponent implements OnInit {
   @Output() resetEvent = new EventEmitter();
 
   @Output() event = new EventEmitter();
@@ -43,8 +43,11 @@ export class BaseFormComponent {
 
   @Input() success = '';
 
-  onSubmit() {
+  ngOnInit() {
     this.resetEvent.emit();
+  }
+
+  onSubmit() {
     if (this.isBaseFormValid()) {
       const model = this.formGroup.getRawValue();
       this.event.emit(model);
