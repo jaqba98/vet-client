@@ -11,5 +11,5 @@ export const initialRoute: RouteStoreModel = {
 
 export const routeReducer = createReducer(
   initialRoute,
-  on(setRoute, (state, payload) => ({ ...state, ...payload }))
+  on(setRoute, (state: RouteStoreModel, { page, section }) => ({ ...state, page, section }))
 );

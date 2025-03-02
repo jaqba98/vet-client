@@ -1,16 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import {
-  RoutePageEnum, RouteSectionEnum,
-  RouteStoreModel,
-  setRoute
-} from '@vet-client/lib-store';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import {
   HomeNavMenuFormModel,
-  MenuOptionsModel,
+  HomeNavMenuModel,
 } from './home-nav-menu-form.model';
 
 @Component({
@@ -19,8 +15,8 @@ import {
   templateUrl: './home-nav-menu-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
-export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormModel, MenuOptionsModel> {
-  @Input() isHorizontal = false;
+export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormModel, HomeNavMenuModel> {
+  @Input() isHorizontal = true;
 
   constructor(private readonly store: Store<RouteStoreModel>) {
     super({
@@ -67,20 +63,21 @@ export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormMod
     });
   }
 
-  override onSubmit(model: MenuOptionsModel) {
-    if (model.home) {
+  override onSubmit(model: HomeNavMenuModel) {
+    const { home, aboutUs, price, contact } = model;
+    if (home) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home })
       );
-    } else if (model.aboutUs) {
+    } else if (aboutUs) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.aboutUs })
       );
-    } else if (model.price) {
+    } else if (price) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.price })
       );
-    } else if (model.contact) {
+    } else if (contact) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.contact })
       );

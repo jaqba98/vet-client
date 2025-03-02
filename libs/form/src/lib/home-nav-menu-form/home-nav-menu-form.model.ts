@@ -7,7 +7,7 @@ export interface HomeNavMenuFormModel {
   contact: ControlType;
 }
 
-export interface MenuOptionsModel {
+export interface HomeNavMenuModel {
   home: boolean;
   aboutUs: boolean;
   price: boolean;

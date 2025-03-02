@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+import { take } from 'rxjs';
 
+import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store';
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model';
@@ -12,7 +15,7 @@ import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model';
   hostDirectives: [BaseComponentDirective]
 })
 export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, HamburgerModel> {
-  constructor() {
+  constructor(private readonly store: Store<NavStoreType>) {
     super({
       hamburger: {
         id: 'hamburger',
@@ -31,6 +34,10 @@ export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, 
   }
 
   override onSubmit(model: HamburgerModel) {
-    console.log(model);
+    if (model.hamburger) {
+      this.store.select('nav').pipe(take(1)).subscribe(data => {
+        this.store.dispatch(navSwitchIsOpen({ isOpen: !data.isOpen }));
+      });
+    }
   }
 }
