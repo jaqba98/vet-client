@@ -13,7 +13,6 @@ export * from './lib/text-control/text-control.component';
 export * from './lib/error-control/error-control.component';
 export * from './lib/textarea-control/textarea-control.component';
 export * from './lib/textarea-control/textarea-control.model';
-export * from './lib/toast-control/toast-control.component';
 export * from './lib/radio-button-control/radio-button-control.component';
 export * from './lib/radio-button-control/radio-button-control.model';
 export * from './lib/success-control/success-control.component';

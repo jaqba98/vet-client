@@ -10,7 +10,4 @@ export default meta;
 type Story = StoryObj<SuccessControlComponent>;
 
 export const Default: Story = {
-  args: {
-    message: 'Registration success!'
-  }
 };

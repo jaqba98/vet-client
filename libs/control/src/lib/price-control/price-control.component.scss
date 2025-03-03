@@ -1,18 +1,17 @@
-// done
 @use 'libs/scss/src/base/colors';
 
 hr {
   background-color: colors.$color-border;
   height: 1px;
   border: 0;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-left: 2rem;
+  gap: 1rem;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
   color: colors.$color-text-dark-secondary;
-  margin-bottom: 2rem;
 }

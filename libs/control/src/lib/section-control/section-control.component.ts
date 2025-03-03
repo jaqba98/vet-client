@@ -16,6 +16,7 @@ export class SectionControlComponent {
   @Input({ required: true }) sectionId!: RouteSectionEnum;
 
   @Input() sectionFlexCenter = false;
+  @Input() sectionBackground = false;
   @Input() sectionBackgroundPrimary = false;
   @Input() sectionBackgroundSurface = false;
   @Input() sectionBackgroundHeader = false;
@@ -25,6 +26,7 @@ export class SectionControlComponent {
   @Input() sectionContentMaxWidth960px = false;
   @Input() sectionContentMaxWidth360px = false;
   @Input() sectionContentFlex = false;
+  @Input() sectionContentFlexCenter = false;
   @Input() sectionContentFlexDirectionColumn = false;
   @Input() sectionContentFlexGapSmall = false;
   @Input() sectionContentFlexGapMedium = false;
@@ -32,6 +34,7 @@ export class SectionControlComponent {
   getMainClassList(): SectionMainControlModel {
     return {
       'section-control--flex-center': this.sectionFlexCenter,
+      'section-control--background': this.sectionBackground,
       'section-control--background-primary': this.sectionBackgroundPrimary,
       'section-control--background-surface': this.sectionBackgroundSurface,
       'section-control--background-header': this.sectionBackgroundHeader,
@@ -46,6 +49,7 @@ export class SectionControlComponent {
       'section-control__content--max-width-960px': this.sectionContentMaxWidth960px,
       'section-control__content--max-width-360px': this.sectionContentMaxWidth360px,
       'section-control__content--flex': this.sectionContentFlex,
+      'section-control__content--flex-center': this.sectionContentFlexCenter,
       'section-control__content--flex-direction-column': this.sectionContentFlexDirectionColumn,
       'section-control__content--flex-gap-small': this.sectionContentFlexGapSmall,
       'section-control__content--flex-gap-medium': this.sectionContentFlexGapMedium

@@ -1,5 +1,4 @@
-// done
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 import { PriceControlComponent, SectionControlComponent } from '@vet-client/lib-control';
 import { BaseComponentDirective } from '@vet-client/lib-utils';

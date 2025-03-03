@@ -6,7 +6,7 @@
   padding: 2rem 1rem;
 
   @include mixins.breakpoint(md, min) {
-    padding: 4rem 2rem;
+    padding: 6rem 2rem;
   }
 
   &--flex-center {
@@ -14,6 +14,8 @@
     align-items: center;
     justify-content: center;
   }
+
+  &--background { background-color: colors.$color-background; }
 
   &--background-primary { background-color: colors.$color-primary; }
 
@@ -39,7 +41,13 @@
   &__content {
     flex: 1;
 
-    &--flex { display: flex; }
+    &--flex { display: flex; flex-wrap: wrap; }
+
+    &--flex-center {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
     &--flex-direction-column { flex-direction: column; }
 

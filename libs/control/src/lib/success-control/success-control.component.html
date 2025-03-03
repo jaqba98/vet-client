@@ -1,4 +1,8 @@
 <div class="success-control">
   <lib-icon-control [model]="model"></lib-icon-control>
-  <lib-text-control tag="h5" color="light-primary">{{ message }}</lib-text-control>
+  <lib-text-control tag="h5" textControlColor="success">
+    <ng-container h5>
+      <ng-content></ng-content>
+    </ng-container>
+  </lib-text-control>
 </div>

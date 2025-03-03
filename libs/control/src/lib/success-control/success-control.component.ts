@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
@@ -11,14 +11,12 @@ import { IconControlModel } from '../icon-control/icon-control.model';
   imports: [TextControlComponent, IconControlComponent],
   templateUrl: './success-control.component.html',
   styleUrl: './success-control.component.scss',
-  hostDirectives: [BaseComponentDirective],
+  hostDirectives: [BaseComponentDirective]
 })
 export class SuccessControlComponent {
-  @Input({ required: true }) message!: string;
-
   readonly model: IconControlModel = {
     icon: faCircleCheck,
-    color: 'light-primary',
+    color: 'success',
     fontSize: '1rem'
   }
 }
