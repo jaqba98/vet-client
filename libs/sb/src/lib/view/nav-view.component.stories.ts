@@ -6,7 +6,8 @@ import { StorybookUtilsService } from '../utils/storybook-utils.service';
 const meta: Meta<NavViewComponent> = {
   component: NavViewComponent,
   title: 'View/Nav',
-  ...StorybookUtilsService.getFormConfiguration()
+  ...StorybookUtilsService.getFullscreen(),
+  ...StorybookUtilsService.getProviders()
 };
 export default meta;
 type Story = StoryObj<NavViewComponent>;

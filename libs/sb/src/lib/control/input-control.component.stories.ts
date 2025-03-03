@@ -1,4 +1,3 @@
-// done
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import { InputControlComponent } from '@vet-client/lib-control';

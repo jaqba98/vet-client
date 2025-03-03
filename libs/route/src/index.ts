@@ -1,1 +1,1 @@
-export * from './lib/route';
+export * from './lib/route.config';

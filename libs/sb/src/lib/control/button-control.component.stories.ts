@@ -1,4 +1,3 @@
-// done
 import type { Meta, StoryObj } from '@storybook/angular';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 

@@ -6,7 +6,8 @@ import { StorybookUtilsService } from '../../../utils/storybook-utils.service';
 const meta: Meta<LoginPageComponent> = {
   component: LoginPageComponent,
   title: 'Page/Login',
-  ...StorybookUtilsService.getPageConfiguration()
+  ...StorybookUtilsService.getFullscreen(),
+  ...StorybookUtilsService.getProviders()
 };
 export default meta;
 type Story = StoryObj<LoginPageComponent>;

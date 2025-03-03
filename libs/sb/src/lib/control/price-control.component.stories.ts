@@ -1,4 +1,3 @@
-// done
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import { PriceControlComponent } from '@vet-client/lib-control';

@@ -1,6 +1,4 @@
-// done
 import type { Meta, StoryObj } from '@storybook/angular';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 import { IconControlComponent } from '@vet-client/lib-control';
 
