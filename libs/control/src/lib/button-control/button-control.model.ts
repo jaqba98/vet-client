@@ -1,4 +1,3 @@
-// done
 import { IconControlModel } from '../icon-control/icon-control.model';
 
 interface TextValueModel {

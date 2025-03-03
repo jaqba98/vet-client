@@ -1,4 +1,5 @@
 @use 'libs/scss/src/abstracts/mixins';
+@use 'libs/scss/src/abstracts/variables';
 @use 'libs/scss/src/base/colors';
 
 .nav-view {
@@ -11,7 +12,7 @@
   right: 0;
   background-color: colors.$color-surface;
   min-width: 300px;
-  height: 60px;
+  height: variables.$nav-height;
   padding: 0.75rem;
   border-bottom: 1px solid colors.$color-border;
 
@@ -30,22 +31,6 @@
       @include mixins.breakpoint(md, max) {
         display: none;
       }
-    }
-  }
-
-  &__mobile-menu {
-    border-top: 1px solid colors.$color-divider;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    height: calc(100svh - 60px);
-    background-color: colors.$color-surface;
-    padding: 0.75rem;
-    overflow: auto;
-
-    @include mixins.breakpoint(md, min) {
-      display: none;
     }
   }
 }
