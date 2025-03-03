@@ -24,7 +24,8 @@ export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, 
           type: 'icon',
           icon: {
             icon: faBars,
-            color: 'icon__light-primary'
+            color: 'primary',
+            fontSize: '1rem'
           }
         },
         defaultValue: false,

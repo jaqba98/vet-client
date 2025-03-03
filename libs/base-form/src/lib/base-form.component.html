@@ -15,7 +15,7 @@
           [isError]="isControlError(control.name)"
         ></lib-input-control>
         <ng-container *ngIf="isControlError(control.name)">
-          <lib-error-control [message]="getControlErrorMessage(control.name)"></lib-error-control>
+          <lib-error-control>{{ getControlErrorMessage(control.name) }}</lib-error-control>
         </ng-container>
       </div>
     </ng-container>
@@ -33,7 +33,7 @@
           [isError]="isControlError(control.name)"
         ></lib-textarea-control>
         <ng-container *ngIf="isControlError(control.name)">
-          <lib-error-control [message]="getControlErrorMessage(control.name)"></lib-error-control>
+          <lib-error-control>{{ getControlErrorMessage(control.name) }}</lib-error-control>
         </ng-container>
       </div>
     </ng-container>
@@ -54,7 +54,7 @@
   </ng-container>
   <ng-container *ngIf="error !== ''">
     <div class="base-form__message">
-      <lib-error-control [message]="error"></lib-error-control>
+      <lib-error-control>{{ error }}</lib-error-control>
     </div>
   </ng-container>
 </form>

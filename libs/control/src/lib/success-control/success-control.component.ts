@@ -18,6 +18,7 @@ export class SuccessControlComponent {
 
   readonly model: IconControlModel = {
     icon: faCircleCheck,
-    color: 'icon__light-primary'
+    color: 'light-primary',
+    fontSize: '1rem'
   }
 }

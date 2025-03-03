@@ -12,6 +12,5 @@ type Story = StoryObj<ErrorControlComponent>;
 
 export const Default: Story = {
   args: {
-    message: 'Invalid login or password!'
   }
 };

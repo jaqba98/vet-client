@@ -1,16 +1,15 @@
-// done
 @use 'libs/scss/src/base/colors';
 
-.icon {
-  &__dark-primary {
-    color: colors.$color-text-dark-primary;
-  }
+.icon-control {
+  &--dark-primary { color: colors.$color-text-dark-primary; }
 
-  &__light-primary {
-    color: colors.$color-text-light-primary;
-  }
+  &--dark-secondary { color: colors.$color-text-dark-secondary; }
 
-  &__primary {
-    color: colors.$color-primary;
-  }
+  &--light-primary { color: colors.$color-text-light-primary; }
+
+  &--primary { color: colors.$color-primary; }
+
+  &--error { color: colors.$color-error; }
+
+  &--success { color: colors.$color-success; }
 }

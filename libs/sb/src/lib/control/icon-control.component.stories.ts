@@ -12,10 +12,4 @@ export default meta;
 type Story = StoryObj<IconControlComponent>;
 
 export const Default: Story = {
-  args: {
-    model: {
-      icon: faCoffee,
-      color: 'icon__dark-primary'
-    }
-  }
 };

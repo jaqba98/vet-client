@@ -1,4 +1,3 @@
-// done
 @use 'libs/scss/src/base/colors';
 
 .textarea-control {
@@ -7,14 +6,12 @@
   gap: 0.25rem;
 
   &__textarea {
-    width: 100%;
-    height: 300px;
-    resize: none;
     padding: 0.6rem 0.5rem;
     border-radius: 0.25rem;
     background-color: colors.$color-surface;
     border: 1px solid colors.$color-border;
     color: colors.$color-text-dark-secondary;
+    resize: none;
 
     &:focus {
       outline-color: colors.$color-accent;

@@ -29,7 +29,8 @@ export class SmallLoginRegistrationFormComponent extends BaseFormService<
           type: 'icon',
           icon: {
             icon: faRightToBracket,
-            color: 'icon__light-primary'
+            color: 'primary',
+            fontSize: '1rem'
           }
         },
         defaultValue: false,
@@ -42,7 +43,8 @@ export class SmallLoginRegistrationFormComponent extends BaseFormService<
           type: 'icon',
           icon: {
             icon: faUserPlus,
-            color: 'icon__light-primary'
+            color: 'primary',
+            fontSize: '1rem'
           }
         },
         defaultValue: false,

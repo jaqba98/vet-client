@@ -29,7 +29,8 @@ export class SmallLogoutFormComponent extends BaseFormService<BaseLogoutFormMode
           type: 'icon',
           icon: {
             icon: faArrowRightFromBracket,
-            color: 'icon__light-primary'
+            color: 'primary',
+            fontSize: '1rem'
           }
         },
         defaultValue: false,

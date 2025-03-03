@@ -1,6 +1,7 @@
-// done
+import { InputType } from '@vet-client/lib-type';
+
 export interface InputControlModel {
-  type: 'text' | 'password' | 'email';
+  type: InputType;
   label: string;
   placeholder: string;
 }

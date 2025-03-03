@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
@@ -11,13 +11,12 @@ import { IconControlModel } from '../icon-control/icon-control.model';
   imports: [TextControlComponent, IconControlComponent],
   templateUrl: './error-control.component.html',
   styleUrl: './error-control.component.scss',
-  hostDirectives: [BaseComponentDirective],
+  hostDirectives: [BaseComponentDirective]
 })
 export class ErrorControlComponent {
-  @Input({ required: true }) message!: string;
-
   readonly model: IconControlModel = {
     icon: faCircleExclamation,
-    color: 'icon__light-primary'
+    color: 'error',
+    fontSize: '1rem'
   }
 }

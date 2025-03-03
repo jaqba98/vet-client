@@ -32,7 +32,8 @@ export const Icon: Story = {
         type: 'icon',
         icon: {
           icon: faBars,
-          color: 'icon__light-primary'
+          color: 'primary',
+          fontSize: '1rem',
         }
       },
       fullWidth: false

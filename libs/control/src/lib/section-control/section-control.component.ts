@@ -15,6 +15,7 @@ import { SectionContentControlModel, SectionMainControlModel } from './section-c
 export class SectionControlComponent {
   @Input({ required: true }) sectionId!: RouteSectionEnum;
 
+  @Input() sectionBackgroundPrimary = false;
   @Input() sectionBackgroundSurface = false;
   @Input() sectionContentMarginAuto = false;
   @Input() sectionContentMaxWidth960px = false;
@@ -26,6 +27,7 @@ export class SectionControlComponent {
 
   getMainClassList(): SectionMainControlModel {
     return {
+      'section-control--background-primary': this.sectionBackgroundPrimary,
       'section-control--background-surface': this.sectionBackgroundSurface
     };
   }

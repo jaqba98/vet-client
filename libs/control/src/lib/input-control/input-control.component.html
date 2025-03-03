@@ -1,13 +1,7 @@
-<!-- done -->
 <div class="input-control" [formGroup]="formGroup">
   <ng-container *ngIf="isLabel()">
     <label [for]="controlName">
-      <ng-container *ngIf="isError; else notErrorLabel">
-        <lib-text-control color="error">{{model.label}}</lib-text-control>
-      </ng-container>
-      <ng-template #notErrorLabel>
-        <lib-text-control color="dark-secondary">{{model.label}}</lib-text-control>
-      </ng-template>
+      <lib-text-control [textControlColor]="getLabelColor()">{{ model.label }}</lib-text-control>
     </label>
   </ng-container>
   <input

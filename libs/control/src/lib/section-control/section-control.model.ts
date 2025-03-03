@@ -1,4 +1,5 @@
 export interface SectionMainControlModel {
+  'section-control--background-primary': boolean;
   'section-control--background-surface': boolean;
 }
 
