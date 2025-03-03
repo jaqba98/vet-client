@@ -1,80 +1,26 @@
-// done
-@use 'libs/scss/src/base/colors';
 @use 'libs/scss/src/abstracts/mixins';
+@use 'libs/scss/src/base/colors';
 
-.section {
-  &__guinea-pig {
-    background-image: url('../../../../../apps/vet-client/public/guinea-pig.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+.section-control {
+  padding: 2rem 1rem;
 
-  &__background {
-    background-color: colors.$color-background;
+  @include mixins.breakpoint(md, min) {
     padding: 4rem 2rem;
-
-    @include mixins.breakpoint(md, min) {
-      padding: 6rem 2rem;
-    }
-
-    &--primary {
-      background-color: colors.$color-primary;
-    }
-
-    &--primary80 {
-      background-color: rgba(colors.$color-primary, 80%);
-    }
-
-    &--surface {
-      background-color: colors.$color-surface;
-    }
   }
+
+  &--background-surface { background-color: colors.$color-surface; }
 
   &__content {
-    &--flex {
-      display: flex;
-      flex-wrap: wrap;
-    }
+    &--flex { display: flex; }
 
-    &--align-center {
-      align-items: center;
-    }
+    &--flex-direction-column { flex-direction: column; }
 
-    &--justify-center {
-      justify-content: center;
-    }
+    &--flex-gap-small { gap: 1rem; }
 
-    &--justify-space-around {
-      justify-content: space-between;
-    }
+    &--flex-gap-medium { gap: 1.5rem; }
 
-    &--gap-1rem {
-      gap: 1rem;
-    }
+    &--margin-auto { margin: auto; }
 
-    &--gap-2rem {
-      gap: 2rem;
-    }
-
-    &--margin-auto {
-      margin: auto;
-    }
-
-    &--max-width-480px {
-      max-width: 480px;
-    }
-
-    &--max-width-960px {
-      max-width: 960px;
-    }
-
-    &--min-height-one-page {
-      min-height: calc(100svh - 60px - 50px - 8rem);
-
-      @include mixins.breakpoint(md, min) {
-        min-height: calc(100svh - 60px - 50px - 12rem);
-      }
-    }
+    &--max-width-960px { max-width: 960px; }
   }
 }

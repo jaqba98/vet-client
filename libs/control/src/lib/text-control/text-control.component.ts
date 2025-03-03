@@ -1,8 +1,9 @@
-// done
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { ColorType, TextTagType } from '@vet-client/lib-type';
+import { TextControlModel } from './text-control.model';
 
 @Component({
   selector: 'lib-text-control',
@@ -12,27 +13,24 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
   hostDirectives: [BaseComponentDirective]
 })
 export class TextControlComponent {
-  @Input() tag: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'p';
+  @Input() tag: TextTagType = 'p';
 
-  @Input() color: 'dark-primary' | 'dark-secondary' | 'light-primary' | 'primary' | 'error' | 'success' = 'dark-primary';
+  @Input() textControlColor: ColorType = 'dark-primary';
+  @Input() textControlLineHeight = false;
+  @Input() textControlJustify = false;
+  @Input() textControlBold = false;
 
-  @Input() lineHeight = false;
-
-  @Input() justify = false;
-
-  @Input() bold = false;
-
-  getClassList() {
+  getClassList(): TextControlModel {
     return {
-      'line-height': this.lineHeight,
-      'justify': this.justify,
-      'bold': this.bold,
-      'dark-primary': this.color === 'dark-primary',
-      'dark-secondary': this.color === 'dark-secondary',
-      'light-primary': this.color === 'light-primary',
-      'primary': this.color === 'primary',
-      'error': this.color === 'error',
-      'success': this.color === 'success',
+      'text-control--dark-primary': this.textControlColor === 'dark-primary',
+      'text-control--dark-secondary': this.textControlColor === 'dark-secondary',
+      'text-control--light-primary': this.textControlColor === 'light-primary',
+      'text-control--primary': this.textControlColor === 'primary',
+      'text-control--error': this.textControlColor === 'error',
+      'text-control--success': this.textControlColor === 'success',
+      'text-control--line-height': this.textControlLineHeight,
+      'text-control--justify': this.textControlJustify,
+      'text-control--bold': this.textControlBold
     };
   }
 }

@@ -1,8 +1,5 @@
-<!-- done -->
-<section [id]="sectionId" [ngClass]="getSectionClassList()">
-  <div [ngClass]="getSectionBackgroundClassList()">
-    <div [ngClass]="getSectionContentClassList()">
-      <ng-content></ng-content>
-    </div>
+<section [id]="sectionId" class="section-control" [ngClass]="getMainClassList()">
+  <div class="section-control__content" [ngClass]="getContentClassList()">
+    <ng-content></ng-content>
   </div>
 </section>

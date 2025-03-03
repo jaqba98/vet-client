@@ -1,6 +1,16 @@
-<lib-section-control [sectionId]="sectionId">
-  <lib-text-control>About Us</lib-text-control>
-  <lib-text-control>
+<lib-section-control
+  [sectionId]="sectionId"
+  [sectionBackgroundSurface]="true"
+  [sectionContentMarginAuto]="true"
+  [sectionContentMaxWidth960px]="true"
+  [sectionContentFlex]="true"
+  [sectionContentFlexDirectionColumn]="true"
+  [sectionContentFlexGapSmall]="true"
+>
+  <lib-text-control textControlColor="primary" tag="h2">
+    <ng-container h2>About Us</ng-container>
+  </lib-text-control>
+  <lib-text-control textControlColor="dark-secondary" [textControlLineHeight]="true">
     Our veterinary application is a modern and comprehensive solution that streamlines the management of veterinary
     clinics while providing pet owners with convenient access to healthcare for their animals. With an intuitive
     interface, veterinarians can easily manage appointments, maintain patient records, issue e-prescriptions,
@@ -9,14 +19,14 @@
     history. The app also supports internal communication within the veterinary team, significantly enhancing the
     quality of services provided.
   </lib-text-control>
-  <lib-text-control>
+  <lib-text-control textControlColor="dark-secondary" [textControlLineHeight]="true">
     For pet owners, the application is an invaluable tool that enables them to monitor their pets' health in real time.
     Users can book appointments online, review their pets’ medical history, receive notifications about upcoming
     vaccinations and lab test results, and access a knowledge base filled with veterinary advice, dietary
     recommendations, and preventive healthcare tips. Additionally, the app features a chat function that allows
     owners to quickly consult with a veterinarian—particularly useful in emergency situations.
   </lib-text-control>
-  <lib-text-control>
+  <lib-text-control textControlColor="dark-secondary" [textControlLineHeight]="true">
     Our application not only improves the efficiency of veterinary clinics but also raises the standards of
     animal care. Intelligent algorithms help analyze medical data and suggest optimal treatment methods,
     supporting veterinarians in making diagnostic decisions. Integration with medical devices allows for the

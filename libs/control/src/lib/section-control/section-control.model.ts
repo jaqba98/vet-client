@@ -1,0 +1,12 @@
+export interface SectionMainControlModel {
+  'section-control--background-surface': boolean;
+}
+
+export interface SectionContentControlModel {
+  'section-control__content--margin-auto': boolean;
+  'section-control__content--max-width-960px': boolean;
+  'section-control__content--flex': boolean;
+  'section-control__content--flex-direction-column': boolean;
+  'section-control__content--flex-gap-small': boolean;
+  'section-control__content--flex-gap-medium': boolean;
+}

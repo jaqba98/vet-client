@@ -1,38 +1,21 @@
-// done
 @use 'libs/scss/src/base/colors';
 
-.line-height {
-  line-height: 2;
-}
+.text-control {
+  &--dark-primary { color: colors.$color-text-dark-primary; }
 
-.justify {
-  text-align: justify;
-}
+  &--dark-secondary { color: colors.$color-text-dark-secondary; }
 
-.bold {
-  font-weight: 700;
-}
+  &--light-primary { color: colors.$color-text-light-primary; }
 
-.dark-primary {
-  color: colors.$color-text-dark-primary;
-}
+  &--primary { color: colors.$color-primary; }
 
-.dark-secondary {
-  color: colors.$color-text-dark-secondary;
-}
+  &--error { color: colors.$color-error; }
 
-.light-primary {
-  color: colors.$color-text-light-primary;
-}
+  &--success { color: colors.$color-success; }
 
-.primary {
-  color: colors.$color-primary;
-}
+  &--line-height { line-height: 2; }
 
-.error {
-  color: colors.$color-error;
-}
+  &--justify { text-align: justify; }
 
-.success {
-  color: colors.$color-success;
+  &--bold { font-weight: bold; }
 }

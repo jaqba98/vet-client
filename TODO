@@ -10,6 +10,7 @@
   scss
 + store
   system
+  type
   utils
   vat-client
   view
