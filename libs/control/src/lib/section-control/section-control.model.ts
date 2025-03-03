@@ -1,6 +1,9 @@
 export interface SectionMainControlModel {
+  'section-control--flex-center': boolean;
   'section-control--background-primary': boolean;
   'section-control--background-surface': boolean;
+  'section-control--background-header': boolean;
+  'section-control--height-480px': boolean;
 }
 
 export interface SectionContentControlModel {

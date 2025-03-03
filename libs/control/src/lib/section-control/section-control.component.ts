@@ -15,8 +15,11 @@ import { SectionContentControlModel, SectionMainControlModel } from './section-c
 export class SectionControlComponent {
   @Input({ required: true }) sectionId!: RouteSectionEnum;
 
+  @Input() sectionFlexCenter = false;
   @Input() sectionBackgroundPrimary = false;
   @Input() sectionBackgroundSurface = false;
+  @Input() sectionBackgroundHeader = false;
+  @Input() sectionHeight480px = false;
   @Input() sectionContentMarginAuto = false;
   @Input() sectionContentMaxWidth960px = false;
   @Input() sectionContentMaxWidth360px = false;
@@ -27,8 +30,11 @@ export class SectionControlComponent {
 
   getMainClassList(): SectionMainControlModel {
     return {
+      'section-control--flex-center': this.sectionFlexCenter,
       'section-control--background-primary': this.sectionBackgroundPrimary,
-      'section-control--background-surface': this.sectionBackgroundSurface
+      'section-control--background-surface': this.sectionBackgroundSurface,
+      'section-control--background-header': this.sectionBackgroundHeader,
+      'section-control--height-480px': this.sectionHeight480px
     };
   }
 

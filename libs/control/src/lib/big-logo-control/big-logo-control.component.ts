@@ -1,12 +1,11 @@
-// done
 import { Component } from '@angular/core';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
-import { TITLE } from '@vet-client/lib-const';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { TITLE } from '@vet-client/lib-const';
 import { IconControlComponent } from '../icon-control/icon-control.component';
-import { IconControlModel } from '../icon-control/icon-control.model';
 import { TextControlComponent } from '../text-control/text-control.component';
+import { IconControlModel } from '../icon-control/icon-control.model';
 
 @Component({
   selector: 'lib-big-logo-control',
@@ -20,7 +19,7 @@ export class BigLogoControlComponent {
 
   readonly logoModel: IconControlModel = {
     icon: faPaw,
-    color: 'primary',
-    fontSize: '1rem'
+    color: 'light-primary',
+    fontSize: '6rem'
   };
 }

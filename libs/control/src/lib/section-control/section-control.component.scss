@@ -8,9 +8,30 @@
     padding: 4rem 2rem;
   }
 
+  &--flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &--background-primary { background-color: colors.$color-primary; }
 
   &--background-surface { background-color: colors.$color-surface; }
+
+  &--background-header {
+    background:
+      linear-gradient(
+          rgba(colors.$color-primary, 0.8),
+          rgba(colors.$color-primary, 0.8)
+      ),
+      url("../../../../../apps/vet-client/public/guinea-pig.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  &--height-480px {
+    height: 480px;
+  }
 
   &__content {
     &--flex { display: flex; }
