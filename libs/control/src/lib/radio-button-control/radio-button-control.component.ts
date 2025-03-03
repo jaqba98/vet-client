@@ -11,7 +11,7 @@ import { TextControlComponent } from '../text-control/text-control.component';
   imports: [CommonModule, TextControlComponent, ReactiveFormsModule],
   templateUrl: './radio-button-control.component.html',
   styleUrl: './radio-button-control.component.scss',
-  hostDirectives: [BaseComponentDirective],
+  hostDirectives: [BaseComponentDirective]
 })
 export class RadioButtonControlComponent {
   @Input({ required: true }) model!: RadioButtonControlModel;
