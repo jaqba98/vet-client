@@ -10,6 +10,14 @@ import {
   RegistrationPageComponent,
   VetPageComponent
 } from '@vet-client/lib-page';
+import {
+  HasRoleGuard,
+  IsClientRoleGuard,
+  IsVetRoleGuard,
+  LoggedInGuard,
+  LoggedOutGuard,
+  NotHasRoleGuard
+} from '@vet-client/lib-guard';
 
 export const route: Route[] = [
   {
@@ -19,35 +27,43 @@ export const route: Route[] = [
   },
   {
     path: 'home',
-    component: HomePageComponent
+    component: HomePageComponent,
+    canActivate: [LoggedOutGuard]
   },
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
+    canActivate: [LoggedOutGuard]
   },
   {
     path: 'registration',
-    component: RegistrationPageComponent
+    component: RegistrationPageComponent,
+    canActivate: [LoggedOutGuard]
   },
   {
     path: 'dashboard',
     component: DashboardPageComponent,
+    canActivate: [LoggedInGuard],
     children: [
       {
         path: '',
         component: DashboardMainPageComponent,
+        canActivate: [HasRoleGuard, IsVetRoleGuard, IsClientRoleGuard]
       },
       {
         path: 'choose-role',
         component: ChooseRolePageComponent,
+        canActivate: [NotHasRoleGuard]
       },
       {
         path: 'vet',
         component: VetPageComponent,
+        canActivate: [HasRoleGuard, IsVetRoleGuard]
       },
       {
         path: 'client',
         component: ClientPageComponent,
+        canActivate: [HasRoleGuard, IsClientRoleGuard]
       },
     ]
   },

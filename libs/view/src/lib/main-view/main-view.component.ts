@@ -8,6 +8,6 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
   imports: [CommonModule],
   templateUrl: './main-view.component.html',
   styleUrl: './main-view.component.scss',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
 export class MainViewComponent {}

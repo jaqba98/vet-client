@@ -66,7 +66,10 @@ export class ChooseRoleFormComponent extends BaseFormService<
     const token = this.cookie.getToken();
     if (token === null) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.logout, section: RouteSectionEnum.empty })
+        setRoute({
+          page: RoutePageEnum.home,
+          section: RouteSectionEnum.home
+        })
       );
       return;
     }

@@ -20,6 +20,7 @@
       "@vet-client/lib-control": ["libs/control/src/index.ts"],
       "@vet-client/lib-domain": ["libs/domain/src/index.ts"],
       "@vet-client/lib-form": ["libs/form/src/index.ts"],
+      "@vet-client/lib-guard": ["libs/guard/src/index.ts"],
       "@vet-client/lib-http": ["libs/http/src/index.ts"],
       "@vet-client/lib-page": ["libs/page/src/index.ts"],
       "@vet-client/lib-route": ["libs/route/src/index.ts"],
