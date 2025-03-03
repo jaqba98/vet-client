@@ -20,6 +20,7 @@ export class SectionControlComponent {
   @Input() sectionBackgroundSurface = false;
   @Input() sectionBackgroundHeader = false;
   @Input() sectionHeight480px = false;
+  @Input() sectionMinHeightFull = false;
   @Input() sectionContentMarginAuto = false;
   @Input() sectionContentMaxWidth960px = false;
   @Input() sectionContentMaxWidth360px = false;
@@ -34,7 +35,8 @@ export class SectionControlComponent {
       'section-control--background-primary': this.sectionBackgroundPrimary,
       'section-control--background-surface': this.sectionBackgroundSurface,
       'section-control--background-header': this.sectionBackgroundHeader,
-      'section-control--height-480px': this.sectionHeight480px
+      'section-control--height-480px': this.sectionHeight480px,
+      'section-control--min-height-full': this.sectionMinHeightFull
     };
   }
 

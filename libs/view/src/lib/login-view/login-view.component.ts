@@ -9,7 +9,7 @@ import { LoginFormComponent } from '@vet-client/lib-form';
   selector: 'lib-login-view',
   imports: [SectionControlComponent, LoginFormComponent],
   templateUrl: './login-view.component.html',
-  hostDirectives: [BaseComponentDirective],
+  hostDirectives: [BaseComponentDirective]
 })
 export class LoginViewComponent {
   sectionId = RouteSectionEnum.login;

@@ -2,8 +2,4 @@
 
 .main-view {
   margin-top: variables.$nav-height;
-
-  &--full-height {
-    min-height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
-  }
 }

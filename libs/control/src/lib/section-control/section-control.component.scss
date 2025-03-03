@@ -1,4 +1,5 @@
 @use 'libs/scss/src/abstracts/mixins';
+@use 'libs/scss/src/abstracts/variables';
 @use 'libs/scss/src/base/colors';
 
 .section-control {
@@ -29,11 +30,15 @@
     background-position: center;
   }
 
-  &--height-480px {
-    height: 480px;
+  &--height-480px { height: 480px; }
+
+  &--min-height-full {
+    min-height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
   }
 
   &__content {
+    flex: 1;
+
     &--flex { display: flex; }
 
     &--flex-direction-column { flex-direction: column; }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
@@ -10,6 +10,4 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
   styleUrl: './main-view.component.scss',
   hostDirectives: [BaseComponentDirective]
 })
-export class MainViewComponent {
-  @Input() fullHeight = false;
-}
+export class MainViewComponent {}
