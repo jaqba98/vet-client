@@ -6,21 +6,13 @@ import { Store } from '@ngrx/store';
 import { RouteStoreType } from '@vet-client/lib-store';
 import { RouterService } from '@vet-client/lib-system';
 import { FooterViewComponent, MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
-import {
-  BigLoginRegistrationFormComponent,
-  HomeNavMenuFormComponent,
-  SmallLoginRegistrationFormComponent
-} from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-root-page',
   imports: [
     RouterModule,
     FooterViewComponent,
-    BigLoginRegistrationFormComponent,
     NavViewComponent,
-    HomeNavMenuFormComponent,
-    SmallLoginRegistrationFormComponent,
     MainViewComponent,
   ],
   templateUrl: './root-page.component.html',

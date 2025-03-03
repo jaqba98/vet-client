@@ -8,3 +8,4 @@ export * from './lib/reducer/nav.reducer';
 export * from './lib/type/nav-store.type';
 export * from './lib/type/route-store.type';
 export * from './lib/store.config';
+export * from './lib/enum/menu-type.enum';

@@ -4,13 +4,25 @@
       <lib-hamburger-form></lib-hamburger-form>
     </div>
     <div class="nav-view__menu--options">
-      <ng-content select="[menu]"></ng-content>
+      <ng-container *ngIf="menuType === 'home'">
+        <lib-home-nav-menu-form></lib-home-nav-menu-form>
+      </ng-container>
+      <ng-container *ngIf="menuType === 'dashboard'">
+        <lib-dashboard-nav-menu-form></lib-dashboard-nav-menu-form>
+      </ng-container>
     </div>
   </div>
   <div class="nav-view__logo">
     <lib-small-logo-control></lib-small-logo-control>
   </div>
   <div class="nav-view__dynamic">
-    <ng-content select="[dynamic]"></ng-content>
+    <ng-container *ngIf="menuType === 'home'">
+      <lib-big-login-registration-form></lib-big-login-registration-form>
+      <lib-small-login-registration-form></lib-small-login-registration-form>
+    </ng-container>
+    <ng-container *ngIf="menuType === 'dashboard'">
+      <lib-big-logout-form></lib-big-logout-form>
+      <lib-small-logout-form></lib-small-logout-form>
+    </ng-container>
   </div>
 </nav>

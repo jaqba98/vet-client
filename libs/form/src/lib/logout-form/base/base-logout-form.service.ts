@@ -5,7 +5,7 @@ import {
   RoutePageEnum,
   RouteSectionEnum,
   RouteStoreModel,
-  setRoute,
+  setRoute
 } from '@vet-client/lib-store';
 import { HttpPostAppService } from '@vet-client/lib-http';
 import { CookieService } from '@vet-client/lib-system';

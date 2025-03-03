@@ -20,7 +20,10 @@ import { LoginFormModel, LoginModel } from './login-form.model';
   templateUrl: './login-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class LoginFormComponent extends BaseFormService<LoginFormModel, LoginModel> {
+export class LoginFormComponent extends BaseFormService<
+  LoginFormModel,
+  LoginModel
+> {
   constructor(
     private readonly httpPost: HttpPostAppService,
     private readonly cookie: CookieService,

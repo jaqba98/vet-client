@@ -1,10 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { NavStoreModel } from '../model/nav-store.model';
-import { navSwitchIsOpen } from '../actions/nav.action';
+import { navSetMenuType, navSwitchIsOpen } from '../actions/nav.action';
+import { MenuTypeEnum } from '../enum/menu-type.enum';
 
 export const initialState: NavStoreModel = {
-  isOpen: false
+  isOpen: false,
+  menuType: MenuTypeEnum.home
 };
 
 export const navReducer = createReducer(
@@ -12,5 +14,9 @@ export const navReducer = createReducer(
   on(navSwitchIsOpen, (state: NavStoreModel, payload) => ({
     ...state,
     isOpen: payload.isOpen
+  })),
+  on(navSetMenuType, (state: NavStoreModel, payload) => ({
+    ...state,
+    menuType: payload.menuType
   }))
 );
