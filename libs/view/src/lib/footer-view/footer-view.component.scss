@@ -1,9 +1,9 @@
-// done
 @use 'libs/scss/src/base/colors';
+@use 'libs/scss/src/base/variables';
 
 .footer-view {
   padding: 1rem;
   background-color: colors.$color-primary;
   text-align: center;
-  height: 50px;
+  height: variables.$footer-height;
 }
