@@ -18,6 +18,7 @@ export class SectionControlComponent {
   @Input() sectionBackgroundSurface = false;
   @Input() sectionContentMarginAuto = false;
   @Input() sectionContentMaxWidth960px = false;
+  @Input() sectionContentMaxWidth360px = false;
   @Input() sectionContentFlex = false;
   @Input() sectionContentFlexDirectionColumn = false;
   @Input() sectionContentFlexGapSmall = false;
@@ -33,6 +34,7 @@ export class SectionControlComponent {
     return {
       'section-control__content--margin-auto': this.sectionContentMarginAuto,
       'section-control__content--max-width-960px': this.sectionContentMaxWidth960px,
+      'section-control__content--max-width-360px': this.sectionContentMaxWidth360px,
       'section-control__content--flex': this.sectionContentFlex,
       'section-control__content--flex-direction-column': this.sectionContentFlexDirectionColumn,
       'section-control__content--flex-gap-small': this.sectionContentFlexGapSmall,

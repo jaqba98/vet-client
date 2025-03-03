@@ -20,7 +20,6 @@ export const Title: Story = {
 
 export const MaxWidth640px: Story = {
   args: {
-    title: 'Hello',
-    maxWidth: '640px'
+    title: 'Hello'
   }
 };

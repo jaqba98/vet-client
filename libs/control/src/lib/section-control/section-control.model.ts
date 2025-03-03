@@ -5,6 +5,7 @@ export interface SectionMainControlModel {
 export interface SectionContentControlModel {
   'section-control__content--margin-auto': boolean;
   'section-control__content--max-width-960px': boolean;
+  'section-control__content--max-width-360px': boolean;
   'section-control__content--flex': boolean;
   'section-control__content--flex-direction-column': boolean;
   'section-control__content--flex-gap-small': boolean;

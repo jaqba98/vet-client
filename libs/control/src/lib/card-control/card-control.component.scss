@@ -1,25 +1,19 @@
-// done
 @use 'libs/scss/src/base/colors';
 
 .card-control {
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.25rem;
   background-color: colors.$color-surface;
   border: 1px solid colors.$color-border;
-  box-shadow: 0 0 2rem colors.$color-shadow;
-  overflow: hidden;
+  border-radius: 0.5rem;
 
   &__headline {
-    padding: 1.5rem 2rem;
-    background-color: colors.$color-surface;
+    padding: 1rem;
     border-bottom: 1px solid colors.$color-border;
   }
 
-  &__context {
+  &__content {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 2rem;
+    padding: 1rem;
   }
 }
