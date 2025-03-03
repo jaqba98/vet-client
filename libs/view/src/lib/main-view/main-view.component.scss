@@ -1,8 +1,9 @@
-// done
-.main {
-  margin-top: 60px;
+@use 'libs/scss/src/abstracts/variables';
+
+.main-view {
+  margin-top: variables.$nav-height;
 
   &--full-height {
-    min-height: calc(100svh - 60px - 50px);
+    min-height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
   }
 }
