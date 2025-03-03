@@ -1,33 +1,10 @@
-// done
 import { Component } from "@angular/core";
 
-import {
-  FooterViewComponent,
-  MainViewComponent,
-  NavViewComponent,
-  RegistrationViewComponent
-} from '@vet-client/lib-view';
-import {
-  HomeNavMenuFormComponent,
-} from '@vet-client/lib-form';
-import {
-  SmallLoginRegistrationFormComponent
-} from '@vet-client/lib-form';
-import {
-  BigLoginRegistrationFormComponent
-} from '@vet-client/lib-form';
+import { RegistrationViewComponent } from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-registration-page',
-  imports: [
-    NavViewComponent,
-    MainViewComponent,
-    FooterViewComponent,
-    RegistrationViewComponent,
-    HomeNavMenuFormComponent,
-    SmallLoginRegistrationFormComponent,
-    BigLoginRegistrationFormComponent,
-  ],
+  imports: [RegistrationViewComponent],
   templateUrl: './registration-page.component.html',
 })
 export class RegistrationPageComponent {}

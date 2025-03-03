@@ -1,22 +1,10 @@
-// done
 import { Component } from "@angular/core";
 
-import { FooterViewComponent, LoginViewComponent, MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
-import {
-  HomeNavMenuFormComponent, BigLoginRegistrationFormComponent, SmallLoginRegistrationFormComponent
-} from '@vet-client/lib-form';
+import { LoginViewComponent } from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-login-page',
-  imports: [
-    NavViewComponent,
-    MainViewComponent,
-    FooterViewComponent,
-    LoginViewComponent,
-    HomeNavMenuFormComponent,
-    BigLoginRegistrationFormComponent,
-    SmallLoginRegistrationFormComponent,
-  ],
+  imports: [LoginViewComponent],
   templateUrl: './login-page.component.html',
 })
 export class LoginPageComponent {}

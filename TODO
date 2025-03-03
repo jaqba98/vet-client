@@ -1,11 +1,11 @@
 + base-form
   const
-  control
++ control
   domain
 + form
 + http
-  page
-  route
++ page
++ route
   sb
   scss
 + store

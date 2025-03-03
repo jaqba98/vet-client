@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<lib-nav-view>
+  <lib-home-nav-menu-form menu></lib-home-nav-menu-form>
+  <div dynamic>
+    <lib-big-login-registration-form></lib-big-login-registration-form>
+    <lib-small-login-registration-form></lib-small-login-registration-form>
+  </div>
+</lib-nav-view>
+<lib-main-view>
+  <router-outlet></router-outlet>
+</lib-main-view>
+<lib-footer-view></lib-footer-view>

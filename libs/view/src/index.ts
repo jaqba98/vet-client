@@ -8,3 +8,5 @@ export * from './lib/nav-view/nav-view.component';
 export * from './lib/price-view/price-view.component';
 export * from './lib/registration-view/registration-view.component';
 export * from './lib/choose-role-view/choose-role-view.component';
+export * from './lib/vet-view/vet-view.component';
+export * from './lib/client-view/client-view.component';

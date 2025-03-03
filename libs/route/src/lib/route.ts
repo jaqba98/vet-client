@@ -1,19 +1,15 @@
 import { Route } from '@angular/router';
 
 import {
-  ChooseRolePageComponent, ClientPageComponent, DashboardMainPageComponent,
+  ChooseRolePageComponent,
+  ClientPageComponent,
+  DashboardMainPageComponent,
   DashboardPageComponent,
   HomePageComponent,
   LoginPageComponent,
-  RegistrationPageComponent, VetPageComponent
+  RegistrationPageComponent,
+  VetPageComponent
 } from '@vet-client/lib-page';
-import {
-  HasRoleGuard,
-  IsClientRoleGuard, IsVetRoleGuard,
-  LoggedInGuard,
-  LoggedOutGuard,
-  NotHasRoleGuard
-} from '@vet-client/lib-system';
 
 export const route: Route[] = [
   {
@@ -23,49 +19,41 @@ export const route: Route[] = [
   },
   {
     path: 'home',
-    component: HomePageComponent,
-    canActivate: [LoggedOutGuard]
+    component: HomePageComponent
   },
   {
     path: 'login',
-    component: LoginPageComponent,
-    canActivate: [LoggedOutGuard]
+    component: LoginPageComponent
   },
   {
     path: 'registration',
-    component: RegistrationPageComponent,
-    canActivate: [LoggedOutGuard]
+    component: RegistrationPageComponent
   },
   {
     path: 'dashboard',
     component: DashboardPageComponent,
-    canActivate: [LoggedInGuard],
     children: [
       {
         path: '',
         component: DashboardMainPageComponent,
-        canActivate: [HasRoleGuard, IsClientRoleGuard, IsVetRoleGuard]
       },
       {
         path: 'choose-role',
         component: ChooseRolePageComponent,
-        canActivate: [NotHasRoleGuard]
       },
       {
         path: 'vet',
         component: VetPageComponent,
-        canActivate: [HasRoleGuard, IsClientRoleGuard]
       },
       {
         path: 'client',
         component: ClientPageComponent,
-        canActivate: [HasRoleGuard, IsVetRoleGuard]
       },
     ]
   },
   {
     path: '**',
-    redirectTo: '/',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];

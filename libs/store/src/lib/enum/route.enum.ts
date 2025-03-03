@@ -1,4 +1,5 @@
 export enum RoutePageEnum {
+  empty = '',
   home = '/home/',
   login = '/login/',
   registration = '/registration/',
