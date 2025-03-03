@@ -1,0 +1,24 @@
+@use 'libs/scss/src/abstracts/mixins';
+@use 'libs/scss/src/abstracts/variables';
+@use 'libs/scss/src/base/colors';
+
+.mobile-nav-menu-view {
+  padding: 1rem;
+  position: fixed;
+  top: variables.$nav-height;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: colors.$color-surface;
+  overflow: scroll;
+  transform: translateX(100%);
+  transition: transform 0.25s ease-in-out;
+
+  @include mixins.breakpoint(md, min) {
+    display: none;
+  }
+}
+
+.is-open {
+  transform: translateX(0);
+}

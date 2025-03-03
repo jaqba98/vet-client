@@ -28,7 +28,7 @@ export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormMod
           text: 'Home'
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: true
       },
       aboutUs: {
         id: 'aboutUs',
@@ -38,7 +38,7 @@ export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormMod
           text: 'About us'
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: true
       },
       price: {
         id: 'price',
@@ -48,7 +48,7 @@ export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormMod
           text: 'Price'
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: true
       },
       contact: {
         id: 'contact',
@@ -58,7 +58,7 @@ export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormMod
           text: 'Contact'
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: true
       },
     });
   }

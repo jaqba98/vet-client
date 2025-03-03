@@ -1,0 +1,8 @@
+<div class="mobile-nav-menu-view" [ngClass]="{ 'is-open': isOpen }">
+  <ng-container *ngIf="menuType === 'home'">
+    <lib-home-nav-menu-form [isHorizontal]="false"></lib-home-nav-menu-form>
+  </ng-container>
+  <ng-container *ngIf="menuType === 'dashboard'">
+    <lib-dashboard-nav-menu-form [isHorizontal]="false"></lib-dashboard-nav-menu-form>
+  </ng-container>
+</div>

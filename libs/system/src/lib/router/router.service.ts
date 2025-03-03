@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-import { RoutePageEnum, RouteSectionEnum } from '@vet-client/lib-store';
+import { NavStoreType, navSwitchIsOpen, RoutePageEnum, RouteSectionEnum } from '@vet-client/lib-store';
 
 @Injectable({ providedIn: 'root' })
 export class RouterService {
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly store: Store<NavStoreType>,
+    private readonly router: Router
+  ) {}
 
   navigate(page: RoutePageEnum, section: RouteSectionEnum) {
     if (page === RoutePageEnum.empty) {
@@ -19,5 +23,6 @@ export class RouterService {
         }
       }, 100);
     });
+    this.store.dispatch(navSwitchIsOpen({ isOpen: false }));
   }
 }

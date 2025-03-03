@@ -35,8 +35,8 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
           type: 'text',
           text: 'Dashboard',
         },
-        fullWidth: false,
-        defaultValue: false
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }

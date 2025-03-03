@@ -3,9 +3,14 @@ import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { RouteStoreType } from '@vet-client/lib-store';
+import { NavStoreType, RouteStoreType } from '@vet-client/lib-store';
 import { RouterService } from '@vet-client/lib-system';
-import { FooterViewComponent, MainViewComponent, NavViewComponent } from '@vet-client/lib-view';
+import {
+  FooterViewComponent,
+  MainViewComponent,
+  MobileNavMenuViewComponent,
+  NavViewComponent
+} from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-root-page',
@@ -14,6 +19,7 @@ import { FooterViewComponent, MainViewComponent, NavViewComponent } from '@vet-c
     FooterViewComponent,
     NavViewComponent,
     MainViewComponent,
+    MobileNavMenuViewComponent,
   ],
   templateUrl: './root-page.component.html',
 })
@@ -21,7 +27,8 @@ export class RootPageComponent implements OnInit, OnDestroy {
   private sub!: Subscription;
 
   constructor(
-    private readonly store: Store<RouteStoreType>,
+    private readonly routeStore: Store<RouteStoreType>,
+    private readonly navStore: Store<NavStoreType>,
     private readonly router: RouterService
   ) {
     this.sub = new Subscription();
@@ -29,9 +36,16 @@ export class RootPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub.add(
-      this.store
+      this.routeStore
         .select('route')
         .subscribe((route) => this.router.navigate(route.page, route.section))
+    );
+    this.sub.add(
+      this.navStore
+        .select('nav')
+        .subscribe((nav) => {
+          document.body.style.overflow = nav.isOpen ? 'hidden' : 'auto';
+        })
     );
   }
 
