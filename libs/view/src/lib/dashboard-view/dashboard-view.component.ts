@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control';
+import {
+  navDashboardNavIsOpen,
+  NavStoreModel,
+  NavStoreType,
+} from '@vet-client/lib-store';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'lib-dashboard-view',
@@ -28,8 +35,16 @@ export class DashboardViewComponent {
     fullWidth: false
   };
 
+  constructor(private readonly store: Store<NavStoreType>) {
+  }
+
   onClick() {
-    this.isOpen = !this.isOpen;
+    this.store.select('nav').pipe(take(1)).subscribe((state: NavStoreModel) => {
+      this.store.dispatch(
+        navDashboardNavIsOpen({ dashboardNavIsOpen: !state.dashboardNavIsOpen })
+      )
+      this.isOpen = !state.dashboardNavIsOpen;
+    });
   }
 
   getMenuClassList() {
