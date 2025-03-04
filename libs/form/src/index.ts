@@ -6,6 +6,7 @@ export * from './lib/registration-form/registration-form.component';
 export * from './lib/dashboard-nav-menu-form/dashboard-nav-menu-form.component';
 export * from './lib/choose-role-form/choose-role-form.component';
 export * from './lib/vet-menu-form/vet-menu-form.component';
+export * from './lib/client-menu-form/client-menu-form.component';
 export * from './lib/login-registration-form/component/big-login-registration-form.component';
 export * from './lib/login-registration-form/component/small-login-registration-form.component';
 export * from './lib/logout-form/component/big-logout-form.component';

@@ -11,15 +11,10 @@ import {
   NavStoreType,
 } from '@vet-client/lib-store';
 import { take } from 'rxjs';
-import { VetMenuFormComponent } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-dashboard-view',
-  imports: [
-    CommonModule,
-    ButtonControlComponent,
-    VetMenuFormComponent
-  ],
+  imports: [CommonModule, ButtonControlComponent],
   templateUrl: './dashboard-view.component.html',
   styleUrl: './dashboard-view.component.scss',
   hostDirectives: [BaseComponentDirective],
