@@ -20,6 +20,8 @@ import { LogoutRequestModel } from '../model/request/logout-request.model';
 import { LogoutResponseModel } from '../model/response/logout-response.model';
 import { RegistrationRequestModel } from '../model/request/registration-request.model';
 import { RegistrationResponseModel } from '../model/response/registration-response.model';
+import { GetAccountRequestModel } from '../model/request/get-account-request.model';
+import { GetAccountResponseModel } from '../model/response/get-account-response.model';
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -67,11 +69,20 @@ export class HttpPostAppService {
       .pipe(take(1));
   }
 
-  registrationPost(request: RegistrationRequestModel): Observable<RegistrationResponseModel> {
+  registrationPost(request: RegistrationRequestModel) {
     return this.httpExecute
       .exec<RegistrationResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.registration, request }
+      })
+      .pipe(take(1));
+  }
+
+  getAccountPost(request: GetAccountRequestModel) {
+    return this.httpExecute
+      .exec<GetAccountResponseModel>({
+        method: MethodEnum.post,
+        type: { endpoint: EndpointEnum.getAccount, request }
       })
       .pipe(take(1));
   }

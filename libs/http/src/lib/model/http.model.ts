@@ -7,6 +7,7 @@ import { LogoutPostModel } from './post/logout-post.model';
 import { LoginPostModel } from './post/login-post.model';
 import { RegistrationPostModel } from './post/registration-post.model';
 import { MethodEnum } from '../enum/method.enum';
+import { GetAccountPostModel } from './post/get-account-post.model';
 
 type HttpPostType =
   | AuthPostModel
@@ -16,7 +17,8 @@ type HttpPostType =
   | IsVetPostModel
   | LoginPostModel
   | LogoutPostModel
-  | RegistrationPostModel;
+  | RegistrationPostModel
+  | GetAccountPostModel;
 
 interface HttpModel {
   method: MethodEnum.post;

@@ -11,6 +11,7 @@ import {
   VetPageComponent
 } from '@vet-client/lib-page';
 import {
+  GetAccountGuard,
   HasRoleGuard,
   IsClientRoleGuard,
   IsVetRoleGuard,
@@ -43,7 +44,7 @@ export const route: Route[] = [
   {
     path: 'dashboard',
     component: DashboardPageComponent,
-    canActivate: [LoggedInGuard],
+    canActivate: [LoggedInGuard, GetAccountGuard],
     children: [
       {
         path: '',

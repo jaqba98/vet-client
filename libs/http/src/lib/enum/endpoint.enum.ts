@@ -6,5 +6,6 @@ export enum EndpointEnum {
   isVet = 'is-vet',
   login = 'login',
   logout = 'logout',
-  registration = 'registration'
+  registration = 'registration',
+  getAccount = 'get-account',
 }
