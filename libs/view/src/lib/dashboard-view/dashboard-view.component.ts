@@ -11,13 +11,18 @@ import {
   NavStoreType,
 } from '@vet-client/lib-store';
 import { take } from 'rxjs';
+import { VetMenuFormComponent } from '@vet-client/lib-form';
 
 @Component({
   selector: 'lib-dashboard-view',
-  imports: [CommonModule, ButtonControlComponent],
+  imports: [
+    CommonModule,
+    ButtonControlComponent,
+    VetMenuFormComponent
+  ],
   templateUrl: './dashboard-view.component.html',
   styleUrl: './dashboard-view.component.scss',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
 export class DashboardViewComponent {
   isOpen = false;
@@ -29,22 +34,26 @@ export class DashboardViewComponent {
       icon: {
         icon: faBars,
         color: 'light-primary',
-        fontSize: '1rem'
+        fontSize: '1rem',
       },
     },
-    fullWidth: false
+    fullWidth: false,
   };
 
-  constructor(private readonly store: Store<NavStoreType>) {
-  }
+  constructor(private readonly store: Store<NavStoreType>) {}
 
   onClick() {
-    this.store.select('nav').pipe(take(1)).subscribe((state: NavStoreModel) => {
-      this.store.dispatch(
-        navDashboardNavIsOpen({ dashboardNavIsOpen: !state.dashboardNavIsOpen })
-      )
-      this.isOpen = !state.dashboardNavIsOpen;
-    });
+    this.store
+      .select('nav')
+      .pipe(take(1))
+      .subscribe((state: NavStoreModel) => {
+        this.store.dispatch(
+          navDashboardNavIsOpen({
+            dashboardNavIsOpen: !state.dashboardNavIsOpen,
+          })
+        );
+        this.isOpen = !state.dashboardNavIsOpen;
+      });
   }
 
   getMenuClassList() {
