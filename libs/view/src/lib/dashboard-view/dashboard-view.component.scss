@@ -3,50 +3,74 @@
 @use 'libs/scss/src/base/colors';
 
 .dashboard-view {
-  height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
+  min-height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
   display: flex;
+  overflow-x: hidden;
 
   &__menu {
-    width: calc(100vw - 40px - 2rem);
-    height: inherit;
+    position: relative;
     background-color: colors.$color-surface;
     border-right: 1px solid colors.$color-border;
-    position: fixed;
-    transition: transform 0.25s ease-in-out;
+    transition: width 0.1s ease-in-out;
 
     &--open {
-      transform: translateX(0);
+      width: calc(100vw - 35px - 2rem);
     }
 
     &--close {
-      transform: translateX(-100%);
-    }
-
-    @include mixins.breakpoint(md, min) {
-      position: static;
-      transform: translateX(0);
-      width: 300px;
-      transition: none;
+      width: 0;
     }
 
     &--hamburger {
-      width: 40px;
-      height: 40px;
       position: absolute;
       right: calc(-40px - 2rem);
-      border: none;
-      background-color: orange;
       margin: 1rem;
 
       @include mixins.breakpoint(md, min) {
         display: none;
       }
     }
+
+    &--content {
+      padding: 1rem;
+
+      &--open {
+        display: block;
+      }
+
+      &--close {
+        display: none;
+      }
+
+      @include mixins.breakpoint(md, min) {
+        display: block;
+      }
+    }
+
+    @include mixins.breakpoint(md, min) {
+      position: static;
+      width: 300px;
+      transition: none;
+    }
   }
 
   &__content {
     width: 100%;
-    height: inherit;
     background-color: colors.$color-background;
+    padding: calc(40px + 2rem) 1rem 1rem;
+
+    @include mixins.breakpoint(md, max) {
+      &--open {
+        width: 0;
+      }
+
+      &--close {
+        width: 100%;
+      }
+    }
+
+    @include mixins.breakpoint(md, min) {
+      padding: 1rem;
+    }
   }
 }

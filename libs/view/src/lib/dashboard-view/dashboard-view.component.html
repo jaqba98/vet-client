@@ -1,8 +1,17 @@
 <div class="dashboard-view">
-  <div class="dashboard-view__menu" [ngClass]="getClassIsOpen()">
-    <button class="dashboard-view__menu--hamburger" (click)="onClick()">
-      <lib-button-control [model]="buttonModel"></lib-button-control>
-    </button>
+  <div class="dashboard-view__menu" [ngClass]="getMenuClassList()">
+    <div class="dashboard-view__menu--hamburger">
+      <lib-button-control [model]="hamburgerModel" (event)="onClick()"></lib-button-control>
+    </div>
+    <div class="dashboard-view__menu--content" [ngClass]="getMenuContentClassList()">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda blanditiis earum impedit ipsam
+      nisi quam quisquam tenetur vero, voluptatum. Accusantium aliquid blanditiis esse illum nam numquam pariatur
+      sit voluptatum?
+    </div>
   </div>
-  <div class="dashboard-view__content"></div>
+  <div class="dashboard-view__content" [ngClass]="getContentClassList()">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda blanditiis earum impedit ipsam
+    nisi quam quisquam tenetur vero, voluptatum. Accusantium aliquid blanditiis esse illum nam numquam pariatur
+    sit voluptatum?
+  </div>
 </div>

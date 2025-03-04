@@ -15,6 +15,7 @@
   height: variables.$nav-height;
   padding: 0.75rem;
   border-bottom: 1px solid colors.$color-border;
+  z-index: variables.$z-index-foreground;
 
   &__menu {
     display: flex;

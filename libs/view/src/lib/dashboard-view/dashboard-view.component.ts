@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'lib-dashboard-view',
@@ -15,7 +15,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 export class DashboardViewComponent {
   isOpen = false;
 
-  buttonModel: ButtonControlModel = {
+  hamburgerModel: ButtonControlModel = {
     id: 'hamburger',
     value: {
       type: 'icon',
@@ -32,7 +32,21 @@ export class DashboardViewComponent {
     this.isOpen = !this.isOpen;
   }
 
-  getClassIsOpen() {
-    return this.isOpen ? 'dashboard-view__menu--open' : 'dashboard-view__menu--close';
+  getMenuClassList() {
+    return this.isOpen
+      ? 'dashboard-view__menu--open'
+      : 'dashboard-view__menu--close';
+  }
+
+  getMenuContentClassList() {
+    return this.isOpen
+      ? 'dashboard-view__menu--content--open'
+      : 'dashboard-view__menu--content--close';
+  }
+
+  getContentClassList() {
+    return this.isOpen
+      ? 'dashboard-view__content--open'
+      : 'dashboard-view__content--close';
   }
 }
