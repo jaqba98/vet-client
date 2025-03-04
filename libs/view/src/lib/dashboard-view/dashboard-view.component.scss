@@ -1,14 +1,16 @@
 @use 'libs/scss/src/abstracts/mixins';
 @use 'libs/scss/src/abstracts/variables';
+@use 'libs/scss/src/base/colors';
 
 .dashboard-view {
   height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
   display: flex;
 
   &__menu {
-    width: calc(100vw - 40px);
+    width: calc(100vw - 40px - 2rem);
     height: inherit;
-    background-color: red;
+    background-color: colors.$color-surface;
+    border-right: 1px solid colors.$color-border;
     position: fixed;
     transition: transform 0.25s ease-in-out;
 
@@ -31,9 +33,10 @@
       width: 40px;
       height: 40px;
       position: absolute;
-      right: -40px;
+      right: calc(-40px - 2rem);
       border: none;
       background-color: orange;
+      margin: 1rem;
 
       @include mixins.breakpoint(md, min) {
         display: none;
@@ -44,6 +47,6 @@
   &__content {
     width: 100%;
     height: inherit;
-    background-color: blue;
+    background-color: colors.$color-background;
   }
 }

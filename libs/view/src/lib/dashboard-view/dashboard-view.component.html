@@ -1,6 +1,8 @@
 <div class="dashboard-view">
   <div class="dashboard-view__menu" [ngClass]="getClassIsOpen()">
-    <button class="dashboard-view__menu--hamburger" (click)="onClick()">Click</button>
+    <button class="dashboard-view__menu--hamburger" (click)="onClick()">
+      <lib-button-control [model]="buttonModel"></lib-button-control>
+    </button>
   </div>
   <div class="dashboard-view__content"></div>
 </div>
