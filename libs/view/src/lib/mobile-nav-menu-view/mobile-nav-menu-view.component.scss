@@ -3,7 +3,7 @@
 @use 'libs/scss/src/base/colors';
 
 .mobile-nav-menu-view {
-  padding: 1rem;
+  padding: 1rem 0.5rem 1rem 1rem;
   position: fixed;
   top: variables.$nav-height;
   left: 0;
