@@ -6,7 +6,6 @@ import { StorybookUtilsService } from '../utils/storybook-utils.service';
 const meta: Meta<ChooseRoleViewComponent> = {
   component: ChooseRoleViewComponent,
   title: 'View/ChooseRole',
-  ...StorybookUtilsService.getFullscreen(),
   ...StorybookUtilsService.getProviders()
 };
 export default meta;

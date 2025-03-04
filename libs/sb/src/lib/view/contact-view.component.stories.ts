@@ -6,7 +6,6 @@ import { StorybookUtilsService } from '../utils/storybook-utils.service';
 const meta: Meta<ContactViewComponent> = {
   component: ContactViewComponent,
   title: 'View/Contact',
-  ...StorybookUtilsService.getFullscreen(),
   ...StorybookUtilsService.getProviders()
 };
 export default meta;

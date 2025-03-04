@@ -6,7 +6,6 @@ import { StorybookUtilsService } from '../utils/storybook-utils.service';
 const meta: Meta<FooterViewComponent> = {
   component: FooterViewComponent,
   title: 'View/Footer',
-  ...StorybookUtilsService.getFullscreen(),
   ...StorybookUtilsService.getProviders()
 };
 export default meta;

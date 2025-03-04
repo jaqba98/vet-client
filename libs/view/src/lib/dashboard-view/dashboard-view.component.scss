@@ -1,0 +1,49 @@
+@use 'libs/scss/src/abstracts/mixins';
+@use 'libs/scss/src/abstracts/variables';
+
+.dashboard-view {
+  height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
+  display: flex;
+
+  &__menu {
+    width: calc(100vw - 40px);
+    height: inherit;
+    background-color: red;
+    position: fixed;
+    transition: transform 0.25s ease-in-out;
+
+    &--open {
+      transform: translateX(0);
+    }
+
+    &--close {
+      transform: translateX(-100%);
+    }
+
+    @include mixins.breakpoint(md, min) {
+      position: static;
+      transform: translateX(0);
+      width: 300px;
+      transition: none;
+    }
+
+    &--hamburger {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: -40px;
+      border: none;
+      background-color: orange;
+
+      @include mixins.breakpoint(md, min) {
+        display: none;
+      }
+    }
+  }
+
+  &__content {
+    width: 100%;
+    height: inherit;
+    background-color: blue;
+  }
+}

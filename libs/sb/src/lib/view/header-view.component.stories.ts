@@ -6,7 +6,6 @@ import { StorybookUtilsService } from '../utils/storybook-utils.service';
 const meta: Meta<HeaderViewComponent> = {
   component: HeaderViewComponent,
   title: 'View/Header',
-  ...StorybookUtilsService.getFullscreen(),
   ...StorybookUtilsService.getProviders()
 };
 export default meta;

@@ -37,6 +37,16 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
         },
         defaultValue: false,
         fullWidth: true
+      },
+      settings: {
+        kind: 'button',
+        id: 'settings',
+        value: {
+          type: 'text',
+          text: 'Settings',
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }

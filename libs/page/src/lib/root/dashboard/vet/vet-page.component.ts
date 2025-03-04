@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { VetViewComponent } from '@vet-client/lib-view';
+import { DashboardViewComponent } from '@vet-client/lib-view';
 
 @Component({
   selector: 'lib-vet-page',
-  imports: [VetViewComponent],
+  imports: [DashboardViewComponent],
   templateUrl: './vet-page.component.html',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
 export class VetPageComponent {}
