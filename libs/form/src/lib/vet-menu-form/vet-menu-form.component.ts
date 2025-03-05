@@ -56,6 +56,16 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
         },
         defaultValue: false,
         fullWidth: true
+      },
+      vetServices: {
+        id: 'vetServices',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Services'
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }
@@ -76,6 +86,10 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
     } else if (model.vetMedication) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardVetMedication, section: RouteSectionEnum.dashboardVetMedication })
+      );
+    } else if (model.vetServices) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardVetServices, section: RouteSectionEnum.dashboardVetServices })
       );
     }
   }

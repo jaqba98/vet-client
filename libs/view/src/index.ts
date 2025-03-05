@@ -18,3 +18,4 @@ export * from './lib/vet-settings-view/vet-settings-view.component';
 export * from './lib/vet-clinic-view/vet-clinic-view.component';
 export * from './lib/vet-medical-record-view/vet-medical-record-view.component';
 export * from './lib/vet-medication-view/vet-medication-view.component';
+export * from './lib/vet-services-view/vet-services-view.component';

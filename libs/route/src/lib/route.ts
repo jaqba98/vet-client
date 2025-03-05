@@ -7,9 +7,15 @@ import {
   DashboardMainPageComponent,
   DashboardPageComponent,
   HomePageComponent,
-  LoginPageComponent, ProfilePageComponent,
-  RegistrationPageComponent, VetClinicPageComponent, VetMedicalRecordPageComponent,
-  VetPageComponent, VetSettingsPageComponent
+  LoginPageComponent,
+  ProfilePageComponent,
+  RegistrationPageComponent,
+  VetClinicPageComponent,
+  VetMedicalRecordPageComponent,
+  VetMedicationPageComponent,
+  VetPageComponent,
+  VetServicesPageComponent,
+  VetSettingsPageComponent
 } from '@vet-client/lib-page';
 import {
   GetAccountGuard,
@@ -20,9 +26,6 @@ import {
   LoggedOutGuard,
   NotHasRoleGuard
 } from '@vet-client/lib-guard';
-import {
-  VetMedicationPageComponent
-} from '../../../page/src/lib/root/dashboard/vet/vet-medication/vet-medication-page.component';
 
 export const route: Route[] = [
   {
@@ -80,6 +83,10 @@ export const route: Route[] = [
           {
             path: 'medication',
             component: VetMedicationPageComponent
+          },
+          {
+            path: 'services',
+            component: VetServicesPageComponent
           }
         ]
       },
