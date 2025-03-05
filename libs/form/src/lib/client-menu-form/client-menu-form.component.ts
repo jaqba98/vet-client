@@ -27,6 +27,16 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true
+      },
+      clientPets: {
+        id: 'clientPets',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Pets'
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }
@@ -35,6 +45,10 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
     if (model.clientSettings) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardClientSettings, section: RouteSectionEnum.dashboardClientSettings })
+      );
+    } else if (model.clientPets) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardClientPets, section: RouteSectionEnum.dashboardClientPets })
       );
     }
   }

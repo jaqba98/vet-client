@@ -3,7 +3,9 @@ import { Route } from '@angular/router';
 import {
   AccountSettingsPageComponent,
   ChooseRolePageComponent,
-  ClientPageComponent, ClientSettingsPageComponent,
+  ClientPageComponent,
+  ClientPetsPageComponent,
+  ClientSettingsPageComponent,
   DashboardMainPageComponent,
   DashboardPageComponent,
   HomePageComponent,
@@ -112,6 +114,10 @@ export const route: Route[] = [
             path: 'settings',
             component: ClientSettingsPageComponent
           },
+          {
+            path: 'pets',
+            component: ClientPetsPageComponent
+          }
         ]
       },
       {
