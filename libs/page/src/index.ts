@@ -16,3 +16,4 @@ export * from './lib/root/dashboard/vet/vet-medication/vet-medication-page.compo
 export * from './lib/root/dashboard/vet/vet-services/vet-services-page.component';
 export * from './lib/root/dashboard/vet/vet-appointment/vet-appointment-page.component';
 export * from './lib/root/dashboard/vet/vet-invoice/vet-invoice-page.component';
+export * from './lib/root/dashboard/vet/vet-patients/vet-patients-page.component';

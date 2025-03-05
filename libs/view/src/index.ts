@@ -21,3 +21,4 @@ export * from './lib/vet-medication-view/vet-medication-view.component';
 export * from './lib/vet-services-view/vet-services-view.component';
 export * from './lib/vet-appointment-view/vet-appointment-view.component';
 export * from './lib/vet-invoice-view/vet-invoice-view.component';
+export * from './lib/vet-patients-view/vet-patients-view.component';
