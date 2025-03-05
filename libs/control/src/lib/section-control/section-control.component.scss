@@ -38,6 +38,8 @@
     min-height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
   }
 
+  &--padding-reset { padding: 1rem; }
+
   &__content {
     flex: 1;
 

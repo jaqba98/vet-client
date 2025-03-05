@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 
 import {
+  AccountSettingsPageComponent,
   ChooseRolePageComponent,
   ClientPageComponent,
   DashboardMainPageComponent,
@@ -65,6 +66,11 @@ export const route: Route[] = [
         path: 'client',
         component: ClientPageComponent,
         canActivate: [HasRoleGuard, IsClientRoleGuard]
+      },
+      {
+        path: 'account-settings',
+        component: AccountSettingsPageComponent,
+        canActivate: [HasRoleGuard]
       },
     ]
   },

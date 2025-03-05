@@ -6,6 +6,7 @@ export interface SectionMainControlModel {
   'section-control--background-header': boolean;
   'section-control--height-480px': boolean;
   'section-control--min-height-full': boolean;
+  'section-control--padding-reset': boolean;
 }
 
 export interface SectionContentControlModel {

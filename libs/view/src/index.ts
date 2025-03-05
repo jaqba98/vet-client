@@ -12,3 +12,4 @@ export * from './lib/vet-view/vet-view.component';
 export * from './lib/client-view/client-view.component';
 export * from './lib/mobile-nav-menu-view/mobile-nav-menu-view.component';
 export * from './lib/dashboard-view/dashboard-view.component';
+export * from './lib/account-settings-view/account-settings-view.component';

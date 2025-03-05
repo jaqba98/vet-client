@@ -38,12 +38,12 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
         defaultValue: false,
         fullWidth: true
       },
-      settings: {
+      accountSettings: {
         kind: 'button',
-        id: 'settings',
+        id: 'accountSettings',
         value: {
           type: 'text',
-          text: 'Settings',
+          text: 'Account Settings',
         },
         defaultValue: false,
         fullWidth: true
@@ -57,6 +57,13 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
         setRoute({
           page: RoutePageEnum.dashboard,
           section: RouteSectionEnum.dashboard,
+        })
+      );
+    } else if (model.accountSettings) {
+      this.store.dispatch(
+        setRoute({
+          page: RoutePageEnum.dashboardAccountSettings,
+          section: RouteSectionEnum.empty,
         })
       );
     }
