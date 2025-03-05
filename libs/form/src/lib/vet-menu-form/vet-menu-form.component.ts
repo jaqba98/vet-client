@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import {
   VetMenuFormModel, VetMenuModel
 } from './vet-menu-form.model';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
 
 @Component({
   selector: 'lib-vet-menu-form',
@@ -13,44 +15,14 @@ import {
   hostDirectives: [BaseComponentDirective]
 })
 export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetMenuModel> {
-  constructor() {
+  constructor(private readonly store: Store<RouteStoreModel>) {
     super({
-      vet1: {
-        id: 'home',
+      vetSettings: {
+        id: 'vetSettings',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Vet1'
-        },
-        defaultValue: false,
-        fullWidth: true
-      },
-      vet2: {
-        id: 'home',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Vet2'
-        },
-        defaultValue: false,
-        fullWidth: true
-      },
-      vet3: {
-        id: 'home',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Vet3'
-        },
-        defaultValue: false,
-        fullWidth: true
-      },
-      vet4: {
-        id: 'home',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Vet4'
+          text: 'Vet Settings'
         },
         defaultValue: false,
         fullWidth: true
@@ -59,6 +31,11 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
   }
 
   override onSubmit(model: VetMenuModel) {
-    console.log(model);
+    const { vetSettings } = model;
+    if (vetSettings) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardVetVetSettings, section: RouteSectionEnum.dashboardVetVetSettings })
+      );
+    }
   }
 }

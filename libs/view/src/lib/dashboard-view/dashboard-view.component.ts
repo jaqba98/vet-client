@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
+import { RouterOutlet } from '@angular/router';
+import { take } from 'rxjs';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control';
@@ -10,11 +12,10 @@ import {
   NavStoreModel,
   NavStoreType,
 } from '@vet-client/lib-store';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'lib-dashboard-view',
-  imports: [CommonModule, ButtonControlComponent],
+  imports: [CommonModule, ButtonControlComponent, RouterOutlet],
   templateUrl: './dashboard-view.component.html',
   styleUrl: './dashboard-view.component.scss',
   hostDirectives: [BaseComponentDirective],
