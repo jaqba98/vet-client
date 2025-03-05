@@ -3,7 +3,7 @@ import { Route } from '@angular/router';
 import {
   AccountSettingsPageComponent,
   ChooseRolePageComponent,
-  ClientPageComponent,
+  ClientPageComponent, ClientSettingsPageComponent,
   DashboardMainPageComponent,
   DashboardPageComponent,
   HomePageComponent,
@@ -106,7 +106,13 @@ export const route: Route[] = [
       {
         path: 'client',
         component: ClientPageComponent,
-        canActivate: [HasRoleGuard, IsClientRoleGuard]
+        canActivate: [HasRoleGuard, IsClientRoleGuard],
+        children: [
+          {
+            path: 'settings',
+            component: ClientSettingsPageComponent
+          },
+        ]
       },
       {
         path: 'account-settings',

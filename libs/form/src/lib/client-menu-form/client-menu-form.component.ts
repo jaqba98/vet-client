@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
@@ -6,6 +7,7 @@ import {
   ClientMenuFormModel,
   ClientMenuModel
 } from './client-menu-form.model';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
 
 @Component({
   selector: 'lib-client-menu-form',
@@ -14,44 +16,14 @@ import {
   hostDirectives: [BaseComponentDirective]
 })
 export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel, ClientMenuModel> {
-  constructor() {
+  constructor(private readonly store: Store<RouteStoreModel>) {
     super({
-      client1: {
-        id: 'home',
+      clientSettings: {
+        id: 'clientSettings',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Client1'
-        },
-        defaultValue: false,
-        fullWidth: true
-      },
-      client2: {
-        id: 'home',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Client2'
-        },
-        defaultValue: false,
-        fullWidth: true
-      },
-      client3: {
-        id: 'home',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Client3'
-        },
-        defaultValue: false,
-        fullWidth: true
-      },
-      client4: {
-        id: 'home',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Client4'
+          text: 'Settings'
         },
         defaultValue: false,
         fullWidth: true
@@ -60,6 +32,10 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
   }
 
   override onSubmit(model: ClientMenuModel) {
-    console.log(model);
+    if (model.clientSettings) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardClientSettings, section: RouteSectionEnum.dashboardClientSettings })
+      );
+    }
   }
 }
