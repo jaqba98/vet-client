@@ -5,11 +5,11 @@ import { RouteSectionEnum } from '@vet-client/lib-store';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 
 @Component({
-  selector: 'lib-vet-settings-view',
+  selector: 'lib-vet-clinic-view',
   imports: [SectionControlComponent],
-  templateUrl: './vet-settings-view.component.html',
+  templateUrl: './vet-clinic-view.component.html',
   hostDirectives: [BaseComponentDirective]
 })
-export class VetSettingsViewComponent {
-  sectionId = RouteSectionEnum.dashboardVetSettings;
+export class VetClinicViewComponent {
+  sectionId = RouteSectionEnum.dashboardVetClinic;
 }

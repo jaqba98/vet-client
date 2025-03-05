@@ -15,3 +15,4 @@ export * from './lib/dashboard-view/dashboard-view.component';
 export * from './lib/account-settings-view/account-settings-view.component';
 export * from './lib/profile-view/profile-view.component';
 export * from './lib/vet-settings-view/vet-settings-view.component';
+export * from './lib/vet-clinic-view/vet-clinic-view.component';

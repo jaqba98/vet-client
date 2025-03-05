@@ -8,7 +8,7 @@ import {
   DashboardPageComponent,
   HomePageComponent,
   LoginPageComponent, ProfilePageComponent,
-  RegistrationPageComponent,
+  RegistrationPageComponent, VetClinicPageComponent,
   VetPageComponent, VetSettingsPageComponent
 } from '@vet-client/lib-page';
 import {
@@ -63,8 +63,12 @@ export const route: Route[] = [
         canActivate: [HasRoleGuard, IsVetRoleGuard],
         children: [
           {
-            path: 'vet-settings',
+            path: 'settings',
             component: VetSettingsPageComponent
+          },
+          {
+            path: 'clinic',
+            component: VetClinicPageComponent
           },
         ]
       },

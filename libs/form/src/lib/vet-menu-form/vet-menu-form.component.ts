@@ -22,7 +22,17 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Vet Settings'
+          text: 'Settings'
+        },
+        defaultValue: false,
+        fullWidth: true
+      },
+      vetClinic: {
+        id: 'vetClinic',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Clinic'
         },
         defaultValue: false,
         fullWidth: true
@@ -31,10 +41,14 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
   }
 
   override onSubmit(model: VetMenuModel) {
-    const { vetSettings } = model;
+    const { vetSettings, vetClinic } = model;
     if (vetSettings) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardVetVetSettings, section: RouteSectionEnum.dashboardVetVetSettings })
+        setRoute({ page: RoutePageEnum.dashboardVetSettings, section: RouteSectionEnum.dashboardVetSettings })
+      );
+    } else if (vetClinic) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardVetClinic, section: RouteSectionEnum.dashboardVetClinic })
       );
     }
   }

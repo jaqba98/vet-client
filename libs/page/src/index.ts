@@ -10,3 +10,4 @@ export * from './lib/root/dashboard/client/client-page.component';
 export * from './lib/root/dashboard/account-settings/account-settings-page.component';
 export * from './lib/root/dashboard/profile/profile-page.component';
 export * from './lib/root/dashboard/vet/vet-settings/vet-settings-page.component';
+export * from './lib/root/dashboard/vet/vet-clinic/vet-clinic-page.component';
