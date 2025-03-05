@@ -47,6 +47,16 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true
+      },
+      clientInvoice: {
+        id: 'clientInvoice',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Invoice'
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }
@@ -63,6 +73,10 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
     } else if (model.clientAppointment) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardClientAppointment, section: RouteSectionEnum.dashboardClientAppointment })
+      );
+    } else if (model.clientInvoice) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardClientInvoice, section: RouteSectionEnum.dashboardClientInvoice })
       );
     }
   }
