@@ -15,3 +15,4 @@ export * from './lib/root/dashboard/vet/vet-medical-record/vet-medical-record-pa
 export * from './lib/root/dashboard/vet/vet-medication/vet-medication-page.component';
 export * from './lib/root/dashboard/vet/vet-services/vet-services-page.component';
 export * from './lib/root/dashboard/vet/vet-appointment/vet-appointment-page.component';
+export * from './lib/root/dashboard/vet/vet-invoice/vet-invoice-page.component';

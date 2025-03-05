@@ -7,6 +7,7 @@ export interface VetMenuFormModel {
   vetMedication: ControlType;
   vetServices: ControlType;
   vetAppointment: ControlType;
+  vetInvoice: ControlType;
 }
 
 export interface VetMenuModel {
@@ -16,4 +17,5 @@ export interface VetMenuModel {
   vetMedication: boolean;
   vetServices: boolean;
   vetAppointment: boolean;
+  vetInvoice: boolean;
 }

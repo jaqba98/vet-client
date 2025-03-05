@@ -20,3 +20,4 @@ export * from './lib/vet-medical-record-view/vet-medical-record-view.component';
 export * from './lib/vet-medication-view/vet-medication-view.component';
 export * from './lib/vet-services-view/vet-services-view.component';
 export * from './lib/vet-appointment-view/vet-appointment-view.component';
+export * from './lib/vet-invoice-view/vet-invoice-view.component';

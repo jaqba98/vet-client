@@ -76,6 +76,16 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
         },
         defaultValue: false,
         fullWidth: true
+      },
+      vetInvoice: {
+        id: 'vetInvoice',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Invoice'
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }
@@ -104,6 +114,10 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
     } else if (model.vetAppointment) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardVetAppointment, section: RouteSectionEnum.dashboardVetAppointment })
+      );
+    } else if (model.vetInvoice) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardVetInvoice, section: RouteSectionEnum.dashboardVetInvoice })
       );
     }
   }
