@@ -2,7 +2,9 @@ import { Route } from '@angular/router';
 
 import {
   AccountSettingsPageComponent,
-  ChooseRolePageComponent, ClientAppointmentPageComponent,
+  ChooseRolePageComponent,
+  ClientAppointmentPageComponent,
+  ClientInvoicePageComponent,
   ClientPageComponent,
   ClientPetsPageComponent,
   ClientSettingsPageComponent,
@@ -124,6 +126,10 @@ export const route: Route[] = [
             path: 'appointment',
             component: ClientAppointmentPageComponent
           },
+          {
+            path: 'invoice',
+            component: ClientInvoicePageComponent
+          }
         ]
       },
       {
