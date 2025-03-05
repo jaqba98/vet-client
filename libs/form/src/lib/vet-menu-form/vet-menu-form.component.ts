@@ -46,23 +46,36 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
         },
         defaultValue: false,
         fullWidth: true
+      },
+      vetMedication: {
+        id: 'vetMedication',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Medication'
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }
 
   override onSubmit(model: VetMenuModel) {
-    const { vetSettings, vetClinic, vetMedicalRecord } = model;
-    if (vetSettings) {
+    if (model.vetSettings) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardVetSettings, section: RouteSectionEnum.dashboardVetSettings })
       );
-    } else if (vetClinic) {
+    } else if (model.vetClinic) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardVetClinic, section: RouteSectionEnum.dashboardVetClinic })
       );
-    } else if (vetMedicalRecord) {
+    } else if (model.vetMedicalRecord) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardVetMedicalRecord, section: RouteSectionEnum.dashboardVetMedicalRecord })
+      );
+    } else if (model.vetMedication) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardVetMedication, section: RouteSectionEnum.dashboardVetMedication })
       );
     }
   }

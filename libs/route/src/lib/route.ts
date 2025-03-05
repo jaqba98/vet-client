@@ -20,6 +20,9 @@ import {
   LoggedOutGuard,
   NotHasRoleGuard
 } from '@vet-client/lib-guard';
+import {
+  VetMedicationPageComponent
+} from '../../../page/src/lib/root/dashboard/vet/vet-medication/vet-medication-page.component';
 
 export const route: Route[] = [
   {
@@ -73,6 +76,10 @@ export const route: Route[] = [
           {
             path: 'medical-record',
             component: VetMedicalRecordPageComponent
+          },
+          {
+            path: 'medication',
+            component: VetMedicationPageComponent
           }
         ]
       },
