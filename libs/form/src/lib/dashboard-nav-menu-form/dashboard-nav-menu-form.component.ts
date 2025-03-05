@@ -47,6 +47,16 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
         },
         defaultValue: false,
         fullWidth: true
+      },
+      profile: {
+        kind: 'button',
+        id: 'profile',
+        value: {
+          type: 'text',
+          text: 'Profile',
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }
@@ -63,6 +73,13 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
       this.store.dispatch(
         setRoute({
           page: RoutePageEnum.dashboardAccountSettings,
+          section: RouteSectionEnum.empty,
+        })
+      );
+    } else if (model.profile) {
+      this.store.dispatch(
+        setRoute({
+          page: RoutePageEnum.dashboardProfile,
           section: RouteSectionEnum.empty,
         })
       );

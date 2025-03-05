@@ -7,7 +7,7 @@ import {
   DashboardMainPageComponent,
   DashboardPageComponent,
   HomePageComponent,
-  LoginPageComponent,
+  LoginPageComponent, ProfilePageComponent,
   RegistrationPageComponent,
   VetPageComponent
 } from '@vet-client/lib-page';
@@ -70,6 +70,11 @@ export const route: Route[] = [
       {
         path: 'account-settings',
         component: AccountSettingsPageComponent,
+        canActivate: [HasRoleGuard]
+      },
+      {
+        path: 'profile',
+        component: ProfilePageComponent,
         canActivate: [HasRoleGuard]
       },
     ]
