@@ -8,7 +8,7 @@ import {
   DashboardPageComponent,
   HomePageComponent,
   LoginPageComponent, ProfilePageComponent,
-  RegistrationPageComponent, VetClinicPageComponent,
+  RegistrationPageComponent, VetClinicPageComponent, VetMedicalRecordPageComponent,
   VetPageComponent, VetSettingsPageComponent
 } from '@vet-client/lib-page';
 import {
@@ -70,6 +70,10 @@ export const route: Route[] = [
             path: 'clinic',
             component: VetClinicPageComponent
           },
+          {
+            path: 'medical-record',
+            component: VetMedicalRecordPageComponent
+          }
         ]
       },
       {
