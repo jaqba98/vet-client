@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 
 import {
   AccountSettingsPageComponent,
-  ChooseRolePageComponent,
+  ChooseRolePageComponent, ClientAppointmentPageComponent,
   ClientPageComponent,
   ClientPetsPageComponent,
   ClientSettingsPageComponent,
@@ -13,10 +13,12 @@ import {
   ProfilePageComponent,
   RegistrationPageComponent,
   VetAppointmentPageComponent,
-  VetClinicPageComponent, VetInvoicePageComponent,
+  VetClinicPageComponent,
+  VetInvoicePageComponent,
   VetMedicalRecordPageComponent,
   VetMedicationPageComponent,
-  VetPageComponent, VetPatientsPageComponent,
+  VetPageComponent,
+  VetPatientsPageComponent,
   VetServicesPageComponent,
   VetSettingsPageComponent
 } from '@vet-client/lib-page';
@@ -117,7 +119,11 @@ export const route: Route[] = [
           {
             path: 'pets',
             component: ClientPetsPageComponent
-          }
+          },
+          {
+            path: 'appointment',
+            component: ClientAppointmentPageComponent
+          },
         ]
       },
       {

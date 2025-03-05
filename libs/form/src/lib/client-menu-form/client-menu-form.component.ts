@@ -37,6 +37,16 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true
+      },
+      clientAppointment: {
+        id: 'clientAppointment',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Appointment'
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }
@@ -49,6 +59,10 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
     } else if (model.clientPets) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardClientPets, section: RouteSectionEnum.dashboardClientPets })
+      );
+    } else if (model.clientAppointment) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardClientAppointment, section: RouteSectionEnum.dashboardClientAppointment })
       );
     }
   }

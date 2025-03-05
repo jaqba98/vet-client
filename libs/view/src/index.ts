@@ -24,3 +24,4 @@ export * from './lib/vet-invoice-view/vet-invoice-view.component';
 export * from './lib/vet-patients-view/vet-patients-view.component';
 export * from './lib/client-settings-view/client-settings-view.component';
 export * from './lib/client-pets-view/client-pets-view.component';
+export * from './lib/client-appointment-view/client-appointment-view.component';
