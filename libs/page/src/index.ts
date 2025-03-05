@@ -14,3 +14,4 @@ export * from './lib/root/dashboard/vet/vet-clinic/vet-clinic-page.component';
 export * from './lib/root/dashboard/vet/vet-medical-record/vet-medical-record-page.component';
 export * from './lib/root/dashboard/vet/vet-medication/vet-medication-page.component';
 export * from './lib/root/dashboard/vet/vet-services/vet-services-page.component';
+export * from './lib/root/dashboard/vet/vet-appointment/vet-appointment-page.component';

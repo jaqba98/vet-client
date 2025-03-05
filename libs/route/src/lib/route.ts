@@ -10,6 +10,7 @@ import {
   LoginPageComponent,
   ProfilePageComponent,
   RegistrationPageComponent,
+  VetAppointmentPageComponent,
   VetClinicPageComponent,
   VetMedicalRecordPageComponent,
   VetMedicationPageComponent,
@@ -87,6 +88,10 @@ export const route: Route[] = [
           {
             path: 'services',
             component: VetServicesPageComponent
+          },
+          {
+            path: 'appointment',
+            component: VetAppointmentPageComponent
           }
         ]
       },
