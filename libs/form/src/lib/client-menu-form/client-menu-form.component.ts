@@ -67,6 +67,16 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true
+      },
+      clientClinics: {
+        id: 'clientClinics',
+        kind: 'button',
+        value: {
+          type: 'text',
+          text: 'Clinics'
+        },
+        defaultValue: false,
+        fullWidth: true
       }
     });
   }
@@ -91,6 +101,10 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
     } else if (model.clientMedicalRecord) {
       this.store.dispatch(
         setRoute({ page: RoutePageEnum.dashboardClientMedicalRecord, section: RouteSectionEnum.dashboardClientMedicalRecord })
+      );
+    } else if (model.clientClinics) {
+      this.store.dispatch(
+        setRoute({ page: RoutePageEnum.dashboardClientClinics, section: RouteSectionEnum.dashboardClientClinics })
       );
     }
   }

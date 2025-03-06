@@ -6,6 +6,7 @@ export interface ClientMenuFormModel {
   clientAppointment: ControlType;
   clientInvoice: ControlType;
   clientMedicalRecord: ControlType;
+  clientClinics: ControlType;
 }
 
 export interface ClientMenuModel {
@@ -14,4 +15,5 @@ export interface ClientMenuModel {
   clientAppointment: boolean;
   clientInvoice: boolean;
   clientMedicalRecord: boolean;
+  clientClinics: boolean;
 }

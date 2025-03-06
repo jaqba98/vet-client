@@ -3,7 +3,7 @@ import { Route } from '@angular/router';
 import {
   AccountSettingsPageComponent,
   ChooseRolePageComponent,
-  ClientAppointmentPageComponent,
+  ClientAppointmentPageComponent, ClientClinicsPageComponent,
   ClientInvoicePageComponent, ClientMedicalRecordPageComponent,
   ClientPageComponent,
   ClientPetsPageComponent,
@@ -134,6 +134,10 @@ export const route: Route[] = [
             path: 'medical-record',
             component: ClientMedicalRecordPageComponent
           },
+          {
+            path: 'clinics',
+            component: ClientClinicsPageComponent
+          }
         ]
       },
       {
