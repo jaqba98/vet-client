@@ -35,6 +35,10 @@
   &__column {
     border-right: 1px solid colors.$color-border;
     padding: 1rem;
+
+    &--button {
+      width: 40px;
+    }
   }
 
   &__column:last-child {

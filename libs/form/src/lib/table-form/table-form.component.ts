@@ -33,6 +33,10 @@ export class TableFormComponent {
   model: TableControlModel = {
     addButton: true,
     removeButton: true,
+    refreshButton: true,
+    searchButton: true,
+    editButton: true,
+    previewButton: true,
     minIndex: 0,
     currentIndex: 0,
     maxRowPerPage: 5,

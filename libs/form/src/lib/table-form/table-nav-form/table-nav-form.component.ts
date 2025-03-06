@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate, faMagnifyingGlass, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
@@ -46,6 +46,36 @@ export class TableNavFormComponent extends BaseFormService<TableNavFormModel, Ta
         defaultValue: false,
         fullWidth: false,
         color: 'error'
+      },
+      refresh: {
+        id: 'refresh',
+        kind: 'button',
+        value: {
+          type: 'icon',
+          icon: {
+            icon: faArrowsRotate,
+            color: 'light-primary',
+            fontSize: '1rem'
+          }
+        },
+        defaultValue: false,
+        fullWidth: false,
+        color: 'primary'
+      },
+      search: {
+        id: 'search',
+        kind: 'button',
+        value: {
+          type: 'icon',
+          icon: {
+            icon: faMagnifyingGlass,
+            color: 'light-primary',
+            fontSize: '1rem'
+          }
+        },
+        defaultValue: false,
+        fullWidth: false,
+        color: 'dark-secondary'
       }
     });
   }
