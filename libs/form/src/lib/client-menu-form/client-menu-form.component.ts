@@ -27,7 +27,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'dark-secondary'
+        color: 'primary'
       },
       clientPets: {
         id: 'clientPets',
@@ -38,7 +38,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'dark-secondary'
+        color: 'primary'
       },
       clientAppointment: {
         id: 'clientAppointment',
@@ -49,7 +49,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'dark-secondary'
+        color: 'primary'
       },
       clientInvoice: {
         id: 'clientInvoice',
@@ -60,7 +60,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'dark-secondary'
+        color: 'primary'
       },
       clientMedicalRecord: {
         id: 'clientMedicalRecord',
@@ -71,7 +71,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'dark-secondary'
+        color: 'primary'
       },
       clientClinics: {
         id: 'clientClinics',
@@ -82,7 +82,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'dark-secondary'
+        color: 'primary'
       }
     });
   }
