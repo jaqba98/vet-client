@@ -1,6 +1,8 @@
 <lib-section-control
   [sectionId]="sectionId"
   [sectionPaddingReset]="true"
+  [sectionHeight100]="true"
+  [sectionContentHeight100]="true"
 >
-  <lib-table-control></lib-table-control>
+  <lib-table-control [model]="tableModel"></lib-table-control>
 </lib-section-control>

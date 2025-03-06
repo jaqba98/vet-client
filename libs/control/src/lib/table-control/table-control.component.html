@@ -1,1 +1,15 @@
-<p>table-control works!</p>
+<div class="table-control">
+  <div class="table-control__nav"></div>
+  <div class="table-control__table">
+    <table class="table">
+      <ng-container *ngFor="let row of model.rows">
+        <tr class="table__row">
+          <ng-container *ngFor="let column of row.columns">
+            <td class="table__column">{{ column.value }}</td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  <div class="table-control__paginator"></div>
+</div>

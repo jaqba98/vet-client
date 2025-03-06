@@ -1,0 +1,41 @@
+@use 'libs/scss/src/abstracts/variables';
+@use 'libs/scss/src/base/colors';
+
+.table-control {
+  height: 100%;
+
+  &__nav {
+    height: variables.$nav-height;
+    background-color: colors.$color-surface;
+    border-bottom: 1px solid colors.$color-border;
+  }
+
+  &__table {
+    height: calc(100% - #{variables.$nav-height} - #{variables.$footer-height});
+    overflow-y: auto;
+  }
+
+  &__paginator {
+    height: variables.$footer-height;
+    background-color: colors.$color-surface;
+    border-top: 1px solid colors.$color-border;
+  }
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+
+  &__column {
+    border-right: 1px solid colors.$color-border;
+    padding: 1rem;
+  }
+
+  &__column:last-child {
+    border-right: none;
+  }
+
+  &__row {
+    border-bottom: 1px solid colors.$color-border;
+  }
+}

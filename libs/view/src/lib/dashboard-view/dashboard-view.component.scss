@@ -3,12 +3,13 @@
 @use 'libs/scss/src/base/colors';
 
 .dashboard-view {
-  min-height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
+  min-height: 400px;
+  height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
   display: flex;
-  overflow-x: hidden;
 
   &__menu {
     position: relative;
+    height: 100%;
     background-color: colors.$color-surface;
     border-right: 1px solid colors.$color-border;
     transition: width 0.1s ease-in-out;
@@ -56,8 +57,10 @@
 
   &__content {
     width: 100%;
+    height: 100%;
     background-color: colors.$color-background;
-    padding: calc(40px + 2rem) 1rem 1rem;
+    padding: calc(40px + 2rem) 0 0;
+    overflow: auto;
 
     @include mixins.breakpoint(md, max) {
       &--open {
@@ -70,7 +73,7 @@
     }
 
     @include mixins.breakpoint(md, min) {
-      padding: 1rem;
+      padding: 0;
     }
   }
 }

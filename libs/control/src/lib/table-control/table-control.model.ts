@@ -1,2 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface,@typescript-eslint/no-empty-object-type
-export interface TableControlModel {}
+export interface TableColumnModel {
+  value: string;
+}
+
+export interface TableRowModel {
+  columns: TableColumnModel[];
+}
+
+export interface TableControlModel {
+  minIndex: number;
+  currentIndex: number;
+  maxRowPerPage: number;
+  rows: TableRowModel[];
+}

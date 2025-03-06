@@ -23,6 +23,7 @@ export class SectionControlComponent {
   @Input() sectionHeight480px = false;
   @Input() sectionMinHeightFull = false;
   @Input() sectionPaddingReset = false;
+  @Input() sectionHeight100 = false;
   @Input() sectionContentMarginAuto = false;
   @Input() sectionContentMaxWidth960px = false;
   @Input() sectionContentMaxWidth360px = false;
@@ -31,6 +32,7 @@ export class SectionControlComponent {
   @Input() sectionContentFlexDirectionColumn = false;
   @Input() sectionContentFlexGapSmall = false;
   @Input() sectionContentFlexGapMedium = false;
+  @Input() sectionContentHeight100 = false;
 
   getMainClassList(): SectionMainControlModel {
     return {
@@ -41,7 +43,8 @@ export class SectionControlComponent {
       'section-control--background-header': this.sectionBackgroundHeader,
       'section-control--height-480px': this.sectionHeight480px,
       'section-control--min-height-full': this.sectionMinHeightFull,
-      'section-control--padding-reset': this.sectionPaddingReset
+      'section-control--padding-reset': this.sectionPaddingReset,
+      'section-control--height-100': this.sectionHeight100
     };
   }
 
@@ -54,7 +57,8 @@ export class SectionControlComponent {
       'section-control__content--flex-center': this.sectionContentFlexCenter,
       'section-control__content--flex-direction-column': this.sectionContentFlexDirectionColumn,
       'section-control__content--flex-gap-small': this.sectionContentFlexGapSmall,
-      'section-control__content--flex-gap-medium': this.sectionContentFlexGapMedium
+      'section-control__content--flex-gap-medium': this.sectionContentFlexGapMedium,
+      'section-control__content--height-100': this.sectionContentHeight100,
     };
   }
 }

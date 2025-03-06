@@ -7,6 +7,7 @@ export interface SectionMainControlModel {
   'section-control--height-480px': boolean;
   'section-control--min-height-full': boolean;
   'section-control--padding-reset': boolean;
+  'section-control--height-100': boolean;
 }
 
 export interface SectionContentControlModel {
@@ -18,4 +19,5 @@ export interface SectionContentControlModel {
   'section-control__content--flex-direction-column': boolean;
   'section-control__content--flex-gap-small': boolean;
   'section-control__content--flex-gap-medium': boolean;
+  'section-control__content--height-100': boolean;
 }
