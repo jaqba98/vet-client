@@ -12,3 +12,4 @@ export * from './lib/login-registration-form/component/small-login-registration-
 export * from './lib/logout-form/component/big-logout-form.component';
 export * from './lib/logout-form/component/small-logout-form.component';
 export * from './lib/registration-form/registration-form.component';
+export * from './lib/client-pets-form/client-pets-form.component';
