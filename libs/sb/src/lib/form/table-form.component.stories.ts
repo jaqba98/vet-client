@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import { TableFormComponent } from '@vet-client/lib-form';
-import { StorybookUtilsService } from '../../utils/storybook-utils.service';
+import { StorybookUtilsService } from '../utils/storybook-utils.service';
 
 const meta: Meta<TableFormComponent> = {
   component: TableFormComponent,

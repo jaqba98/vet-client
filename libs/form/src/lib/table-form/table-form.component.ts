@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { TableControlComponent } from '@vet-client/lib-control';
 
 @Component({
   selector: 'lib-table-form',
-  imports: [CommonModule],
+  imports: [TableControlComponent],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
