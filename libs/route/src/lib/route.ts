@@ -4,7 +4,7 @@ import {
   AccountSettingsPageComponent,
   ChooseRolePageComponent,
   ClientAppointmentPageComponent, ClientClinicsPageComponent,
-  ClientInvoicePageComponent, ClientMedicalRecordPageComponent,
+  ClientInvoicePageComponent, ClientMainPageComponent, ClientMedicalRecordPageComponent,
   ClientPageComponent,
   ClientPetsPageComponent,
   ClientSettingsPageComponent,
@@ -16,7 +16,7 @@ import {
   RegistrationPageComponent,
   VetAppointmentPageComponent,
   VetClinicPageComponent,
-  VetInvoicePageComponent,
+  VetInvoicePageComponent, VetMainPageComponent,
   VetMedicalRecordPageComponent,
   VetMedicationPageComponent,
   VetPageComponent,
@@ -76,6 +76,10 @@ export const route: Route[] = [
         canActivate: [HasRoleGuard, IsVetRoleGuard],
         children: [
           {
+            path: '',
+            component: VetMainPageComponent
+          },
+          {
             path: 'settings',
             component: VetSettingsPageComponent
           },
@@ -106,7 +110,12 @@ export const route: Route[] = [
           {
             path: 'patients',
             component: VetPatientsPageComponent
-          }
+          },
+          {
+            path: 'dashboard/vet/**',
+            redirectTo: 'dashboard/vet/',
+            pathMatch: 'full'
+          },
         ]
       },
       {
@@ -114,6 +123,10 @@ export const route: Route[] = [
         component: ClientPageComponent,
         canActivate: [HasRoleGuard, IsClientRoleGuard],
         children: [
+          {
+            path: '',
+            component: ClientMainPageComponent
+          },
           {
             path: 'settings',
             component: ClientSettingsPageComponent
@@ -137,6 +150,11 @@ export const route: Route[] = [
           {
             path: 'clinics',
             component: ClientClinicsPageComponent
+          },
+          {
+            path: 'dashboard/client/**',
+            redirectTo: 'dashboard/client/',
+            pathMatch: 'full'
           }
         ]
       },
