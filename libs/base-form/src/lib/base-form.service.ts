@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import {
@@ -13,20 +13,20 @@ import {
 
 @Injectable()
 export class BaseFormService<TFormModel, TModel> {
-  formGroup: FormGroup;
+  formGroup!: FormGroup;
 
-  controlsArray: ControlsArrayType;
+  controlsArray!: ControlsArrayType;
 
   success = '';
 
   error = '';
 
-  constructor(@Inject('baseForm') baseForm: BaseFormModel<TFormModel>) {
+  initBaseForm(baseForm: BaseFormModel<TFormModel>) {
     this.formGroup = this.createFormGroup(baseForm);
     this.controlsArray = this.getControlsArray(baseForm);
   }
 
-  initBaseForm() {
+  resetBaseForm() {
     this.success = '';
     this.error = '';
   }

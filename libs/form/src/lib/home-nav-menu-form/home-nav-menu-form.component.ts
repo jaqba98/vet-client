@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
@@ -13,13 +13,20 @@ import {
   selector: 'lib-home-nav-menu-form',
   imports: [BaseFormComponent],
   templateUrl: './home-nav-menu-form.component.html',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
-export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormModel, HomeNavMenuModel> {
+export class HomeNavMenuFormComponent
+  extends BaseFormService<HomeNavMenuFormModel, HomeNavMenuModel>
+  implements OnInit
+{
   @Input() isHorizontal = true;
 
   constructor(private readonly store: Store<RouteStoreModel>) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       home: {
         id: 'home',
         kind: 'button',
@@ -75,7 +82,10 @@ export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormMod
       );
     } else if (aboutUs) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.aboutUs })
+        setRoute({
+          page: RoutePageEnum.home,
+          section: RouteSectionEnum.aboutUs,
+        })
       );
     } else if (price) {
       this.store.dispatch(
@@ -83,7 +93,10 @@ export class HomeNavMenuFormComponent extends BaseFormService<HomeNavMenuFormMod
       );
     } else if (contact) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.contact })
+        setRoute({
+          page: RoutePageEnum.home,
+          section: RouteSectionEnum.contact,
+        })
       );
     }
   }

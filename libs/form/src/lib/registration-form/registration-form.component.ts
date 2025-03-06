@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import { CardControlComponent } from '@vet-client/lib-control';
@@ -16,9 +16,15 @@ import {
   templateUrl: './registration-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class RegistrationFormComponent extends BaseFormService<RegistrationFormModel, RegistrationModel> {
+export class RegistrationFormComponent
+  extends BaseFormService<RegistrationFormModel, RegistrationModel>
+  implements OnInit {
   constructor(private readonly httpPost: HttpPostAppService) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       email: {
         kind: 'input',
         type: 'text',
@@ -87,7 +93,7 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         lastName: model.lastName,
       })
       .subscribe((response) => {
-        this.initBaseForm();
+        this.resetBaseForm();
         const { success, errors } = response;
         if (success) {
           this.success = 'Success! Your account has been created.';

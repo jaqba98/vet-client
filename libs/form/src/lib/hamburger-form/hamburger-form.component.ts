@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
@@ -12,11 +12,18 @@ import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model';
   selector: 'lib-hamburger-form',
   imports: [BaseFormComponent],
   templateUrl: './hamburger-form.component.html',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
-export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, HamburgerModel> {
+export class HamburgerFormComponent
+  extends BaseFormService<HamburgerFormModel, HamburgerModel>
+  implements OnInit
+{
   constructor(private readonly store: Store<NavStoreType>) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       hamburger: {
         id: 'hamburger',
         kind: 'button',
@@ -37,9 +44,12 @@ export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, 
 
   override onSubmit(model: HamburgerModel) {
     if (model.hamburger) {
-      this.store.select('nav').pipe(take(1)).subscribe(data => {
-        this.store.dispatch(navSwitchIsOpen({ isOpen: !data.isOpen }));
-      });
+      this.store
+        .select('nav')
+        .pipe(take(1))
+        .subscribe((data) => {
+          this.store.dispatch(navSwitchIsOpen({ isOpen: !data.isOpen }));
+        });
     }
   }
 }

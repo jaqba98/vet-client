@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
@@ -8,19 +8,26 @@ import { BaseLoginRegistrationFormService } from '../base/base-login-registratio
 
 @Component({
   selector: 'lib-big-login-registration-form',
-  imports: [CommonModule ,BaseFormComponent],
+  imports: [CommonModule, BaseFormComponent],
   templateUrl: '../base/base-login-registration-form.component.html',
   styleUrl: '../base/base-login-registration-form.component.scss',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
-export class BigLoginRegistrationFormComponent extends BaseFormService<
-  BaseLoginRegistrationFormModel,
-  BaseLoginRegistrationModel
-> {
+export class BigLoginRegistrationFormComponent
+  extends BaseFormService<
+    BaseLoginRegistrationFormModel,
+    BaseLoginRegistrationModel
+  >
+  implements OnInit
+{
   loginRegistrationFormClass = 'base-login-registration-form--big';
 
   constructor(private readonly baseLoginRegistrationForm: BaseLoginRegistrationFormService) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       login: {
         id: 'login',
         kind: 'button',

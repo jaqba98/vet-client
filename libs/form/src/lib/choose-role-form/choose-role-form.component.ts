@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
@@ -24,16 +24,20 @@ import { ChooseRoleFormModel, ChooseRoleModel } from './choose-role-form.model';
   templateUrl: './choose-role-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class ChooseRoleFormComponent extends BaseFormService<
-  ChooseRoleFormModel,
-  ChooseRoleModel
-> {
+export class ChooseRoleFormComponent
+  extends BaseFormService<ChooseRoleFormModel, ChooseRoleModel>
+  implements OnInit
+{
   constructor(
     private readonly httpPost: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly store: Store<RouteStoreModel>
   ) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       role: {
         kind: 'radio-button',
         name: 'role',
@@ -69,23 +73,29 @@ export class ChooseRoleFormComponent extends BaseFormService<
       this.store.dispatch(
         setRoute({
           page: RoutePageEnum.home,
-          section: RouteSectionEnum.home
+          section: RouteSectionEnum.home,
         })
       );
       return;
     }
     this.httpPost
       .chooseRolePost({ token, role: model.role })
-      .subscribe(response => {
+      .subscribe((response) => {
         const { success, role } = response;
         if (success) {
           if (role === RoleDomainEnum.vet) {
             this.store.dispatch(
-              setRoute({ page: RoutePageEnum.dashboardVet, section: RouteSectionEnum.dashboardVet })
+              setRoute({
+                page: RoutePageEnum.dashboardVet,
+                section: RouteSectionEnum.dashboardVet,
+              })
             );
           } else if (role === RoleDomainEnum.client) {
             this.store.dispatch(
-              setRoute({ page: RoutePageEnum.dashboardClient, section: RouteSectionEnum.dashboardClient })
+              setRoute({
+                page: RoutePageEnum.dashboardClient,
+                section: RouteSectionEnum.dashboardClient,
+              })
             );
           } else {
             throw new Error('Not supported role!');

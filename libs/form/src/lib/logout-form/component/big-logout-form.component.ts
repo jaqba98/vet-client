@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
@@ -11,16 +11,23 @@ import { BaseLogoutFormService } from '../base/base-logout-form.service';
 
 @Component({
   selector: 'lib-big-logout-form',
-  imports: [CommonModule ,BaseFormComponent],
+  imports: [CommonModule, BaseFormComponent],
   templateUrl: '../base/base-logout-form.component.html',
   styleUrl: '../base/base-logout-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class BigLogoutFormComponent extends BaseFormService<BaseLogoutFormModel, BaseLogoutModel> {
+export class BigLogoutFormComponent
+  extends BaseFormService<BaseLogoutFormModel, BaseLogoutModel>
+  implements OnInit
+{
   logoutFormClass = 'base-logout-form--big';
 
   constructor(private readonly baseLogoutForm: BaseLogoutFormService) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       logout: {
         id: 'logout',
         kind: 'button',

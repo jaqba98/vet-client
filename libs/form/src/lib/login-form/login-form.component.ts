@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import {
@@ -20,16 +20,20 @@ import { LoginFormModel, LoginModel } from './login-form.model';
   templateUrl: './login-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class LoginFormComponent extends BaseFormService<
-  LoginFormModel,
-  LoginModel
-> {
+export class LoginFormComponent
+  extends BaseFormService<LoginFormModel, LoginModel>
+  implements OnInit
+{
   constructor(
     private readonly httpPost: HttpPostAppService,
     private readonly cookie: CookieService,
     private readonly store: Store<RouteStoreModel>
   ) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       email: {
         kind: 'input',
         type: 'text',
@@ -63,7 +67,7 @@ export class LoginFormComponent extends BaseFormService<
   override onSubmit(model: LoginModel) {
     const { email, password } = model;
     this.httpPost.loginPost({ email, password }).subscribe((response) => {
-      this.initBaseForm();
+      this.resetBaseForm();
       const { success, token } = response;
       if (success) {
         this.cookie.updateToken(token);

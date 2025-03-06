@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
@@ -9,11 +9,18 @@ import { TableNavFormModel, TableNavModel } from './table-nav-form.model';
   selector: 'lib-table-nav-form',
   imports: [BaseFormComponent],
   templateUrl: './table-nav-form.component.html',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
-export class TableNavFormComponent extends BaseFormService<TableNavFormModel, TableNavModel> {
+export class TableNavFormComponent
+  extends BaseFormService<TableNavFormModel, TableNavModel>
+  implements OnInit
+{
   constructor() {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       add: {
         kind: 'button',
         id: 'add',

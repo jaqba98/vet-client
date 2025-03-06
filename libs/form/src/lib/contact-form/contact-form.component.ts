@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
@@ -12,9 +12,13 @@ import { ContactFormModel, ContactModel } from './contact-form.model';
   templateUrl: './contact-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class ContactFormComponent extends BaseFormService<ContactFormModel, ContactModel> {
+export class ContactFormComponent extends BaseFormService<ContactFormModel, ContactModel> implements OnInit {
   constructor() {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       email: {
         kind: 'input',
         type: 'text',

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import {
@@ -20,14 +20,18 @@ import {
   templateUrl: './dashboard-nav-menu-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class DashboardNavMenuFormComponent extends BaseFormService<
-  DashboardNavMenuFormModel,
-  DashboardNavMenuModel
-> {
+export class DashboardNavMenuFormComponent
+  extends BaseFormService<DashboardNavMenuFormModel, DashboardNavMenuModel>
+  implements OnInit
+{
   @Input() isHorizontal = true;
 
   constructor(private readonly store: Store<RouteStoreType>) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       dashboard: {
         kind: 'button',
         id: 'dashboard',

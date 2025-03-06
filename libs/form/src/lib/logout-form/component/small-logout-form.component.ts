@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 
@@ -12,16 +12,23 @@ import { BaseLogoutFormService } from '../base/base-logout-form.service';
 
 @Component({
   selector: 'lib-small-logout-form',
-  imports: [CommonModule ,BaseFormComponent],
+  imports: [CommonModule, BaseFormComponent],
   templateUrl: '../base/base-logout-form.component.html',
   styleUrl: '../base/base-logout-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class SmallLogoutFormComponent extends BaseFormService<BaseLogoutFormModel, BaseLogoutModel> {
+export class SmallLogoutFormComponent
+  extends BaseFormService<BaseLogoutFormModel, BaseLogoutModel>
+  implements OnInit
+{
   logoutFormClass = 'base-logout-form--small';
 
   constructor(public readonly baseLogoutForm: BaseLogoutFormService) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       logout: {
         id: 'logout',
         kind: 'button',

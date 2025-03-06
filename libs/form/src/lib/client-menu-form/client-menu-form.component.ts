@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
@@ -15,9 +15,13 @@ import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet
   templateUrl: './client-menu-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
-export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel, ClientMenuModel> {
+export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel, ClientMenuModel> implements OnInit {
   constructor(private readonly store: Store<RouteStoreModel>) {
-    super({
+    super();
+  }
+
+  ngOnInit() {
+    this.initBaseForm({
       clientSettings: {
         id: 'clientSettings',
         kind: 'button',
