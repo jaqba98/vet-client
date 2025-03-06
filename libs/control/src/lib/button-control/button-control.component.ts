@@ -27,7 +27,11 @@ export class ButtonControlComponent {
       'button-control__button--text': this.model.value.type === 'text',
       'button-control__button--icon': this.model.value.type === 'icon',
       'button-control__button--link': this.model.value.type === 'link',
-      'button-control__button--full-width': this.model.fullWidth
+      'button-control__button--full-width': this.model.fullWidth,
+      'button-control__button--primary': this.model.color === 'primary',
+      'button-control__button--dark-secondary': this.model.color === 'dark-secondary',
+      'button-control__button--success': this.model.color === 'success',
+      'button-control__button--error': this.model.color === 'error'
     };
   }
 }

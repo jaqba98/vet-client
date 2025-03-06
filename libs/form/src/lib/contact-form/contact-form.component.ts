@@ -47,7 +47,8 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
           text: 'Send',
         },
         fullWidth: false,
-        defaultValue: false
+        defaultValue: false,
+        color: 'primary'
       },
     });
   }

@@ -10,15 +10,11 @@
 
     &--text,
     &--icon {
-      background-color: colors.$color-primary;
-      border: 1px solid colors.$color-primary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 0.25rem;
       height: 40px;
-
-      &:focus {
-        outline: 2px solid colors.$color-primary;
-        outline-offset: 2px;
-      }
 
       &:active {
         transform: scale(0.95);
@@ -40,6 +36,46 @@
 
     &--full-width {
       width: 100%;
+    }
+
+    &--primary {
+      background-color: colors.$color-primary;
+      border: 1px solid colors.$color-primary;
+
+      &:focus {
+        outline: 2px solid colors.$color-primary;
+        outline-offset: 2px;
+      }
+    }
+
+    &--dark-secondary {
+      background-color: colors.$color-text-dark-secondary;
+      border: 1px solid colors.$color-text-dark-secondary;
+
+      &:focus {
+        outline: 2px solid colors.$color-text-dark-secondary;
+        outline-offset: 2px;
+      }
+    }
+
+    &--success {
+      background-color: colors.$color-success;
+      border: 1px solid colors.$color-success;
+
+      &:focus {
+        outline: 2px solid colors.$color-success;
+        outline-offset: 2px;
+      }
+    }
+
+    &--error {
+      background-color: colors.$color-error;
+      border: 1px solid colors.$color-error;
+
+      &:focus {
+        outline: 2px solid colors.$color-error;
+        outline-offset: 2px;
+      }
     }
   }
 }

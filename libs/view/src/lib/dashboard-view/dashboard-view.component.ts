@@ -34,6 +34,7 @@ export class DashboardViewComponent {
       },
     },
     fullWidth: false,
+    color: 'primary'
   };
 
   constructor(private readonly store: Store<NavStoreType>) {}

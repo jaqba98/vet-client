@@ -18,7 +18,8 @@ export const Default: Story = {
         type: 'text',
         text: 'Click'
       },
-      fullWidth: false
+      fullWidth: false,
+      color: 'primary'
     }
   }
 };
@@ -35,7 +36,8 @@ export const Icon: Story = {
           fontSize: '1rem',
         }
       },
-      fullWidth: false
+      fullWidth: false,
+      color: 'primary'
     }
   }
 };
@@ -48,7 +50,8 @@ export const Link: Story = {
         type: 'link',
         text: 'Click'
       },
-      fullWidth: false
+      fullWidth: false,
+      color: 'primary'
     }
   }
 };

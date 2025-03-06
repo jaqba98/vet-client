@@ -72,6 +72,7 @@ export class RegistrationFormComponent extends BaseFormService<RegistrationFormM
         },
         defaultValue: false,
         fullWidth: false,
+        color: 'primary'
       },
     });
   }

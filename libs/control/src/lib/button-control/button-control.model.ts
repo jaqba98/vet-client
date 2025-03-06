@@ -1,4 +1,5 @@
 import { IconControlModel } from '../icon-control/icon-control.model';
+import { ColorType } from '@vet-client/lib-type';
 
 interface TextValueModel {
   type: 'text';
@@ -21,4 +22,5 @@ export interface ButtonControlModel {
   id: string;
   value: ValueType;
   fullWidth: boolean;
+  color: ColorType;
 }

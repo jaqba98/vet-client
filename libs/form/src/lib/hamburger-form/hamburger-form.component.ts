@@ -29,7 +29,8 @@ export class HamburgerFormComponent extends BaseFormService<HamburgerFormModel, 
           }
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: false,
+        color: 'primary'
       }
     });
   }

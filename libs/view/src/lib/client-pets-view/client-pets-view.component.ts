@@ -14,6 +14,8 @@ const getTableRows = (): TableRowModel[] => {
   return Array.from({ length: 10 }, (_, i) => i + 1)
     .map(index => {
       return {
+        id: index,
+        isSelected: false,
         columns: [
           { value: `Column_${index}_1` },
           { value: `Column_${index}_2` },
@@ -26,6 +28,8 @@ const getTableRows = (): TableRowModel[] => {
 
 const getTableModel = (): TableControlModel => {
   return {
+    addButton: true,
+    removeButton: true,
     minIndex: 0,
     currentIndex: 0,
     maxRowPerPage: 5,

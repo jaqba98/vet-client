@@ -29,7 +29,8 @@ export class BigLoginRegistrationFormComponent extends BaseFormService<
           text: 'Login'
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: false,
+        color: 'primary'
       },
       registration: {
         id: 'registration',
@@ -39,7 +40,8 @@ export class BigLoginRegistrationFormComponent extends BaseFormService<
           text: 'Registration'
         },
         defaultValue: false,
-        fullWidth: false
+        fullWidth: false,
+        color: 'primary'
       },
     });
   }

@@ -55,6 +55,7 @@ export class LoginFormComponent extends BaseFormService<
         },
         defaultValue: false,
         fullWidth: false,
+        color: 'primary'
       },
     });
   }

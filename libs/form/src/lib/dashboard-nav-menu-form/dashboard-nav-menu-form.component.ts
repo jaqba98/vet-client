@@ -36,7 +36,8 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
           text: 'Dashboard',
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'primary'
       },
       accountSettings: {
         kind: 'button',
@@ -46,7 +47,8 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
           text: 'Account Settings',
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'primary'
       },
       profile: {
         kind: 'button',
@@ -56,7 +58,8 @@ export class DashboardNavMenuFormComponent extends BaseFormService<
           text: 'Profile',
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'primary'
       }
     });
   }

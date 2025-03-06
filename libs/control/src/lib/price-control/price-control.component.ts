@@ -34,6 +34,7 @@ export class PriceControlComponent {
       type: 'text',
       text: 'Get started',
     },
-    fullWidth: true
+    fullWidth: true,
+    color: 'primary'
   };
 }

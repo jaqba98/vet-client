@@ -30,6 +30,7 @@ export class BigLogoutFormComponent extends BaseFormService<BaseLogoutFormModel,
         },
         defaultValue: false,
         fullWidth: false,
+        color: 'primary'
       },
     });
   }

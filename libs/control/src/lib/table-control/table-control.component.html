@@ -1,5 +1,12 @@
 <div class="table-control">
-  <div class="table-control__nav"></div>
+  <div class="table-control__nav">
+    <ng-container *ngIf="model.addButton">
+      <lib-button-control [model]="addButtonTextModel"></lib-button-control>
+    </ng-container>
+    <ng-container *ngIf="model.removeButton">
+      <lib-button-control [model]="removeButtonTextModel"></lib-button-control>
+    </ng-container>
+  </div>
   <div class="table-control__table">
     <table class="table">
       <ng-container *ngFor="let row of model.rows">

@@ -13,6 +13,8 @@ const getRows = (): TableControlModel['rows'] => {
   return Array.from({ length: 100 }, (_, i) => i + 1)
     .map(index => {
       return {
+        id: index,
+        isSelected: false,
         columns: [
           { value: `Column_${index}_1` },
           { value: `Column_${index}_2` },
@@ -26,6 +28,8 @@ const getRows = (): TableControlModel['rows'] => {
 export const Default: Story = {
   args: {
     model: {
+      addButton: true,
+      removeButton: true,
       minIndex: 0,
       currentIndex: 0,
       maxRowPerPage: 5,

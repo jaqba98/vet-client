@@ -25,7 +25,8 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
           text: 'Settings'
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'dark-secondary'
       },
       vetClinic: {
         id: 'vetClinic',
@@ -35,7 +36,8 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
           text: 'Clinic'
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'dark-secondary'
       },
       vetMedicalRecord: {
         id: 'vetMedicalRecord',
@@ -45,7 +47,8 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
           text: 'Medical Record'
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'dark-secondary'
       },
       vetMedication: {
         id: 'vetMedication',
@@ -55,7 +58,8 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
           text: 'Medication'
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'dark-secondary'
       },
       vetServices: {
         id: 'vetServices',
@@ -65,7 +69,8 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
           text: 'Services'
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'dark-secondary'
       },
       vetAppointment: {
         id: 'vetAppointment',
@@ -75,7 +80,8 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
           text: 'Appointment'
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'dark-secondary'
       },
       vetInvoice: {
         id: 'vetInvoice',
@@ -85,7 +91,8 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
           text: 'Invoice'
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'dark-secondary'
       },
       vetPatients: {
         id: 'vetPatients',
@@ -95,7 +102,8 @@ export class VetMenuFormComponent extends BaseFormService<VetMenuFormModel, VetM
           text: 'Patients'
         },
         defaultValue: false,
-        fullWidth: true
+        fullWidth: true,
+        color: 'dark-secondary'
       }
     });
   }

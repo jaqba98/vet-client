@@ -58,6 +58,7 @@ export class ChooseRoleFormComponent extends BaseFormService<
         },
         defaultValue: false,
         fullWidth: false,
+        color: 'primary'
       },
     });
   }

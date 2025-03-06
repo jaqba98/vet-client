@@ -35,6 +35,7 @@ export class SmallLogoutFormComponent extends BaseFormService<BaseLogoutFormMode
         },
         defaultValue: false,
         fullWidth: false,
+        color: 'primary'
       },
     });
   }
