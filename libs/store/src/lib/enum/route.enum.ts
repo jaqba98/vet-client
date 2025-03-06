@@ -20,6 +20,7 @@ export enum RoutePageEnum {
   dashboardClientPets = '/dashboard/client/pets',
   dashboardClientAppointment = '/dashboard/client/appointment',
   dashboardClientInvoice = '/dashboard/client/invoice',
+  dashboardClientMedicalRecord = '/dashboard/client/medical-record',
   dashboardChooseRole = '/dashboard/choose-role'
 }
 
@@ -48,5 +49,6 @@ export enum RouteSectionEnum {
   dashboardClientPets = 'dashboard-client-pets',
   dashboardClientAppointment = 'dashboard-client-appointment',
   dashboardClientInvoice = 'dashboard-client-invoice',
+  dashboardClientMedicalRecord = 'dashboard-client-medical-record',
   dashboardChooseRole = 'dashboard-choose-role'
 }

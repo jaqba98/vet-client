@@ -4,7 +4,7 @@ import {
   AccountSettingsPageComponent,
   ChooseRolePageComponent,
   ClientAppointmentPageComponent,
-  ClientInvoicePageComponent,
+  ClientInvoicePageComponent, ClientMedicalRecordPageComponent,
   ClientPageComponent,
   ClientPetsPageComponent,
   ClientSettingsPageComponent,
@@ -129,7 +129,11 @@ export const route: Route[] = [
           {
             path: 'invoice',
             component: ClientInvoicePageComponent
-          }
+          },
+          {
+            path: 'medical-record',
+            component: ClientMedicalRecordPageComponent
+          },
         ]
       },
       {

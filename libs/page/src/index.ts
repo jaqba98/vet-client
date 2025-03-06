@@ -21,3 +21,4 @@ export * from './lib/root/dashboard/client/client-settings/client-settings-page.
 export * from './lib/root/dashboard/client/client-pets/client-pets-page.component';
 export * from './lib/root/dashboard/client/client-appointment/client-appointment-page.component';
 export * from './lib/root/dashboard/client/client-invoice/client-invoice-page.component';
+export * from './lib/root/dashboard/client/client-medical-record/client-medical-record-page.component';
