@@ -2,41 +2,10 @@
   <div class="table-control__nav">
     <ng-content select="[nav]"></ng-content>
   </div>
-  <div class="table-control__table">
-    <table class="table">
-      <tr class="table__row">
-        <ng-container *ngFor="let header of model.headers">
-          <th class="table__column table__header">{{ header.value }}</th>
-        </ng-container>
-      </tr>
-      <ng-container *ngFor="let row of model.rows">
-        <tr class="table__row">
-          <ng-container *ngIf="model.selectButton">
-            <td class="table__column table__column--button">
-              <lib-button-control [model]="selectModel"></lib-button-control>
-            </td>
-          </ng-container>
-          <ng-container *ngFor="let column of row.columns">
-            <td class="table__column">{{ column.value }}</td>
-          </ng-container>
-          <ng-container *ngIf="model.previewButton">
-            <td class="table__column table__column--button">
-              <lib-button-control [model]="previewModel"></lib-button-control>
-            </td>
-          </ng-container>
-          <ng-container *ngIf="model.removeButton">
-            <td class="table__column table__column--button">
-              <lib-button-control [model]="editModel"></lib-button-control>
-            </td>
-          </ng-container>
-          <ng-container *ngIf="model.removeButton">
-            <td class="table__column table__column--button">
-              <lib-button-control [model]="removeModel"></lib-button-control>
-            </td>
-          </ng-container>
-        </tr>
-      </ng-container>
-    </table>
+  <div class="table-control__content">
+    <ng-content select="[content]"></ng-content>
   </div>
-  <div class="table-control__paginator"></div>
+  <div class="table-control__paginator">
+    <ng-content select="[paginator]"></ng-content>
+  </div>
 </div>

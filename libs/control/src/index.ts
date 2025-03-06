@@ -17,4 +17,3 @@ export * from './lib/radio-button-control/radio-button-control.component';
 export * from './lib/radio-button-control/radio-button-control.model';
 export * from './lib/success-control/success-control.component';
 export * from './lib/table-control/table-control.component';
-export * from './lib/table-control/table-control.model';
