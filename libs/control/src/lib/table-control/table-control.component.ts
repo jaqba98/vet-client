@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faEye, faSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { TableControlModel } from './table-control.model';
@@ -16,6 +16,20 @@ import { ButtonControlModel } from '../button-control/button-control.model';
 })
 export class TableControlComponent {
   @Input({ required: false }) model!: TableControlModel;
+
+  readonly selectModel: ButtonControlModel = {
+    id: 'select',
+    value: {
+      type: 'icon',
+      icon: {
+        icon: faSquare,
+        color: 'light-primary',
+        fontSize: '1rem'
+      }
+    },
+    color: 'primary',
+    fullWidth: false
+  };
 
   readonly previewModel: ButtonControlModel = {
     id: 'edit',

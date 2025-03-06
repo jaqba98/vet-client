@@ -48,4 +48,8 @@
   &__row {
     border-bottom: 1px solid colors.$color-border;
   }
+
+  &__header {
+    background-color: red;
+  }
 }

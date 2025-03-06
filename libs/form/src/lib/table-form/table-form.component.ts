@@ -37,9 +37,20 @@ export class TableFormComponent {
     searchButton: true,
     editButton: true,
     previewButton: true,
+    selectButton: true,
     minIndex: 0,
     currentIndex: 0,
     maxRowPerPage: 5,
+    headers: [
+      { value: '1' },
+      { value: '2' },
+      { value: '2' },
+      { value: '2' },
+      { value: '2' },
+      { value: '2' },
+      { value: '2' },
+      { value: '2' }
+    ],
     rows: getTableRows(),
   };
 

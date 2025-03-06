@@ -8,10 +8,6 @@ export interface TableRowModel {
   columns: TableColumnModel[];
 }
 
-export interface TableHeaderModel {
-  columns: TableColumnModel[];
-}
-
 export interface TableControlModel {
   addButton: boolean;
   removeButton: boolean;
@@ -19,8 +15,10 @@ export interface TableControlModel {
   searchButton: boolean;
   editButton: boolean;
   previewButton: boolean;
+  selectButton: boolean;
   minIndex: number;
   currentIndex: number;
   maxRowPerPage: number;
+  headers: TableColumnModel[];
   rows: TableRowModel[];
 }
