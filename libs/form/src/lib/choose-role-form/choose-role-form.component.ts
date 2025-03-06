@@ -52,6 +52,7 @@ export class ChooseRoleFormComponent
           },
         ],
         defaultValue: RoleDomainEnum.vet,
+        isEnabled: true
       },
       save: {
         kind: 'button',
@@ -62,7 +63,8 @@ export class ChooseRoleFormComponent
         },
         defaultValue: false,
         fullWidth: false,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
     });
   }

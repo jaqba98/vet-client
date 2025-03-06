@@ -38,7 +38,8 @@ export class SmallLoginRegistrationFormComponent
         },
         defaultValue: false,
         fullWidth: false,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       registration: {
         id: 'registration',
@@ -53,7 +54,8 @@ export class SmallLoginRegistrationFormComponent
         },
         defaultValue: false,
         fullWidth: false,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
     });
   }

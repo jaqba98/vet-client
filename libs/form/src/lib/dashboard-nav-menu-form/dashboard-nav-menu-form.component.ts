@@ -41,7 +41,8 @@ export class DashboardNavMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       accountSettings: {
         kind: 'button',
@@ -52,7 +53,8 @@ export class DashboardNavMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       profile: {
         kind: 'button',
@@ -63,7 +65,8 @@ export class DashboardNavMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       }
     });
   }

@@ -41,6 +41,7 @@ export class LoginFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [],
+        isEnabled: true
       },
       password: {
         kind: 'input',
@@ -49,6 +50,7 @@ export class LoginFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [],
+        isEnabled: true
       },
       login: {
         id: 'login',
@@ -59,7 +61,8 @@ export class LoginFormComponent
         },
         defaultValue: false,
         fullWidth: false,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
     });
   }

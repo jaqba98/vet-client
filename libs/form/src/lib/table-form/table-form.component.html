@@ -1,6 +1,9 @@
 <lib-table-control>
   <ng-container nav>
-    <lib-table-nav-form></lib-table-nav-form>
+    <lib-table-nav-form
+      [tableNavFormAddButton]="tableNavFormAddButton"
+      [tableNavFormRemoveButton]="tableNavFormRemoveButton"
+    ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
     <p>content</p>

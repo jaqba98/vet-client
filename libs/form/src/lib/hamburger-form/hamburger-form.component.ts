@@ -37,7 +37,8 @@ export class HamburgerFormComponent
         },
         defaultValue: false,
         fullWidth: false,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       }
     });
   }

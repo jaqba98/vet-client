@@ -25,7 +25,8 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         label: 'Email',
         placeholder: '',
         validators: [Validators.required, Validators.email],
-        defaultValue: ''
+        defaultValue: '',
+        isEnabled: true
       },
       subject: {
         kind: 'input',
@@ -33,7 +34,8 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         label: 'Subject',
         placeholder: '',
         validators: [Validators.required],
-        defaultValue: ''
+        defaultValue: '',
+        isEnabled: true
       },
       message: {
         kind: 'textarea',
@@ -41,7 +43,8 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         placeholder: '',
         height: '300px',
         validators: [Validators.required],
-        defaultValue: ''
+        defaultValue: '',
+        isEnabled: true
       },
       send: {
         kind: 'button',
@@ -52,7 +55,8 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         },
         fullWidth: false,
         defaultValue: false,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
     });
   }

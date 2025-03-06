@@ -37,7 +37,8 @@ export class BigLogoutFormComponent
         },
         defaultValue: false,
         fullWidth: false,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
     });
   }

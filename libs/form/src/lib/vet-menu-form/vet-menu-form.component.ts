@@ -30,7 +30,8 @@ export class VetMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       vetClinic: {
         id: 'vetClinic',
@@ -41,7 +42,8 @@ export class VetMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       vetMedicalRecord: {
         id: 'vetMedicalRecord',
@@ -52,7 +54,8 @@ export class VetMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       vetMedication: {
         id: 'vetMedication',
@@ -63,7 +66,8 @@ export class VetMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       vetServices: {
         id: 'vetServices',
@@ -74,7 +78,8 @@ export class VetMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       vetAppointment: {
         id: 'vetAppointment',
@@ -85,7 +90,8 @@ export class VetMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       vetInvoice: {
         id: 'vetInvoice',
@@ -96,7 +102,8 @@ export class VetMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       vetPatients: {
         id: 'vetPatients',
@@ -107,7 +114,8 @@ export class VetMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       }
     });
   }

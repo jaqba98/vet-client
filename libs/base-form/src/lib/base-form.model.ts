@@ -5,6 +5,7 @@ import { RadioButtonControlModel } from '@vet-client/lib-control';
 
 export interface ControlBaseModel<TDefaultValue> {
   defaultValue: TDefaultValue;
+  isEnabled: boolean;
 }
 
 export interface ControlInputModel extends ControlBaseModel<string>, InputControlModel {

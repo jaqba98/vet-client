@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, OnInit } from '@angular/core';
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
 import { BaseComponentDirective } from '@vet-client/lib-utils';
@@ -15,26 +15,42 @@ export class TableNavFormComponent
   extends BaseFormService<TableNavFormModel, TableNavModel>
   implements OnInit
 {
-  constructor() {
-    super();
-  }
+  @Input() tableNavFormAddButton = true;
+  @Input() tableNavFormRemoveButton = true;
 
   ngOnInit() {
     this.initBaseForm({
       add: {
-        kind: 'button',
         id: 'add',
+        kind: 'button',
         value: {
           type: 'icon',
           icon: {
             icon: faPlus,
             color: 'light-primary',
-            fontSize: '1rem'
-          }
+            fontSize: '1rem',
+          },
         },
         defaultValue: false,
         fullWidth: false,
-        color: 'success'
+        color: 'success',
+        isEnabled: this.tableNavFormAddButton,
+      },
+      remove: {
+        id: 'remove',
+        kind: 'button',
+        value: {
+          type: 'icon',
+          icon: {
+            icon: faTrash,
+            color: 'light-primary',
+            fontSize: '1rem',
+          },
+        },
+        defaultValue: false,
+        fullWidth: false,
+        color: 'error',
+        isEnabled: this.tableNavFormRemoveButton,
       },
     });
   }

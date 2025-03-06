@@ -36,6 +36,7 @@ export class RegistrationFormComponent
           Validators.email,
           Validators.maxLength(255),
         ],
+        isEnabled: true
       },
       password: {
         kind: 'input',
@@ -44,6 +45,7 @@ export class RegistrationFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(255)],
+        isEnabled: true
       },
       confirmPassword: {
         kind: 'input',
@@ -52,6 +54,7 @@ export class RegistrationFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(255)],
+        isEnabled: true
       },
       firstName: {
         kind: 'input',
@@ -60,6 +63,7 @@ export class RegistrationFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(50)],
+        isEnabled: true
       },
       lastName: {
         kind: 'input',
@@ -68,6 +72,7 @@ export class RegistrationFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(100)],
+        isEnabled: true
       },
       register: {
         id: 'register',
@@ -78,7 +83,8 @@ export class RegistrationFormComponent
         },
         defaultValue: false,
         fullWidth: false,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
     });
   }

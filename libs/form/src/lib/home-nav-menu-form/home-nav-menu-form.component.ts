@@ -36,7 +36,8 @@ export class HomeNavMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       aboutUs: {
         id: 'aboutUs',
@@ -47,7 +48,8 @@ export class HomeNavMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       price: {
         id: 'price',
@@ -58,7 +60,8 @@ export class HomeNavMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
       contact: {
         id: 'contact',
@@ -69,7 +72,8 @@ export class HomeNavMenuFormComponent
         },
         defaultValue: false,
         fullWidth: true,
-        color: 'primary'
+        color: 'primary',
+        isEnabled: true
       },
     });
   }

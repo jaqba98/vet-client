@@ -34,6 +34,7 @@ export class BaseFormService<TFormModel, TModel> {
   createFormGroup(baseForm: BaseFormModel<TFormModel>): FormGroup {
     const formGroup = new FormGroup({});
     Object.entries(baseForm as Record<string, ControlType>)
+      .filter(([, control]) => control.isEnabled)
       .forEach(([key, control]) => {
         switch (control.kind) {
           case 'input':
@@ -46,7 +47,10 @@ export class BaseFormService<TFormModel, TModel> {
             formGroup.addControl(key, this.createTextareaFormControl(control));
             break;
           case 'radio-button':
-            formGroup.addControl(key, this.createRadioButtonFormControl(control));
+            formGroup.addControl(
+              key,
+              this.createRadioButtonFormControl(control)
+            );
             break;
           default:
             throw new Error('Unknown control kind!');
@@ -57,6 +61,7 @@ export class BaseFormService<TFormModel, TModel> {
 
   getControlsArray(baseForm: BaseFormModel<TFormModel>): ControlsArrayType {
     return Object.entries(baseForm as Record<string, ControlType>)
+      .filter(([, control]) => control.isEnabled)
       .map(([key, value]) => ({ name: key, model: value }));
   }
 
