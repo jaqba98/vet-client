@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 
 import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { TableControlComponent } from '@vet-client/lib-control';
+import { TableNavFormComponent } from './table-nav-form/table-nav-form.component';
 
 @Component({
   selector: 'lib-table-form',
-  imports: [TableControlComponent],
+  imports: [TableControlComponent, TableNavFormComponent],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective]
 })
