@@ -4,9 +4,9 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
 import { TableFormComponent } from '../table-form/table-form.component';
 
 @Component({
-  selector: 'lib-client-pets-form',
+  selector: 'lib-vet-services-form',
   imports: [TableFormComponent],
-  templateUrl: './client-pets-form.component.html',
+  templateUrl: './vet-services-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class ClientPetsFormComponent {}
+export class VetServicesFormComponent {}
