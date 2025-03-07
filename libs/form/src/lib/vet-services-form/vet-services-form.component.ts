@@ -30,15 +30,19 @@ export class VetServicesFormComponent {
     this.rows = Array
       .from({ length: 100 }, (_, i) => i + 1)
       .map(i => i.toString())
-      .map(index => <VetServicesDataModel>{
+      .map(index => ({
         id: index,
-        name: `name-${index}`,
-        description: `description-${index}`,
-        category: `category-${index}`,
-        durationMinutes: `durationMinutes-${index}`,
-        price: `price-${index}`,
-        isAvailable: `isAvailable-${index}`,
-      })
+        isSelected: false,
+        data: <VetServicesDataModel>{
+          id: index,
+          name: `name-${index}`,
+          description: `description-${index}`,
+          category: `category-${index}`,
+          durationMinutes: `durationMinutes-${index}`,
+          price: `price-${index}`,
+          isAvailable: `isAvailable-${index}`,
+        },
+      }))
   }
 
   onTableAddFormEvent(event: TableDataModel) {

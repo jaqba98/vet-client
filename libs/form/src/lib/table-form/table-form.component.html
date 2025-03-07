@@ -12,7 +12,7 @@
   <ng-container content>
     <ng-container [ngSwitch]="tableTab">
       <ng-container *ngSwitchCase="'table'">
-        <lib-table-table-form [rows]="rows"></lib-table-table-form>
+        <lib-table-table-form [service]="tableForm"></lib-table-table-form>
       </ng-container>
       <ng-container *ngSwitchCase="'add'">
         <lib-table-add-form [formModel]="formModel" (event)="onTableAddFormEvent($event)"></lib-table-add-form>

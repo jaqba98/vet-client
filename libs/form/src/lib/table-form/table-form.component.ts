@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
@@ -9,6 +9,7 @@ import { TableTabEnum } from './enum/table-tab.enum'
 import { TableDataModel, TableFormModel, TableFormRowsModel } from './model/table-form.model'
 import { TableAddFormComponent } from './table-add-form/table-add-form.component'
 import { TableTableFormComponent } from './table-table-form/table-table-form.component'
+import { TableFormService } from './service/table-form.service'
 
 @Component({
   selector: 'lib-table-form',
@@ -20,9 +21,10 @@ import { TableTableFormComponent } from './table-table-form/table-table-form.com
     TableTableFormComponent,
   ],
   templateUrl: './table-form.component.html',
+  providers: [TableFormService],
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent {
+export class TableFormComponent implements OnInit {
   @Output() tableAddFormEvent = new EventEmitter<TableDataModel>()
 
   @Input() tableButtonEnabled = true
@@ -35,6 +37,13 @@ export class TableFormComponent {
   @Input({ required: true }) rows!: TableFormRowsModel
 
   tableTab: TableTabEnum = TableTabEnum.table
+
+  constructor(protected readonly tableForm: TableFormService) {
+  }
+
+  ngOnInit() {
+    this.tableForm.setRows(this.rows)
+  }
 
   onTableNavFormEvent(event: TableNavDataModel) {
     if (event.table) this.tableTab = TableTabEnum.table
