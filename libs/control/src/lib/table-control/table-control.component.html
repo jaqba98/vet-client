@@ -1,11 +1,9 @@
-<div class="table-control">
-  <div class="table-control__nav">
-    <ng-content select="[nav]"></ng-content>
-  </div>
-  <div class="table-control__content">
-    <ng-content select="[content]"></ng-content>
-  </div>
-  <div class="table-control__paginator">
-    <ng-content select="[paginator]"></ng-content>
-  </div>
-</div>
+<table>
+  <ng-container *ngFor="let row of rows">
+    <tr>
+      <ng-container *ngFor="let column of getColumns(row)">
+        <td>{{ getColumn(row, column) }}</td>
+      </ng-container>
+    </tr>
+  </ng-container>
+</table>
