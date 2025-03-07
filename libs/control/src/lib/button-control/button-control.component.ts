@@ -28,6 +28,7 @@ export class ButtonControlComponent {
       'button-control__button--icon': this.model.value.type === 'icon',
       'button-control__button--link': this.model.value.type === 'link',
       'button-control__button--full-width': this.model.fullWidth,
+      'button-control__button--transparent': this.model.color === 'transparent',
       'button-control__button--primary': this.model.color === 'primary',
       'button-control__button--dark-primary': this.model.color === 'dark-primary',
       'button-control__button--dark-secondary': this.model.color === 'dark-secondary',

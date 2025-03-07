@@ -17,11 +17,9 @@ export class TableFormService {
     this.rows.next(this.rows.getValue().filter(row => row.id !== id))
   }
 
-  changeSelect(id: string, select: boolean) {
+  setIsSelected(id: string, value: boolean) {
     const newRows = this.rows.getValue().map((row) => {
-      if (row.id === id) {
-        row.isSelected = select
-      }
+      if (row.id === id) row.isSelected = value
       return row
     })
     this.rows.next(newRows)

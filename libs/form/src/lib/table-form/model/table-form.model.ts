@@ -11,3 +11,5 @@ export interface TableFormRowModel<TKey extends string = string> {
 }
 
 export type TableFormRowsModel<TKey extends string = string> = TableFormRowModel<TKey>[]
+
+export type TableFormHeadersModel = string[]

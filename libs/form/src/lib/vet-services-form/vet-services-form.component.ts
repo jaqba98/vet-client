@@ -3,7 +3,12 @@ import { Component } from '@angular/core'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { TableFormComponent } from '../table-form/table-form.component'
-import { TableDataModel, TableFormModel, TableFormRowsModel } from '../table-form/model/table-form.model'
+import {
+  TableDataModel,
+  TableFormHeadersModel,
+  TableFormModel,
+  TableFormRowsModel,
+} from '../table-form/model/table-form.model'
 import { VetServicesDataModel, VetServicesFormModel } from './vet-services-form.model'
 
 @Component({
@@ -15,9 +20,12 @@ import { VetServicesDataModel, VetServicesFormModel } from './vet-services-form.
 export class VetServicesFormComponent {
   readonly formModel: TableFormModel<keyof VetServicesFormModel>
 
+  readonly headers: TableFormHeadersModel
+
   readonly rows: TableFormRowsModel<keyof VetServicesDataModel>
 
   constructor(private readonly builder: BaseFormBuilder) {
+    this.headers = ['Id', 'Name', 'Description', 'Category', 'Duration Minutes', 'Price', 'Is Available']
     this.formModel = {
       id: this.builder.buildInputText('ID', [], false),
       name: this.builder.buildInputText('Name', [], true),
@@ -28,7 +36,7 @@ export class VetServicesFormComponent {
       isAvailable: this.builder.buildInputText('Is Available', [], true),
     }
     this.rows = Array
-      .from({ length: 100 }, (_, i) => i + 1)
+      .from({ length: 10 }, (_, i) => i + 1)
       .map(i => i.toString())
       .map(index => ({
         id: index,

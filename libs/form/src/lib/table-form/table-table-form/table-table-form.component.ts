@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common'
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import {
   faEdit,
   faSquare,
   faSquareCheck,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
+import { Subscription } from 'rxjs'
 
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control'
 import { TableFormService } from '../service/table-form.service'
-import { TableFormRowModel, TableFormRowsModel } from '../model/table-form.model'
+import { TableFormHeadersModel, TableFormRowModel, TableFormRowsModel } from '../model/table-form.model'
 
 @Component({
   selector: 'lib-table-table-form',
@@ -19,10 +20,18 @@ import { TableFormRowModel, TableFormRowsModel } from '../model/table-form.model
   styleUrl: './table-table-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableTableFormComponent implements OnInit {
+export class TableTableFormComponent implements OnInit, OnDestroy {
+  @Output() unselectEvent = new EventEmitter<string>()
+  @Output() selectEvent = new EventEmitter<string>()
+  @Output() editEvent = new EventEmitter<string>()
+  @Output() removeEvent = new EventEmitter<string>()
+
   @Input({ required: true }) service!: TableFormService
+  @Input({ required: true }) headers!: TableFormHeadersModel
 
   rows!: TableFormRowsModel
+
+  private sub: Subscription
 
   readonly selectButtonModel: ButtonControlModel = {
     id: 'select',
@@ -30,12 +39,12 @@ export class TableTableFormComponent implements OnInit {
       type: 'icon',
       icon: {
         icon: faSquareCheck,
-        color: 'light-primary',
+        color: 'primary',
         fontSize: '2rem',
       },
     },
     fullWidth: false,
-    color: 'primary',
+    color: 'transparent',
   }
 
   readonly unselectButtonModel: ButtonControlModel = {
@@ -44,12 +53,12 @@ export class TableTableFormComponent implements OnInit {
       type: 'icon',
       icon: {
         icon: faSquare,
-        color: 'light-primary',
+        color: 'primary',
         fontSize: '2rem',
       },
     },
     fullWidth: false,
-    color: 'primary',
+    color: 'transparent',
   }
 
   readonly editButtonModel: ButtonControlModel = {
@@ -63,7 +72,7 @@ export class TableTableFormComponent implements OnInit {
       },
     },
     fullWidth: false,
-    color: 'primary',
+    color: 'dark-secondary',
   }
 
   readonly removeButtonModel: ButtonControlModel = {
@@ -80,10 +89,16 @@ export class TableTableFormComponent implements OnInit {
     color: 'error',
   }
 
-  constructor(private readonly objectType: ObjectTypeUtils) {}
+  constructor(private readonly objectType: ObjectTypeUtils) {
+    this.sub = new Subscription()
+  }
 
   ngOnInit() {
-    this.service.rows$.subscribe(rows => (this.rows = rows))
+    this.sub.add(this.service.rows$.subscribe(rows => (this.rows = rows)))
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
   getColumns(row: TableFormRowModel) {
@@ -94,15 +109,19 @@ export class TableTableFormComponent implements OnInit {
     return row.data[column]
   }
 
-  onSelectButtonClick(id: string) {
-    this.service.changeSelect(id, true)
+  onUnselectButtonClick(id: string) {
+    this.unselectEvent.emit(id)
   }
 
-  onUnselectButtonClick(id: string) {
-    this.service.changeSelect(id, false)
+  onSelectButtonClick(id: string) {
+    this.selectEvent.emit(id)
+  }
+
+  onEditButtonClick(id: string) {
+    this.editEvent.emit(id)
   }
 
   onRemoveButtonClick(id: string) {
-    this.service.remove(id)
+    this.removeEvent.emit(id)
   }
 }

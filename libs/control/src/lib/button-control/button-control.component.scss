@@ -38,6 +38,11 @@
       width: 100%;
     }
 
+    &--transparent {
+      background-color: transparent;
+      border: none;
+    }
+
     &--primary {
       background-color: colors.$color-primary;
       border: 1px solid colors.$color-primary;
