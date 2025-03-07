@@ -1,8 +1,6 @@
 import { ControlType } from '@vet-client/lib-base-form'
 
-import { TableFormModel, TableModel } from '../table-form/model/table-form.model'
-
-export interface VetServicesFormModel extends TableFormModel {
+export interface VetServicesFormModel {
   id: ControlType
   name: ControlType
   description: ControlType
@@ -12,7 +10,7 @@ export interface VetServicesFormModel extends TableFormModel {
   isAvailable: ControlType
 }
 
-export interface VetServicesModel extends TableModel {
+export interface VetServicesModel {
   id: string
   name: string
   description: string

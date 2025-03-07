@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableControlComponent } from '@vet-client/lib-control'
@@ -21,6 +21,8 @@ import { CommonModule } from '@angular/common'
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent {
+  @Output() tableAddFormEvent = new EventEmitter<TableModel>()
+
   @Input() tableNavFormTableButton = true
 
   @Input() tableNavFormAddButton = true
@@ -41,6 +43,6 @@ export class TableFormComponent {
   }
 
   onTableAddFormEvent(event: TableModel) {
-    console.log(event)
+    this.tableAddFormEvent.emit(event)
   }
 }

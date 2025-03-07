@@ -1,1 +1,4 @@
-<lib-table-form [tableFormModel]="formModel"></lib-table-form>
+<lib-table-form
+  [tableFormModel]="formModel"
+  (tableAddFormEvent)="onTableAddFormEvent($event)"
+></lib-table-form>

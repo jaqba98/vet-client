@@ -3,7 +3,7 @@ import { Component } from '@angular/core'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { TableFormComponent } from '../table-form/table-form.component'
-import { VetServicesFormModel } from './vet-services-form.model'
+import { VetServicesFormModel, VetServicesModel } from './vet-services-form.model'
 
 @Component({
   selector: 'lib-vet-services-form',
@@ -24,5 +24,9 @@ export class VetServicesFormComponent {
       price: this.builder.buildInputText('Price', [], true),
       isAvailable: this.builder.buildInputText('Is Available', [], true),
     }
+  }
+
+  onTableAddFormEvent(event: VetServicesModel) {
+    console.log(event)
   }
 }

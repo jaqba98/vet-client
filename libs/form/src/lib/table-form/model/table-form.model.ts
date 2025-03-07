@@ -1,3 +1,5 @@
-export type TableFormModel = object
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type TableFormModel = any
 
-export type TableModel = object
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type TableModel = any
