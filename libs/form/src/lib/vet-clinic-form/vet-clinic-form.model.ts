@@ -10,6 +10,6 @@ export interface BaseVetServicesFormModel<T> {
   isAvailable: T
 }
 
-export type VetServicesFormModel = BaseVetServicesFormModel<ControlType>
+export type VetClinicFormModel = BaseVetServicesFormModel<ControlType>
 
 export type VetServicesDataModel = BaseVetServicesFormModel<string>

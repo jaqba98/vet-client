@@ -12,5 +12,5 @@ export * from './lib/login-registration-form/component/small-login-registration-
 export * from './lib/logout-form/component/big-logout-form.component'
 export * from './lib/logout-form/component/small-logout-form.component'
 export * from './lib/registration-form/registration-form.component'
-export * from './lib/vet-services-form/vet-services-form.component'
+export * from './lib/vet-clinic-form/vet-clinic-form.component'
 export * from './lib/table-form/table-form.component'

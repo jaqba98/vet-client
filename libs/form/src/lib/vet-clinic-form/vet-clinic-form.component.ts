@@ -9,16 +9,16 @@ import {
   TableFormModel,
   TableFormRowsModel,
 } from '../table-form/model/table-form.model'
-import { VetServicesDataModel, VetServicesFormModel } from './vet-services-form.model'
+import { VetServicesDataModel, VetClinicFormModel } from './vet-clinic-form.model'
 
 @Component({
-  selector: 'lib-vet-services-form',
+  selector: 'lib-vet-clinic-form',
   imports: [TableFormComponent],
-  templateUrl: './vet-services-form.component.html',
+  templateUrl: './vet-clinic-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class VetServicesFormComponent {
-  readonly formModel: TableFormModel<keyof VetServicesFormModel>
+export class VetClinicFormComponent {
+  readonly formModel: TableFormModel<keyof VetClinicFormModel>
 
   readonly headers: TableFormHeadersModel
 
