@@ -11,6 +11,7 @@ import { TableNavFormComponent } from './table-nav-form/table-nav-form.component
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent {
+  @Input() tableNavFormTableButton = true
   @Input() tableNavFormAddButton = true
   @Input() tableNavFormRemoveButton = true
   @Input() tableNavFormRefreshButton = true

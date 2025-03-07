@@ -48,6 +48,16 @@
       }
     }
 
+    &--dark-primary {
+      background-color: colors.$color-text-dark-primary;
+      border: 1px solid colors.$color-text-dark-primary;
+
+      &:focus {
+        outline: 2px solid colors.$color-text-dark-primary;
+        outline-offset: 2px;
+      }
+    }
+
     &--dark-secondary {
       background-color: colors.$color-text-dark-secondary;
       border: 1px solid colors.$color-text-dark-secondary;
