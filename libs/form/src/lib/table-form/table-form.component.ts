@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { TableControlComponent } from '@vet-client/lib-control'
+import { TableControlComponent, TablePanelControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseFormModel } from '@vet-client/lib-base-form'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
@@ -15,10 +15,10 @@ import { TableFormRowsModel } from './model/table-form.model'
   selector: 'lib-table-form',
   imports: [
     CommonModule,
-    TableControlComponent,
     TableNavFormComponent,
     TableAddFormComponent,
     TableTableFormComponent,
+    TablePanelControlComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
