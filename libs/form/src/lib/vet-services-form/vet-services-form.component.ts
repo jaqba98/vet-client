@@ -1,11 +1,10 @@
-// I am here
 import { Component } from '@angular/core'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { TableFormComponent } from '../table-form/table-form.component'
-import { VetServicesFormModel, VetServicesModel } from './vet-services-form.model'
-import { TableFormRowsModel } from '../table-form/model/table-form.model'
+import { TableDataModel, TableFormModel } from '../table-form/model/table-form.model'
+import { VetServicesFormModel } from './vet-services-form.model'
 
 @Component({
   selector: 'lib-vet-services-form',
@@ -14,9 +13,7 @@ import { TableFormRowsModel } from '../table-form/model/table-form.model'
   hostDirectives: [BaseComponentDirective],
 })
 export class VetServicesFormComponent {
-  readonly formModel!: VetServicesFormModel
-
-  readonly rows!: TableFormRowsModel<keyof VetServicesModel>
+  readonly formModel: TableFormModel<keyof VetServicesFormModel>
 
   constructor(private readonly builder: BaseFormBuilder) {
     this.formModel = {
@@ -28,21 +25,25 @@ export class VetServicesFormComponent {
       price: this.builder.buildInputText('Price', [], true),
       isAvailable: this.builder.buildInputText('Is Available', [], true),
     }
-    this.rows = Array
-      .from({ length: 100 }, (_, i) => i + 1)
-      .map(i => i.toString())
-      .map(index => <VetServicesModel>{
-        id: index,
-        name: `name-${index}`,
-        description: `description-${index}`,
-        category: `category-${index}`,
-        durationMinutes: `durationMinutes-${index}`,
-        price: `price-${index}`,
-        isAvailable: `isAvailable-${index}`,
-      })
   }
 
-  onTableAddFormEvent(event: VetServicesModel) {
+  onTableAddFormEvent(event: TableDataModel) {
     console.log(event)
   }
+
+  // readonly rows!: TableFormRowsModel<keyof VetServicesModel>
+  // constructor(private readonly builder: BaseFormBuilder) {
+  //   this.rows = Array
+  //     .from({ length: 100 }, (_, i) => i + 1)
+  //     .map(i => i.toString())
+  //     .map(index => <VetServicesModel>{
+  //       id: index,
+  //       name: `name-${index}`,
+  //       description: `description-${index}`,
+  //       category: `category-${index}`,
+  //       durationMinutes: `durationMinutes-${index}`,
+  //       price: `price-${index}`,
+  //       isAvailable: `isAvailable-${index}`,
+  //     })
+  // }
 }
