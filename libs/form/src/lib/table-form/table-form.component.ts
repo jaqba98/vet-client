@@ -13,4 +13,6 @@ import { TableNavFormComponent } from './table-nav-form/table-nav-form.component
 export class TableFormComponent {
   @Input() tableNavFormAddButton = true;
   @Input() tableNavFormRemoveButton = true;
+  @Input() tableNavFormRefreshButton = true;
+  @Input() tableNavFormSearchButton = true;
 }
