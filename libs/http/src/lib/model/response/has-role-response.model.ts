@@ -1,3 +1,3 @@
-import { BaseResponseModel } from '../base/base-response.model';
+import { BaseResponseModel } from '../base/base-response.model'
 
-export type HasRoleResponseModel = BaseResponseModel;
+export type HasRoleResponseModel = BaseResponseModel

@@ -1,1 +1,1 @@
-export const TITLE = 'myVet';
+export const TITLE = 'myVet'

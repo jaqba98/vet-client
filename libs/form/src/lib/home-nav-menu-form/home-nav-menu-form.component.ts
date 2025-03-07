@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, Input, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
 
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store'
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   HomeNavMenuFormModel,
   HomeNavMenuModel,
-} from './home-nav-menu-form.model';
+} from './home-nav-menu-form.model'
 
 @Component({
   selector: 'lib-home-nav-menu-form',
@@ -17,12 +17,11 @@ import {
 })
 export class HomeNavMenuFormComponent
   extends BaseFormService<HomeNavMenuFormModel, HomeNavMenuModel>
-  implements OnInit
-{
-  @Input() isHorizontal = true;
+  implements OnInit {
+  @Input() isHorizontal = true
 
   constructor(private readonly store: Store<RouteStoreModel>) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -32,76 +31,79 @@ export class HomeNavMenuFormComponent
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Home'
+          text: 'Home',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       aboutUs: {
         id: 'aboutUs',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'About us'
+          text: 'About us',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       price: {
         id: 'price',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Price'
+          text: 'Price',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       contact: {
         id: 'contact',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Contact'
+          text: 'Contact',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
-    });
+    })
   }
 
   override onSubmit(model: HomeNavMenuModel) {
-    const { home, aboutUs, price, contact } = model;
+    const { home, aboutUs, price, contact } = model
     if (home) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home })
-      );
-    } else if (aboutUs) {
+        setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }),
+      )
+    }
+    else if (aboutUs) {
       this.store.dispatch(
         setRoute({
           page: RoutePageEnum.home,
           section: RouteSectionEnum.aboutUs,
-        })
-      );
-    } else if (price) {
+        }),
+      )
+    }
+    else if (price) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.price })
-      );
-    } else if (contact) {
+        setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.price }),
+      )
+    }
+    else if (contact) {
       this.store.dispatch(
         setRoute({
           page: RoutePageEnum.home,
           section: RouteSectionEnum.contact,
-        })
-      );
+        }),
+      )
     }
   }
 }

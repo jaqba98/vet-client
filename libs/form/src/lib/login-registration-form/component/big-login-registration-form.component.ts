@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model';
-import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model'
+import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service'
 
 @Component({
   selector: 'lib-big-login-registration-form',
@@ -18,12 +18,11 @@ export class BigLoginRegistrationFormComponent
     BaseLoginRegistrationFormModel,
     BaseLoginRegistrationModel
   >
-  implements OnInit
-{
-  loginRegistrationFormClass = 'base-login-registration-form--big';
+  implements OnInit {
+  loginRegistrationFormClass = 'base-login-registration-form--big'
 
   constructor(private readonly baseLoginRegistrationForm: BaseLoginRegistrationFormService) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -33,29 +32,29 @@ export class BigLoginRegistrationFormComponent
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Login'
+          text: 'Login',
         },
         defaultValue: false,
         fullWidth: false,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       registration: {
         id: 'registration',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Registration'
+          text: 'Registration',
         },
         defaultValue: false,
         fullWidth: false,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
-    });
+    })
   }
 
   override onSubmit(model: BaseLoginRegistrationModel) {
-    this.baseLoginRegistrationForm.onSubmit(model);
+    this.baseLoginRegistrationForm.onSubmit(model)
   }
 }

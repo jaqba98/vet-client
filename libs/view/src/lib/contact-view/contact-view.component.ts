@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
-import { SectionControlComponent } from '@vet-client/lib-control';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { RouteSectionEnum } from '@vet-client/lib-store';
-import { ContactFormComponent } from '@vet-client/lib-form';
+import { SectionControlComponent } from '@vet-client/lib-control'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { RouteSectionEnum } from '@vet-client/lib-store'
+import { ContactFormComponent } from '@vet-client/lib-form'
 
 @Component({
   selector: 'lib-contact-view',
@@ -12,5 +12,5 @@ import { ContactFormComponent } from '@vet-client/lib-form';
   hostDirectives: [BaseComponentDirective],
 })
 export class ContactViewComponent {
-  sectionId = RouteSectionEnum.contact;
+  sectionId = RouteSectionEnum.contact
 }

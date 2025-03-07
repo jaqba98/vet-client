@@ -1,4 +1,4 @@
 export enum MenuTypeEnum {
   home = 'home',
-  dashboard = 'dashboard'
+  dashboard = 'dashboard',
 }

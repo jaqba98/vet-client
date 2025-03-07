@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import type { Meta, StoryObj } from '@storybook/angular'
 
-import { RadioButtonControlComponent } from '@vet-client/lib-control';
+import { RadioButtonControlComponent } from '@vet-client/lib-control'
 
 const meta: Meta<RadioButtonControlComponent> = {
   component: RadioButtonControlComponent,
   title: 'Control/RadioButton',
-};
-export default meta;
-type Story = StoryObj<RadioButtonControlComponent>;
+}
+export default meta
+type Story = StoryObj<RadioButtonControlComponent>
 
 export const Default: Story = {
   args: {
@@ -15,8 +15,8 @@ export const Default: Story = {
       name: 'role',
       options: [
         { id: 'vet', value: 'Vet' },
-        { id: 'client', value: 'Client' }
-      ]
-    }
-  }
-};
+        { id: 'client', value: 'Client' },
+      ],
+    },
+  },
+}

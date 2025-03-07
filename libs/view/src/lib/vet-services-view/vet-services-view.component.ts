@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
-import { SectionControlComponent } from '@vet-client/lib-control';
-import { RouteSectionEnum } from '@vet-client/lib-store';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { VetServicesFormComponent } from '@vet-client/lib-form';
+import { SectionControlComponent } from '@vet-client/lib-control'
+import { RouteSectionEnum } from '@vet-client/lib-store'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { VetServicesFormComponent } from '@vet-client/lib-form'
 
 @Component({
   selector: 'lib-vet-services-view',
@@ -12,5 +12,5 @@ import { VetServicesFormComponent } from '@vet-client/lib-form';
   hostDirectives: [BaseComponentDirective],
 })
 export class VetServicesViewComponent {
-  sectionId = RouteSectionEnum.dashboardVetSettings;
+  sectionId = RouteSectionEnum.dashboardVetSettings
 }

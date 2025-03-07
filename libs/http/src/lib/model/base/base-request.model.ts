@@ -1,3 +1,3 @@
 export interface BaseRequestModel {
-  token: string;
+  token: string
 }

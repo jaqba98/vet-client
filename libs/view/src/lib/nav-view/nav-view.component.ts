@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
 
-import { MenuTypeEnum, NavStoreType } from '@vet-client/lib-store';
+import { MenuTypeEnum, NavStoreType } from '@vet-client/lib-store'
 import {
   BigLoginRegistrationFormComponent,
   BigLogoutFormComponent,
@@ -11,10 +11,10 @@ import {
   HamburgerFormComponent,
   HomeNavMenuFormComponent,
   SmallLoginRegistrationFormComponent,
-  SmallLogoutFormComponent
-} from '@vet-client/lib-form';
-import { SmallLogoControlComponent } from '@vet-client/lib-control';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
+  SmallLogoutFormComponent,
+} from '@vet-client/lib-form'
+import { SmallLogoControlComponent } from '@vet-client/lib-control'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
 
 @Component({
   selector: 'lib-nav-view',
@@ -27,28 +27,28 @@ import { BaseComponentDirective } from '@vet-client/lib-utils';
     BigLogoutFormComponent,
     SmallLogoutFormComponent,
     SmallLoginRegistrationFormComponent,
-    BigLoginRegistrationFormComponent
+    BigLoginRegistrationFormComponent,
   ],
   templateUrl: './nav-view.component.html',
   styleUrl: './nav-view.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
 export class NavViewComponent implements OnInit, OnDestroy {
-  menuType!: MenuTypeEnum;
+  menuType!: MenuTypeEnum
 
-  sub: Subscription;
+  sub: Subscription
 
   constructor(private readonly navStore: Store<NavStoreType>) {
-    this.sub = new Subscription();
+    this.sub = new Subscription()
   }
 
   ngOnInit() {
     this.sub = this.navStore.select('nav').subscribe((nav) => {
-      this.menuType = nav.menuType;
-    });
+      this.menuType = nav.menuType
+    })
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.sub.unsubscribe()
   }
 }

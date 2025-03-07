@@ -1,3 +1,3 @@
-import { BaseRequestModel } from '../base/base-request.model';
+import { BaseRequestModel } from '../base/base-request.model'
 
-export type IsClientRequestModel = BaseRequestModel;
+export type IsClientRequestModel = BaseRequestModel

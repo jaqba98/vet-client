@@ -1,18 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, Input, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
 
 import {
   RoutePageEnum,
   RouteSectionEnum,
   RouteStoreType,
-  setRoute
-} from '@vet-client/lib-store';
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
+  setRoute,
+} from '@vet-client/lib-store'
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   DashboardNavMenuFormModel,
   DashboardNavMenuModel,
-} from './dashboard-nav-menu-form.model';
+} from './dashboard-nav-menu-form.model'
 
 @Component({
   selector: 'lib-dashboard-nav-menu-form',
@@ -22,12 +22,11 @@ import {
 })
 export class DashboardNavMenuFormComponent
   extends BaseFormService<DashboardNavMenuFormModel, DashboardNavMenuModel>
-  implements OnInit
-{
-  @Input() isHorizontal = true;
+  implements OnInit {
+  @Input() isHorizontal = true
 
   constructor(private readonly store: Store<RouteStoreType>) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -42,7 +41,7 @@ export class DashboardNavMenuFormComponent
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       accountSettings: {
         kind: 'button',
@@ -54,7 +53,7 @@ export class DashboardNavMenuFormComponent
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       profile: {
         kind: 'button',
@@ -66,9 +65,9 @@ export class DashboardNavMenuFormComponent
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
-      }
-    });
+        isEnabled: true,
+      },
+    })
   }
 
   override onSubmit(model: DashboardNavMenuModel) {
@@ -77,22 +76,24 @@ export class DashboardNavMenuFormComponent
         setRoute({
           page: RoutePageEnum.dashboard,
           section: RouteSectionEnum.dashboard,
-        })
-      );
-    } else if (model.accountSettings) {
+        }),
+      )
+    }
+    else if (model.accountSettings) {
       this.store.dispatch(
         setRoute({
           page: RoutePageEnum.dashboardAccountSettings,
           section: RouteSectionEnum.empty,
-        })
-      );
-    } else if (model.profile) {
+        }),
+      )
+    }
+    else if (model.profile) {
       this.store.dispatch(
         setRoute({
           page: RoutePageEnum.dashboardProfile,
           section: RouteSectionEnum.empty,
-        })
-      );
+        }),
+      )
     }
   }
 }

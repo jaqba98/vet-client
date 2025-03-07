@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core'
+import { Validators } from '@angular/forms'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { CardControlComponent } from '@vet-client/lib-control';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ContactFormModel, ContactModel } from './contact-form.model';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { CardControlComponent } from '@vet-client/lib-control'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { ContactFormModel, ContactModel } from './contact-form.model'
 
 @Component({
   selector: 'lib-contact-form',
@@ -14,7 +14,7 @@ import { ContactFormModel, ContactModel } from './contact-form.model';
 })
 export class ContactFormComponent extends BaseFormService<ContactFormModel, ContactModel> implements OnInit {
   constructor() {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         placeholder: '',
         validators: [Validators.required, Validators.email],
         defaultValue: '',
-        isEnabled: true
+        isEnabled: true,
       },
       subject: {
         kind: 'input',
@@ -35,7 +35,7 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         placeholder: '',
         validators: [Validators.required],
         defaultValue: '',
-        isEnabled: true
+        isEnabled: true,
       },
       message: {
         kind: 'textarea',
@@ -44,7 +44,7 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         height: '300px',
         validators: [Validators.required],
         defaultValue: '',
-        isEnabled: true
+        isEnabled: true,
       },
       send: {
         kind: 'button',
@@ -56,12 +56,12 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         fullWidth: false,
         defaultValue: false,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
-    });
+    })
   }
 
   override onSubmit(model: ContactModel) {
-    console.log(model);
+    console.log(model)
   }
 }

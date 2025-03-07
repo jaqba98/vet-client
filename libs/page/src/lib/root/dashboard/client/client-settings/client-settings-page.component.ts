@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ClientSettingsViewComponent } from '@vet-client/lib-view';
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { ClientSettingsViewComponent } from '@vet-client/lib-view'
 
 @Component({
   selector: 'lib-client-settings-page',

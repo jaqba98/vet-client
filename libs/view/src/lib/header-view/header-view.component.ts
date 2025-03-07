@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
-import { BigLogoControlComponent, SectionControlComponent } from '@vet-client/lib-control';
-import { RouteSectionEnum } from '@vet-client/lib-store';
+import { BigLogoControlComponent, SectionControlComponent } from '@vet-client/lib-control'
+import { RouteSectionEnum } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-header-view',
@@ -9,5 +9,5 @@ import { RouteSectionEnum } from '@vet-client/lib-store';
   templateUrl: './header-view.component.html',
 })
 export class HeaderViewComponent {
-  sectionId = RouteSectionEnum.home;
+  sectionId = RouteSectionEnum.home
 }

@@ -1,5 +1,5 @@
 export interface TextareaControlModel {
-  label: string;
-  placeholder: string;
-  height: string;
+  label: string
+  placeholder: string
+  height: string
 }

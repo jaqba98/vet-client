@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { faArrowsRotate, faMagnifyingGlass, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, OnInit } from '@angular/core'
+import { faArrowsRotate, faMagnifyingGlass, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { TableNavFormModel, TableNavModel } from './table-nav-form.model';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { TableNavFormModel, TableNavModel } from './table-nav-form.model'
 
 @Component({
   selector: 'lib-table-nav-form',
@@ -13,12 +13,11 @@ import { TableNavFormModel, TableNavModel } from './table-nav-form.model';
 })
 export class TableNavFormComponent
   extends BaseFormService<TableNavFormModel, TableNavModel>
-  implements OnInit
-{
-  @Input() tableNavFormAddButton = true;
-  @Input() tableNavFormRemoveButton = true;
-  @Input() tableNavFormRefreshButton = true;
-  @Input() tableNavFormSearchButton = true;
+  implements OnInit {
+  @Input() tableNavFormAddButton = true
+  @Input() tableNavFormRemoveButton = true
+  @Input() tableNavFormRefreshButton = true
+  @Input() tableNavFormSearchButton = true
 
   ngOnInit() {
     this.initBaseForm({
@@ -86,10 +85,10 @@ export class TableNavFormComponent
         color: 'dark-secondary',
         isEnabled: this.tableNavFormSearchButton,
       },
-    });
+    })
   }
 
   override onSubmit(model: TableNavModel) {
-    console.log(model);
+    console.log(model)
   }
 }

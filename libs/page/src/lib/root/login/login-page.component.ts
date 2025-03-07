@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core'
 
-import { LoginViewComponent } from '@vet-client/lib-view';
+import { LoginViewComponent } from '@vet-client/lib-view'
 
 @Component({
   selector: 'lib-login-page',

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { BaseComponentDirective } from '@vet-client/lib-utils'
 
 @Component({
   selector: 'lib-main-view',

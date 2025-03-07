@@ -1,1 +1,1 @@
-export * from './lib/app.const';
+export * from './lib/app.const'

@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core'
 
-import { RegistrationViewComponent } from '@vet-client/lib-view';
+import { RegistrationViewComponent } from '@vet-client/lib-view'
 
 @Component({
   selector: 'lib-registration-page',

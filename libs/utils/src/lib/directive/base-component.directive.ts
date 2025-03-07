@@ -1,9 +1,8 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core'
 
 @Directive({
   selector: '[libBaseComponent]',
 })
 export class BaseComponentDirective {
-  @HostBinding('style.display') display = 'contents';
+  @HostBinding('style.display') display = 'contents'
 }
-

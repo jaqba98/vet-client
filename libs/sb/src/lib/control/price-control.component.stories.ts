@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import type { Meta, StoryObj } from '@storybook/angular'
 
-import { PriceControlComponent } from '@vet-client/lib-control';
+import { PriceControlComponent } from '@vet-client/lib-control'
 
 const meta: Meta<PriceControlComponent> = {
   component: PriceControlComponent,
   title: 'Control/Price',
-};
-export default meta;
-type Story = StoryObj<PriceControlComponent>;
+}
+export default meta
+type Story = StoryObj<PriceControlComponent>
 
 export const Default: Story = {
   args: {
@@ -18,7 +18,7 @@ export const Default: Story = {
       'Appointment Scheduling',
       'Basic Pet Records',
       'Email Notifications',
-      'Veterinarian Directory'
-    ]
-  }
-};
+      'Veterinarian Directory',
+    ],
+  },
+}

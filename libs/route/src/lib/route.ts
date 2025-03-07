@@ -1,4 +1,4 @@
-import { Route } from '@angular/router';
+import { Route } from '@angular/router'
 
 import {
   AccountSettingsPageComponent,
@@ -22,8 +22,8 @@ import {
   VetPageComponent,
   VetPatientsPageComponent,
   VetServicesPageComponent,
-  VetSettingsPageComponent
-} from '@vet-client/lib-page';
+  VetSettingsPageComponent,
+} from '@vet-client/lib-page'
 import {
   GetAccountGuard,
   HasRoleGuard,
@@ -31,29 +31,29 @@ import {
   IsVetRoleGuard,
   LoggedInGuard,
   LoggedOutGuard,
-  NotHasRoleGuard
-} from '@vet-client/lib-guard';
+  NotHasRoleGuard,
+} from '@vet-client/lib-guard'
 
 export const route: Route[] = [
   {
     path: '',
     redirectTo: '/home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'home',
     component: HomePageComponent,
-    canActivate: [LoggedOutGuard]
+    canActivate: [LoggedOutGuard],
   },
   {
     path: 'login',
     component: LoginPageComponent,
-    canActivate: [LoggedOutGuard]
+    canActivate: [LoggedOutGuard],
   },
   {
     path: 'registration',
     component: RegistrationPageComponent,
-    canActivate: [LoggedOutGuard]
+    canActivate: [LoggedOutGuard],
   },
   {
     path: 'dashboard',
@@ -63,12 +63,12 @@ export const route: Route[] = [
       {
         path: '',
         component: DashboardMainPageComponent,
-        canActivate: [HasRoleGuard, IsVetRoleGuard, IsClientRoleGuard]
+        canActivate: [HasRoleGuard, IsVetRoleGuard, IsClientRoleGuard],
       },
       {
         path: 'choose-role',
         component: ChooseRolePageComponent,
-        canActivate: [NotHasRoleGuard]
+        canActivate: [NotHasRoleGuard],
       },
       {
         path: 'vet',
@@ -77,46 +77,46 @@ export const route: Route[] = [
         children: [
           {
             path: '',
-            component: VetMainPageComponent
+            component: VetMainPageComponent,
           },
           {
             path: 'settings',
-            component: VetSettingsPageComponent
+            component: VetSettingsPageComponent,
           },
           {
             path: 'clinic',
-            component: VetClinicPageComponent
+            component: VetClinicPageComponent,
           },
           {
             path: 'medical-record',
-            component: VetMedicalRecordPageComponent
+            component: VetMedicalRecordPageComponent,
           },
           {
             path: 'medication',
-            component: VetMedicationPageComponent
+            component: VetMedicationPageComponent,
           },
           {
             path: 'services',
-            component: VetServicesPageComponent
+            component: VetServicesPageComponent,
           },
           {
             path: 'appointment',
-            component: VetAppointmentPageComponent
+            component: VetAppointmentPageComponent,
           },
           {
             path: 'invoice',
-            component: VetInvoicePageComponent
+            component: VetInvoicePageComponent,
           },
           {
             path: 'patients',
-            component: VetPatientsPageComponent
+            component: VetPatientsPageComponent,
           },
           {
             path: 'dashboard/vet/**',
             redirectTo: 'dashboard/vet/',
-            pathMatch: 'full'
+            pathMatch: 'full',
           },
-        ]
+        ],
       },
       {
         path: 'client',
@@ -125,54 +125,54 @@ export const route: Route[] = [
         children: [
           {
             path: '',
-            component: ClientMainPageComponent
+            component: ClientMainPageComponent,
           },
           {
             path: 'settings',
-            component: ClientSettingsPageComponent
+            component: ClientSettingsPageComponent,
           },
           {
             path: 'pets',
-            component: ClientPetsPageComponent
+            component: ClientPetsPageComponent,
           },
           {
             path: 'appointment',
-            component: ClientAppointmentPageComponent
+            component: ClientAppointmentPageComponent,
           },
           {
             path: 'invoice',
-            component: ClientInvoicePageComponent
+            component: ClientInvoicePageComponent,
           },
           {
             path: 'medical-record',
-            component: ClientMedicalRecordPageComponent
+            component: ClientMedicalRecordPageComponent,
           },
           {
             path: 'clinics',
-            component: ClientClinicsPageComponent
+            component: ClientClinicsPageComponent,
           },
           {
             path: 'dashboard/client/**',
             redirectTo: 'dashboard/client/',
-            pathMatch: 'full'
-          }
-        ]
+            pathMatch: 'full',
+          },
+        ],
       },
       {
         path: 'account-settings',
         component: AccountSettingsPageComponent,
-        canActivate: [HasRoleGuard]
+        canActivate: [HasRoleGuard],
       },
       {
         path: 'profile',
         component: ProfilePageComponent,
-        canActivate: [HasRoleGuard]
+        canActivate: [HasRoleGuard],
       },
-    ]
+    ],
   },
   {
     path: '**',
     redirectTo: '/home',
-    pathMatch: 'full'
-  }
-];
+    pathMatch: 'full',
+  },
+]

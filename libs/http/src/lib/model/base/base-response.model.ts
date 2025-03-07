@@ -1,3 +1,3 @@
 export interface BaseResponseModel {
-  success: boolean;
+  success: boolean
 }

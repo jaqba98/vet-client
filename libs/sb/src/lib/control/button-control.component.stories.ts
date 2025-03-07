@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import type { Meta, StoryObj } from '@storybook/angular'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-import { ButtonControlComponent } from '@vet-client/lib-control';
+import { ButtonControlComponent } from '@vet-client/lib-control'
 
 const meta: Meta<ButtonControlComponent> = {
   component: ButtonControlComponent,
   title: 'Control/Button',
-};
-export default meta;
-type Story = StoryObj<ButtonControlComponent>;
+}
+export default meta
+type Story = StoryObj<ButtonControlComponent>
 
 export const Default: Story = {
   args: {
@@ -16,13 +16,13 @@ export const Default: Story = {
       id: 'click',
       value: {
         type: 'text',
-        text: 'Click'
+        text: 'Click',
       },
       fullWidth: false,
-      color: 'primary'
-    }
-  }
-};
+      color: 'primary',
+    },
+  },
+}
 
 export const Icon: Story = {
   args: {
@@ -34,13 +34,13 @@ export const Icon: Story = {
           icon: faBars,
           color: 'primary',
           fontSize: '1rem',
-        }
+        },
       },
       fullWidth: false,
-      color: 'primary'
-    }
-  }
-};
+      color: 'primary',
+    },
+  },
+}
 
 export const Link: Story = {
   args: {
@@ -48,10 +48,10 @@ export const Link: Story = {
       id: 'click',
       value: {
         type: 'link',
-        text: 'Click'
+        text: 'Click',
       },
       fullWidth: false,
-      color: 'primary'
-    }
-  }
-};
+      color: 'primary',
+    },
+  },
+}

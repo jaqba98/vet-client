@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { CardControlComponent } from '@vet-client/lib-control';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { CardControlComponent } from '@vet-client/lib-control'
 import {
   BaseComponentDirective,
   TextConvertUtils,
-} from '@vet-client/lib-utils';
-import { RoleDomainEnum } from '@vet-client/lib-domain';
-import { HttpPostAppService } from '@vet-client/lib-http';
-import { CookieService } from '@vet-client/lib-system';
+} from '@vet-client/lib-utils'
+import { RoleDomainEnum } from '@vet-client/lib-domain'
+import { HttpPostAppService } from '@vet-client/lib-http'
+import { CookieService } from '@vet-client/lib-system'
 import {
   RoutePageEnum,
   RouteSectionEnum,
   RouteStoreModel,
   setRoute,
-} from '@vet-client/lib-store';
-import { ChooseRoleFormModel, ChooseRoleModel } from './choose-role-form.model';
+} from '@vet-client/lib-store'
+import { ChooseRoleFormModel, ChooseRoleModel } from './choose-role-form.model'
 
 @Component({
   selector: 'lib-choose-role-form',
@@ -26,14 +26,13 @@ import { ChooseRoleFormModel, ChooseRoleModel } from './choose-role-form.model';
 })
 export class ChooseRoleFormComponent
   extends BaseFormService<ChooseRoleFormModel, ChooseRoleModel>
-  implements OnInit
-{
+  implements OnInit {
   constructor(
     private readonly httpPost: HttpPostAppService,
     private readonly cookie: CookieService,
-    private readonly store: Store<RouteStoreModel>
+    private readonly store: Store<RouteStoreModel>,
   ) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -52,7 +51,7 @@ export class ChooseRoleFormComponent
           },
         ],
         defaultValue: RoleDomainEnum.vet,
-        isEnabled: true
+        isEnabled: true,
       },
       save: {
         kind: 'button',
@@ -64,45 +63,47 @@ export class ChooseRoleFormComponent
         defaultValue: false,
         fullWidth: false,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
-    });
+    })
   }
 
   override onSubmit(model: ChooseRoleModel) {
-    const token = this.cookie.getToken();
+    const token = this.cookie.getToken()
     if (token === null) {
       this.store.dispatch(
         setRoute({
           page: RoutePageEnum.home,
           section: RouteSectionEnum.home,
-        })
-      );
-      return;
+        }),
+      )
+      return
     }
     this.httpPost
       .chooseRolePost({ token, role: model.role })
       .subscribe((response) => {
-        const { success, role } = response;
+        const { success, role } = response
         if (success) {
           if (role === RoleDomainEnum.vet) {
             this.store.dispatch(
               setRoute({
                 page: RoutePageEnum.dashboardVet,
                 section: RouteSectionEnum.dashboardVet,
-              })
-            );
-          } else if (role === RoleDomainEnum.client) {
+              }),
+            )
+          }
+          else if (role === RoleDomainEnum.client) {
             this.store.dispatch(
               setRoute({
                 page: RoutePageEnum.dashboardClient,
                 section: RouteSectionEnum.dashboardClient,
-              })
-            );
-          } else {
-            throw new Error('Not supported role!');
+              }),
+            )
+          }
+          else {
+            throw new Error('Not supported role!')
           }
         }
-      });
+      })
   }
 }

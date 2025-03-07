@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   ClientMenuFormModel,
-  ClientMenuModel
-} from './client-menu-form.model';
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store';
+  ClientMenuModel,
+} from './client-menu-form.model'
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-client-menu-form',
   imports: [BaseFormComponent],
   templateUrl: './client-menu-form.component.html',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
 export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel, ClientMenuModel> implements OnInit {
   constructor(private readonly store: Store<RouteStoreModel>) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -27,101 +27,106 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Settings'
+          text: 'Settings',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       clientPets: {
         id: 'clientPets',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Pets'
+          text: 'Pets',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       clientAppointment: {
         id: 'clientAppointment',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Appointment'
+          text: 'Appointment',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       clientInvoice: {
         id: 'clientInvoice',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Invoice'
+          text: 'Invoice',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       clientMedicalRecord: {
         id: 'clientMedicalRecord',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Medical Record'
+          text: 'Medical Record',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       clientClinics: {
         id: 'clientClinics',
         kind: 'button',
         value: {
           type: 'text',
-          text: 'Clinics'
+          text: 'Clinics',
         },
         defaultValue: false,
         fullWidth: true,
         color: 'primary',
-        isEnabled: true
-      }
-    });
+        isEnabled: true,
+      },
+    })
   }
 
   override onSubmit(model: ClientMenuModel) {
     if (model.clientSettings) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientSettings, section: RouteSectionEnum.dashboardClientSettings })
-      );
-    } else if (model.clientPets) {
+        setRoute({ page: RoutePageEnum.dashboardClientSettings, section: RouteSectionEnum.dashboardClientSettings }),
+      )
+    }
+    else if (model.clientPets) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientPets, section: RouteSectionEnum.dashboardClientPets })
-      );
-    } else if (model.clientAppointment) {
+        setRoute({ page: RoutePageEnum.dashboardClientPets, section: RouteSectionEnum.dashboardClientPets }),
+      )
+    }
+    else if (model.clientAppointment) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientAppointment, section: RouteSectionEnum.dashboardClientAppointment })
-      );
-    } else if (model.clientInvoice) {
+        setRoute({ page: RoutePageEnum.dashboardClientAppointment, section: RouteSectionEnum.dashboardClientAppointment }),
+      )
+    }
+    else if (model.clientInvoice) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientInvoice, section: RouteSectionEnum.dashboardClientInvoice })
-      );
-    } else if (model.clientMedicalRecord) {
+        setRoute({ page: RoutePageEnum.dashboardClientInvoice, section: RouteSectionEnum.dashboardClientInvoice }),
+      )
+    }
+    else if (model.clientMedicalRecord) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientMedicalRecord, section: RouteSectionEnum.dashboardClientMedicalRecord })
-      );
-    } else if (model.clientClinics) {
+        setRoute({ page: RoutePageEnum.dashboardClientMedicalRecord, section: RouteSectionEnum.dashboardClientMedicalRecord }),
+      )
+    }
+    else if (model.clientClinics) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientClinics, section: RouteSectionEnum.dashboardClientClinics })
-      );
+        setRoute({ page: RoutePageEnum.dashboardClientClinics, section: RouteSectionEnum.dashboardClientClinics }),
+      )
     }
   }
 }

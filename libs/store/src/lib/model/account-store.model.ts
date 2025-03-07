@@ -1,4 +1,4 @@
 export interface AccountStoreModel {
-  firstName: string;
-  lastName: string;
+  firstName: string
+  lastName: string
 }

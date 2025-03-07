@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core'
 
 import {
   AboutUsViewComponent,
   ContactViewComponent,
   HeaderViewComponent,
-  PriceViewComponent
-} from '@vet-client/lib-view';
+  PriceViewComponent,
+} from '@vet-client/lib-view'
 
 @Component({
   selector: 'lib-home-page',
@@ -13,7 +13,7 @@ import {
     HeaderViewComponent,
     AboutUsViewComponent,
     PriceViewComponent,
-    ContactViewComponent
+    ContactViewComponent,
   ],
   templateUrl: './home-page.component.html',
 })

@@ -1,3 +1,3 @@
-import { AccountStoreModel } from '../model/account-store.model';
+import { AccountStoreModel } from '../model/account-store.model'
 
-export type AccountStoreType = { account: AccountStoreModel };
+export type AccountStoreType = { account: AccountStoreModel }

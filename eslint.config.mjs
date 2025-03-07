@@ -1,4 +1,5 @@
-import nx from '@nx/eslint-plugin';
+import nx from '@nx/eslint-plugin'
+import stylistic from '@stylistic/eslint-plugin'
 
 export default [
   ...nx.configs['flat/base'],
@@ -36,7 +37,12 @@ export default [
       '**/*.cjs',
       '**/*.mjs',
     ],
+    plugins: {
+      '@stylistic': stylistic,
+    },
     // Override or add rules here
-    rules: {},
+    rules: {
+      ...stylistic.configs.recommended.rules,
+    },
   },
-];
+]

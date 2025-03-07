@@ -1,7 +1,7 @@
-import { InputType } from '@vet-client/lib-type';
+import { InputType } from '@vet-client/lib-type'
 
 export interface InputControlModel {
-  type: InputType;
-  label: string;
-  placeholder: string;
+  type: InputType
+  label: string
+  placeholder: string
 }

@@ -4,4 +4,4 @@ export type ColorType =
   | 'light-primary'
   | 'primary'
   | 'error'
-  | 'success';
+  | 'success'

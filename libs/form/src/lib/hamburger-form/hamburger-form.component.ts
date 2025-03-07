@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { Component, OnInit } from '@angular/core'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { Store } from '@ngrx/store'
+import { take } from 'rxjs'
 
-import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store';
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model';
+import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store'
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model'
 
 @Component({
   selector: 'lib-hamburger-form',
@@ -16,10 +16,9 @@ import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model';
 })
 export class HamburgerFormComponent
   extends BaseFormService<HamburgerFormModel, HamburgerModel>
-  implements OnInit
-{
+  implements OnInit {
   constructor(private readonly store: Store<NavStoreType>) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -32,15 +31,15 @@ export class HamburgerFormComponent
           icon: {
             icon: faBars,
             color: 'light-primary',
-            fontSize: '1rem'
-          }
+            fontSize: '1rem',
+          },
         },
         defaultValue: false,
         fullWidth: false,
         color: 'primary',
-        isEnabled: true
-      }
-    });
+        isEnabled: true,
+      },
+    })
   }
 
   override onSubmit(model: HamburgerModel) {
@@ -49,8 +48,8 @@ export class HamburgerFormComponent
         .select('nav')
         .pipe(take(1))
         .subscribe((data) => {
-          this.store.dispatch(navSwitchIsOpen({ isOpen: !data.isOpen }));
-        });
+          this.store.dispatch(navSwitchIsOpen({ isOpen: !data.isOpen }))
+        })
     }
   }
 }

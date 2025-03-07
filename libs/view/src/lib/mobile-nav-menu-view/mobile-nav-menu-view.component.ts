@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
 
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { MenuTypeEnum, NavStoreType } from '@vet-client/lib-store';
-import { DashboardNavMenuFormComponent, HomeNavMenuFormComponent } from '@vet-client/lib-form';
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { MenuTypeEnum, NavStoreType } from '@vet-client/lib-store'
+import { DashboardNavMenuFormComponent, HomeNavMenuFormComponent } from '@vet-client/lib-form'
 
 @Component({
   selector: 'lib-mobile-nav-menu-view',
@@ -19,26 +19,26 @@ import { DashboardNavMenuFormComponent, HomeNavMenuFormComponent } from '@vet-cl
   hostDirectives: [BaseComponentDirective],
 })
 export class MobileNavMenuViewComponent implements OnInit, OnDestroy {
-  menuType!: MenuTypeEnum;
+  menuType!: MenuTypeEnum
 
-  isOpen = false;
+  isOpen = false
 
-  private readonly sub: Subscription;
+  private readonly sub: Subscription
 
   constructor(private readonly store: Store<NavStoreType>) {
-    this.sub = new Subscription();
+    this.sub = new Subscription()
   }
 
   ngOnInit() {
     this.sub.add(
       this.store.select('nav').subscribe((nav) => {
-        this.isOpen = nav.isOpen;
-        this.menuType = nav.menuType;
-      })
-    );
+        this.isOpen = nav.isOpen
+        this.menuType = nav.menuType
+      }),
+    )
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.sub.unsubscribe()
   }
 }

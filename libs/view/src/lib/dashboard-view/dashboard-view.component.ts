@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { Store } from '@ngrx/store';
-import { RouterOutlet } from '@angular/router';
-import { take } from 'rxjs';
+import { Component } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { Store } from '@ngrx/store'
+import { RouterOutlet } from '@angular/router'
+import { take } from 'rxjs'
 
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control';
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control'
 import {
   navDashboardNavIsOpen,
   NavStoreModel,
   NavStoreType,
-} from '@vet-client/lib-store';
+} from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-dashboard-view',
@@ -21,7 +21,7 @@ import {
   hostDirectives: [BaseComponentDirective],
 })
 export class DashboardViewComponent {
-  isOpen = false;
+  isOpen = false
 
   hamburgerModel: ButtonControlModel = {
     id: 'hamburger',
@@ -34,8 +34,8 @@ export class DashboardViewComponent {
       },
     },
     fullWidth: false,
-    color: 'primary'
-  };
+    color: 'primary',
+  }
 
   constructor(private readonly store: Store<NavStoreType>) {}
 
@@ -47,27 +47,27 @@ export class DashboardViewComponent {
         this.store.dispatch(
           navDashboardNavIsOpen({
             dashboardNavIsOpen: !state.dashboardNavIsOpen,
-          })
-        );
-        this.isOpen = !state.dashboardNavIsOpen;
-      });
+          }),
+        )
+        this.isOpen = !state.dashboardNavIsOpen
+      })
   }
 
   getMenuClassList() {
     return this.isOpen
       ? 'dashboard-view__menu--open'
-      : 'dashboard-view__menu--close';
+      : 'dashboard-view__menu--close'
   }
 
   getMenuContentClassList() {
     return this.isOpen
       ? 'dashboard-view__menu--content--open'
-      : 'dashboard-view__menu--content--close';
+      : 'dashboard-view__menu--content--close'
   }
 
   getContentClassList() {
     return this.isOpen
       ? 'dashboard-view__content--open'
-      : 'dashboard-view__content--close';
+      : 'dashboard-view__content--close'
   }
 }

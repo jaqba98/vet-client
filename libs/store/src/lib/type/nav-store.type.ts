@@ -1,9 +1,9 @@
-import { NavStoreModel } from '../model/nav-store.model';
+import { NavStoreModel } from '../model/nav-store.model'
 
-export type NavStoreType = { nav: NavStoreModel };
+export type NavStoreType = { nav: NavStoreModel }
 
-export type NavIsOpenStoreType = { isOpen: NavStoreModel['isOpen'] };
+export type NavIsOpenStoreType = { isOpen: NavStoreModel['isOpen'] }
 
-export type NavMenuTypeStoreType = { menuType: NavStoreModel['menuType'] };
+export type NavMenuTypeStoreType = { menuType: NavStoreModel['menuType'] }
 
-export type NavDashboardNavIsOpen = { dashboardNavIsOpen: NavStoreModel['dashboardNavIsOpen'] };
+export type NavDashboardNavIsOpen = { dashboardNavIsOpen: NavStoreModel['dashboardNavIsOpen'] }

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core'
+import { faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { CommonModule } from '@angular/common'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model';
-import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service';
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model'
+import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service'
 
 @Component({
   selector: 'lib-small-login-registration-form',
@@ -17,10 +17,10 @@ import { BaseLoginRegistrationFormService } from '../base/base-login-registratio
 export class SmallLoginRegistrationFormComponent
   extends BaseFormService<BaseLoginRegistrationFormModel, BaseLoginRegistrationModel>
   implements OnInit {
-  loginRegistrationFormClass = 'base-login-registration-form--small';
+  loginRegistrationFormClass = 'base-login-registration-form--small'
 
   constructor(private readonly baseLoginRegistrationForm: BaseLoginRegistrationFormService) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -33,13 +33,13 @@ export class SmallLoginRegistrationFormComponent
           icon: {
             icon: faRightToBracket,
             color: 'light-primary',
-            fontSize: '1rem'
-          }
+            fontSize: '1rem',
+          },
         },
         defaultValue: false,
         fullWidth: false,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
       registration: {
         id: 'registration',
@@ -49,18 +49,18 @@ export class SmallLoginRegistrationFormComponent
           icon: {
             icon: faUserPlus,
             color: 'light-primary',
-            fontSize: '1rem'
-          }
+            fontSize: '1rem',
+          },
         },
         defaultValue: false,
         fullWidth: false,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
-    });
+    })
   }
 
   override onSubmit(model: BaseLoginRegistrationModel) {
-    this.baseLoginRegistrationForm.onSubmit(model);
+    this.baseLoginRegistrationForm.onSubmit(model)
   }
 }

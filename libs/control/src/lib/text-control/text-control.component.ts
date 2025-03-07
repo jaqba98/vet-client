@@ -1,24 +1,24 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common'
+import { Component, Input } from '@angular/core'
 
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { ColorType, TextTagType } from '@vet-client/lib-type';
-import { TextControlModel } from './text-control.model';
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { ColorType, TextTagType } from '@vet-client/lib-type'
+import { TextControlModel } from './text-control.model'
 
 @Component({
   selector: 'lib-text-control',
   imports: [CommonModule],
   templateUrl: './text-control.component.html',
   styleUrl: './text-control.component.scss',
-  hostDirectives: [BaseComponentDirective]
+  hostDirectives: [BaseComponentDirective],
 })
 export class TextControlComponent {
-  @Input() tag: TextTagType = 'p';
+  @Input() tag: TextTagType = 'p'
 
-  @Input() textControlColor: ColorType = 'dark-primary';
-  @Input() textControlLineHeight = false;
-  @Input() textControlJustify = false;
-  @Input() textControlBold = false;
+  @Input() textControlColor: ColorType = 'dark-primary'
+  @Input() textControlLineHeight = false
+  @Input() textControlJustify = false
+  @Input() textControlBold = false
 
   getClassList(): TextControlModel {
     return {
@@ -30,7 +30,7 @@ export class TextControlComponent {
       'text-control--success': this.textControlColor === 'success',
       'text-control--line-height': this.textControlLineHeight,
       'text-control--justify': this.textControlJustify,
-      'text-control--bold': this.textControlBold
-    };
+      'text-control--bold': this.textControlBold,
+    }
   }
 }

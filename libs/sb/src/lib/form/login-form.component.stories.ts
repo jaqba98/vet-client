@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import type { Meta, StoryObj } from '@storybook/angular'
 
-import { LoginFormComponent } from '@vet-client/lib-form';
-import { StorybookUtilsService } from '../utils/storybook-utils.service';
+import { LoginFormComponent } from '@vet-client/lib-form'
+import { StorybookUtilsService } from '../utils/storybook-utils.service'
 
 const meta: Meta<LoginFormComponent> = {
   component: LoginFormComponent,
   title: 'Form/Login',
-  ...StorybookUtilsService.getProviders()
-};
-export default meta;
-type Story = StoryObj<LoginFormComponent>;
+  ...StorybookUtilsService.getProviders(),
+}
+export default meta
+type Story = StoryObj<LoginFormComponent>
 
-export const Default: Story = {};
+export const Default: Story = {}

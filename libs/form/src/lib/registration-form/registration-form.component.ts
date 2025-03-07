@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core'
+import { Validators } from '@angular/forms'
 
-import { CardControlComponent } from '@vet-client/lib-control';
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form';
-import { BaseComponentDirective } from '@vet-client/lib-utils';
-import { HttpPostAppService } from '@vet-client/lib-http';
+import { CardControlComponent } from '@vet-client/lib-control'
+import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { HttpPostAppService } from '@vet-client/lib-http'
 import {
   RegistrationFormModel,
   RegistrationModel,
-} from './registration-form.model';
+} from './registration-form.model'
 
 @Component({
   selector: 'lib-registration-form',
@@ -20,7 +20,7 @@ export class RegistrationFormComponent
   extends BaseFormService<RegistrationFormModel, RegistrationModel>
   implements OnInit {
   constructor(private readonly httpPost: HttpPostAppService) {
-    super();
+    super()
   }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class RegistrationFormComponent
           Validators.email,
           Validators.maxLength(255),
         ],
-        isEnabled: true
+        isEnabled: true,
       },
       password: {
         kind: 'input',
@@ -45,7 +45,7 @@ export class RegistrationFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(255)],
-        isEnabled: true
+        isEnabled: true,
       },
       confirmPassword: {
         kind: 'input',
@@ -54,7 +54,7 @@ export class RegistrationFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(255)],
-        isEnabled: true
+        isEnabled: true,
       },
       firstName: {
         kind: 'input',
@@ -63,7 +63,7 @@ export class RegistrationFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(50)],
-        isEnabled: true
+        isEnabled: true,
       },
       lastName: {
         kind: 'input',
@@ -72,7 +72,7 @@ export class RegistrationFormComponent
         placeholder: '',
         defaultValue: '',
         validators: [Validators.required, Validators.maxLength(100)],
-        isEnabled: true
+        isEnabled: true,
       },
       register: {
         id: 'register',
@@ -84,9 +84,9 @@ export class RegistrationFormComponent
         defaultValue: false,
         fullWidth: false,
         color: 'primary',
-        isEnabled: true
+        isEnabled: true,
       },
-    });
+    })
   }
 
   override onSubmit(model: RegistrationModel) {
@@ -99,13 +99,14 @@ export class RegistrationFormComponent
         lastName: model.lastName,
       })
       .subscribe((response) => {
-        this.resetBaseForm();
-        const { success, errors } = response;
+        this.resetBaseForm()
+        const { success, errors } = response
         if (success) {
-          this.success = 'Success! Your account has been created.';
-        } else {
-          this.error = errors[0];
+          this.success = 'Success! Your account has been created.'
         }
-      });
+        else {
+          this.error = errors[0]
+        }
+      })
   }
 }
