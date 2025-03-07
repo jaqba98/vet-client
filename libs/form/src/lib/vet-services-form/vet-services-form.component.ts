@@ -3,8 +3,8 @@ import { Component } from '@angular/core'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { TableFormComponent } from '../table-form/table-form.component'
-import { TableDataModel, TableFormModel } from '../table-form/model/table-form.model'
-import { VetServicesFormModel } from './vet-services-form.model'
+import { TableDataModel, TableFormModel, TableFormRowsModel } from '../table-form/model/table-form.model'
+import { VetServicesDataModel, VetServicesFormModel } from './vet-services-form.model'
 
 @Component({
   selector: 'lib-vet-services-form',
@@ -14,6 +14,8 @@ import { VetServicesFormModel } from './vet-services-form.model'
 })
 export class VetServicesFormComponent {
   readonly formModel: TableFormModel<keyof VetServicesFormModel>
+
+  readonly rows: TableFormRowsModel<keyof VetServicesDataModel>
 
   constructor(private readonly builder: BaseFormBuilder) {
     this.formModel = {
@@ -25,25 +27,21 @@ export class VetServicesFormComponent {
       price: this.builder.buildInputText('Price', [], true),
       isAvailable: this.builder.buildInputText('Is Available', [], true),
     }
+    this.rows = Array
+      .from({ length: 100 }, (_, i) => i + 1)
+      .map(i => i.toString())
+      .map(index => <VetServicesDataModel>{
+        id: index,
+        name: `name-${index}`,
+        description: `description-${index}`,
+        category: `category-${index}`,
+        durationMinutes: `durationMinutes-${index}`,
+        price: `price-${index}`,
+        isAvailable: `isAvailable-${index}`,
+      })
   }
 
   onTableAddFormEvent(event: TableDataModel) {
     console.log(event)
   }
-
-  // readonly rows!: TableFormRowsModel<keyof VetServicesModel>
-  // constructor(private readonly builder: BaseFormBuilder) {
-  //   this.rows = Array
-  //     .from({ length: 100 }, (_, i) => i + 1)
-  //     .map(i => i.toString())
-  //     .map(index => <VetServicesModel>{
-  //       id: index,
-  //       name: `name-${index}`,
-  //       description: `description-${index}`,
-  //       category: `category-${index}`,
-  //       durationMinutes: `durationMinutes-${index}`,
-  //       price: `price-${index}`,
-  //       isAvailable: `isAvailable-${index}`,
-  //     })
-  // }
 }

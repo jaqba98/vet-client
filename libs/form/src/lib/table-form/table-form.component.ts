@@ -6,8 +6,9 @@ import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TableNavDataModel } from './table-nav-form/table-nav-form.model'
 import { TableTabEnum } from './enum/table-tab.enum'
-import { TableDataModel, TableFormModel } from './model/table-form.model'
+import { TableDataModel, TableFormModel, TableFormRowsModel } from './model/table-form.model'
 import { TableAddFormComponent } from './table-add-form/table-add-form.component'
+import { TableTableFormComponent } from './table-table-form/table-table-form.component'
 
 @Component({
   selector: 'lib-table-form',
@@ -16,6 +17,7 @@ import { TableAddFormComponent } from './table-add-form/table-add-form.component
     TablePanelControlComponent,
     TableNavFormComponent,
     TableAddFormComponent,
+    TableTableFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
@@ -30,6 +32,7 @@ export class TableFormComponent {
   @Input() searchButtonEnabled = true
 
   @Input({ required: true }) formModel!: TableFormModel
+  @Input({ required: true }) rows!: TableFormRowsModel
 
   tableTab: TableTabEnum = TableTabEnum.table
 
