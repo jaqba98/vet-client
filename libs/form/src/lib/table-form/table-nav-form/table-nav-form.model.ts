@@ -10,4 +10,4 @@ export interface BaseTableNavFormModel<T> {
 
 export type TableNavFormModel = BaseTableNavFormModel<ControlType>
 
-export type TableNavModel = BaseTableNavFormModel<boolean>
+export type TableNavDataModel = BaseTableNavFormModel<boolean>

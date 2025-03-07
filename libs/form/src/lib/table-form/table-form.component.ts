@@ -1,52 +1,38 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { Component, Input } from '@angular/core'
 
-import { TableControlComponent, TablePanelControlComponent } from '@vet-client/lib-control'
+import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { BaseFormModel } from '@vet-client/lib-base-form'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
-import { TableAddFormComponent } from './table-add-form/table-add-form.component'
+import { TableNavDataModel } from './table-nav-form/table-nav-form.model'
 import { TableTabEnum } from './enum/table-tab.enum'
-import { TableNavModel } from './table-nav-form/table-nav-form.model'
-import { TableTableFormComponent } from './table-table-form/table-table-form.component'
-import { TableFormRowsModel } from './model/table-form.model'
 
 @Component({
   selector: 'lib-table-form',
-  imports: [
-    CommonModule,
-    TableNavFormComponent,
-    TableAddFormComponent,
-    TableTableFormComponent,
-    TablePanelControlComponent,
-  ],
+  imports: [CommonModule, TablePanelControlComponent, TableNavFormComponent],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<
-  TKey extends string,
-  TFormModel extends BaseFormModel<TKey>,
-  TModel,
-> {
-  @Output() tableAddFormEvent = new EventEmitter<TModel>()
-
-  @Input() tableButton = true
-  @Input() addButton = true
-  @Input() removeButton = true
-  @Input() refreshButton = true
-  @Input() searchButton = true
-
-  @Input({ required: true }) formModel!: TFormModel
-  @Input({ required: true }) rows!: TableFormRowsModel
+export class TableFormComponent {
+  @Input() tableButtonEnabled = true
+  @Input() addButtonEnabled = true
+  @Input() removeButtonEnabled = true
+  @Input() refreshButtonEnabled = true
+  @Input() searchButtonEnabled = true
 
   tableTab: TableTabEnum = TableTabEnum.table
 
-  onTableNavFormEvent(event: TableNavModel) {
+  onTableNavFormEvent(event: TableNavDataModel) {
     if (event.table) this.tableTab = TableTabEnum.table
     else if (event.add) this.tableTab = TableTabEnum.add
   }
 
-  onTableAddFormEvent(event: TModel) {
-    this.tableAddFormEvent.emit(event)
-  }
+  // @Output() tableAddFormEvent = new EventEmitter<TModel>()
+  //
+  // @Input({ required: true }) formModel!: TFormModel
+  // @Input({ required: true }) rows!: TableFormRowsModel
+  //
+  // onTableAddFormEvent(event: TModel) {
+  //   this.tableAddFormEvent.emit(event)
+  // }
 }
