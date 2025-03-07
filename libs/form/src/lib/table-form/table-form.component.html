@@ -10,7 +10,17 @@
     ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
-    <lib-table-add-form [tableFormModel]="tableFormModel" (event)="onTableAddFormEvent($event)"></lib-table-add-form>
+    <ng-container [ngSwitch]="tableTab">
+      <ng-container *ngSwitchCase="'table'">
+        <p>table</p>
+      </ng-container>
+      <ng-container *ngSwitchCase="'add'">
+        <lib-table-add-form [tableFormModel]="tableFormModel" (event)="onTableAddFormEvent($event)"></lib-table-add-form>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <p>default</p>
+      </ng-container>
+    </ng-container>
   </ng-container>
   <ng-container paginator>
     <p>paginator</p>

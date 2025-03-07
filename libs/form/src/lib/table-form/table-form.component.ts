@@ -6,10 +6,13 @@ import { TableNavFormComponent } from './table-nav-form/table-nav-form.component
 import { TableAddFormComponent } from './table-add-form/table-add-form.component'
 import { TableFormModel, TableModel } from './model/table-form.model'
 import { TableNavModel } from './table-nav-form/table-nav-form.model'
+import { TableTabEnum } from './enum/table-tab.enum'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'lib-table-form',
   imports: [
+    CommonModule,
     TableControlComponent,
     TableNavFormComponent,
     TableAddFormComponent,
@@ -30,8 +33,11 @@ export class TableFormComponent {
 
   @Input({ required: true }) tableFormModel!: TableFormModel
 
+  tableTab: TableTabEnum = TableTabEnum.table
+
   onTableNavFormEvent(event: TableNavModel) {
-    console.log(event)
+    if (event.table) this.tableTab = TableTabEnum.table
+    else if (event.add) this.tableTab = TableTabEnum.add
   }
 
   onTableAddFormEvent(event: TableModel) {
