@@ -6,10 +6,11 @@
       [tableNavFormRemoveButton]="tableNavFormRemoveButton"
       [tableNavFormRefreshButton]="tableNavFormRefreshButton"
       [tableNavFormSearchButton]="tableNavFormSearchButton"
+      (event)="onTableNavFormEvent($event)"
     ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
-    <p>content</p>
+    <lib-table-add-form [tableFormModel]="tableFormModel" (event)="onTableAddFormEvent($event)"></lib-table-add-form>
   </ng-container>
   <ng-container paginator>
     <p>paginator</p>

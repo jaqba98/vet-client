@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { faArrowsRotate, faMagnifyingGlass, faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
@@ -14,11 +14,17 @@ import { TableNavFormModel, TableNavModel } from './table-nav-form.model'
 export class TableNavFormComponent
   extends BaseFormService<TableNavFormModel, TableNavModel>
   implements OnInit {
-  @Input() tableNavFormTableButton = true
-  @Input() tableNavFormAddButton = true
-  @Input() tableNavFormRemoveButton = true
-  @Input() tableNavFormRefreshButton = true
-  @Input() tableNavFormSearchButton = true
+  @Output() event = new EventEmitter<TableNavModel>()
+
+  @Input({ required: true }) tableNavFormTableButton!: boolean
+
+  @Input({ required: true }) tableNavFormAddButton!: boolean
+
+  @Input({ required: true }) tableNavFormRemoveButton!: boolean
+
+  @Input({ required: true }) tableNavFormRefreshButton!: boolean
+
+  @Input({ required: true }) tableNavFormSearchButton!: boolean
 
   constructor(private readonly builder: BaseFormBuilder) {
     super()
@@ -35,6 +41,6 @@ export class TableNavFormComponent
   }
 
   override onSubmit(model: TableNavModel) {
-    console.log(model)
+    this.event.emit(model)
   }
 }
