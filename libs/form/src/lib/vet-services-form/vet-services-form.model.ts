@@ -1,21 +1,15 @@
-import { ControlType } from '@vet-client/lib-base-form'
+import { BaseFormModel, ControlType } from '@vet-client/lib-base-form'
 
-export interface VetServicesFormModel {
-  id: ControlType
-  name: ControlType
-  description: ControlType
-  category: ControlType
-  durationMinutes: ControlType
-  price: ControlType
-  isAvailable: ControlType
+export interface BaseVetServicesFormModel<T> {
+  id: T
+  name: T
+  description: T
+  category: T
+  durationMinutes: T
+  price: T
+  isAvailable: T
 }
 
-export interface VetServicesModel {
-  id: string
-  name: string
-  description: string
-  category: string
-  durationMinutes: string
-  price: string
-  isAvailable: string
-}
+export type VetServicesFormModel = BaseFormModel<BaseVetServicesFormModel<ControlType>>
+
+export type VetServicesModel = BaseVetServicesFormModel<string>

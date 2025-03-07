@@ -1,0 +1,9 @@
+<table>
+  <ng-container *ngFor="let row of rows">
+    <tr>
+      <ng-container *ngFor="let column of getColumns(row)">
+        <td>{{ getColumn(row, column) }}</td>
+      </ng-container>
+    </tr>
+  </ng-container>
+</table>

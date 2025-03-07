@@ -4,6 +4,7 @@ import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { VetServicesFormModel, VetServicesModel } from './vet-services-form.model'
+import { TableFormRowsModel } from '../table-form/model/table-form.model'
 
 @Component({
   selector: 'lib-vet-services-form',
@@ -14,9 +15,11 @@ import { VetServicesFormModel, VetServicesModel } from './vet-services-form.mode
 export class VetServicesFormComponent {
   readonly formModel!: VetServicesFormModel
 
+  readonly rows!: TableFormRowsModel<keyof VetServicesModel>
+
   constructor(private readonly builder: BaseFormBuilder) {
     this.formModel = {
-      id: this.builder.buildInputText('Id', [], true),
+      id: this.builder.buildInputText('ID', [], false),
       name: this.builder.buildInputText('Name', [], true),
       description: this.builder.buildInputText('Description', [], true),
       category: this.builder.buildInputText('Category', [], true),
@@ -24,6 +27,18 @@ export class VetServicesFormComponent {
       price: this.builder.buildInputText('Price', [], true),
       isAvailable: this.builder.buildInputText('Is Available', [], true),
     }
+    this.rows = Array
+      .from({ length: 100 }, (_, i) => i + 1)
+      .map(i => i.toString())
+      .map(index => <VetServicesModel>{
+        id: index,
+        name: `name-${index}`,
+        description: `description-${index}`,
+        category: `category-${index}`,
+        durationMinutes: `durationMinutes-${index}`,
+        price: `price-${index}`,
+        isAvailable: `isAvailable-${index}`,
+      })
   }
 
   onTableAddFormEvent(event: VetServicesModel) {

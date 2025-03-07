@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type TableFormModel = any
+export type TableFormRowModel<TKey extends string = string> = Record<TKey, string>
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type TableModel = any
+export type TableFormRowsModel<TKey extends string = string> = TableFormRowModel<TKey>[]

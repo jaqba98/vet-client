@@ -1,21 +1,21 @@
 <lib-table-control>
   <ng-container nav>
     <lib-table-nav-form
-      [tableNavFormTableButton]="tableNavFormTableButton"
-      [tableNavFormAddButton]="tableNavFormAddButton"
-      [tableNavFormRemoveButton]="tableNavFormRemoveButton"
-      [tableNavFormRefreshButton]="tableNavFormRefreshButton"
-      [tableNavFormSearchButton]="tableNavFormSearchButton"
+      [tableButton]="tableButton"
+      [addButton]="addButton"
+      [removeButton]="removeButton"
+      [refreshButton]="refreshButton"
+      [searchButton]="searchButton"
       (event)="onTableNavFormEvent($event)"
     ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
     <ng-container [ngSwitch]="tableTab">
       <ng-container *ngSwitchCase="'table'">
-        <p>table</p>
+        <lib-table-table-form [rows]="rows"></lib-table-table-form>
       </ng-container>
       <ng-container *ngSwitchCase="'add'">
-        <lib-table-add-form [tableFormModel]="tableFormModel" (event)="onTableAddFormEvent($event)"></lib-table-add-form>
+        <lib-table-add-form [formModel]="formModel" (event)="onTableAddFormEvent($event)"></lib-table-add-form>
       </ng-container>
       <ng-container *ngSwitchDefault>
         <p>default</p>
