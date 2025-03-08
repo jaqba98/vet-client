@@ -16,14 +16,10 @@ export class TableAddFormComponent<T> extends BaseFormService<TableFormModel, T>
 
   @Input({ required: true }) formModel!: TableFormModel
 
-  constructor(private readonly builder: BaseFormBuilder) {
-    super()
-  }
-
   ngOnInit() {
     this.initBaseForm({
       ...this.formModel,
-      add: this.builder.buildButtonText('add', 'Add', 'primary', true),
+      add: BaseFormBuilder.buildButtonText('add', 'Add', 'primary', true),
     })
   }
 

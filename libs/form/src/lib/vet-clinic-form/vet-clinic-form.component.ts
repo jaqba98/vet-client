@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Validators } from '@angular/forms'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ClinicDomainDataModel, ClinicDomainFormDataModel } from '@vet-client/lib-domain'
@@ -10,6 +11,7 @@ import {
   TableFormModel,
   TableFormRowsModel,
 } from '../table-form/model/table-form.model'
+import { CookieService } from '@vet-client/lib-system'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -18,26 +20,24 @@ import {
   hostDirectives: [BaseComponentDirective],
 })
 export class VetClinicFormComponent {
-  readonly formModel!: TableFormModel<keyof ClinicDomainFormDataModel>
+  readonly formModel: TableFormModel<keyof ClinicDomainFormDataModel> = {
+    name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)], true),
+  }
 
-  readonly headers: TableFormHeadersModel
+  readonly headers: TableFormHeadersModel = ['Name']
 
-  readonly rows: TableFormRowsModel<keyof ClinicDomainFormDataModel>
+  readonly rows: TableFormRowsModel<keyof ClinicDomainFormDataModel> = []
 
   constructor(
-    private readonly builder: BaseFormBuilder,
+    private readonly cookie: CookieService,
     private readonly httpPost: HttpPostAppService,
   ) {
-    this.formModel = {
-      name: this.builder.buildInputText('Name', [], true),
-    }
-    this.headers = ['Name']
-    this.rows = []
   }
 
   onTableAddFormEvent(data: ClinicDomainDataModel) {
-    this.httpPost.clinicCreatePost({ token: '123', data }).subscribe((res) => {
-      console.log(res)
+    const token = this.cookie.getToken()
+    this.httpPost.clinicCreatePost({ token, data }).subscribe((res) => {
+      console.log(res.success)
     })
   }
 }

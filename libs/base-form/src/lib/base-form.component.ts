@@ -79,9 +79,7 @@ export class BaseFormComponent implements OnInit {
       return 'This field is required!'
     }
     if (control.hasError('maxlength')) {
-      return `Minimum length is ${
-        control.getError('maxlength').requiredLength
-      } characters!`
+      return `Maximum length is ${control.getError('maxlength').requiredLength} characters!`
     }
     if (control.hasError('email')) {
       return 'Please enter a valid email address'

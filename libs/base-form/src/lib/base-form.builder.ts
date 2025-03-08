@@ -3,11 +3,11 @@ import { IconDefinition } from '@fortawesome/angular-fontawesome'
 
 import { ControlButtonModel, ControlInputModel } from './base-form.model'
 import { ColorType } from '@vet-client/lib-type'
-import { ValidatorFn, Validators } from '@angular/forms'
+import { ValidatorFn } from '@angular/forms'
 
 @Injectable({ providedIn: 'root' })
 export class BaseFormBuilder {
-  buildButtonText(id: string, text: string, color: ColorType, isEnabled: boolean): ControlButtonModel {
+  static buildButtonText(id: string, text: string, color: ColorType, isEnabled: boolean): ControlButtonModel {
     return {
       id,
       kind: 'button',
@@ -22,7 +22,7 @@ export class BaseFormBuilder {
     }
   }
 
-  buildButtonIcon(id: string, icon: IconDefinition, color: ColorType, isEnabled: boolean): ControlButtonModel {
+  static buildButtonIcon(id: string, icon: IconDefinition, color: ColorType, isEnabled: boolean): ControlButtonModel {
     return {
       id,
       kind: 'button',
@@ -41,7 +41,7 @@ export class BaseFormBuilder {
     }
   }
 
-  buildInputText(label: string, validators: ValidatorFn[], isEnabled: boolean): ControlInputModel {
+  static buildInputText(label: string, validators: ValidatorFn[], isEnabled: boolean): ControlInputModel {
     return {
       kind: 'input',
       type: 'text',
