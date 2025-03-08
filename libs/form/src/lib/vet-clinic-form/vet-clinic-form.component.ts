@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { ClinicDomainFormDataModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { TableFormComponent } from '../table-form/table-form.component'
 import {
@@ -9,7 +10,6 @@ import {
   TableFormModel,
   TableFormRowsModel,
 } from '../table-form/model/table-form.model'
-import { VetServicesDataModel, VetClinicFormModel } from './vet-clinic-form.model'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -18,39 +18,18 @@ import { VetServicesDataModel, VetClinicFormModel } from './vet-clinic-form.mode
   hostDirectives: [BaseComponentDirective],
 })
 export class VetClinicFormComponent {
-  readonly formModel: TableFormModel<keyof VetClinicFormModel>
+  readonly formModel!: TableFormModel<keyof ClinicDomainFormDataModel>
 
   readonly headers: TableFormHeadersModel
 
-  readonly rows: TableFormRowsModel<keyof VetServicesDataModel>
+  readonly rows: TableFormRowsModel<keyof ClinicDomainFormDataModel>
 
   constructor(private readonly builder: BaseFormBuilder) {
-    this.headers = ['Id', 'Name', 'Description', 'Category', 'Duration Minutes', 'Price', 'Is Available']
     this.formModel = {
-      id: this.builder.buildInputText('ID', [], false),
       name: this.builder.buildInputText('Name', [], true),
-      description: this.builder.buildInputText('Description', [], true),
-      category: this.builder.buildInputText('Category', [], true),
-      durationMinutes: this.builder.buildInputText('Duration Minutes', [], true),
-      price: this.builder.buildInputText('Price', [], true),
-      isAvailable: this.builder.buildInputText('Is Available', [], true),
     }
-    this.rows = Array
-      .from({ length: 10 }, (_, i) => i + 1)
-      .map(i => i.toString())
-      .map(index => ({
-        id: index,
-        isSelected: false,
-        data: <VetServicesDataModel>{
-          id: index,
-          name: `name-${index}`,
-          description: `description-${index}`,
-          category: `category-${index}`,
-          durationMinutes: `durationMinutes-${index}`,
-          price: `price-${index}`,
-          isAvailable: `isAvailable-${index}`,
-        },
-      }))
+    this.headers = ['Name']
+    this.rows = []
   }
 
   onTableAddFormEvent(event: TableDataModel) {
