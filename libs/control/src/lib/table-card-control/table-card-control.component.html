@@ -1,0 +1,10 @@
+<div class="table-card-control" [ngStyle]="{ width: width }">
+  <div class="table-card-control__headline">
+    <lib-text-control tag="h3" textControlColor="primary">
+      <ng-container h3>{{ title }}</ng-container>
+    </lib-text-control>
+  </div>
+  <div class="table-card-control__content">
+    <ng-content></ng-content>
+  </div>
+</div>

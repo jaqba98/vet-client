@@ -1,0 +1,18 @@
+@use 'libs/scss/src/base/colors';
+
+.table-card-control {
+  background-color: colors.$color-surface;
+  height: 100%;
+
+  &__headline {
+    padding: 1rem;
+    border-bottom: 1px solid colors.$color-border;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}

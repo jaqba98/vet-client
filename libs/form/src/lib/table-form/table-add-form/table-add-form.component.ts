@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
-import { CardControlComponent } from '@vet-client/lib-control'
+import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
 
 @Component({
   selector: 'lib-table-add-form',
-  imports: [CardControlComponent, BaseFormComponent],
+  imports: [TableCardControlComponent, BaseFormComponent],
   templateUrl: './table-add-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
