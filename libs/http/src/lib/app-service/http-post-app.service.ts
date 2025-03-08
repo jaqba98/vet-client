@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { map, Observable, take } from 'rxjs'
+import { take } from 'rxjs'
 
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import { MethodEnum } from '../enum/method.enum'
@@ -22,6 +22,8 @@ import { RegistrationRequestModel } from '../model/request/registration-request.
 import { RegistrationResponseModel } from '../model/response/registration-response.model'
 import { GetAccountRequestModel } from '../model/request/get-account-request.model'
 import { GetAccountResponseModel } from '../model/response/get-account-response.model'
+import { ClinicCreateRequestModel } from '../model/request/clinic-request.model'
+import { ClinicCreateResponseModel } from '../model/response/clinic-response.model'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -83,6 +85,15 @@ export class HttpPostAppService {
       .exec<GetAccountResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.getAccount, request },
+      })
+      .pipe(take(1))
+  }
+
+  clinicCreatePost(request: ClinicCreateRequestModel) {
+    return this.httpExecute
+      .exec<ClinicCreateResponseModel>({
+        method: MethodEnum.post,
+        type: { endpoint: EndpointEnum.clinic, request },
       })
       .pipe(take(1))
   }

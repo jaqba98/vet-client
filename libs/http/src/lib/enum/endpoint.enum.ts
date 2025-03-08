@@ -8,4 +8,5 @@ export enum EndpointEnum {
   logout = 'logout',
   registration = 'registration',
   getAccount = 'get-account',
+  clinic = 'clinic',
 }
