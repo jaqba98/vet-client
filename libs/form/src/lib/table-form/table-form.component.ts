@@ -6,7 +6,7 @@ import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TableNavDataModel } from './table-nav-form/table-nav-form.model'
 import { TableTabEnum } from './enum/table-tab.enum'
-import { TableDataModel, TableFormHeadersModel, TableFormModel, TableFormRowsModel } from './model/table-form.model'
+import { TableFormHeadersModel, TableFormModel, TableFormRowsModel } from './model/table-form.model'
 import { TableAddFormComponent } from './table-add-form/table-add-form.component'
 import { TableTableFormComponent } from './table-table-form/table-table-form.component'
 import { TableFormService } from './service/table-form.service'
@@ -24,8 +24,8 @@ import { TableFormService } from './service/table-form.service'
   providers: [TableFormService],
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent implements OnInit {
-  @Output() tableAddFormEvent = new EventEmitter<TableDataModel>()
+export class TableFormComponent<T> implements OnInit {
+  @Output() tableAddFormEvent = new EventEmitter<T>()
 
   @Input() tableButtonEnabled = true
   @Input() addButtonEnabled = true
@@ -51,7 +51,7 @@ export class TableFormComponent implements OnInit {
     else if (event.add) this.tableTab = TableTabEnum.add
   }
 
-  onTableAddFormEvent(event: TableDataModel) {
+  onTableAddFormEvent(event: T) {
     this.tableAddFormEvent.emit(event)
   }
 

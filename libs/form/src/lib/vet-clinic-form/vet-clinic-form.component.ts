@@ -1,11 +1,11 @@
 import { Component } from '@angular/core'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ClinicDomainFormDataModel } from '@vet-client/lib-domain'
+import { ClinicDomainDataModel, ClinicDomainFormDataModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
+import { HttpPostAppService } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
 import {
-  TableDataModel,
   TableFormHeadersModel,
   TableFormModel,
   TableFormRowsModel,
@@ -24,7 +24,10 @@ export class VetClinicFormComponent {
 
   readonly rows: TableFormRowsModel<keyof ClinicDomainFormDataModel>
 
-  constructor(private readonly builder: BaseFormBuilder) {
+  constructor(
+    private readonly builder: BaseFormBuilder,
+    private readonly httpPost: HttpPostAppService,
+  ) {
     this.formModel = {
       name: this.builder.buildInputText('Name', [], true),
     }
@@ -32,7 +35,9 @@ export class VetClinicFormComponent {
     this.rows = []
   }
 
-  onTableAddFormEvent(event: TableDataModel) {
-    console.log(event)
+  onTableAddFormEvent(data: ClinicDomainDataModel) {
+    this.httpPost.clinicCreatePost({ token: '123', data }).subscribe((res) => {
+      console.log(res)
+    })
   }
 }

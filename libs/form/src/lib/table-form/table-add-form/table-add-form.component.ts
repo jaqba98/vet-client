@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
-import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { TableDataModel, TableFormModel } from '../model/table-form.model'
+import { TableFormModel } from '../model/table-form.model'
 
 @Component({
   selector: 'lib-table-add-form',
@@ -11,8 +11,8 @@ import { TableDataModel, TableFormModel } from '../model/table-form.model'
   templateUrl: './table-add-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableAddFormComponent extends BaseFormService<TableFormModel, TableDataModel> implements OnInit {
-  @Output() event = new EventEmitter<TableDataModel>()
+export class TableAddFormComponent<T> extends BaseFormService<TableFormModel, T> implements OnInit {
+  @Output() event = new EventEmitter<T>()
 
   @Input({ required: true }) formModel!: TableFormModel
 
@@ -27,7 +27,7 @@ export class TableAddFormComponent extends BaseFormService<TableFormModel, Table
     })
   }
 
-  override onSubmit(model: TableDataModel) {
+  override onSubmit(model: T) {
     this.event.emit(model)
   }
 }
