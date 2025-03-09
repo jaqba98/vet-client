@@ -20,9 +20,10 @@ import { HttpPostAppService } from '@vet-client/lib-http'
 export class TableAddFormComponent<TEvent>
   extends BaseFormService<TableFormModel, TEvent>
   implements OnInit {
-  @Input({ required: true }) formModel!: TableFormModel
+  @Input({ required: true })
+  callback!: (model: TEvent, self: BaseFormService<TableFormModel, TEvent>) => void
 
-  @Input({ required: true }) callback!: (model: TEvent, self: BaseFormService<TableFormModel, TEvent>) => void
+  @Input({ required: true }) formModel!: TableFormModel
 
   constructor(
     public readonly cookie: CookieService,
