@@ -5,10 +5,7 @@ import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { HttpPostAppService } from '@vet-client/lib-http'
-import {
-  RegistrationFormModel,
-  RegistrationModel,
-} from './registration-form.model'
+import { RegistrationDomainDataModel, RegistrationDomainFormDataModel } from '@vet-client/lib-domain'
 
 @Component({
   selector: 'lib-registration-form',
@@ -17,7 +14,7 @@ import {
   hostDirectives: [BaseComponentDirective],
 })
 export class RegistrationFormComponent
-  extends BaseFormService<RegistrationFormModel, RegistrationModel>
+  extends BaseFormService<RegistrationDomainFormDataModel, RegistrationDomainDataModel>
   implements OnInit {
   constructor(private readonly httpPost: HttpPostAppService) {
     super()
@@ -89,24 +86,16 @@ export class RegistrationFormComponent
     })
   }
 
-  override onSubmit(model: RegistrationModel) {
-    this.httpPost
-      .registrationPost({
-        email: model.email,
-        password: model.password,
-        confirmPassword: model.confirmPassword,
-        firstName: model.firstName,
-        lastName: model.lastName,
-      })
-      .subscribe((response) => {
-        this.resetBaseForm()
-        const { success, errors } = response
-        if (success) {
-          this.success = 'Success! Your account has been created.'
-        }
-        else {
-          this.error = errors[0]
-        }
-      })
+  override onSubmit(model: RegistrationDomainDataModel) {
+    this.httpPost.registrationPost(model).subscribe((response) => {
+      this.resetBaseForm()
+      const { success, errors } = response
+      if (success) {
+        this.success = 'Success! Your account has been created.'
+      }
+      else {
+        this.error = errors[0]
+      }
+    })
   }
 }

@@ -1,7 +1,3 @@
-export interface RegistrationRequestModel {
-  email: string
-  password: string
-  confirmPassword: string
-  firstName: string
-  lastName: string
-}
+import { RegistrationDomainDataModel } from '@vet-client/lib-domain'
+
+export type RegistrationRequestModel = RegistrationDomainDataModel
