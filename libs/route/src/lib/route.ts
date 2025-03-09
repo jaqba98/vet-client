@@ -31,7 +31,7 @@ import {
   IsVetGuard,
   LoggedInGuard,
   LoggedOutGuard,
-  NotHasRoleGuard,
+  HasNotRoleGuard,
 } from '@vet-client/lib-guard'
 
 export const route: Route[] = [
@@ -68,7 +68,7 @@ export const route: Route[] = [
       {
         path: 'choose-role',
         component: ChooseRolePageComponent,
-        canActivate: [NotHasRoleGuard],
+        canActivate: [HasNotRoleGuard],
       },
       {
         path: 'vet',
