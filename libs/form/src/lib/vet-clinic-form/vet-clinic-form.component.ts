@@ -37,13 +37,14 @@ export class VetClinicFormComponent {
   tableAddFormCallback(model: ClinicDomainDataModel, self: BaseFormService<TableFormModel, ClinicDomainDataModel>) {
     const token = this.cookie.getToken()
     this.httpPost.clinicCreatePost({ token, ...model }).subscribe((response) => {
+      const { success, errors } = response
       self.success = ''
       self.error = ''
-      if (response.success) {
-        self.success = 'success'
+      if (success) {
+        self.success = 'Clinic was added correctly!'
       }
       else {
-        self.error = 'error'
+        self.error = errors[0]
       }
     })
   }
