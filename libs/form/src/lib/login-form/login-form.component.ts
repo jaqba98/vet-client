@@ -12,7 +12,7 @@ import { HttpPostAppService } from '@vet-client/lib-http'
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { LoginFormModel, LoginModel } from './login-form.model'
+import { LoginDomainDataModel, LoginDomainFormDataModel } from '@vet-client/lib-domain'
 
 @Component({
   selector: 'lib-login-form',
@@ -21,7 +21,7 @@ import { LoginFormModel, LoginModel } from './login-form.model'
   hostDirectives: [BaseComponentDirective],
 })
 export class LoginFormComponent
-  extends BaseFormService<LoginFormModel, LoginModel>
+  extends BaseFormService<LoginDomainFormDataModel, LoginDomainDataModel>
   implements OnInit {
   constructor(
     private readonly httpPost: HttpPostAppService,
@@ -66,7 +66,7 @@ export class LoginFormComponent
     })
   }
 
-  override onSubmit(model: LoginModel) {
+  override onSubmit(model: LoginDomainDataModel) {
     const { email, password } = model
     this.httpPost.loginPost({ email, password }).subscribe((response) => {
       this.resetBaseForm()
@@ -81,7 +81,7 @@ export class LoginFormComponent
         )
       }
       else {
-        this.error = 'Incorrect email address or password!'
+        this.error = response.errors[0]
       }
     })
   }

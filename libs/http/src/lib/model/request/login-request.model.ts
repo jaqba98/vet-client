@@ -1,4 +1,3 @@
-export interface LoginRequestModel {
-  email: string
-  password: string
-}
+import { LoginDomainDataModel } from '@vet-client/lib-domain'
+
+export type LoginRequestModel = LoginDomainDataModel
