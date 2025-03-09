@@ -1,6 +1,5 @@
-import { RoleDomainEnum } from '@vet-client/lib-domain'
+import { ChooseRoleDomainDataModel } from '@vet-client/lib-domain'
 import { BaseResponseModel } from '../base/base-response.model'
 
-export interface ChooseRoleResponseModel extends BaseResponseModel {
-  role: RoleDomainEnum
+export interface ChooseRoleResponseModel extends BaseResponseModel, ChooseRoleDomainDataModel {
 }

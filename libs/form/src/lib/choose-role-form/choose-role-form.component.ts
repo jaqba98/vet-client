@@ -7,7 +7,7 @@ import {
   BaseComponentDirective,
   TextConvertUtils,
 } from '@vet-client/lib-utils'
-import { RoleDomainEnum } from '@vet-client/lib-domain'
+import { ChooseRoleDomainDataModel, ChooseRoleDomainFormDataModel, RoleDomainEnum } from '@vet-client/lib-domain'
 import { HttpPostAppService } from '@vet-client/lib-http'
 import { CookieService } from '@vet-client/lib-system'
 import {
@@ -16,7 +16,6 @@ import {
   RouteStoreModel,
   setRoute,
 } from '@vet-client/lib-store'
-import { ChooseRoleFormModel, ChooseRoleModel } from './choose-role-form.model'
 
 @Component({
   selector: 'lib-choose-role-form',
@@ -25,7 +24,7 @@ import { ChooseRoleFormModel, ChooseRoleModel } from './choose-role-form.model'
   hostDirectives: [BaseComponentDirective],
 })
 export class ChooseRoleFormComponent
-  extends BaseFormService<ChooseRoleFormModel, ChooseRoleModel>
+  extends BaseFormService<ChooseRoleDomainFormDataModel, ChooseRoleDomainDataModel>
   implements OnInit {
   constructor(
     private readonly httpPost: HttpPostAppService,
@@ -68,7 +67,7 @@ export class ChooseRoleFormComponent
     })
   }
 
-  override onSubmit(model: ChooseRoleModel) {
+  override onSubmit(model: ChooseRoleDomainDataModel) {
     const token = this.cookie.getToken()
     if (token === null) {
       this.store.dispatch(
