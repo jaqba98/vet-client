@@ -4,11 +4,8 @@ import { CommonModule } from '@angular/common'
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import {
-  BaseLogoutFormModel,
-  BaseLogoutModel,
-} from '../base/base-logout-form.model'
 import { BaseLogoutFormService } from '../base/base-logout-form.service'
+import { LogoutDomainDataModel, LogoutDomainFormDataModel } from '@vet-client/lib-domain'
 
 @Component({
   selector: 'lib-small-logout-form',
@@ -18,7 +15,7 @@ import { BaseLogoutFormService } from '../base/base-logout-form.service'
   hostDirectives: [BaseComponentDirective],
 })
 export class SmallLogoutFormComponent
-  extends BaseFormService<BaseLogoutFormModel, BaseLogoutModel>
+  extends BaseFormService<LogoutDomainFormDataModel, LogoutDomainDataModel>
   implements OnInit {
   logoutFormClass = 'base-logout-form--small'
 
@@ -47,7 +44,7 @@ export class SmallLogoutFormComponent
     })
   }
 
-  override onSubmit(model: BaseLogoutModel) {
-    this.baseLogoutForm.onSubmit(model)
+  override onSubmit() {
+    this.baseLogoutForm.onSubmit()
   }
 }
