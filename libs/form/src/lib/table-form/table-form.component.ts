@@ -36,6 +36,7 @@ export class TableFormComponent<TEvent> implements OnInit {
   @Input({ required: true }) formModel!: TableFormModel
   @Input({ required: true }) headers!: TableFormHeadersModel
   @Input({ required: true }) rows!: TableFormRowsModel
+
   @Input({ required: true }) tableAddFormCallback!: (model: TEvent, self: BaseFormService<TableFormModel, TEvent>) => void
 
   tableTab: TableTabEnum = TableTabEnum.table

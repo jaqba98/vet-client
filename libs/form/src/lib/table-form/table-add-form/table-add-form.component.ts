@@ -21,6 +21,7 @@ export class TableAddFormComponent<TEvent>
   extends BaseFormService<TableFormModel, TEvent>
   implements OnInit {
   @Input({ required: true }) formModel!: TableFormModel
+
   @Input({ required: true }) callback!: (model: TEvent, self: BaseFormService<TableFormModel, TEvent>) => void
 
   constructor(

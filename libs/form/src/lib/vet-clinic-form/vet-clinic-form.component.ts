@@ -11,7 +11,6 @@ import {
   TableFormModel,
   TableFormRowsModel,
 } from '../table-form/model/table-form.model'
-import { CookieService } from '@vet-client/lib-system'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -28,23 +27,7 @@ export class VetClinicFormComponent {
 
   readonly rows: TableFormRowsModel<keyof ClinicDomainFormDataModel> = []
 
-  constructor(
-    private readonly cookie: CookieService,
-    private readonly httpPost: HttpPostAppService,
-  ) {
-  }
-
   tableAddFormCallback(model: ClinicDomainDataModel, self: BaseFormService<TableFormModel, ClinicDomainDataModel>) {
-    const token = this.cookie.getToken()
-    this.httpPost.clinicCreatePost({ token, ...model }).subscribe((response) => {
-      self.resetBaseForm()
-      const { success, errors } = response
-      if (success) {
-        self.success = 'Clinic was added correctly!'
-      }
-      else {
-        self.error = errors[0]
-      }
-    })
+    console.log(model, self)
   }
 }
