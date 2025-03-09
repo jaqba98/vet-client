@@ -8,7 +8,7 @@ import { CookieService } from '@vet-client/lib-system'
 import { HttpPostAppService } from '@vet-client/lib-http'
 
 @Injectable({ providedIn: 'root' })
-export class IsVetRoleGuard implements CanActivate {
+export class IsVetGuard implements CanActivate {
   constructor(
     private readonly store: Store<RouteStoreType>,
     private readonly cookie: CookieService,

@@ -27,8 +27,8 @@ import {
 import {
   GetAccountGuard,
   HasRoleGuard,
-  IsClientRoleGuard,
-  IsVetRoleGuard,
+  IsClientGuard,
+  IsVetGuard,
   LoggedInGuard,
   LoggedOutGuard,
   NotHasRoleGuard,
@@ -63,7 +63,7 @@ export const route: Route[] = [
       {
         path: '',
         component: DashboardMainPageComponent,
-        canActivate: [HasRoleGuard, IsVetRoleGuard, IsClientRoleGuard],
+        canActivate: [HasRoleGuard, IsVetGuard, IsClientGuard],
       },
       {
         path: 'choose-role',
@@ -73,7 +73,7 @@ export const route: Route[] = [
       {
         path: 'vet',
         component: VetPageComponent,
-        canActivate: [HasRoleGuard, IsVetRoleGuard],
+        canActivate: [HasRoleGuard, IsVetGuard],
         children: [
           {
             path: '',
@@ -121,7 +121,7 @@ export const route: Route[] = [
       {
         path: 'client',
         component: ClientPageComponent,
-        canActivate: [HasRoleGuard, IsClientRoleGuard],
+        canActivate: [HasRoleGuard, IsClientGuard],
         children: [
           {
             path: '',
