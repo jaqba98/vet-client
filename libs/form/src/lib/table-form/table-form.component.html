@@ -11,16 +11,6 @@
   </ng-container>
   <ng-container content>
     <ng-container [ngSwitch]="tableTab">
-      <ng-container *ngSwitchCase="'table'">
-        <lib-table-table-form
-          [service]="tableForm"
-          [headers]="headers"
-          (unselectEvent)="onUnselectButtonEvent($event)"
-          (selectEvent)="onSelectButtonEvent($event)"
-          (editEvent)="onEditButtonEvent($event)"
-          (removeEvent)="onRemoveButtonEvent($event)"
-        ></lib-table-table-form>
-      </ng-container>
       <ng-container *ngSwitchCase="'add'">
         <lib-table-add-form [formModel]="formModel" [callback]="tableAddFormCallback"></lib-table-add-form>
       </ng-container>
