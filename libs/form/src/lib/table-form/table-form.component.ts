@@ -10,6 +10,8 @@ import { TableFormHeadersModel, TableFormModel, TableFormRowsModel } from './mod
 import { TableAddFormComponent } from './table-add-form/table-add-form.component'
 import { TableTableFormComponent } from './table-table-form/table-table-form.component'
 import { TableFormService } from './service/table-form.service'
+import { BaseFormService } from '@vet-client/lib-base-form'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'lib-table-form',
@@ -24,9 +26,7 @@ import { TableFormService } from './service/table-form.service'
   providers: [TableFormService],
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<T> implements OnInit {
-  @Output() tableAddFormEvent = new EventEmitter<T>()
-
+export class TableFormComponent<TEvent> implements OnInit {
   @Input() tableButtonEnabled = true
   @Input() addButtonEnabled = true
   @Input() removeButtonEnabled = true
@@ -36,6 +36,7 @@ export class TableFormComponent<T> implements OnInit {
   @Input({ required: true }) formModel!: TableFormModel
   @Input({ required: true }) headers!: TableFormHeadersModel
   @Input({ required: true }) rows!: TableFormRowsModel
+  @Input({ required: true }) tableAddFormCallback!: (model: TEvent, self: BaseFormService<TableFormModel, TEvent>) => void
 
   tableTab: TableTabEnum = TableTabEnum.table
 
@@ -49,10 +50,6 @@ export class TableFormComponent<T> implements OnInit {
   onTableNavFormEvent(event: TableNavDataModel) {
     if (event.table) this.tableTab = TableTabEnum.table
     else if (event.add) this.tableTab = TableTabEnum.add
-  }
-
-  onTableAddFormEvent(event: T) {
-    this.tableAddFormEvent.emit(event)
   }
 
   onUnselectButtonEvent(id: string) {

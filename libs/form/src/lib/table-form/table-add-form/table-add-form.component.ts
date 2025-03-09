@@ -1,9 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { TableCardControlComponent } from '@vet-client/lib-control'
+import {
+  BaseFormBuilder,
+  BaseFormComponent,
+  BaseFormService,
+} from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
+import { CookieService } from '@vet-client/lib-system'
+import { HttpPostAppService } from '@vet-client/lib-http'
 
 @Component({
   selector: 'lib-table-add-form',
@@ -11,10 +17,18 @@ import { TableFormModel } from '../model/table-form.model'
   templateUrl: './table-add-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableAddFormComponent<T> extends BaseFormService<TableFormModel, T> implements OnInit {
-  @Output() event = new EventEmitter<T>()
-
+export class TableAddFormComponent<TEvent>
+  extends BaseFormService<TableFormModel, TEvent>
+  implements OnInit {
   @Input({ required: true }) formModel!: TableFormModel
+  @Input({ required: true }) callback!: (model: TEvent, self: BaseFormService<TableFormModel, TEvent>) => void
+
+  constructor(
+    public readonly cookie: CookieService,
+    public readonly httpPost: HttpPostAppService,
+  ) {
+    super()
+  }
 
   ngOnInit() {
     this.initBaseForm({
@@ -23,7 +37,7 @@ export class TableAddFormComponent<T> extends BaseFormService<TableFormModel, T>
     })
   }
 
-  override onSubmit(model: T) {
-    this.event.emit(model)
+  override onSubmit(model: TEvent) {
+    this.callback(model, this)
   }
 }

@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ClinicDomainDataModel, ClinicDomainFormDataModel } from '@vet-client/lib-domain'
-import { BaseFormBuilder } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormService } from '@vet-client/lib-base-form'
 import { HttpPostAppService } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
 import {
@@ -34,10 +34,17 @@ export class VetClinicFormComponent {
   ) {
   }
 
-  onTableAddFormEvent(data: ClinicDomainDataModel) {
+  tableAddFormCallback(model: ClinicDomainDataModel, self: BaseFormService<TableFormModel, ClinicDomainDataModel>) {
     const token = this.cookie.getToken()
-    this.httpPost.clinicCreatePost({ token, data }).subscribe((res) => {
-      console.log(res.success)
+    this.httpPost.clinicCreatePost({ token, ...model }).subscribe((response) => {
+      self.success = ''
+      self.error = ''
+      if (response.success) {
+        self.success = 'success'
+      }
+      else {
+        self.error = 'error'
+      }
     })
   }
 }

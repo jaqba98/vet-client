@@ -22,7 +22,7 @@
         ></lib-table-table-form>
       </ng-container>
       <ng-container *ngSwitchCase="'add'">
-        <lib-table-add-form [formModel]="formModel" (event)="onTableAddFormEvent($event)"></lib-table-add-form>
+        <lib-table-add-form [formModel]="formModel" [callback]="tableAddFormCallback"></lib-table-add-form>
       </ng-container>
       <ng-container *ngSwitchDefault>
         <p>default</p>
