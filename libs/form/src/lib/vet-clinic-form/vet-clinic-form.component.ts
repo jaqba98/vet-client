@@ -10,6 +10,7 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 import { TableAddFormComponent } from '../table-form/table-add-form/table-add-form.component'
 import { TableAddFormModel } from '../table-form/table-add-form/table-add-form.model'
 import { TableDataFormComponent } from '../table-form/table-data-form/table-data-form.component'
+import { BaseResponseModel } from '../../../../http/src/lib/model/base/base-response.model'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -43,8 +44,8 @@ export class VetClinicFormComponent {
     )
   }
 
-  tableDataRemoveCallback(ids: number[], self: TableDataFormComponent<ClinicDomainDataModel>): void {
+  tableDataRemoveCallback(ids: number[], self: TableDataFormComponent<ClinicDomainDataModel>): Observable<BaseResponseModel> {
     const token = self.cookie.getToken()
-    self.httpPost.clinicDeletePost({ token, ids }).subscribe()
+    return self.httpPost.clinicDeletePost({ token, ids })
   }
 }

@@ -15,6 +15,7 @@ import {
 import { TableTabEnum } from './enum/table-tab.enum'
 import { TableNavDataModel } from './table-nav-form/table-nav-form.model'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
+import { BaseResponseModel } from '../../../../http/src/lib/model/base/base-response.model'
 
 @Component({
   selector: 'lib-table-form',
@@ -35,7 +36,7 @@ export class TableFormComponent<TData extends object> {
   ) => Observable<TableAddFormModel>
 
   @Input({ required: true }) tableDataFormCallback!: (self: TableDataFormComponent<TData>) => Observable<TData[]>
-  @Input({ required: true }) tableDataRemoveCallback!: (ids: number[], self: TableDataFormComponent<TData>) => void
+  @Input({ required: true }) tableDataRemoveCallback!: (ids: number[], self: TableDataFormComponent<TData>) => Observable<BaseResponseModel>
 
   // I am here
   @Input() tableButtonEnabled = true

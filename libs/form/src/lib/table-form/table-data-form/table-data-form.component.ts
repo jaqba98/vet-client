@@ -8,6 +8,7 @@ import { HttpPostAppService } from '@vet-client/lib-http'
 import { TableFormModel } from '../model/table-form.model'
 import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { BaseResponseModel } from '../../../../../http/src/lib/model/base/base-response.model'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -19,7 +20,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 export class TableDataFormComponent<TData extends object> implements OnInit {
   @Input({ required: true }) formModel!: TableFormModel
   @Input({ required: true }) callback!: (self: TableDataFormComponent<TData>) => Observable<TData[]>
-  @Input({ required: true }) removeCallback!: (ids: number[], self: TableDataFormComponent<TData>) => void
+  @Input({ required: true }) removeCallback!: (ids: number[], self: TableDataFormComponent<TData>) => Observable<BaseResponseModel>
 
   rows!: TData[]
 
@@ -44,9 +45,7 @@ export class TableDataFormComponent<TData extends object> implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.callback(this).subscribe((data) => {
-      this.rows = data
-    })
+    this.callback(this).subscribe(data => this.rows = data)
   }
 
   getHeaders() {
@@ -61,7 +60,9 @@ export class TableDataFormComponent<TData extends object> implements OnInit {
     return this.objectType.getPropertyByDynamicKey(row, header)
   }
 
-  onRemoveButtonEvent(id: number) {
-    this.removeCallback([id], this)
+  async onRemoveButtonEvent(id: number) {
+    this.removeCallback([id], this).subscribe(() => {
+      this.callback(this).subscribe(data => (this.rows = data))
+    })
   }
 }
