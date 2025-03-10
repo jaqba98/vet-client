@@ -28,7 +28,7 @@ export class TableNavFormComponent extends BaseFormService<TableNavFormModel, Ta
     this.initBaseForm({
       table: BaseFormBuilder.buildButtonIcon('table', faTable, 'dark-primary', this.tableButtonEnabled),
       add: BaseFormBuilder.buildButtonIcon('add', faPlus, 'success', this.addButtonEnabled),
-      remove: BaseFormBuilder.buildButtonIcon('remove', faTrash, 'error', this.removeButtonEnabled),
+      delete: BaseFormBuilder.buildButtonIcon('delete', faTrash, 'error', this.removeButtonEnabled),
       refresh: BaseFormBuilder.buildButtonIcon('refresh', faArrowsRotate, 'primary', this.refreshButtonEnabled),
       search: BaseFormBuilder.buildButtonIcon('search', faMagnifyingGlass, 'dark-secondary', this.searchButtonEnabled),
     })

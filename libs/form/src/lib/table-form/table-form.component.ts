@@ -16,6 +16,7 @@ import { TableTabEnum } from './enum/table-tab.enum'
 import { TableNavDataModel } from './table-nav-form/table-nav-form.model'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 import { BaseResponseModel } from '@vet-client/lib-http'
+import { TableFormDeleteAllService } from './service/table-form-delete-all.service'
 
 @Component({
   selector: 'lib-table-form',
@@ -27,6 +28,7 @@ import { BaseResponseModel } from '@vet-client/lib-http'
     TableDataFormComponent,
   ],
   templateUrl: './table-form.component.html',
+  providers: [TableFormDeleteAllService],
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TData extends object> {
@@ -38,6 +40,9 @@ export class TableFormComponent<TData extends object> {
 
   @Input({ required: true })
   tableDataRemoveCallback!: (ids: number[], self: TableDataFormComponent) => Observable<BaseResponseModel>
+
+  constructor(private readonly tableFormDeleteAll: TableFormDeleteAllService) {
+  }
 
   // I am here
   @Input() tableButtonEnabled = true
@@ -54,5 +59,8 @@ export class TableFormComponent<TData extends object> {
   onTableNavFormEvent(event: TableNavDataModel) {
     if (event.table) this.tableTab = TableTabEnum.data
     else if (event.add) this.tableTab = TableTabEnum.add
+    else if (event.delete) {
+      this.tableFormDeleteAll.invoke()
+    }
   }
 }

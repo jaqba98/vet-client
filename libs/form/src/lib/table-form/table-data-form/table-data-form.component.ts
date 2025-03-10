@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
-import { Component, Input, OnInit } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Observable, Subscription } from 'rxjs'
 
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { CookieService } from '@vet-client/lib-system'
@@ -8,6 +8,7 @@ import { BaseResponseModel, HttpPostAppService } from '@vet-client/lib-http'
 import { TableFormModel, TableFormRowModel, TableFormRowsModel } from '../model/table-form.model'
 import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control'
 import { faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { TableFormDeleteAllService } from '../service/table-form-delete-all.service'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -16,12 +17,14 @@ import { faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-ic
   styleUrl: './table-data-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableDataFormComponent implements OnInit {
+export class TableDataFormComponent implements OnInit, OnDestroy {
   @Input({ required: true }) formModel!: TableFormModel
   @Input({ required: true }) callback!: (self: TableDataFormComponent) => Observable<TableFormRowsModel>
   @Input({ required: true }) removeCallback!: (ids: number[], self: TableDataFormComponent) => Observable<BaseResponseModel>
 
   rows!: TableFormRowsModel
+
+  sub!: Subscription
 
   readonly selectedButtonModel: ButtonControlModel = {
     id: 'checked',
@@ -69,10 +72,25 @@ export class TableDataFormComponent implements OnInit {
     public readonly cookie: CookieService,
     public readonly httpPost: HttpPostAppService,
     private readonly objectType: ObjectTypeUtils,
-  ) {}
+    private readonly tableFormDeleteAll: TableFormDeleteAllService,
+  ) {
+    this.sub = new Subscription()
+  }
 
   ngOnInit() {
     this.callback(this).subscribe(data => this.rows = data)
+    this.sub.add(
+      this.tableFormDeleteAll.getAction().subscribe(() => {
+        const ids = this.rows.filter(row => row.isSelected).map(row => row.id)
+        this.removeCallback(ids, this).subscribe(() => {
+          this.callback(this).subscribe(data => (this.rows = data))
+        })
+      }),
+    )
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
   onSelectEvent(id: number) {
@@ -99,7 +117,7 @@ export class TableDataFormComponent implements OnInit {
     return this.objectType.getPropertyByDynamicKey(row, header)
   }
 
-  async onRemoveButtonEvent(id: number) {
+  onRemoveButtonEvent(id: number) {
     this.removeCallback([id], this).subscribe(() => {
       this.callback(this).subscribe(data => (this.rows = data))
     })
