@@ -83,7 +83,7 @@ export class TableDataFormComponent implements OnInit, OnDestroy {
       this.tableFormDeleteAll.getAction().subscribe(() => {
         const ids = this.rows.filter(row => row.isSelected).map(row => row.id)
         this.removeCallback(ids, this).subscribe(() => {
-          this.callback(this).subscribe(data => (this.rows = data))
+          this.rows = this.rows.filter(row => !ids.includes(row.id))
         })
       }),
     )
@@ -119,7 +119,7 @@ export class TableDataFormComponent implements OnInit, OnDestroy {
 
   onRemoveButtonEvent(id: number) {
     this.removeCallback([id], this).subscribe(() => {
-      this.callback(this).subscribe(data => (this.rows = data))
+      this.rows = this.rows.filter(row => row.id !== id)
     })
   }
 }
