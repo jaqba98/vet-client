@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 
 @Injectable({ providedIn: 'root' })
 export class ObjectTypeUtils {
-  getKeys(obj: object): string[] {
-    return Object.keys(obj)
+  getPropertyByDynamicKey<TObject>(obj: TObject, key: string) {
+    return (obj as Record<string, string>)[key]
   }
 }

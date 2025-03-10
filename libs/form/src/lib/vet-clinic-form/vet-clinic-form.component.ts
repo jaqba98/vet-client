@@ -42,4 +42,8 @@ export class VetClinicFormComponent {
       map(data => data.clinics),
     )
   }
+
+  tableDataRemoveCallback(ids: number[], self: TableDataFormComponent<ClinicDomainDataModel>): void {
+    console.log(`remove: ${ids}, self: ${self}`)
+  }
 }

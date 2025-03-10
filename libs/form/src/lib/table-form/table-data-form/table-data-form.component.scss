@@ -13,4 +13,8 @@
     border: 1px solid colors.$color-border;
     padding: 0.5rem;
   }
+
+  &__button {
+    width: 40px;
+  }
 }

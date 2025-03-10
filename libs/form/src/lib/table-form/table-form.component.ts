@@ -35,6 +35,7 @@ export class TableFormComponent<TData extends object> {
   ) => Observable<TableAddFormModel>
 
   @Input({ required: true }) tableDataFormCallback!: (self: TableDataFormComponent<TData>) => Observable<TData[]>
+  @Input({ required: true }) tableDataRemoveCallback!: (ids: number[], self: TableDataFormComponent<TData>) => void
 
   // I am here
   @Input() tableButtonEnabled = true
