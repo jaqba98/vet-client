@@ -14,6 +14,7 @@ import {
 } from './model/table-form.model'
 import { TableTabEnum } from './enum/table-tab.enum'
 import { TableNavDataModel } from './table-nav-form/table-nav-form.model'
+import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 
 @Component({
   selector: 'lib-table-form',
@@ -22,6 +23,7 @@ import { TableNavDataModel } from './table-nav-form/table-nav-form.model'
     TablePanelControlComponent,
     TableNavFormComponent,
     TableAddFormComponent,
+    TableDataFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
@@ -43,10 +45,10 @@ export class TableFormComponent<TData> {
   @Input() headers!: TableFormHeadersModel
   @Input() rows!: TableFormRowsModel
 
-  tableTab: TableTabEnum = TableTabEnum.table
+  tableTab: TableTabEnum = TableTabEnum.data
 
   onTableNavFormEvent(event: TableNavDataModel) {
-    if (event.table) this.tableTab = TableTabEnum.table
+    if (event.table) this.tableTab = TableTabEnum.data
     else if (event.add) this.tableTab = TableTabEnum.add
   }
 }

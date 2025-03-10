@@ -1,4 +1,4 @@
 export enum TableTabEnum {
-  table = 'table',
+  data = 'data',
   add = 'add',
 }

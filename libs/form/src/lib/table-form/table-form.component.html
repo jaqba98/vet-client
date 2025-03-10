@@ -11,6 +11,9 @@
   </ng-container>
   <ng-container content>
     <ng-container [ngSwitch]="tableTab">
+      <ng-container *ngSwitchCase="'data'">
+        <lib-table-data-form></lib-table-data-form>
+      </ng-container>
       <ng-container *ngSwitchCase="'add'">
         <lib-table-add-form [formModel]="formModel" [callback]="tableAddFormCallback"></lib-table-add-form>
       </ng-container>
