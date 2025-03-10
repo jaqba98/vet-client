@@ -13,7 +13,7 @@ import { HttpPostAppService } from '@vet-client/lib-http'
   styleUrl: './table-data-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableDataFormComponent<TData> implements OnInit {
+export class TableDataFormComponent<TData extends object> implements OnInit {
   @Input({ required: true }) callback!: (self: TableDataFormComponent<TData>) => Observable<TData[]>
 
   rows!: TData[]
@@ -27,5 +27,9 @@ export class TableDataFormComponent<TData> implements OnInit {
     this.callback(this).subscribe((data) => {
       this.rows = data
     })
+  }
+
+  getColumns(row: TData) {
+    return Object.values(row)
   }
 }

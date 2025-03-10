@@ -28,7 +28,7 @@ import { TableDataFormComponent } from './table-data-form/table-data-form.compon
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TData> {
+export class TableFormComponent<TData extends object> {
   @Input({ required: true }) tableAddFormCallback!: (
     data: TData,
     self: TableAddFormComponent<TData>

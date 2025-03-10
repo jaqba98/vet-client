@@ -1,3 +1,9 @@
-<ng-container *ngFor="let row of rows">
-  <p>{{ row | json }}</p>
-</ng-container>
+<table class="table">
+  <ng-container *ngFor="let row of rows">
+    <tr class="table__row">
+      <ng-container *ngFor="let column of getColumns(row)">
+        <td class="table__column">{{ column }}</td>
+      </ng-container>
+    </tr>
+  </ng-container>
+</table>
