@@ -6,3 +6,5 @@ export type ClinicCreateResponseModel = BaseResponseModel
 export interface ClinicReadResponseModel extends BaseResponseModel {
   clinics: ClinicDomainDataModel[]
 }
+
+export type ClinicDeleteResponseModel = BaseResponseModel

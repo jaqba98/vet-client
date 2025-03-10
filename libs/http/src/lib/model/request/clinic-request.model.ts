@@ -4,3 +4,7 @@ import { BaseRequestModel } from '../base/base-request.model'
 export interface ClinicCreateRequestModel extends BaseRequestModel, ClinicDomainDataModel {}
 
 export type ClinicReadRequestModel = BaseRequestModel
+
+export interface ClinicDeleteRequestModel extends BaseRequestModel {
+  ids: number[]
+}

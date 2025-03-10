@@ -44,6 +44,7 @@ export class VetClinicFormComponent {
   }
 
   tableDataRemoveCallback(ids: number[], self: TableDataFormComponent<ClinicDomainDataModel>): void {
-    console.log(`remove: ${ids}, self: ${self}`)
+    const token = self.cookie.getToken()
+    self.httpPost.clinicDeletePost({ token, ids }).subscribe()
   }
 }

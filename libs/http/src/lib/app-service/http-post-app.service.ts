@@ -22,8 +22,16 @@ import { RegistrationRequestModel } from '../model/request/registration-request.
 import { RegistrationResponseModel } from '../model/response/registration-response.model'
 import { GetAccountRequestModel } from '../model/request/get-account-request.model'
 import { GetAccountResponseModel } from '../model/response/get-account-response.model'
-import { ClinicCreateRequestModel, ClinicReadRequestModel } from '../model/request/clinic-request.model'
-import { ClinicCreateResponseModel, ClinicReadResponseModel } from '../model/response/clinic-response.model'
+import {
+  ClinicCreateRequestModel,
+  ClinicDeleteRequestModel,
+  ClinicReadRequestModel,
+} from '../model/request/clinic-request.model'
+import {
+  ClinicCreateResponseModel,
+  ClinicDeleteResponseModel,
+  ClinicReadResponseModel,
+} from '../model/response/clinic-response.model'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -103,6 +111,15 @@ export class HttpPostAppService {
       .exec<ClinicReadResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicRead, request },
+      })
+      .pipe(take(1))
+  }
+
+  clinicDeletePost(request: ClinicDeleteRequestModel) {
+    return this.httpExecute
+      .exec<ClinicDeleteResponseModel>({
+        method: MethodEnum.post,
+        type: { endpoint: EndpointEnum.clinicDelete, request },
       })
       .pipe(take(1))
   }
