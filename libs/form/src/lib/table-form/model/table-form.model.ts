@@ -2,14 +2,12 @@ import { ControlType } from '@vet-client/lib-base-form'
 
 export type TableFormModel<TKey extends string = string> = Record<TKey, ControlType>
 
-export type TableDataModel<TKey extends string = string> = Record<TKey, string>
-
-export interface TableFormRowModel<TKey extends string = string> {
-  id: string
+export interface TableFormRowModel<TData = object> {
+  id: number
   isSelected: boolean
-  data: TableDataModel<TKey>
+  data: TData
 }
 
-export type TableFormRowsModel<TKey extends string = string> = TableFormRowModel<TKey>[]
+export type TableFormRowsModel<TData = object> = TableFormRowModel<TData>[]
 
 export type TableFormHeadersModel = string[]

@@ -1,16 +1,16 @@
-import { Component, Input } from '@angular/core'
+import { Component } from '@angular/core'
 import { map, Observable } from 'rxjs'
+import { Validators } from '@angular/forms'
 
 import { ClinicDomainDataModel, ClinicDomainFormDataModel } from '@vet-client/lib-domain'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
-import { Validators } from '@angular/forms'
+import { BaseResponseModel } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
-import { TableFormModel } from '../table-form/model/table-form.model'
+import { TableFormModel, TableFormRowsModel } from '../table-form/model/table-form.model'
 import { TableAddFormComponent } from '../table-form/table-add-form/table-add-form.component'
 import { TableAddFormModel } from '../table-form/table-add-form/table-add-form.model'
 import { TableDataFormComponent } from '../table-form/table-data-form/table-data-form.component'
-import { BaseResponseModel } from '../../../../http/src/lib/model/base/base-response.model'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -20,6 +20,7 @@ import { BaseResponseModel } from '../../../../http/src/lib/model/base/base-resp
 })
 export class VetClinicFormComponent {
   readonly formModel: TableFormModel<keyof ClinicDomainFormDataModel> = {
+    id: BaseFormBuilder.buildInputText('ID', [], false),
     name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)], true),
   }
 
@@ -37,14 +38,18 @@ export class VetClinicFormComponent {
     )
   }
 
-  tableDataFormCallback(self: TableDataFormComponent<ClinicDomainDataModel>): Observable<ClinicDomainDataModel[]> {
+  tableDataFormCallback(self: TableDataFormComponent): Observable<TableFormRowsModel<ClinicDomainDataModel>> {
     const token = self.cookie.getToken()
     return self.httpPost.clinicReadPost({ token }).pipe(
-      map(data => data.clinics),
+      map(data => data.clinics.map(clinic => ({
+        id: clinic.id,
+        isSelected: false,
+        data: clinic,
+      }))),
     )
   }
 
-  tableDataRemoveCallback(ids: number[], self: TableDataFormComponent<ClinicDomainDataModel>): Observable<BaseResponseModel> {
+  tableDataRemoveCallback(ids: number[], self: TableDataFormComponent): Observable<BaseResponseModel> {
     const token = self.cookie.getToken()
     return self.httpPost.clinicDeletePost({ token, ids })
   }
