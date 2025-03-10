@@ -17,6 +17,7 @@ import { TableNavDataModel } from './table-nav-form/table-nav-form.model'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 import { BaseResponseModel } from '@vet-client/lib-http'
 import { TableFormDeleteAllService } from './service/table-form-delete-all.service'
+import { TableFormRefreshAllService } from './service/table-form-refresh-all.service'
 
 @Component({
   selector: 'lib-table-form',
@@ -28,7 +29,7 @@ import { TableFormDeleteAllService } from './service/table-form-delete-all.servi
     TableDataFormComponent,
   ],
   templateUrl: './table-form.component.html',
-  providers: [TableFormDeleteAllService],
+  providers: [TableFormDeleteAllService, TableFormRefreshAllService],
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TData extends object> {
@@ -41,7 +42,10 @@ export class TableFormComponent<TData extends object> {
   @Input({ required: true })
   tableDataRemoveCallback!: (ids: number[], self: TableDataFormComponent) => Observable<BaseResponseModel>
 
-  constructor(private readonly tableFormDeleteAll: TableFormDeleteAllService) {
+  constructor(
+    private readonly tableFormDeleteAll: TableFormDeleteAllService,
+    private readonly tableFormRefreshAll: TableFormRefreshAllService,
+  ) {
   }
 
   // I am here
@@ -61,6 +65,9 @@ export class TableFormComponent<TData extends object> {
     else if (event.add) this.tableTab = TableTabEnum.add
     else if (event.delete) {
       this.tableFormDeleteAll.invoke()
+    }
+    else if (event.refresh) {
+      this.tableFormRefreshAll.invoke()
     }
   }
 }
