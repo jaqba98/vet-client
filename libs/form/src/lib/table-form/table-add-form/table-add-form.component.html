@@ -4,6 +4,6 @@
     [controlsArray]="controlsArray"
     [success]="store.createSuccess$ | async"
     [error]="store.createError$ | async"
-    (event)="onSubmit($event)"
+    (event)="store.create($event)"
   ></lib-base-form>
 </lib-table-card-control>
