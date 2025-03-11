@@ -1,7 +1,28 @@
+@use 'libs/scss/src/abstracts/mixins';
+
 .paginator {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   height: 100%;
+
+  &__center {
+    display: none;
+
+    @include mixins.breakpoint(md, min) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  }
+
+  &__legend {
+    @include mixins.breakpoint(md, min) {
+      position: absolute;
+      right: 1rem;
+    }
+  }
 }

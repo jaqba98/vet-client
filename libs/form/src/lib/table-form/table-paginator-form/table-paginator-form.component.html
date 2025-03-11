@@ -1,7 +1,14 @@
 <div class="paginator">
   <lib-button-control [model]="first" (event)="store.firstPage()"></lib-button-control>
   <lib-button-control [model]="previous" (event)="store.prevPage()"></lib-button-control>
-  <lib-text-control>{{ currPage }} / {{ maxPage }}</lib-text-control>
+  <div class="paginator__center">
+    <ng-container *ngFor="let control of getPageControls()">
+      <lib-button-control [model]="control" (event)="store.goToPage(control.id)"></lib-button-control>
+    </ng-container>
+  </div>
+  <div class="paginator__legend">
+    <lib-text-control textControlColor="dark-secondary">{{ page }} / {{ maxPage }}</lib-text-control>
+  </div>
   <lib-button-control [model]="next" (event)="store.nextPage()"></lib-button-control>
   <lib-button-control [model]="last" (event)="store.lastPage()"></lib-button-control>
 </div>

@@ -118,7 +118,7 @@ export class BaseTableFormStore<TRows> {
     const rows = this.rows.getValue()
     const page = this.page.getValue()
     const nextPage = page + 1
-    if (nextPage > rows.length / NUMBER_OF_ROWS_PER_PAGE) return
+    if (nextPage > Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)) return
     this.router.navigate([this.url + nextPage])
   }
 
@@ -135,7 +135,7 @@ export class BaseTableFormStore<TRows> {
 
   lastPage() {
     const rows = this.rows.getValue()
-    this.router.navigate([this.url + rows.length / NUMBER_OF_ROWS_PER_PAGE])
+    this.router.navigate([this.url + Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)])
   }
 
   goToPage(id: string) {
