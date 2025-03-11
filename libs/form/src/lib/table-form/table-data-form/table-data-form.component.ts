@@ -1,15 +1,17 @@
-import { CommonModule } from '@angular/common'
 import { Component, Input, OnInit } from '@angular/core'
-import { combineLatest } from 'rxjs'
+import { CommonModule } from '@angular/common'
+import { combineLatest, Subscription } from 'rxjs'
+import { faEdit, faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
-import { CookieService } from '@vet-client/lib-system'
-import { HttpPostAppService } from '@vet-client/lib-http'
-import { TableFormModel } from '../model/table-form.model'
 import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control'
-import { faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { TableFormRowModel, TableFormRowsModel } from '../model/table-form-rows.model'
+import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { BaseTableFormStore } from '../store/base-table-form.store'
+import { TableFormModel } from '../model/table-form.model'
+import {
+  TableFormRowModel,
+  TableFormRowsModel,
+} from '../model/table-form-rows.model'
+import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -23,17 +25,13 @@ export class TableDataFormComponent<TData> implements OnInit {
 
   @Input({ required: true }) formModel!: TableFormModel
 
-  rows!: TableFormRowsModel<unknown>
+  rows!: TableFormRowsModel<TData>
 
   readonly selectedButtonModel: ButtonControlModel = {
     id: 'checked',
     value: {
       type: 'icon',
-      icon: {
-        icon: faSquareCheck,
-        color: 'dark-secondary',
-        fontSize: '2rem',
-      },
+      icon: { icon: faSquareCheck, color: 'dark-secondary', fontSize: '2rem' },
     },
     color: 'transparent',
     fullWidth: false,
@@ -44,13 +42,20 @@ export class TableDataFormComponent<TData> implements OnInit {
     id: 'unchecked',
     value: {
       type: 'icon',
-      icon: {
-        icon: faSquare,
-        color: 'dark-secondary',
-        fontSize: '2rem',
-      },
+      icon: { icon: faSquare, color: 'dark-secondary', fontSize: '2rem' },
     },
     color: 'transparent',
+    fullWidth: false,
+    width40px: false,
+  }
+
+  readonly editButtonModel: ButtonControlModel = {
+    id: 'edit',
+    value: {
+      type: 'icon',
+      icon: { icon: faEdit, color: 'light-primary', fontSize: '1rem' },
+    },
+    color: 'primary',
     fullWidth: false,
     width40px: false,
   }
@@ -59,37 +64,39 @@ export class TableDataFormComponent<TData> implements OnInit {
     id: 'remove',
     value: {
       type: 'icon',
-      icon: {
-        icon: faTrash,
-        color: 'light-primary',
-        fontSize: '1rem',
-      },
+      icon: { icon: faTrash, color: 'light-primary', fontSize: '1rem' },
     },
     color: 'error',
     fullWidth: false,
     width40px: false,
   }
 
-  constructor(
-    public readonly cookie: CookieService,
-    public readonly httpPost: HttpPostAppService,
-    private readonly objectType: ObjectTypeUtils,
-  ) {}
+  private sub = new Subscription()
+
+  constructor(private readonly objectType: ObjectTypeUtils) {}
 
   ngOnInit() {
-    combineLatest([this.store.rows$, this.store.page$]).subscribe(([rows, page]) => {
-      this.rows = rows.filter((_, index) => index >= page && index <= page + 5)
-    })
+    this.sub.add(
+      combineLatest([this.store.rows$, this.store.page$]).subscribe(([rows, page]) => {
+        const maxPage = Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
+        if (page < 0 || page > maxPage) {
+          this.store.goToPage('1')
+          return
+        }
+        const pageFrom = (page - 1) * NUMBER_OF_ROWS_PER_PAGE
+        const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
+        this.rows = rows.filter((_, index) => index >= pageFrom && index <= pageTo)
+      }),
+    )
   }
 
   getHeaders() {
     return Object.entries(this.formModel)
-      .filter(([, values]) => values.isEnabled)
+      .filter(([, value]) => value.isEnabled)
       .map(([key]) => key)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getColumn(row: TableFormRowModel<any>['data'], header: string) {
+  getColumn(row: TableFormRowModel<TData>['data'], header: string) {
     return this.objectType.getPropertyByDynamicKey(row, header)
   }
 }

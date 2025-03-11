@@ -1,2 +1,1 @@
-export const NUMBER_OF_ROWS_PER_PAGE = 5
-export const NUMBER_OF_PAGINATOR_BUTTONS = 7
+export const NUMBER_OF_ROWS_PER_PAGE = 10

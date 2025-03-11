@@ -9,20 +9,20 @@
     align-items: center;
     padding: 0.5rem;
     gap: 1rem;
-    height: variables.$nav-height;
+    height: variables.$table-nav-height;
     background-color: colors.$color-surface;
     border-top: 1px solid colors.$color-border;
     border-bottom: 1px solid colors.$color-border;
   }
 
   &__content {
-    height: calc(100% - #{variables.$nav-height} - #{variables.$footer-height});
+    height: calc(100% - #{variables.$table-nav-height} - #{variables.$table-paginator-height});
     background-color: colors.$color-background;
-    overflow-y: auto;
+    overflow: hidden;
   }
 
   &__paginator {
-    height: variables.$footer-height;
+    height: variables.$table-paginator-height;
     background-color: colors.$color-surface;
     border-top: 1px solid colors.$color-border;
   }
