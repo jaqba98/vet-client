@@ -1,6 +1,19 @@
 <table class="table">
   <tr class="table__row">
-    <td class="table__column"></td>
+    <td class="table__column table__button">
+      <ng-container *ngIf="store.allRowsSelected$ | async; else unselected">
+        <lib-button-control
+          [model]="selectedButtonModel"
+          (event)="store.unselectAll()"
+        ></lib-button-control>
+      </ng-container>
+      <ng-template #unselected>
+        <lib-button-control
+          [model]="unselectedButtonModel"
+          (event)="store.selectAll()"
+        ></lib-button-control>
+      </ng-template>
+    </td>
     <ng-container *ngFor="let header of getHeaders()">
       <td class="table__column">{{ header }}</td>
     </ng-container>
@@ -10,17 +23,26 @@
     <tr class="table__row">
       <td class="table__column table__button">
         <ng-container *ngIf="row.isSelected; else unselected">
-          <lib-button-control [model]="selectedButtonModel" (event)="onUnselectEvent(row.id)"></lib-button-control>
+          <lib-button-control
+            [model]="selectedButtonModel"
+            (event)="store.unselectRow(row.id)"
+          ></lib-button-control>
         </ng-container>
         <ng-template #unselected>
-          <lib-button-control [model]="unselectedButtonModel" (event)="onSelectEvent(row.id)"></lib-button-control>
+          <lib-button-control
+            [model]="unselectedButtonModel"
+            (event)="store.selectRow(row.id)"
+          ></lib-button-control>
         </ng-template>
       </td>
       <ng-container *ngFor="let header of getHeaders()">
         <td class="table__column">{{ getColumn(row.data, header) }}</td>
       </ng-container>
       <td class="table__column table__button">
-        <lib-button-control [model]="removeButtonModel" (event)="onRemoveButtonEvent(row.id)"></lib-button-control>
+        <lib-button-control
+          [model]="removeButtonModel"
+          (event)="store.delete([row.id])"
+        ></lib-button-control>
       </td>
     </tr>
   </ng-container>

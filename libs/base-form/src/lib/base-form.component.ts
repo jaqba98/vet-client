@@ -39,9 +39,9 @@ export class BaseFormComponent implements OnInit {
 
   @Input() isHorizontal = false
 
-  @Input() error = ''
+  @Input() error: string | null = ''
 
-  @Input() success = ''
+  @Input() success: string | null = ''
 
   ngOnInit() {
     this.resetEvent.emit()

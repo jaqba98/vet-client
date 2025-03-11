@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { faArrowsRotate, faMagnifyingGlass, faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -8,6 +8,8 @@ import {
 } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableNavDataModel, TableNavFormModel } from './table-nav-form.model'
+import { BaseTableFormStore } from '../store/base-table-form.store'
+import { TableTabEnum } from '../enum/table-tab.enum'
 
 @Component({
   selector: 'lib-table-nav-form',
@@ -15,8 +17,8 @@ import { TableNavDataModel, TableNavFormModel } from './table-nav-form.model'
   templateUrl: './table-nav-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableNavFormComponent extends BaseFormService<TableNavFormModel, TableNavDataModel> implements OnInit {
-  @Output() event = new EventEmitter<TableNavDataModel>()
+export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormModel, TableNavDataModel> implements OnInit {
+  @Input({ required: true }) store!: BaseTableFormStore<TData>
 
   @Input({ required: true }) tableButtonEnabled!: boolean
   @Input({ required: true }) addButtonEnabled!: boolean
@@ -35,6 +37,18 @@ export class TableNavFormComponent extends BaseFormService<TableNavFormModel, Ta
   }
 
   override onSubmit(event: TableNavDataModel) {
-    this.event.emit(event)
+    if (event.table) {
+      this.store.setTab(TableTabEnum.data)
+      this.store.read()
+    }
+    else if (event.add) {
+      this.store.setTab(TableTabEnum.add)
+    }
+    else if (event.delete) {
+      this.store.deleteAll()
+    }
+    else if (event.refresh) {
+      this.store.read()
+    }
   }
 }

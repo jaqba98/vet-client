@@ -1,25 +1,21 @@
 <lib-table-panel-control>
   <ng-container nav>
     <lib-table-nav-form
+      [store]="store"
       [tableButtonEnabled]="tableButtonEnabled"
       [addButtonEnabled]="addButtonEnabled"
       [removeButtonEnabled]="removeButtonEnabled"
       [refreshButtonEnabled]="refreshButtonEnabled"
       [searchButtonEnabled]="searchButtonEnabled"
-      (event)="onTableNavFormEvent($event)"
     ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
-    <ng-container [ngSwitch]="tableTab">
+    <ng-container [ngSwitch]="this.store.tab$ | async">
       <ng-container *ngSwitchCase="'data'">
-        <lib-table-data-form
-          [formModel]="formModel"
-          [callback]="tableDataFormCallback"
-          [removeCallback]="tableDataRemoveCallback"
-        ></lib-table-data-form>
+        <lib-table-data-form [store]="store" [formModel]="formModel"></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'add'">
-        <lib-table-add-form [formModel]="formModel" [callback]="tableAddFormCallback"></lib-table-add-form>
+        <lib-table-add-form [store]="store" [formModel]="formModel"></lib-table-add-form>
       </ng-container>
       <ng-container *ngSwitchDefault>
         <p>default</p>
@@ -27,6 +23,6 @@
     </ng-container>
   </ng-container>
   <ng-container paginator>
-    <p>paginator</p>
+    <lib-table-paginator-form [store]="store"></lib-table-paginator-form>
   </ng-container>
 </lib-table-panel-control>

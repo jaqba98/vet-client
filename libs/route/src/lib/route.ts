@@ -85,6 +85,11 @@ export const route: Route[] = [
           },
           {
             path: 'clinic',
+            redirectTo: 'clinic/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'clinic/:page',
             component: VetClinicPageComponent,
           },
           {
