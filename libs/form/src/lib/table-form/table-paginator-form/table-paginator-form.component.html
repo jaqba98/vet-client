@@ -1,4 +1,7 @@
 <div class="paginator">
-  <lib-button-control [model]="left" (event)="store.prevPage()"></lib-button-control>
-  <lib-button-control [model]="right" (event)="store.nextPage()"></lib-button-control>
+  <lib-button-control [model]="first" (event)="store.firstPage()"></lib-button-control>
+  <lib-button-control [model]="previous" (event)="store.prevPage()"></lib-button-control>
+  <lib-text-control>{{ currPage }} / {{ maxPage }}</lib-text-control>
+  <lib-button-control [model]="next" (event)="store.nextPage()"></lib-button-control>
+  <lib-button-control [model]="last" (event)="store.lastPage()"></lib-button-control>
 </div>

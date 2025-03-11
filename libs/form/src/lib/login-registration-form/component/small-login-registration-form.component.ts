@@ -40,6 +40,7 @@ export class SmallLoginRegistrationFormComponent
         fullWidth: false,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
       registration: {
         id: 'registration',
@@ -56,6 +57,7 @@ export class SmallLoginRegistrationFormComponent
         fullWidth: false,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
     })
   }

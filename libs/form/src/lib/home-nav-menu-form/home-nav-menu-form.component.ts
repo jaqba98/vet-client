@@ -37,6 +37,7 @@ export class HomeNavMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
       aboutUs: {
         id: 'aboutUs',
@@ -49,6 +50,7 @@ export class HomeNavMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
       price: {
         id: 'price',
@@ -61,6 +63,7 @@ export class HomeNavMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
       contact: {
         id: 'contact',
@@ -73,6 +76,7 @@ export class HomeNavMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
     })
   }

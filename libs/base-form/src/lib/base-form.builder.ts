@@ -19,6 +19,7 @@ export class BaseFormBuilder {
       fullWidth: false,
       color,
       isEnabled,
+      width40px: false,
     }
   }
 
@@ -38,6 +39,7 @@ export class BaseFormBuilder {
       fullWidth: false,
       color,
       isEnabled,
+      width40px: false,
     }
   }
 

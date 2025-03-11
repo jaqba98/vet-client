@@ -23,4 +23,5 @@ export interface ButtonControlModel {
   value: ValueType
   fullWidth: boolean
   color: ColorType
+  width40px: boolean
 }

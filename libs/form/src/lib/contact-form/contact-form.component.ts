@@ -57,6 +57,7 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
         defaultValue: false,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
     })
   }

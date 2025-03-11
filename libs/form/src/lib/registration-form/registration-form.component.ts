@@ -82,6 +82,7 @@ export class RegistrationFormComponent
         fullWidth: false,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
     })
   }

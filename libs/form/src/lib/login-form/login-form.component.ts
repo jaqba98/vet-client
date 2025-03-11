@@ -62,6 +62,7 @@ export class LoginFormComponent
         fullWidth: false,
         color: 'primary',
         isEnabled: true,
+        width40px: false,
       },
     })
   }

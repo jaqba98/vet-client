@@ -37,6 +37,7 @@ export class TableDataFormComponent<TData> implements OnInit {
     },
     color: 'transparent',
     fullWidth: false,
+    width40px: false,
   }
 
   readonly unselectedButtonModel: ButtonControlModel = {
@@ -51,6 +52,7 @@ export class TableDataFormComponent<TData> implements OnInit {
     },
     color: 'transparent',
     fullWidth: false,
+    width40px: false,
   }
 
   readonly removeButtonModel: ButtonControlModel = {
@@ -65,6 +67,7 @@ export class TableDataFormComponent<TData> implements OnInit {
     },
     color: 'error',
     fullWidth: false,
+    width40px: false,
   }
 
   constructor(

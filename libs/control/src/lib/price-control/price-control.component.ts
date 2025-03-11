@@ -36,5 +36,6 @@ export class PriceControlComponent {
     },
     fullWidth: true,
     color: 'primary',
+    width40px: false,
   }
 }
