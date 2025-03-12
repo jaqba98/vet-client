@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { ClinicDomainDataType, setClinicDomainData } from '@vet-client/lib-store'
+import { ClinicDomainDataType, setClinicDomainClinicsData } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import { ClinicReadResponseModel } from '../model/response/clinic-response.model'
 import { MethodEnum } from '../enum/method.enum'
@@ -25,7 +25,7 @@ export class ClinicHttpPostService {
     }).pipe(
       take(1),
       map(res => res.clinics.map(clinic => ({ id: clinic.id, isSelected: false, data: clinic }))),
-      map(clinics => this.storeClinicDomainData.dispatch(setClinicDomainData({ clinics }))),
+      map(clinics => this.storeClinicDomainData.dispatch(setClinicDomainClinicsData({ clinics }))),
     )
   }
 }

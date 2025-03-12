@@ -2,11 +2,21 @@
 import { createReducer, on } from '@ngrx/store'
 
 import { ClinicDomainDataStoreModel } from '../../../model/domain/data/clinic-domain-data-store.model'
-import { setClinicDomainData } from '../../../actions/domain/data/clinic-domain-data.action'
+import {
+  setClinicDomainClinicsData,
+  setClinicDomainData,
+  setClinicDomainPageData,
+} from '../../../actions/domain/data/clinic-domain-data.action'
 
-const initialState: ClinicDomainDataStoreModel = { clinics: [] }
+const initialState: ClinicDomainDataStoreModel = { page: 1, clinics: [] }
 
 export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>(
   initialState,
-  on(setClinicDomainData, (state: ClinicDomainDataStoreModel, { clinics }) => ({ ...state, clinics })),
+  on(setClinicDomainData, (state: ClinicDomainDataStoreModel, { page, clinics }) => ({
+    ...state,
+    page: page ? page : state.page,
+    clinics: clinics ? clinics : state.clinics,
+  })),
+  on(setClinicDomainClinicsData, (state: ClinicDomainDataStoreModel, { clinics }) => ({ ...state, clinics })),
+  on(setClinicDomainPageData, (state: ClinicDomainDataStoreModel, { page }) => ({ ...state, page })),
 )
