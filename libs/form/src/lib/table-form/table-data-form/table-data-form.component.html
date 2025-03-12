@@ -32,7 +32,7 @@
           <td class="table__column">{{ getColumn(row.data, header) }}</td>
         </ng-container>
         <td class="table__column table__button">
-          <lib-button-control [model]="editButtonModel"></lib-button-control>
+          <lib-button-control [model]="editButtonModel" (event)="onEditEvent(row.id)"></lib-button-control>
         </td>
         <td class="table__column table__button">
           <lib-button-control [model]="removeButtonModel" (event)="store.delete([row.id])"></lib-button-control>

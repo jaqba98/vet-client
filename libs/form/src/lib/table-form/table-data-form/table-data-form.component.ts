@@ -1,9 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { combineLatest, Subscription } from 'rxjs'
-import { faEdit, faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
+import {
+  faEdit,
+  faSquare,
+  faSquareCheck,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons'
 
-import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control'
+import {
+  ButtonControlComponent,
+  ButtonControlModel,
+} from '@vet-client/lib-control'
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { BaseTableFormStore } from '../store/base-table-form.store'
 import { TableFormModel } from '../model/table-form.model'
@@ -12,6 +20,7 @@ import {
   TableFormRowsModel,
 } from '../model/table-form-rows.model'
 import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
+import { TableTabEnum } from '../enum/table-tab.enum'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -77,16 +86,23 @@ export class TableDataFormComponent<TData> implements OnInit {
 
   ngOnInit() {
     this.sub.add(
-      combineLatest([this.store.rows$, this.store.page$]).subscribe(([rows, page]) => {
-        const maxPage = rows.length === 0 ? 1 : Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
-        if (page < 0 || page > maxPage) {
-          this.store.goToPage('1')
-          return
-        }
-        const pageFrom = (page - 1) * NUMBER_OF_ROWS_PER_PAGE
-        const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
-        this.rows = rows.filter((_, index) => index >= pageFrom && index < pageTo)
-      }),
+      combineLatest([this.store.rows$, this.store.page$]).subscribe(
+        ([rows, page]) => {
+          const maxPage
+            = rows.length === 0
+              ? 1
+              : Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
+          if (page < 0 || page > maxPage) {
+            this.store.goToPage('1')
+            return
+          }
+          const pageFrom = (page - 1) * NUMBER_OF_ROWS_PER_PAGE
+          const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
+          this.rows = rows.filter(
+            (_, index) => index >= pageFrom && index < pageTo,
+          )
+        },
+      ),
     )
   }
 
@@ -98,5 +114,10 @@ export class TableDataFormComponent<TData> implements OnInit {
 
   getColumn(row: TableFormRowModel<TData>['data'], header: string) {
     return this.objectType.getPropertyByDynamicKey(row, header)
+  }
+
+  onEditEvent(id: number) {
+    this.store.setTab(TableTabEnum.edit)
+    this.store.setEditRow(id)
   }
 }

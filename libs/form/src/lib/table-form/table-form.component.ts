@@ -14,6 +14,7 @@ import { TableFormDeleteAllService } from './service/table-form-delete-all.servi
 import { TableFormRefreshAllService } from './service/table-form-refresh-all.service'
 import { BaseTableFormStore } from './store/base-table-form.store'
 import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
+import { TableEditFormComponent } from './table-edit-form/table-edit-form.component'
 
 @Component({
   selector: 'lib-table-form',
@@ -24,6 +25,7 @@ import { TablePaginatorFormComponent } from './table-paginator-form/table-pagina
     TableAddFormComponent,
     TableDataFormComponent,
     TablePaginatorFormComponent,
+    TableEditFormComponent,
   ],
   templateUrl: './table-form.component.html',
   providers: [TableFormDeleteAllService, TableFormRefreshAllService],

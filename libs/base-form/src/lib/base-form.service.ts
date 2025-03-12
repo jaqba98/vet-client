@@ -34,7 +34,6 @@ export class BaseFormService<TFormModel, TModel> {
   createFormGroup(baseForm: BaseFormModel<TFormModel>): FormGroup {
     const formGroup = new FormGroup({})
     Object.entries(baseForm as Record<string, ControlType>)
-      .filter(([, control]) => control.isEnabled)
       .forEach(([key, control]) => {
         switch (control.kind) {
           case 'input':

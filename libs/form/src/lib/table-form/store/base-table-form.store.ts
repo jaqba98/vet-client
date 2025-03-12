@@ -1,9 +1,12 @@
 import { Inject, Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Subject } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
 import { HttpPostAppService } from '@vet-client/lib-http'
-import { TableFormRowsModel } from '../model/table-form-rows.model'
+import {
+  TableFormRowModel,
+  TableFormRowsModel,
+} from '../model/table-form-rows.model'
 import { TableTabEnum } from '../enum/table-tab.enum'
 import { Router } from '@angular/router'
 import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
@@ -16,6 +19,11 @@ export class BaseTableFormStore<TRows> {
   protected createError = new BehaviorSubject<string>('')
   protected tab = new BehaviorSubject<TableTabEnum>(TableTabEnum.data)
   protected page = new BehaviorSubject<number>(1)
+  protected row = new BehaviorSubject<TableFormRowModel<TRows>>({
+    id: -1,
+    isSelected: false,
+    data: <TRows>{},
+  })
 
   rows$ = this.rows.asObservable()
   allRowsSelected$ = this.allRowsSelected.asObservable()
@@ -23,6 +31,7 @@ export class BaseTableFormStore<TRows> {
   createError$ = this.createError.asObservable()
   tab$ = this.tab.asObservable()
   page$ = this.page.asObservable()
+  row$ = this.row.asObservable()
 
   constructor(
     protected cookie: CookieService,
@@ -37,6 +46,11 @@ export class BaseTableFormStore<TRows> {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   create(row: TRows) {
+    throw new Error('Method not implemented.')
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  edit(row: TRows) {
     throw new Error('Method not implemented.')
   }
 
@@ -141,6 +155,11 @@ export class BaseTableFormStore<TRows> {
 
   goToPage(id: string) {
     this.router.navigate([this.url + Number(id)])
+  }
+
+  setEditRow(id: number) {
+    const row = this.rows.getValue().find(row => row.id === id)
+    if (row) this.row.next(row)
   }
 
   private getPageRows() {
