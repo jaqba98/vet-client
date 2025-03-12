@@ -7,7 +7,7 @@ import { ValidatorFn } from '@angular/forms'
 
 @Injectable({ providedIn: 'root' })
 export class BaseFormBuilder {
-  static buildButtonText(id: string, text: string, color: ColorType, isEnabled: boolean): ControlButtonModel {
+  static buildButtonText(id: string, text: string, color: ColorType, isEnabled: boolean, width40px = false): ControlButtonModel {
     return {
       id,
       kind: 'button',
@@ -19,7 +19,7 @@ export class BaseFormBuilder {
       fullWidth: false,
       color,
       isEnabled,
-      width40px: false,
+      width40px,
     }
   }
 
