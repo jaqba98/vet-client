@@ -6,12 +6,10 @@ import { Subscription } from 'rxjs'
 import { MenuTypeEnum, NavStoreType } from '@vet-client/lib-store'
 import {
   BigLoginRegistrationFormComponent,
-  BigLogoutFormComponent,
   DashboardNavMenuFormComponent,
   HamburgerFormComponent,
-  HomeNavMenuFormComponent,
+  HomeNavMenuFormComponent, LogoutFormComponent,
   SmallLoginRegistrationFormComponent,
-  SmallLogoutFormComponent,
 } from '@vet-client/lib-form'
 import { SmallLogoControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
@@ -24,10 +22,9 @@ import { BaseComponentDirective } from '@vet-client/lib-utils'
     SmallLogoControlComponent,
     HomeNavMenuFormComponent,
     DashboardNavMenuFormComponent,
-    BigLogoutFormComponent,
-    SmallLogoutFormComponent,
     SmallLoginRegistrationFormComponent,
     BigLoginRegistrationFormComponent,
+    LogoutFormComponent,
   ],
   templateUrl: './nav-view.component.html',
   styleUrl: './nav-view.component.scss',

@@ -35,18 +35,20 @@ import {
 import { CookieService } from '@vet-client/lib-system'
 import { Store } from '@ngrx/store'
 import {
-  LoginDomainResponseType,
+  LoginDomainResponseType, LogoutDomainDataType,
   RoutePageEnum,
   RouteSectionEnum,
-  RouteStoreType, setLoginDomainResponse,
+  RouteStoreType,
+  setLoginDomainResponse, setLogoutDomainData,
   setRoute,
 } from '@vet-client/lib-store'
-import { LoginDomainDataModel } from '@vet-client/lib-domain'
+import { LoginDomainDataModel, LogoutDomainDataModel } from '@vet-client/lib-domain'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
   constructor(
     private readonly storeLoginDomainResponse: Store<LoginDomainResponseType>,
+    private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
     private readonly httpExecute: HttpExecuteService,
     private cookie: CookieService,
     private storeRoute: Store<RouteStoreType>,
@@ -83,8 +85,12 @@ export class HttpPostAppService {
   }
 
   loginPost(data: LoginDomainDataModel) {
+    const request: LoginRequestModel = {
+      email: data.email,
+      password: data.password,
+    }
     return this.httpExecute
-      .exec<LoginResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request: data } })
+      .exec<LoginResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
       .pipe(
         take(1),
         map((response) => {
@@ -101,10 +107,22 @@ export class HttpPostAppService {
       )
   }
 
-  logoutPost(request: LogoutRequestModel) {
+  logoutPost(data: LogoutDomainDataModel) {
+    const request: LogoutRequestModel = {
+      token: this.cookie.getToken(),
+    }
     return this.httpExecute
       .exec<LogoutResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.logout, request } })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map((response) => {
+          if (response.success && data.logout) {
+            this.cookie.deleteCookie('token')
+            this.storeRoute.dispatch(setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }))
+            this.storeLogoutDomainData.dispatch(setLogoutDomainData({ logout: false }))
+          }
+        }),
+      )
   }
 
   registrationPost(request: RegistrationRequestModel) {

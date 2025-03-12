@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store'
 import { skip, Subscription, switchMap } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { LoginDomainDataType } from '@vet-client/lib-store'
+import { LoginDomainDataType, LogoutDomainDataType } from '@vet-client/lib-store'
 import { HttpPostAppService } from '../app-service/http-post-app.service'
 
 @Component({
@@ -17,6 +17,7 @@ export class HttpComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly storeLoginDomainData: Store<LoginDomainDataType>,
+    private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
     private readonly httpPost: HttpPostAppService,
   ) {}
 
@@ -24,6 +25,10 @@ export class HttpComponent implements OnInit, OnDestroy {
     this.sub.add(this.storeLoginDomainData.select('loginDomainData').pipe(
       skip(1),
       switchMap(data => this.httpPost.loginPost(data)),
+    ).subscribe())
+    this.sub.add(this.storeLogoutDomainData.select('logoutDomainData').pipe(
+      skip(1),
+      switchMap(data => this.httpPost.logoutPost(data)),
     ).subscribe())
   }
 

@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/angular'
 
 import { StorybookUtilsService } from '../utils/storybook-utils.service'
-import { SmallLogoutFormComponent } from '@vet-client/lib-form'
+import { LogoutFormComponent } from '@vet-client/lib-form'
 
-const meta: Meta<SmallLogoutFormComponent> = {
-  component: SmallLogoutFormComponent,
+const meta: Meta<LogoutFormComponent> = {
+  component: LogoutFormComponent,
   title: 'Form/LogoutSmall',
   ...StorybookUtilsService.getProviders(),
 }
 export default meta
-type Story = StoryObj<SmallLogoutFormComponent>
+type Story = StoryObj<LogoutFormComponent>
 
 export const Default: Story = {}

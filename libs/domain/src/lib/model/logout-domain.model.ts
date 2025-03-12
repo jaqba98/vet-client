@@ -1,9 +1,14 @@
-import { ControlType } from '@vet-client/lib-base-form'
+// done
+import { ControlButtonModel } from '@vet-client/lib-base-form'
 
-interface LogoutDomainModel<T> {
-  logout: T
+export interface LogoutDomainFormModel {
+  logout: ControlButtonModel
 }
 
-export type LogoutDomainFormDataModel = LogoutDomainModel<ControlType>
+export interface LogoutDomainResponseModel {
+  success: boolean
+}
 
-export type LogoutDomainDataModel = Omit<LogoutDomainModel<string>, 'logout'>
+export interface LogoutDomainDataModel {
+  logout: boolean
+}

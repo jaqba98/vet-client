@@ -54,4 +54,16 @@ export class BaseFormBuilder {
       isEnabled,
     }
   }
+
+  static buildInputPassword(label: string, validators: ValidatorFn[], isEnabled: boolean): ControlInputModel {
+    return {
+      kind: 'input',
+      type: 'password',
+      label,
+      placeholder: '',
+      validators,
+      defaultValue: '',
+      isEnabled,
+    }
+  }
 }

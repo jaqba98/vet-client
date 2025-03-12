@@ -7,7 +7,7 @@ import { setLoginDomainForm } from '../../../actions/domain/form/login-domain-fo
 
 export const initialState: LoginDomainFormStoreModel = {
   email: BaseFormBuilder.buildInputText('Email', [], true),
-  password: BaseFormBuilder.buildInputText('Password', [], true),
+  password: BaseFormBuilder.buildInputPassword('Password', [], true),
   login: BaseFormBuilder.buildButtonText('login', 'Login', 'primary', true),
 }
 
