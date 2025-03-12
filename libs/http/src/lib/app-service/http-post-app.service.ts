@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { take } from 'rxjs'
+import { map, take } from 'rxjs'
 
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import { MethodEnum } from '../enum/method.enum'
@@ -32,10 +32,22 @@ import {
   ClinicDeleteResponseModel,
   ClinicReadResponseModel, ClinicUpdateResponseModel,
 } from '../model/response/clinic-response.model'
+import { CookieService } from '@vet-client/lib-system'
+import { Store } from '@ngrx/store'
+import {
+  RoutePageEnum,
+  RouteSectionEnum,
+  RouteStoreType,
+  setRoute,
+} from '@vet-client/lib-store'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
-  constructor(private readonly httpExecute: HttpExecuteService) {}
+  constructor(
+    private readonly httpExecute: HttpExecuteService,
+    private cookie: CookieService,
+    private storeRoute: Store<RouteStoreType>,
+  ) {}
 
   authPost(request: AuthRequestModel) {
     return this.httpExecute
@@ -70,7 +82,20 @@ export class HttpPostAppService {
   loginPost(request: LoginRequestModel) {
     return this.httpExecute
       .exec<LoginResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map((data) => {
+          if (data.success) {
+            this.cookie.updateToken(data.token)
+            this.storeRoute.dispatch(
+              setRoute({
+                page: RoutePageEnum.dashboard,
+                section: RouteSectionEnum.dashboard,
+              }),
+            )
+          }
+        }),
+      )
   }
 
   logoutPost(request: LogoutRequestModel) {

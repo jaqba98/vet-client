@@ -1,18 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import {
-  RoutePageEnum,
-  RouteSectionEnum,
-  RouteStoreModel,
-  setRoute,
-} from '@vet-client/lib-store'
-import { CookieService } from '@vet-client/lib-system'
-import { HttpPostAppService } from '@vet-client/lib-http'
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { LoginDomainDataModel, LoginDomainFormDataModel } from '@vet-client/lib-domain'
+import { LoginDomainDataModel, LoginDomainFormModel } from '@vet-client/lib-domain'
+import { LoginDomainType, setLoginDomain } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-login-form',
@@ -21,13 +14,9 @@ import { LoginDomainDataModel, LoginDomainFormDataModel } from '@vet-client/lib-
   hostDirectives: [BaseComponentDirective],
 })
 export class LoginFormComponent
-  extends BaseFormService<LoginDomainFormDataModel, LoginDomainDataModel>
+  extends BaseFormService<LoginDomainFormModel, LoginDomainDataModel>
   implements OnInit {
-  constructor(
-    private readonly httpPost: HttpPostAppService,
-    private readonly cookie: CookieService,
-    private readonly store: Store<RouteStoreModel>,
-  ) {
+  constructor(private readonly storeLoginDomain: Store<LoginDomainType>) {
     super()
   }
 
@@ -67,23 +56,7 @@ export class LoginFormComponent
     })
   }
 
-  override onSubmit(model: LoginDomainDataModel) {
-    const { email, password } = model
-    this.httpPost.loginPost({ email, password }).subscribe((response) => {
-      this.resetBaseForm()
-      const { success, token } = response
-      if (success) {
-        this.cookie.updateToken(token)
-        this.store.dispatch(
-          setRoute({
-            page: RoutePageEnum.dashboard,
-            section: RouteSectionEnum.dashboard,
-          }),
-        )
-      }
-      else {
-        this.error = response.errors[0]
-      }
-    })
+  override onSubmit(login: LoginDomainDataModel) {
+    this.storeLoginDomain.dispatch(setLoginDomain(login))
   }
 }

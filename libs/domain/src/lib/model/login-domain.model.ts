@@ -1,11 +1,13 @@
-import { ControlType } from '@vet-client/lib-base-form'
+// done
+import { ControlButtonModel, ControlInputModel } from '@vet-client/lib-base-form'
 
-interface LoginDomainModel<T> {
-  email: T
-  password: T
-  login: T
+export interface LoginDomainFormModel {
+  email: ControlInputModel
+  password: ControlInputModel
+  login: ControlButtonModel
 }
 
-export type LoginDomainFormDataModel = LoginDomainModel<ControlType>
-
-export type LoginDomainDataModel = Omit<LoginDomainModel<string>, 'login'>
+export interface LoginDomainDataModel {
+  email: string
+  password: string
+}

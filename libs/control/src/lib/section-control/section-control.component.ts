@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common'
 import { Component, Input } from '@angular/core'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { RouteSectionEnum } from '@vet-client/lib-store'
 import { SectionContentControlModel, SectionMainControlModel } from './section-control.model'
 
 @Component({
@@ -13,7 +12,9 @@ import { SectionContentControlModel, SectionMainControlModel } from './section-c
   hostDirectives: [BaseComponentDirective],
 })
 export class SectionControlComponent {
-  @Input({ required: true }) sectionId!: RouteSectionEnum
+  // todo: Fix this any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input({ required: true }) sectionId!: any
 
   @Input() sectionFlexCenter = false
   @Input() sectionBackground = false

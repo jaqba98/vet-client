@@ -11,6 +11,7 @@ import {
   MobileNavMenuViewComponent,
   NavViewComponent,
 } from '@vet-client/lib-view'
+import { HttpComponent } from '@vet-client/lib-http'
 
 @Component({
   selector: 'lib-root-page',
@@ -20,6 +21,7 @@ import {
     NavViewComponent,
     MainViewComponent,
     MobileNavMenuViewComponent,
+    HttpComponent,
   ],
   templateUrl: './root-page.component.html',
 })
@@ -41,11 +43,9 @@ export class RootPageComponent implements OnInit, OnDestroy {
         .subscribe(route => this.router.navigate(route.page, route.section)),
     )
     this.sub.add(
-      this.navStore
-        .select('nav')
-        .subscribe((nav) => {
-          document.body.style.overflow = nav.isOpen ? 'hidden' : 'auto'
-        }),
+      this.navStore.select('nav').subscribe((nav) => {
+        document.body.style.overflow = nav.isOpen ? 'hidden' : 'auto'
+      }),
     )
   }
 
