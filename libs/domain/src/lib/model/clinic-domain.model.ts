@@ -1,8 +1,20 @@
-import { ControlType } from '@vet-client/lib-base-form'
+import { ControlButtonModel, ControlInputModel } from '@vet-client/lib-base-form'
 
-export interface ClinicDomainFormDataModel {
-  id: ControlType
-  name: ControlType
+export interface ClinicDomainFormModel {
+  name: ControlInputModel
+}
+
+export interface ClinicDomainCreateFormModel extends ClinicDomainFormModel {
+  create: ControlButtonModel
+}
+
+export interface ClinicDomainUpdateFormModel extends ClinicDomainFormModel {
+  update: ControlButtonModel
+}
+
+export interface ClinicDomainResponseModel {
+  success: boolean
+  error: string
 }
 
 export interface ClinicDomainDataModel {

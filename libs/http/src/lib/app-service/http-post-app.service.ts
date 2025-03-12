@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { map, skip, take } from 'rxjs'
+import { map, take } from 'rxjs'
 
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import { MethodEnum } from '../enum/method.enum'
@@ -25,28 +25,32 @@ import { GetAccountResponseModel } from '../model/response/get-account-response.
 import {
   ClinicCreateRequestModel,
   ClinicDeleteRequestModel,
-  ClinicReadRequestModel, ClinicUpdateRequestModel,
+  ClinicUpdateRequestModel,
 } from '../model/request/clinic-request.model'
 import {
   ClinicCreateResponseModel,
   ClinicDeleteResponseModel,
-  ClinicReadResponseModel, ClinicUpdateResponseModel,
+  ClinicUpdateResponseModel,
 } from '../model/response/clinic-response.model'
 import { CookieService } from '@vet-client/lib-system'
 import { Store } from '@ngrx/store'
 import {
-  LoginDomainResponseType, LogoutDomainDataType,
+  LoginDomainResponseType,
+  LogoutDomainDataType,
   RoutePageEnum,
   RouteSectionEnum,
   RouteStoreType,
-  setLoginDomainResponse, setLogoutDomainData,
+  setLoginDomainResponse,
+  setLogoutDomainData,
   setRoute,
 } from '@vet-client/lib-store'
 import { LoginDomainDataModel, LogoutDomainDataModel } from '@vet-client/lib-domain'
+import { ClinicHttpPostService } from '../dom-service/clinic-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
   constructor(
+    private readonly clinicHttpPost: ClinicHttpPostService,
     private readonly storeLoginDomainResponse: Store<LoginDomainResponseType>,
     private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
     private readonly httpExecute: HttpExecuteService,
@@ -152,13 +156,8 @@ export class HttpPostAppService {
       .pipe(take(1))
   }
 
-  clinicReadPost(request: ClinicReadRequestModel) {
-    return this.httpExecute
-      .exec<ClinicReadResponseModel>({
-        method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicRead, request },
-      })
-      .pipe(take(1))
+  clinicReadPost() {
+    return this.clinicHttpPost.readPost()
   }
 
   clinicUpdatePost(request: ClinicUpdateRequestModel) {

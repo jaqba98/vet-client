@@ -47,25 +47,25 @@ export class VetClinicFormStore extends BaseTableFormStore<ClinicDomainDataModel
   }
 
   override read() {
-    const token = this.cookie.getToken()
-    this.httpPost
-      .clinicReadPost({ token })
-      .pipe(
-        map(res => res.clinics),
-        map(clinics =>
-          clinics.map(
-            clinic =>
-              <TableFormRowModel<ClinicDomainDataModel>>{
-                id: clinic.id,
-                isSelected: false,
-                data: clinic,
-              },
-          ),
-        ),
-      )
-      .subscribe((res) => {
-        this.setRows(res)
-      })
+    // const token = this.cookie.getToken()
+    // this.httpPost
+    //   .clinicReadPost({ token })
+    //   .pipe(
+    //     map(res => res.clinics),
+    //     map(clinics =>
+    //       clinics.map(
+    //         clinic =>
+    //           <TableFormRowModel<ClinicDomainDataModel>>{
+    //             id: clinic.id,
+    //             isSelected: false,
+    //             data: clinic,
+    //           },
+    //       ),
+    //     ),
+    //   )
+    //   .subscribe((res) => {
+    //     this.setRows(res)
+    //   })
   }
 
   override delete(ids: number[]) {
