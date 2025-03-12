@@ -5,7 +5,7 @@ import { Subscription, switchMap } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { HttpPostAppService } from '../app-service/http-post-app.service'
-import { LoginDomainType } from '@vet-client/lib-store'
+import { LoginDomainDataType } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-http',
@@ -16,7 +16,7 @@ export class HttpComponent implements OnInit, OnDestroy {
   private sub: Subscription
 
   constructor(
-    private storeLoginDomain: Store<LoginDomainType>,
+    private storeLoginDomain: Store<LoginDomainDataType>,
     private httpPost: HttpPostAppService,
   ) {
     this.sub = new Subscription()
@@ -24,7 +24,7 @@ export class HttpComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub.add(
-      this.storeLoginDomain.select('loginDomain').pipe(switchMap(data => this.httpPost.loginPost(data))).subscribe(),
+      this.storeLoginDomain.select('loginDomainData').pipe(switchMap(data => this.httpPost.loginPost(data))).subscribe(),
     )
   }
 

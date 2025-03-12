@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { LoginDomainDataModel, LoginDomainFormModel } from '@vet-client/lib-domain'
-import { LoginDomainType, setLoginDomain } from '@vet-client/lib-store'
+import { LoginDomainFormType, LoginDomainDataType } from '@vet-client/lib-store'
+import { Subscription } from 'rxjs'
+import { setLoginDomainData } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-login-form',
@@ -15,48 +17,29 @@ import { LoginDomainType, setLoginDomain } from '@vet-client/lib-store'
 })
 export class LoginFormComponent
   extends BaseFormService<LoginDomainFormModel, LoginDomainDataModel>
-  implements OnInit {
-  constructor(private readonly storeLoginDomain: Store<LoginDomainType>) {
+  implements OnInit, OnDestroy {
+  private sub = new Subscription()
+
+  constructor(
+    private readonly storeLoginDomainForm: Store<LoginDomainFormType>,
+    private readonly storeLoginDomainData: Store<LoginDomainDataType>,
+  ) {
     super()
   }
 
   ngOnInit() {
-    this.initBaseForm({
-      email: {
-        kind: 'input',
-        type: 'text',
-        label: 'Email',
-        placeholder: '',
-        defaultValue: '',
-        validators: [],
-        isEnabled: true,
-      },
-      password: {
-        kind: 'input',
-        type: 'password',
-        label: 'Password',
-        placeholder: '',
-        defaultValue: '',
-        validators: [],
-        isEnabled: true,
-      },
-      login: {
-        id: 'login',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Login',
-        },
-        defaultValue: false,
-        fullWidth: false,
-        color: 'primary',
-        isEnabled: true,
-        width40px: false,
-      },
-    })
+    this.sub.add(
+      this.storeLoginDomainForm.select('loginDomainForm').subscribe((loginDomain) => {
+        this.initBaseForm(loginDomain)
+      }),
+    )
   }
 
-  override onSubmit(login: LoginDomainDataModel) {
-    this.storeLoginDomain.dispatch(setLoginDomain(login))
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
+  override onSubmit(data: LoginDomainDataModel) {
+    this.storeLoginDomainData.dispatch(setLoginDomainData(data))
   }
 }
