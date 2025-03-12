@@ -25,8 +25,8 @@ import { TableEditFormComponent } from './table-edit-form/table-edit-form.compon
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TData> {
-  @Input({ required: true }) store!: BaseTableFormStore<TData>
+export class TableFormComponent<TStore> {
+  @Input({ required: true }) store!: BaseTableFormStore<TStore>
 
   @Input() tableButtonEnabled = true
   @Input() addButtonEnabled = true

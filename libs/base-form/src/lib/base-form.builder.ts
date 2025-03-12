@@ -39,7 +39,7 @@ export class BaseFormBuilder {
       fullWidth: false,
       color,
       isEnabled,
-      width40px: false,
+      width40px: true,
     }
   }
 

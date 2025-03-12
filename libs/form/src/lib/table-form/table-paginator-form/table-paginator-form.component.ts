@@ -1,14 +1,26 @@
 import { CommonModule } from '@angular/common'
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { faBackward, faBackwardFast, faForward, faForwardFast } from '@fortawesome/free-solid-svg-icons'
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
+import {
+  faBackward,
+  faBackwardFast,
+  faForward,
+  faForwardFast,
+} from '@fortawesome/free-solid-svg-icons'
 import { combineLatest, Subscription } from 'rxjs'
 import { ActivatedRoute } from '@angular/router'
 
-import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
+import {
+  ButtonControlComponent,
+  TextControlComponent,
+} from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ControlButtonModel } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
 import { BaseTableFormStore } from '../store/base-table-form.store'
-import { TableFormRowsModel } from '../model/table-form-rows.model'
 import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
 import { ColorType } from '@vet-client/lib-type'
 
@@ -19,91 +31,35 @@ import { ColorType } from '@vet-client/lib-type'
   styleUrl: './table-paginator-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TablePaginatorFormComponent<TData> implements OnInit, OnDestroy {
-  @Input({ required: true }) store!: BaseTableFormStore<TData>
+export class TablePaginatorFormComponent<TStore> implements OnInit, OnDestroy {
+  @Input({ required: true }) store!: BaseTableFormStore<TStore>
 
-  readonly first: ControlButtonModel = {
-    id: 'first',
-    kind: 'button',
-    value: {
-      type: 'icon',
-      icon: { icon: faBackwardFast, color: 'light-primary', fontSize: '1rem' },
-    },
-    defaultValue: false,
-    color: 'dark-secondary',
-    fullWidth: false,
-    isEnabled: true,
-    width40px: true,
-  }
+  readonly first = BaseFormBuilder.buildButtonIcon('first', faBackwardFast, 'dark-secondary', true)
+  readonly previous = BaseFormBuilder.buildButtonIcon('previous', faBackward, 'dark-secondary', true)
+  readonly next = BaseFormBuilder.buildButtonIcon('next', faForward, 'dark-secondary', true)
+  readonly last = BaseFormBuilder.buildButtonIcon('last', faForwardFast, 'dark-secondary', true)
 
-  readonly previous: ControlButtonModel = {
-    id: 'previous',
-    kind: 'button',
-    value: {
-      type: 'icon',
-      icon: { icon: faBackward, color: 'light-primary', fontSize: '1rem' },
-    },
-    defaultValue: false,
-    color: 'dark-secondary',
-    fullWidth: false,
-    isEnabled: true,
-    width40px: true,
-  }
-
-  readonly next: ControlButtonModel = {
-    id: 'next',
-    kind: 'button',
-    value: {
-      type: 'icon',
-      icon: { icon: faForward, color: 'light-primary', fontSize: '1rem' },
-    },
-    defaultValue: false,
-    color: 'dark-secondary',
-    fullWidth: false,
-    isEnabled: true,
-    width40px: true,
-  }
-
-  readonly last: ControlButtonModel = {
-    id: 'last',
-    kind: 'button',
-    value: {
-      type: 'icon',
-      icon: { icon: faForwardFast, color: 'light-primary', fontSize: '1rem' },
-    },
-    defaultValue: false,
-    color: 'dark-secondary',
-    fullWidth: false,
-    isEnabled: true,
-    width40px: false,
-  }
+  private readonly sub = new Subscription()
 
   page!: number
 
   maxPage!: number
 
-  private sub: Subscription
-
-  constructor(private route: ActivatedRoute) {
-    this.sub = new Subscription()
+  constructor(private readonly route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.sub.add(
-      this.route.paramMap.subscribe((paramMap) => {
-        const page = Number(paramMap.get('page'))
-        if (page) {
-          this.store.setPage(page)
-        }
-      }),
-    )
-    combineLatest([this.store.rows$, this.store.page$]).subscribe(
-      ([rows, page]) => {
-        const maxPage = Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
-        this.page = page
-        this.maxPage = maxPage
-      },
-    )
+    this.sub.add(this.route.paramMap.subscribe((params) => {
+      const page = params.get('page')
+      if (page) {
+        this.store.setPage(Number(page))
+      }
+    }))
+    this.sub.add(combineLatest([this.store.rows$, this.store.page$]).subscribe(([rows, page]) => {
+      const maxPage = Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
+      this.page = page
+      this.maxPage = maxPage
+    }))
   }
 
   ngOnDestroy() {

@@ -88,6 +88,7 @@ export class TableDataFormComponent<TData> implements OnInit {
     this.sub.add(
       combineLatest([this.store.rows$, this.store.page$]).subscribe(
         ([rows, page]) => {
+          console.log(123)
           const maxPage
             = rows.length === 0
               ? 1

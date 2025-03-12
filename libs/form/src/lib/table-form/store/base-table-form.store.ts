@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@angular/core'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { Injectable } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
 import { HttpPostAppService } from '@vet-client/lib-http'
@@ -38,7 +38,7 @@ export class BaseTableFormStore<TRows> {
   page$ = this.page.asObservable()
   row$ = this.row.asObservable()
 
-  url = ''
+  url = 'dashboard/vet/clinic/'
 
   constructor(
     protected cookie: CookieService,
