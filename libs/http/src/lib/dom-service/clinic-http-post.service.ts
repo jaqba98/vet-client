@@ -24,7 +24,7 @@ export class ClinicHttpPostService {
       type: { endpoint: EndpointEnum.clinicRead, request: { token } },
     }).pipe(
       take(1),
-      map(res => res.clinics),
+      map(res => res.clinics.map(clinic => ({ id: clinic.id, isSelected: false, data: clinic }))),
       map(clinics => this.storeClinicDomainData.dispatch(setClinicDomainData({ clinics }))),
     )
   }

@@ -14,6 +14,7 @@ import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
 @Injectable()
 export class BaseTableFormStore<TRows> {
   protected rows = new BehaviorSubject<TableFormRowsModel<TRows>>([])
+
   protected allRowsSelected = new BehaviorSubject<boolean>(false)
   protected createSuccess = new BehaviorSubject<string>('')
   protected createError = new BehaviorSubject<string>('')
@@ -37,11 +38,12 @@ export class BaseTableFormStore<TRows> {
   page$ = this.page.asObservable()
   row$ = this.row.asObservable()
 
+  url = ''
+
   constructor(
     protected cookie: CookieService,
     protected httpPost: HttpPostAppService,
     protected router: Router,
-    @Inject('url') public url: string,
   ) {}
 
   setRows(rows: TableFormRowsModel<TRows>) {

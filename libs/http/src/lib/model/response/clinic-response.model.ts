@@ -4,7 +4,7 @@ import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 export type ClinicCreateResponseModel = BaseResponseModel
 
 export interface ClinicReadResponseModel extends BaseResponseModel {
-  clinics: ClinicDomainDataModel[]
+  clinics: ClinicDomainDataModel['data'][]
 }
 
 export type ClinicUpdateResponseModel = BaseResponseModel

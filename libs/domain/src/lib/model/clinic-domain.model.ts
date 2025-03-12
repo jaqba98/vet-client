@@ -19,5 +19,9 @@ export interface ClinicDomainResponseModel {
 
 export interface ClinicDomainDataModel {
   id: number
-  name: string
+  isSelected: boolean
+  data: {
+    id: number
+    name: string
+  }
 }

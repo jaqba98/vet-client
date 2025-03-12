@@ -1,30 +1,48 @@
-import { Component } from '@angular/core'
-import { Validators } from '@angular/forms'
+// done
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
 
-import { ClinicDomainFormModel } from '@vet-client/lib-domain'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { BaseFormBuilder } from '@vet-client/lib-base-form'
+import { ClinicDomainDataNotify, ClinicDomainDataType, ClinicDomainFormType } from '@vet-client/lib-store'
 import { TableFormComponent } from '../table-form/table-form.component'
-import { TableFormModel } from '../table-form/model/table-form.model'
 import { VetClinicFormStore } from './vet-clinic-form.store'
-import { ClinicDomainDataNotify } from '@vet-client/lib-store'
+import { TableFormModel } from '../table-form/model/table-form.model'
 
 @Component({
   selector: 'lib-vet-clinic-form',
   imports: [TableFormComponent],
+  providers: [VetClinicFormStore],
   templateUrl: './vet-clinic-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class VetClinicFormComponent {
+export class VetClinicFormComponent implements OnInit, OnDestroy {
+  private readonly sub = new Subscription()
+
+  createFormModel!: TableFormModel
+
+  updateFormModel!: TableFormModel
+
   constructor(
-    private readonly clinicDomainData: ClinicDomainDataNotify,
-    public store: VetClinicFormStore,
-  ) {
-    this.clinicDomainData.notify()
-    this.store.read()
+    public readonly store: VetClinicFormStore,
+    private readonly clinicDomainDataNotify: ClinicDomainDataNotify,
+    private readonly storeClinicDomainForm: Store<ClinicDomainFormType>,
+    private readonly storeClinicDomainData: Store<ClinicDomainDataType>,
+  ) {}
+
+  ngOnInit() {
+    this.clinicDomainDataNotify.notify()
+    this.sub.add(this.storeClinicDomainForm.select('clinicDomainForm').subscribe((form) => {
+      this.createFormModel = { ...form.createForm }
+      this.updateFormModel = { ...form.updateForm }
+    }))
+    this.sub.add(this.storeClinicDomainData.select('clinicDomainData').subscribe((data) => {
+      this.store.data = data
+      this.store.read()
+    }))
   }
 
-  readonly formModel: TableFormModel<keyof ClinicDomainFormModel> = {
-    name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)], true),
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 }
