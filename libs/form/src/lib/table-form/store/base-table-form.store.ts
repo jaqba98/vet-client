@@ -81,8 +81,9 @@ export class BaseTableFormStore<TRows> {
   }
 
   selectAll() {
+    const ids = this.getPageRows()
     const newRows = this.rows.getValue().map((row) => {
-      row.isSelected = true
+      if (ids.includes(row.id)) row.isSelected = true
       return row
     })
     this.rows.next(newRows)
@@ -140,5 +141,15 @@ export class BaseTableFormStore<TRows> {
 
   goToPage(id: string) {
     this.router.navigate([this.url + Number(id)])
+  }
+
+  private getPageRows() {
+    const page = this.page.getValue()
+    const rows = this.rows.getValue()
+    const pageFrom = (page - 1) * NUMBER_OF_ROWS_PER_PAGE
+    const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
+    return rows
+      .filter((_, index) => index >= pageFrom && index < pageTo)
+      .map(row => row.id)
   }
 }

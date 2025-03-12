@@ -78,14 +78,14 @@ export class TableDataFormComponent<TData> implements OnInit {
   ngOnInit() {
     this.sub.add(
       combineLatest([this.store.rows$, this.store.page$]).subscribe(([rows, page]) => {
-        const maxPage = Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
+        const maxPage = rows.length === 0 ? 1 : Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
         if (page < 0 || page > maxPage) {
           this.store.goToPage('1')
           return
         }
         const pageFrom = (page - 1) * NUMBER_OF_ROWS_PER_PAGE
         const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
-        this.rows = rows.filter((_, index) => index >= pageFrom && index <= pageTo)
+        this.rows = rows.filter((_, index) => index >= pageFrom && index < pageTo)
       }),
     )
   }
