@@ -10,5 +10,6 @@ export enum EndpointEnum {
   getAccount = 'get-account',
   clinicCreate = 'clinic-create',
   clinicRead = 'clinic-read',
+  clinicUpdate = 'clinic-update',
   clinicDelete = 'clinic-delete',
 }

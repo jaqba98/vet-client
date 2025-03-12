@@ -1,26 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { combineLatest, Subscription } from 'rxjs'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService, ControlType } from '@vet-client/lib-base-form'
+import {
+  BaseFormBuilder,
+  BaseFormComponent,
+  BaseFormService,
+  ControlType,
+} from '@vet-client/lib-base-form'
 import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
 import { BaseTableFormStore } from '../store/base-table-form.store'
-import { Subscription } from 'rxjs'
+import { AsyncPipe } from '@angular/common'
 
 @Component({
   selector: 'lib-table-edit-form',
-  imports: [TableCardControlComponent, BaseFormComponent],
+  imports: [TableCardControlComponent, BaseFormComponent, AsyncPipe],
   templateUrl: './table-edit-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
 export class TableEditFormComponent<TData>
   extends BaseFormService<TableFormModel, TData>
-  implements OnInit {
+  implements OnInit, OnDestroy {
   @Input({ required: true }) store!: BaseTableFormStore<TData>
 
   @Input({ required: true }) formModel!: TableFormModel
 
   private sub!: Subscription
+
+  private id!: number
 
   constructor(private objectType: ObjectTypeUtils) {
     super()
@@ -30,11 +38,13 @@ export class TableEditFormComponent<TData>
   ngOnInit() {
     this.sub.add(
       this.store.row$.subscribe((row) => {
-        const newFormModel: Record<string, ControlType> = {}
+        this.id = row.id
+        const newFormModel: TableFormModel = {}
         for (const [key, value] of Object.entries(this.formModel)) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const defaultValue: any = this.objectType.getPropertyByDynamicKey(row.data, key)
-          newFormModel[key] = { ...value, defaultValue: defaultValue }
+          newFormModel[key] = <ControlType>{
+            ...value,
+            defaultValue: this.objectType.getPropertyByDynamicKey(row.data, key),
+          }
         }
         this.initBaseForm({
           ...newFormModel,
@@ -42,5 +52,16 @@ export class TableEditFormComponent<TData>
         })
       }),
     )
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
+  onEditEvent(row: TData) {
+    this.store.edit(row)
+    this.store.read()
+    this.store.setEditRow(this.id)
+    this.store.updateEditRow(this.id, row)
   }
 }

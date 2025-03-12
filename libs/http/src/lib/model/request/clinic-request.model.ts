@@ -5,6 +5,8 @@ export interface ClinicCreateRequestModel extends BaseRequestModel, ClinicDomain
 
 export type ClinicReadRequestModel = BaseRequestModel
 
+export interface ClinicUpdateRequestModel extends BaseRequestModel, ClinicDomainDataModel {}
+
 export interface ClinicDeleteRequestModel extends BaseRequestModel {
   ids: number[]
 }

@@ -7,4 +7,6 @@ export interface ClinicReadResponseModel extends BaseResponseModel {
   clinics: ClinicDomainDataModel[]
 }
 
+export type ClinicUpdateResponseModel = BaseResponseModel
+
 export type ClinicDeleteResponseModel = BaseResponseModel

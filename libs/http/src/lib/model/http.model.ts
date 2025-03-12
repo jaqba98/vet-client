@@ -8,7 +8,12 @@ import { LoginPostModel } from './post/login-post.model'
 import { RegistrationPostModel } from './post/registration-post.model'
 import { MethodEnum } from '../enum/method.enum'
 import { GetAccountPostModel } from './post/get-account-post.model'
-import { ClinicCreatePostModel, ClinicDeletePostModel, ClinicReadPostModel } from './post/clinic-post.model'
+import {
+  ClinicCreatePostModel,
+  ClinicDeletePostModel,
+  ClinicReadPostModel,
+  ClinicUpdatePostModel,
+} from './post/clinic-post.model'
 
 type HttpPostType =
   | AuthPostModel
@@ -22,6 +27,7 @@ type HttpPostType =
   | GetAccountPostModel
   | ClinicCreatePostModel
   | ClinicReadPostModel
+  | ClinicUpdatePostModel
   | ClinicDeletePostModel
 
 interface HttpModel {

@@ -2,6 +2,9 @@
   <lib-base-form
     [formGroup]="formGroup"
     [controlsArray]="controlsArray"
-    (event)="store.edit($event)"
+    [success]="store.editSuccess$ | async"
+    [error]="store.editError$ | async"
+    [resetForm]="false"
+    (event)="onEditEvent($event)"
   ></lib-base-form>
 </lib-table-card-control>

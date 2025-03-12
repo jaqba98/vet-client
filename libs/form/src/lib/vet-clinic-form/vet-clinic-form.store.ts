@@ -33,7 +33,17 @@ export class VetClinicFormStore extends BaseTableFormStore<ClinicDomainDataModel
   }
 
   override edit(row: ClinicDomainDataModel) {
-    console.log(row)
+    const token = this.cookie.getToken()
+    this.httpPost.clinicUpdatePost({ token, ...row }).subscribe((res) => {
+      this.setEditSuccess('')
+      this.setEditError('')
+      if (res.success) {
+        this.setEditSuccess('Clinic was updated correctly!')
+      }
+      else {
+        this.setEditError(res.errors[0])
+      }
+    })
   }
 
   override read() {

@@ -25,12 +25,12 @@ import { GetAccountResponseModel } from '../model/response/get-account-response.
 import {
   ClinicCreateRequestModel,
   ClinicDeleteRequestModel,
-  ClinicReadRequestModel,
+  ClinicReadRequestModel, ClinicUpdateRequestModel,
 } from '../model/request/clinic-request.model'
 import {
   ClinicCreateResponseModel,
   ClinicDeleteResponseModel,
-  ClinicReadResponseModel,
+  ClinicReadResponseModel, ClinicUpdateResponseModel,
 } from '../model/response/clinic-response.model'
 
 @Injectable({ providedIn: 'root' })
@@ -111,6 +111,15 @@ export class HttpPostAppService {
       .exec<ClinicReadResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicRead, request },
+      })
+      .pipe(take(1))
+  }
+
+  clinicUpdatePost(request: ClinicUpdateRequestModel) {
+    return this.httpExecute
+      .exec<ClinicUpdateResponseModel>({
+        method: MethodEnum.post,
+        type: { endpoint: EndpointEnum.clinicUpdate, request },
       })
       .pipe(take(1))
   }

@@ -43,6 +43,8 @@ export class BaseFormComponent implements OnInit {
 
   @Input() success: string | null = ''
 
+  @Input() resetForm = true
+
   ngOnInit() {
     this.resetEvent.emit()
   }
@@ -51,7 +53,7 @@ export class BaseFormComponent implements OnInit {
     if (this.isBaseFormValid()) {
       const model = this.formGroup.getRawValue()
       this.event.emit(model)
-      this.resetBaseForm()
+      if (this.resetForm) this.resetBaseForm()
       return
     }
     this.setBaseFormNotValid()

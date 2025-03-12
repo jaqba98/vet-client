@@ -17,6 +17,8 @@ export class BaseTableFormStore<TRows> {
   protected allRowsSelected = new BehaviorSubject<boolean>(false)
   protected createSuccess = new BehaviorSubject<string>('')
   protected createError = new BehaviorSubject<string>('')
+  protected editSuccess = new BehaviorSubject<string>('')
+  protected editError = new BehaviorSubject<string>('')
   protected tab = new BehaviorSubject<TableTabEnum>(TableTabEnum.data)
   protected page = new BehaviorSubject<number>(1)
   protected row = new BehaviorSubject<TableFormRowModel<TRows>>({
@@ -29,6 +31,8 @@ export class BaseTableFormStore<TRows> {
   allRowsSelected$ = this.allRowsSelected.asObservable()
   createSuccess$ = this.createSuccess.asObservable()
   createError$ = this.createError.asObservable()
+  editSuccess$ = this.editSuccess.asObservable()
+  editError$ = this.editError.asObservable()
   tab$ = this.tab.asObservable()
   page$ = this.page.asObservable()
   row$ = this.row.asObservable()
@@ -121,8 +125,20 @@ export class BaseTableFormStore<TRows> {
     this.createError.next(msg)
   }
 
+  setEditSuccess(msg: string) {
+    this.editSuccess.next(msg)
+  }
+
+  setEditError(msg: string) {
+    this.editError.next(msg)
+  }
+
   setTab(tab: TableTabEnum) {
     this.tab.next(tab)
+    this.setCreateSuccess('')
+    this.setCreateError('')
+    this.setEditSuccess('')
+    this.setEditError('')
   }
 
   setPage(page: number) {
@@ -160,6 +176,14 @@ export class BaseTableFormStore<TRows> {
   setEditRow(id: number) {
     const row = this.rows.getValue().find(row => row.id === id)
     if (row) this.row.next(row)
+  }
+
+  updateEditRow(id: number, row: TRows) {
+    const oldRow = this.rows.getValue().find(row => row.id === id)
+    if (oldRow) {
+      oldRow.data = row
+      this.row.next(oldRow)
+    }
   }
 
   private getPageRows() {
