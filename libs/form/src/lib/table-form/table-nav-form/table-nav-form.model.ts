@@ -4,8 +4,6 @@ export interface BaseTableNavFormModel<T> {
   table: T
   add: T
   delete: T
-  refresh: T
-  search: T
 }
 
 export type TableNavFormModel = BaseTableNavFormModel<ControlType>

@@ -5,13 +5,8 @@ import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TableAddFormComponent } from './table-add-form/table-add-form.component'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import {
-  TableFormHeadersModel,
-  TableFormModel,
-} from './model/table-form.model'
+import { TableFormModel } from './model/table-form.model'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
-import { TableFormDeleteAllService } from './service/table-form-delete-all.service'
-import { TableFormRefreshAllService } from './service/table-form-refresh-all.service'
 import { BaseTableFormStore } from './store/base-table-form.store'
 import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
 import { TableEditFormComponent } from './table-edit-form/table-edit-form.component'
@@ -28,19 +23,14 @@ import { TableEditFormComponent } from './table-edit-form/table-edit-form.compon
     TableEditFormComponent,
   ],
   templateUrl: './table-form.component.html',
-  providers: [TableFormDeleteAllService, TableFormRefreshAllService],
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TData> {
   @Input({ required: true }) store!: BaseTableFormStore<TData>
 
-  // I am here
   @Input() tableButtonEnabled = true
   @Input() addButtonEnabled = true
   @Input() removeButtonEnabled = true
-  @Input() refreshButtonEnabled = true
-  @Input() searchButtonEnabled = true
 
   @Input({ required: true }) formModel!: TableFormModel
-  @Input() headers!: TableFormHeadersModel
 }

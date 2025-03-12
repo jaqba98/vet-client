@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { faArrowsRotate, faMagnifyingGlass, faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import {
   BaseFormBuilder,
@@ -23,16 +23,12 @@ export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormMo
   @Input({ required: true }) tableButtonEnabled!: boolean
   @Input({ required: true }) addButtonEnabled!: boolean
   @Input({ required: true }) removeButtonEnabled!: boolean
-  @Input({ required: true }) refreshButtonEnabled!: boolean
-  @Input({ required: true }) searchButtonEnabled!: boolean
 
   ngOnInit() {
     this.initBaseForm({
       table: BaseFormBuilder.buildButtonIcon('table', faTable, 'dark-primary', this.tableButtonEnabled),
       add: BaseFormBuilder.buildButtonIcon('add', faPlus, 'success', this.addButtonEnabled),
       delete: BaseFormBuilder.buildButtonIcon('delete', faTrash, 'error', this.removeButtonEnabled),
-      refresh: BaseFormBuilder.buildButtonIcon('refresh', faArrowsRotate, 'primary', this.refreshButtonEnabled),
-      search: BaseFormBuilder.buildButtonIcon('search', faMagnifyingGlass, 'dark-secondary', this.searchButtonEnabled),
     })
   }
 
@@ -46,9 +42,6 @@ export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormMo
     }
     else if (event.delete) {
       this.store.deleteAll()
-    }
-    else if (event.refresh) {
-      this.store.read()
     }
   }
 }
