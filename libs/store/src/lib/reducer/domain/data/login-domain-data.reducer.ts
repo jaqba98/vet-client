@@ -1,15 +1,12 @@
 // done
 import { createReducer, on } from '@ngrx/store'
 
-import { LoginDomainDataModel } from '@vet-client/lib-domain'
+import { LoginDomainDataStoreModel } from '../../../model/domain/data/login-domain-data-store.model'
 import { setLoginDomainData } from '../../../actions/domain/data/login-domain-data.action'
 
-export const initialState: LoginDomainDataModel = {
-  email: '',
-  password: '',
-}
+export const initialState: LoginDomainDataStoreModel = { email: '', password: '' }
 
-export const loginDomainDataReducer = createReducer<LoginDomainDataModel>(
+export const loginDomainDataReducer = createReducer<LoginDomainDataStoreModel>(
   initialState,
-  on(setLoginDomainData, (state: LoginDomainDataModel, { email, password }) => ({ ...state, email, password })),
+  on(setLoginDomainData, (state: LoginDomainDataStoreModel, { email, password }) => ({ ...state, email, password })),
 )

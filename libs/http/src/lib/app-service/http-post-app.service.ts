@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { map, take } from 'rxjs'
+import { map, skip, take } from 'rxjs'
 
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import { MethodEnum } from '../enum/method.enum'
@@ -35,15 +35,18 @@ import {
 import { CookieService } from '@vet-client/lib-system'
 import { Store } from '@ngrx/store'
 import {
+  LoginDomainResponseType,
   RoutePageEnum,
   RouteSectionEnum,
-  RouteStoreType,
+  RouteStoreType, setLoginDomainResponse,
   setRoute,
 } from '@vet-client/lib-store'
+import { LoginDomainDataModel } from '@vet-client/lib-domain'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
   constructor(
+    private readonly storeLoginDomainResponse: Store<LoginDomainResponseType>,
     private readonly httpExecute: HttpExecuteService,
     private cookie: CookieService,
     private storeRoute: Store<RouteStoreType>,
@@ -79,20 +82,20 @@ export class HttpPostAppService {
       .pipe(take(1))
   }
 
-  loginPost(request: LoginRequestModel) {
+  loginPost(data: LoginDomainDataModel) {
     return this.httpExecute
-      .exec<LoginResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
+      .exec<LoginResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request: data } })
       .pipe(
         take(1),
-        map((data) => {
-          if (data.success) {
-            this.cookie.updateToken(data.token)
-            this.storeRoute.dispatch(
-              setRoute({
-                page: RoutePageEnum.dashboard,
-                section: RouteSectionEnum.dashboard,
-              }),
-            )
+        map((response) => {
+          const { success, token } = response
+          if (success) {
+            this.cookie.updateToken(token)
+            this.storeRoute.dispatch(setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard }))
+            this.storeLoginDomainResponse.dispatch(setLoginDomainResponse({ isError: false }))
+          }
+          else {
+            this.storeLoginDomainResponse.dispatch(setLoginDomainResponse({ isError: true }))
           }
         }),
       )

@@ -1,11 +1,11 @@
 // done
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { Subscription, switchMap } from 'rxjs'
+import { skip, Subscription, switchMap } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { HttpPostAppService } from '../app-service/http-post-app.service'
 import { LoginDomainDataType } from '@vet-client/lib-store'
+import { HttpPostAppService } from '../app-service/http-post-app.service'
 
 @Component({
   selector: 'lib-http',
@@ -13,19 +13,18 @@ import { LoginDomainDataType } from '@vet-client/lib-store'
   hostDirectives: [BaseComponentDirective],
 })
 export class HttpComponent implements OnInit, OnDestroy {
-  private sub: Subscription
+  private readonly sub = new Subscription()
 
   constructor(
-    private storeLoginDomain: Store<LoginDomainDataType>,
-    private httpPost: HttpPostAppService,
-  ) {
-    this.sub = new Subscription()
-  }
+    private readonly storeLoginDomainData: Store<LoginDomainDataType>,
+    private readonly httpPost: HttpPostAppService,
+  ) {}
 
   ngOnInit() {
-    this.sub.add(
-      this.storeLoginDomain.select('loginDomainData').pipe(switchMap(data => this.httpPost.loginPost(data))).subscribe(),
-    )
+    this.sub.add(this.storeLoginDomainData.select('loginDomainData').pipe(
+      skip(1),
+      switchMap(data => this.httpPost.loginPost(data)),
+    ).subscribe())
   }
 
   ngOnDestroy() {

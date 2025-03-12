@@ -8,6 +8,7 @@ import { navReducer } from './reducer/nav.reducer'
 import { accountReducer } from './reducer/account.reducer'
 import { loginDomainFormReducer } from './reducer/domain/form/login-domain-form.reducer'
 import { loginDomainDataReducer } from './reducer/domain/data/login-domain-data.reducer'
+import { loginDomainResponseReducer } from './reducer/domain/response/login-domain-response.reducer'
 
 export const storeConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,7 @@ export const storeConfig: ApplicationConfig = {
       account: accountReducer,
       loginDomainData: loginDomainDataReducer,
       loginDomainForm: loginDomainFormReducer,
+      loginDomainResponse: loginDomainResponseReducer,
     }),
     provideStoreDevtools(),
   ],

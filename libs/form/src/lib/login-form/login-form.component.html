@@ -1,10 +1,9 @@
-<lib-card-control title="Login">
+<!-- done -->
+<lib-card-control [title]="title">
   <lib-base-form
     [formGroup]="formGroup"
     [controlsArray]="controlsArray"
-    [success]="success"
     [error]="error"
     (event)="onSubmit($event)"
-    (resetEvent)="resetBaseForm()"
   ></lib-base-form>
 </lib-card-control>

@@ -1,41 +1,14 @@
 // done
 import { createReducer, on } from '@ngrx/store'
 
+import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { LoginDomainFormStoreModel } from '../../../model/domain/form/login-domain-form-store.model'
 import { setLoginDomainForm } from '../../../actions/domain/form/login-domain-form.action'
 
 export const initialState: LoginDomainFormStoreModel = {
-  email: {
-    kind: 'input',
-    type: 'text',
-    label: 'Email',
-    placeholder: '',
-    defaultValue: '',
-    validators: [],
-    isEnabled: true,
-  },
-  password: {
-    kind: 'input',
-    type: 'password',
-    label: 'Password',
-    placeholder: '',
-    defaultValue: '',
-    validators: [],
-    isEnabled: true,
-  },
-  login: {
-    id: 'login',
-    kind: 'button',
-    value: {
-      type: 'text',
-      text: 'Login',
-    },
-    defaultValue: false,
-    fullWidth: false,
-    color: 'primary',
-    isEnabled: true,
-    width40px: false,
-  },
+  email: BaseFormBuilder.buildInputText('Email', [], true),
+  password: BaseFormBuilder.buildInputText('Password', [], true),
+  login: BaseFormBuilder.buildButtonText('login', 'Login', 'primary', true),
 }
 
 export const loginDomainFormReducer = createReducer<LoginDomainFormStoreModel>(
