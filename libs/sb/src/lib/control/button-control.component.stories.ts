@@ -20,6 +20,7 @@ export const Default: Story = {
       },
       fullWidth: false,
       color: 'primary',
+      width40px: false,
     },
   },
 }
@@ -38,6 +39,7 @@ export const Icon: Story = {
       },
       fullWidth: false,
       color: 'primary',
+      width40px: false,
     },
   },
 }
@@ -52,6 +54,7 @@ export const Link: Story = {
       },
       fullWidth: false,
       color: 'primary',
+      width40px: false,
     },
   },
 }
