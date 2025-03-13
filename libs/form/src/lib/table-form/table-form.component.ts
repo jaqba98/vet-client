@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, Input } from '@angular/core'
+import { Observable } from 'rxjs'
 
 import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
@@ -26,6 +27,8 @@ import { TableEditFormComponent } from './table-edit-form/table-edit-form.compon
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TStore> {
+  @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
+  @Input({ required: true }) dispatchPage!: (page: number) => void
   @Input({ required: true }) store!: BaseTableFormStore<TStore>
 
   @Input() tableButtonEnabled = true

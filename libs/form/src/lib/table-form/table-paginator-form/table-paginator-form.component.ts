@@ -2,14 +2,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { faBackward, faBackwardFast, faForward, faForwardFast } from '@fortawesome/free-solid-svg-icons'
-import { Subscription } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { ActivatedRoute } from '@angular/router'
 
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
-import { BaseTableFormStore } from '../store/base-table-form.store'
-import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
 
 @Component({
   selector: 'lib-table-paginator-form',
@@ -18,8 +16,9 @@ import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
   styleUrl: './table-paginator-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TablePaginatorFormComponent<TStore> implements OnInit, OnDestroy {
-  @Input({ required: true }) store!: BaseTableFormStore<TStore>
+export class TablePaginatorFormComponent implements OnInit, OnDestroy {
+  @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
+  @Input({ required: true }) dispatchPage!: (page: number) => void
 
   readonly first: ControlButtonModel
   readonly previous: ControlButtonModel
@@ -66,18 +65,40 @@ export class TablePaginatorFormComponent<TStore> implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub.add(this.route.paramMap.subscribe((param) => {
       const page = Number(param.get('page'))
-      if (page) this.store.setPage(page)
+      if (page) this.dispatchPage(page)
     }))
-    this.sub.add(this.store.page$.subscribe((page) => {
-      this.page = page
-    }))
-    this.sub.add(this.store.rows$.subscribe((rows) => {
-      this.maxPage = Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
+    this.sub.add(this.selectPage().subscribe((data) => {
+      this.page = data.page
+      this.maxPage = data.maxPage
     }))
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe()
+  }
+
+  onFirstPageEvent() {
+    this.dispatchPage(1)
+  }
+
+  onPreviousPageEvent() {
+    if (this.page > 1) {
+      this.dispatchPage(this.page - 1)
+    }
+  }
+
+  onNextPageEvent() {
+    if (this.page < this.maxPage) {
+      this.dispatchPage(this.page + 1)
+    }
+  }
+
+  onLastPageEvent() {
+    this.dispatchPage(this.maxPage)
+  }
+
+  onSpecificPageEvent(page: string) {
+    this.dispatchPage(Number(page))
   }
 
   getPageControls() {
