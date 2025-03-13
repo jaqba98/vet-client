@@ -38,7 +38,7 @@ export class HamburgerFormComponent
         fullWidth: false,
         color: 'primary',
         isEnabled: true,
-        width40px: true,
+        isSquare: true,
       },
     })
   }

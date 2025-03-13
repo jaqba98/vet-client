@@ -1,44 +1,46 @@
-<div class="table_wrapper">
-  <table class="table">
-    <thead class="table__head">
+<table class="table">
+  <thead class="table__head">
     <tr class="table__row">
-      <td class="table__column table__button">
+      <td class="table__button">
         <ng-container *ngIf="store.allRowsSelected$ | async; else unselected">
-          <lib-button-control [model]="selectedButtonModel" (event)="store.unselectAll()"></lib-button-control>
+          <lib-button-control [model]="selectedButtonModel"></lib-button-control>
         </ng-container>
         <ng-template #unselected>
-          <lib-button-control [model]="unselectedButtonModel" (event)="store.selectAll()"></lib-button-control>
+          <lib-button-control [model]="unselectedButtonModel"></lib-button-control>
         </ng-template>
       </td>
       <ng-container *ngFor="let header of getHeaders()">
         <td class="table__column">{{ header }}</td>
+        <td class="table__column">{{ header }}</td>
+        <td class="table__column">{{ header }}</td>
       </ng-container>
-      <td class="table__column table__button"></td>
-      <td class="table__column table__button"></td>
+      <td class="table__button"></td>
+      <td class="table__button"></td>
     </tr>
-    </thead>
-    <tbody class="table__body">
+  </thead>
+  <tbody class="table__body">
     <ng-container *ngFor="let row of rows">
       <tr class="table__row">
-        <td class="table__column table__button">
+        <td class="table__button">
           <ng-container *ngIf="row.isSelected; else unselected">
-            <lib-button-control [model]="selectedButtonModel" (event)="store.unselectRow(row.id)"></lib-button-control>
+            <lib-button-control [model]="selectedButtonModel"></lib-button-control>
           </ng-container>
           <ng-template #unselected>
-            <lib-button-control [model]="unselectedButtonModel" (event)="store.selectRow(row.id)"></lib-button-control>
+            <lib-button-control [model]="unselectedButtonModel"></lib-button-control>
           </ng-template>
         </td>
         <ng-container *ngFor="let header of getHeaders()">
           <td class="table__column">{{ getColumn(row.data, header) }}</td>
+          <td class="table__column">{{ getColumn(row.data, header) }}</td>
+          <td class="table__column">{{ getColumn(row.data, header) }}</td>
         </ng-container>
-        <td class="table__column table__button">
-          <lib-button-control [model]="editButtonModel" (event)="onEditEvent(row.id)"></lib-button-control>
+        <td class="table__button">
+          <lib-button-control [model]="editButtonModel"></lib-button-control>
         </td>
-        <td class="table__column table__button">
-          <lib-button-control [model]="removeButtonModel" (event)="store.delete([row.id])"></lib-button-control>
+        <td class="table__button">
+          <lib-button-control [model]="removeButtonModel"></lib-button-control>
         </td>
       </tr>
     </ng-container>
-    </tbody>
-  </table>
-</div>
+  </tbody>
+</table>

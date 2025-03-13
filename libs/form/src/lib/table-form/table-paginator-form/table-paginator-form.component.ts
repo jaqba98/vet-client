@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router'
 
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
+import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
 import { BaseTableFormStore } from '../store/base-table-form.store'
 import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
 
@@ -21,10 +21,10 @@ import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
 export class TablePaginatorFormComponent<TStore> implements OnInit, OnDestroy {
   @Input({ required: true }) store!: BaseTableFormStore<TStore>
 
-  readonly first = BaseFormBuilder.buildButtonIcon('first', faBackwardFast, 'dark-secondary', true)
-  readonly previous = BaseFormBuilder.buildButtonIcon('previous', faBackward, 'dark-secondary', true)
-  readonly next = BaseFormBuilder.buildButtonIcon('next', faForward, 'dark-secondary', true)
-  readonly last = BaseFormBuilder.buildButtonIcon('last', faForwardFast, 'dark-secondary', true)
+  readonly first: ControlButtonModel
+  readonly previous: ControlButtonModel
+  readonly next: ControlButtonModel
+  readonly last: ControlButtonModel
 
   page = 0
 
@@ -32,8 +32,35 @@ export class TablePaginatorFormComponent<TStore> implements OnInit, OnDestroy {
 
   private readonly sub: Subscription
 
-  constructor(private readonly route: ActivatedRoute) {
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly controlButton: ControlButtonBuilder,
+  ) {
     this.sub = new Subscription()
+    this.first = this.controlButton
+      .buildBase('first')
+      .buildIsSquare(true)
+      .buildIcon(faBackwardFast, 'light-primary', '1rem')
+      .buildColor('dark-secondary')
+      .build()
+    this.previous = this.controlButton
+      .buildBase('previous')
+      .buildIsSquare(true)
+      .buildIcon(faBackward, 'light-primary', '1rem')
+      .buildColor('dark-secondary')
+      .build()
+    this.next = this.controlButton
+      .buildBase('next')
+      .buildIsSquare(true)
+      .buildIcon(faForward, 'light-primary', '1rem')
+      .buildColor('dark-secondary')
+      .build()
+    this.last = this.controlButton
+      .buildBase('last')
+      .buildIsSquare(true)
+      .buildIcon(faForwardFast, 'light-primary', '1rem')
+      .buildColor('dark-secondary')
+      .build()
   }
 
   ngOnInit() {
@@ -77,11 +104,15 @@ export class TablePaginatorFormComponent<TStore> implements OnInit, OnDestroy {
     const sortedPages = Array.from(pages).sort()
     sortedPages.forEach((index: number) => {
       const id = index.toString()
+      const control = this.controlButton
+        .buildBase(id)
+        .buildIsSquare(true)
+        .buildText(id)
       if (index === this.page) {
-        controls.push(BaseFormBuilder.buildButtonText(id, id, 'primary', true, true))
+        controls.push(control.buildColor('primary').build())
       }
       else {
-        controls.push(BaseFormBuilder.buildButtonText(id, id, 'dark-secondary', true, true))
+        controls.push(control.buildColor('dark-secondary').build())
       }
     })
     return controls

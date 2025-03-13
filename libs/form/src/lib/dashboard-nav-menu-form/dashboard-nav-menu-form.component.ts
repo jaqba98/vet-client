@@ -42,7 +42,7 @@ export class DashboardNavMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       accountSettings: {
         kind: 'button',
@@ -55,7 +55,7 @@ export class DashboardNavMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       profile: {
         kind: 'button',
@@ -68,7 +68,7 @@ export class DashboardNavMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
     })
   }

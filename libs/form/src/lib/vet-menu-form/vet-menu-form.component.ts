@@ -32,7 +32,7 @@ export class VetMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       vetClinic: {
         id: 'vetClinic',
@@ -45,7 +45,7 @@ export class VetMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       vetMedicalRecord: {
         id: 'vetMedicalRecord',
@@ -58,7 +58,7 @@ export class VetMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       vetMedication: {
         id: 'vetMedication',
@@ -71,7 +71,7 @@ export class VetMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       vetServices: {
         id: 'vetServices',
@@ -84,7 +84,7 @@ export class VetMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       vetAppointment: {
         id: 'vetAppointment',
@@ -97,7 +97,7 @@ export class VetMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       vetInvoice: {
         id: 'vetInvoice',
@@ -110,7 +110,7 @@ export class VetMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       vetPatients: {
         id: 'vetPatients',
@@ -123,7 +123,7 @@ export class VetMenuFormComponent
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
     })
   }

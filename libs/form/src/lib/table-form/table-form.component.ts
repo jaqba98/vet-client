@@ -32,6 +32,5 @@ export class TableFormComponent<TStore> {
   @Input() addButtonEnabled = true
   @Input() removeButtonEnabled = true
 
-  @Input({ required: true }) createFormModel!: TableFormModel
-  @Input({ required: true }) updateFormModel!: TableFormModel
+  @Input({ required: true }) formModel!: TableFormModel
 }

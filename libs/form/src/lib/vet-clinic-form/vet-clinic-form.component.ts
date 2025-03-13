@@ -23,9 +23,7 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 export class VetClinicFormComponent implements OnInit, OnDestroy {
   private readonly sub = new Subscription()
 
-  createFormModel!: TableFormModel
-
-  updateFormModel!: TableFormModel
+  formModel!: TableFormModel
 
   constructor(
     public readonly store: VetClinicFormStore,
@@ -37,8 +35,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.clinicDomainDataNotify.notify()
     this.sub.add(this.storeClinicDomainForm.select('clinicDomainForm').subscribe((form) => {
-      this.createFormModel = { ...form.createForm }
-      this.updateFormModel = { ...form.updateForm }
+      this.formModel = { ...form }
     }))
     this.sub.add(this.storeClinicDomainData.select('clinicDomainData').subscribe((data) => {
       this.store.data = data

@@ -34,7 +34,7 @@ export class ButtonControlComponent {
       'button-control__button--dark-secondary': this.model.color === 'dark-secondary',
       'button-control__button--success': this.model.color === 'success',
       'button-control__button--error': this.model.color === 'error',
-      'button-control__button--width40px': this.model.width40px,
+      'button-control__button--width40px': this.model.isSquare,
     }
   }
 }

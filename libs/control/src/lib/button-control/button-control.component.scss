@@ -39,8 +39,8 @@
     }
 
     &--transparent {
-      background-color: transparent;
-      border: none;
+      background-color: colors.$color-background;
+      border: 1px solid colors.$color-border;
     }
 
     &--primary {

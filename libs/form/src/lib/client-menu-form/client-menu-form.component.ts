@@ -33,7 +33,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       clientPets: {
         id: 'clientPets',
@@ -46,7 +46,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       clientAppointment: {
         id: 'clientAppointment',
@@ -59,7 +59,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       clientInvoice: {
         id: 'clientInvoice',
@@ -72,7 +72,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       clientMedicalRecord: {
         id: 'clientMedicalRecord',
@@ -85,7 +85,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       clientClinics: {
         id: 'clientClinics',
@@ -98,7 +98,7 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
         fullWidth: true,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
     })
   }

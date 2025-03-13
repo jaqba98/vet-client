@@ -10,13 +10,13 @@
   <ng-container content>
     <ng-container [ngSwitch]="this.store.tab$ | async">
       <ng-container *ngSwitchCase="'data'">
-        <lib-table-data-form [store]="store" [formModel]="createFormModel"></lib-table-data-form>
+        <lib-table-data-form [store]="store" [formModel]="formModel"></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'add'">
-        <lib-table-add-form [store]="store" [formModel]="createFormModel"></lib-table-add-form>
+        <lib-table-add-form [store]="store" [formModel]="formModel"></lib-table-add-form>
       </ng-container>
       <ng-container *ngSwitchCase="'edit'">
-        <lib-table-edit-form [store]="store" [formModel]="createFormModel"></lib-table-edit-form>
+        <lib-table-edit-form [store]="store" [formModel]="formModel"></lib-table-edit-form>
       </ng-container>
       <ng-container *ngSwitchDefault>
         <p>default</p>

@@ -1,26 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core'
+// done
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { combineLatest, Subscription } from 'rxjs'
 import {
   faEdit,
   faSquare,
   faSquareCheck,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
+import { combineLatest, Subscription } from 'rxjs'
 
-import {
-  ButtonControlComponent,
-  ButtonControlModel,
-} from '@vet-client/lib-control'
+import { ButtonControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
+import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
 import { BaseTableFormStore } from '../store/base-table-form.store'
 import { TableFormModel } from '../model/table-form.model'
-import {
-  TableFormRowModel,
-  TableFormRowsModel,
-} from '../model/table-form-rows.model'
+import { TableFormRowModel, TableFormRowsModel } from '../model/table-form-rows.model'
 import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
-import { TableTabEnum } from '../enum/table-tab.enum'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -29,82 +24,66 @@ import { TableTabEnum } from '../enum/table-tab.enum'
   styleUrl: './table-data-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableDataFormComponent<TData> implements OnInit {
-  @Input({ required: true }) store!: BaseTableFormStore<TData>
+export class TableDataFormComponent<TStore> implements OnInit, OnDestroy {
+  @Input({ required: true }) store!: BaseTableFormStore<TStore>
 
   @Input({ required: true }) formModel!: TableFormModel
 
-  rows!: TableFormRowsModel<TData>
+  rows!: TableFormRowsModel<TStore>
 
-  readonly selectedButtonModel: ButtonControlModel = {
-    id: 'checked',
-    value: {
-      type: 'icon',
-      icon: { icon: faSquareCheck, color: 'dark-secondary', fontSize: '2rem' },
-    },
-    color: 'transparent',
-    fullWidth: false,
-    width40px: false,
+  readonly selectedButtonModel: ControlButtonModel
+  readonly unselectedButtonModel: ControlButtonModel
+  readonly editButtonModel: ControlButtonModel
+  readonly removeButtonModel: ControlButtonModel
+
+  private sub: Subscription
+
+  constructor(
+    private readonly objectType: ObjectTypeUtils,
+    private readonly controlButton: ControlButtonBuilder,
+  ) {
+    this.sub = new Subscription()
+    this.selectedButtonModel = this.controlButton
+      .buildBase('checked')
+      .buildIsSquare(true)
+      .buildIcon(faSquareCheck, 'light-primary', '2rem')
+      .buildColor('transparent')
+      .build()
+    this.unselectedButtonModel = this.controlButton
+      .buildBase('unchecked')
+      .buildIsSquare(true)
+      .buildIcon(faSquare, 'light-primary', '2rem')
+      .buildColor('transparent')
+      .build()
+    this.editButtonModel = this.controlButton
+      .buildBase('edit')
+      .buildIsSquare(true)
+      .buildIcon(faEdit, 'light-primary', '1rem')
+      .buildColor('primary')
+      .build()
+    this.removeButtonModel = this.controlButton
+      .buildBase('remove')
+      .buildIsSquare(true)
+      .buildIcon(faTrash, 'light-primary', '1rem')
+      .buildColor('error')
+      .build()
   }
-
-  readonly unselectedButtonModel: ButtonControlModel = {
-    id: 'unchecked',
-    value: {
-      type: 'icon',
-      icon: { icon: faSquare, color: 'dark-secondary', fontSize: '2rem' },
-    },
-    color: 'transparent',
-    fullWidth: false,
-    width40px: false,
-  }
-
-  readonly editButtonModel: ButtonControlModel = {
-    id: 'edit',
-    value: {
-      type: 'icon',
-      icon: { icon: faEdit, color: 'light-primary', fontSize: '1rem' },
-    },
-    color: 'primary',
-    fullWidth: false,
-    width40px: false,
-  }
-
-  readonly removeButtonModel: ButtonControlModel = {
-    id: 'remove',
-    value: {
-      type: 'icon',
-      icon: { icon: faTrash, color: 'light-primary', fontSize: '1rem' },
-    },
-    color: 'error',
-    fullWidth: false,
-    width40px: false,
-  }
-
-  private sub = new Subscription()
-
-  constructor(private readonly objectType: ObjectTypeUtils) {}
 
   ngOnInit() {
-    this.sub.add(
-      combineLatest([this.store.rows$, this.store.page$]).subscribe(
-        ([rows, page]) => {
-          console.log(123)
-          const maxPage
-            = rows.length === 0
-              ? 1
-              : Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
-          if (page < 0 || page > maxPage) {
-            this.store.goToPage('1')
-            return
-          }
-          const pageFrom = (page - 1) * NUMBER_OF_ROWS_PER_PAGE
-          const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
-          this.rows = rows.filter(
-            (_, index) => index >= pageFrom && index < pageTo,
-          )
-        },
-      ),
-    )
+    this.sub.add(combineLatest([this.store.rows$, this.store.page$]).subscribe(([rows, page]) => {
+      const maxPage = rows.length === 0 ? 1 : Math.ceil(rows.length / NUMBER_OF_ROWS_PER_PAGE)
+      if (page < 0 || page > maxPage) {
+        this.store.goToPage('1')
+        return
+      }
+      const pageFrom = (page - 1) * NUMBER_OF_ROWS_PER_PAGE
+      const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
+      this.rows = rows.filter((_, index) => index >= pageFrom && index < pageTo)
+    }))
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
   getHeaders() {
@@ -113,12 +92,7 @@ export class TableDataFormComponent<TData> implements OnInit {
       .map(([key]) => key)
   }
 
-  getColumn(row: TableFormRowModel<TData>['data'], header: string) {
+  getColumn(row: TableFormRowModel<TStore>['data'], header: string) {
     return this.objectType.getPropertyByDynamicKey(row, header)
-  }
-
-  onEditEvent(id: number) {
-    this.store.setTab(TableTabEnum.edit)
-    this.store.setEditRow(id)
   }
 }

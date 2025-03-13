@@ -1,38 +1,47 @@
+// done
 @use 'libs/scss/src/base/colors';
 @use 'libs/scss/src/abstracts/variables';
 
-.table_wrapper {
-  height: 100%;
-  overflow: auto;
-}
-
 .table {
-  border: 1px solid colors.$color-border;
+  display: block;
   border-collapse: collapse;
   table-layout: fixed;
+  height: 100%;
 
-  &__head {
-    top: -1px;
-    position: sticky;
-    height: variables.$table-head-height;
-    z-index: 2;
-    background-color: colors.$color-surface;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  &__head,
+  &__body {
+    display: block;
   }
 
+  &__head {
+    height: variables.$table-head-height;
+    background-color: colors.$color-surface;
+  }
+
+  &__body {
+    height: calc(100% - #{variables.$table-paginator-height});
+    overflow: auto;
+  }
 
   &__row {
-    width: 100%;
-    border: 1px solid colors.$color-border;
+    display: flex;
   }
 
   &__column {
-    width: 100%;
-    border: 1px solid colors.$color-border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.5rem;
+    flex: 1;
+    border: 1px solid colors.$color-border;
   }
 
   &__button {
-    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border: 1px solid colors.$color-border;
+    width: 60px
   }
 }

@@ -4,28 +4,15 @@ import { Validators } from '@angular/forms'
 
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { ClinicDomainFormStoreModel } from '../../../model/domain/form/clinic-domain-form-store.model'
-import {
-  setClinicDomainCreateForm,
-  setClinicDomainForm,
-  setClinicDomainUpdateForm,
-} from '../../../actions/domain/form/clinic-domain-form.action'
+import { setClinicDomainForm } from '../../../actions/domain/form/clinic-domain-form.action'
 
 const initialState: ClinicDomainFormStoreModel = {
-  createForm: {
-    name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)], true),
-    create: BaseFormBuilder.buildButtonText('create', 'Create', 'primary', true),
-  },
-  updateForm: {
-    name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)], true),
-    update: BaseFormBuilder.buildButtonText('update', 'Update', 'primary', true),
-  },
+  name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)], true),
 }
 
 export const clinicDomainFormReducer = createReducer<ClinicDomainFormStoreModel>(
   initialState,
-  on(setClinicDomainForm, (state: ClinicDomainFormStoreModel, { createForm, updateForm }) => ({
-    ...state, createForm, updateForm,
+  on(setClinicDomainForm, (state: ClinicDomainFormStoreModel, { name }) => ({
+    ...state, name,
   })),
-  on(setClinicDomainCreateForm, (state: ClinicDomainFormStoreModel, { createForm }) => ({ ...state, createForm })),
-  on(setClinicDomainUpdateForm, (state: ClinicDomainFormStoreModel, { updateForm }) => ({ ...state, updateForm })),
 )

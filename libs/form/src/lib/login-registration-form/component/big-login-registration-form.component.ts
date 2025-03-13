@@ -38,7 +38,7 @@ export class BigLoginRegistrationFormComponent
         fullWidth: false,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
       registration: {
         id: 'registration',
@@ -51,7 +51,7 @@ export class BigLoginRegistrationFormComponent
         fullWidth: false,
         color: 'primary',
         isEnabled: true,
-        width40px: false,
+        isSquare: false,
       },
     })
   }
