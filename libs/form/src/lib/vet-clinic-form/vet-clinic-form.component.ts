@@ -1,13 +1,14 @@
 // done
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { Subscription } from 'rxjs'
+import { skip, Subscription } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   ClinicDomainDataNotify,
   ClinicDomainDataType,
   ClinicDomainFormType,
+  setClinicDomainPageData,
 } from '@vet-client/lib-store'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { VetClinicFormStore } from './vet-clinic-form.store'
@@ -40,6 +41,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     this.sub.add(this.storeClinicDomainData.select('clinicDomainData').subscribe((data) => {
       this.store.data = data
       this.store.read()
+    }))
+    this.sub.add(this.store.page$.pipe(skip(1)).subscribe((page) => {
+      console.log(page)
+      this.storeClinicDomainData.dispatch(setClinicDomainPageData({ page }))
     }))
   }
 
