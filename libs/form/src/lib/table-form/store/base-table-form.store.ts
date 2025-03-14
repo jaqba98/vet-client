@@ -9,7 +9,7 @@ import {
 } from '../model/table-form-rows.model'
 import { TableTabEnum } from '../enum/table-tab.enum'
 import { Router } from '@angular/router'
-import { NUMBER_OF_ROWS_PER_PAGE } from '../const/table-form.const'
+import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 
 @Injectable()
 export class BaseTableFormStore<TRows> {
@@ -70,15 +70,15 @@ export class BaseTableFormStore<TRows> {
   }
 
   deleteAll() {
-    const token = this.cookie.getToken()
-    const ids = this.rows.getValue()
-      .filter(row => row.isSelected)
-      .map(row => row.id)
-    this.httpPost.clinicDeletePost({ token, ids }).subscribe(() => {
-      const newRows = this.rows.getValue().filter(row => !ids.includes(row.id))
-      this.setRows(newRows)
-      this.allRowsSelected.next(false)
-    })
+    // const token = this.cookie.getToken()
+    // const ids = this.rows.getValue()
+    //   .filter(row => row.isSelected)
+    //   .map(row => row.id)
+    // this.httpPost.clinicDeletePost({ ids }).subscribe(() => {
+    //   const newRows = this.rows.getValue().filter(row => !ids.includes(row.id))
+    //   this.setRows(newRows)
+    //   this.allRowsSelected.next(false)
+    // })
   }
 
   selectRow(id: number) {

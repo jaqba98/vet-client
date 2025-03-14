@@ -169,12 +169,7 @@ export class HttpPostAppService {
       .pipe(take(1))
   }
 
-  clinicDeletePost(request: ClinicDeleteRequestModel) {
-    return this.httpExecute
-      .exec<ClinicDeleteResponseModel>({
-        method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicDelete, request },
-      })
-      .pipe(take(1))
+  clinicDeletePost(ids: number[]) {
+    return this.clinicHttpPost.deletePost(ids)
   }
 }

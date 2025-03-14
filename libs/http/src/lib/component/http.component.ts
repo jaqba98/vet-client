@@ -5,8 +5,8 @@ import { skip, Subscription, switchMap } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
-  ClinicDomainDataNotify,
-  ClinicDomainDataType,
+  ClinicDomainDataDeleteNotification,
+  ClinicDomainDataReadNotification,
   LoginDomainDataType,
   LogoutDomainDataType,
 } from '@vet-client/lib-store'
@@ -21,7 +21,8 @@ export class HttpComponent implements OnInit, OnDestroy {
   private readonly sub = new Subscription()
 
   constructor(
-    private readonly clinicDomainDataNotify: ClinicDomainDataNotify,
+    private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
+    private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
     private readonly storeLoginDomainData: Store<LoginDomainDataType>,
     private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
     private readonly httpPost: HttpPostAppService,
@@ -36,9 +37,12 @@ export class HttpComponent implements OnInit, OnDestroy {
       skip(1),
       switchMap(data => this.httpPost.logoutPost(data)),
     ).subscribe())
-    this.sub.add(this.clinicDomainDataNotify.notification$.pipe(
+    this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
       switchMap(() => this.httpPost.clinicReadPost()),
     ).subscribe())
+    this.sub.add(this.clinicDomainDataDeleteNotification.notification$.pipe(
+      switchMap(ids => this.httpPost.clinicDeletePost(ids)),
+    ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
   }
 
   ngOnDestroy() {

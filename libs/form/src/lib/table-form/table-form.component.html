@@ -11,6 +11,7 @@
     <ng-container [ngSwitch]="this.store.tab$ | async">
       <ng-container *ngSwitchCase="'data'">
         <lib-table-data-form
+          [dispatchDelete]="dispatchDelete"
           [selectRows]="selectRows"
           [dispatchIsSelected]="dispatchIsSelected"
           [formModel]="formModel"

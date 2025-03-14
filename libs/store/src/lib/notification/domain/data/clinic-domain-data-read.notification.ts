@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
-export class ClinicDomainDataNotify {
+export class ClinicDomainDataReadNotification {
   private readonly notification = new BehaviorSubject<void>(undefined)
 
   notification$ = this.notification.asObservable()
 
-  notify() {
+  runNotification() {
     this.notification.next()
   }
 }
