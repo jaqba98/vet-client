@@ -1,73 +1,66 @@
 import { CommonModule } from '@angular/common'
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { Observable, Subscription } from 'rxjs'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 import { TablePanelControlComponent } from '@vet-client/lib-control'
-import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { TableFormModel } from './model/table-form.model'
-import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
-import { TableEditFormComponent } from './table-edit-form/table-edit-form.component'
-import { TableFormRowsModel } from './model/table-form-rows.model'
-import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/lib-domain'
-import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
 
 @Component({
   selector: 'lib-table-form',
-  imports: [
-    CommonModule,
-    TablePanelControlComponent,
-    TableNavFormComponent,
-    TableDataFormComponent,
-    TablePaginatorFormComponent,
-    TableEditFormComponent,
-    TableCreateFormComponent,
-  ],
+  imports: [CommonModule, TablePanelControlComponent, TablePaginatorFormComponent],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TStore> implements OnInit, OnDestroy {
-  @Input({ required: true }) selectPage!: () => Observable<number>
-  @Input({ required: true }) selectMaxPage!: () => Observable<number>
+export class TableFormComponent {
+  @Output() tablePaginatorEvent = new EventEmitter<number>()
 
-  @Input({ required: true }) dispatchPage!: (page: number) => void
-  @Input({ required: true }) dispatchMaxPage!: () => void
+  @Input({ required: true }) page!: number
+  @Input({ required: true }) maxPage!: number
 
-  // I am here
-  @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
-  @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
-  @Input({ required: true }) dispatchDelete!: (id: number) => void
-  @Input({ required: true }) dispatchEdit!: (id: number) => void
-  @Input({ required: true }) selectTab!: () => Observable<string>
-  @Input({ required: true }) dispatchTab!: (tab: string) => void
-
-  @Input({ required: true })
-  selectCreateResponse!: () => Observable<ClinicDomainResponseModel>
-
-  @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TStore>>
-
-  @Input() tableButtonEnabled = true
-  @Input() addButtonEnabled = true
-  @Input() removeButtonEnabled = true
-
-  @Input({ required: true }) formModel!: TableFormModel
-
-  tab!: string
-
-  private readonly sub: Subscription
-
-  constructor() {
-    this.sub = new Subscription()
+  onTablePaginatorEvent(page: number) {
+    this.tablePaginatorEvent.emit(page)
   }
 
-  ngOnInit() {
-    this.sub.add(this.selectTab().subscribe((tab) => {
-      this.tab = tab
-    }))
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe()
-  }
+  // @Input({ required: true }) selectPage!: () => Observable<number>
+  // @Input({ required: true }) selectMaxPage!: () => Observable<number>
+  //
+  // @Input({ required: true }) dispatchPage!: (page: number) => void
+  // @Input({ required: true }) dispatchMaxPage!: () => void
+  //
+  // // I am here
+  // @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
+  // @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
+  // @Input({ required: true }) dispatchDelete!: (id: number) => void
+  // @Input({ required: true }) dispatchEdit!: (id: number) => void
+  // @Input({ required: true }) selectTab!: () => Observable<string>
+  // @Input({ required: true }) dispatchTab!: (tab: string) => void
+  //
+  // @Input({ required: true })
+  // selectCreateResponse!: () => Observable<ClinicDomainResponseModel>
+  //
+  // @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TStore>>
+  //
+  // @Input() tableButtonEnabled = true
+  // @Input() addButtonEnabled = true
+  // @Input() removeButtonEnabled = true
+  //
+  // @Input({ required: true }) formModel!: TableFormModel
+  //
+  // tab!: string
+  //
+  // private readonly sub: Subscription
+  //
+  // constructor() {
+  //   this.sub = new Subscription()
+  // }
+  //
+  // ngOnInit() {
+  //   this.sub.add(this.selectTab().subscribe((tab) => {
+  //     this.tab = tab
+  //   }))
+  // }
+  //
+  // ngOnDestroy() {
+  //   this.sub.unsubscribe()
+  // }
 }

@@ -1,13 +1,19 @@
 // done
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { faBackward, faBackwardFast, faForward, faForwardFast } from '@fortawesome/free-solid-svg-icons'
-import { combineLatest, Observable, Subscription } from 'rxjs'
-import { ActivatedRoute } from '@angular/router'
+import {
+  faBackward,
+  faBackwardFast,
+  faForward,
+  faForwardFast,
+} from '@fortawesome/free-solid-svg-icons'
 
-import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
+import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
+import {
+  ControlButtonBuilder,
+  ControlButtonModel,
+} from '@vet-client/lib-base-form'
 
 @Component({
   selector: 'lib-table-paginator-form',
@@ -16,30 +22,18 @@ import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-f
   styleUrl: './table-paginator-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TablePaginatorFormComponent implements OnInit, OnDestroy {
-  @Input({ required: true }) selectPage!: () => Observable<number>
-  @Input({ required: true }) selectMaxPage!: () => Observable<number>
+export class TablePaginatorFormComponent {
+  @Output() tablePaginatorEvent = new EventEmitter<number>()
 
-  @Input({ required: true }) dispatchPage!: (page: number) => void
-  @Input({ required: true }) dispatchMaxPage!: () => void
+  @Input({ required: true }) page!: number
+  @Input({ required: true }) maxPage!: number
 
-  // I am here
   readonly first: ControlButtonModel
   readonly previous: ControlButtonModel
   readonly next: ControlButtonModel
   readonly last: ControlButtonModel
 
-  page = 0
-
-  maxPage = 0
-
-  private readonly sub: Subscription
-
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly controlButton: ControlButtonBuilder,
-  ) {
-    this.sub = new Subscription()
+  constructor(private readonly controlButton: ControlButtonBuilder) {
     this.first = this.controlButton
       .buildBase('first')
       .buildIsSquare(true)
@@ -66,45 +60,34 @@ export class TablePaginatorFormComponent implements OnInit, OnDestroy {
       .build()
   }
 
-  ngOnInit() {
-    this.sub.add(this.route.paramMap.subscribe((params) => {
-      const page = Number(params.get('page'))
-      if (page) {
-        this.dispatchPage(page)
-      }
-    }))
-    this.sub.add(combineLatest([this.selectPage(), this.selectMaxPage()]).subscribe(([page, maxPage]) => {
-      this.page = page
-      this.maxPage = maxPage
-    }))
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe()
-  }
-
   onFirstPageEvent() {
-    this.dispatchPage(1)
+    if (this.page !== 1) {
+      this.tablePaginatorEvent.emit(1)
+    }
   }
 
   onPreviousPageEvent() {
     if (this.page > 1) {
-      this.dispatchPage(this.page - 1)
+      this.tablePaginatorEvent.emit(this.page - 1)
+    }
+  }
+
+  onSpecificPageEvent(id: string) {
+    if (this.page >= 1 && this.page <= this.maxPage) {
+      this.tablePaginatorEvent.emit(Number(id))
     }
   }
 
   onNextPageEvent() {
     if (this.page < this.maxPage) {
-      this.dispatchPage(this.page + 1)
+      this.tablePaginatorEvent.emit(this.page + 1)
     }
   }
 
   onLastPageEvent() {
-    this.dispatchPage(this.maxPage)
-  }
-
-  onSpecificPageEvent(page: string) {
-    this.dispatchPage(Number(page))
+    if (this.page !== this.maxPage) {
+      this.tablePaginatorEvent.emit(this.maxPage)
+    }
   }
 
   getPageControls() {

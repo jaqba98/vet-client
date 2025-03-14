@@ -1,44 +1,45 @@
 <lib-table-panel-control>
   <ng-container nav>
-    <lib-table-nav-form
-      [dispatchTab]="dispatchTab"
-      [tableButtonEnabled]="tableButtonEnabled"
-      [addButtonEnabled]="addButtonEnabled"
-      [removeButtonEnabled]="removeButtonEnabled"
-    ></lib-table-nav-form>
+    <p>nav</p>
+<!--    <lib-table-nav-form-->
+<!--      [dispatchTab]="dispatchTab"-->
+<!--      [tableButtonEnabled]="tableButtonEnabled"-->
+<!--      [addButtonEnabled]="addButtonEnabled"-->
+<!--      [removeButtonEnabled]="removeButtonEnabled"-->
+<!--    ></lib-table-nav-form>-->
   </ng-container>
   <ng-container content>
-    <ng-container [ngSwitch]="tab">
-      <ng-container *ngSwitchCase="'data'">
-        <lib-table-data-form
-          [dispatchDelete]="dispatchDelete"
-          [dispatchEdit]="dispatchEdit"
-          [selectRows]="selectRows"
-          [dispatchIsSelected]="dispatchIsSelected"
-          [formModel]="formModel"
-        ></lib-table-data-form>
-      </ng-container>
-      <ng-container *ngSwitchCase="'create'">
-        <lib-table-create-form
-          [selectCreateResponse]="selectCreateResponse"
-          [dispatchCreate]="dispatchCreate"
-          [formModel]="formModel"
-        ></lib-table-create-form>
-      </ng-container>
-      <ng-container *ngSwitchCase="'update'">
-        <lib-table-edit-form [dispatchTab]="dispatchTab" [formModel]="formModel"></lib-table-edit-form>
-      </ng-container>
-      <ng-container *ngSwitchDefault>
-        <p>default</p>
-      </ng-container>
-    </ng-container>
+    <p>content</p>
+<!--    <ng-container [ngSwitch]="tab">-->
+<!--      <ng-container *ngSwitchCase="'data'">-->
+<!--        <lib-table-data-form-->
+<!--          [dispatchDelete]="dispatchDelete"-->
+<!--          [dispatchEdit]="dispatchEdit"-->
+<!--          [selectRows]="selectRows"-->
+<!--          [dispatchIsSelected]="dispatchIsSelected"-->
+<!--          [formModel]="formModel"-->
+<!--        ></lib-table-data-form>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngSwitchCase="'create'">-->
+<!--        <lib-table-create-form-->
+<!--          [selectCreateResponse]="selectCreateResponse"-->
+<!--          [dispatchCreate]="dispatchCreate"-->
+<!--          [formModel]="formModel"-->
+<!--        ></lib-table-create-form>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngSwitchCase="'update'">-->
+<!--        <lib-table-edit-form [dispatchTab]="dispatchTab" [formModel]="formModel"></lib-table-edit-form>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngSwitchDefault>-->
+<!--        <p>default</p>-->
+<!--      </ng-container>-->
+<!--    </ng-container>-->
   </ng-container>
   <ng-container paginator>
     <lib-table-paginator-form
-      [selectPage]="selectPage"
-      [selectMaxPage]="selectMaxPage"
-      [dispatchPage]="dispatchPage"
-      [dispatchMaxPage]="dispatchMaxPage"
+      [page]="page"
+      [maxPage]="maxPage"
+      (tablePaginatorEvent)="onTablePaginatorEvent($event)"
     ></lib-table-paginator-form>
   </ng-container>
 </lib-table-panel-control>

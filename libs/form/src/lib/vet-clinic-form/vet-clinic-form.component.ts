@@ -10,15 +10,19 @@ import {
   ClinicDomainDataType,
 } from '@vet-client/lib-store'
 import { ActivatedRoute } from '@angular/router'
+import { TableFormComponent } from '../table-form/table-form.component'
 
 @Component({
   selector: 'lib-vet-clinic-form',
-  // imports: [TableFormComponent],
+  imports: [TableFormComponent],
   templateUrl: './vet-clinic-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
 export class VetClinicFormComponent implements OnInit, OnDestroy {
   private readonly sub: Subscription
+
+  page!: number
+  maxPage!: number
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -36,7 +40,8 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
         this.store.dispatch(clinicDomainDataPageAction({ page }))
         this.store.dispatch(clinicDomainDataMaxPageAction())
         this.sub.add(this.store.select('clinicDomainData').pipe(skip(1)).subscribe((clinicDomainData) => {
-          console.log(clinicDomainData)
+          this.page = clinicDomainData.page
+          this.maxPage = clinicDomainData.maxPage
         }))
       }
     }))
@@ -44,6 +49,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe()
+  }
+
+  onTablePaginatorEvent(page: number) {
+    this.store.dispatch(clinicDomainDataPageAction({ page }))
   }
 
   // private readonly sub = new Subscription()

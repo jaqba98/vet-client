@@ -1,17 +1,6 @@
-<!--&lt;!&ndash; done &ndash;&gt;-->
-<!--<lib-table-form-->
-<!--  [selectPage]="selectPage.bind(this)"-->
-<!--  [selectMaxPage]="selectMaxPage.bind(this)"-->
-<!--  [dispatchPage]="dispatchPage.bind(this)"-->
-<!--  [dispatchMaxPage]="dispatchMaxPage.bind(this)"-->
-
-<!--  [formModel]="formModel"-->
-<!--  [dispatchIsSelected]="dispatchIsSelected.bind(this)"-->
-<!--  [selectRows]="selectRows.bind(this)"-->
-<!--  [selectCreateResponse]="selectCreateResponse.bind(this)"-->
-<!--  [dispatchCreate]="dispatchCreate.bind(this)"-->
-<!--  [dispatchDelete]="dispatchDelete.bind(this)"-->
-<!--  [dispatchEdit]="dispatchEdit.bind(this)"-->
-<!--  [selectTab]="selectTab.bind(this)"-->
-<!--  [dispatchTab]="dispatchTab.bind(this)"-->
-<!--&gt;</lib-table-form>-->
+<!-- done -->
+<lib-table-form
+  [page]="page"
+  [maxPage]="maxPage"
+  (tablePaginatorEvent)="onTablePaginatorEvent($event)"
+></lib-table-form>
