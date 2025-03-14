@@ -11,6 +11,7 @@ import { TableDataFormComponent } from './table-data-form/table-data-form.compon
 import { BaseTableFormStore } from './store/base-table-form.store'
 import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
 import { TableEditFormComponent } from './table-edit-form/table-edit-form.component'
+import { TableFormRowsModel } from './model/table-form-rows.model'
 
 @Component({
   selector: 'lib-table-form',
@@ -27,6 +28,7 @@ import { TableEditFormComponent } from './table-edit-form/table-edit-form.compon
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TStore> {
+  @Input({ required: true }) data!: TableFormRowsModel<TStore>
   @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
   @Input({ required: true }) dispatchPage!: (page: number) => void
   @Input({ required: true }) store!: BaseTableFormStore<TStore>
