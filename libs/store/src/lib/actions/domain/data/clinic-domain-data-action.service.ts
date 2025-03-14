@@ -17,13 +17,13 @@ export const clinicDomainDataTabAction = createAction(
   '[Clinic Domain Data Action] Set Tab', props<Pick<ClinicDomainDataStoreModel, 'tab'>>(),
 )
 
+export const clinicDomainDataSelectAction = createAction(
+  '[Clinic Domain Data Action] Set Select', props<{ id: number, isSelected: boolean }>(),
+)
+
 // I am here
 
 export const setClinicDomainData = createAction('[Clinic Domain Data] Set', props<ClinicDomainDataStoreModel>())
-
-export const setClinicDomainSelection = createAction(
-  '[Clinic Domain Data] Set Selection', props<{ id: number, isSelected: boolean }>(),
-)
 
 export const setClinicDomainSelectedClinic = createAction(
   '[Clinic Domain Data] Set Selected Clinic', props<{ selectedPage: number }>(),

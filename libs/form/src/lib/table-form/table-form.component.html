@@ -18,6 +18,8 @@
           [headers]="headers"
           [rows]="rows"
           (deleteEvent)="onDeleteEvent($event)"
+          (selectEvent)="onSelectEvent($event)"
+          (unselectEvent)="onUnselectEvent($event)"
         ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'create'">

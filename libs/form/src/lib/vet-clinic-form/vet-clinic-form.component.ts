@@ -10,8 +10,11 @@ import {
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   ClinicDomainDataReadNotification,
+  clinicDomainDataSelectAction,
   clinicDomainDataTabAction,
-  ClinicDomainDataType, ClinicDomainFormType, ClinicDomainResponseType,
+  ClinicDomainDataType,
+  ClinicDomainFormType,
+  ClinicDomainResponseType,
 } from '@vet-client/lib-store'
 import { ClinicDomainDataInternalModel, ClinicDomainDataModel, ClinicDomainFormModel } from '@vet-client/lib-domain'
 import { TableFormComponent } from '../table-form/table-form.component'
@@ -72,12 +75,11 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
             }
           }))
           this.sub.add(this.dataStore.select('clinicDomainData').pipe(skip(1)).subscribe((data) => {
-            this.page = data.page
-            this.maxPage = data.maxPage
+            console.log(data.clinics)
             this.tab = data.tab as TableFormTabEnum
             const left = (this.page - 1) * NUMBER_OF_ROWS_PER_PAGE
             const right = left + NUMBER_OF_ROWS_PER_PAGE
-            this.clinics = data.clinics.filter((clinic, id) => id >= left && id <= right)
+            this.clinics = data.clinics.filter((_, id) => id >= left && id <= right)
             if (this.page < 1 || this.page > this.maxPage) {
               this.router.navigate(['dashboard/vet/clinic/1'])
             }
@@ -106,6 +108,19 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   onCreateEvent(model: ClinicDomainDataInternalModel) {
     this.clinicDomainDataCreateNotification.runNotification(model)
+  }
+
+  onSelectEvent(id: number) {
+    this.dataStore.dispatch(clinicDomainDataSelectAction({ id, isSelected: true }))
+  }
+
+  onUnselectEvent(id: number) {
+    this.dataStore.dispatch(clinicDomainDataSelectAction({ id, isSelected: false }))
+  }
+
+  onDeleteSelectedEvent() {
+    const ids = this.clinics.filter(clinic => clinic.isSelected).map(clinic => clinic.id)
+    this.clinicDomainDataDeleteNotification.runNotification(ids)
   }
 
   getHeaders(): string[] {

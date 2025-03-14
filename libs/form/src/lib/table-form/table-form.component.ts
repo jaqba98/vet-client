@@ -25,6 +25,9 @@ import { TableCreateFormComponent } from './table-create-form/table-create-form.
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TRows, TData> {
+  @Output() deleteSelectedEvent = new EventEmitter()
+  @Output() selectEvent = new EventEmitter<number>()
+  @Output() unselectEvent = new EventEmitter<number>()
   @Output() createEvent = new EventEmitter<TData>()
   @Output() tablePaginatorEvent = new EventEmitter<number>()
   @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
@@ -54,7 +57,7 @@ export class TableFormComponent<TRows, TData> {
   }
 
   onDeleteSelectedEvent() {
-    //
+    this.deleteSelectedEvent.emit()
   }
 
   onDeleteEvent(id: number) {
@@ -67,6 +70,14 @@ export class TableFormComponent<TRows, TData> {
 
   onCreateEvent(data: TData) {
     this.createEvent.emit(data)
+  }
+
+  onSelectEvent(id: number) {
+    this.selectEvent.emit(id)
+  }
+
+  onUnselectEvent(id: number) {
+    this.unselectEvent.emit(id)
   }
 
   // @Input({ required: true }) selectPage!: () => Observable<number>
