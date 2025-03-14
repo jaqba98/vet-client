@@ -34,6 +34,7 @@ export class TableFormComponent<TRows, TData> {
   @Output() tablePaginatorEvent = new EventEmitter<number>()
   @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
   @Output() deleteEvent = new EventEmitter<number>()
+  @Output() refreshEvent = new EventEmitter<number>()
 
   @Input({ required: true }) formModel!: TableFormModel
   @Input({ required: true }) headers!: string[]
@@ -68,7 +69,7 @@ export class TableFormComponent<TRows, TData> {
   }
 
   onRefreshEvent() {
-    //
+    this.refreshEvent.emit()
   }
 
   onCreateEvent(data: TData) {

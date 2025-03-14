@@ -148,6 +148,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     })
   }
 
+  onRefreshEvent() {
+    this.clinicDomainDataReadNotification.runNotification()
+  }
+
   getHeaders(): string[] {
     return Object.entries(this.formModel)
       .filter(([, value]) => value.isEnabled)
