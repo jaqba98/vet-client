@@ -16,7 +16,7 @@ const initialState: ClinicDomainDataStoreModel = {
   page: 1,
   maxPage: 1,
   selectedPage: -1,
-  tab: 'table',
+  tab: 'data',
   clinics: [],
 }
 

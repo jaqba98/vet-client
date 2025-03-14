@@ -11,7 +11,7 @@ import {
   ClinicDomainDataType,
   ClinicDomainFormType, ClinicDomainResponseType,
   setClinicDomainPageData,
-  setClinicDomainSelection,
+  setClinicDomainSelection, setClinicDomainTab,
 } from '@vet-client/lib-store'
 import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/lib-domain'
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
@@ -79,6 +79,16 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     return this.storeClinicResponseData.select('clinicDomainResponse').pipe(
       map(data => data.createResponse),
     )
+  }
+
+  selectTab(): Observable<string> {
+    return this.storeClinicDomainData.select('clinicDomainData').pipe(
+      map(data => data.tab),
+    )
+  }
+
+  dispatchTab(tab: string) {
+    this.storeClinicDomainData.dispatch(setClinicDomainTab({ tab }))
   }
 
   dispatchPage(page: number) {

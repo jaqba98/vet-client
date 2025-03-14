@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
-import { Component, Input } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Observable, Subscription } from 'rxjs'
 
 import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
@@ -28,12 +28,14 @@ import { TableCreateFormComponent } from './table-create-form/table-create-form.
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TStore> {
+export class TableFormComponent<TStore> implements OnInit, OnDestroy {
   @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
   @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
   @Input({ required: true }) dispatchDelete!: (id: number) => void
   @Input({ required: true }) dispatchEdit!: (id: number) => void
   @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
+  @Input({ required: true }) selectTab!: () => Observable<string>
+  @Input({ required: true }) dispatchTab!: (tab: string) => void
 
   @Input({ required: true })
   selectCreateResponse!: () => Observable<ClinicDomainResponseModel>
@@ -48,4 +50,22 @@ export class TableFormComponent<TStore> {
   @Input() removeButtonEnabled = true
 
   @Input({ required: true }) formModel!: TableFormModel
+
+  tab!: string
+
+  private readonly sub: Subscription
+
+  constructor() {
+    this.sub = new Subscription()
+  }
+
+  ngOnInit() {
+    this.sub.add(this.selectTab().subscribe((tab) => {
+      this.tab = tab
+    }))
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
 }

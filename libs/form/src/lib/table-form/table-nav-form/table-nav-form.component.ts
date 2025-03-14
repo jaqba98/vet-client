@@ -20,6 +20,7 @@ import { TableTabEnum } from '../enum/table-tab.enum'
 export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormModel, TableNavDataModel> implements OnInit {
   @Input({ required: true }) store!: BaseTableFormStore<TData>
 
+  @Input({ required: true }) dispatchTab!: (tab: string) => void
   @Input({ required: true }) tableButtonEnabled!: boolean
   @Input({ required: true }) addButtonEnabled!: boolean
   @Input({ required: true }) removeButtonEnabled!: boolean
@@ -34,11 +35,10 @@ export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormMo
 
   override onSubmit(event: TableNavDataModel) {
     if (event.table) {
-      this.store.setTab(TableTabEnum.data)
-      this.store.read()
+      this.dispatchTab(TableTabEnum.data)
     }
     else if (event.create) {
-      this.store.setTab(TableTabEnum.create)
+      this.dispatchTab(TableTabEnum.create)
     }
     else if (event.delete) {
       this.store.deleteAll()

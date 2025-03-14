@@ -13,6 +13,7 @@ import { TableFormModel } from '../model/table-form.model'
 import { BaseTableFormStore } from '../store/base-table-form.store'
 import { AsyncPipe } from '@angular/common'
 import { ClinicDomainDataModel } from '@vet-client/lib-domain'
+import { TableTabEnum } from '../enum/table-tab.enum'
 
 @Component({
   selector: 'lib-table-edit-form',
@@ -23,6 +24,7 @@ import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 export class TableEditFormComponent<TData>
   extends BaseFormService<TableFormModel, TData>
   implements OnInit, OnDestroy {
+  @Input({ required: true }) dispatchTab!: (tab: string) => void
   @Input({ required: true }) store!: BaseTableFormStore<TData>
 
   @Input({ required: true }) formModel!: TableFormModel
@@ -60,9 +62,6 @@ export class TableEditFormComponent<TData>
   }
 
   onEditEvent(row: TData) {
-    this.store.edit(row)
-    this.store.read()
-    this.store.setEditRow(this.id)
-    this.store.updateEditRow(this.id, row)
+    this.dispatchTab(TableTabEnum.edit)
   }
 }

@@ -2,13 +2,14 @@
   <ng-container nav>
     <lib-table-nav-form
       [store]="store"
+      [dispatchTab]="dispatchTab"
       [tableButtonEnabled]="tableButtonEnabled"
       [addButtonEnabled]="addButtonEnabled"
       [removeButtonEnabled]="removeButtonEnabled"
     ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
-    <ng-container [ngSwitch]="this.store.tab$ | async">
+    <ng-container [ngSwitch]="tab">
       <ng-container *ngSwitchCase="'data'">
         <lib-table-data-form
           [dispatchDelete]="dispatchDelete"
@@ -26,7 +27,7 @@
         ></lib-table-create-form>
       </ng-container>
       <ng-container *ngSwitchCase="'edit'">
-        <lib-table-edit-form [store]="store" [formModel]="formModel"></lib-table-edit-form>
+        <lib-table-edit-form [dispatchTab]="dispatchTab" [store]="store" [formModel]="formModel"></lib-table-edit-form>
       </ng-container>
       <ng-container *ngSwitchDefault>
         <p>default</p>
