@@ -4,7 +4,6 @@ import { Observable } from 'rxjs'
 
 import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
-import { TableAddFormComponent } from './table-add-form/table-add-form.component'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableFormModel } from './model/table-form.model'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
@@ -13,6 +12,7 @@ import { TablePaginatorFormComponent } from './table-paginator-form/table-pagina
 import { TableEditFormComponent } from './table-edit-form/table-edit-form.component'
 import { TableFormRowsModel } from './model/table-form-rows.model'
 import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/lib-domain'
+import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
 
 @Component({
   selector: 'lib-table-form',
@@ -20,10 +20,10 @@ import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/li
     CommonModule,
     TablePanelControlComponent,
     TableNavFormComponent,
-    TableAddFormComponent,
     TableDataFormComponent,
     TablePaginatorFormComponent,
     TableEditFormComponent,
+    TableCreateFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
@@ -33,8 +33,12 @@ export class TableFormComponent<TStore> {
   @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
   @Input({ required: true }) dispatchDelete!: (id: number) => void
   @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
-  @Input({ required: true }) selectCreateResponse!: () => Observable<ClinicDomainResponseModel>
+
+  @Input({ required: true })
+  selectCreateResponse!: () => Observable<ClinicDomainResponseModel>
+
   @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TStore>>
+
   @Input({ required: true }) dispatchPage!: (page: number) => void
   @Input({ required: true }) store!: BaseTableFormStore<TStore>
 

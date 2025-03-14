@@ -38,7 +38,7 @@ export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormMo
       this.store.read()
     }
     else if (event.add) {
-      this.store.setTab(TableTabEnum.add)
+      this.store.setTab(TableTabEnum.create)
     }
     else if (event.delete) {
       this.store.deleteAll()

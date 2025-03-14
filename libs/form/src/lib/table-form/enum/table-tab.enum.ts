@@ -1,5 +1,5 @@
 export enum TableTabEnum {
   data = 'data',
-  add = 'add',
+  create = 'create',
   edit = 'edit',
 }

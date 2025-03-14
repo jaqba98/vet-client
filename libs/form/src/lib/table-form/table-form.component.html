@@ -18,7 +18,11 @@
         ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'add'">
-        <lib-table-add-form [selectCreateResponse]="selectCreateResponse" [dispatchCreate]="dispatchCreate" [store]="store" [formModel]="formModel"></lib-table-add-form>
+        <lib-table-create-form
+          [selectCreateResponse]="selectCreateResponse"
+          [dispatchCreate]="dispatchCreate"
+          [formModel]="formModel"
+        ></lib-table-create-form>
       </ng-container>
       <ng-container *ngSwitchCase="'edit'">
         <lib-table-edit-form [store]="store" [formModel]="formModel"></lib-table-edit-form>

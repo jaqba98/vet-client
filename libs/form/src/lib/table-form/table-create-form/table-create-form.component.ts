@@ -1,32 +1,30 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Observable, Subscription } from 'rxjs'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseFormComponent, BaseFormService, ControlButtonBuilder } from '@vet-client/lib-base-form'
 import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
-import { BaseTableFormStore } from '../store/base-table-form.store'
-import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/lib-domain'
+import { TableFormRowModel } from '../model/table-form-rows.model'
+import { TableFormResponseModel } from '../model/table-form-response.model'
 
 @Component({
-  selector: 'lib-table-add-form',
+  selector: 'lib-table-create-form',
   imports: [TableCardControlComponent, BaseFormComponent],
-  templateUrl: './table-add-form.component.html',
+  templateUrl: './table-create-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableAddFormComponent<TData>
+export class TableCreateFormComponent<TData>
   extends BaseFormService<TableFormModel, TData>
   implements OnInit, OnDestroy {
-  @Input({ required: true }) selectCreateResponse!: () => Observable<ClinicDomainResponseModel>
-  @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
-
-  @Input({ required: true }) store!: BaseTableFormStore<TData>
+  @Input({ required: true }) selectCreateResponse!: () => Observable<TableFormResponseModel>
+  @Input({ required: true }) dispatchCreate!: (clinic: TableFormRowModel<TData>) => void
 
   @Input({ required: true }) formModel!: TableFormModel
 
   private readonly sub: Subscription
 
-  constructor() {
+  constructor(private readonly controlButton: ControlButtonBuilder) {
     super()
     this.sub = new Subscription()
   }
@@ -34,7 +32,11 @@ export class TableAddFormComponent<TData>
   ngOnInit() {
     this.initBaseForm({
       ...this.formModel,
-      add: BaseFormBuilder.buildButtonText('add', 'Add', 'primary', true),
+      create: this.controlButton
+        .buildBase('create')
+        .buildText('Create')
+        .buildColor('primary')
+        .build(),
     })
     this.sub.add(this.selectCreateResponse().subscribe((response) => {
       this.success = ''
