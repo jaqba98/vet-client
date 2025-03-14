@@ -6,6 +6,7 @@ import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
 import { BaseTableFormStore } from '../store/base-table-form.store'
+import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 
 @Component({
   selector: 'lib-table-add-form',
@@ -16,6 +17,8 @@ import { BaseTableFormStore } from '../store/base-table-form.store'
 export class TableAddFormComponent<TData>
   extends BaseFormService<TableFormModel, TData>
   implements OnInit {
+  @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
+
   @Input({ required: true }) store!: BaseTableFormStore<TData>
 
   @Input({ required: true }) formModel!: TableFormModel

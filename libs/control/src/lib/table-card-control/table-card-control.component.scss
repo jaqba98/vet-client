@@ -2,7 +2,7 @@
 
 .table-card-control {
   background-color: colors.$color-surface;
-  height: 100%;
+  min-height: 638px;
 
   &__headline {
     padding: 1rem;

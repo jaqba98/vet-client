@@ -12,6 +12,7 @@ import { BaseTableFormStore } from './store/base-table-form.store'
 import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
 import { TableEditFormComponent } from './table-edit-form/table-edit-form.component'
 import { TableFormRowsModel } from './model/table-form-rows.model'
+import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 
 @Component({
   selector: 'lib-table-form',
@@ -29,6 +30,7 @@ import { TableFormRowsModel } from './model/table-form-rows.model'
 })
 export class TableFormComponent<TStore> {
   @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
+  @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
   @Input({ required: true }) dispatchDelete!: (id: number) => void
   @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
   @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TStore>>

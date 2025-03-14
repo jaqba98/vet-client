@@ -5,10 +5,15 @@ import { map, take } from 'rxjs'
 import { CookieService } from '@vet-client/lib-system'
 import { ClinicDomainDataType, setClinicDomainClinicsData } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
-import { ClinicDeleteResponseModel, ClinicReadResponseModel } from '../model/response/clinic-response.model'
+import {
+  ClinicCreateResponseModel,
+  ClinicDeleteResponseModel,
+  ClinicReadResponseModel,
+} from '../model/response/clinic-response.model'
 import { MethodEnum } from '../enum/method.enum'
 import { EndpointEnum } from '../enum/endpoint.enum'
-import { ClinicDeleteRequestModel } from '../model/request/clinic-request.model'
+import { ClinicCreateRequestModel, ClinicDeleteRequestModel } from '../model/request/clinic-request.model'
+import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicHttpPostService {
@@ -17,6 +22,17 @@ export class ClinicHttpPostService {
     private readonly httpExecute: HttpExecuteService,
     private readonly storeClinicDomainData: Store<ClinicDomainDataType>,
   ) {}
+
+  clinicCreatePost(client: ClinicDomainDataModel) {
+    const token = this.cookie.getToken()
+    const request: ClinicCreateRequestModel = { token, ...client }
+    return this.httpExecute
+      .exec<ClinicCreateResponseModel>({
+        method: MethodEnum.post,
+        type: { endpoint: EndpointEnum.clinicCreate, request },
+      })
+      .pipe(take(1))
+  }
 
   readPost() {
     const token = this.cookie.getToken()

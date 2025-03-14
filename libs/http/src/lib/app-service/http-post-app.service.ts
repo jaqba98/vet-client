@@ -44,7 +44,7 @@ import {
   setLogoutDomainData,
   setRoute,
 } from '@vet-client/lib-store'
-import { LoginDomainDataModel, LogoutDomainDataModel } from '@vet-client/lib-domain'
+import { ClinicDomainDataModel, LoginDomainDataModel, LogoutDomainDataModel } from '@vet-client/lib-domain'
 import { ClinicHttpPostService } from '../dom-service/clinic-http-post.service'
 
 @Injectable({ providedIn: 'root' })
@@ -147,13 +147,8 @@ export class HttpPostAppService {
       .pipe(take(1))
   }
 
-  clinicCreatePost(request: ClinicCreateRequestModel) {
-    return this.httpExecute
-      .exec<ClinicCreateResponseModel>({
-        method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicCreate, request },
-      })
-      .pipe(take(1))
+  clinicCreatePost(clinic: ClinicDomainDataModel) {
+    return this.clinicHttpPost.clinicCreatePost(clinic)
   }
 
   clinicReadPost() {

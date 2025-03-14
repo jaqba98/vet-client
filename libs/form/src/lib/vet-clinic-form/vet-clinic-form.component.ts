@@ -5,6 +5,7 @@ import { map, Subscription } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
+  ClinicDomainDataCreateNotification,
   ClinicDomainDataDeleteNotification, ClinicDomainDataReadNotification,
   ClinicDomainDataType,
   ClinicDomainFormType,
@@ -36,6 +37,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   constructor(
     public readonly store: VetClinicFormStore,
     private readonly router: Router,
+    private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
     private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
     private readonly storeClinicDomainForm: Store<ClinicDomainFormType>,
@@ -78,6 +80,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   dispatchIsSelected(id: number, isSelected: boolean) {
     return this.storeClinicDomainData.dispatch(setClinicDomainSelection({ id, isSelected }))
+  }
+
+  dispatchCreate(clinic: ClinicDomainDataModel) {
+    this.clinicDomainDataCreateNotification.runNotification(clinic)
   }
 
   dispatchDelete(id: number) {

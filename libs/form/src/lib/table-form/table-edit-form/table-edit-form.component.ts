@@ -12,6 +12,7 @@ import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
 import { BaseTableFormStore } from '../store/base-table-form.store'
 import { AsyncPipe } from '@angular/common'
+import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 
 @Component({
   selector: 'lib-table-edit-form',
