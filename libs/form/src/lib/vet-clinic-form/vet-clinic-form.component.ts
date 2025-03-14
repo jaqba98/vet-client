@@ -10,7 +10,7 @@ import {
   ClinicDomainDataDeleteNotification, ClinicDomainDataReadNotification,
   ClinicDomainDataType,
   ClinicDomainFormType, ClinicDomainResponseType,
-  setClinicDomainPageData,
+  setClinicDomainPageData, setClinicDomainSelectedClinic,
   setClinicDomainSelection, setClinicDomainTab,
 } from '@vet-client/lib-store'
 import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/lib-domain'
@@ -108,6 +108,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   dispatchEdit(id: number) {
-    console.log(id)
+    this.storeClinicDomainData.dispatch(setClinicDomainSelectedClinic({ selectedPage: id }))
+    this.storeClinicDomainData.dispatch(setClinicDomainTab({ tab: 'update' }))
   }
 }

@@ -26,7 +26,7 @@
           [formModel]="formModel"
         ></lib-table-create-form>
       </ng-container>
-      <ng-container *ngSwitchCase="'edit'">
+      <ng-container *ngSwitchCase="'update'">
         <lib-table-edit-form [dispatchTab]="dispatchTab" [store]="store" [formModel]="formModel"></lib-table-edit-form>
       </ng-container>
       <ng-container *ngSwitchDefault>
