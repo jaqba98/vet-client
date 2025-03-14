@@ -46,6 +46,7 @@ export class HttpComponent implements OnInit, OnDestroy {
       switchMap(ids => this.httpPost.clinicDeletePost(ids)),
     ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
     this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
+      skip(1),
       switchMap(clinic => this.httpPost.clinicCreatePost(clinic)),
     ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
   }

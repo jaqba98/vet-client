@@ -8,8 +8,8 @@ import {
 } from '../../../actions/domain/response/clinic-domain-response.action'
 
 const initialState: ClinicDomainResponseStoreModel = {
-  createResponse: { success: false, error: '' },
-  updateResponse: { success: false, error: '' },
+  createResponse: { success: false, message: '' },
+  updateResponse: { success: false, message: '' },
 }
 
 export const clinicDomainResponseReducer = createReducer<ClinicDomainResponseStoreModel>(

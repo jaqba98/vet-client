@@ -1,24 +1,24 @@
 // done
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { map, Subscription } from 'rxjs'
+import { map, Observable, Subscription } from 'rxjs'
+import { Router } from '@angular/router'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   ClinicDomainDataCreateNotification,
   ClinicDomainDataDeleteNotification, ClinicDomainDataReadNotification,
   ClinicDomainDataType,
-  ClinicDomainFormType,
+  ClinicDomainFormType, ClinicDomainResponseType,
   setClinicDomainPageData,
   setClinicDomainSelection,
 } from '@vet-client/lib-store'
+import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/lib-domain'
+import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { VetClinicFormStore } from './vet-clinic-form.store'
 import { TableFormModel } from '../table-form/model/table-form.model'
-import { Router } from '@angular/router'
 import { TableFormRowsModel } from '../table-form/model/table-form-rows.model'
-import { ClinicDomainDataModel } from '@vet-client/lib-domain'
-import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -42,6 +42,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
     private readonly storeClinicDomainForm: Store<ClinicDomainFormType>,
     private readonly storeClinicDomainData: Store<ClinicDomainDataType>,
+    private readonly storeClinicResponseData: Store<ClinicDomainResponseType>,
   ) {}
 
   ngOnInit() {
@@ -71,6 +72,12 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
         const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
         return data.clinics.filter((_, index) => index >= pageFrom && index < pageTo)
       }),
+    )
+  }
+
+  selectCreateResponse(): Observable<ClinicDomainResponseModel> {
+    return this.storeClinicResponseData.select('clinicDomainResponse').pipe(
+      map(data => data.createResponse),
     )
   }
 

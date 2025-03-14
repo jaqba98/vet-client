@@ -2,8 +2,8 @@
   <lib-base-form
     [formGroup]="formGroup"
     [controlsArray]="controlsArray"
-    [success]="store.createSuccess$ | async"
-    [error]="store.createError$ | async"
+    [success]="success"
+    [error]="error"
     (event)="dispatchCreate($event)"
   ></lib-base-form>
 </lib-table-card-control>

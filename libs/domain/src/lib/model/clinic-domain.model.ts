@@ -6,7 +6,7 @@ export interface ClinicDomainFormModel {
 
 export interface ClinicDomainResponseModel {
   success: boolean
-  error: string
+  message: string
 }
 
 export interface ClinicDomainDataModel {

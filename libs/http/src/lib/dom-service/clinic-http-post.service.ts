@@ -3,7 +3,13 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { ClinicDomainDataType, setClinicDomainClinicsData } from '@vet-client/lib-store'
+import {
+  ClinicDomainDataType,
+  ClinicDomainResponseType,
+  setClinicDomainClinicsData,
+  setClinicDomainCreateResponse,
+} from '@vet-client/lib-store'
+import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import {
   ClinicCreateResponseModel,
@@ -12,8 +18,10 @@ import {
 } from '../model/response/clinic-response.model'
 import { MethodEnum } from '../enum/method.enum'
 import { EndpointEnum } from '../enum/endpoint.enum'
-import { ClinicCreateRequestModel, ClinicDeleteRequestModel } from '../model/request/clinic-request.model'
-import { ClinicDomainDataModel } from '@vet-client/lib-domain'
+import {
+  ClinicCreateRequestModel,
+  ClinicDeleteRequestModel,
+} from '../model/request/clinic-request.model'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicHttpPostService {
@@ -21,6 +29,7 @@ export class ClinicHttpPostService {
     private readonly cookie: CookieService,
     private readonly httpExecute: HttpExecuteService,
     private readonly storeClinicDomainData: Store<ClinicDomainDataType>,
+    private readonly storeClinicDomainResponse: Store<ClinicDomainResponseType>,
   ) {}
 
   clinicCreatePost(client: ClinicDomainDataModel) {
@@ -31,19 +40,39 @@ export class ClinicHttpPostService {
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicCreate, request },
       })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map((response) => {
+          return this.storeClinicDomainResponse.dispatch(setClinicDomainCreateResponse({
+            createResponse: {
+              success: response.success,
+              message: response.success ? 'Clinic was added correctly!' : response.errors[0],
+            },
+          }))
+        }),
+      )
   }
 
   readPost() {
     const token = this.cookie.getToken()
-    return this.httpExecute.exec<ClinicReadResponseModel>({
-      method: MethodEnum.post,
-      type: { endpoint: EndpointEnum.clinicRead, request: { token } },
-    }).pipe(
-      take(1),
-      map(res => res.clinics.map(clinic => ({ id: clinic.id, isSelected: false, data: clinic }))),
-      map(clinics => this.storeClinicDomainData.dispatch(setClinicDomainClinicsData({ clinics }))),
-    )
+    return this.httpExecute
+      .exec<ClinicReadResponseModel>({
+        method: MethodEnum.post,
+        type: { endpoint: EndpointEnum.clinicRead, request: { token } },
+      })
+      .pipe(
+        take(1),
+        map(res =>
+          res.clinics.map(clinic => ({
+            id: clinic.id,
+            isSelected: false,
+            data: clinic,
+          })),
+        ),
+        map(clinics =>
+          this.storeClinicDomainData.dispatch(setClinicDomainClinicsData({ clinics })),
+        ),
+      )
   }
 
   deletePost(ids: number[]) {
