@@ -24,6 +24,7 @@ export class TableDataFormComponent<TRows> {
 
   @Input({ required: true }) headers!: string[]
   @Input({ required: true }) rows!: TableFormRowsModel<TRows>
+  @Input({ required: true }) allSelected!: boolean
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel
@@ -38,13 +39,13 @@ export class TableDataFormComponent<TRows> {
       .buildBase('checked')
       .buildIsSquare(true)
       .buildIcon(faSquareCheck, 'light-primary', '2rem')
-      .buildColor('dark-secondary')
+      .buildColor('primary')
       .build()
     this.unselectedButtonModel = this.controlButton
       .buildBase('unchecked')
       .buildIsSquare(true)
       .buildIcon(faSquare, 'light-primary', '2rem')
-      .buildColor('dark-secondary')
+      .buildColor('primary')
       .build()
     this.editButtonModel = this.controlButton
       .buildBase('edit')

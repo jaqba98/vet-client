@@ -43,6 +43,7 @@ export class TableFormComponent<TRows, TData> {
   @Input({ required: true }) rows!: TableFormRowsModel<TRows>
   @Input({ required: true }) createSuccess!: string
   @Input({ required: true }) createError!: string
+  @Input({ required: true }) allSelected!: boolean
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true

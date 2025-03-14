@@ -17,6 +17,7 @@
         <lib-table-data-form
           [headers]="headers"
           [rows]="rows"
+          [allSelected]="allSelected"
           (selectAllEvent)="onSelectAllEvent()"
           (unselectAllEvent)="onUnselectAllEvent()"
           (deleteEvent)="onDeleteEvent($event)"
