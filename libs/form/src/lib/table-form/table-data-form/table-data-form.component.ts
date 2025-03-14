@@ -1,5 +1,5 @@
 // done
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import {
   faEdit,
@@ -7,6 +7,7 @@ import {
   faSquareCheck,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
+import { Observable, Subscription } from 'rxjs'
 
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
@@ -21,9 +22,9 @@ import { TableFormRowModel, TableFormRowsModel } from '../model/table-form-rows.
   styleUrl: './table-data-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableDataFormComponent<TData> {
-  @Input({ required: true }) data!: TableFormRowsModel<TData>
-
+export class TableDataFormComponent<TData> implements OnInit, OnDestroy {
+  @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
+  @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TData>>
   @Input({ required: true }) formModel!: TableFormModel
 
   readonly selectedButtonModel: ControlButtonModel
@@ -31,21 +32,26 @@ export class TableDataFormComponent<TData> {
   readonly editButtonModel: ControlButtonModel
   readonly removeButtonModel: ControlButtonModel
 
+  rows!: TableFormRowsModel<TData>
+
+  private readonly sub: Subscription
+
   constructor(
     private readonly objectType: ObjectTypeUtils,
     private readonly controlButton: ControlButtonBuilder,
   ) {
+    this.sub = new Subscription()
     this.selectedButtonModel = this.controlButton
       .buildBase('checked')
       .buildIsSquare(true)
       .buildIcon(faSquareCheck, 'light-primary', '2rem')
-      .buildColor('transparent')
+      .buildColor('primary')
       .build()
     this.unselectedButtonModel = this.controlButton
       .buildBase('unchecked')
       .buildIsSquare(true)
       .buildIcon(faSquare, 'light-primary', '2rem')
-      .buildColor('transparent')
+      .buildColor('primary')
       .build()
     this.editButtonModel = this.controlButton
       .buildBase('edit')
@@ -61,6 +67,16 @@ export class TableDataFormComponent<TData> {
       .build()
   }
 
+  ngOnInit() {
+    this.sub.add(this.selectRows().subscribe((rows) => {
+      this.rows = rows
+    }))
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
   getHeaders() {
     return Object.entries(this.formModel)
       .filter(([, value]) => value.isEnabled)
@@ -69,5 +85,13 @@ export class TableDataFormComponent<TData> {
 
   getColumn(row: TableFormRowModel<TData>['data'], header: string) {
     return this.objectType.getPropertyByDynamicKey(row, header)
+  }
+
+  onSelectEvent(id: number) {
+    this.dispatchIsSelected(id, true)
+  }
+
+  onUnselectEvent(id: number) {
+    this.dispatchIsSelected(id, false)
   }
 }

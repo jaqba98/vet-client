@@ -17,14 +17,14 @@
     <td class="table__button"></td>
     <td class="table__button"></td>
   </tr>
-  <ng-container *ngFor="let row of data">
+  <ng-container *ngFor="let row of rows">
     <tr class="table__row">
       <td class="table__button">
         <ng-container *ngIf="row.isSelected; else unselected">
-          <lib-button-control [model]="selectedButtonModel"></lib-button-control>
+          <lib-button-control [model]="selectedButtonModel" (click)="onUnselectEvent(row.id)"></lib-button-control>
         </ng-container>
         <ng-template #unselected>
-          <lib-button-control [model]="unselectedButtonModel"></lib-button-control>
+          <lib-button-control [model]="unselectedButtonModel" (click)="onSelectEvent(row.id)"></lib-button-control>
         </ng-template>
       </td>
       <ng-container *ngFor="let header of getHeaders()">

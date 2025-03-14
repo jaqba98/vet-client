@@ -10,7 +10,11 @@
   <ng-container content>
     <ng-container [ngSwitch]="this.store.tab$ | async">
       <ng-container *ngSwitchCase="'data'">
-        <lib-table-data-form [data]="data" [formModel]="formModel"></lib-table-data-form>
+        <lib-table-data-form
+          [selectRows]="selectRows"
+          [dispatchIsSelected]="dispatchIsSelected"
+          [formModel]="formModel"
+        ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'add'">
         <lib-table-add-form [store]="store" [formModel]="formModel"></lib-table-add-form>

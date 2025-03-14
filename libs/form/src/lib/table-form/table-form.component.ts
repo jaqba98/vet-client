@@ -28,8 +28,9 @@ import { TableFormRowsModel } from './model/table-form-rows.model'
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TStore> {
-  @Input({ required: true }) data!: TableFormRowsModel<TStore>
+  @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
   @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
+  @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TStore>>
   @Input({ required: true }) dispatchPage!: (page: number) => void
   @Input({ required: true }) store!: BaseTableFormStore<TStore>
 

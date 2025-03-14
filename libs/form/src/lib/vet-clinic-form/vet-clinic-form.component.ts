@@ -9,6 +9,7 @@ import {
   ClinicDomainDataType,
   ClinicDomainFormType,
   setClinicDomainPageData,
+  setClinicDomainSelection,
 } from '@vet-client/lib-store'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { VetClinicFormStore } from './vet-clinic-form.store'
@@ -30,7 +31,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   formModel!: TableFormModel
 
-  data!: TableFormRowsModel<ClinicDomainDataModel['data']>
+  clinics!: TableFormRowsModel<ClinicDomainDataModel['data']>
 
   constructor(
     public readonly store: VetClinicFormStore,
@@ -46,11 +47,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
       this.formModel = { ...form }
     }))
     this.sub.add(this.selectPage().subscribe((data) => {
-      this.router.navigate(['dashboard/vet/clinic/' + data.page]).then(() => {
-        const pageFrom = (data.page - 1) * NUMBER_OF_ROWS_PER_PAGE
-        const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
-        this.data = data.clinics.filter((_, index) => index >= pageFrom && index < pageTo)
-      })
+      this.router.navigate(['dashboard/vet/clinic/' + data.page])
     }))
   }
 
@@ -68,7 +65,21 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     )
   }
 
+  selectRows() {
+    return this.selectPage().pipe(
+      map((data) => {
+        const pageFrom = (data.page - 1) * NUMBER_OF_ROWS_PER_PAGE
+        const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
+        return data.clinics.filter((_, index) => index >= pageFrom && index < pageTo)
+      }),
+    )
+  }
+
   dispatchPage(page: number) {
     return this.storeClinicDomainData.dispatch(setClinicDomainPageData({ page }))
+  }
+
+  dispatchIsSelected(id: number, isSelected: boolean) {
+    return this.storeClinicDomainData.dispatch(setClinicDomainSelection({ id, isSelected }))
   }
 }

@@ -12,3 +12,7 @@ export const setClinicDomainClinicsData = createAction(
 export const setClinicDomainPageData = createAction(
   '[Clinic Domain Data] Set Page', props<Pick<ClinicDomainDataStoreModel, 'page'>>(),
 )
+
+export const setClinicDomainSelection = createAction(
+  '[Clinic Domain Data] Set Selection', props<{ id: number, isSelected: boolean }>(),
+)

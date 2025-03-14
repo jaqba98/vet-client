@@ -1,8 +1,9 @@
 <!-- done -->
 <lib-table-form
   [store]="store"
-  [data]="data"
   [formModel]="formModel"
+  [dispatchIsSelected]="dispatchIsSelected.bind(this)"
+  [selectRows]="selectRows.bind(this)"
   [selectPage]="selectPage.bind(this)"
   [dispatchPage]="dispatchPage.bind(this)"
 ></lib-table-form>
