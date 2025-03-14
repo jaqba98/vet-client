@@ -4,6 +4,7 @@ import { createReducer, on } from '@ngrx/store'
 import { ClinicDomainDataStoreModel } from '../../../model/domain/data/clinic-domain-data-store.model'
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 import {
+  clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   setClinicDomainClinicsData,
   setClinicDomainData,
@@ -14,8 +15,8 @@ import {
 
 const initialState: ClinicDomainDataStoreModel = {
   page: 1,
-  // I am here
   maxPage: 1,
+  // I am here
   selectedPage: -1,
   tab: 'data',
   clinics: [],
@@ -24,11 +25,14 @@ const initialState: ClinicDomainDataStoreModel = {
 export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>(
   initialState,
   on(clinicDomainDataPageAction, (state: ClinicDomainDataStoreModel, { page }) => ({ ...state, page })),
+  on(clinicDomainDataMaxPageAction, (state: ClinicDomainDataStoreModel) => ({
+    ...state,
+    maxPage: state.clinics.length === 0 ? 1 : Math.ceil(state.clinics.length / NUMBER_OF_ROWS_PER_PAGE),
+  })),
   // I am here
   on(setClinicDomainData, (state: ClinicDomainDataStoreModel, { page, clinics }) => ({
     ...state,
     page: page ? page : state.page,
-    maxPage: clinics.length === 0 ? 1 : Math.ceil(state.clinics.length / NUMBER_OF_ROWS_PER_PAGE),
     clinics: clinics ? clinics : state.clinics,
   })),
   on(setClinicDomainClinicsData, (state: ClinicDomainDataStoreModel, { clinics }) => ({ ...state, clinics })),

@@ -29,7 +29,10 @@ import { TableCreateFormComponent } from './table-create-form/table-create-form.
 })
 export class TableFormComponent<TStore> implements OnInit, OnDestroy {
   @Input({ required: true }) selectPage!: () => Observable<number>
+  @Input({ required: true }) selectMaxPage!: () => Observable<number>
+
   @Input({ required: true }) dispatchPage!: (page: number) => void
+  @Input({ required: true }) dispatchMaxPage!: () => void
 
   // I am here
   @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void

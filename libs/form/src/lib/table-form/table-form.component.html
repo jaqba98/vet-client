@@ -34,6 +34,11 @@
     </ng-container>
   </ng-container>
   <ng-container paginator>
-    <lib-table-paginator-form [selectPage]="selectPage" [dispatchPage]="dispatchPage"></lib-table-paginator-form>
+    <lib-table-paginator-form
+      [selectPage]="selectPage"
+      [selectMaxPage]="selectMaxPage"
+      [dispatchPage]="dispatchPage"
+      [dispatchMaxPage]="dispatchMaxPage"
+    ></lib-table-paginator-form>
   </ng-container>
 </lib-table-panel-control>

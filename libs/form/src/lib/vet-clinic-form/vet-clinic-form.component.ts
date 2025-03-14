@@ -7,7 +7,7 @@ import { Router } from '@angular/router'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   ClinicDomainDataCreateNotification,
-  ClinicDomainDataDeleteNotification,
+  ClinicDomainDataDeleteNotification, clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   ClinicDomainDataReadNotification,
   ClinicDomainDataType,
@@ -110,7 +110,17 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     )
   }
 
+  selectMaxPage() {
+    return this.store.select('clinicDomainData').pipe(
+      map(data => data.maxPage),
+    )
+  }
+
   dispatchPage(page: number) {
     this.store.dispatch(clinicDomainDataPageAction({ page }))
+  }
+
+  dispatchMaxPage() {
+    this.store.dispatch(clinicDomainDataMaxPageAction())
   }
 }

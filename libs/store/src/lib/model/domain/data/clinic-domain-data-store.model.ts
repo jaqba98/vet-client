@@ -3,8 +3,8 @@ import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 
 export interface ClinicDomainDataStoreModel {
   page: number
-  // I am here
   maxPage: number
+  // I am here
   selectedPage: number
   tab: string
   clinics: ClinicDomainDataModel[]

@@ -2,7 +2,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { faBackward, faBackwardFast, faForward, faForwardFast } from '@fortawesome/free-solid-svg-icons'
-import { Observable, Subscription } from 'rxjs'
+import { combineLatest, Observable, Subscription } from 'rxjs'
 import { ActivatedRoute } from '@angular/router'
 
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
@@ -18,7 +18,10 @@ import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-f
 })
 export class TablePaginatorFormComponent implements OnInit, OnDestroy {
   @Input({ required: true }) selectPage!: () => Observable<number>
+  @Input({ required: true }) selectMaxPage!: () => Observable<number>
+
   @Input({ required: true }) dispatchPage!: (page: number) => void
+  @Input({ required: true }) dispatchMaxPage!: () => void
 
   // I am here
   readonly first: ControlButtonModel
@@ -70,8 +73,9 @@ export class TablePaginatorFormComponent implements OnInit, OnDestroy {
         this.dispatchPage(page)
       }
     }))
-    this.sub.add(this.selectPage().subscribe((page) => {
+    this.sub.add(combineLatest([this.selectPage(), this.selectMaxPage()]).subscribe(([page, maxPage]) => {
       this.page = page
+      this.maxPage = maxPage
     }))
   }
 
