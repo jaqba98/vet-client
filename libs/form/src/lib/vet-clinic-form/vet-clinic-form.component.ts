@@ -16,14 +16,12 @@ import {
 import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/lib-domain'
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 import { TableFormComponent } from '../table-form/table-form.component'
-import { VetClinicFormStore } from './vet-clinic-form.store'
 import { TableFormModel } from '../table-form/model/table-form.model'
 import { TableFormRowsModel } from '../table-form/model/table-form-rows.model'
 
 @Component({
   selector: 'lib-vet-clinic-form',
   imports: [TableFormComponent],
-  providers: [VetClinicFormStore],
   templateUrl: './vet-clinic-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
@@ -35,7 +33,6 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   clinics!: TableFormRowsModel<ClinicDomainDataModel['data']>
 
   constructor(
-    public readonly store: VetClinicFormStore,
     private readonly router: Router,
     private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,

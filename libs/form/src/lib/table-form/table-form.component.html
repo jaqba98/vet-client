@@ -1,7 +1,6 @@
 <lib-table-panel-control>
   <ng-container nav>
     <lib-table-nav-form
-      [store]="store"
       [dispatchTab]="dispatchTab"
       [tableButtonEnabled]="tableButtonEnabled"
       [addButtonEnabled]="addButtonEnabled"
@@ -27,7 +26,7 @@
         ></lib-table-create-form>
       </ng-container>
       <ng-container *ngSwitchCase="'update'">
-        <lib-table-edit-form [dispatchTab]="dispatchTab" [store]="store" [formModel]="formModel"></lib-table-edit-form>
+        <lib-table-edit-form [dispatchTab]="dispatchTab" [formModel]="formModel"></lib-table-edit-form>
       </ng-container>
       <ng-container *ngSwitchDefault>
         <p>default</p>

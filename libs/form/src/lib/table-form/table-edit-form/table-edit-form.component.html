@@ -2,8 +2,6 @@
   <lib-base-form
     [formGroup]="formGroup"
     [controlsArray]="controlsArray"
-    [success]="store.editSuccess$ | async"
-    [error]="store.editError$ | async"
     [resetForm]="false"
     (event)="onEditEvent($event)"
   ></lib-base-form>

@@ -1,18 +1,14 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 
 import {
-  BaseFormBuilder,
   BaseFormComponent,
   BaseFormService,
-  ControlType,
 } from '@vet-client/lib-base-form'
 import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
-import { BaseTableFormStore } from '../store/base-table-form.store'
 import { AsyncPipe } from '@angular/common'
-import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 import { TableTabEnum } from '../enum/table-tab.enum'
 
 @Component({
@@ -23,9 +19,8 @@ import { TableTabEnum } from '../enum/table-tab.enum'
 })
 export class TableEditFormComponent<TData>
   extends BaseFormService<TableFormModel, TData>
-  implements OnInit, OnDestroy {
+  implements OnDestroy {
   @Input({ required: true }) dispatchTab!: (tab: string) => void
-  @Input({ required: true }) store!: BaseTableFormStore<TData>
 
   @Input({ required: true }) formModel!: TableFormModel
 
@@ -38,24 +33,24 @@ export class TableEditFormComponent<TData>
     this.sub = new Subscription()
   }
 
-  ngOnInit() {
-    this.sub.add(
-      this.store.row$.subscribe((row) => {
-        this.id = row.id
-        const newFormModel: TableFormModel = {}
-        for (const [key, value] of Object.entries(this.formModel)) {
-          newFormModel[key] = <ControlType>{
-            ...value,
-            defaultValue: this.objectType.getPropertyByDynamicKey(row.data, key),
-          }
-        }
-        this.initBaseForm({
-          ...newFormModel,
-          edit: BaseFormBuilder.buildButtonText('edit', 'Edit', 'primary', true),
-        })
-      }),
-    )
-  }
+  // ngOnInit() {
+  //   this.sub.add(
+  //     this.store.row$.subscribe((row) => {
+  //       this.id = row.id
+  //       const newFormModel: TableFormModel = {}
+  //       for (const [key, value] of Object.entries(this.formModel)) {
+  //         newFormModel[key] = <ControlType>{
+  //           ...value,
+  //           defaultValue: this.objectType.getPropertyByDynamicKey(row.data, key),
+  //         }
+  //       }
+  //       this.initBaseForm({
+  //         ...newFormModel,
+  //         edit: BaseFormBuilder.buildButtonText('edit', 'Edit', 'primary', true),
+  //       })
+  //     }),
+  //   )
+  // }
 
   ngOnDestroy() {
     this.sub.unsubscribe()

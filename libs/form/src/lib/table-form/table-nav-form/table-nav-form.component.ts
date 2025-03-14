@@ -8,7 +8,6 @@ import {
 } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableNavDataModel, TableNavFormModel } from './table-nav-form.model'
-import { BaseTableFormStore } from '../store/base-table-form.store'
 import { TableTabEnum } from '../enum/table-tab.enum'
 
 @Component({
@@ -17,9 +16,7 @@ import { TableTabEnum } from '../enum/table-tab.enum'
   templateUrl: './table-nav-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormModel, TableNavDataModel> implements OnInit {
-  @Input({ required: true }) store!: BaseTableFormStore<TData>
-
+export class TableNavFormComponent extends BaseFormService<TableNavFormModel, TableNavDataModel> implements OnInit {
   @Input({ required: true }) dispatchTab!: (tab: string) => void
   @Input({ required: true }) tableButtonEnabled!: boolean
   @Input({ required: true }) addButtonEnabled!: boolean
@@ -41,7 +38,7 @@ export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormMo
       this.dispatchTab(TableTabEnum.create)
     }
     else if (event.delete) {
-      this.store.deleteAll()
+      // this.store.deleteAll()
     }
   }
 }
