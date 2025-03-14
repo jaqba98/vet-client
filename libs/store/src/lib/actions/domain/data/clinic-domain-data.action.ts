@@ -16,3 +16,11 @@ export const setClinicDomainPageData = createAction(
 export const setClinicDomainSelection = createAction(
   '[Clinic Domain Data] Set Selection', props<{ id: number, isSelected: boolean }>(),
 )
+
+export const setClinicDomainSelectedClinic = createAction(
+  '[Clinic Domain Data] Set Selected Clinic', props<{ selectedPage: number }>(),
+)
+
+export const setClinicDomainTab = createAction(
+  '[Clinic Domain Data] Set Tab', props<{ tab: string }>(),
+)

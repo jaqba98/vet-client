@@ -7,10 +7,18 @@ import {
   setClinicDomainClinicsData,
   setClinicDomainData,
   setClinicDomainPageData,
+  setClinicDomainSelectedClinic,
   setClinicDomainSelection,
+  setClinicDomainTab,
 } from '../../../actions/domain/data/clinic-domain-data.action'
 
-const initialState: ClinicDomainDataStoreModel = { page: 1, maxPage: 1, clinics: [] }
+const initialState: ClinicDomainDataStoreModel = {
+  page: 1,
+  maxPage: 1,
+  selectedPage: -1,
+  tab: 'table',
+  clinics: [],
+}
 
 export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>(
   initialState,
@@ -26,4 +34,6 @@ export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>
     ...state,
     clinics: state.clinics.map(clinic => clinic.id === id ? { ...clinic, isSelected } : clinic),
   })),
+  on(setClinicDomainSelectedClinic, (state: ClinicDomainDataStoreModel, { selectedPage }) => ({ ...state, selectedPage })),
+  on(setClinicDomainTab, (state: ClinicDomainDataStoreModel, { tab }) => ({ ...state, tab })),
 )

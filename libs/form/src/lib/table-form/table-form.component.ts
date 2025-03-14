@@ -32,6 +32,7 @@ export class TableFormComponent<TStore> {
   @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
   @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
   @Input({ required: true }) dispatchDelete!: (id: number) => void
+  @Input({ required: true }) dispatchEdit!: (id: number) => void
   @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
 
   @Input({ required: true })

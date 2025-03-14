@@ -25,6 +25,7 @@ import { TableFormRowModel, TableFormRowsModel } from '../model/table-form-rows.
 export class TableDataFormComponent<TData> implements OnInit, OnDestroy {
   @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
   @Input({ required: true }) dispatchDelete!: (id: number) => void
+  @Input({ required: true }) dispatchEdit!: (id: number) => void
   @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TData>>
   @Input({ required: true }) formModel!: TableFormModel
 
@@ -98,5 +99,9 @@ export class TableDataFormComponent<TData> implements OnInit, OnDestroy {
 
   onRemoveEvent(id: number) {
     this.dispatchDelete(id)
+  }
+
+  onEditEvent(id: number) {
+    this.dispatchEdit(id)
   }
 }

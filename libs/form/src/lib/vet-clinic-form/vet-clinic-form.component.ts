@@ -96,4 +96,8 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   dispatchDelete(id: number) {
     this.clinicDomainDataDeleteNotification.runNotification([id])
   }
+
+  dispatchEdit(id: number) {
+    console.log(id)
+  }
 }
