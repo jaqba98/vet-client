@@ -20,11 +20,3 @@ export const clinicDomainDataTabAction = createAction(
 export const clinicDomainDataSelectAction = createAction(
   '[Clinic Domain Data Action] Set Select', props<{ id: number, isSelected: boolean }>(),
 )
-
-// I am here
-
-export const setClinicDomainData = createAction('[Clinic Domain Data] Set', props<ClinicDomainDataStoreModel>())
-
-export const setClinicDomainSelectedClinic = createAction(
-  '[Clinic Domain Data] Set Selected Clinic', props<{ selectedPage: number }>(),
-)

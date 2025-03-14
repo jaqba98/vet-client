@@ -64,7 +64,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
           this.sub.add(this.formStore.select('clinicDomainForm').subscribe((form) => {
             this.formModel = form
           }))
-          this.sub.add(this.responseStore.select('clinicDomainResponse').pipe(skip(1)).subscribe((response) => {
+          this.sub.add(this.responseStore.select('clinicDomainResponse').subscribe((response) => {
             this.createSuccess = ''
             this.createError = ''
             if (response.createResponse.success) {
@@ -74,17 +74,24 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
               this.createError = response.createResponse.message
             }
           }))
-          this.sub.add(this.dataStore.select('clinicDomainData').pipe(skip(1)).subscribe((data) => {
-            console.log(data.clinics)
+          this.sub.add(this.dataStore.select('clinicDomainData').subscribe((data) => {
             this.tab = data.tab as TableFormTabEnum
+            this.page = data.page
+            this.maxPage = data.clinics.length === 0 ? 1 : Math.ceil(data.clinics.length / NUMBER_OF_ROWS_PER_PAGE)
             const left = (this.page - 1) * NUMBER_OF_ROWS_PER_PAGE
             const right = left + NUMBER_OF_ROWS_PER_PAGE
             this.clinics = data.clinics.filter((_, id) => id >= left && id <= right)
+            if (this.page > this.maxPage) {
+              this.router.navigate(['dashboard/vet/clinic/' + this.maxPage])
+              return
+            }
             if (this.page < 1 || this.page > this.maxPage) {
               this.router.navigate(['dashboard/vet/clinic/1'])
+              return
             }
           }))
         }
+        return
       }
       this.router.navigate(['dashboard/vet/clinic/1'])
     }))
@@ -95,7 +102,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   onTablePaginatorEvent(page: number) {
-    this.dataStore.dispatch(clinicDomainDataPageAction({ page }))
+    this.router.navigate(['dashboard/vet/clinic/' + page])
   }
 
   onTableNavEvent(tab: TableFormTabEnum) {
