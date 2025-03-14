@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { skip, Subscription } from 'rxjs'
 import { Store } from '@ngrx/store'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
@@ -9,7 +10,6 @@ import {
   ClinicDomainDataReadNotification,
   ClinicDomainDataType,
 } from '@vet-client/lib-store'
-import { ActivatedRoute } from '@angular/router'
 import { TableFormComponent } from '../table-form/table-form.component'
 
 @Component({
@@ -21,11 +21,12 @@ import { TableFormComponent } from '../table-form/table-form.component'
 export class VetClinicFormComponent implements OnInit, OnDestroy {
   private readonly sub: Subscription
 
-  page!: number
-  maxPage!: number
+  page = 1
+  maxPage = 1
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
     private readonly store: Store<ClinicDomainDataType>,
   ) {
@@ -34,16 +35,23 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub.add(this.route.paramMap.subscribe((params) => {
-      const page = Number(params.get('page'))
+      const page = params.get('page')
       if (page) {
-        this.clinicDomainDataReadNotification.runNotification()
-        this.store.dispatch(clinicDomainDataPageAction({ page }))
-        this.store.dispatch(clinicDomainDataMaxPageAction())
-        this.sub.add(this.store.select('clinicDomainData').pipe(skip(1)).subscribe((clinicDomainData) => {
-          this.page = clinicDomainData.page
-          this.maxPage = clinicDomainData.maxPage
-        }))
+        const numPage = Number(page)
+        if (numPage) {
+          this.clinicDomainDataReadNotification.runNotification()
+          this.store.dispatch(clinicDomainDataPageAction({ page: numPage }))
+          this.store.dispatch(clinicDomainDataMaxPageAction())
+          this.sub.add(this.store.select('clinicDomainData').pipe(skip(1)).subscribe((clinicDomainData) => {
+            this.page = clinicDomainData.page
+            this.maxPage = clinicDomainData.maxPage
+            if (this.page < 1 || this.page > this.maxPage) {
+              this.router.navigate(['dashboard/vet/clinic/1'])
+            }
+          }))
+        }
       }
+      this.router.navigate(['dashboard/vet/clinic/1'])
     }))
   }
 
