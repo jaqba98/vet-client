@@ -3,15 +3,14 @@
 @use 'libs/scss/src/base/colors';
 
 .dashboard-view {
-  min-height: 400px;
-  height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
+  min-height: calc(100svh - #{variables.$nav-height} - #{variables.$footer-height});
   display: flex;
 
   &__menu {
     position: relative;
-    height: 100%;
     background-color: colors.$color-surface;
     border-right: 1px solid colors.$color-border;
+    height: inherit;
     transition: width 0.1s ease-in-out;
 
     &--open {
@@ -57,7 +56,7 @@
 
   &__content {
     width: 100%;
-    height: 100%;
+    height: inherit;
     background-color: colors.$color-surface;
     padding: calc(40px + 2rem) 0 0;
     overflow: auto;

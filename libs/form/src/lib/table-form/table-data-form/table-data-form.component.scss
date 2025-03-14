@@ -6,42 +6,29 @@
   display: block;
   border-collapse: collapse;
   table-layout: fixed;
-  height: 100%;
-
-  &__head,
-  &__body {
-    display: block;
-  }
-
-  &__head {
-    height: variables.$table-head-height;
-    background-color: colors.$color-surface;
-  }
-
-  &__body {
-    height: calc(100% - #{variables.$table-paginator-height});
-    overflow: auto;
-  }
+  overflow: auto;
 
   &__row {
     display: flex;
+
+    &--head {
+      background-color: colors.$color-surface;
+    }
   }
 
   &__column {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem;
+    border: 1px solid colors.$color-border;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    flex: 1;
-    border: 1px solid colors.$color-border;
+    text-transform: capitalize;
   }
 
   &__button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-width: 60px;
     padding: 0.5rem;
     border: 1px solid colors.$color-border;
-    width: 60px
   }
 }

@@ -1,8 +1,26 @@
+<!-- done -->
 <table class="table">
-  <thead class="table__head">
+  <tr class="table__row table__row--head">
+    <td class="table__button">
+      <ng-container *ngIf="store.allRowsSelected$ | async; else unselected">
+        <lib-button-control [model]="selectedButtonModel"></lib-button-control>
+      </ng-container>
+      <ng-template #unselected>
+        <lib-button-control [model]="unselectedButtonModel"></lib-button-control>
+      </ng-template>
+    </td>
+    <ng-container *ngFor="let header of getHeaders()">
+      <td class="table__column">
+        <lib-text-control textControlColor="primary">{{ header }}</lib-text-control>
+      </td>
+    </ng-container>
+    <td class="table__button"></td>
+    <td class="table__button"></td>
+  </tr>
+  <ng-container *ngFor="let row of rows">
     <tr class="table__row">
       <td class="table__button">
-        <ng-container *ngIf="store.allRowsSelected$ | async; else unselected">
+        <ng-container *ngIf="row.isSelected; else unselected">
           <lib-button-control [model]="selectedButtonModel"></lib-button-control>
         </ng-container>
         <ng-template #unselected>
@@ -10,37 +28,16 @@
         </ng-template>
       </td>
       <ng-container *ngFor="let header of getHeaders()">
-        <td class="table__column">{{ header }}</td>
-        <td class="table__column">{{ header }}</td>
-        <td class="table__column">{{ header }}</td>
+        <td class="table__column">
+          <lib-text-control textControlColor="dark-secondary">{{ getColumn(row.data, header) }}</lib-text-control>
+        </td>
       </ng-container>
-      <td class="table__button"></td>
-      <td class="table__button"></td>
+      <td class="table__button">
+        <lib-button-control [model]="editButtonModel"></lib-button-control>
+      </td>
+      <td class="table__button">
+        <lib-button-control [model]="removeButtonModel"></lib-button-control>
+      </td>
     </tr>
-  </thead>
-  <tbody class="table__body">
-    <ng-container *ngFor="let row of rows">
-      <tr class="table__row">
-        <td class="table__button">
-          <ng-container *ngIf="row.isSelected; else unselected">
-            <lib-button-control [model]="selectedButtonModel"></lib-button-control>
-          </ng-container>
-          <ng-template #unselected>
-            <lib-button-control [model]="unselectedButtonModel"></lib-button-control>
-          </ng-template>
-        </td>
-        <ng-container *ngFor="let header of getHeaders()">
-          <td class="table__column">{{ getColumn(row.data, header) }}</td>
-          <td class="table__column">{{ getColumn(row.data, header) }}</td>
-          <td class="table__column">{{ getColumn(row.data, header) }}</td>
-        </ng-container>
-        <td class="table__button">
-          <lib-button-control [model]="editButtonModel"></lib-button-control>
-        </td>
-        <td class="table__button">
-          <lib-button-control [model]="removeButtonModel"></lib-button-control>
-        </td>
-      </tr>
-    </ng-container>
-  </tbody>
+  </ng-container>
 </table>
