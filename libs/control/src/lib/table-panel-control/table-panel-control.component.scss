@@ -16,6 +16,7 @@
   }
 
   &__content {
+    min-height: 638px;
     background-color: colors.$color-background;
     overflow: hidden;
   }
