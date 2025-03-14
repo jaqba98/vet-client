@@ -19,7 +19,7 @@ import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 })
 export class TableNavFormComponent extends BaseFormService<TableNavFormModel, TableNavDataModel> implements OnInit {
   @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
-  @Output() deleteEvent = new EventEmitter<boolean>()
+  @Output() deleteSelectedEvent = new EventEmitter<boolean>()
   @Output() refreshEvent = new EventEmitter<boolean>()
 
   @Input({ required: true }) tableButtonEnabled!: boolean
@@ -48,7 +48,7 @@ export class TableNavFormComponent extends BaseFormService<TableNavFormModel, Ta
       return
     }
     if (event.delete) {
-      this.deleteEvent.emit(true)
+      this.deleteSelectedEvent.emit(true)
       return
     }
     if (event.refresh) {

@@ -1,48 +1,35 @@
 // done
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import {
-  faEdit,
-  faSquare,
-  faSquareCheck,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons'
-import { Observable, Subscription } from 'rxjs'
+import { faEdit, faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
+import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
-import { TableFormModel } from '../model/table-form.model'
 import { TableFormRowModel, TableFormRowsModel } from '../model/table-form-rows.model'
 
 @Component({
   selector: 'lib-table-data-form',
-  imports: [CommonModule, ButtonControlComponent, TextControlComponent],
+  imports: [CommonModule, TextControlComponent, ButtonControlComponent],
   templateUrl: './table-data-form.component.html',
   styleUrl: './table-data-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableDataFormComponent<TData> implements OnInit, OnDestroy {
-  @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
-  @Input({ required: true }) dispatchDelete!: (id: number) => void
-  @Input({ required: true }) dispatchEdit!: (id: number) => void
-  @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TData>>
-  @Input({ required: true }) formModel!: TableFormModel
+export class TableDataFormComponent<TRows> {
+  @Output() deleteEvent = new EventEmitter<number>()
+
+  @Input({ required: true }) headers!: string[]
+  @Input({ required: true }) rows!: TableFormRowsModel<TRows>
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel
   readonly editButtonModel: ControlButtonModel
-  readonly removeButtonModel: ControlButtonModel
-
-  rows!: TableFormRowsModel<TData>
-
-  private readonly sub: Subscription
+  readonly deleteButtonModel: ControlButtonModel
 
   constructor(
     private readonly objectType: ObjectTypeUtils,
     private readonly controlButton: ControlButtonBuilder,
   ) {
-    this.sub = new Subscription()
     this.selectedButtonModel = this.controlButton
       .buildBase('checked')
       .buildIsSquare(true)
@@ -61,47 +48,31 @@ export class TableDataFormComponent<TData> implements OnInit, OnDestroy {
       .buildIcon(faEdit, 'light-primary', '1rem')
       .buildColor('primary')
       .build()
-    this.removeButtonModel = this.controlButton
-      .buildBase('remove')
+    this.deleteButtonModel = this.controlButton
+      .buildBase('delete')
       .buildIsSquare(true)
       .buildIcon(faTrash, 'light-primary', '1rem')
       .buildColor('error')
       .build()
   }
 
-  ngOnInit() {
-    this.sub.add(this.selectRows().subscribe((rows) => {
-      this.rows = rows
-    }))
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe()
-  }
-
-  getHeaders() {
-    return Object.entries(this.formModel)
-      .filter(([, value]) => value.isEnabled)
-      .map(([key]) => key)
-  }
-
-  getColumn(row: TableFormRowModel<TData>['data'], header: string) {
+  getColumn(row: TableFormRowModel<TRows>['data'], header: string) {
     return this.objectType.getPropertyByDynamicKey(row, header)
   }
 
   onSelectEvent(id: number) {
-    this.dispatchIsSelected(id, true)
+    //
   }
 
   onUnselectEvent(id: number) {
-    this.dispatchIsSelected(id, false)
+    //
   }
 
-  onRemoveEvent(id: number) {
-    this.dispatchDelete(id)
+  onDeleteEvent(id: number) {
+    this.deleteEvent.emit(id)
   }
 
   onEditEvent(id: number) {
-    this.dispatchEdit(id)
+    //
   }
 }

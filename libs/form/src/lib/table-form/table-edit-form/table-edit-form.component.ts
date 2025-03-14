@@ -8,12 +8,10 @@ import {
 import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
-import { AsyncPipe } from '@angular/common'
-import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-table-edit-form',
-  imports: [TableCardControlComponent, BaseFormComponent, AsyncPipe],
+  imports: [TableCardControlComponent, BaseFormComponent],
   templateUrl: './table-edit-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
@@ -56,7 +54,7 @@ export class TableEditFormComponent<TData>
     this.sub.unsubscribe()
   }
 
-  onEditEvent(row: TData) {
-    this.dispatchTab(TableFormTabEnum.edit)
-  }
+  // onEditEvent(row: TData) {
+  //   this.dispatchTab(TableFormTabEnum.edit)
+  // }
 }

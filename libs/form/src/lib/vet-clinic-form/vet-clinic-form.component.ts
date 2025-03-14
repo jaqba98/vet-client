@@ -5,14 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
+  ClinicDomainDataDeleteNotification,
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   ClinicDomainDataReadNotification,
   clinicDomainDataTabAction,
-  ClinicDomainDataType,
+  ClinicDomainDataType, ClinicDomainFormType,
 } from '@vet-client/lib-store'
+import { ClinicDomainDataModel, ClinicDomainFormModel } from '@vet-client/lib-domain'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
+import { TableFormModel } from '../table-form/model/table-form.model'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -23,15 +26,19 @@ import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
 export class VetClinicFormComponent implements OnInit, OnDestroy {
   private readonly sub: Subscription
 
+  formModel!: TableFormModel<keyof ClinicDomainFormModel>
   page = 1
   maxPage = 1
   tab = TableFormTabEnum.table
+  clinics: ClinicDomainDataModel[] = []
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
-    private readonly store: Store<ClinicDomainDataType>,
+    private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
+    private readonly formStore: Store<ClinicDomainFormType>,
+    private readonly dataStore: Store<ClinicDomainDataType>,
   ) {
     this.sub = new Subscription()
   }
@@ -43,12 +50,16 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
         const numPage = Number(page)
         if (numPage) {
           this.clinicDomainDataReadNotification.runNotification()
-          this.store.dispatch(clinicDomainDataPageAction({ page: numPage }))
-          this.store.dispatch(clinicDomainDataMaxPageAction())
-          this.sub.add(this.store.select('clinicDomainData').pipe(skip(1)).subscribe((clinicDomainData) => {
-            this.page = clinicDomainData.page
-            this.maxPage = clinicDomainData.maxPage
-            this.tab = clinicDomainData.tab as TableFormTabEnum
+          this.dataStore.dispatch(clinicDomainDataPageAction({ page: numPage }))
+          this.dataStore.dispatch(clinicDomainDataMaxPageAction())
+          this.sub.add(this.formStore.select('clinicDomainForm').subscribe((form) => {
+            this.formModel = form
+          }))
+          this.sub.add(this.dataStore.select('clinicDomainData').pipe(skip(1)).subscribe((data) => {
+            this.page = data.page
+            this.maxPage = data.maxPage
+            this.tab = data.tab as TableFormTabEnum
+            this.clinics = data.clinics
             if (this.page < 1 || this.page > this.maxPage) {
               this.router.navigate(['dashboard/vet/clinic/1'])
             }
@@ -64,11 +75,21 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   onTablePaginatorEvent(page: number) {
-    this.store.dispatch(clinicDomainDataPageAction({ page }))
+    this.dataStore.dispatch(clinicDomainDataPageAction({ page }))
   }
 
   onTableNavEvent(tab: TableFormTabEnum) {
-    this.store.dispatch(clinicDomainDataTabAction({ tab }))
+    this.dataStore.dispatch(clinicDomainDataTabAction({ tab }))
+  }
+
+  onDeleteEvent(id: number) {
+    this.clinicDomainDataDeleteNotification.runNotification([id])
+  }
+
+  getHeaders(): string[] {
+    return Object.entries(this.formModel)
+      .filter(([, value]) => value.isEnabled)
+      .map(([key]) => key)
   }
 
   // private readonly sub = new Subscription()

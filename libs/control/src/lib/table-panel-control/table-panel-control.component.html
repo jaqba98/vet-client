@@ -5,7 +5,9 @@
   <div class="table-control__content">
     <ng-content select="[content]"></ng-content>
   </div>
-  <div class="table-control__paginator">
-    <ng-content select="[paginator]"></ng-content>
-  </div>
+  <ng-container *ngIf="isPaginator">
+    <div class="table-control__paginator">
+      <ng-content select="[paginator]"></ng-content>
+    </div>
+  </ng-container>
 </div>

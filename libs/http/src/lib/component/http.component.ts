@@ -5,6 +5,7 @@ import { skip, Subscription, switchMap } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
+  ClinicDomainDataDeleteNotification,
   ClinicDomainDataReadNotification,
   LoginDomainDataType,
   LogoutDomainDataType,
@@ -21,6 +22,7 @@ export class HttpComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
+    private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
     private readonly storeLoginDomainData: Store<LoginDomainDataType>,
     private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
     private readonly httpPost: HttpPostAppService,
@@ -30,7 +32,9 @@ export class HttpComponent implements OnInit, OnDestroy {
     this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
       switchMap(() => this.httpPost.clinicReadPost()),
     ).subscribe())
-
+    this.sub.add(this.clinicDomainDataDeleteNotification.notification$.pipe(
+      switchMap(ids => this.httpPost.clinicDeletePost(ids)),
+    ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
     // I am here
     this.sub.add(this.storeLoginDomainData.select('loginDomainData').pipe(
       skip(1),
@@ -40,16 +44,6 @@ export class HttpComponent implements OnInit, OnDestroy {
       skip(1),
       switchMap(data => this.httpPost.logoutPost(data)),
     ).subscribe())
-    // this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
-    //   switchMap(() => this.httpPost.clinicReadPost()),
-    // ).subscribe())
-    // this.sub.add(this.clinicDomainDataDeleteNotification.notification$.pipe(
-    //   switchMap(ids => this.httpPost.clinicDeletePost(ids)),
-    // ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
-    // this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
-    //   skip(1),
-    //   switchMap(clinic => this.httpPost.clinicCreatePost(clinic)),
-    // ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
   }
 
   ngOnDestroy() {

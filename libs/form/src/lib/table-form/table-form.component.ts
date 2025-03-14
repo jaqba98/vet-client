@@ -6,6 +6,9 @@ import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TableFormTabEnum } from './enum/table-form-tab.enum'
+import { TableDataFormComponent } from './table-data-form/table-data-form.component'
+import { TableFormModel } from './model/table-form.model'
+import { TableFormRowModel, TableFormRowsModel } from './model/table-form-rows.model'
 
 @Component({
   selector: 'lib-table-form',
@@ -14,17 +17,21 @@ import { TableFormTabEnum } from './enum/table-form-tab.enum'
     TablePanelControlComponent,
     TablePaginatorFormComponent,
     TableNavFormComponent,
+    TableDataFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent {
+export class TableFormComponent<TRows> {
   @Output() tablePaginatorEvent = new EventEmitter<number>()
   @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
+  @Output() deleteEvent = new EventEmitter<number>()
 
+  @Input({ required: true }) headers!: string[]
   @Input({ required: true }) page!: number
   @Input({ required: true }) maxPage!: number
   @Input({ required: true }) tab!: TableFormTabEnum
+  @Input({ required: true }) rows!: TableFormRowsModel<TRows>
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true
@@ -40,8 +47,12 @@ export class TableFormComponent {
     this.tableNavEvent.emit(tag)
   }
 
-  onDeleteEvent() {
+  onDeleteSelectedEvent() {
     //
+  }
+
+  onDeleteEvent(id: number) {
+    this.deleteEvent.emit(id)
   }
 
   onRefreshEvent() {

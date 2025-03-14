@@ -2,6 +2,8 @@
 @use 'libs/scss/src/base/colors';
 
 .table-control {
+  display: flex;
+  flex-direction: column;
   height: 100%;
 
   &__nav {
@@ -16,7 +18,8 @@
   }
 
   &__content {
-    min-height: 638px;
+    flex: 1;
+    min-height: calc(100% - #{variables.$table-nav-height} - #{variables.$table-paginator-height});
     background-color: colors.$color-background;
     overflow: hidden;
   }

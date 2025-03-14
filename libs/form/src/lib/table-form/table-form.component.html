@@ -1,4 +1,4 @@
-<lib-table-panel-control>
+<lib-table-panel-control [isPaginator]="tab === 'table'">
   <ng-container nav>
     <lib-table-nav-form
       [tableButtonEnabled]="tableButtonEnabled"
@@ -7,21 +7,18 @@
       [refreshButtonEnabled]="refreshButtonEnabled"
       [searchButtonEnabled]="searchButtonEnabled"
       (tableNavEvent)="onTableNavEvent($event)"
-      (deleteEvent)="onDeleteEvent()"
+      (deleteSelectedEvent)="onDeleteSelectedEvent()"
       (refreshEvent)="onRefreshEvent()"
     ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
     <ng-container [ngSwitch]="tab">
       <ng-container *ngSwitchCase="'table'">
-        <p>table</p>
-<!--        <lib-table-data-form-->
-<!--          [dispatchDelete]="dispatchDelete"-->
-<!--          [dispatchEdit]="dispatchEdit"-->
-<!--          [selectRows]="selectRows"-->
-<!--          [dispatchIsSelected]="dispatchIsSelected"-->
-<!--          [formModel]="formModel"-->
-<!--        ></lib-table-data-form>-->
+        <lib-table-data-form
+          [headers]="headers"
+          [rows]="rows"
+          (deleteEvent)="onDeleteEvent($event)"
+        ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'create'">
         <p>create</p>
@@ -44,7 +41,7 @@
       </ng-container>
     </ng-container>
   </ng-container>
-  <ng-container paginator>
+  <ng-container *ngIf="tab === 'table'" paginator>
     <lib-table-paginator-form
       [page]="page"
       [maxPage]="maxPage"
