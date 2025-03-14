@@ -27,7 +27,7 @@ export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormMo
   ngOnInit() {
     this.initBaseForm({
       table: BaseFormBuilder.buildButtonIcon('table', faTable, 'dark-primary', this.tableButtonEnabled),
-      add: BaseFormBuilder.buildButtonIcon('add', faPlus, 'success', this.addButtonEnabled),
+      create: BaseFormBuilder.buildButtonIcon('add', faPlus, 'success', this.addButtonEnabled),
       delete: BaseFormBuilder.buildButtonIcon('delete', faTrash, 'error', this.removeButtonEnabled),
     })
   }
@@ -37,7 +37,7 @@ export class TableNavFormComponent<TData> extends BaseFormService<TableNavFormMo
       this.store.setTab(TableTabEnum.data)
       this.store.read()
     }
-    else if (event.add) {
+    else if (event.create) {
       this.store.setTab(TableTabEnum.create)
     }
     else if (event.delete) {
