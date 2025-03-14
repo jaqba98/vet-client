@@ -17,9 +17,10 @@ import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-f
   hostDirectives: [BaseComponentDirective],
 })
 export class TablePaginatorFormComponent implements OnInit, OnDestroy {
-  @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
+  @Input({ required: true }) selectPage!: () => Observable<number>
   @Input({ required: true }) dispatchPage!: (page: number) => void
 
+  // I am here
   readonly first: ControlButtonModel
   readonly previous: ControlButtonModel
   readonly next: ControlButtonModel
@@ -63,13 +64,14 @@ export class TablePaginatorFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sub.add(this.route.paramMap.subscribe((param) => {
-      const page = Number(param.get('page'))
-      if (page) this.dispatchPage(page)
+    this.sub.add(this.route.paramMap.subscribe((params) => {
+      const page = Number(params.get('page'))
+      if (page) {
+        this.dispatchPage(page)
+      }
     }))
-    this.sub.add(this.selectPage().subscribe((data) => {
-      this.page = data.page
-      this.maxPage = data.maxPage
+    this.sub.add(this.selectPage().subscribe((page) => {
+      this.page = page
     }))
   }
 

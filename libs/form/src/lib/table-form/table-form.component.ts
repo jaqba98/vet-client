@@ -28,11 +28,14 @@ import { TableCreateFormComponent } from './table-create-form/table-create-form.
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TStore> implements OnInit, OnDestroy {
+  @Input({ required: true }) selectPage!: () => Observable<number>
+  @Input({ required: true }) dispatchPage!: (page: number) => void
+
+  // I am here
   @Input({ required: true }) dispatchIsSelected!: (id: number, isSelected: boolean) => void
   @Input({ required: true }) dispatchCreate!: (clinic: ClinicDomainDataModel) => void
   @Input({ required: true }) dispatchDelete!: (id: number) => void
   @Input({ required: true }) dispatchEdit!: (id: number) => void
-  @Input({ required: true }) selectPage!: () => Observable<{ page: number, maxPage: number }>
   @Input({ required: true }) selectTab!: () => Observable<string>
   @Input({ required: true }) dispatchTab!: (tab: string) => void
 
@@ -40,8 +43,6 @@ export class TableFormComponent<TStore> implements OnInit, OnDestroy {
   selectCreateResponse!: () => Observable<ClinicDomainResponseModel>
 
   @Input({ required: true }) selectRows!: () => Observable<TableFormRowsModel<TStore>>
-
-  @Input({ required: true }) dispatchPage!: (page: number) => void
 
   @Input() tableButtonEnabled = true
   @Input() addButtonEnabled = true

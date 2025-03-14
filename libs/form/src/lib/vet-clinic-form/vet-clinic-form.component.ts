@@ -7,11 +7,15 @@ import { Router } from '@angular/router'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   ClinicDomainDataCreateNotification,
-  ClinicDomainDataDeleteNotification, ClinicDomainDataReadNotification,
+  ClinicDomainDataDeleteNotification,
+  clinicDomainDataPageAction,
+  ClinicDomainDataReadNotification,
   ClinicDomainDataType,
-  ClinicDomainFormType, ClinicDomainResponseType,
-  setClinicDomainPageData, setClinicDomainSelectedClinic,
-  setClinicDomainSelection, setClinicDomainTab,
+  ClinicDomainFormType,
+  ClinicDomainResponseType,
+  setClinicDomainSelectedClinic,
+  setClinicDomainSelection,
+  setClinicDomainTab,
 } from '@vet-client/lib-store'
 import { ClinicDomainDataModel, ClinicDomainResponseModel } from '@vet-client/lib-domain'
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
@@ -33,12 +37,12 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   clinics!: TableFormRowsModel<ClinicDomainDataModel['data']>
 
   constructor(
+    private readonly store: Store<ClinicDomainDataType>,
     private readonly router: Router,
     private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
     private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
     private readonly storeClinicDomainForm: Store<ClinicDomainFormType>,
-    private readonly storeClinicDomainData: Store<ClinicDomainDataType>,
     private readonly storeClinicResponseData: Store<ClinicDomainResponseType>,
   ) {}
 
@@ -47,7 +51,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     this.sub.add(this.storeClinicDomainForm.select('clinicDomainForm').subscribe((form) => {
       this.formModel = { ...form }
     }))
-    this.sub.add(this.storeClinicDomainData.select('clinicDomainData').subscribe((data) => {
+    this.sub.add(this.store.select('clinicDomainData').subscribe((data) => {
       this.router.navigate(['dashboard/vet/clinic/' + data.page])
     }))
   }
@@ -56,14 +60,8 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe()
   }
 
-  selectPage() {
-    return this.storeClinicDomainData.select('clinicDomainData').pipe(
-      map(data => ({ page: data.page, maxPage: data.maxPage })),
-    )
-  }
-
   selectRows() {
-    return this.storeClinicDomainData.select('clinicDomainData').pipe(
+    return this.store.select('clinicDomainData').pipe(
       map((data) => {
         const pageFrom = (data.page - 1) * NUMBER_OF_ROWS_PER_PAGE
         const pageTo = pageFrom + NUMBER_OF_ROWS_PER_PAGE
@@ -79,21 +77,17 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   selectTab(): Observable<string> {
-    return this.storeClinicDomainData.select('clinicDomainData').pipe(
+    return this.store.select('clinicDomainData').pipe(
       map(data => data.tab),
     )
   }
 
   dispatchTab(tab: string) {
-    this.storeClinicDomainData.dispatch(setClinicDomainTab({ tab }))
-  }
-
-  dispatchPage(page: number) {
-    return this.storeClinicDomainData.dispatch(setClinicDomainPageData({ page }))
+    this.store.dispatch(setClinicDomainTab({ tab }))
   }
 
   dispatchIsSelected(id: number, isSelected: boolean) {
-    return this.storeClinicDomainData.dispatch(setClinicDomainSelection({ id, isSelected }))
+    return this.store.dispatch(setClinicDomainSelection({ id, isSelected }))
   }
 
   dispatchCreate(clinic: ClinicDomainDataModel) {
@@ -105,7 +99,18 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   dispatchEdit(id: number) {
-    this.storeClinicDomainData.dispatch(setClinicDomainSelectedClinic({ selectedPage: id }))
-    this.storeClinicDomainData.dispatch(setClinicDomainTab({ tab: 'update' }))
+    this.store.dispatch(setClinicDomainSelectedClinic({ selectedPage: id }))
+    this.store.dispatch(setClinicDomainTab({ tab: 'update' }))
+  }
+
+  // I am here
+  selectPage() {
+    return this.store.select('clinicDomainData').pipe(
+      map(data => data.page),
+    )
+  }
+
+  dispatchPage(page: number) {
+    this.store.dispatch(clinicDomainDataPageAction({ page }))
   }
 }
