@@ -7,11 +7,11 @@ export const clinicDomainDataClinicsAction = createAction(
   '[Clinic Domain Data] Set', props<Pick<ClinicDomainDataStoreModel, 'clinics'>>(),
 )
 
-// I am here
-
 export const clinicDomainDataPageAction = createAction(
   '[Clinic Domain Data Action] Set Page', props<Pick<ClinicDomainDataStoreModel, 'page'>>(),
 )
+
+// I am here
 
 export const clinicDomainDataMaxPageAction = createAction('[Clinic Domain Data Action] Set Max Page')
 

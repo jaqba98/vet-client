@@ -3,7 +3,12 @@ import { skip, Subscription } from 'rxjs'
 import { Store } from '@ngrx/store'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ClinicDomainDataReadNotification, ClinicDomainDataType } from '@vet-client/lib-store'
+import {
+  clinicDomainDataPageAction,
+  ClinicDomainDataReadNotification,
+  ClinicDomainDataType,
+} from '@vet-client/lib-store'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -15,6 +20,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   private readonly sub: Subscription
 
   constructor(
+    private readonly route: ActivatedRoute,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
     private readonly store: Store<ClinicDomainDataType>,
   ) {
@@ -22,9 +28,15 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.clinicDomainDataReadNotification.runNotification()
-    this.sub.add(this.store.select('clinicDomainData').pipe(skip(1)).subscribe((clinicDomainData) => {
-      console.log(clinicDomainData)
+    this.sub.add(this.route.paramMap.subscribe((params) => {
+      const page = Number(params.get('page'))
+      if (page) {
+        this.clinicDomainDataReadNotification.runNotification()
+        this.store.dispatch(clinicDomainDataPageAction({ page }))
+        this.sub.add(this.store.select('clinicDomainData').pipe(skip(1)).subscribe((clinicDomainData) => {
+          console.log(clinicDomainData)
+        }))
+      }
     }))
   }
 
