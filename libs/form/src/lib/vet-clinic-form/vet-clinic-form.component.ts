@@ -130,6 +130,18 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     this.clinicDomainDataDeleteNotification.runNotification(ids)
   }
 
+  onSelectAllEvent() {
+    this.clinics.forEach((clinic) => {
+      this.dataStore.dispatch(clinicDomainDataSelectAction({ id: clinic.id, isSelected: true }))
+    })
+  }
+
+  onUnselectAllEvent() {
+    this.clinics.forEach((clinic) => {
+      this.dataStore.dispatch(clinicDomainDataSelectAction({ id: clinic.id, isSelected: false }))
+    })
+  }
+
   getHeaders(): string[] {
     return Object.entries(this.formModel)
       .filter(([, value]) => value.isEnabled)

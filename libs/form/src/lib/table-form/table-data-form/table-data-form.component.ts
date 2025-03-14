@@ -16,6 +16,8 @@ import { TableFormRowModel, TableFormRowsModel } from '../model/table-form-rows.
   hostDirectives: [BaseComponentDirective],
 })
 export class TableDataFormComponent<TRows> {
+  @Output() selectAllEvent = new EventEmitter<number>()
+  @Output() unselectAllEvent = new EventEmitter<number>()
   @Output() selectEvent = new EventEmitter<number>()
   @Output() unselectEvent = new EventEmitter<number>()
   @Output() deleteEvent = new EventEmitter<number>()
@@ -68,6 +70,14 @@ export class TableDataFormComponent<TRows> {
 
   onUnselectEvent(id: number) {
     this.unselectEvent.emit(id)
+  }
+
+  onSelectAllEvent() {
+    this.selectAllEvent.emit()
+  }
+
+  onUnselectAllEvent() {
+    this.unselectAllEvent.emit()
   }
 
   onDeleteEvent(id: number) {
