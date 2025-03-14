@@ -8,9 +8,11 @@ import {
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   ClinicDomainDataReadNotification,
+  clinicDomainDataTabAction,
   ClinicDomainDataType,
 } from '@vet-client/lib-store'
 import { TableFormComponent } from '../table-form/table-form.component'
+import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -23,6 +25,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   page = 1
   maxPage = 1
+  tab = TableFormTabEnum.table
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -45,6 +48,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
           this.sub.add(this.store.select('clinicDomainData').pipe(skip(1)).subscribe((clinicDomainData) => {
             this.page = clinicDomainData.page
             this.maxPage = clinicDomainData.maxPage
+            this.tab = clinicDomainData.tab as TableFormTabEnum
             if (this.page < 1 || this.page > this.maxPage) {
               this.router.navigate(['dashboard/vet/clinic/1'])
             }
@@ -61,6 +65,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   onTablePaginatorEvent(page: number) {
     this.store.dispatch(clinicDomainDataPageAction({ page }))
+  }
+
+  onTableNavEvent(tab: TableFormTabEnum) {
+    this.store.dispatch(clinicDomainDataTabAction({ tab }))
   }
 
   // private readonly sub = new Subscription()

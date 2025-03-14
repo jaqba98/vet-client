@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
+// done
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { faArrowsRotate, faMagnifyingGlass, faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import {
   BaseFormBuilder,
@@ -8,7 +9,7 @@ import {
 } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableNavDataModel, TableNavFormModel } from './table-nav-form.model'
-import { TableTabEnum } from '../enum/table-tab.enum'
+import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-table-nav-form',
@@ -17,28 +18,46 @@ import { TableTabEnum } from '../enum/table-tab.enum'
   hostDirectives: [BaseComponentDirective],
 })
 export class TableNavFormComponent extends BaseFormService<TableNavFormModel, TableNavDataModel> implements OnInit {
-  @Input({ required: true }) dispatchTab!: (tab: string) => void
+  @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
+  @Output() deleteEvent = new EventEmitter<boolean>()
+  @Output() refreshEvent = new EventEmitter<boolean>()
+
   @Input({ required: true }) tableButtonEnabled!: boolean
-  @Input({ required: true }) addButtonEnabled!: boolean
-  @Input({ required: true }) removeButtonEnabled!: boolean
+  @Input({ required: true }) createButtonEnabled!: boolean
+  @Input({ required: true }) deleteButtonEnabled!: boolean
+  @Input({ required: true }) refreshButtonEnabled!: boolean
+  @Input({ required: true }) searchButtonEnabled!: boolean
 
   ngOnInit() {
     this.initBaseForm({
       table: BaseFormBuilder.buildButtonIcon('table', faTable, 'dark-primary', this.tableButtonEnabled),
-      create: BaseFormBuilder.buildButtonIcon('add', faPlus, 'success', this.addButtonEnabled),
-      delete: BaseFormBuilder.buildButtonIcon('delete', faTrash, 'error', this.removeButtonEnabled),
+      create: BaseFormBuilder.buildButtonIcon('create', faPlus, 'success', this.createButtonEnabled),
+      delete: BaseFormBuilder.buildButtonIcon('delete', faTrash, 'error', this.deleteButtonEnabled),
+      refresh: BaseFormBuilder.buildButtonIcon('refresh', faArrowsRotate, 'primary', this.refreshButtonEnabled),
+      search: BaseFormBuilder.buildButtonIcon('search', faMagnifyingGlass, 'dark-secondary', this.searchButtonEnabled),
     })
   }
 
   override onSubmit(event: TableNavDataModel) {
     if (event.table) {
-      this.dispatchTab(TableTabEnum.data)
+      this.tableNavEvent.emit(TableFormTabEnum.table)
+      return
     }
-    else if (event.create) {
-      this.dispatchTab(TableTabEnum.create)
+    if (event.create) {
+      this.tableNavEvent.emit(TableFormTabEnum.create)
+      return
     }
-    else if (event.delete) {
-      // this.store.deleteAll()
+    if (event.delete) {
+      this.deleteEvent.emit(true)
+      return
+    }
+    if (event.refresh) {
+      this.refreshEvent.emit(true)
+      return
+    }
+    if (event.search) {
+      this.tableNavEvent.emit(TableFormTabEnum.search)
+      return
     }
   }
 }

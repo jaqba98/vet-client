@@ -13,6 +13,10 @@ export const clinicDomainDataPageAction = createAction(
 
 export const clinicDomainDataMaxPageAction = createAction('[Clinic Domain Data Action] Set Max Page')
 
+export const clinicDomainDataTabAction = createAction(
+  '[Clinic Domain Data Action] Set Tab', props<Pick<ClinicDomainDataStoreModel, 'tab'>>(),
+)
+
 // I am here
 
 export const setClinicDomainData = createAction('[Clinic Domain Data] Set', props<ClinicDomainDataStoreModel>())
@@ -23,8 +27,4 @@ export const setClinicDomainSelection = createAction(
 
 export const setClinicDomainSelectedClinic = createAction(
   '[Clinic Domain Data] Set Selected Clinic', props<{ selectedPage: number }>(),
-)
-
-export const setClinicDomainTab = createAction(
-  '[Clinic Domain Data] Set Tab', props<{ tab: string }>(),
 )

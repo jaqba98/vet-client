@@ -1,11 +1,18 @@
+// done
 import { ControlType } from '@vet-client/lib-base-form'
 
-export interface BaseTableNavFormModel<T> {
-  table: T
-  create: T
-  delete: T
+export interface TableNavFormModel {
+  table: ControlType
+  create: ControlType
+  delete: ControlType
+  refresh: ControlType
+  search: ControlType
 }
 
-export type TableNavFormModel = BaseTableNavFormModel<ControlType>
-
-export type TableNavDataModel = BaseTableNavFormModel<boolean>
+export interface TableNavDataModel {
+  table: boolean
+  create: boolean
+  delete: boolean
+  refresh: boolean
+  search: boolean
+}

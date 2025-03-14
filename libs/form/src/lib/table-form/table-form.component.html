@@ -1,17 +1,20 @@
 <lib-table-panel-control>
   <ng-container nav>
-    <p>nav</p>
-<!--    <lib-table-nav-form-->
-<!--      [dispatchTab]="dispatchTab"-->
-<!--      [tableButtonEnabled]="tableButtonEnabled"-->
-<!--      [addButtonEnabled]="addButtonEnabled"-->
-<!--      [removeButtonEnabled]="removeButtonEnabled"-->
-<!--    ></lib-table-nav-form>-->
+    <lib-table-nav-form
+      [tableButtonEnabled]="tableButtonEnabled"
+      [createButtonEnabled]="createButtonEnabled"
+      [deleteButtonEnabled]="deleteButtonEnabled"
+      [refreshButtonEnabled]="refreshButtonEnabled"
+      [searchButtonEnabled]="searchButtonEnabled"
+      (tableNavEvent)="onTableNavEvent($event)"
+      (deleteEvent)="onDeleteEvent()"
+      (refreshEvent)="onRefreshEvent()"
+    ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
-    <p>content</p>
-<!--    <ng-container [ngSwitch]="tab">-->
-<!--      <ng-container *ngSwitchCase="'data'">-->
+    <ng-container [ngSwitch]="tab">
+      <ng-container *ngSwitchCase="'table'">
+        <p>table</p>
 <!--        <lib-table-data-form-->
 <!--          [dispatchDelete]="dispatchDelete"-->
 <!--          [dispatchEdit]="dispatchEdit"-->
@@ -19,21 +22,27 @@
 <!--          [dispatchIsSelected]="dispatchIsSelected"-->
 <!--          [formModel]="formModel"-->
 <!--        ></lib-table-data-form>-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngSwitchCase="'create'">-->
+      </ng-container>
+      <ng-container *ngSwitchCase="'create'">
+        <p>create</p>
 <!--        <lib-table-create-form-->
 <!--          [selectCreateResponse]="selectCreateResponse"-->
 <!--          [dispatchCreate]="dispatchCreate"-->
 <!--          [formModel]="formModel"-->
 <!--        ></lib-table-create-form>-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngSwitchCase="'update'">-->
+      </ng-container>
+      <ng-container *ngSwitchCase="'update'">
+        <p>update</p>
 <!--        <lib-table-edit-form [dispatchTab]="dispatchTab" [formModel]="formModel"></lib-table-edit-form>-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngSwitchDefault>-->
-<!--        <p>default</p>-->
-<!--      </ng-container>-->
-<!--    </ng-container>-->
+      </ng-container>
+      <ng-container *ngSwitchCase="'search'">
+        <p>search</p>
+<!--        <lib-table-edit-form [dispatchTab]="dispatchTab" [formModel]="formModel"></lib-table-edit-form>-->
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <p>default</p>
+      </ng-container>
+    </ng-container>
   </ng-container>
   <ng-container paginator>
     <lib-table-paginator-form

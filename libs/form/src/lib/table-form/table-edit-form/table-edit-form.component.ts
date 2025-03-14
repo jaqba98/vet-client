@@ -9,7 +9,7 @@ import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
 import { AsyncPipe } from '@angular/common'
-import { TableTabEnum } from '../enum/table-tab.enum'
+import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-table-edit-form',
@@ -57,6 +57,6 @@ export class TableEditFormComponent<TData>
   }
 
   onEditEvent(row: TData) {
-    this.dispatchTab(TableTabEnum.edit)
+    this.dispatchTab(TableFormTabEnum.edit)
   }
 }

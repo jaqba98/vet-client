@@ -7,19 +7,19 @@ import {
   clinicDomainDataClinicsAction,
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
+  clinicDomainDataTabAction,
   setClinicDomainData,
   setClinicDomainSelectedClinic,
   setClinicDomainSelection,
-  setClinicDomainTab,
 } from '../../../actions/domain/data/clinic-domain-data-action.service'
 
 const initialState: ClinicDomainDataStoreModel = {
   clinics: [],
   page: -1,
   maxPage: -1,
+  tab: 'table',
   // I am here
   selectedPage: -1,
-  tab: 'data',
 }
 
 export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>(
@@ -30,6 +30,7 @@ export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>
     ...state,
     maxPage: state.clinics.length === 0 ? 1 : Math.ceil(state.clinics.length / NUMBER_OF_ROWS_PER_PAGE),
   })),
+  on(clinicDomainDataTabAction, (state: ClinicDomainDataStoreModel, { tab }) => ({ ...state, tab })),
   // I am here
   // I am here
   on(setClinicDomainData, (state: ClinicDomainDataStoreModel, { page, clinics }) => ({
@@ -42,5 +43,4 @@ export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>
     clinics: state.clinics.map(clinic => clinic.id === id ? { ...clinic, isSelected } : clinic),
   })),
   on(setClinicDomainSelectedClinic, (state: ClinicDomainDataStoreModel, { selectedPage }) => ({ ...state, selectedPage })),
-  on(setClinicDomainTab, (state: ClinicDomainDataStoreModel, { tab }) => ({ ...state, tab })),
 )

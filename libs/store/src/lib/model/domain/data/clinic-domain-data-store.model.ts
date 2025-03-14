@@ -5,7 +5,7 @@ export interface ClinicDomainDataStoreModel {
   clinics: ClinicDomainDataModel[]
   page: number
   maxPage: number
+  tab: string
   // I am here
   selectedPage: number
-  tab: string
 }

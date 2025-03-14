@@ -2,5 +2,7 @@
 <lib-table-form
   [page]="page"
   [maxPage]="maxPage"
+  [tab]="tab"
   (tablePaginatorEvent)="onTablePaginatorEvent($event)"
+  (tableNavEvent)="onTableNavEvent($event)"
 ></lib-table-form>

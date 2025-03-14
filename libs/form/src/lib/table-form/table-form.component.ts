@@ -4,21 +4,48 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
+import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
+import { TableFormTabEnum } from './enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-table-form',
-  imports: [CommonModule, TablePanelControlComponent, TablePaginatorFormComponent],
+  imports: [
+    CommonModule,
+    TablePanelControlComponent,
+    TablePaginatorFormComponent,
+    TableNavFormComponent,
+  ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent {
   @Output() tablePaginatorEvent = new EventEmitter<number>()
+  @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
 
   @Input({ required: true }) page!: number
   @Input({ required: true }) maxPage!: number
+  @Input({ required: true }) tab!: TableFormTabEnum
+
+  @Input() tableButtonEnabled = true
+  @Input() createButtonEnabled = true
+  @Input() deleteButtonEnabled = true
+  @Input() refreshButtonEnabled = true
+  @Input() searchButtonEnabled = true
 
   onTablePaginatorEvent(page: number) {
     this.tablePaginatorEvent.emit(page)
+  }
+
+  onTableNavEvent(tag: TableFormTabEnum) {
+    this.tableNavEvent.emit(tag)
+  }
+
+  onDeleteEvent() {
+    //
+  }
+
+  onRefreshEvent() {
+    //
   }
 
   // @Input({ required: true }) selectPage!: () => Observable<number>
