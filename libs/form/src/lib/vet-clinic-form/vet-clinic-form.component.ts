@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
+  clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   ClinicDomainDataReadNotification,
   ClinicDomainDataType,
@@ -33,6 +34,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
       if (page) {
         this.clinicDomainDataReadNotification.runNotification()
         this.store.dispatch(clinicDomainDataPageAction({ page }))
+        this.store.dispatch(clinicDomainDataMaxPageAction())
         this.sub.add(this.store.select('clinicDomainData').pipe(skip(1)).subscribe((clinicDomainData) => {
           console.log(clinicDomainData)
         }))

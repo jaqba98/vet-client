@@ -16,8 +16,8 @@ import {
 const initialState: ClinicDomainDataStoreModel = {
   clinics: [],
   page: -1,
+  maxPage: -1,
   // I am here
-  maxPage: 1,
   selectedPage: -1,
   tab: 'data',
 }
@@ -26,11 +26,11 @@ export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>
   initialState,
   on(clinicDomainDataClinicsAction, (state: ClinicDomainDataStoreModel, { clinics }) => ({ ...state, clinics })),
   on(clinicDomainDataPageAction, (state: ClinicDomainDataStoreModel, { page }) => ({ ...state, page })),
-  // I am here
   on(clinicDomainDataMaxPageAction, (state: ClinicDomainDataStoreModel) => ({
     ...state,
     maxPage: state.clinics.length === 0 ? 1 : Math.ceil(state.clinics.length / NUMBER_OF_ROWS_PER_PAGE),
   })),
+  // I am here
   // I am here
   on(setClinicDomainData, (state: ClinicDomainDataStoreModel, { page, clinics }) => ({
     ...state,
