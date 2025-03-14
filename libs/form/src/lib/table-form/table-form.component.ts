@@ -8,7 +8,8 @@ import { TableNavFormComponent } from './table-nav-form/table-nav-form.component
 import { TableFormTabEnum } from './enum/table-form-tab.enum'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 import { TableFormModel } from './model/table-form.model'
-import { TableFormRowModel, TableFormRowsModel } from './model/table-form-rows.model'
+import { TableFormRowsModel } from './model/table-form-rows.model'
+import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
 
 @Component({
   selector: 'lib-table-form',
@@ -18,20 +19,25 @@ import { TableFormRowModel, TableFormRowsModel } from './model/table-form-rows.m
     TablePaginatorFormComponent,
     TableNavFormComponent,
     TableDataFormComponent,
+    TableCreateFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TRows> {
+export class TableFormComponent<TRows, TData> {
+  @Output() createEvent = new EventEmitter<TData>()
   @Output() tablePaginatorEvent = new EventEmitter<number>()
   @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
   @Output() deleteEvent = new EventEmitter<number>()
 
+  @Input({ required: true }) formModel!: TableFormModel
   @Input({ required: true }) headers!: string[]
   @Input({ required: true }) page!: number
   @Input({ required: true }) maxPage!: number
   @Input({ required: true }) tab!: TableFormTabEnum
   @Input({ required: true }) rows!: TableFormRowsModel<TRows>
+  @Input({ required: true }) createSuccess!: string
+  @Input({ required: true }) createError!: string
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true
@@ -57,6 +63,10 @@ export class TableFormComponent<TRows> {
 
   onRefreshEvent() {
     //
+  }
+
+  onCreateEvent(data: TData) {
+    this.createEvent.emit(data)
   }
 
   // @Input({ required: true }) selectPage!: () => Observable<number>

@@ -5,14 +5,15 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
+  ClinicDomainDataCreateNotification,
   ClinicDomainDataDeleteNotification,
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   ClinicDomainDataReadNotification,
   clinicDomainDataTabAction,
-  ClinicDomainDataType, ClinicDomainFormType,
+  ClinicDomainDataType, ClinicDomainFormType, ClinicDomainResponseType,
 } from '@vet-client/lib-store'
-import { ClinicDomainDataModel, ClinicDomainFormModel } from '@vet-client/lib-domain'
+import { ClinicDomainDataInternalModel, ClinicDomainDataModel, ClinicDomainFormModel } from '@vet-client/lib-domain'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
 import { TableFormModel } from '../table-form/model/table-form.model'
@@ -32,14 +33,18 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   maxPage = 1
   tab = TableFormTabEnum.table
   clinics: ClinicDomainDataModel[] = []
+  createSuccess = ''
+  createError = ''
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
     private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
     private readonly formStore: Store<ClinicDomainFormType>,
     private readonly dataStore: Store<ClinicDomainDataType>,
+    private readonly responseStore: Store<ClinicDomainResponseType>,
   ) {
     this.sub = new Subscription()
   }
@@ -55,6 +60,16 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
           this.dataStore.dispatch(clinicDomainDataMaxPageAction())
           this.sub.add(this.formStore.select('clinicDomainForm').subscribe((form) => {
             this.formModel = form
+          }))
+          this.sub.add(this.responseStore.select('clinicDomainResponse').pipe(skip(1)).subscribe((response) => {
+            this.createSuccess = ''
+            this.createError = ''
+            if (response.createResponse.success) {
+              this.createSuccess = response.createResponse.message
+            }
+            else {
+              this.createError = response.createResponse.message
+            }
           }))
           this.sub.add(this.dataStore.select('clinicDomainData').pipe(skip(1)).subscribe((data) => {
             this.page = data.page
@@ -87,6 +102,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   onDeleteEvent(id: number) {
     this.clinicDomainDataDeleteNotification.runNotification([id])
+  }
+
+  onCreateEvent(model: ClinicDomainDataInternalModel) {
+    this.clinicDomainDataCreateNotification.runNotification(model)
   }
 
   getHeaders(): string[] {

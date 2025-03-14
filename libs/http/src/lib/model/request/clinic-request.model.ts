@@ -1,7 +1,7 @@
-import { ClinicDomainDataModel } from '@vet-client/lib-domain'
+import { ClinicDomainDataInternalModel, ClinicDomainDataModel } from '@vet-client/lib-domain'
 import { BaseRequestModel } from '../base/base-request.model'
 
-export interface ClinicCreateRequestModel extends BaseRequestModel, ClinicDomainDataModel {}
+export interface ClinicCreateRequestModel extends BaseRequestModel, ClinicDomainDataInternalModel {}
 
 export type ClinicReadRequestModel = BaseRequestModel
 

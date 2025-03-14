@@ -7,7 +7,6 @@ import { ClinicDomainFormStoreModel } from '../../../model/domain/form/clinic-do
 import { setClinicDomainForm } from '../../../actions/domain/form/clinic-domain-form.action'
 
 const initialState: ClinicDomainFormStoreModel = {
-  id: BaseFormBuilder.buildInputText('ID', [], false),
   name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)], true),
 }
 

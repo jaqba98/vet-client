@@ -21,12 +21,12 @@
         ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'create'">
-        <p>create</p>
-<!--        <lib-table-create-form-->
-<!--          [selectCreateResponse]="selectCreateResponse"-->
-<!--          [dispatchCreate]="dispatchCreate"-->
-<!--          [formModel]="formModel"-->
-<!--        ></lib-table-create-form>-->
+        <lib-table-create-form
+          [formModel]="formModel"
+          [createSuccess]="createSuccess"
+          [createError]="createError"
+          (createEvent)="onCreateEvent($event)"
+        ></lib-table-create-form>
       </ng-container>
       <ng-container *ngSwitchCase="'update'">
         <p>update</p>
@@ -41,7 +41,7 @@
       </ng-container>
     </ng-container>
   </ng-container>
-  <ng-container *ngIf="tab === 'table'" paginator>
+  <ng-container paginator>
     <lib-table-paginator-form
       [page]="page"
       [maxPage]="maxPage"

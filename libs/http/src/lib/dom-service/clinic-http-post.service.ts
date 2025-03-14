@@ -5,11 +5,9 @@ import { map, take } from 'rxjs'
 import { CookieService } from '@vet-client/lib-system'
 import {
   clinicDomainDataClinicsAction,
-  ClinicDomainDataType,
-  ClinicDomainResponseType,
-  setClinicDomainCreateResponse,
+  ClinicDomainDataType, ClinicDomainResponseType, setClinicDomainCreateResponse,
 } from '@vet-client/lib-store'
-import { ClinicDomainDataModel } from '@vet-client/lib-domain'
+import { ClinicDomainDataInternalModel } from '@vet-client/lib-domain'
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import {
   ClinicCreateResponseModel,
@@ -33,7 +31,7 @@ export class ClinicHttpPostService {
     private readonly storeClinicDomainResponse: Store<ClinicDomainResponseType>,
   ) {}
 
-  clinicCreatePost(client: ClinicDomainDataModel) {
+  clinicCreatePost(client: ClinicDomainDataInternalModel) {
     const token = this.cookie.getToken()
     const request: ClinicCreateRequestModel = { token, ...client }
     return this.httpExecute
@@ -44,12 +42,13 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((response) => {
-          return this.storeClinicDomainResponse.dispatch(setClinicDomainCreateResponse({
+          const createData = {
             createResponse: {
               success: response.success,
-              message: response.success ? 'Clinic was added correctly!' : response.errors[0],
+              message: response.success ? 'The clinic has been added correctly!' : response.errors[0],
             },
-          }))
+          }
+          return this.storeClinicDomainResponse.dispatch(setClinicDomainCreateResponse(createData))
         }),
       )
   }

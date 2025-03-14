@@ -23,6 +23,7 @@ import {
   hostDirectives: [BaseComponentDirective],
 })
 export class TablePaginatorFormComponent {
+  @Output() tablePaginatorOnInitEvent = new EventEmitter()
   @Output() tablePaginatorEvent = new EventEmitter<number>()
 
   @Input({ required: true }) page!: number

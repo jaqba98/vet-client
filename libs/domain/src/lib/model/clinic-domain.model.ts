@@ -1,7 +1,6 @@
 import { ControlInputModel } from '@vet-client/lib-base-form'
 
 export interface ClinicDomainFormModel {
-  id: ControlInputModel
   name: ControlInputModel
 }
 
@@ -10,11 +9,14 @@ export interface ClinicDomainResponseModel {
   message: string
 }
 
+export interface ClinicDomainDataInternalModel {
+  name: string
+}
+
 export interface ClinicDomainDataModel {
   id: number
   isSelected: boolean
-  data: {
+  data: ClinicDomainDataInternalModel & {
     id: number
-    name: string
   }
 }

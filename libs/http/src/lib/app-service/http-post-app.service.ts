@@ -40,7 +40,11 @@ import {
   setLogoutDomainData,
   setRoute,
 } from '@vet-client/lib-store'
-import { ClinicDomainDataModel, LoginDomainDataModel, LogoutDomainDataModel } from '@vet-client/lib-domain'
+import {
+  ClinicDomainDataInternalModel,
+  LoginDomainDataModel,
+  LogoutDomainDataModel,
+} from '@vet-client/lib-domain'
 import { ClinicHttpPostService } from '../dom-service/clinic-http-post.service'
 
 @Injectable({ providedIn: 'root' })
@@ -143,7 +147,7 @@ export class HttpPostAppService {
       .pipe(take(1))
   }
 
-  clinicCreatePost(clinic: ClinicDomainDataModel) {
+  clinicCreatePost(clinic: ClinicDomainDataInternalModel) {
     return this.clinicHttpPost.clinicCreatePost(clinic)
   }
 

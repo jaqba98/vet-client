@@ -1,11 +1,15 @@
 <!-- done -->
 <lib-table-form
+  [formModel]="formModel"
   [headers]="getHeaders()"
   [rows]="clinics"
   [page]="page"
   [maxPage]="maxPage"
   [tab]="tab"
+  [createSuccess]="createSuccess"
+  [createError]="createError"
   (tablePaginatorEvent)="onTablePaginatorEvent($event)"
   (tableNavEvent)="onTableNavEvent($event)"
   (deleteEvent)="onDeleteEvent($event)"
+  (createEvent)="onCreateEvent($event)"
 ></lib-table-form>
