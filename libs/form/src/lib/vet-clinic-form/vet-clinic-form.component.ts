@@ -16,6 +16,7 @@ import { ClinicDomainDataModel, ClinicDomainFormModel } from '@vet-client/lib-do
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
 import { TableFormModel } from '../table-form/model/table-form.model'
+import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -59,7 +60,9 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
             this.page = data.page
             this.maxPage = data.maxPage
             this.tab = data.tab as TableFormTabEnum
-            this.clinics = data.clinics
+            const left = (this.page - 1) * NUMBER_OF_ROWS_PER_PAGE
+            const right = left + NUMBER_OF_ROWS_PER_PAGE
+            this.clinics = data.clinics.filter((clinic, id) => id >= left && id <= right)
             if (this.page < 1 || this.page > this.maxPage) {
               this.router.navigate(['dashboard/vet/clinic/1'])
             }
