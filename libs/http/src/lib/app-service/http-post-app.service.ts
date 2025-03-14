@@ -23,13 +23,9 @@ import { RegistrationResponseModel } from '../model/response/registration-respon
 import { GetAccountRequestModel } from '../model/request/get-account-request.model'
 import { GetAccountResponseModel } from '../model/response/get-account-response.model'
 import {
-  ClinicCreateRequestModel,
-  ClinicDeleteRequestModel,
   ClinicUpdateRequestModel,
 } from '../model/request/clinic-request.model'
 import {
-  ClinicCreateResponseModel,
-  ClinicDeleteResponseModel,
   ClinicUpdateResponseModel,
 } from '../model/response/clinic-response.model'
 import { CookieService } from '@vet-client/lib-system'

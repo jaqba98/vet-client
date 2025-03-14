@@ -4,9 +4,9 @@ import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
 import {
+  clinicDomainDataClinicsAction,
   ClinicDomainDataType,
   ClinicDomainResponseType,
-  setClinicDomainClinicsData,
   setClinicDomainCreateResponse,
 } from '@vet-client/lib-store'
 import { ClinicDomainDataModel } from '@vet-client/lib-domain'
@@ -22,6 +22,7 @@ import {
   ClinicCreateRequestModel,
   ClinicDeleteRequestModel,
 } from '../model/request/clinic-request.model'
+import { BaseRequestModel } from '../model/base/base-request.model'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicHttpPostService {
@@ -55,23 +56,24 @@ export class ClinicHttpPostService {
 
   readPost() {
     const token = this.cookie.getToken()
+    const request: BaseRequestModel = { token }
     return this.httpExecute
       .exec<ClinicReadResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicRead, request: { token } },
+        type: { endpoint: EndpointEnum.clinicRead, request },
       })
       .pipe(
         take(1),
-        map(res =>
-          res.clinics.map(clinic => ({
+        map((res) => {
+          return res.clinics.map(clinic => ({
             id: clinic.id,
             isSelected: false,
             data: clinic,
-          })),
-        ),
-        map(clinics =>
-          this.storeClinicDomainData.dispatch(setClinicDomainClinicsData({ clinics })),
-        ),
+          }))
+        }),
+        map((clinics) => {
+          return this.storeClinicDomainData.dispatch(clinicDomainDataClinicsAction({ clinics }))
+        }),
       )
   }
 

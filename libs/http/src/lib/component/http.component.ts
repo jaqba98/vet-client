@@ -5,8 +5,6 @@ import { skip, Subscription, switchMap } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
-  ClinicDomainDataCreateNotification,
-  ClinicDomainDataDeleteNotification,
   ClinicDomainDataReadNotification,
   LoginDomainDataType,
   LogoutDomainDataType,
@@ -22,15 +20,18 @@ export class HttpComponent implements OnInit, OnDestroy {
   private readonly sub = new Subscription()
 
   constructor(
-    private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
-    private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
     private readonly storeLoginDomainData: Store<LoginDomainDataType>,
     private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
     private readonly httpPost: HttpPostAppService,
   ) {}
 
   ngOnInit() {
+    this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
+      switchMap(() => this.httpPost.clinicReadPost()),
+    ).subscribe())
+
+    // I am here
     this.sub.add(this.storeLoginDomainData.select('loginDomainData').pipe(
       skip(1),
       switchMap(data => this.httpPost.loginPost(data)),
@@ -39,16 +40,16 @@ export class HttpComponent implements OnInit, OnDestroy {
       skip(1),
       switchMap(data => this.httpPost.logoutPost(data)),
     ).subscribe())
-    this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
-      switchMap(() => this.httpPost.clinicReadPost()),
-    ).subscribe())
-    this.sub.add(this.clinicDomainDataDeleteNotification.notification$.pipe(
-      switchMap(ids => this.httpPost.clinicDeletePost(ids)),
-    ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
-    this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
-      skip(1),
-      switchMap(clinic => this.httpPost.clinicCreatePost(clinic)),
-    ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
+    // this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
+    //   switchMap(() => this.httpPost.clinicReadPost()),
+    // ).subscribe())
+    // this.sub.add(this.clinicDomainDataDeleteNotification.notification$.pipe(
+    //   switchMap(ids => this.httpPost.clinicDeletePost(ids)),
+    // ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
+    // this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
+    //   skip(1),
+    //   switchMap(clinic => this.httpPost.clinicCreatePost(clinic)),
+    // ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
   }
 
   ngOnDestroy() {

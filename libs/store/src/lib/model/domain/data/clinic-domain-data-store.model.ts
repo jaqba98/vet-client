@@ -2,10 +2,10 @@
 import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 
 export interface ClinicDomainDataStoreModel {
+  clinics: ClinicDomainDataModel[]
+  // I am here
   page: number
   maxPage: number
-  // I am here
   selectedPage: number
   tab: string
-  clinics: ClinicDomainDataModel[]
 }
