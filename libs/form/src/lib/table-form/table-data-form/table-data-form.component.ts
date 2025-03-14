@@ -45,13 +45,13 @@ export class TableDataFormComponent<TData> implements OnInit, OnDestroy {
       .buildBase('checked')
       .buildIsSquare(true)
       .buildIcon(faSquareCheck, 'light-primary', '2rem')
-      .buildColor('primary')
+      .buildColor('dark-secondary')
       .build()
     this.unselectedButtonModel = this.controlButton
       .buildBase('unchecked')
       .buildIsSquare(true)
       .buildIcon(faSquare, 'light-primary', '2rem')
-      .buildColor('primary')
+      .buildColor('dark-secondary')
       .build()
     this.editButtonModel = this.controlButton
       .buildBase('edit')
