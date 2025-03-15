@@ -21,6 +21,7 @@ export class TableDataFormComponent<TRows> {
   @Output() selectEvent = new EventEmitter<number>()
   @Output() unselectEvent = new EventEmitter<number>()
   @Output() deleteEvent = new EventEmitter<number>()
+  @Output() editSelectEvent = new EventEmitter<number>()
 
   @Input({ required: true }) headers!: string[]
   @Input({ required: true }) rows!: TableFormRowsModel<TRows>
@@ -85,7 +86,7 @@ export class TableDataFormComponent<TRows> {
     this.deleteEvent.emit(id)
   }
 
-  onEditEvent(id: number) {
-    //
+  onEditSelectEvent(id: number) {
+    this.editSelectEvent.emit(id)
   }
 }

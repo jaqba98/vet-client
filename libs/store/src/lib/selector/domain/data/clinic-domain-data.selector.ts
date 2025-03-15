@@ -23,3 +23,8 @@ export const selectClinicDomainDataTab = createSelector(
   selectClinicDomainData,
   clinicDomainData => clinicDomainData.tab,
 )
+
+export const selectClinicDomainDataSelectedClinic = createSelector(
+  selectClinicDomainData,
+  clinicDomainData => clinicDomainData.selectedClinic,
+)

@@ -23,6 +23,7 @@
           (deleteEvent)="onDeleteEvent($event)"
           (selectEvent)="onSelectEvent($event)"
           (unselectEvent)="onUnselectEvent($event)"
+          (editSelectEvent)="onEditSelectEvent($event)"
         ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'create'">
@@ -34,8 +35,13 @@
         ></lib-table-create-form>
       </ng-container>
       <ng-container *ngSwitchCase="'update'">
-        <p>update</p>
-<!--        <lib-table-edit-form [dispatchTab]="dispatchTab" [formModel]="formModel"></lib-table-edit-form>-->
+        <lib-table-edit-form
+          [formModel]="formModel"
+          [editSuccess]="editSuccess"
+          [editError]="editError"
+          [selectedClinic]="selectedClinic"
+          (updateEvent)="onUpdateEvent($event)"
+        ></lib-table-edit-form>
       </ng-container>
       <ng-container *ngSwitchCase="'search'">
         <p>search</p>

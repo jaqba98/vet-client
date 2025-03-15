@@ -7,11 +7,12 @@ import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   ClinicDomainDataCreateNotification,
   ClinicDomainDataDeleteNotification,
-  ClinicDomainDataReadNotification,
+  ClinicDomainDataReadNotification, ClinicDomainDataUpdateNotification,
   LoginDomainDataType,
   LogoutDomainDataType,
 } from '@vet-client/lib-store'
 import { HttpPostAppService } from '../app-service/http-post-app.service'
+import { CookieService } from '@vet-client/lib-system'
 
 @Component({
   selector: 'lib-http',
@@ -22,19 +23,31 @@ export class HttpComponent implements OnInit, OnDestroy {
   private readonly sub = new Subscription()
 
   constructor(
+    private readonly cookie: CookieService,
     private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
     private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
+    private readonly clinicDomainDataUpdateNotification: ClinicDomainDataUpdateNotification,
     private readonly storeLoginDomainData: Store<LoginDomainDataType>,
     private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
     private readonly httpPost: HttpPostAppService,
   ) {}
 
   ngOnInit() {
+    const token = this.cookie.getToken()
     this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
       skip(1),
       switchMap(clinic => this.httpPost.clinicCreatePost(clinic)),
     ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
+    this.sub.add(this.clinicDomainDataUpdateNotification.notification$.pipe(
+      skip(1),
+      switchMap(clinic => this.httpPost.clinicUpdatePost({
+        token, id: clinic.id, name: clinic.name,
+      })),
+    ).subscribe((response) => {
+      console.log(response)
+      this.clinicDomainDataReadNotification.runNotification()
+    }))
     this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
       skip(1),
       switchMap(() => this.httpPost.clinicReadPost()),

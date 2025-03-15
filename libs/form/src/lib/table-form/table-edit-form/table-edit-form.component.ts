@@ -1,13 +1,16 @@
-import { Component, Input, OnDestroy } from '@angular/core'
-import { Subscription } from 'rxjs'
-
 import {
-  BaseFormComponent,
-  BaseFormService,
-} from '@vet-client/lib-base-form'
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
+
+import { BaseFormComponent, BaseFormService, ControlButtonBuilder } from '@vet-client/lib-base-form'
 import { TableCardControlComponent } from '@vet-client/lib-control'
-import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
+import { TableFormRowModel } from '../model/table-form-rows.model'
 
 @Component({
   selector: 'lib-table-edit-form',
@@ -17,44 +20,35 @@ import { TableFormModel } from '../model/table-form.model'
 })
 export class TableEditFormComponent<TData>
   extends BaseFormService<TableFormModel, TData>
-  implements OnDestroy {
-  @Input({ required: true }) dispatchTab!: (tab: string) => void
+  implements OnInit {
+  @Output() updateEvent = new EventEmitter<TData>()
 
   @Input({ required: true }) formModel!: TableFormModel
+  @Input({ required: true }) editSuccess!: string
+  @Input({ required: true }) editError!: string
+  @Input({ required: true }) selectedClinic!: TableFormRowModel<TData>
 
-  private sub!: Subscription
-
-  private id!: number
-
-  constructor(private objectType: ObjectTypeUtils) {
+  constructor(private readonly controlButton: ControlButtonBuilder) {
     super()
-    this.sub = new Subscription()
   }
 
-  // ngOnInit() {
-  //   this.sub.add(
-  //     this.store.row$.subscribe((row) => {
-  //       this.id = row.id
-  //       const newFormModel: TableFormModel = {}
-  //       for (const [key, value] of Object.entries(this.formModel)) {
-  //         newFormModel[key] = <ControlType>{
-  //           ...value,
-  //           defaultValue: this.objectType.getPropertyByDynamicKey(row.data, key),
-  //         }
-  //       }
-  //       this.initBaseForm({
-  //         ...newFormModel,
-  //         edit: BaseFormBuilder.buildButtonText('edit', 'Edit', 'primary', true),
-  //       })
-  //     }),
-  //   )
-  // }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe()
+  ngOnInit() {
+    this.initBaseForm({
+      ...this.formModel,
+      create: this.controlButton
+        .buildBase('edit')
+        .buildText('Edit')
+        .buildColor('primary')
+        .build(),
+    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.formGroup.patchValue(this.selectedClinic.data as any)
   }
 
-  // onEditEvent(row: TData) {
-  //   this.dispatchTab(TableFormTabEnum.edit)
-  // }
+  override onSubmit(data: TData) {
+    this.updateEvent.emit({
+      ...this.selectedClinic.data,
+      ...data,
+    })
+  }
 }

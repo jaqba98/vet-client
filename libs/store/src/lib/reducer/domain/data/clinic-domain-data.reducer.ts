@@ -8,6 +8,7 @@ import {
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   clinicDomainDataSelectAction,
+  clinicDomainDataSelectedClinicAction,
   clinicDomainDataTabAction,
 } from '../../../actions/domain/data/clinic-domain-data-action.service'
 
@@ -16,8 +17,7 @@ const initialState: ClinicDomainDataStoreModel = {
   page: 0,
   maxPage: 0,
   tab: 'table',
-  // I am here
-  selectedPage: -1,
+  selectedClinic: undefined,
 }
 
 export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>(
@@ -39,5 +39,8 @@ export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>
       }
       return clinic
     }),
+  })),
+  on(clinicDomainDataSelectedClinicAction, (state: ClinicDomainDataStoreModel, { selectedClinic }) => ({
+    ...state, selectedClinic,
   })),
 )

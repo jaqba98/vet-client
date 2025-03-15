@@ -6,6 +6,5 @@ export interface ClinicDomainDataStoreModel {
   page: number
   maxPage: number
   tab: string
-  // I am here
-  selectedPage: number
+  selectedClinic: ClinicDomainDataModel | undefined
 }

@@ -10,6 +10,8 @@ import { TableDataFormComponent } from './table-data-form/table-data-form.compon
 import { TableFormModel } from './model/table-form.model'
 import { TableFormRowsModel } from './model/table-form-rows.model'
 import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
+import { ClinicDomainDataModel } from '@vet-client/lib-domain'
+import { TableEditFormComponent } from './table-edit-form/table-edit-form.component'
 
 @Component({
   selector: 'lib-table-form',
@@ -20,6 +22,7 @@ import { TableCreateFormComponent } from './table-create-form/table-create-form.
     TableNavFormComponent,
     TableDataFormComponent,
     TableCreateFormComponent,
+    TableEditFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
@@ -35,6 +38,8 @@ export class TableFormComponent<TRows, TData> {
   @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
   @Output() deleteEvent = new EventEmitter<number>()
   @Output() refreshEvent = new EventEmitter<number>()
+  @Output() editSelectEvent = new EventEmitter<number>()
+  @Output() updateEvent = new EventEmitter<TData>()
 
   @Input({ required: true }) formModel!: TableFormModel
   @Input({ required: true }) headers!: string[]
@@ -44,7 +49,10 @@ export class TableFormComponent<TRows, TData> {
   @Input({ required: true }) rows!: TableFormRowsModel<TRows>
   @Input({ required: true }) createSuccess!: string
   @Input({ required: true }) createError!: string
+  @Input({ required: true }) editSuccess!: string
+  @Input({ required: true }) editError!: string
   @Input({ required: true }) allSelected!: boolean
+  @Input({ required: true }) selectedClinic!: ClinicDomainDataModel
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true
@@ -90,6 +98,14 @@ export class TableFormComponent<TRows, TData> {
 
   onUnselectAllEvent() {
     this.unselectAllEvent.emit()
+  }
+
+  onEditSelectEvent(id: number) {
+    this.editSelectEvent.emit(id)
+  }
+
+  onUpdateEvent(data: any) {
+    this.updateEvent.emit(data)
   }
 
   // @Input({ required: true }) selectPage!: () => Observable<number>

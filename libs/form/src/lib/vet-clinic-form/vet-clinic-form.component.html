@@ -6,9 +6,12 @@
   [page]="page"
   [maxPage]="maxPage"
   [tab]="tab"
-  [createSuccess]="createSuccess"
   [allSelected]="allSelected"
+  [createSuccess]="createSuccess"
   [createError]="createError"
+  [editSuccess]="editSuccess"
+  [editError]="editError"
+  [selectedClinic]="selectedClinic"
   (tablePaginatorEvent)="onTablePaginatorEvent($event)"
   (tableNavEvent)="onTableNavEvent($event)"
   (deleteEvent)="onDeleteEvent($event)"
@@ -19,5 +22,7 @@
   (selectAllEvent)="onSelectAllEvent()"
   (unselectAllEvent)="onUnselectAllEvent()"
   (refreshEvent)="onRefreshEvent()"
+  (editSelectEvent)="onEditSelectEvent($event)"
+  (updateEvent)="onUpdateEvent($event)"
 ></lib-table-form>
 

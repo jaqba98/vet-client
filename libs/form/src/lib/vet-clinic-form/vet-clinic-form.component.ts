@@ -10,7 +10,7 @@ import {
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   ClinicDomainDataReadNotification,
-  clinicDomainDataSelectAction,
+  clinicDomainDataSelectAction, clinicDomainDataSelectedClinicAction,
   clinicDomainDataTabAction,
   ClinicDomainDataType,
   ClinicDomainFormType,
@@ -19,6 +19,7 @@ import {
   selectClinicDomainDataMaxPage,
   selectClinicDomainDataPage,
   selectClinicDomainDataTab,
+  ClinicDomainDataUpdateNotification, selectClinicDomainDataSelectedClinic,
 } from '@vet-client/lib-store'
 import { ClinicDomainDataInternalModel, ClinicDomainDataModel, ClinicDomainFormModel } from '@vet-client/lib-domain'
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
@@ -43,7 +44,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   allClinics: ClinicDomainDataModel[] = []
   createSuccess = ''
   createError = ''
+  editSuccess = ''
+  editError = ''
   allSelected = false
+  selectedClinic!: ClinicDomainDataModel
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -51,6 +55,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
     private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
+    private readonly clinicDomainDataUpdateNotification: ClinicDomainDataUpdateNotification,
     private readonly formStore: Store<ClinicDomainFormType>,
     private readonly dataStore: Store<ClinicDomainDataType>,
     private readonly responseStore: Store<ClinicDomainResponseType>,
@@ -103,6 +108,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     }))
     this.sub.add(this.dataStore.select(selectClinicDomainDataTab).subscribe((tab) => {
       this.tab = tab as TableFormTabEnum
+    }))
+    this.sub.add(this.dataStore.select(selectClinicDomainDataSelectedClinic).subscribe((selectedClinic) => {
+      if (selectedClinic)
+        this.selectedClinic = selectedClinic
     }))
   }
 
@@ -169,6 +178,22 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   onRefreshEvent() {
     //
+  }
+
+  onEditSelectEvent(id: number) {
+    of(true).pipe(
+      take(1),
+      withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
+      map(([, clinics]) => clinics.find(clinic => clinic.id === id)),
+      map((clinic) => {
+        this.dataStore.dispatch(clinicDomainDataSelectedClinicAction({ selectedClinic: clinic }))
+      }),
+      map(() => this.dataStore.dispatch(clinicDomainDataTabAction({ tab: TableFormTabEnum.update }))),
+    ).subscribe()
+  }
+
+  onUpdateEvent(model: ClinicDomainDataModel['data']) {
+    this.clinicDomainDataUpdateNotification.runNotification({ ...model })
   }
 
   getHeaders(): string[] {
