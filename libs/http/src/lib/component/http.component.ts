@@ -32,15 +32,17 @@ export class HttpComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
+      skip(1),
       switchMap(clinic => this.httpPost.clinicCreatePost(clinic)),
     ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
     this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
+      skip(1),
       switchMap(() => this.httpPost.clinicReadPost()),
     ).subscribe())
     this.sub.add(this.clinicDomainDataDeleteNotification.notification$.pipe(
+      skip(1),
       switchMap(ids => this.httpPost.clinicDeletePost(ids)),
     ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
-    // I am here
     this.sub.add(this.storeLoginDomainData.select('loginDomainData').pipe(
       skip(1),
       switchMap(data => this.httpPost.loginPost(data)),

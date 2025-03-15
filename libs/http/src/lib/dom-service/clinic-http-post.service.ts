@@ -5,7 +5,9 @@ import { map, take } from 'rxjs'
 import { CookieService } from '@vet-client/lib-system'
 import {
   clinicDomainDataClinicsAction,
-  ClinicDomainDataType, ClinicDomainResponseType, setClinicDomainCreateResponse,
+  ClinicDomainDataType,
+  ClinicDomainResponseType,
+  setClinicDomainCreateResponse,
 } from '@vet-client/lib-store'
 import { ClinicDomainDataInternalModel } from '@vet-client/lib-domain'
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
@@ -64,14 +66,11 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          return res.clinics.map(clinic => ({
-            id: clinic.id,
-            isSelected: false,
-            data: clinic,
-          }))
+          return res.clinics.map(clinic => ({ id: clinic.id, isSelected: false, data: clinic }))
         }),
         map((clinics) => {
-          return this.storeClinicDomainData.dispatch(clinicDomainDataClinicsAction({ clinics }))
+          this.storeClinicDomainData.dispatch(clinicDomainDataClinicsAction({ clinics }))
+          return clinics
         }),
       )
   }

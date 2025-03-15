@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { skip, Subscription, take } from 'rxjs'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { map, of, skip, Subscription, take, withLatestFrom } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -15,12 +15,16 @@ import {
   ClinicDomainDataType,
   ClinicDomainFormType,
   ClinicDomainResponseType,
+  selectClinicDomainDataClinics,
+  selectClinicDomainDataMaxPage,
+  selectClinicDomainDataPage,
+  selectClinicDomainDataTab,
 } from '@vet-client/lib-store'
 import { ClinicDomainDataInternalModel, ClinicDomainDataModel, ClinicDomainFormModel } from '@vet-client/lib-domain'
+import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
 import { TableFormModel } from '../table-form/model/table-form.model'
-import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -35,11 +39,11 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   page = 1
   maxPage = 1
   tab = TableFormTabEnum.table
-  allClinics: ClinicDomainDataModel[] = []
   clinics: ClinicDomainDataModel[] = []
+  allClinics: ClinicDomainDataModel[] = []
   createSuccess = ''
   createError = ''
-  allSelected!: boolean
+  allSelected = false
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -55,49 +59,50 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sub.add(this.route.paramMap.pipe(take(1)).subscribe((params) => {
-      const page = params.get('page')
-      if (page) {
-        const numPage = Number(page)
-        if (numPage) {
-          this.clinicDomainDataReadNotification.runNotification()
-          this.dataStore.dispatch(clinicDomainDataPageAction({ page: numPage }))
-          this.dataStore.dispatch(clinicDomainDataMaxPageAction())
-        }
-        return
+    this.sub.add(this.route.paramMap.subscribe(async (paramMap) => {
+      const page = Number(paramMap.get('page'))
+      if (!page) {
+        await this.router.navigate(['dashboard/vet/clinic/1'])
+        this.dataStore.dispatch(clinicDomainDataPageAction({ page: 1 }))
       }
-      this.router.navigate(['dashboard/vet/clinic/1'])
+      else {
+        this.dataStore.dispatch(clinicDomainDataPageAction({ page }))
+      }
     }))
     this.sub.add(this.formStore.select('clinicDomainForm').subscribe((form) => {
       this.formModel = form
     }))
-    this.sub.add(this.responseStore.select('clinicDomainResponse').subscribe((response) => {
+    this.sub.add(this.responseStore.select('clinicDomainResponse').pipe(skip(1)).subscribe((response) => {
       this.createSuccess = ''
       this.createError = ''
-      if (response.createResponse.success) {
-        this.createSuccess = response.createResponse.message
+      if (response.createResponse.success) this.createSuccess = response.createResponse.message
+      else this.createError = response.createResponse.message
+    }))
+    this.sub.add(this.dataStore.select(selectClinicDomainDataPage).pipe(take(1)).subscribe(async (page) => {
+      this.page = page
+      this.clinicDomainDataReadNotification.runNotification()
+    }))
+    this.sub.add(this.dataStore.select(selectClinicDomainDataPage).pipe(
+      skip(1),
+      withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
+    ).subscribe(async ([page, clinics]) => {
+      this.page = page
+      this.selectClinics(clinics)
+    }))
+    this.sub.add(this.dataStore.select(selectClinicDomainDataClinics).pipe(skip(1)).subscribe((clinics) => {
+      this.selectClinics(clinics)
+    }))
+    this.sub.add(this.dataStore.select(selectClinicDomainDataMaxPage).pipe(skip(1)).subscribe(async (maxPage) => {
+      this.maxPage = maxPage
+      if (this.page < 1) {
+        await this.router.navigate(['dashboard/vet/clinic/1'])
       }
-      else {
-        this.createError = response.createResponse.message
+      else if (this.page > this.maxPage) {
+        await this.router.navigate(['dashboard/vet/clinic/' + this.maxPage])
       }
     }))
-    this.sub.add(this.dataStore.select('clinicDomainData').subscribe((data) => {
-      this.tab = data.tab as TableFormTabEnum
-      this.page = data.page
-      this.maxPage = data.clinics.length === 0 ? 1 : Math.ceil(data.clinics.length / NUMBER_OF_ROWS_PER_PAGE)
-      const left = (this.page - 1) * NUMBER_OF_ROWS_PER_PAGE
-      const right = left + NUMBER_OF_ROWS_PER_PAGE
-      this.allClinics = data.clinics
-      this.clinics = data.clinics.filter((_, id) => id >= left && id <= right)
-      this.allSelected = this.clinics.length === 0 ? false : !this.clinics.some(clinic => !clinic.isSelected)
-      if (this.page > this.maxPage) {
-        this.router.navigate(['dashboard/vet/clinic/' + this.maxPage])
-        return
-      }
-      if (this.page < 1 || this.page > this.maxPage) {
-        this.router.navigate(['dashboard/vet/clinic/1'])
-        return
-      }
+    this.sub.add(this.dataStore.select(selectClinicDomainDataTab).subscribe((tab) => {
+      this.tab = tab as TableFormTabEnum
     }))
   }
 
@@ -106,8 +111,7 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   onTablePaginatorEvent(page: number) {
-    this.dataStore.dispatch(clinicDomainDataPageAction({ page: page }))
-    this.dataStore.dispatch(clinicDomainDataMaxPageAction())
+    this.dataStore.dispatch(clinicDomainDataPageAction({ page }))
     this.router.navigate(['dashboard/vet/clinic/' + page])
   }
 
@@ -132,30 +136,53 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   onDeleteSelectedEvent() {
-    const ids = this.allClinics.filter(clinic => clinic.isSelected).map(clinic => clinic.id)
-    this.clinicDomainDataDeleteNotification.runNotification(ids)
+    of(true).pipe(
+      take(1),
+      withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
+      map(([, clinics]) => clinics.filter(clinic => clinic.isSelected)),
+      map(clinics => clinics.map(clinic => clinic.id)),
+      map(ids => this.clinicDomainDataDeleteNotification.runNotification(ids)),
+    ).subscribe()
   }
 
   onSelectAllEvent() {
-    this.clinics.forEach((clinic) => {
-      this.dataStore.dispatch(clinicDomainDataSelectAction({ id: clinic.id, isSelected: true }))
+    of(this.clinics).pipe(
+      take(1),
+      map(clinics => clinics.map(clinic => clinic.id)),
+    ).subscribe((clinics) => {
+      clinics.forEach((id) => {
+        this.dataStore.dispatch(clinicDomainDataSelectAction({ id, isSelected: true }))
+      })
     })
   }
 
   onUnselectAllEvent() {
-    this.clinics.forEach((clinic) => {
-      this.dataStore.dispatch(clinicDomainDataSelectAction({ id: clinic.id, isSelected: false }))
+    of(this.clinics).pipe(
+      take(1),
+      map(clinics => clinics.map(clinic => clinic.id)),
+    ).subscribe((clinics) => {
+      clinics.forEach((id) => {
+        this.dataStore.dispatch(clinicDomainDataSelectAction({ id, isSelected: false }))
+      })
     })
   }
 
   onRefreshEvent() {
-    this.clinicDomainDataReadNotification.runNotification()
+    //
   }
 
   getHeaders(): string[] {
     return Object.entries(this.formModel)
       .filter(([, value]) => value.isEnabled)
       .map(([key]) => key)
+  }
+
+  private selectClinics(clinics: ClinicDomainDataModel[]) {
+    const firstItem = (this.page - 1) * NUMBER_OF_ROWS_PER_PAGE
+    const lastItem = firstItem + NUMBER_OF_ROWS_PER_PAGE
+    this.clinics = clinics.filter((_, index) => index >= firstItem && index < lastItem)
+    this.allSelected = this.clinics.length === 0 ? false : !this.clinics.find(clinic => !clinic.isSelected)
+    this.dataStore.dispatch(clinicDomainDataMaxPageAction())
   }
 
   // private readonly sub = new Subscription()

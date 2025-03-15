@@ -44,6 +44,7 @@ export * from './lib/notification/domain/data/clinic-domain-data-delete.notifica
 export * from './lib/reducer/domain/data/clinic-domain-data.reducer'
 export * from './lib/reducer/domain/form/clinic-domain-form.reducer'
 export * from './lib/reducer/domain/response/clinic-domain-response.reducer'
+export * from './lib/selector/domain/data/clinic-domain-data.selector'
 export * from './lib/type/domain/data/clinic-domain-data-type'
 export * from './lib/type/domain/form/clinic-domain-form.type'
 export * from './lib/type/domain/response/clinic-domain-response.type'
