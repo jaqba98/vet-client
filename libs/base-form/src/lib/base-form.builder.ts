@@ -66,4 +66,16 @@ export class BaseFormBuilder {
       isEnabled,
     }
   }
+
+  static buildHiddenControl(): ControlInputModel {
+    return {
+      kind: 'input',
+      type: 'text',
+      label: '',
+      placeholder: '',
+      validators: [],
+      defaultValue: '',
+      isEnabled: false,
+    }
+  }
 }

@@ -19,7 +19,6 @@ import { LoginResponseModel } from '../model/response/login-response.model'
 import { LogoutRequestModel } from '../model/request/logout-request.model'
 import { LogoutResponseModel } from '../model/response/logout-response.model'
 import { RegistrationRequestModel } from '../model/request/registration-request.model'
-import { RegistrationResponseModel } from '../model/response/registration-response.model'
 import { GetAccountRequestModel } from '../model/request/get-account-request.model'
 import { GetAccountResponseModel } from '../model/response/get-account-response.model'
 import {
@@ -46,10 +45,12 @@ import {
   LogoutDomainDataModel,
 } from '@vet-client/lib-domain'
 import { ClinicHttpPostService } from '../dom-service/clinic-http-post.service'
+import { AuthHttpPostService } from '../dom-service/auth-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
   constructor(
+    private readonly authHttpPost: AuthHttpPostService,
     private readonly clinicHttpPost: ClinicHttpPostService,
     private readonly storeLoginDomainResponse: Store<LoginDomainResponseType>,
     private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
@@ -130,12 +131,7 @@ export class HttpPostAppService {
   }
 
   registrationPost(request: RegistrationRequestModel) {
-    return this.httpExecute
-      .exec<RegistrationResponseModel>({
-        method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.registration, request },
-      })
-      .pipe(take(1))
+    return this.authHttpPost.registrationPost(request)
   }
 
   getAccountPost(request: GetAccountRequestModel) {

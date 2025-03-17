@@ -9,7 +9,7 @@ import {
   ClinicDomainDataDeleteNotification,
   ClinicDomainDataReadNotification, ClinicDomainDataUpdateNotification,
   LoginDomainDataType,
-  LogoutDomainDataType,
+  LogoutDomainDataType, RegistrationDomainDataNotification,
 } from '@vet-client/lib-store'
 import { HttpPostAppService } from '../app-service/http-post-app.service'
 import { CookieService } from '@vet-client/lib-system'
@@ -23,6 +23,7 @@ export class HttpComponent implements OnInit, OnDestroy {
   private readonly sub = new Subscription()
 
   constructor(
+    private readonly registrationDomainForm: RegistrationDomainDataNotification,
     private readonly cookie: CookieService,
     private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
@@ -34,6 +35,10 @@ export class HttpComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.sub.add(this.registrationDomainForm.notification$.pipe(
+      switchMap(data => this.httpPost.registrationPost(data)),
+    ).subscribe())
+
     const token = this.cookie.getToken()
     this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
       skip(1),

@@ -15,6 +15,7 @@ import { logoutDomainResponseReducer } from './reducer/domain/response/logout-do
 import { clinicDomainDataReducer } from './reducer/domain/data/clinic-domain-data.reducer'
 import { clinicDomainFormReducer } from './reducer/domain/form/clinic-domain-form.reducer'
 import { clinicDomainResponseReducer } from './reducer/domain/response/clinic-domain-response.reducer'
+import { registrationDomainResponseReducer } from './reducer/domain/response/registration-domain-response.reducer'
 
 export const storeConfig: ApplicationConfig = {
   providers: [
@@ -31,6 +32,7 @@ export const storeConfig: ApplicationConfig = {
       clinicDomainData: clinicDomainDataReducer,
       clinicDomainForm: clinicDomainFormReducer,
       clinicDomainResponse: clinicDomainResponseReducer,
+      registrationDomainResponse: registrationDomainResponseReducer,
     }),
     provideStoreDevtools(),
   ],

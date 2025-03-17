@@ -1,14 +1,31 @@
-import { ControlType } from '@vet-client/lib-base-form'
+import { ControlInputModel } from '@vet-client/lib-base-form'
 
-interface RegistrationDomainModel<T> {
-  email: T
-  password: T
-  confirmPassword: T
-  firstName: T
-  lastName: T
-  register: T
+export interface RegistrationDomainFormModel {
+  id: ControlInputModel
+  email: ControlInputModel
+  password: ControlInputModel
+  confirmPassword: ControlInputModel
+  firstName: ControlInputModel
+  lastName: ControlInputModel
+  role: ControlInputModel
+  pictureUrl: ControlInputModel
+  isVerified: ControlInputModel
+  register: ControlInputModel
 }
 
-export type RegistrationDomainFormDataModel = RegistrationDomainModel<ControlType>
+export interface RegistrationDomainResponseModel {
+  success: boolean
+  message: string
+}
 
-export type RegistrationDomainDataModel = Omit<RegistrationDomainModel<string>, 'register'>
+export interface RegistrationDomainDataModel {
+  id: number
+  email: string
+  password: string
+  confirmPassword: string
+  firstName: string
+  lastName: string
+  role: string
+  pictureUrl: string
+  isVerified: boolean
+}
