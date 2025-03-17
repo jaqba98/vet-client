@@ -1,4 +1,4 @@
-import { ControlInputModel } from '@vet-client/lib-base-form'
+import { ControlButtonModel, ControlInputModel } from '@vet-client/lib-base-form'
 
 export interface RegistrationDomainFormModel {
   id: ControlInputModel
@@ -10,7 +10,7 @@ export interface RegistrationDomainFormModel {
   role: ControlInputModel
   pictureUrl: ControlInputModel
   isVerified: ControlInputModel
-  register: ControlInputModel
+  register: ControlButtonModel
 }
 
 export interface RegistrationDomainResponseModel {

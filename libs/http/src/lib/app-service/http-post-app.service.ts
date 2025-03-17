@@ -14,8 +14,6 @@ import { IsClientRequestModel } from '../model/request/is-client-request.model'
 import { IsClientResponseModel } from '../model/response/is-client-response.model'
 import { IsVetRequestModel } from '../model/request/is-vet-request.model'
 import { IsVetResponseModel } from '../model/response/is-vet-response.model'
-import { LoginRequestModel } from '../model/request/login-request.model'
-import { LoginResponseModel } from '../model/response/login-response.model'
 import { LogoutRequestModel } from '../model/request/logout-request.model'
 import { LogoutResponseModel } from '../model/response/logout-response.model'
 import { RegistrationRequestModel } from '../model/request/registration-request.model'
@@ -33,11 +31,9 @@ import {
   LoginDomainResponseType,
   LogoutDomainDataType,
   RoutePageEnum,
-  RouteSectionEnum,
+  RouteSectionEnum, routeSetAction,
   RouteStoreType,
-  setLoginDomainResponse,
   setLogoutDomainData,
-  setRoute,
 } from '@vet-client/lib-store'
 import {
   ClinicDomainDataInternalModel,
@@ -90,26 +86,7 @@ export class HttpPostAppService {
   }
 
   loginPost(data: LoginDomainDataModel) {
-    const request: LoginRequestModel = {
-      email: data.email,
-      password: data.password,
-    }
-    return this.httpExecute
-      .exec<LoginResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
-      .pipe(
-        take(1),
-        map((response) => {
-          const { success, token } = response
-          if (success) {
-            this.cookie.updateToken(token)
-            this.storeRoute.dispatch(setRoute({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard }))
-            this.storeLoginDomainResponse.dispatch(setLoginDomainResponse({ isError: false }))
-          }
-          else {
-            this.storeLoginDomainResponse.dispatch(setLoginDomainResponse({ isError: true }))
-          }
-        }),
-      )
+    return this.authHttpPost.loginPost(data)
   }
 
   logoutPost(data: LogoutDomainDataModel) {
@@ -123,7 +100,7 @@ export class HttpPostAppService {
         map((response) => {
           if (response.success && data.logout) {
             this.cookie.deleteCookie('token')
-            this.storeRoute.dispatch(setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }))
+            this.storeRoute.dispatch(routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.home }))
             this.storeLogoutDomainData.dispatch(setLogoutDomainData({ logout: false }))
           }
         }),

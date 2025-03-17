@@ -1,12 +1,13 @@
-// done
 import { createReducer, on } from '@ngrx/store'
 
 import { LoginDomainResponseStoreModel } from '../../../model/domain/response/login-domain-response-store.model'
-import { setLoginDomainResponse } from '../../../actions/domain/response/login-domain-response.action'
+import { loginDomainResponseAction } from '../../../actions/domain/response/login-domain-response.action'
 
-const initialState: LoginDomainResponseStoreModel = { isError: false }
+const initialState: LoginDomainResponseStoreModel = { success: false, message: '' }
 
 export const loginDomainResponseReducer = createReducer<LoginDomainResponseStoreModel>(
   initialState,
-  on(setLoginDomainResponse, (state: LoginDomainResponseStoreModel, { isError }) => ({ ...state, isError })),
+  on(loginDomainResponseAction, (state: LoginDomainResponseStoreModel, { success, message }) => ({
+    ...state, success, message,
+  })),
 )

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store'
+import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreModel } from '@vet-client/lib-store'
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
@@ -85,12 +85,12 @@ export class HomeNavMenuFormComponent
     const { home, aboutUs, price, contact } = model
     if (home) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.home }),
+        routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.home }),
       )
     }
     else if (aboutUs) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.home,
           section: RouteSectionEnum.aboutUs,
         }),
@@ -98,12 +98,12 @@ export class HomeNavMenuFormComponent
     }
     else if (price) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.home, section: RouteSectionEnum.price }),
+        routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.price }),
       )
     }
     else if (contact) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.home,
           section: RouteSectionEnum.contact,
         }),

@@ -14,7 +14,7 @@ import {
   RoutePageEnum,
   RouteSectionEnum,
   RouteStoreModel,
-  setRoute,
+  routeSetAction,
 } from '@vet-client/lib-store'
 
 @Component({
@@ -72,7 +72,7 @@ export class ChooseRoleFormComponent
     const token = this.cookie.getToken()
     if (token === null) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.home,
           section: RouteSectionEnum.home,
         }),
@@ -86,7 +86,7 @@ export class ChooseRoleFormComponent
         if (success) {
           if (role === RoleDomainEnum.vet) {
             this.store.dispatch(
-              setRoute({
+              routeSetAction({
                 page: RoutePageEnum.dashboardVet,
                 section: RouteSectionEnum.dashboardVet,
               }),
@@ -94,7 +94,7 @@ export class ChooseRoleFormComponent
           }
           else if (role === RoleDomainEnum.client) {
             this.store.dispatch(
-              setRoute({
+              routeSetAction({
                 page: RoutePageEnum.dashboardClient,
                 section: RouteSectionEnum.dashboardClient,
               }),

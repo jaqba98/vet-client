@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store'
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { VetMenuFormModel, VetMenuModel } from './vet-menu-form.model'
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store'
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, routeSetAction } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-vet-menu-form',
@@ -131,7 +131,7 @@ export class VetMenuFormComponent
   override onSubmit(model: VetMenuModel) {
     if (model.vetSettings) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardVetSettings,
           section: RouteSectionEnum.dashboardVetSettings,
         }),
@@ -139,7 +139,7 @@ export class VetMenuFormComponent
     }
     else if (model.vetClinic) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardVetClinic,
           section: RouteSectionEnum.dashboardVetClinic,
         }),
@@ -147,7 +147,7 @@ export class VetMenuFormComponent
     }
     else if (model.vetMedicalRecord) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardVetMedicalRecord,
           section: RouteSectionEnum.dashboardVetMedicalRecord,
         }),
@@ -155,7 +155,7 @@ export class VetMenuFormComponent
     }
     else if (model.vetMedication) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardVetMedication,
           section: RouteSectionEnum.dashboardVetMedication,
         }),
@@ -163,7 +163,7 @@ export class VetMenuFormComponent
     }
     else if (model.vetServices) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardVetServices,
           section: RouteSectionEnum.dashboardVetServices,
         }),
@@ -171,7 +171,7 @@ export class VetMenuFormComponent
     }
     else if (model.vetAppointment) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardVetAppointment,
           section: RouteSectionEnum.dashboardVetAppointment,
         }),
@@ -179,7 +179,7 @@ export class VetMenuFormComponent
     }
     else if (model.vetInvoice) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardVetInvoice,
           section: RouteSectionEnum.dashboardVetInvoice,
         }),
@@ -187,7 +187,7 @@ export class VetMenuFormComponent
     }
     else if (model.vetPatients) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardVetPatients,
           section: RouteSectionEnum.dashboardVetPatients,
         }),

@@ -8,9 +8,8 @@ import {
   NavMenuTypeStoreType,
   navSetMenuType,
   RoutePageEnum,
-  RouteSectionEnum,
+  RouteSectionEnum, routeSetAction,
   RouteStoreType,
-  setRoute,
 } from '@vet-client/lib-store'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpPostAppService } from '@vet-client/lib-http'
@@ -28,7 +27,7 @@ export class LoggedInGuard implements CanActivate {
     const token = this.cookie.getToken()
     if (!token) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.home,
           section: RouteSectionEnum.home,
         }),
@@ -50,7 +49,7 @@ export class LoggedInGuard implements CanActivate {
           navSetMenuType({ menuType: MenuTypeEnum.home }),
         )
         this.store.dispatch(
-          setRoute({
+          routeSetAction({
             page: RoutePageEnum.home,
             section: RouteSectionEnum.home,
           }),

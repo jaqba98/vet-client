@@ -5,7 +5,7 @@ import {
   RoutePageEnum,
   RouteSectionEnum,
   RouteStoreType,
-  setRoute,
+  routeSetAction,
 } from '@vet-client/lib-store'
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
@@ -76,7 +76,7 @@ export class DashboardNavMenuFormComponent
   override onSubmit(model: DashboardNavMenuModel) {
     if (model.dashboard) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboard,
           section: RouteSectionEnum.dashboard,
         }),
@@ -84,7 +84,7 @@ export class DashboardNavMenuFormComponent
     }
     else if (model.accountSettings) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardAccountSettings,
           section: RouteSectionEnum.empty,
         }),
@@ -92,7 +92,7 @@ export class DashboardNavMenuFormComponent
     }
     else if (model.profile) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.dashboardProfile,
           section: RouteSectionEnum.empty,
         }),

@@ -8,9 +8,8 @@ import {
   NavMenuTypeStoreType,
   navSetMenuType,
   RoutePageEnum,
-  RouteSectionEnum,
+  RouteSectionEnum, routeSetAction,
   RouteStoreType,
-  setRoute,
 } from '@vet-client/lib-store'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpPostAppService } from '@vet-client/lib-http'
@@ -39,7 +38,7 @@ export class LoggedOutGuard implements CanActivate {
             navSetMenuType({ menuType: MenuTypeEnum.dashboard }),
           )
           this.store.dispatch(
-            setRoute({
+            routeSetAction({
               page: RoutePageEnum.dashboard,
               section: RouteSectionEnum.dashboard,
             }),

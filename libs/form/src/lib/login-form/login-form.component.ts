@@ -1,18 +1,17 @@
-// done
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Subscription } from 'rxjs'
 import { Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { LoginDomainDataModel, LoginDomainFormModel } from '@vet-client/lib-domain'
 import {
+  loginDomainDataAction,
   LoginDomainDataType,
   LoginDomainFormType,
+  loginDomainResponseAction,
   LoginDomainResponseType,
-  setLoginDomainData,
-  setLoginDomainResponse,
 } from '@vet-client/lib-store'
 
 @Component({
@@ -26,29 +25,31 @@ export class LoginFormComponent
   implements OnInit, OnDestroy {
   private readonly sub = new Subscription()
 
-  readonly title = 'Login'
-
   constructor(
-    private readonly storeLoginDomainData: Store<LoginDomainDataType>,
-    private readonly storeLoginDomainForm: Store<LoginDomainFormType>,
-    private readonly storeLoginDomainResponse: Store<LoginDomainResponseType>,
+    private readonly storeData: Store<LoginDomainDataType>,
+    private readonly storeForm: Store<LoginDomainFormType>,
+    private readonly storeResponse: Store<LoginDomainResponseType>,
   ) {
     super()
   }
 
   ngOnInit() {
-    this.sub.add(this.storeLoginDomainForm.select('loginDomainForm').subscribe((form) => {
+    this.sub.add(this.storeForm.select('loginDomainForm').subscribe((form) => {
       this.initBaseForm(form)
     }))
-    this.sub.add(this.storeLoginDomainResponse.select('loginDomainResponse').subscribe((response) => {
-      if (response.isError) {
-        this.error = 'Incorrect email address or password!'
+    this.sub.add(this.storeResponse.select('loginDomainResponse').subscribe((response) => {
+      this.success = ''
+      this.error = ''
+      if (response.success) {
+        this.success = response.message
       }
       else {
-        this.error = ''
+        this.error = response.message
       }
     }))
-    this.storeLoginDomainResponse.dispatch(setLoginDomainResponse({ isError: false }))
+    this.storeResponse.dispatch(loginDomainResponseAction({
+      success: false, message: '',
+    }))
   }
 
   ngOnDestroy() {
@@ -56,6 +57,6 @@ export class LoginFormComponent
   }
 
   override onSubmit(data: LoginDomainDataModel) {
-    this.storeLoginDomainData.dispatch(setLoginDomainData(data))
+    this.storeData.dispatch(loginDomainDataAction(data))
   }
 }

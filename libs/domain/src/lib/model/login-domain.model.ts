@@ -1,4 +1,3 @@
-// done
 import { ControlInputModel, ControlButtonModel } from '@vet-client/lib-base-form'
 
 export interface LoginDomainFormModel {
@@ -8,7 +7,8 @@ export interface LoginDomainFormModel {
 }
 
 export interface LoginDomainResponseModel {
-  isError: boolean
+  success: boolean
+  message: string
 }
 
 export interface LoginDomainDataModel {

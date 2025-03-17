@@ -2,20 +2,57 @@ import { Injectable } from '@angular/core'
 import { map, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 
-import { RegistrationDomainResponseType } from '@vet-client/lib-store'
+import {
+  loginDomainResponseAction,
+  LoginDomainResponseType,
+  RoutePageEnum,
+  RouteSectionEnum,
+  routeSetAction,
+  RouteStoreType,
+} from '@vet-client/lib-store'
 import { registrationDomainResponseSet } from '@vet-client/lib-store'
+import { LoginDomainDataModel } from '@vet-client/lib-domain'
+import { CookieService } from '@vet-client/lib-system'
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import { RegistrationRequestModel } from '../model/request/registration-request.model'
 import { MethodEnum } from '../enum/method.enum'
 import { EndpointEnum } from '../enum/endpoint.enum'
 import { ResponseModel } from '../model/response/response.model'
+import { LoginRequestModel } from '../model/request/login-request.model'
 
 @Injectable({ providedIn: 'root' })
 export class AuthHttpPostService {
   constructor(
+    private readonly cookie: CookieService,
     private readonly httpExecute: HttpExecuteService,
-    private readonly store: Store<RegistrationDomainResponseType>,
+    private readonly storeRoute: Store<RouteStoreType>,
+    private readonly storeLoginDomainResponse: Store<LoginDomainResponseType>,
   ) {}
+
+  loginPost(data: LoginDomainDataModel) {
+    const request: LoginRequestModel = data
+    return this.httpExecute
+      .exec<ResponseModel<string>>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
+      .pipe(
+        take(1),
+        map((response) => {
+          if (response.success) {
+            this.cookie.updateToken(response.data)
+            this.storeRoute.dispatch(routeSetAction({
+              page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard,
+            }))
+            this.storeLoginDomainResponse.dispatch(loginDomainResponseAction({
+              success: response.success, message: response.data,
+            }))
+          }
+          else {
+            this.storeLoginDomainResponse.dispatch(loginDomainResponseAction({
+              success: response.success, message: response.errors[0],
+            }))
+          }
+        }),
+      )
+  }
 
   registrationPost(request: RegistrationRequestModel) {
     return this.httpExecute
@@ -26,7 +63,7 @@ export class AuthHttpPostService {
       .pipe(
         take(1),
         map((response) => {
-          this.store.dispatch(registrationDomainResponseSet({
+          this.storeRoute.dispatch(registrationDomainResponseSet({
             success: response.success,
             message: response.success ? response.data : response.errors[0],
           }))

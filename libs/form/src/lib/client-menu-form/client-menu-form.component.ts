@@ -7,7 +7,7 @@ import {
   ClientMenuFormModel,
   ClientMenuModel,
 } from './client-menu-form.model'
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, setRoute } from '@vet-client/lib-store'
+import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, routeSetAction } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-client-menu-form',
@@ -106,32 +106,32 @@ export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel
   override onSubmit(model: ClientMenuModel) {
     if (model.clientSettings) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientSettings, section: RouteSectionEnum.dashboardClientSettings }),
+        routeSetAction({ page: RoutePageEnum.dashboardClientSettings, section: RouteSectionEnum.dashboardClientSettings }),
       )
     }
     else if (model.clientPets) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientPets, section: RouteSectionEnum.dashboardClientPets }),
+        routeSetAction({ page: RoutePageEnum.dashboardClientPets, section: RouteSectionEnum.dashboardClientPets }),
       )
     }
     else if (model.clientAppointment) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientAppointment, section: RouteSectionEnum.dashboardClientAppointment }),
+        routeSetAction({ page: RoutePageEnum.dashboardClientAppointment, section: RouteSectionEnum.dashboardClientAppointment }),
       )
     }
     else if (model.clientInvoice) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientInvoice, section: RouteSectionEnum.dashboardClientInvoice }),
+        routeSetAction({ page: RoutePageEnum.dashboardClientInvoice, section: RouteSectionEnum.dashboardClientInvoice }),
       )
     }
     else if (model.clientMedicalRecord) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientMedicalRecord, section: RouteSectionEnum.dashboardClientMedicalRecord }),
+        routeSetAction({ page: RoutePageEnum.dashboardClientMedicalRecord, section: RouteSectionEnum.dashboardClientMedicalRecord }),
       )
     }
     else if (model.clientClinics) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.dashboardClientClinics, section: RouteSectionEnum.dashboardClientClinics }),
+        routeSetAction({ page: RoutePageEnum.dashboardClientClinics, section: RouteSectionEnum.dashboardClientClinics }),
       )
     }
   }

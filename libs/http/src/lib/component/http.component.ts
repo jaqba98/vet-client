@@ -35,11 +35,15 @@ export class HttpComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    const token = this.cookie.getToken()
     this.sub.add(this.registrationDomainForm.notification$.pipe(
       switchMap(data => this.httpPost.registrationPost(data)),
     ).subscribe())
+    this.sub.add(this.storeLoginDomainData.select('loginDomainData').pipe(
+      skip(1),
+      switchMap(data => this.httpPost.loginPost(data)),
+    ).subscribe())
 
-    const token = this.cookie.getToken()
     this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
       skip(1),
       switchMap(clinic => this.httpPost.clinicCreatePost(clinic)),
@@ -61,10 +65,6 @@ export class HttpComponent implements OnInit, OnDestroy {
       skip(1),
       switchMap(ids => this.httpPost.clinicDeletePost(ids)),
     ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
-    this.sub.add(this.storeLoginDomainData.select('loginDomainData').pipe(
-      skip(1),
-      switchMap(data => this.httpPost.loginPost(data)),
-    ).subscribe())
     this.sub.add(this.storeLogoutDomainData.select('logoutDomainData').pipe(
       skip(1),
       switchMap(data => this.httpPost.logoutPost(data)),

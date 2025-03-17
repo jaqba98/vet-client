@@ -3,7 +3,7 @@ import { CanActivate } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { map, Observable } from 'rxjs'
 
-import { RoutePageEnum, RouteSectionEnum, RouteStoreType, setRoute } from '@vet-client/lib-store'
+import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreType } from '@vet-client/lib-store'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpPostAppService } from '@vet-client/lib-http'
 
@@ -19,7 +19,7 @@ export class HasNotRoleGuard implements CanActivate {
     const token = this.cookie.getToken()
     if (!token) {
       this.store.dispatch(
-        setRoute({
+        routeSetAction({
           page: RoutePageEnum.home,
           section: RouteSectionEnum.home,
         }),
@@ -30,7 +30,7 @@ export class HasNotRoleGuard implements CanActivate {
       map((response) => {
         if (response.success) {
           this.store.dispatch(
-            setRoute({
+            routeSetAction({
               page: RoutePageEnum.dashboard,
               section: RouteSectionEnum.dashboard,
             }),

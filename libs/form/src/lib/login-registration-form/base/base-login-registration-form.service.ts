@@ -5,7 +5,7 @@ import {
   RoutePageEnum,
   RouteSectionEnum,
   RouteStoreModel,
-  setRoute,
+  routeSetAction,
 } from '@vet-client/lib-store'
 import { BaseLoginRegistrationModel } from './base-login-registration-form.model'
 
@@ -17,13 +17,13 @@ export class BaseLoginRegistrationFormService {
     const { login, registration } = model
     if (login) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.login, section: RouteSectionEnum.login }),
+        routeSetAction({ page: RoutePageEnum.login, section: RouteSectionEnum.login }),
       )
       return
     }
     if (registration) {
       this.store.dispatch(
-        setRoute({ page: RoutePageEnum.registration, section: RouteSectionEnum.registration }),
+        routeSetAction({ page: RoutePageEnum.registration, section: RouteSectionEnum.registration }),
       )
       return
     }
