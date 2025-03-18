@@ -1,4 +1,5 @@
-export interface BaseResponseModel {
+export interface BaseResponseModel<TData = undefined> {
   success: boolean
-  errors: string[]
+  messages: string[]
+  data: TData
 }

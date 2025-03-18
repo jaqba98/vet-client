@@ -1,4 +1,3 @@
-// done
 import { createReducer, on } from '@ngrx/store'
 
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'

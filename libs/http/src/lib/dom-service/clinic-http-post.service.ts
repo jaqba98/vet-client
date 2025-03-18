@@ -44,10 +44,11 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((response) => {
+          console.log(response)
           const createData = {
             createResponse: {
               success: response.success,
-              message: response.success ? 'The clinic has been added correctly!' : response.errors[0],
+              message: response.messages[0],
             },
           }
           return this.storeClinicDomainResponse.dispatch(setClinicDomainCreateResponse(createData))
@@ -66,7 +67,7 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          return res.clinics.map(clinic => ({ id: clinic.id, isSelected: false, data: clinic }))
+          return res.data.map(clinic => ({ id: clinic.id, isSelected: false, data: clinic }))
         }),
         map((clinics) => {
           this.storeClinicDomainData.dispatch(clinicDomainDataClinicsAction({ clinics }))

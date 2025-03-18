@@ -1,10 +1,9 @@
-// done
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { Subject } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicDomainDataReadNotification {
-  private readonly notification = new BehaviorSubject<void>(undefined)
+  private readonly notification = new Subject<void>()
 
   notification$ = this.notification.asObservable()
 

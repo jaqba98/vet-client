@@ -8,8 +8,8 @@ export enum EndpointEnum {
   logout = 'logout',
   registration = 'registration',
   getAccount = 'get-account',
-  clinicCreate = 'clinic-create',
-  clinicRead = 'clinic-read',
-  clinicUpdate = 'clinic-update',
-  clinicDelete = 'clinic-delete',
+  clinicCreate = 'clinic/create',
+  clinicRead = 'clinic/read',
+  clinicUpdate = 'clinic/update',
+  clinicDelete = 'clinic/delete',
 }

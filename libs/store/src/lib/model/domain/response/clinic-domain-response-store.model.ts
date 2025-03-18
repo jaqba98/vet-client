@@ -1,4 +1,3 @@
-// done
 import { ClinicDomainResponseModel } from '@vet-client/lib-domain'
 
 export interface ClinicDomainResponseStoreModel {

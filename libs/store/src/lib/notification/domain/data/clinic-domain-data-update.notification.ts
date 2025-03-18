@@ -1,14 +1,11 @@
-// done
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { Subject } from 'rxjs'
+
 import { ClinicDomainDataModel } from '@vet-client/lib-domain'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicDomainDataUpdateNotification {
-  private readonly notification = new BehaviorSubject<ClinicDomainDataModel['data']>({
-    id: 0,
-    name: '',
-  })
+  private readonly notification = new Subject<ClinicDomainDataModel['data']>()
 
   notification$ = this.notification.asObservable()
 

@@ -45,24 +45,18 @@ export class HttpComponent implements OnInit, OnDestroy {
     ).subscribe())
 
     this.sub.add(this.clinicDomainDataCreateNotification.notification$.pipe(
-      skip(1),
       switchMap(clinic => this.httpPost.clinicCreatePost(clinic)),
     ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
     this.sub.add(this.clinicDomainDataUpdateNotification.notification$.pipe(
-      skip(1),
-      switchMap(clinic => this.httpPost.clinicUpdatePost({
-        token, id: clinic.id, name: clinic.name,
-      })),
+      switchMap(clinic => this.httpPost.clinicUpdatePost({ token, ...clinic })),
     ).subscribe((response) => {
       console.log(response)
       this.clinicDomainDataReadNotification.runNotification()
     }))
     this.sub.add(this.clinicDomainDataReadNotification.notification$.pipe(
-      skip(1),
       switchMap(() => this.httpPost.clinicReadPost()),
     ).subscribe())
     this.sub.add(this.clinicDomainDataDeleteNotification.notification$.pipe(
-      skip(1),
       switchMap(ids => this.httpPost.clinicDeletePost(ids)),
     ).subscribe(() => this.clinicDomainDataReadNotification.runNotification()))
     this.sub.add(this.storeLogoutDomainData.select('logoutDomainData').pipe(
