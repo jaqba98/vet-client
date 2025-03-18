@@ -41,14 +41,14 @@ export class RegistrationFormComponent
       pictureUrl: BaseFormBuilder.buildHiddenControl(),
       register: BaseFormBuilder.buildButtonText('register', 'Register', 'primary', true, false),
     })
-    this.sub.add(this.store.select('registrationDomainResponse').pipe(skip(1)).subscribe((res) => {
+    this.sub.add(this.store.select('registrationDomainResponse').pipe(skip(1)).subscribe((response) => {
       this.success = ''
       this.error = ''
-      if (res.success) {
-        this.success = res.message
+      if (response.success) {
+        this.success = response.message
       }
       else {
-        this.error = res.message
+        this.error = response.message
       }
     }))
   }

@@ -47,7 +47,8 @@ export class AuthHttpPostService {
           }
           else {
             this.storeLoginDomainResponse.dispatch(loginDomainResponseAction({
-              success: response.success, message: response.errors[0],
+              success: response.success,
+              message: response.messages[0],
             }))
           }
         }),
@@ -65,7 +66,7 @@ export class AuthHttpPostService {
         map((response) => {
           this.storeRoute.dispatch(registrationDomainResponseSet({
             success: response.success,
-            message: response.success ? response.data : response.errors[0],
+            message: response.messages[0],
           }))
         }),
       )

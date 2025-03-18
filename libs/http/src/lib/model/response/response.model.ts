@@ -1,5 +1,5 @@
 export interface ResponseModel<TData> {
   success: boolean
-  errors: string[]
+  messages: string[]
   data: TData
 }
