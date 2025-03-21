@@ -16,9 +16,7 @@ export class IsVetHttpPostService {
   ) {}
 
   isVetPost() {
-    const request: GuardRequestDtoModel = {
-      token: this.cookie.getToken(),
-    }
+    const request: GuardRequestDtoModel = { token: this.cookie.getToken() }
     return this.httpExecute
       .exec<ResponseDtoModel>({
         method: MethodEnum.post,

@@ -17,9 +17,7 @@ export class GetAccountHttpPostService {
   ) {}
 
   getAccountPost() {
-    const request: GuardRequestDtoModel = {
-      token: this.cookie.getToken(),
-    }
+    const request: GuardRequestDtoModel = { token: this.cookie.getToken() }
     return this.httpExecute
       .exec<ResponseDataDtoModel<AccountDomainModel>>({
         method: MethodEnum.post,
