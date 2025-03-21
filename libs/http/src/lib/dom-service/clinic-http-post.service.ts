@@ -39,7 +39,7 @@ export class ClinicHttpPostService {
     return this.httpExecute
       .exec<ClinicCreateResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicCreate, request },
+        type: { endpoint: EndpointEnum.vetClinicCreate, request },
       })
       .pipe(
         take(1),
@@ -62,7 +62,7 @@ export class ClinicHttpPostService {
     return this.httpExecute
       .exec<ClinicReadResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicRead, request },
+        type: { endpoint: EndpointEnum.vetClinicRead, request },
       })
       .pipe(
         take(1),
@@ -82,7 +82,7 @@ export class ClinicHttpPostService {
     return this.httpExecute
       .exec<ClinicDeleteResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicDelete, request },
+        type: { endpoint: EndpointEnum.vetClinicDelete, request },
       })
       .pipe(take(1))
   }

@@ -57,7 +57,7 @@ export class HttpPostAppService {
 
   authPost(request: AuthRequestModel) {
     return this.httpExecute
-      .exec<AuthResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.auth, request } })
+      .exec<AuthResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.validToken, request } })
       .pipe(take(1))
   }
 
@@ -132,7 +132,7 @@ export class HttpPostAppService {
     return this.httpExecute
       .exec<ClinicUpdateResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicUpdate, request },
+        type: { endpoint: EndpointEnum.vetClinicUpdate, request },
       })
       .pipe(take(1))
   }

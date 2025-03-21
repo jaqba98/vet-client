@@ -6,12 +6,13 @@ import { HttpType } from '../model/http.model'
 import { MethodEnum } from '../enum/method.enum'
 import { EndpointEnum } from '../enum/endpoint.enum'
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class HttpExecuteService {
-  constructor(private readonly http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   exec<TResponse>(type: HttpType): Observable<TResponse> {
+    // I am here
     const apiUrl = this.buildApiUrl(type.type.endpoint)
     switch (type.method) {
       case MethodEnum.post:

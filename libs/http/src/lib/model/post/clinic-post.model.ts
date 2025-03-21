@@ -6,10 +6,10 @@ import {
   ClinicReadRequestModel, ClinicUpdateRequestModel,
 } from '../request/clinic-request.model'
 
-export type ClinicCreatePostModel = BaseEndpointModel<EndpointEnum.clinicCreate, ClinicCreateRequestModel>
+export type ClinicCreatePostModel = BaseEndpointModel<EndpointEnum.vetClinicCreate, ClinicCreateRequestModel>
 
-export type ClinicReadPostModel = BaseEndpointModel<EndpointEnum.clinicRead, ClinicReadRequestModel>
+export type ClinicReadPostModel = BaseEndpointModel<EndpointEnum.vetClinicRead, ClinicReadRequestModel>
 
-export type ClinicUpdatePostModel = BaseEndpointModel<EndpointEnum.clinicUpdate, ClinicUpdateRequestModel>
+export type ClinicUpdatePostModel = BaseEndpointModel<EndpointEnum.vetClinicUpdate, ClinicUpdateRequestModel>
 
-export type ClinicDeletePostModel = BaseEndpointModel<EndpointEnum.clinicDelete, ClinicDeleteRequestModel>
+export type ClinicDeletePostModel = BaseEndpointModel<EndpointEnum.vetClinicDelete, ClinicDeleteRequestModel>
