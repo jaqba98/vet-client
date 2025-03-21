@@ -4,7 +4,7 @@ import { map, take } from 'rxjs'
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import { MethodEnum } from '../enum/method.enum'
 import { EndpointEnum } from '../enum/endpoint.enum'
-import { AuthRequestModel } from '../model/request/auth-request.model'
+import { GuardRequestDtoModel } from '../model/request/guard/guard-request-dto.model'
 import { AuthResponseModel } from '../model/response/auth-response.model'
 import { ChooseRoleRequestDtoModel } from '../model/request/controller/choose-role-request-dto.model'
 import { ChooseRoleResponseModel } from '../model/response/choose-role-response.model'
@@ -14,14 +14,14 @@ import { IsClientRequestModel } from '../model/request/is-client-request.model'
 import { IsClientResponseModel } from '../model/response/is-client-response.model'
 import { IsVetRequestModel } from '../model/request/is-vet-request.model'
 import { IsVetResponseModel } from '../model/response/is-vet-response.model'
-import { LogoutRequestModel } from '../model/request/logout-request.model'
+import { LogoutRequestDtoModel } from '../model/request/controller/logout-request-dto.model'
 import { LogoutResponseModel } from '../model/response/logout-response.model'
-import { RegistrationRequestModel } from '../model/request/registration-request.model'
+import { RegistrationRequestDtoModel } from '../model/request/controller/registration-request-dto.model'
 import { GetAccountRequestModel } from '../model/request/get-account-request.model'
 import { GetAccountResponseModel } from '../model/response/get-account-response.model'
 import {
   ClinicUpdateRequestModel,
-} from '../model/request/clinic-request.model'
+} from '../model/request/controller/clinic-request.model'
 import {
   ClinicUpdateResponseModel,
 } from '../model/response/clinic-response.model'
@@ -55,7 +55,7 @@ export class HttpPostAppService {
     private storeRoute: Store<RouteStoreType>,
   ) {}
 
-  authPost(request: AuthRequestModel) {
+  authPost(request: GuardRequestDtoModel) {
     return this.httpExecute
       .exec<AuthResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.validToken, request } })
       .pipe(take(1))
@@ -90,7 +90,7 @@ export class HttpPostAppService {
   }
 
   logoutPost(data: LogoutDomainDataModel) {
-    const request: LogoutRequestModel = {
+    const request: LogoutRequestDtoModel = {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
@@ -107,7 +107,7 @@ export class HttpPostAppService {
       )
   }
 
-  registrationPost(request: RegistrationRequestModel) {
+  registrationPost(request: RegistrationRequestDtoModel) {
     return this.authHttpPost.registrationPost(request)
   }
 

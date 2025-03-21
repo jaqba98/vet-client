@@ -27,5 +27,4 @@ export interface RegistrationDomainDataModel {
   lastName: string
   role: string
   pictureUrl: string
-  isVerified: boolean
 }

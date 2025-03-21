@@ -4,7 +4,7 @@ import {
   ClinicCreateRequestModel,
   ClinicDeleteRequestModel,
   ClinicReadRequestModel, ClinicUpdateRequestModel,
-} from '../request/clinic-request.model'
+} from '../request/controller/clinic-request.model'
 
 export type ClinicCreatePostModel = BaseEndpointModel<EndpointEnum.vetClinicCreate, ClinicCreateRequestModel>
 

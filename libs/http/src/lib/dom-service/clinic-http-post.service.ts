@@ -21,7 +21,7 @@ import { EndpointEnum } from '../enum/endpoint.enum'
 import {
   ClinicCreateRequestModel,
   ClinicDeleteRequestModel,
-} from '../model/request/clinic-request.model'
+} from '../model/request/controller/clinic-request.model'
 import { TokenRequestDtoModel } from '../model/base/token-request-dto.model'
 
 @Injectable({ providedIn: 'root' })

@@ -14,11 +14,11 @@ import { registrationDomainResponseSet } from '@vet-client/lib-store'
 import { LoginDomainDataModel } from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpExecuteService } from '../infrastructure/http-execute.service'
-import { RegistrationRequestModel } from '../model/request/registration-request.model'
+import { RegistrationRequestDtoModel } from '../model/request/controller/registration-request-dto.model'
 import { MethodEnum } from '../enum/method.enum'
 import { EndpointEnum } from '../enum/endpoint.enum'
 import { ResponseDtoModel } from '../model/response/response-dto.model'
-import { LoginRequestModel } from '../model/request/login-request.model'
+import { LoginRequestDtoModel } from '../model/request/controller/login-request-dto.model'
 
 @Injectable({ providedIn: 'root' })
 export class AuthHttpPostService {
@@ -30,7 +30,7 @@ export class AuthHttpPostService {
   ) {}
 
   loginPost(data: LoginDomainDataModel) {
-    const request: LoginRequestModel = data
+    const request: LoginRequestDtoModel = data
     return this.httpExecute
       .exec<ResponseDtoModel<string>>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
       .pipe(
@@ -55,7 +55,7 @@ export class AuthHttpPostService {
       )
   }
 
-  registrationPost(request: RegistrationRequestModel) {
+  registrationPost(request: RegistrationRequestDtoModel) {
     return this.httpExecute
       .exec<ResponseDtoModel<string>>({
         method: MethodEnum.post,

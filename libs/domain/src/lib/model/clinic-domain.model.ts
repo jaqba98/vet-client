@@ -18,7 +18,8 @@ export interface ClinicDomainResponseModel {
   message: string
 }
 
-export interface ClinicDomainDataInternalModel {
+export interface ClinicDomainDataModel {
+  id: number
   name: string
   street: string
   buildingNumber: string
@@ -29,12 +30,4 @@ export interface ClinicDomainDataInternalModel {
   country: string
   email: string
   phoneNumber: string
-}
-
-export interface ClinicDomainDataModel {
-  id: number
-  isSelected: boolean
-  data: ClinicDomainDataInternalModel & {
-    id: number
-  }
 }

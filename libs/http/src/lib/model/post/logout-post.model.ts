@@ -1,5 +1,5 @@
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { BaseEndpointModel } from '../base/base-endpoint.model'
-import { LogoutRequestModel } from '../request/logout-request.model'
+import { LogoutRequestDtoModel } from '../request/controller/logout-request-dto.model'
 
-export type LogoutPostModel = BaseEndpointModel<EndpointEnum.logout, LogoutRequestModel>
+export type LogoutPostModel = BaseEndpointModel<EndpointEnum.logout, LogoutRequestDtoModel>
