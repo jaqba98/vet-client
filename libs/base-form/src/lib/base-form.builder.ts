@@ -43,7 +43,7 @@ export class BaseFormBuilder {
     }
   }
 
-  static buildInputText(label: string, validators: ValidatorFn[], isEnabled: boolean): ControlInputModel {
+  static buildInputText(label: string, validators: ValidatorFn[]): ControlInputModel {
     return {
       kind: 'input',
       type: 'text',
@@ -51,11 +51,11 @@ export class BaseFormBuilder {
       placeholder: '',
       validators,
       defaultValue: '',
-      isEnabled,
+      isEnabled: true,
     }
   }
 
-  static buildInputPassword(label: string, validators: ValidatorFn[], isEnabled: boolean): ControlInputModel {
+  static buildInputPassword(label: string, validators: ValidatorFn[]): ControlInputModel {
     return {
       kind: 'input',
       type: 'password',
@@ -63,7 +63,7 @@ export class BaseFormBuilder {
       placeholder: '',
       validators,
       defaultValue: '',
-      isEnabled,
+      isEnabled: true,
     }
   }
 

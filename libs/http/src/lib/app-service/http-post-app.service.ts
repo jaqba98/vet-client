@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core'
 
 import { ChooseRoleHttpPostService } from '../dom-service/common/choose-role-http-post.service'
 import {
-  ChooseRoleDomainDataModel,
-  ClinicDomainDataModel,
-  DeleteDomainDataModel,
-  LoginDomainDataModel, RegistrationDomainDataModel,
+  ChooseRoleDomainModel,
+  ClinicDomainModel,
+  DeleteDomainModel,
+  LoginDomainModel,
+  RegistrationDomainModel,
 } from '@vet-client/lib-domain'
 import { ClinicHttpPostService } from '../dom-service/common/clinic-http-post.service'
 import { LoginHttpPostService } from '../dom-service/common/login-http-post.service'
@@ -32,11 +33,11 @@ export class HttpPostAppService {
     private validTokenHttpPost: ValidTokenHttpPostService,
   ) {}
 
-  chooseRolePost(domain: ChooseRoleDomainDataModel) {
+  chooseRolePost(domain: ChooseRoleDomainModel) {
     return this.chooseRoleHttpPost.chooseRolePost(domain)
   }
 
-  createClinicPost(domain: ClinicDomainDataModel) {
+  createClinicPost(domain: ClinicDomainModel) {
     return this.clinicHttpPost.createClinicPost(domain)
   }
 
@@ -44,15 +45,15 @@ export class HttpPostAppService {
     return this.clinicHttpPost.readClinicPost()
   }
 
-  updateClinicPost(domain: ClinicDomainDataModel) {
+  updateClinicPost(domain: ClinicDomainModel) {
     return this.clinicHttpPost.updateClinicPost(domain)
   }
 
-  deleteClinicPost(domain: DeleteDomainDataModel) {
+  deleteClinicPost(domain: DeleteDomainModel) {
     return this.clinicHttpPost.deleteClinicPost(domain)
   }
 
-  loginPost(domain: LoginDomainDataModel) {
+  loginPost(domain: LoginDomainModel) {
     return this.loginHttpPost.loginPost(domain)
   }
 
@@ -60,7 +61,7 @@ export class HttpPostAppService {
     return this.logoutHttpPost.logoutPost()
   }
 
-  registrationPost(domain: RegistrationDomainDataModel) {
+  registrationPost(domain: RegistrationDomainModel) {
     return this.registrationHttpPost.registrationPost(domain)
   }
 

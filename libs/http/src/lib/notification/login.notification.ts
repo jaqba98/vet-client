@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs'
 
-import { LoginDomainDataModel } from '@vet-client/lib-domain'
+import { LoginDomainModel } from '@vet-client/lib-domain'
+import { ResponseNotification } from '../utils/response.notification'
 
 @Injectable({ providedIn: 'root' })
-export class LoginNotification {
-  private readonly notification = new Subject<LoginDomainDataModel>()
+export class LoginNotification extends ResponseNotification {
+  private readonly notification = new Subject<LoginDomainModel>()
 
   notification$ = this.notification.asObservable()
 
-  runNotification(data: LoginDomainDataModel) {
+  runNotification(data: LoginDomainModel) {
     this.notification.next(data)
   }
 }
