@@ -10,7 +10,7 @@ import { ResponseDataDtoModel } from '../../model/response/response-data-dto.mod
 
 @Injectable({ providedIn: 'root' })
 export class LoginHttpPostService {
-  constructor(private readonly httpExecute: HttpExecuteService) {}
+  constructor(private httpExecute: HttpExecuteService) {}
 
   loginPost(domain: LoginDomainDataModel) {
     const request: LoginRequestDtoModel = { ...domain }

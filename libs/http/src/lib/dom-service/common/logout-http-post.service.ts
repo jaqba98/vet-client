@@ -9,7 +9,7 @@ import { EndpointEnum } from '../../enum/endpoint.enum'
 
 @Injectable({ providedIn: 'root' })
 export class LogoutHttpPostService {
-  constructor(private readonly httpExecute: HttpExecuteService) {}
+  constructor(private httpExecute: HttpExecuteService) {}
 
   logoutPost() {
     const request: LogoutRequestDtoModel = undefined
