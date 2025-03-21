@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core'
 import { IconDefinition } from '@fortawesome/angular-fontawesome'
 
-import { ControlButtonModel, ControlInputModel } from './base-form.model'
+import { ControlButtonModel, ControlInputModel, ControlRadioButtonModel } from './base-form.model'
 import { ColorType } from '@vet-client/lib-type'
 import { ValidatorFn } from '@angular/forms'
+import { TextConvertUtils } from '@vet-client/lib-utils'
 
 @Injectable({ providedIn: 'root' })
 export class BaseFormBuilder {
@@ -63,6 +64,21 @@ export class BaseFormBuilder {
       placeholder: '',
       validators,
       defaultValue: '',
+      isEnabled: true,
+    }
+  }
+
+  static buildRadioButton(options: string[], defaultValue: string): ControlRadioButtonModel {
+    return {
+      kind: 'radio-button',
+      name: 'role',
+      options: options.map((option) => {
+        return {
+          id: option,
+          value: TextConvertUtils.firstLetterUppercase(option),
+        }
+      }),
+      defaultValue,
       isEnabled: true,
     }
   }

@@ -1,7 +1,9 @@
-<lib-card-control title="Choose role">
+<lib-card-control [title]="title">
   <lib-base-form
     [formGroup]="formGroup"
     [controlsArray]="controlsArray"
+    [success]="success"
+    [error]="error"
     (event)="onSubmit($event)"
   ></lib-base-form>
 </lib-card-control>
