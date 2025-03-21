@@ -1,143 +1,86 @@
 import { Injectable } from '@angular/core'
-import { map, take } from 'rxjs'
 
-import { HttpExecuteService } from '../infrastructure/http-execute.service'
-import { MethodEnum } from '../enum/method.enum'
-import { EndpointEnum } from '../enum/endpoint.enum'
-import { GuardRequestDtoModel } from '../model/request/guard/guard-request-dto.model'
-import { AuthResponseModel } from '../model/response/auth-response.model'
-import { ChooseRoleRequestDtoModel } from '../model/request/controller/choose-role-request-dto.model'
-import { ChooseRoleResponseModel } from '../model/response/choose-role-response.model'
-import { HasRoleRequestModel } from '../model/request/has-role-request.model'
-import { HasRoleResponseModel } from '../model/response/has-role-response.model'
-import { IsClientRequestModel } from '../model/request/is-client-request.model'
-import { IsClientResponseModel } from '../model/response/is-client-response.model'
-import { IsVetRequestModel } from '../model/request/is-vet-request.model'
-import { IsVetResponseModel } from '../model/response/is-vet-response.model'
-import { LogoutRequestDtoModel } from '../model/request/controller/logout-request-dto.model'
-import { LogoutResponseModel } from '../model/response/logout-response.model'
-import { RegistrationRequestDtoModel } from '../model/request/controller/registration-request-dto.model'
-import { GetAccountRequestModel } from '../model/request/get-account-request.model'
-import { GetAccountResponseModel } from '../model/response/get-account-response.model'
+import { ChooseRoleHttpPostService } from '../dom-service/common/choose-role-http-post.service'
 import {
-  ClinicUpdateRequestModel,
-} from '../model/request/controller/clinic-request.model'
-import {
-  ClinicUpdateResponseModel,
-} from '../model/response/clinic-response.model'
-import { CookieService } from '@vet-client/lib-system'
-import { Store } from '@ngrx/store'
-import {
-  LoginDomainResponseType,
-  LogoutDomainDataType,
-  RoutePageEnum,
-  RouteSectionEnum, routeSetAction,
-  RouteStoreType,
-  setLogoutDomainData,
-} from '@vet-client/lib-store'
-import {
-  ClinicDomainDataInternalModel,
-  LoginDomainDataModel,
-  LogoutDomainDataModel,
+  ChooseRoleDomainDataModel,
+  ClinicDomainDataModel,
+  DeleteDomainDataModel,
+  LoginDomainDataModel, RegistrationDomainDataModel,
 } from '@vet-client/lib-domain'
-import { ClinicHttpPostService } from '../dom-service/clinic-http-post.service'
-import { AuthHttpPostService } from '../dom-service/auth-http-post.service'
+import { ClinicHttpPostService } from '../dom-service/common/clinic-http-post.service'
+import { LoginHttpPostService } from '../dom-service/common/login-http-post.service'
+import { LogoutHttpPostService } from '../dom-service/common/logout-http-post.service'
+import { RegistrationHttpPostService } from '../dom-service/common/registration-http-post.service'
+import { GetAccountHttpPostService } from '../dom-service/guard/get-account-http-post.service'
+import { HasRoleHttpPostService } from '../dom-service/guard/has-role-http-post.service'
+import { IsClientHttpPostService } from '../dom-service/guard/is-client-http-post.service'
+import { IsVetHttpPostService } from '../dom-service/guard/is-vet-http-post.service'
+import { ValidTokenHttpPostService } from '../dom-service/guard/valid-token-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
   constructor(
-    private readonly authHttpPost: AuthHttpPostService,
-    private readonly clinicHttpPost: ClinicHttpPostService,
-    private readonly storeLoginDomainResponse: Store<LoginDomainResponseType>,
-    private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
-    private readonly httpExecute: HttpExecuteService,
-    private cookie: CookieService,
-    private storeRoute: Store<RouteStoreType>,
+    private chooseRoleHttpPost: ChooseRoleHttpPostService,
+    private clinicHttpPost: ClinicHttpPostService,
+    private loginHttpPost: LoginHttpPostService,
+    private logoutHttpPost: LogoutHttpPostService,
+    private registrationHttpPost: RegistrationHttpPostService,
+    private getAccountHttpPost: GetAccountHttpPostService,
+    private hasRoleHttpPost: HasRoleHttpPostService,
+    private isClientHttpPost: IsClientHttpPostService,
+    private isVetHttpPost: IsVetHttpPostService,
+    private validTokenHttpPost: ValidTokenHttpPostService,
   ) {}
 
-  authPost(request: GuardRequestDtoModel) {
-    return this.httpExecute
-      .exec<AuthResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.validToken, request } })
-      .pipe(take(1))
+  chooseRolePost(domain: ChooseRoleDomainDataModel) {
+    return this.chooseRoleHttpPost.chooseRolePost(domain)
   }
 
-  chooseRolePost(request: ChooseRoleRequestDtoModel) {
-    return this.httpExecute
-      .exec<ChooseRoleResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.chooseRole, request } })
-      .pipe(take(1))
+  createClinicPost(domain: ClinicDomainDataModel) {
+    return this.clinicHttpPost.createClinicPost(domain)
   }
 
-  hasRolePost(request: HasRoleRequestModel) {
-    return this.httpExecute
-      .exec<HasRoleResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.hasRole, request } })
-      .pipe(take(1))
+  readClinicPost() {
+    return this.clinicHttpPost.readClinicPost()
   }
 
-  isClientPost(request: IsClientRequestModel) {
-    return this.httpExecute
-      .exec<IsClientResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.isClient, request } })
-      .pipe(take(1))
+  updateClinicPost(domain: ClinicDomainDataModel) {
+    return this.clinicHttpPost.updateClinicPost(domain)
   }
 
-  isVetPost(request: IsVetRequestModel) {
-    return this.httpExecute
-      .exec<IsVetResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.isVet, request } })
-      .pipe(take(1))
+  deleteClinicPost(domain: DeleteDomainDataModel) {
+    return this.clinicHttpPost.deleteClinicPost(domain)
   }
 
-  loginPost(data: LoginDomainDataModel) {
-    return this.authHttpPost.loginPost(data)
+  loginPost(domain: LoginDomainDataModel) {
+    return this.loginHttpPost.loginPost(domain)
   }
 
-  logoutPost(data: LogoutDomainDataModel) {
-    const request: LogoutRequestDtoModel = {
-      token: this.cookie.getToken(),
-    }
-    return this.httpExecute
-      .exec<LogoutResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.logout, request } })
-      .pipe(
-        take(1),
-        map((response) => {
-          if (response.success && data.logout) {
-            this.cookie.deleteCookie('token')
-            this.storeRoute.dispatch(routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.home }))
-            this.storeLogoutDomainData.dispatch(setLogoutDomainData({ logout: false }))
-          }
-        }),
-      )
+  logoutPost() {
+    return this.logoutHttpPost.logoutPost()
   }
 
-  registrationPost(request: RegistrationRequestDtoModel) {
-    return this.authHttpPost.registrationPost(request)
+  registrationPost(domain: RegistrationDomainDataModel) {
+    return this.registrationHttpPost.registrationPost(domain)
   }
 
-  getAccountPost(request: GetAccountRequestModel) {
-    return this.httpExecute
-      .exec<GetAccountResponseModel>({
-        method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.getAccount, request },
-      })
-      .pipe(take(1))
+  getAccountPost() {
+    return this.getAccountHttpPost.getAccountPost()
   }
 
-  clinicCreatePost(clinic: ClinicDomainDataInternalModel) {
-    return this.clinicHttpPost.clinicCreatePost(clinic)
+  hasRolePost() {
+    return this.hasRoleHttpPost.hasRolePost()
   }
 
-  clinicReadPost() {
-    return this.clinicHttpPost.readPost()
+  isClientPost() {
+    return this.isClientHttpPost.isClientPost()
   }
 
-  clinicUpdatePost(request: ClinicUpdateRequestModel) {
-    return this.httpExecute
-      .exec<ClinicUpdateResponseModel>({
-        method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.vetClinicUpdate, request },
-      })
-      .pipe(take(1))
+  isVetPost() {
+    return this.isVetHttpPost.isVetPost()
   }
 
-  clinicDeletePost(ids: number[]) {
-    return this.clinicHttpPost.deletePost(ids)
+  validTokenPost() {
+    return this.validTokenHttpPost.validTokenPost()
   }
 }
