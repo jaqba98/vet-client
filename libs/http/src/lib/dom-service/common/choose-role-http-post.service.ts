@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { take } from 'rxjs'
 
-import { ChooseRoleDomainDataModel } from '@vet-client/lib-domain'
+import { ChooseRoleDomainModel } from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
@@ -16,7 +16,7 @@ export class ChooseRoleHttpPostService {
     private httpExecute: HttpExecuteService,
   ) {}
 
-  chooseRolePost(domain: ChooseRoleDomainDataModel) {
+  chooseRolePost(domain: ChooseRoleDomainModel) {
     const request: ChooseRoleRequestDtoModel = {
       token: this.cookie.getToken(),
       ...domain,
