@@ -35,9 +35,7 @@ export class LogoutHttpPostService {
         map((response) => {
           if (response.success) {
             this.cookie.deleteCookie('token')
-            this.storeRoute.dispatch(routeSetAction({
-              page: RoutePageEnum.home, section: RouteSectionEnum.home,
-            }))
+            this.storeRoute.dispatch(routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.home }))
           }
         }),
       )
