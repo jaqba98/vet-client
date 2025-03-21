@@ -3,9 +3,9 @@ import { ChooseRolePostDtoModel } from './post/controller/choose-role-post-dto.m
 import { HasRolePostModel } from './post/has-role-post.model'
 import { IsClientPostModel } from './post/is-client-post.model'
 import { IsVetPostModel } from './post/is-vet-post.model'
-import { LogoutPostModel } from './post/logout-post.model'
-import { LoginPostModel } from './post/login-post.model'
-import { RegistrationPostModel } from './post/registration-post.model'
+import { LogoutPostDtoModel } from './post/controller/logout-post-dto.model'
+import { LoginPostDtoModel } from './post/controller/login-post-dto.model'
+import { RegistrationPostDtoModel } from './post/controller/registration-post-dto.model'
 import { MethodEnum } from '../enum/method.enum'
 import { GetAccountPostModel } from './post/get-account-post.model'
 import {
@@ -21,9 +21,9 @@ type HttpPostType =
   | HasRolePostModel
   | IsClientPostModel
   | IsVetPostModel
-  | LoginPostModel
-  | LogoutPostModel
-  | RegistrationPostModel
+  | LoginPostDtoModel
+  | LogoutPostDtoModel
+  | RegistrationPostDtoModel
   | GetAccountPostModel
   | ClinicCreatePostModel
   | ClinicReadPostModel
