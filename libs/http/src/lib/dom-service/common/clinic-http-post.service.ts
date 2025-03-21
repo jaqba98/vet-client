@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { take } from 'rxjs'
 
-import { ClinicDomainDataModel, DeleteDomainDataModel } from '@vet-client/lib-domain'
+import { ClinicDomainModel, DeleteDomainDataModel } from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { ClinicRequestDtoModel } from '../../model/request/controller/clinic-request-dto.model'
@@ -19,7 +19,7 @@ export class ClinicHttpPostService {
     private httpExecute: HttpExecuteService,
   ) {}
 
-  createClinicPost(domain: ClinicDomainDataModel) {
+  createClinicPost(domain: ClinicDomainModel) {
     const request: ClinicRequestDtoModel = {
       token: this.cookie.getToken(),
       ...domain,
@@ -37,14 +37,14 @@ export class ClinicHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<ClinicDomainDataModel[]>>({
+      .exec<ResponseDataDtoModel<ClinicDomainModel[]>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicRead, request },
       })
       .pipe(take(1))
   }
 
-  updateClinicPost(domain: ClinicDomainDataModel) {
+  updateClinicPost(domain: ClinicDomainModel) {
     const request: ClinicRequestDtoModel = {
       token: this.cookie.getToken(),
       ...domain,
