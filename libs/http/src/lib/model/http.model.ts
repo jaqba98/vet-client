@@ -1,5 +1,5 @@
 import { AuthPostModel } from './post/auth-post.model'
-import { ChooseRolePostModel } from './post/choose-role-post.model'
+import { ChooseRolePostDtoModel } from './post/controller/choose-role-post-dto.model'
 import { HasRolePostModel } from './post/has-role-post.model'
 import { IsClientPostModel } from './post/is-client-post.model'
 import { IsVetPostModel } from './post/is-vet-post.model'
@@ -13,11 +13,11 @@ import {
   ClinicDeletePostModel,
   ClinicReadPostModel,
   ClinicUpdatePostModel,
-} from './post/clinic-post.model'
+} from './post/controller/clinic-post.model'
 
 type HttpPostType =
   | AuthPostModel
-  | ChooseRolePostModel
+  | ChooseRolePostDtoModel
   | HasRolePostModel
   | IsClientPostModel
   | IsVetPostModel

@@ -8,8 +8,8 @@ export enum EndpointEnum {
   isClient = 'is-client',
   isVet = 'is-vet',
   validToken = 'valid-token',
-  vetClinicCreate = 'vet-clinic/create',
-  vetClinicRead = 'vet-clinic/read',
-  vetClinicUpdate = 'vet-clinic/update',
-  vetClinicDelete = 'vet-clinic/delete',
+  clinicCreate = 'clinic-create',
+  clinicRead = 'clinic-read',
+  clinicUpdate = 'clinic-update',
+  clinicDelete = 'clinic-delete',
 }
