@@ -1,14 +1,14 @@
 import { ClinicDomainDataInternalModel } from '@vet-client/lib-domain'
-import { BaseRequestModel } from '../base/base-request.model'
+import { TokenRequestDtoModel } from '../base/token-request-dto.model'
 
-export interface ClinicCreateRequestModel extends BaseRequestModel, ClinicDomainDataInternalModel {}
+export interface ClinicCreateRequestModel extends TokenRequestDtoModel, ClinicDomainDataInternalModel {}
 
-export type ClinicReadRequestModel = BaseRequestModel
+export type ClinicReadRequestModel = TokenRequestDtoModel
 
-export interface ClinicUpdateRequestModel extends BaseRequestModel, ClinicDomainDataInternalModel {
+export interface ClinicUpdateRequestModel extends TokenRequestDtoModel, ClinicDomainDataInternalModel {
   id: number
 }
 
-export interface ClinicDeleteRequestModel extends BaseRequestModel {
+export interface ClinicDeleteRequestModel extends TokenRequestDtoModel {
   ids: number[]
 }

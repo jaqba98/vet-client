@@ -1,3 +1,3 @@
-import { BaseRequestModel } from '../base/base-request.model'
+import { TokenRequestDtoModel } from '../base/token-request-dto.model'
 
-export type AuthRequestModel = BaseRequestModel
+export type AuthRequestModel = TokenRequestDtoModel

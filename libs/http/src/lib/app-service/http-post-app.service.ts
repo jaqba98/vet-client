@@ -6,7 +6,7 @@ import { MethodEnum } from '../enum/method.enum'
 import { EndpointEnum } from '../enum/endpoint.enum'
 import { AuthRequestModel } from '../model/request/auth-request.model'
 import { AuthResponseModel } from '../model/response/auth-response.model'
-import { ChooseRoleRequestModel } from '../model/request/choose-role-request.model'
+import { ChooseRoleRequestDtoModel } from '../model/request/controller/choose-role-request-dto.model'
 import { ChooseRoleResponseModel } from '../model/response/choose-role-response.model'
 import { HasRoleRequestModel } from '../model/request/has-role-request.model'
 import { HasRoleResponseModel } from '../model/response/has-role-response.model'
@@ -61,7 +61,7 @@ export class HttpPostAppService {
       .pipe(take(1))
   }
 
-  chooseRolePost(request: ChooseRoleRequestModel) {
+  chooseRolePost(request: ChooseRoleRequestDtoModel) {
     return this.httpExecute
       .exec<ChooseRoleResponseModel>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.chooseRole, request } })
       .pipe(take(1))

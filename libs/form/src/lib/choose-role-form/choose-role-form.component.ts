@@ -7,7 +7,7 @@ import {
   BaseComponentDirective,
   TextConvertUtils,
 } from '@vet-client/lib-utils'
-import { ChooseRoleDomainDataModel, ChooseRoleDomainFormDataModel, RoleDomainEnum } from '@vet-client/lib-domain'
+import { ChooseRoleDomainDataModel, ChooseRoleDomainFormModel, RoleEnum } from '@vet-client/lib-domain'
 import { HttpPostAppService } from '@vet-client/lib-http'
 import { CookieService } from '@vet-client/lib-system'
 import {
@@ -24,7 +24,7 @@ import {
   hostDirectives: [BaseComponentDirective],
 })
 export class ChooseRoleFormComponent
-  extends BaseFormService<ChooseRoleDomainFormDataModel, ChooseRoleDomainDataModel>
+  extends BaseFormService<ChooseRoleDomainFormModel, ChooseRoleDomainDataModel>
   implements OnInit {
   constructor(
     private readonly httpPost: HttpPostAppService,
@@ -41,15 +41,15 @@ export class ChooseRoleFormComponent
         name: 'role',
         options: [
           {
-            id: RoleDomainEnum.vet,
-            value: TextConvertUtils.firstLetterUppercase(RoleDomainEnum.vet),
+            id: RoleEnum.vet,
+            value: TextConvertUtils.firstLetterUppercase(RoleEnum.vet),
           },
           {
-            id: RoleDomainEnum.client,
-            value: TextConvertUtils.firstLetterUppercase(RoleDomainEnum.client),
+            id: RoleEnum.client,
+            value: TextConvertUtils.firstLetterUppercase(RoleEnum.client),
           },
         ],
-        defaultValue: RoleDomainEnum.vet,
+        defaultValue: RoleEnum.vet,
         isEnabled: true,
       },
       save: {
@@ -84,7 +84,7 @@ export class ChooseRoleFormComponent
       .subscribe((response) => {
         const { success, role } = response
         if (success) {
-          if (role === RoleDomainEnum.vet) {
+          if (role === RoleEnum.vet) {
             this.store.dispatch(
               routeSetAction({
                 page: RoutePageEnum.dashboardVet,
@@ -92,7 +92,7 @@ export class ChooseRoleFormComponent
               }),
             )
           }
-          else if (role === RoleDomainEnum.client) {
+          else if (role === RoleEnum.client) {
             this.store.dispatch(
               routeSetAction({
                 page: RoutePageEnum.dashboardClient,

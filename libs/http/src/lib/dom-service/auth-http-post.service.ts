@@ -17,7 +17,7 @@ import { HttpExecuteService } from '../infrastructure/http-execute.service'
 import { RegistrationRequestModel } from '../model/request/registration-request.model'
 import { MethodEnum } from '../enum/method.enum'
 import { EndpointEnum } from '../enum/endpoint.enum'
-import { ResponseModel } from '../model/response/response.model'
+import { ResponseDtoModel } from '../model/response/response-dto.model'
 import { LoginRequestModel } from '../model/request/login-request.model'
 
 @Injectable({ providedIn: 'root' })
@@ -32,7 +32,7 @@ export class AuthHttpPostService {
   loginPost(data: LoginDomainDataModel) {
     const request: LoginRequestModel = data
     return this.httpExecute
-      .exec<ResponseModel<string>>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
+      .exec<ResponseDtoModel<string>>({ method: MethodEnum.post, type: { endpoint: EndpointEnum.login, request } })
       .pipe(
         take(1),
         map((response) => {
@@ -57,7 +57,7 @@ export class AuthHttpPostService {
 
   registrationPost(request: RegistrationRequestModel) {
     return this.httpExecute
-      .exec<ResponseModel<string>>({
+      .exec<ResponseDtoModel<string>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.registration, request },
       })

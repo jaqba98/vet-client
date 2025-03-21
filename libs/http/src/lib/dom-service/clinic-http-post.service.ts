@@ -22,7 +22,7 @@ import {
   ClinicCreateRequestModel,
   ClinicDeleteRequestModel,
 } from '../model/request/clinic-request.model'
-import { BaseRequestModel } from '../model/base/base-request.model'
+import { TokenRequestDtoModel } from '../model/base/token-request-dto.model'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicHttpPostService {
@@ -58,7 +58,7 @@ export class ClinicHttpPostService {
 
   readPost() {
     const token = this.cookie.getToken()
-    const request: BaseRequestModel = { token }
+    const request: TokenRequestDtoModel = { token }
     return this.httpExecute
       .exec<ClinicReadResponseModel>({
         method: MethodEnum.post,

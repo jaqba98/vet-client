@@ -1,10 +1,11 @@
-import { ControlType } from '@vet-client/lib-base-form'
+import { ControlButtonModel, ControlRadioButtonModel } from '@vet-client/lib-base-form'
+import { RoleEnum } from '../enum/role.enum'
 
-interface ChooseRoleDomainModel<T> {
-  role: T
-  save: T
+export interface ChooseRoleDomainFormModel {
+  role: ControlRadioButtonModel
+  save: ControlButtonModel
 }
 
-export type ChooseRoleDomainFormDataModel = ChooseRoleDomainModel<ControlType>
-
-export type ChooseRoleDomainDataModel = Omit<ChooseRoleDomainModel<string>, 'save'>
+export interface ChooseRoleDomainDataModel {
+  role: RoleEnum
+}
