@@ -1,3 +1,3 @@
-import { LoginDomainDataModel } from '@vet-client/lib-domain'
+import { LoginDomainModel } from '@vet-client/lib-domain'
 
-export type LoginRequestDtoModel = LoginDomainDataModel
+export type LoginRequestDtoModel = LoginDomainModel

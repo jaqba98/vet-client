@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { take } from 'rxjs'
 
-import { LoginDomainDataModel } from '@vet-client/lib-domain'
+import { LoginDomainModel } from '@vet-client/lib-domain'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
@@ -12,7 +12,7 @@ import { ResponseDataDtoModel } from '../../model/response/response-data-dto.mod
 export class LoginHttpPostService {
   constructor(private httpExecute: HttpExecuteService) {}
 
-  loginPost(domain: LoginDomainDataModel) {
+  loginPost(domain: LoginDomainModel) {
     const request: LoginRequestDtoModel = { ...domain }
     return this.httpExecute
       .exec<ResponseDataDtoModel<string>>({

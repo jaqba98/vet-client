@@ -1,3 +1,3 @@
-import { RegistrationDomainDataModel } from '@vet-client/lib-domain'
+import { RegistrationDomainModel } from '@vet-client/lib-domain'
 
-export type RegistrationRequestDtoModel = RegistrationDomainDataModel
+export type RegistrationRequestDtoModel = RegistrationDomainModel

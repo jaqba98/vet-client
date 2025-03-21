@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { take } from 'rxjs'
 
-import { RegistrationDomainDataModel } from '@vet-client/lib-domain'
+import { RegistrationDomainModel } from '@vet-client/lib-domain'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
@@ -12,7 +12,7 @@ import { ResponseDtoModel } from '../../model/response/response-dto.model'
 export class RegistrationHttpPostService {
   constructor(private httpExecute: HttpExecuteService) {}
 
-  registrationPost(domain: RegistrationDomainDataModel) {
+  registrationPost(domain: RegistrationDomainModel) {
     const request: RegistrationRequestDtoModel = { ...domain }
     return this.httpExecute
       .exec<ResponseDtoModel>({
