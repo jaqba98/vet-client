@@ -1,9 +1,11 @@
-export interface AccountDomainModel {
+import { RoleEnum } from '../enum/role.enum'
+
+export interface AccountDatabaseModel {
   id: number
   email: string
   password: string
   firstName: string
   lastName: string
-  role: string
+  role: RoleEnum
   pictureUrl: string
 }

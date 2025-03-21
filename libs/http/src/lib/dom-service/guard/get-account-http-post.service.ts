@@ -7,7 +7,7 @@ import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { GuardRequestDtoModel } from '../../model/request/guard/guard-request-dto.model'
 import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
-import { AccountDomainModel } from '@vet-client/lib-domain'
+import { AccountDatabaseModel } from '@vet-client/lib-domain'
 
 @Injectable({ providedIn: 'root' })
 export class GetAccountHttpPostService {
@@ -19,7 +19,7 @@ export class GetAccountHttpPostService {
   getAccountPost() {
     const request: GuardRequestDtoModel = { token: this.cookie.getToken() }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<AccountDomainModel>>({
+      .exec<ResponseDataDtoModel<AccountDatabaseModel>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.getAccount, request },
       })

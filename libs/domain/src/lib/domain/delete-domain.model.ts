@@ -1,3 +1,3 @@
-export interface DeleteDomainDataModel {
+export interface DeleteDomainModel {
   ids: number[]
 }

@@ -1,5 +1,3 @@
-import { RoleEnum } from '../enum/role.enum'
+import { AccountDatabaseModel } from '../database/account-database.model'
 
-export interface ChooseRoleDomainModel {
-  role: RoleEnum
-}
+export type ChooseRoleDomainModel = Pick<AccountDatabaseModel, 'role'>

@@ -1,10 +1,5 @@
-export interface RegistrationDomainModel {
-  id: number
-  email: string
-  password: string
+import { AccountDatabaseModel } from '../database/account-database.model'
+
+export interface RegistrationDomainModel extends Omit<AccountDatabaseModel, 'id'> {
   confirmPassword: string
-  firstName: string
-  lastName: string
-  role: string
-  pictureUrl: string
 }
