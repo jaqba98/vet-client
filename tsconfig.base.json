@@ -19,6 +19,7 @@
       "@vet-client/lib-const": ["libs/const/src/index.ts"],
       "@vet-client/lib-control": ["libs/control/src/index.ts"],
       "@vet-client/lib-domain": ["libs/domain/src/index.ts"],
+      "@vet-client/lib-env": ["libs/env/src/index.ts"],
       "@vet-client/lib-form": ["libs/form/src/index.ts"],
       "@vet-client/lib-guard": ["libs/guard/src/index.ts"],
       "@vet-client/lib-http": ["libs/http/src/index.ts"],
