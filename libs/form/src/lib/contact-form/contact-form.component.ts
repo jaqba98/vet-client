@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core'
-import { Validators } from '@angular/forms'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { CardControlComponent } from '@vet-client/lib-control'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ContactFormModel, ContactModel } from './contact-form.model'
+import { ContactDomainModel, ContactFormModel } from '@vet-client/lib-domain'
+import { Validators } from '@angular/forms'
 
 @Component({
   selector: 'lib-contact-form',
@@ -12,9 +12,11 @@ import { ContactFormModel, ContactModel } from './contact-form.model'
   templateUrl: './contact-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class ContactFormComponent extends BaseFormService<ContactFormModel, ContactModel> implements OnInit {
+export class ContactFormComponent
+  extends BaseFormService<ContactFormModel, ContactDomainModel>
+  implements OnInit, OnDestroy {
   constructor(private baseForm: BaseFormBuilder) {
-    super()
+    super('Contact')
   }
 
   ngOnInit() {
@@ -34,7 +36,11 @@ export class ContactFormComponent extends BaseFormService<ContactFormModel, Cont
     })
   }
 
-  override onSubmit(model: ContactModel) {
-    console.log(model)
+  ngOnDestroy() {
+    this.onDestroy()
+  }
+
+  override onSubmit(domain: ContactDomainModel) {
+    console.log(domain)
   }
 }

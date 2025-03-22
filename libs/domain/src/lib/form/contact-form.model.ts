@@ -5,10 +5,3 @@ export interface ContactFormModel {
   subject: ControlInputModel
   message: ControlTextareaModel
 }
-
-export interface ContactModel {
-  email: string
-  subject: string
-  message: string
-  send: boolean
-}

@@ -34,7 +34,7 @@ export class ChooseRoleFormComponent
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe()
+    this.onDestroy()
   }
 
   override onSubmit(domain: ChooseRoleDomainModel) {

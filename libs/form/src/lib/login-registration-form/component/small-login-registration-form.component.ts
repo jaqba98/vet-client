@@ -43,7 +43,7 @@ export class SmallLoginRegistrationFormComponent
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe()
+    this.onDestroy()
   }
 
   override onSubmit(domain: LoginRegistrationDomainModel) {

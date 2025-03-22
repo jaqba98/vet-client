@@ -33,7 +33,7 @@ export class HamburgerFormComponent
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe()
+    this.onDestroy()
   }
 
   override onSubmit(domain: HamburgerDomainModel) {

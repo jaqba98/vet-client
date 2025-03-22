@@ -49,7 +49,7 @@ export class RegistrationFormComponent
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe()
+    this.onDestroy()
   }
 
   override onSubmit(data: RegistrationDomainModel) {
