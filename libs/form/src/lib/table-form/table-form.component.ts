@@ -10,7 +10,7 @@ import { TableDataFormComponent } from './table-data-form/table-data-form.compon
 import { TableFormModel } from './model/table-form.model'
 import { TableFormRowsModel } from './model/table-form-rows.model'
 import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
-import { ClinicDomainDataModel } from '@vet-client/lib-domain'
+import { ClinicTableModel } from '@vet-client/lib-domain'
 import { TableEditFormComponent } from './table-edit-form/table-edit-form.component'
 
 @Component({
@@ -52,7 +52,7 @@ export class TableFormComponent<TRows, TData> {
   @Input({ required: true }) editSuccess!: string
   @Input({ required: true }) editError!: string
   @Input({ required: true }) allSelected!: boolean
-  @Input({ required: true }) selectedClinic!: ClinicDomainDataModel
+  @Input({ required: true }) selectedClinic!: ClinicTableModel
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true

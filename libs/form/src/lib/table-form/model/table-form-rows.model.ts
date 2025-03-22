@@ -1,7 +1,7 @@
 export interface TableFormRowModel<TRow> {
   id: number
   isSelected: boolean
-  data: TRow
+  domain: TRow
 }
 
 export type TableFormRowsModel<TRow> = TableFormRowModel<TRow>[]

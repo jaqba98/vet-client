@@ -62,7 +62,7 @@ export class TableDataFormComponent<TRows> {
       .build()
   }
 
-  getColumn(row: TableFormRowModel<TRows>['data'], header: string) {
+  getColumn(row: TableFormRowModel<TRows>['domain'], header: string) {
     return this.objectType.getPropertyByDynamicKey(row, header)
   }
 

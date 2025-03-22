@@ -42,12 +42,12 @@ export class TableEditFormComponent<TData>
         .build(),
     })
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.formGroup.patchValue(this.selectedClinic.data as any)
+    this.formGroup.patchValue(this.selectedClinic.domain as any)
   }
 
   override onSubmit(data: TData) {
     this.updateEvent.emit({
-      ...this.selectedClinic.data,
+      ...this.selectedClinic.domain,
       ...data,
     })
   }
