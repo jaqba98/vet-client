@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Subscription } from 'rxjs'
 import { Validators } from '@angular/forms'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
@@ -21,7 +20,7 @@ export class RegistrationFormComponent
     private registration: RegistrationNotification,
     private baseForm: BaseFormBuilder,
   ) {
-    super('Registration')
+    super('Registration', registration)
   }
 
   ngOnInit() {
@@ -47,16 +46,6 @@ export class RegistrationFormComponent
         .buildValidators([Validators.required, Validators.maxLength(100)])
         .build(),
     })
-    this.sub.add(this.registration.response$.subscribe((res) => {
-      this.success = ''
-      this.error = ''
-      if (res.success) {
-        this.success = res.message
-      }
-      else {
-        this.error = res.message
-      }
-    }))
   }
 
   ngOnDestroy() {

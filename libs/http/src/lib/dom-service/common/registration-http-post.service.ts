@@ -7,13 +7,13 @@ import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { RegistrationRequestDtoModel } from '../../model/request/controller/registration-request-dto.model'
 import { ResponseDtoModel } from '../../model/response/response-dto.model'
-import { LoginNotification } from '../../notification/login.notification'
+import { RegistrationNotification } from '../../notification/registration.notification'
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationHttpPostService {
   constructor(
     private httpExecute: HttpExecuteService,
-    private login: LoginNotification,
+    private registration: RegistrationNotification,
   ) {}
 
   registrationPost(domain: RegistrationDomainModel) {
@@ -26,7 +26,7 @@ export class RegistrationHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.login.runResponse({
+          this.registration.runResponse({
             success: res.success,
             message: res.messages[0],
           })

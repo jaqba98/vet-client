@@ -25,7 +25,7 @@ export class LoginFormComponent
   ngOnInit() {
     this.initBaseForm({
       email: this.baseForm.buildInput('text', 'Email').build(),
-      password: this.baseForm.buildInput('text', 'Password').build(),
+      password: this.baseForm.buildInput('password', 'Password').build(),
     })
   }
 
