@@ -1,13 +1,25 @@
 .base-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   width: 100%;
 
   &__controls {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__control {
+    display: flex;
+    flex-direction: column;
     gap: 0.25rem;
+  }
+
+  &__submit {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   &--horizontal {

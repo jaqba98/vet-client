@@ -38,9 +38,11 @@
       </div>
     </ng-container>
   </div>
-  <div class="base-form__submit"></div>
-  <div class="base-form__message">
-    <lib-success-control *ngIf="success !== ''">{{ success }}</lib-success-control>
-    <lib-error-control *ngIf="error !== ''">{{ error }}</lib-error-control>
+  <div class="base-form__submit">
+    <ng-container *ngIf="isSubmit">
+      <lib-button-control [model]="submit.control"></lib-button-control>
+      <lib-success-control *ngIf="success !== ''">{{ success }}</lib-success-control>
+      <lib-error-control *ngIf="error !== ''">{{ error }}</lib-error-control>
+    </ng-container>
   </div>
 </form>

@@ -89,7 +89,7 @@ export class BaseFormBuilder {
     return this
   }
 
-  build() {
-    return this.control
+  build<T>() {
+    return <T> this.control
   }
 }

@@ -10,7 +10,8 @@ import {
   TextareaControlComponent,
 } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ControlsType } from './base-form.model'
+import { ControlButtonModel, ControlsType, ControlType } from './base-form.model'
+import { BaseFormBuilder } from './base-form.builder'
 
 @Component({
   selector: 'lib-base-form',
@@ -36,12 +37,19 @@ export class BaseFormComponent implements OnInit {
   @Input({ required: true }) formGroup!: FormGroup
   @Input({ required: true }) controls!: ControlsType
   @Input() resetForm = true
-  @Input() isSubmit = false
+  @Input() isSubmit = true
+  @Input() submitText = 'Submit'
   @Input() isHorizontal = false
   @Input() error = ''
   @Input() success = ''
 
+  submit!: ControlButtonModel
+
+  constructor(private baseForm: BaseFormBuilder) {
+  }
+
   ngOnInit() {
+    this.submit = this.baseForm.buildButton('submit', this.submitText, 'primary').build()
     this.resetEvent.emit()
   }
 
