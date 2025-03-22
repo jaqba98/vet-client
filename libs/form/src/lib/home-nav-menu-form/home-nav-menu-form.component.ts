@@ -1,13 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreModel } from '@vet-client/lib-store'
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
-import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
-  HomeNavMenuFormModel,
-  HomeNavMenuModel,
-} from './home-nav-menu-form.model'
+  RoutePageEnum,
+  RouteSectionEnum,
+  routeSetAction,
+  RouteStoreModel,
+} from '@vet-client/lib-store'
+import {
+  BaseFormBuilder,
+  BaseFormComponent,
+  BaseFormService,
+} from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { HomeNavMenuDomainModel } from '@vet-client/lib-domain'
 
 @Component({
   selector: 'lib-home-nav-menu-form',
@@ -16,13 +22,13 @@ import {
   hostDirectives: [BaseComponentDirective],
 })
 export class HomeNavMenuFormComponent
-  extends BaseFormService<HomeNavMenuFormModel, HomeNavMenuModel>
-  implements OnInit {
+  extends BaseFormService<HomeNavMenuDomainModel, HomeNavMenuDomainModel>
+  implements OnInit, OnDestroy {
   @Input() isHorizontal = true
 
   constructor(
-    private store: Store<RouteStoreModel>,
     private baseForm: BaseFormBuilder,
+    private store: Store<RouteStoreModel>,
   ) {
     super()
   }
@@ -30,20 +36,30 @@ export class HomeNavMenuFormComponent
   ngOnInit() {
     this.initBaseForm({
       home: this.baseForm.buildButton('home', 'Home', 'primary').build(),
-      aboutUs: this.baseForm.buildButton('aboutUs', 'About us', 'primary').build(),
+      aboutUs: this.baseForm
+        .buildButton('aboutUs', 'About us', 'primary')
+        .build(),
       price: this.baseForm.buildButton('price', 'Price', 'primary').build(),
-      contact: this.baseForm.buildButton('contact', 'Contact', 'primary').build(),
+      contact: this.baseForm
+        .buildButton('contact', 'Contact', 'primary')
+        .build(),
     })
   }
 
-  override onSubmit(model: HomeNavMenuModel) {
-    const { home, aboutUs, price, contact } = model
-    if (home) {
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
+  override onSubmit(domain: HomeNavMenuDomainModel) {
+    if (domain.home) {
       this.store.dispatch(
-        routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.home }),
+        routeSetAction({
+          page: RoutePageEnum.home,
+          section: RouteSectionEnum.home,
+        }),
       )
     }
-    else if (aboutUs) {
+    else if (domain.aboutUs) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.home,
@@ -51,12 +67,15 @@ export class HomeNavMenuFormComponent
         }),
       )
     }
-    else if (price) {
+    else if (domain.price) {
       this.store.dispatch(
-        routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.price }),
+        routeSetAction({
+          page: RoutePageEnum.home,
+          section: RouteSectionEnum.price,
+        }),
       )
     }
-    else if (contact) {
+    else if (domain.contact) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.home,
