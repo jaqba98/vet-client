@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core'
-import { faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import {
+  BaseFormBuilder,
+  BaseFormComponent,
+  BaseFormService,
+} from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model'
+import { LoginRegistrationDomainModel, LoginRegistrationFormModel } from '@vet-client/lib-domain'
 import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service'
 
 @Component({
@@ -15,13 +19,16 @@ import { BaseLoginRegistrationFormService } from '../base/base-login-registratio
   hostDirectives: [BaseComponentDirective],
 })
 export class SmallLoginRegistrationFormComponent
-  extends BaseFormService<BaseLoginRegistrationFormModel, BaseLoginRegistrationModel>
-  implements OnInit {
-  loginRegistrationFormClass = 'base-login-registration-form--small'
+  extends BaseFormService<
+    LoginRegistrationFormModel,
+    LoginRegistrationDomainModel
+  >
+  implements OnInit, OnDestroy {
+  formClass = 'form--small'
 
   constructor(
-    private baseLoginRegistrationForm: BaseLoginRegistrationFormService,
     private baseForm: BaseFormBuilder,
+    private baseLoginRegistrationForm: BaseLoginRegistrationFormService,
   ) {
     super()
   }
@@ -29,11 +36,17 @@ export class SmallLoginRegistrationFormComponent
   ngOnInit() {
     this.initBaseForm({
       login: this.baseForm.buildButtonIcon('login', faRightToBracket, 'primary').build(),
-      registration: this.baseForm.buildButtonIcon('registration', faUserPlus, 'primary').build(),
+      registration: this.baseForm
+        .buildButtonIcon('registration', faUserPlus, 'primary')
+        .build(),
     })
   }
 
-  override onSubmit(model: BaseLoginRegistrationModel) {
-    this.baseLoginRegistrationForm.onSubmit(model)
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
+  override onSubmit(domain: LoginRegistrationDomainModel) {
+    this.baseLoginRegistrationForm.onSubmit(domain)
   }
 }

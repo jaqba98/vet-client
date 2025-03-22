@@ -3,7 +3,7 @@ import { ColorType } from '@vet-client/lib-type'
 
 interface BaseValueModel {
   id: string
-  color: ColorType
+  buttonColor: ColorType
 }
 
 interface TextValueModel extends BaseValueModel {

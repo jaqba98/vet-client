@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import {
+  BaseFormBuilder,
+  BaseFormComponent,
+  BaseFormService,
+} from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model'
+import { LoginRegistrationDomainModel, LoginRegistrationFormModel } from '@vet-client/lib-domain'
 import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service'
 
 @Component({
@@ -15,15 +19,15 @@ import { BaseLoginRegistrationFormService } from '../base/base-login-registratio
 })
 export class BigLoginRegistrationFormComponent
   extends BaseFormService<
-    BaseLoginRegistrationFormModel,
-    BaseLoginRegistrationModel
+    LoginRegistrationFormModel,
+    LoginRegistrationDomainModel
   >
-  implements OnInit {
-  loginRegistrationFormClass = 'base-login-registration-form--big'
+  implements OnInit, OnDestroy {
+  formClass = 'form--big'
 
   constructor(
-    private baseLoginRegistrationForm: BaseLoginRegistrationFormService,
     private baseForm: BaseFormBuilder,
+    private baseLoginRegistrationForm: BaseLoginRegistrationFormService,
   ) {
     super()
   }
@@ -31,11 +35,17 @@ export class BigLoginRegistrationFormComponent
   ngOnInit() {
     this.initBaseForm({
       login: this.baseForm.buildButton('login', 'Login', 'primary').build(),
-      registration: this.baseForm.buildButton('registration', 'Registration', 'primary').build(),
+      registration: this.baseForm
+        .buildButton('registration', 'Registration', 'primary')
+        .build(),
     })
   }
 
-  override onSubmit(model: BaseLoginRegistrationModel) {
-    this.baseLoginRegistrationForm.onSubmit(model)
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
+  override onSubmit(domain: LoginRegistrationDomainModel) {
+    this.baseLoginRegistrationForm.onSubmit(domain)
   }
 }

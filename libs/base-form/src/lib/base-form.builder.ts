@@ -29,7 +29,7 @@ export class BaseFormBuilder {
     return this
   }
 
-  buildButton(id: string, text: string, color: ColorType): this {
+  buildButton(id: string, text: string, buttonColor: ColorType): this {
     this.control = <ControlButtonModel> {
       kind: 'button',
       defaultValue: '',
@@ -37,14 +37,15 @@ export class BaseFormBuilder {
         type: 'text',
         id,
         text,
-        color,
+        buttonColor,
+        color: 'light-primary',
       },
       validators: [],
     }
     return this
   }
 
-  buildButtonIcon(id: string, icon: IconDefinition, color: ColorType): this {
+  buildButtonIcon(id: string, icon: IconDefinition, buttonColor: ColorType): this {
     this.control = <ControlButtonModel> {
       kind: 'button',
       defaultValue: '',
@@ -52,7 +53,8 @@ export class BaseFormBuilder {
         type: 'icon',
         id,
         icon,
-        color,
+        buttonColor,
+        color: 'light-primary',
         fontSize: '1rem',
       },
       validators: [],

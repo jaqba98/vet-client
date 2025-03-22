@@ -28,12 +28,12 @@ export class ButtonControlComponent {
       'button-control__button--icon': this.model.type === 'icon',
       'button-control__button--link': this.model.type === 'link',
       // 'button-control__button--full-width': this.model.fullWidth,
-      'button-control__button--transparent': this.model.color === 'transparent',
-      'button-control__button--primary': this.model.color === 'primary',
-      'button-control__button--dark-primary': this.model.color === 'dark-primary',
-      'button-control__button--dark-secondary': this.model.color === 'dark-secondary',
-      'button-control__button--success': this.model.color === 'success',
-      'button-control__button--error': this.model.color === 'error',
+      'button-control__button--transparent': this.model.buttonColor === 'transparent',
+      'button-control__button--primary': this.model.buttonColor === 'primary',
+      'button-control__button--dark-primary': this.model.buttonColor === 'dark-primary',
+      'button-control__button--dark-secondary': this.model.buttonColor === 'dark-secondary',
+      'button-control__button--success': this.model.buttonColor === 'success',
+      'button-control__button--error': this.model.buttonColor === 'error',
       // 'button-control__button--width40px': this.model.isSquare,
     }
   }
