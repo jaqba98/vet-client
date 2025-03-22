@@ -9,9 +9,6 @@ import { LoginNotification } from '../notification/login.notification'
 import { LogoutNotification } from '../notification/logout.notification'
 import { RegistrationNotification } from '../notification/registration.notification'
 import { GetAccountNotification } from '../notification/get-account.notification'
-import { HasRoleNotification } from '../notification/has-role.notification'
-import { IsClientNotification } from '../notification/is-client.notification'
-import { IsVetNotification } from '../notification/is-vet.notification'
 import { ValidTokenNotification } from '../notification/valid-token.notification'
 
 @Component({
@@ -29,9 +26,6 @@ export class HttpComponent implements OnInit, OnDestroy {
     private logout: LogoutNotification,
     private registration: RegistrationNotification,
     private getAccount: GetAccountNotification,
-    private hasRole: HasRoleNotification,
-    private isClient: IsClientNotification,
-    private isVet: IsVetNotification,
     private validToken: ValidTokenNotification,
     private httpPost: HttpPostAppService,
   ) {
@@ -65,15 +59,6 @@ export class HttpComponent implements OnInit, OnDestroy {
     ).subscribe())
     this.sub.add(this.getAccount.notification$.pipe(
       switchMap(() => this.httpPost.getAccountPost()),
-    ).subscribe())
-    this.sub.add(this.hasRole.notification$.pipe(
-      switchMap(() => this.httpPost.hasRolePost()),
-    ).subscribe())
-    this.sub.add(this.isClient.notification$.pipe(
-      switchMap(() => this.httpPost.isClientPost()),
-    ).subscribe())
-    this.sub.add(this.isVet.notification$.pipe(
-      switchMap(() => this.httpPost.isVetPost()),
     ).subscribe())
     this.sub.add(this.validToken.notification$.pipe(
       switchMap(() => this.httpPost.validTokenPost()),

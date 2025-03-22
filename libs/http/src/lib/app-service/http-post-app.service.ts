@@ -17,6 +17,7 @@ import { HasRoleHttpPostService } from '../dom-service/guard/has-role-http-post.
 import { IsClientHttpPostService } from '../dom-service/guard/is-client-http-post.service'
 import { IsVetHttpPostService } from '../dom-service/guard/is-vet-http-post.service'
 import { ValidTokenHttpPostService } from '../dom-service/guard/valid-token-http-post.service'
+import { HasNotRoleHttpPostService } from '../dom-service/guard/has-not-role-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -28,6 +29,7 @@ export class HttpPostAppService {
     private registrationHttpPost: RegistrationHttpPostService,
     private getAccountHttpPost: GetAccountHttpPostService,
     private hasRoleHttpPost: HasRoleHttpPostService,
+    private hasNotRoleHttpPost: HasNotRoleHttpPostService,
     private isClientHttpPost: IsClientHttpPostService,
     private isVetHttpPost: IsVetHttpPostService,
     private validTokenHttpPost: ValidTokenHttpPostService,
@@ -71,6 +73,10 @@ export class HttpPostAppService {
 
   hasRolePost() {
     return this.hasRoleHttpPost.hasRolePost()
+  }
+
+  hasNotRolePost() {
+    return this.hasNotRoleHttpPost.hasNotRolePost()
   }
 
   isClientPost() {

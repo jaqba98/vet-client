@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core'
-import { take } from 'rxjs'
+import { map, take } from 'rxjs'
+import { Store } from '@ngrx/store'
 
+import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreType } from '@vet-client/lib-store'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
@@ -13,6 +15,7 @@ export class IsClientHttpPostService {
   constructor(
     private cookie: CookieService,
     private httpExecute: HttpExecuteService,
+    private routeStore: Store<RouteStoreType>,
   ) {}
 
   isClientPost() {
@@ -22,6 +25,20 @@ export class IsClientHttpPostService {
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.isClient, request },
       })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map((res) => {
+          if (res.success) {
+            return true
+          }
+          this.routeStore.dispatch(
+            routeSetAction({
+              page: RoutePageEnum.dashboardVet,
+              section: RouteSectionEnum.dashboardVet,
+            }),
+          )
+          return false
+        }),
+      )
   }
 }
