@@ -31,8 +31,8 @@ export class VetViewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub.add(
       this.store.select('account').subscribe((account) => {
-        this.firstName = account.account.firstName
-        this.lastName = account.account.lastName
+        this.firstName = account.firstName
+        this.lastName = account.lastName
       }),
     )
   }

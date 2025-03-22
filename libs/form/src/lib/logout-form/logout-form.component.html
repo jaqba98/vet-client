@@ -1,6 +1,7 @@
-<lib-base-form
+ <lib-base-form
   [formGroup]="formGroup"
   [controls]="controlsArray"
   [isHorizontal]="true"
-  (dataEvent)="onSubmit()"
+  [isSubmit]="false"
+  (dataEvent)="onSubmit($event)"
 ></lib-base-form>

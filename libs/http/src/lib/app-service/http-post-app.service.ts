@@ -5,7 +5,7 @@ import {
   ChooseRoleDomainModel,
   ClinicDomainModel,
   DeleteDomainModel,
-  LoginDomainModel,
+  LoginDomainModel, LogoutDomainModel,
   RegistrationDomainModel,
 } from '@vet-client/lib-domain'
 import { ClinicHttpPostService } from '../dom-service/common/clinic-http-post.service'
@@ -61,8 +61,8 @@ export class HttpPostAppService {
     return this.loginHttpPost.loginPost(domain)
   }
 
-  logoutPost() {
-    return this.logoutHttpPost.logoutPost()
+  logoutPost(domain: LogoutDomainModel) {
+    return this.logoutHttpPost.logoutPost(domain)
   }
 
   registrationPost(domain: RegistrationDomainModel) {

@@ -50,7 +50,7 @@ export class HttpComponent implements OnInit, OnDestroy {
       switchMap(domain => this.httpPost.loginPost(domain)),
     ).subscribe())
     this.sub.add(this.logout.notification$.pipe(
-      switchMap(() => this.httpPost.logoutPost()),
+      switchMap(domain => this.httpPost.logoutPost(domain)),
     ).subscribe())
     this.sub.add(this.registration.notification$.pipe(
       switchMap(domain => this.httpPost.registrationPost(domain)),

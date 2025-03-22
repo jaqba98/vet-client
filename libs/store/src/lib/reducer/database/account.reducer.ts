@@ -4,16 +4,14 @@ import { AccountStoreModel } from '../../model/database/account-store.model'
 import { accountSetAction } from '../../actions/database/account.action'
 
 const initialAccount: AccountStoreModel = {
-  account: {
-    email: '',
-    firstName: '',
-    lastName: '',
-    role: '',
-    pictureUrl: '',
-  },
+  email: '',
+  firstName: '',
+  lastName: '',
+  role: '',
+  pictureUrl: '',
 }
 
 export const accountReducer = createReducer(
   initialAccount,
-  on(accountSetAction, (state: AccountStoreModel, { account }) => ({ ...state, ...account })),
+  on(accountSetAction, (state: AccountStoreModel, payload) => ({ ...state, ...payload })),
 )

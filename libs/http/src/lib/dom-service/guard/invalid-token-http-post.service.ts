@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core'
 import { map, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 
-import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreType } from '@vet-client/lib-store'
+import {
+  MenuTypeEnum,
+  navSetMenuType, NavStoreType,
+  RoutePageEnum,
+  RouteSectionEnum,
+  routeSetAction,
+  RouteStoreType,
+} from '@vet-client/lib-store'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
@@ -16,6 +23,7 @@ export class InvalidTokenHttpPostService {
     private cookie: CookieService,
     private httpExecute: HttpExecuteService,
     private routeStore: Store<RouteStoreType>,
+    private storeNav: Store<NavStoreType>,
   ) {}
 
   invalidTokenPost() {
@@ -35,8 +43,14 @@ export class InvalidTokenHttpPostService {
                 section: RouteSectionEnum.dashboard,
               }),
             )
+            this.storeNav.dispatch(
+              navSetMenuType({ menuType: MenuTypeEnum.dashboard }),
+            )
             return false
           }
+          this.storeNav.dispatch(
+            navSetMenuType({ menuType: MenuTypeEnum.home }),
+          )
           return true
         }),
       )

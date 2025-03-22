@@ -1,4 +1,4 @@
-import { NavStoreModel } from '../model/nav-store.model'
+import { NavStoreModel } from '../../model/common/nav-store.model'
 
 export type NavStoreType = { nav: NavStoreModel }
 
