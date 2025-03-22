@@ -1,18 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
 import {
   RoutePageEnum,
   RouteSectionEnum,
-  RouteStoreType,
   routeSetAction,
+  RouteStoreType,
 } from '@vet-client/lib-store'
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { DashboardNavMenuDomainModel, DashboardNavMenuFormModel } from '@vet-client/lib-domain'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import {
-  DashboardNavMenuFormModel,
-  DashboardNavMenuModel,
-} from './dashboard-nav-menu-form.model'
 
 @Component({
   selector: 'lib-dashboard-nav-menu-form',
@@ -21,8 +18,11 @@ import {
   hostDirectives: [BaseComponentDirective],
 })
 export class DashboardNavMenuFormComponent
-  extends BaseFormService<DashboardNavMenuFormModel, DashboardNavMenuModel>
-  implements OnInit {
+  extends BaseFormService<
+    DashboardNavMenuFormModel,
+    DashboardNavMenuDomainModel
+  >
+  implements OnInit, OnDestroy {
   @Input() isHorizontal = true
 
   constructor(
@@ -34,14 +34,24 @@ export class DashboardNavMenuFormComponent
 
   ngOnInit() {
     this.initBaseForm({
-      dashboard: this.baseForm.buildButton('dashboard', 'Dashboard', 'primary').build(),
-      accountSettings: this.baseForm.buildButton('accountSettings', 'Account Settings', 'primary').build(),
-      profile: this.baseForm.buildButton('profile', 'Profile', 'primary').build(),
+      dashboard: this.baseForm
+        .buildButton('dashboard', 'Dashboard', 'primary')
+        .build(),
+      accountSettings: this.baseForm
+        .buildButton('accountSettings', 'Account Settings', 'primary')
+        .build(),
+      profile: this.baseForm
+        .buildButton('profile', 'Profile', 'primary')
+        .build(),
     })
   }
 
-  override onSubmit(model: DashboardNavMenuModel) {
-    if (model.dashboard) {
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
+  override onSubmit(domain: DashboardNavMenuDomainModel) {
+    if (domain.dashboard) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboard,
@@ -49,7 +59,7 @@ export class DashboardNavMenuFormComponent
         }),
       )
     }
-    else if (model.accountSettings) {
+    else if (domain.accountSettings) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardAccountSettings,
@@ -57,7 +67,7 @@ export class DashboardNavMenuFormComponent
         }),
       )
     }
-    else if (model.profile) {
+    else if (domain.profile) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardProfile,
