@@ -36,12 +36,15 @@ export class DashboardNavMenuFormComponent
     this.initBaseForm({
       dashboard: this.baseForm
         .buildButton('dashboard', 'Dashboard', 'primary')
+        .buildFullWidth()
         .build(),
       accountSettings: this.baseForm
         .buildButton('accountSettings', 'Account Settings', 'primary')
+        .buildFullWidth()
         .build(),
       profile: this.baseForm
         .buildButton('profile', 'Profile', 'primary')
+        .buildFullWidth()
         .build(),
     })
   }

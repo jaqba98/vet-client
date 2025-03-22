@@ -35,13 +35,21 @@ export class HomeNavMenuFormComponent
 
   ngOnInit() {
     this.initBaseForm({
-      home: this.baseForm.buildButton('home', 'Home', 'primary').build(),
+      home: this.baseForm
+        .buildButton('home', 'Home', 'primary')
+        .buildFullWidth()
+        .build(),
       aboutUs: this.baseForm
         .buildButton('aboutUs', 'About us', 'primary')
+        .buildFullWidth()
         .build(),
-      price: this.baseForm.buildButton('price', 'Price', 'primary').build(),
+      price: this.baseForm
+        .buildButton('price', 'Price', 'primary')
+        .buildFullWidth()
+        .build(),
       contact: this.baseForm
         .buildButton('contact', 'Contact', 'primary')
+        .buildFullWidth()
         .build(),
     })
   }
