@@ -1,45 +1,22 @@
-// done
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { Subscription } from 'rxjs'
-import { Store } from '@ngrx/store'
+import { Component } from '@angular/core'
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { LogoutFormModel } from '@vet-client/lib-domain'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { LogoutDomainDataModel, LogoutDomainFormModel } from '@vet-client/lib-domain'
-import {
-  LogoutDomainDataType,
-  LogoutDomainFormType,
-  setLogoutDomainData,
-} from '@vet-client/lib-store'
+import { LogoutNotification } from '@vet-client/lib-http'
 
 @Component({
   selector: 'lib-logout-form',
-  imports: [CommonModule, BaseFormComponent],
+  imports: [BaseFormComponent],
   templateUrl: './logout-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class LogoutFormComponent
-  extends BaseFormService<LogoutDomainFormModel, LogoutDomainDataModel>
-  implements OnInit, OnDestroy {
-  private readonly sub = new Subscription()
-
-  constructor(
-    private readonly storeLogoutDomainData: Store<LogoutDomainDataType>,
-    private readonly storeLogoutDomainForm: Store<LogoutDomainFormType>,
-  ) {
+export class LogoutFormComponent extends BaseFormService<LogoutFormModel, void> {
+  constructor(private logout: LogoutNotification) {
     super()
   }
 
-  ngOnInit() {
-    this.sub.add(this.storeLogoutDomainForm.select('logoutDomainForm').subscribe(form => this.initBaseForm(form)))
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe()
-  }
-
   override onSubmit() {
-    this.storeLogoutDomainData.dispatch(setLogoutDomainData({ logout: true }))
+    this.logout.runNotification()
   }
 }
