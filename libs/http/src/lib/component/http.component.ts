@@ -8,7 +8,6 @@ import { ClinicNotification } from '../notification/clinic.notification'
 import { LoginNotification } from '../notification/login.notification'
 import { LogoutNotification } from '../notification/logout.notification'
 import { RegistrationNotification } from '../notification/registration.notification'
-import { GetAccountNotification } from '../notification/get-account.notification'
 import { ValidTokenNotification } from '../notification/valid-token.notification'
 
 @Component({
@@ -25,7 +24,6 @@ export class HttpComponent implements OnInit, OnDestroy {
     private login: LoginNotification,
     private logout: LogoutNotification,
     private registration: RegistrationNotification,
-    private getAccount: GetAccountNotification,
     private validToken: ValidTokenNotification,
     private httpPost: HttpPostAppService,
   ) {
@@ -56,9 +54,6 @@ export class HttpComponent implements OnInit, OnDestroy {
     ).subscribe())
     this.sub.add(this.registration.notification$.pipe(
       switchMap(domain => this.httpPost.registrationPost(domain)),
-    ).subscribe())
-    this.sub.add(this.getAccount.notification$.pipe(
-      switchMap(() => this.httpPost.getAccountPost()),
     ).subscribe())
     this.sub.add(this.validToken.notification$.pipe(
       switchMap(() => this.httpPost.validTokenPost()),

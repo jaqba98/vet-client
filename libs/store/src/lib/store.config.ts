@@ -1,4 +1,3 @@
-// done
 import { ApplicationConfig } from '@angular/core'
 import { provideStore } from '@ngrx/store'
 import { provideStoreDevtools } from '@ngrx/store-devtools'

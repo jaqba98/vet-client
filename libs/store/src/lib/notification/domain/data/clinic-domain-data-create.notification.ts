@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs'
-import { ClinicDomainDataInternalModel } from '@vet-client/lib-domain'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicDomainDataCreateNotification {
-  private readonly notification = new Subject<ClinicDomainDataInternalModel>()
+  private readonly notification = new Subject<any>()
 
   notification$ = this.notification.asObservable()
 
-  runNotification(clinic: ClinicDomainDataInternalModel) {
+  runNotification(clinic: any) {
     this.notification.next(clinic)
   }
 }

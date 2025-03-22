@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { map, of, skip, Subscription, take, withLatestFrom } from 'rxjs'
+import { map, of, skip, Subscription, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -10,16 +10,15 @@ import {
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
   ClinicDomainDataReadNotification,
-  clinicDomainDataSelectAction, clinicDomainDataSelectedClinicAction,
+  clinicDomainDataSelectAction,
   clinicDomainDataTabAction,
   ClinicDomainDataType,
   ClinicDomainFormType,
   ClinicDomainResponseType,
-  selectClinicDomainDataClinics,
   selectClinicDomainDataMaxPage,
   selectClinicDomainDataPage,
   selectClinicDomainDataTab,
-  ClinicDomainDataUpdateNotification, selectClinicDomainDataSelectedClinic,
+  ClinicDomainDataUpdateNotification,
 } from '@vet-client/lib-store'
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 import { TableFormComponent } from '../table-form/table-form.component'
@@ -87,16 +86,16 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
       this.page = page
       this.clinicDomainDataReadNotification.runNotification()
     }))
-    this.sub.add(this.dataStore.select(selectClinicDomainDataPage).pipe(
-      skip(1),
-      withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
-    ).subscribe(async ([page, clinics]) => {
-      this.page = page
-      this.selectClinics(clinics)
-    }))
-    this.sub.add(this.dataStore.select(selectClinicDomainDataClinics).pipe(skip(1)).subscribe((clinics) => {
-      this.selectClinics(clinics)
-    }))
+    // this.sub.add(this.dataStore.select(selectClinicDomainDataPage).pipe(
+    //   skip(1),
+    //   withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
+    // ).subscribe(async ([page, clinics]) => {
+    //   this.page = page
+    //   this.selectClinics(clinics)
+    // }))
+    // this.sub.add(this.dataStore.select(selectClinicDomainDataClinics).pipe(skip(1)).subscribe((clinics) => {
+    //   this.selectClinics(clinics)
+    // }))
     this.sub.add(this.dataStore.select(selectClinicDomainDataMaxPage).pipe(skip(1)).subscribe(async (maxPage) => {
       this.maxPage = maxPage
       if (this.page < 1) {
@@ -109,10 +108,10 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     this.sub.add(this.dataStore.select(selectClinicDomainDataTab).subscribe((tab) => {
       this.tab = tab as TableFormTabEnum
     }))
-    this.sub.add(this.dataStore.select(selectClinicDomainDataSelectedClinic).subscribe((selectedClinic) => {
-      if (selectedClinic)
-        this.selectedClinic = selectedClinic
-    }))
+    // this.sub.add(this.dataStore.select(selectClinicDomainDataSelectedClinic).subscribe((selectedClinic) => {
+    //   if (selectedClinic)
+    //     this.selectedClinic = selectedClinic
+    // }))
   }
 
   ngOnDestroy() {
@@ -145,13 +144,13 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   onDeleteSelectedEvent() {
-    of(true).pipe(
-      take(1),
-      withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
-      map(([, clinics]) => clinics.filter(clinic => clinic.isSelected)),
-      map(clinics => clinics.map(clinic => clinic.id)),
-      map(ids => this.clinicDomainDataDeleteNotification.runNotification(ids)),
-    ).subscribe()
+    // of(true).pipe(
+    //   take(1),
+    //   withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
+    //   map(([, clinics]) => clinics.filter(clinic => clinic.isSelected)),
+    //   map(clinics => clinics.map(clinic => clinic.id)),
+    //   map(ids => this.clinicDomainDataDeleteNotification.runNotification(ids)),
+    // ).subscribe()
   }
 
   onSelectAllEvent() {
@@ -181,15 +180,15 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
   }
 
   onEditSelectEvent(id: number) {
-    of(true).pipe(
-      take(1),
-      withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
-      map(([, clinics]) => clinics.find(clinic => clinic.id === id)),
-      map((clinic) => {
-        this.dataStore.dispatch(clinicDomainDataSelectedClinicAction({ selectedClinic: clinic }))
-      }),
-      map(() => this.dataStore.dispatch(clinicDomainDataTabAction({ tab: TableFormTabEnum.update }))),
-    ).subscribe()
+    // of(true).pipe(
+    //   take(1),
+    //   withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
+    //   map(([, clinics]) => clinics.find(clinic => clinic.id === id)),
+    //   map((clinic) => {
+    //     this.dataStore.dispatch(clinicDomainDataSelectedClinicAction({ selectedClinic: clinic }))
+    //   }),
+    //   map(() => this.dataStore.dispatch(clinicDomainDataTabAction({ tab: TableFormTabEnum.update }))),
+    // ).subscribe()
   }
 
   onUpdateEvent(model: ClinicTableModel['domain']) {

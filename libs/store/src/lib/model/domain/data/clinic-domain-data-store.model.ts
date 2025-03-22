@@ -1,9 +1,9 @@
-import { ClinicDomainDataModel } from '@vet-client/lib-domain'
+import { ClinicDomainModel } from '@vet-client/lib-domain'
 
 export interface ClinicDomainDataStoreModel {
-  clinics: ClinicDomainDataModel[]
+  clinics: ClinicDomainModel[]
   page: number
   maxPage: number
   tab: string
-  selectedClinic: ClinicDomainDataModel | undefined
+  selectedClinic: ClinicDomainModel | undefined
 }

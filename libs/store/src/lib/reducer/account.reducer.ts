@@ -1,14 +1,19 @@
 import { createReducer, on } from '@ngrx/store'
 
 import { AccountStoreModel } from '../model/account-store.model'
-import { setAccount } from '../actions/account.action'
+import { accountSetAction } from '../actions/account.action'
 
-export const initialAccount: AccountStoreModel = {
+const initialAccount: AccountStoreModel = {
+  id: -1,
+  email: '',
+  password: '',
   firstName: '',
   lastName: '',
+  role: '',
+  pictureUrl: '',
 }
 
 export const accountReducer = createReducer(
   initialAccount,
-  on(setAccount, (state: AccountStoreModel, { firstName, lastName }) => ({ ...state, firstName, lastName })),
+  on(accountSetAction, (state: AccountStoreModel, payload) => ({ ...state, ...payload })),
 )

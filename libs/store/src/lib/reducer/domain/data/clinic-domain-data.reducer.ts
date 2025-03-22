@@ -6,7 +6,6 @@ import {
   clinicDomainDataClinicsAction,
   clinicDomainDataMaxPageAction,
   clinicDomainDataPageAction,
-  clinicDomainDataSelectAction,
   clinicDomainDataSelectedClinicAction,
   clinicDomainDataTabAction,
 } from '../../../actions/domain/data/clinic-domain-data-action.service'
@@ -30,15 +29,15 @@ export const clinicDomainDataReducer = createReducer<ClinicDomainDataStoreModel>
     }
   }),
   on(clinicDomainDataTabAction, (state: ClinicDomainDataStoreModel, { tab }) => ({ ...state, tab })),
-  on(clinicDomainDataSelectAction, (state: ClinicDomainDataStoreModel, { id, isSelected }) => ({
-    ...state,
-    clinics: state.clinics.map((clinic) => {
-      if (clinic.id === id) {
-        return { ...clinic, isSelected }
-      }
-      return clinic
-    }),
-  })),
+  // on(clinicDomainDataSelectAction, (state: ClinicDomainDataStoreModel, { id, isSelected }) => ({
+  //   ...state,
+  //   clinics: state.clinics.map((clinic) => {
+  //     if (clinic.id === id) {
+  //       return { ...clinic, isSelected }
+  //     }
+  //     return clinic
+  //   }),
+  // })),
   on(clinicDomainDataSelectedClinicAction, (state: ClinicDomainDataStoreModel, { selectedClinic }) => ({
     ...state, selectedClinic,
   })),

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs'
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ChooseRoleDomainModel, ChooseRoleFormModel, RoleEnum } from '@vet-client/lib-domain'
+import { ChooseRoleDomainModel, ChooseRoleFormModel } from '@vet-client/lib-domain'
 import { ChooseRoleNotification } from '@vet-client/lib-http'
 
 @Component({
@@ -27,10 +27,7 @@ export class ChooseRoleFormComponent
 
   ngOnInit() {
     this.initBaseForm({
-      role: BaseFormBuilder.buildRadioButton(
-        [RoleEnum.vet, RoleEnum.client],
-        RoleEnum.vet,
-      ),
+      role: BaseFormBuilder.buildRadioButton(['vet', 'client'], 'vet'),
     })
     this.sub.add(this.chooseRole.response$.subscribe((res) => {
       this.success = ''

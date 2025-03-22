@@ -1,6 +1,6 @@
-import { ClinicDomainResponseModel } from '@vet-client/lib-domain'
+import { ResponseModel } from '@vet-client/lib-domain'
 
 export interface ClinicDomainResponseStoreModel {
-  createResponse: ClinicDomainResponseModel
-  updateResponse: ClinicDomainResponseModel
+  createResponse: ResponseModel
+  updateResponse: ResponseModel
 }

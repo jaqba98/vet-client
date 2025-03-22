@@ -1,3 +1,3 @@
-import { ClinicDomainFormModel } from '@vet-client/lib-domain'
+import { ClinicFormModel } from '@vet-client/lib-domain'
 
-export type ClinicDomainFormStoreModel = ClinicDomainFormModel
+export type ClinicDomainFormStoreModel = ClinicFormModel

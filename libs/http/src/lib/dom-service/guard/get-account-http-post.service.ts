@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core'
-import { take } from 'rxjs'
+import { map, take } from 'rxjs'
+import { Store } from '@ngrx/store'
 
+import { accountSetAction, AccountStoreType } from '@vet-client/lib-store'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
@@ -14,6 +16,7 @@ export class GetAccountHttpPostService {
   constructor(
     private cookie: CookieService,
     private httpExecute: HttpExecuteService,
+    private store: Store<AccountStoreType>,
   ) {}
 
   getAccountPost() {
@@ -23,6 +26,15 @@ export class GetAccountHttpPostService {
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.getAccount, request },
       })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map((res) => {
+          if (res.success) {
+            this.store.dispatch(accountSetAction(res.data))
+            return true
+          }
+          return false
+        }),
+      )
   }
 }

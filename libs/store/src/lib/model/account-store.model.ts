@@ -1,4 +1,3 @@
-export interface AccountStoreModel {
-  firstName: string
-  lastName: string
-}
+import { AccountDatabaseModel } from '@vet-client/lib-domain'
+
+export type AccountStoreModel = AccountDatabaseModel
