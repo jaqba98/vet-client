@@ -7,16 +7,16 @@ import { ClinicDomainFormStoreModel } from '../../../model/domain/form/clinic-do
 import { setClinicDomainForm } from '../../../actions/domain/form/clinic-domain-form.action'
 
 const initialState: ClinicDomainFormStoreModel = {
-  name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)], true),
-  street: BaseFormBuilder.buildInputText('Street', [Validators.required, Validators.maxLength(255)], true),
-  buildingNumber: BaseFormBuilder.buildInputText('Building number', [Validators.required, Validators.maxLength(255)], true),
-  apartmentNumber: BaseFormBuilder.buildInputText('Apartment Number', [Validators.required, Validators.maxLength(255)], true),
-  postalCode: BaseFormBuilder.buildInputText('Postal code', [Validators.required, Validators.maxLength(255)], true),
-  city: BaseFormBuilder.buildInputText('City', [Validators.required, Validators.maxLength(255)], true),
-  province: BaseFormBuilder.buildInputText('Province', [Validators.required, Validators.maxLength(255)], true),
-  country: BaseFormBuilder.buildInputText('Country', [Validators.required, Validators.maxLength(255)], true),
-  email: BaseFormBuilder.buildInputText('Email', [Validators.required, Validators.maxLength(255)], true),
-  phoneNumber: BaseFormBuilder.buildInputText('Phone number', [Validators.required, Validators.maxLength(255)], true),
+  name: BaseFormBuilder.buildInputText('Name', [Validators.required, Validators.maxLength(255)]),
+  street: BaseFormBuilder.buildInputText('Street', [Validators.required, Validators.maxLength(255)]),
+  buildingNumber: BaseFormBuilder.buildInputText('Building number', [Validators.required, Validators.maxLength(255)]),
+  apartmentNumber: BaseFormBuilder.buildInputText('Apartment Number', [Validators.required, Validators.maxLength(255)]),
+  postalCode: BaseFormBuilder.buildInputText('Postal code', [Validators.required, Validators.maxLength(255)]),
+  city: BaseFormBuilder.buildInputText('City', [Validators.required, Validators.maxLength(255)]),
+  province: BaseFormBuilder.buildInputText('Province', [Validators.required, Validators.maxLength(255)]),
+  country: BaseFormBuilder.buildInputText('Country', [Validators.required, Validators.maxLength(255)]),
+  email: BaseFormBuilder.buildInputText('Email', [Validators.required, Validators.maxLength(255)]),
+  phoneNumber: BaseFormBuilder.buildInputText('Phone number', [Validators.required, Validators.maxLength(255)]),
 }
 
 export const clinicDomainFormReducer = createReducer<ClinicDomainFormStoreModel>(

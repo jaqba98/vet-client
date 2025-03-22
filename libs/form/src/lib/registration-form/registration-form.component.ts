@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Subscription } from 'rxjs'
 import { Validators } from '@angular/forms'
-import { Store } from '@ngrx/store'
-import { skip, Subscription } from 'rxjs'
 
-import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { RegistrationDomainDataModel, RegistrationDomainFormModel } from '@vet-client/lib-domain'
-import { RegistrationDomainDataNotification, RegistrationDomainResponseType } from '@vet-client/lib-store'
+import { RegistrationDomainModel, RegistrationFormModel } from '@vet-client/lib-domain'
+import { RegistrationNotification } from '@vet-client/lib-http'
 
 @Component({
   selector: 'lib-registration-form',
@@ -16,39 +15,43 @@ import { RegistrationDomainDataNotification, RegistrationDomainResponseType } fr
   hostDirectives: [BaseComponentDirective],
 })
 export class RegistrationFormComponent
-  extends BaseFormService<RegistrationDomainFormModel, RegistrationDomainDataModel>
+  extends BaseFormService<RegistrationFormModel, RegistrationDomainModel>
   implements OnInit, OnDestroy {
   private readonly sub: Subscription
 
-  constructor(
-    private readonly store: Store<RegistrationDomainResponseType>,
-    private readonly registrationDomainForm: RegistrationDomainDataNotification,
-  ) {
+  title = 'Registration'
+
+  constructor(private registration: RegistrationNotification) {
     super()
     this.sub = new Subscription()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      id: BaseFormBuilder.buildHiddenControl(),
-      email: BaseFormBuilder.buildInputText('Email', [Validators.required, Validators.email, Validators.maxLength(255)], true),
-      password: BaseFormBuilder.buildInputPassword('Password', [Validators.required, Validators.maxLength(255)], true),
-      confirmPassword: BaseFormBuilder.buildInputPassword('Confirm password', [Validators.required, Validators.maxLength(255)], true),
-      firstName: BaseFormBuilder.buildInputText('First name', [Validators.required, Validators.maxLength(50)], true),
-      lastName: BaseFormBuilder.buildInputText('Last name', [Validators.required, Validators.maxLength(100)], true),
-      role: BaseFormBuilder.buildHiddenControl(),
-      isVerified: BaseFormBuilder.buildHiddenControl(),
-      pictureUrl: BaseFormBuilder.buildHiddenControl(),
-      register: BaseFormBuilder.buildButtonText('register', 'Register', 'primary', true, false),
+      email: BaseFormBuilder.buildInputText(
+        'Email', [Validators.required, Validators.email, Validators.maxLength(255)],
+      ),
+      password: BaseFormBuilder.buildInputPassword(
+        'Password', [Validators.required, Validators.maxLength(255)],
+      ),
+      confirmPassword: BaseFormBuilder.buildInputPassword(
+        'Confirm password', [Validators.required, Validators.maxLength(255)],
+      ),
+      firstName: BaseFormBuilder.buildInputText(
+        'First name', [Validators.required, Validators.maxLength(50)],
+      ),
+      lastName: BaseFormBuilder.buildInputText(
+        'Last name', [Validators.required, Validators.maxLength(100)],
+      ),
     })
-    this.sub.add(this.store.select('registrationDomainResponse').pipe(skip(1)).subscribe((response) => {
+    this.sub.add(this.registration.response$.subscribe((res) => {
       this.success = ''
       this.error = ''
-      if (response.success) {
-        this.success = response.message
+      if (res.success) {
+        this.success = res.message
       }
       else {
-        this.error = response.message
+        this.error = res.message
       }
     }))
   }
@@ -57,7 +60,7 @@ export class RegistrationFormComponent
     this.sub.unsubscribe()
   }
 
-  override onSubmit(data: RegistrationDomainDataModel) {
-    this.registrationDomainForm.runNotification(data)
+  override onSubmit(data: RegistrationDomainModel) {
+    this.registration.runNotification(data)
   }
 }
