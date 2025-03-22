@@ -1,1 +1,3 @@
-export type LogoutDomainModel = object
+export interface LogoutDomainModel {
+  logout: boolean
+}
