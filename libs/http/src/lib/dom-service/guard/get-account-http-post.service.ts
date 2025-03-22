@@ -30,7 +30,15 @@ export class GetAccountHttpPostService {
         take(1),
         map((res) => {
           if (res.success) {
-            this.store.dispatch(accountSetAction(res.data))
+            this.store.dispatch(accountSetAction({
+              account: {
+                email: res.data.email,
+                firstName: res.data.firstName,
+                lastName: res.data.lastName,
+                role: res.data.role,
+                pictureUrl: res.data.pictureUrl,
+              },
+            }))
             return true
           }
           return false

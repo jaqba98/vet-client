@@ -4,16 +4,16 @@ import { provideStoreDevtools } from '@ngrx/store-devtools'
 
 import { routeReducer } from './reducer/route.reducer'
 import { navReducer } from './reducer/nav.reducer'
-import { accountReducer } from './reducer/account.reducer'
+import { accountReducer } from './reducer/database/account.reducer'
 import { clinicDomainDataReducer } from './reducer/domain/data/clinic-domain-data.reducer'
 import { clinicDomainResponseReducer } from './reducer/domain/response/clinic-domain-response.reducer'
 
 export const storeConfig: ApplicationConfig = {
   providers: [
     provideStore({
+      account: accountReducer,
       route: routeReducer,
       nav: navReducer,
-      account: accountReducer,
       clinicDomainData: clinicDomainDataReducer,
       clinicDomainResponse: clinicDomainResponseReducer,
     }),
