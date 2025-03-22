@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { take } from 'rxjs'
 
-import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store'
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { HamburgerDomainModel, HamburgerFormModel } from '@vet-client/lib-domain'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model'
+import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-hamburger-form',
@@ -15,8 +15,8 @@ import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model'
   hostDirectives: [BaseComponentDirective],
 })
 export class HamburgerFormComponent
-  extends BaseFormService<HamburgerFormModel, HamburgerModel>
-  implements OnInit {
+  extends BaseFormService<HamburgerFormModel, HamburgerDomainModel>
+  implements OnInit, OnDestroy {
   constructor(
     private store: Store<NavStoreType>,
     private baseForm: BaseFormBuilder,
@@ -26,18 +26,21 @@ export class HamburgerFormComponent
 
   ngOnInit() {
     this.initBaseForm({
-      hamburger: this.baseForm.buildButtonIcon('hamburger', faBars, 'primary').build(),
+      hamburger: this.baseForm
+        .buildButtonIcon('hamburger', faBars, 'primary')
+        .build(),
     })
   }
 
-  override onSubmit(model: HamburgerModel) {
-    if (model.hamburger) {
-      this.store
-        .select('nav')
-        .pipe(take(1))
-        .subscribe((data) => {
-          this.store.dispatch(navSwitchIsOpen({ isOpen: !data.isOpen }))
-        })
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
+  override onSubmit(domain: HamburgerDomainModel) {
+    if (domain.hamburger) {
+      this.store.select('nav').pipe(take(1)).subscribe((data) => {
+        this.store.dispatch(navSwitchIsOpen({ isOpen: !data.isOpen }))
+      })
     }
   }
 }
