@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core'
 
-import { BaseFormComponent, BaseFormService, ControlButtonBuilder } from '@vet-client/lib-base-form'
+import { BaseFormComponent, BaseFormService, BaseFormBuilder } from '@vet-client/lib-base-form'
 import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
@@ -28,18 +28,18 @@ export class TableEditFormComponent<TData>
   @Input({ required: true }) editError!: string
   @Input({ required: true }) selectedClinic!: TableFormRowModel<TData>
 
-  constructor(private readonly controlButton: ControlButtonBuilder) {
+  constructor(private readonly controlButton: BaseFormBuilder) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
       ...this.formModel,
-      create: this.controlButton
-        .buildBase('edit')
-        .buildText('Edit')
-        .buildColor('primary')
-        .build(),
+      // create: this.controlButton
+      //   .buildBase('edit')
+      //   .buildText('Edit')
+      //   .buildColor('primary')
+      //   .build(),
     })
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.formGroup.patchValue(this.selectedClinic.domain as any)

@@ -4,7 +4,7 @@
   gap: 1rem;
   width: 100%;
 
-  &__group {
+  &__controls {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
@@ -15,7 +15,7 @@
     gap: 0.5rem;
   }
 
-  &__message {
-    margin-top: 1rem;
+  &--horizontal .base-form__controls {
+    flex-direction: row;
   }
 }

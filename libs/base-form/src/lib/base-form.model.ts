@@ -1,28 +1,31 @@
 import { ValidatorFn } from '@angular/forms'
 
-import { ButtonControlModel, InputControlModel, TextareaControlModel } from '@vet-client/lib-control'
-import { RadioButtonControlModel } from '@vet-client/lib-control'
+import {
+  ButtonControlModel,
+  InputControlModel,
+  RadioButtonControlModel,
+  TextareaControlModel,
+} from '@vet-client/lib-control'
 
-export interface ControlBaseModel<TDefaultValue> {
-  defaultValue: TDefaultValue
-  isEnabled: boolean
-}
-
-export interface ControlInputModel extends ControlBaseModel<string>, InputControlModel {
-  kind: 'input'
+interface ControlBaseModel<TControl> {
+  defaultValue: string
+  control: TControl
   validators: ValidatorFn[]
 }
 
-export interface ControlButtonModel extends ControlBaseModel<boolean>, ButtonControlModel {
+export interface ControlInputModel extends ControlBaseModel<InputControlModel> {
+  kind: 'input'
+}
+
+export interface ControlButtonModel extends ControlBaseModel<ButtonControlModel> {
   kind: 'button'
 }
 
-export interface ControlTextareaModel extends ControlBaseModel<string>, TextareaControlModel {
+export interface ControlTextareaModel extends ControlBaseModel<TextareaControlModel> {
   kind: 'textarea'
-  validators: ValidatorFn[]
 }
 
-export interface ControlRadioButtonModel extends ControlBaseModel<string>, RadioButtonControlModel {
+export interface ControlRadioButtonModel extends ControlBaseModel<RadioButtonControlModel> {
   kind: 'radio-button'
 }
 
@@ -34,4 +37,4 @@ export type ControlType =
 
 export type BaseFormModel<TKey> = Record<keyof TKey, ControlType>
 
-export type ControlsArrayType = { name: string, model: ControlType }[]
+export type ControlsType = { name: string, model: ControlType }[]

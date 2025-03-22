@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core'
 
-import { BaseFormComponent, BaseFormService, ControlButtonBuilder } from '@vet-client/lib-base-form'
+import { BaseFormComponent, BaseFormService, BaseFormBuilder } from '@vet-client/lib-base-form'
 import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
@@ -26,18 +26,18 @@ export class TableCreateFormComponent<TData>
   @Input({ required: true }) createSuccess!: string
   @Input({ required: true }) createError!: string
 
-  constructor(private readonly controlButton: ControlButtonBuilder) {
+  constructor(private readonly controlButton: BaseFormBuilder) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
       ...this.formModel,
-      create: this.controlButton
-        .buildBase('create')
-        .buildText('Create')
-        .buildColor('primary')
-        .build(),
+      // create: this.controlButton
+      //   .buildBase('create')
+      //   .buildText('Create')
+      //   .buildColor('primary')
+      //   .build(),
     })
   }
 

@@ -1,9 +1,9 @@
 <lib-table-card-control title="Create">
   <lib-base-form
     [formGroup]="formGroup"
-    [controlsArray]="controlsArray"
+    [controls]="controlsArray"
     [success]="createSuccess"
     [error]="createError"
-    (event)="onSubmit($event)"
+    (dataEvent)="onSubmit($event)"
   ></lib-base-form>
 </lib-table-card-control>

@@ -1,21 +1,13 @@
 import { Injectable } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
-import {
-  BaseFormModel,
-  ControlButtonModel,
-  ControlInputModel,
-  ControlRadioButtonModel,
-  ControlsArrayType,
-  ControlTextareaModel,
-  ControlType,
-} from './base-form.model'
+import { BaseFormModel, ControlsType, ControlType } from './base-form.model'
 
 @Injectable()
-export class BaseFormService<TFormModel, TModel> {
+export class BaseFormService<TFormModel, TDomainModel> {
   formGroup!: FormGroup
 
-  controlsArray!: ControlsArrayType
+  controlsArray!: ControlsType
 
   success = ''
 
@@ -37,19 +29,10 @@ export class BaseFormService<TFormModel, TModel> {
       .forEach(([key, control]) => {
         switch (control.kind) {
           case 'input':
-            formGroup.addControl(key, this.createInputFormControl(control))
-            break
           case 'button':
-            formGroup.addControl(key, this.createButtonFormControl(control))
-            break
           case 'textarea':
-            formGroup.addControl(key, this.createTextareaFormControl(control))
-            break
           case 'radio-button':
-            formGroup.addControl(
-              key,
-              this.createRadioButtonFormControl(control),
-            )
+            formGroup.addControl(key, new FormControl(control.defaultValue, control.validators))
             break
           default:
             throw new Error('Unknown control kind!')
@@ -58,30 +41,13 @@ export class BaseFormService<TFormModel, TModel> {
     return formGroup
   }
 
-  getControlsArray(baseForm: BaseFormModel<TFormModel>): ControlsArrayType {
+  getControlsArray(baseForm: BaseFormModel<TFormModel>): ControlsType {
     return Object.entries(baseForm as Record<string, ControlType>)
-      .filter(([, control]) => control.isEnabled)
       .map(([key, value]) => ({ name: key, model: value }))
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onSubmit(model: TModel) {
+  onSubmit(domain: TDomainModel) {
     throw new Error('Unimplemented method name!')
-  }
-
-  private createInputFormControl(control: ControlInputModel) {
-    return new FormControl(control.defaultValue, control.validators)
-  }
-
-  private createButtonFormControl(control: ControlButtonModel) {
-    return new FormControl(control.defaultValue)
-  }
-
-  private createTextareaFormControl(control: ControlTextareaModel) {
-    return new FormControl(control.defaultValue, control.validators)
-  }
-
-  private createRadioButtonFormControl(control: ControlRadioButtonModel) {
-    return new FormControl(control.defaultValue)
   }
 }

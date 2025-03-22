@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { CommonModule } from '@angular/common'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model'
 import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service'
@@ -19,46 +19,17 @@ export class SmallLoginRegistrationFormComponent
   implements OnInit {
   loginRegistrationFormClass = 'base-login-registration-form--small'
 
-  constructor(private readonly baseLoginRegistrationForm: BaseLoginRegistrationFormService) {
+  constructor(
+    private baseLoginRegistrationForm: BaseLoginRegistrationFormService,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      login: {
-        id: 'login',
-        kind: 'button',
-        value: {
-          type: 'icon',
-          icon: {
-            icon: faRightToBracket,
-            color: 'light-primary',
-            fontSize: '1rem',
-          },
-        },
-        defaultValue: false,
-        fullWidth: false,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      registration: {
-        id: 'registration',
-        kind: 'button',
-        value: {
-          type: 'icon',
-          icon: {
-            icon: faUserPlus,
-            color: 'light-primary',
-            fontSize: '1rem',
-          },
-        },
-        defaultValue: false,
-        fullWidth: false,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
+      login: this.baseForm.buildButtonIcon('login', faRightToBracket, 'primary').build(),
+      registration: this.baseForm.buildButtonIcon('registration', faUserPlus, 'primary').build(),
     })
   }
 

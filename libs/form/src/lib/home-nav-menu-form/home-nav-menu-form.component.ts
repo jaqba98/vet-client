@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
 import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreModel } from '@vet-client/lib-store'
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   HomeNavMenuFormModel,
@@ -20,64 +20,19 @@ export class HomeNavMenuFormComponent
   implements OnInit {
   @Input() isHorizontal = true
 
-  constructor(private readonly store: Store<RouteStoreModel>) {
+  constructor(
+    private store: Store<RouteStoreModel>,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      home: {
-        id: 'home',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Home',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      aboutUs: {
-        id: 'aboutUs',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'About us',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      price: {
-        id: 'price',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Price',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      contact: {
-        id: 'contact',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Contact',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
+      home: this.baseForm.buildButton('home', 'Home', 'primary').build(),
+      aboutUs: this.baseForm.buildButton('aboutUs', 'About us', 'primary').build(),
+      price: this.baseForm.buildButton('price', 'Price', 'primary').build(),
+      contact: this.baseForm.buildButton('contact', 'Contact', 'primary').build(),
     })
   }
 

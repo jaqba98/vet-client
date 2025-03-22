@@ -24,17 +24,17 @@ export class ButtonControlComponent {
 
   getClassList() {
     return {
-      'button-control__button--text': this.model.value.type === 'text',
-      'button-control__button--icon': this.model.value.type === 'icon',
-      'button-control__button--link': this.model.value.type === 'link',
-      'button-control__button--full-width': this.model.fullWidth,
+      'button-control__button--text': this.model.type === 'text',
+      'button-control__button--icon': this.model.type === 'icon',
+      'button-control__button--link': this.model.type === 'link',
+      // 'button-control__button--full-width': this.model.fullWidth,
       'button-control__button--transparent': this.model.color === 'transparent',
       'button-control__button--primary': this.model.color === 'primary',
       'button-control__button--dark-primary': this.model.color === 'dark-primary',
       'button-control__button--dark-secondary': this.model.color === 'dark-secondary',
       'button-control__button--success': this.model.color === 'success',
       'button-control__button--error': this.model.color === 'error',
-      'button-control__button--width40px': this.model.isSquare,
+      // 'button-control__button--width40px': this.model.isSquare,
     }
   }
 }

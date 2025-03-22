@@ -1,10 +1,9 @@
-import { ControlType } from '@vet-client/lib-base-form'
+import { ControlInputModel, ControlTextareaModel } from '@vet-client/lib-base-form'
 
 export interface ContactFormModel {
-  email: ControlType
-  subject: ControlType
-  message: ControlType
-  send: ControlType
+  email: ControlInputModel
+  subject: ControlInputModel
+  message: ControlTextareaModel
 }
 
 export interface ContactModel {

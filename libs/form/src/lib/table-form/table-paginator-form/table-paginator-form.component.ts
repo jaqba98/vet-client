@@ -11,7 +11,7 @@ import {
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import {
-  ControlButtonBuilder,
+  BaseFormBuilder,
   ControlButtonModel,
 } from '@vet-client/lib-base-form'
 
@@ -34,30 +34,21 @@ export class TablePaginatorFormComponent {
   readonly next: ControlButtonModel
   readonly last: ControlButtonModel
 
-  constructor(private readonly controlButton: ControlButtonBuilder) {
-    this.first = this.controlButton
-      .buildBase('first')
-      .buildIsSquare(true)
-      .buildIcon(faBackwardFast, 'light-primary', '1rem')
-      .buildColor('dark-secondary')
+  constructor(
+    private readonly controlButton: BaseFormBuilder,
+    private baseForm: BaseFormBuilder,
+  ) {
+    this.first = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('first', faBackwardFast, 'dark-secondary')
       .build()
-    this.previous = this.controlButton
-      .buildBase('previous')
-      .buildIsSquare(true)
-      .buildIcon(faBackward, 'light-primary', '1rem')
-      .buildColor('dark-secondary')
+    this.previous = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('previous', faBackward, 'dark-secondary')
       .build()
-    this.next = this.controlButton
-      .buildBase('next')
-      .buildIsSquare(true)
-      .buildIcon(faForward, 'light-primary', '1rem')
-      .buildColor('dark-secondary')
+    this.next = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('next', faForward, 'dark-secondary')
       .build()
-    this.last = this.controlButton
-      .buildBase('last')
-      .buildIsSquare(true)
-      .buildIcon(faForwardFast, 'light-primary', '1rem')
-      .buildColor('dark-secondary')
+    this.last = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('last', faForwardFast, 'dark-secondary')
       .build()
   }
 
@@ -115,15 +106,17 @@ export class TablePaginatorFormComponent {
     const sortedPages = Array.from(pages).sort()
     sortedPages.forEach((index: number) => {
       const id = index.toString()
-      const control = this.controlButton
-        .buildBase(id)
-        .buildIsSquare(true)
-        .buildText(id)
       if (index === this.page) {
-        controls.push(control.buildColor('primary').build())
+        const control = <ControlButtonModel> this.baseForm
+          .buildButton(id, id, 'primary')
+          .build()
+        controls.push(control)
       }
       else {
-        controls.push(control.buildColor('dark-secondary').build())
+        const control = <ControlButtonModel> this.baseForm
+          .buildButton(id, id, 'dark-secondary')
+          .build()
+        controls.push(control)
       }
     })
     return controls

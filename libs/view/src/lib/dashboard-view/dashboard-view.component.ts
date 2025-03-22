@@ -6,16 +6,16 @@ import { RouterOutlet } from '@angular/router'
 import { take } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ButtonControlComponent, ButtonControlModel } from '@vet-client/lib-control'
 import {
   navDashboardNavIsOpen,
   NavStoreModel,
   NavStoreType,
 } from '@vet-client/lib-store'
+import { BaseFormBuilder, ControlType } from '@vet-client/lib-base-form'
 
 @Component({
   selector: 'lib-dashboard-view',
-  imports: [CommonModule, ButtonControlComponent, RouterOutlet],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './dashboard-view.component.html',
   styleUrl: './dashboard-view.component.scss',
   hostDirectives: [BaseComponentDirective],
@@ -23,22 +23,14 @@ import {
 export class DashboardViewComponent {
   isOpen = false
 
-  hamburgerModel: ButtonControlModel = {
-    id: 'hamburger',
-    value: {
-      type: 'icon',
-      icon: {
-        icon: faBars,
-        color: 'light-primary',
-        fontSize: '1rem',
-      },
-    },
-    fullWidth: false,
-    color: 'primary',
-    isSquare: false,
-  }
+  hamburgerModel!: ControlType
 
-  constructor(private readonly store: Store<NavStoreType>) {}
+  constructor(
+    private readonly store: Store<NavStoreType>,
+    private baseForm: BaseFormBuilder,
+  ) {
+    this.hamburgerModel = this.baseForm.buildButtonIcon('hamburger', faBars, 'primary').build()
+  }
 
   onClick() {
     this.store

@@ -13,7 +13,6 @@ import { ButtonControlModel } from '../button-control/button-control.model'
     CommonModule,
     CardControlComponent,
     TextControlComponent,
-    ButtonControlComponent,
   ],
   templateUrl: './price-control.component.html',
   styleUrl: './price-control.component.scss',
@@ -28,14 +27,11 @@ export class PriceControlComponent {
 
   @Input({ required: true }) elements!: string[]
 
-  buttonModel: ButtonControlModel = {
-    id: 'price',
-    value: {
-      type: 'text',
-      text: 'Get started',
-    },
-    fullWidth: true,
-    color: 'primary',
-    isSquare: false,
-  }
+  // buttonModel: ButtonControlModel
+
+  // constructor(private baseForm: BaseFormBuilder) {
+  // this.buttonModel = <ButtonControlModel> this.baseForm
+  //   .buildButton('price', 'Get started', 'primary')
+  //   .build().control
+  // }
 }

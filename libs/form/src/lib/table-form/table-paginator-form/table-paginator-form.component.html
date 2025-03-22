@@ -1,15 +1,15 @@
 <!-- done -->
 <div class="paginator">
-  <lib-button-control [model]="first" (event)="onFirstPageEvent()"></lib-button-control>
-  <lib-button-control [model]="previous" (event)="onPreviousPageEvent()"></lib-button-control>
+  <lib-button-control [model]="first.control" (event)="onFirstPageEvent()"></lib-button-control>
+  <lib-button-control [model]="previous.control" (event)="onPreviousPageEvent()"></lib-button-control>
   <div class="paginator__center">
     <ng-container *ngFor="let control of getPageControls()">
-      <lib-button-control [model]="control" (event)="onSpecificPageEvent(control.id)"></lib-button-control>
+      <lib-button-control [model]="control.control" (event)="onSpecificPageEvent(control.control.id)"></lib-button-control>
     </ng-container>
   </div>
   <div class="paginator__legend">
     <lib-text-control textControlColor="dark-secondary">{{ page }} / {{ maxPage }}</lib-text-control>
   </div>
-  <lib-button-control [model]="next" (event)="onNextPageEvent()"></lib-button-control>
-  <lib-button-control [model]="last" (event)="onLastPageEvent()"></lib-button-control>
+  <lib-button-control [model]="next.control" (event)="onNextPageEvent()"></lib-button-control>
+  <lib-button-control [model]="last.control" (event)="onLastPageEvent()"></lib-button-control>
 </div>

@@ -28,13 +28,17 @@ export class TableNavFormComponent extends BaseFormService<TableNavFormModel, Ta
   @Input({ required: true }) refreshButtonEnabled!: boolean
   @Input({ required: true }) searchButtonEnabled!: boolean
 
+  constructor(private baseForm: BaseFormBuilder) {
+    super()
+  }
+
   ngOnInit() {
     this.initBaseForm({
-      table: BaseFormBuilder.buildButtonIcon('table', faTable, 'dark-primary', this.tableButtonEnabled),
-      create: BaseFormBuilder.buildButtonIcon('create', faPlus, 'success', this.createButtonEnabled),
-      delete: BaseFormBuilder.buildButtonIcon('delete', faTrash, 'error', this.deleteButtonEnabled),
-      refresh: BaseFormBuilder.buildButtonIcon('refresh', faArrowsRotate, 'primary', this.refreshButtonEnabled),
-      search: BaseFormBuilder.buildButtonIcon('search', faMagnifyingGlass, 'dark-secondary', this.searchButtonEnabled),
+      table: this.baseForm.buildButtonIcon('table', faTable, 'dark-primary').build(),
+      create: this.baseForm.buildButtonIcon('create', faPlus, 'success').build(),
+      delete: this.baseForm.buildButtonIcon('delete', faTrash, 'error').build(),
+      refresh: this.baseForm.buildButtonIcon('refresh', faArrowsRotate, 'primary').build(),
+      search: this.baseForm.buildButtonIcon('search', faMagnifyingGlass, 'dark-secondary').build(),
     })
   }
 

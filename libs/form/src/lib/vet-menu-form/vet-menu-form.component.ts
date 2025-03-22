@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { VetMenuFormModel, VetMenuModel } from './vet-menu-form.model'
 import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, routeSetAction } from '@vet-client/lib-store'
@@ -15,116 +15,23 @@ import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, routeSetAction } from
 export class VetMenuFormComponent
   extends BaseFormService<VetMenuFormModel, VetMenuModel>
   implements OnInit {
-  constructor(private readonly store: Store<RouteStoreModel>) {
+  constructor(
+    private store: Store<RouteStoreModel>,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      vetSettings: {
-        id: 'vetSettings',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Settings',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      vetClinic: {
-        id: 'vetClinic',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Clinic',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      vetMedicalRecord: {
-        id: 'vetMedicalRecord',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Medical Record',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      vetMedication: {
-        id: 'vetMedication',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Medication',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      vetServices: {
-        id: 'vetServices',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Services',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      vetAppointment: {
-        id: 'vetAppointment',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Appointment',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      vetInvoice: {
-        id: 'vetInvoice',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Invoice',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      vetPatients: {
-        id: 'vetPatients',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Patients',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
+      vetSettings: this.baseForm.buildButton('vetSettings', 'Settings', 'primary').build(),
+      vetClinic: this.baseForm.buildButton('vetClinic', 'Clinic', 'primary').build(),
+      vetMedicalRecord: this.baseForm.buildButton('vetMedicalRecord', 'Medical Record', 'primary').build(),
+      vetMedication: this.baseForm.buildButton('vetMedication', 'Medication', 'primary').build(),
+      vetServices: this.baseForm.buildButton('vetServices', 'Services', 'primary').build(),
+      vetAppointment: this.baseForm.buildButton('vetAppointment', 'Appointment', 'primary').build(),
+      vetInvoice: this.baseForm.buildButton('vetInvoice', 'Invoice', 'primary').build(),
+      vetPatients: this.baseForm.buildButton('vetPatients', 'Patients', 'primary').build(),
     })
   }
 

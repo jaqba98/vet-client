@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseLoginRegistrationFormModel, BaseLoginRegistrationModel } from '../base/base-login-registration-form.model'
 import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service'
@@ -21,38 +21,17 @@ export class BigLoginRegistrationFormComponent
   implements OnInit {
   loginRegistrationFormClass = 'base-login-registration-form--big'
 
-  constructor(private readonly baseLoginRegistrationForm: BaseLoginRegistrationFormService) {
+  constructor(
+    private baseLoginRegistrationForm: BaseLoginRegistrationFormService,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      login: {
-        id: 'login',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Login',
-        },
-        defaultValue: false,
-        fullWidth: false,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      registration: {
-        id: 'registration',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Registration',
-        },
-        defaultValue: false,
-        fullWidth: false,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
+      login: this.baseForm.buildButton('login', 'Login', 'primary').build(),
+      registration: this.baseForm.buildButton('registration', 'Registration', 'primary').build(),
     })
   }
 

@@ -1,27 +1,23 @@
 import { IconControlModel } from '../icon-control/icon-control.model'
 import { ColorType } from '@vet-client/lib-type'
 
-interface TextValueModel {
+interface BaseValueModel {
+  id: string
+  color: ColorType
+}
+
+interface TextValueModel extends BaseValueModel {
   type: 'text'
   text: string
 }
 
-interface IconValueModel {
+interface IconValueModel extends BaseValueModel, IconControlModel {
   type: 'icon'
-  icon: IconControlModel
 }
 
-interface LinkValueModel {
+interface LinkValueModel extends BaseValueModel {
   type: 'link'
   text: string
 }
 
-type ValueType = TextValueModel | IconValueModel | LinkValueModel
-
-export interface ButtonControlModel {
-  id: string
-  value: ValueType
-  fullWidth: boolean
-  color: ColorType
-  isSquare: boolean
-}
+export type ButtonControlModel = TextValueModel | IconValueModel | LinkValueModel

@@ -20,15 +20,18 @@ export class LoginFormComponent
 
   title = 'Login'
 
-  constructor(private login: LoginNotification) {
+  constructor(
+    private login: LoginNotification,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
     this.sub = new Subscription()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      email: BaseFormBuilder.buildInputText('Email', []),
-      password: BaseFormBuilder.buildInputPassword('Password', []),
+      email: this.baseForm.buildInput('text', 'Email').build(),
+      password: this.baseForm.buildInput('text', 'Password').build(),
     })
     this.sub.add(this.login.response$.subscribe((res) => {
       this.success = ''

@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
-
 import {
   ButtonControlComponent,
   ErrorControlComponent,
   InputControlComponent,
-  RadioButtonControlComponent, SuccessControlComponent,
+  RadioButtonControlComponent,
+  SuccessControlComponent,
   TextareaControlComponent,
 } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ControlsArrayType } from './base-form.model'
+import { ControlsType } from './base-form.model'
 
 @Component({
   selector: 'lib-base-form',
@@ -31,19 +31,15 @@ import { ControlsArrayType } from './base-form.model'
 export class BaseFormComponent implements OnInit {
   @Output() resetEvent = new EventEmitter()
 
-  @Output() event = new EventEmitter()
+  @Output() dataEvent = new EventEmitter()
 
   @Input({ required: true }) formGroup!: FormGroup
-
-  @Input({ required: true }) controlsArray!: ControlsArrayType
-
-  @Input() isHorizontal = false
-
-  @Input() error: string | null = ''
-
-  @Input() success: string | null = ''
-
+  @Input({ required: true }) controls!: ControlsType
   @Input() resetForm = true
+  @Input() isSubmit = false
+  @Input() isHorizontal = false
+  @Input() error = ''
+  @Input() success = ''
 
   ngOnInit() {
     this.resetEvent.emit()
@@ -52,7 +48,7 @@ export class BaseFormComponent implements OnInit {
   onSubmit() {
     if (this.isBaseFormValid()) {
       const model = this.formGroup.getRawValue()
-      this.event.emit(model)
+      this.dataEvent.emit(model)
       if (this.resetForm) this.resetBaseForm()
       return
     }
@@ -94,14 +90,14 @@ export class BaseFormComponent implements OnInit {
   }
 
   private setBaseFormNotValid() {
-    this.controlsArray.forEach((control) => {
+    this.controls.forEach((control) => {
       this.formGroup.controls[control.name].markAsUntouched()
     })
     this.formGroup.markAllAsTouched()
   }
 
   private resetBaseForm() {
-    this.controlsArray.forEach((control) => {
+    this.controls.forEach((control) => {
       this.formGroup.controls[control.name].patchValue(
         control.model.defaultValue,
       )

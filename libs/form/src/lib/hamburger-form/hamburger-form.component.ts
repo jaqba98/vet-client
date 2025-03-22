@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store'
 import { take } from 'rxjs'
 
 import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store'
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model'
 
@@ -17,29 +17,16 @@ import { HamburgerFormModel, HamburgerModel } from './hamburger-form.model'
 export class HamburgerFormComponent
   extends BaseFormService<HamburgerFormModel, HamburgerModel>
   implements OnInit {
-  constructor(private readonly store: Store<NavStoreType>) {
+  constructor(
+    private store: Store<NavStoreType>,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      hamburger: {
-        id: 'hamburger',
-        kind: 'button',
-        value: {
-          type: 'icon',
-          icon: {
-            icon: faBars,
-            color: 'light-primary',
-            fontSize: '1rem',
-          },
-        },
-        defaultValue: false,
-        fullWidth: false,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: true,
-      },
+      hamburger: this.baseForm.buildButtonIcon('hamburger', faBars, 'primary').build(),
     })
   }
 

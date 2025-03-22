@@ -13,7 +13,6 @@ import {
   clinicDomainDataSelectAction,
   clinicDomainDataTabAction,
   ClinicDomainDataType,
-  ClinicDomainFormType,
   ClinicDomainResponseType,
   selectClinicDomainDataMaxPage,
   selectClinicDomainDataPage,
@@ -25,6 +24,7 @@ import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
 import { TableFormModel } from '../table-form/model/table-form.model'
 import { ClinicFormModel, ClinicTableModel } from '@vet-client/lib-domain'
+import { BaseFormBuilder } from '@vet-client/lib-base-form'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -55,14 +55,27 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
     private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
     private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
     private readonly clinicDomainDataUpdateNotification: ClinicDomainDataUpdateNotification,
-    private readonly formStore: Store<ClinicDomainFormType>,
     private readonly dataStore: Store<ClinicDomainDataType>,
     private readonly responseStore: Store<ClinicDomainResponseType>,
+    private baseForm: BaseFormBuilder,
   ) {
     this.sub = new Subscription()
   }
 
   ngOnInit() {
+    this.formModel = {
+      name: this.baseForm.buildInput('text', 'Name').build(),
+      street: this.baseForm.buildInput('text', 'Street').build(),
+      buildingNumber: this.baseForm.buildInput('text', 'Building Number').build(),
+      apartmentNumber: this.baseForm.buildInput('text', 'Apartment Number').build(),
+      postalCode: this.baseForm.buildInput('text', 'Postal Code').build(),
+      city: this.baseForm.buildInput('text', 'City').build(),
+      province: this.baseForm.buildInput('text', 'Province').build(),
+      country: this.baseForm.buildInput('text', 'Country').build(),
+      email: this.baseForm.buildInput('text', 'Email').build(),
+      phoneNumber: this.baseForm.buildInput('text', 'Phone number').build(),
+    }
+
     this.sub.add(this.route.paramMap.subscribe(async (paramMap) => {
       const page = Number(paramMap.get('page'))
       if (!page) {
@@ -72,9 +85,6 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
       else {
         this.dataStore.dispatch(clinicDomainDataPageAction({ page }))
       }
-    }))
-    this.sub.add(this.formStore.select('clinicDomainForm').subscribe((form) => {
-      this.formModel = form
     }))
     this.sub.add(this.responseStore.select('clinicDomainResponse').pipe(skip(1)).subscribe((response) => {
       this.createSuccess = ''
@@ -197,7 +207,6 @@ export class VetClinicFormComponent implements OnInit, OnDestroy {
 
   getHeaders(): string[] {
     return Object.entries(this.formModel)
-      .filter(([, value]) => value.isEnabled)
       .map(([key]) => key)
   }
 

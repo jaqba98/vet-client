@@ -20,14 +20,17 @@ export class ChooseRoleFormComponent
 
   title = 'Choose role'
 
-  constructor(private chooseRole: ChooseRoleNotification) {
+  constructor(
+    private chooseRole: ChooseRoleNotification,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
     this.sub = new Subscription()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      role: BaseFormBuilder.buildRadioButton(['vet', 'client'], 'vet'),
+      role: this.baseForm.buildRadioButton('vet', ['vet', 'client']).build(),
     })
     this.sub.add(this.chooseRole.response$.subscribe((res) => {
       this.success = ''

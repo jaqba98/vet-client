@@ -1,60 +1,46 @@
-<form
-  class="base-form"
-  [ngClass]="getClassList()"
-  [formGroup]="formGroup"
-  (ngSubmit)="onSubmit()"
->
-  <ng-container *ngFor="let control of controlsArray">
-    <!-- Input -->
-    <ng-container *ngIf="control.model.kind === 'input'">
-      <div class="base-form__group">
+<form class="base-form" [ngClass]="getClassList()" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <!-- controls -->
+  <div class="base-form__controls">
+    <ng-container *ngFor="let control of controls">
+      <div class="base-form__control">
+        <!-- input -->
         <lib-input-control
+          *ngIf="control.model.kind === 'input'"
           [formGroup]="formGroup"
           [controlName]="control.name"
-          [model]="control.model"
+          [model]="control.model.control"
           [isError]="isControlError(control.name)"
         ></lib-input-control>
-        <ng-container *ngIf="isControlError(control.name)">
-          <lib-error-control>{{ getControlErrorMessage(control.name) }}</lib-error-control>
-        </ng-container>
-      </div>
-    </ng-container>
-    <!-- Button -->
-    <ng-container *ngIf="control.model.kind === 'button'">
-      <lib-button-control [model]="control.model" (event)="onButtonEvent(control.name)"></lib-button-control>
-    </ng-container>
-    <!-- Textarea -->
-    <ng-container *ngIf="control.model.kind === 'textarea'">
-      <div class="base-form__group">
+        <!-- button -->
+        <lib-button-control
+          *ngIf="control.model.kind === 'button'"
+          [model]="control.model.control"
+          (event)="onButtonEvent(control.name)"
+        ></lib-button-control>
+        <!-- textarea -->
         <lib-textarea-control
+          *ngIf="control.model.kind === 'textarea'"
           [formGroup]="formGroup"
           [controlName]="control.name"
-          [model]="control.model"
+          [model]="control.model.control"
           [isError]="isControlError(control.name)"
         ></lib-textarea-control>
+        <!-- radio button -->
+        <lib-radio-button-control
+          *ngIf="control.model.kind === 'radio-button'"
+          [formGroup]="formGroup"
+          [controlName]="control.name"
+          [model]="control.model.control"
+        ></lib-radio-button-control>
         <ng-container *ngIf="isControlError(control.name)">
           <lib-error-control>{{ getControlErrorMessage(control.name) }}</lib-error-control>
         </ng-container>
       </div>
     </ng-container>
-    <!-- Radio button -->
-    <ng-container *ngIf="control.model.kind === 'radio-button'">
-      <lib-radio-button-control
-        [formGroup]="formGroup"
-        [controlName]="control.name"
-        [model]="control.model"
-      ></lib-radio-button-control>
-    </ng-container>
-  </ng-container>
-  <!-- Message -->
-  <ng-container *ngIf="success !== ''">
-    <div class="base-form__message">
-      <lib-success-control>{{ success }}</lib-success-control>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="error !== ''">
-    <div class="base-form__message">
-      <lib-error-control>{{ error }}</lib-error-control>
-    </div>
-  </ng-container>
+  </div>
+  <div class="base-form__submit"></div>
+  <div class="base-form__message">
+    <lib-success-control *ngIf="success !== ''">{{ success }}</lib-success-control>
+    <lib-error-control *ngIf="error !== ''">{{ error }}</lib-error-control>
+  </div>
 </form>

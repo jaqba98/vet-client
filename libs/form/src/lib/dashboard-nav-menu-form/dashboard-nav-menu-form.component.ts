@@ -7,7 +7,7 @@ import {
   RouteStoreType,
   routeSetAction,
 } from '@vet-client/lib-store'
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   DashboardNavMenuFormModel,
@@ -25,51 +25,18 @@ export class DashboardNavMenuFormComponent
   implements OnInit {
   @Input() isHorizontal = true
 
-  constructor(private readonly store: Store<RouteStoreType>) {
+  constructor(
+    private store: Store<RouteStoreType>,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      dashboard: {
-        kind: 'button',
-        id: 'dashboard',
-        value: {
-          type: 'text',
-          text: 'Dashboard',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      accountSettings: {
-        kind: 'button',
-        id: 'accountSettings',
-        value: {
-          type: 'text',
-          text: 'Account Settings',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      profile: {
-        kind: 'button',
-        id: 'profile',
-        value: {
-          type: 'text',
-          text: 'Profile',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
+      dashboard: this.baseForm.buildButton('dashboard', 'Dashboard', 'primary').build(),
+      accountSettings: this.baseForm.buildButton('accountSettings', 'Account Settings', 'primary').build(),
+      profile: this.baseForm.buildButton('profile', 'Profile', 'primary').build(),
     })
   }
 

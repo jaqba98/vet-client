@@ -1,12 +1,12 @@
-import { ControlType } from '@vet-client/lib-base-form'
+import { ControlButtonModel } from '@vet-client/lib-base-form'
 
 export interface ClientMenuFormModel {
-  clientSettings: ControlType
-  clientPets: ControlType
-  clientAppointment: ControlType
-  clientInvoice: ControlType
-  clientMedicalRecord: ControlType
-  clientClinics: ControlType
+  clientSettings: ControlButtonModel
+  clientPets: ControlButtonModel
+  clientAppointment: ControlButtonModel
+  clientInvoice: ControlButtonModel
+  clientMedicalRecord: ControlButtonModel
+  clientClinics: ControlButtonModel
 }
 
 export interface ClientMenuModel {

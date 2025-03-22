@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import {
   ClientMenuFormModel,
@@ -16,90 +16,21 @@ import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, routeSetAction } from
   hostDirectives: [BaseComponentDirective],
 })
 export class ClientMenuFormComponent extends BaseFormService<ClientMenuFormModel, ClientMenuModel> implements OnInit {
-  constructor(private readonly store: Store<RouteStoreModel>) {
+  constructor(
+    private store: Store<RouteStoreModel>,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      clientSettings: {
-        id: 'clientSettings',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Settings',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      clientPets: {
-        id: 'clientPets',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Pets',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      clientAppointment: {
-        id: 'clientAppointment',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Appointment',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      clientInvoice: {
-        id: 'clientInvoice',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Invoice',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      clientMedicalRecord: {
-        id: 'clientMedicalRecord',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Medical Record',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
-      clientClinics: {
-        id: 'clientClinics',
-        kind: 'button',
-        value: {
-          type: 'text',
-          text: 'Clinics',
-        },
-        defaultValue: false,
-        fullWidth: true,
-        color: 'primary',
-        isEnabled: true,
-        isSquare: false,
-      },
+      clientSettings: this.baseForm.buildButton('clientSettings', 'Settings', 'primary').build(),
+      clientPets: this.baseForm.buildButton('clientPets', 'Pets', 'primary').build(),
+      clientAppointment: this.baseForm.buildButton('clientAppointment', 'Appointment', 'primary').build(),
+      clientInvoice: this.baseForm.buildButton('clientInvoice', 'Invoice', 'primary').build(),
+      clientMedicalRecord: this.baseForm.buildButton('clientMedicalRecord', 'Medical Record', 'primary').build(),
+      clientClinics: this.baseForm.buildButton('clientClinics', 'Clinics', 'primary').build(),
     })
   }
 

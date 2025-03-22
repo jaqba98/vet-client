@@ -21,28 +21,36 @@ export class RegistrationFormComponent
 
   title = 'Registration'
 
-  constructor(private registration: RegistrationNotification) {
+  constructor(
+    private registration: RegistrationNotification,
+    private baseForm: BaseFormBuilder,
+  ) {
     super()
     this.sub = new Subscription()
   }
 
   ngOnInit() {
     this.initBaseForm({
-      email: BaseFormBuilder.buildInputText(
-        'Email', [Validators.required, Validators.email, Validators.maxLength(255)],
-      ),
-      password: BaseFormBuilder.buildInputPassword(
-        'Password', [Validators.required, Validators.maxLength(255)],
-      ),
-      confirmPassword: BaseFormBuilder.buildInputPassword(
-        'Confirm password', [Validators.required, Validators.maxLength(255)],
-      ),
-      firstName: BaseFormBuilder.buildInputText(
-        'First name', [Validators.required, Validators.maxLength(50)],
-      ),
-      lastName: BaseFormBuilder.buildInputText(
-        'Last name', [Validators.required, Validators.maxLength(100)],
-      ),
+      email: this.baseForm
+        .buildInput('text', 'Email')
+        .buildValidators([Validators.required, Validators.email, Validators.maxLength(255)])
+        .build(),
+      password: this.baseForm
+        .buildInput('password', 'Password')
+        .buildValidators([Validators.required, Validators.maxLength(255)])
+        .build(),
+      confirmPassword: this.baseForm
+        .buildInput('password', 'Confirm password')
+        .buildValidators([Validators.required, Validators.maxLength(255)])
+        .build(),
+      firstName: this.baseForm
+        .buildInput('text', 'First name')
+        .buildValidators([Validators.required, Validators.maxLength(50)])
+        .build(),
+      lastName: this.baseForm
+        .buildInput('text', 'Last name')
+        .buildValidators([Validators.required, Validators.maxLength(100)])
+        .build(),
     })
     this.sub.add(this.registration.response$.subscribe((res) => {
       this.success = ''

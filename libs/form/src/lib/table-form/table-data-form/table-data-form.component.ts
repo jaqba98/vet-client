@@ -5,7 +5,7 @@ import { faEdit, faSquare, faSquareCheck, faTrash } from '@fortawesome/free-soli
 
 import { BaseComponentDirective, ObjectTypeUtils } from '@vet-client/lib-utils'
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
-import { ControlButtonBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
+import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
 import { TableFormRowModel, TableFormRowsModel } from '../model/table-form-rows.model'
 
 @Component({
@@ -34,31 +34,20 @@ export class TableDataFormComponent<TRows> {
 
   constructor(
     private readonly objectType: ObjectTypeUtils,
-    private readonly controlButton: ControlButtonBuilder,
+    private readonly controlButton: BaseFormBuilder,
+    private baseForm: BaseFormBuilder,
   ) {
-    this.selectedButtonModel = this.controlButton
-      .buildBase('checked')
-      .buildIsSquare(true)
-      .buildIcon(faSquareCheck, 'light-primary', '2rem')
-      .buildColor('primary')
+    this.selectedButtonModel = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('checked', faSquareCheck, 'light-primary')
       .build()
-    this.unselectedButtonModel = this.controlButton
-      .buildBase('unchecked')
-      .buildIsSquare(true)
-      .buildIcon(faSquare, 'light-primary', '2rem')
-      .buildColor('primary')
+    this.unselectedButtonModel = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('unchecked', faSquare, 'light-primary')
       .build()
-    this.editButtonModel = this.controlButton
-      .buildBase('edit')
-      .buildIsSquare(true)
-      .buildIcon(faEdit, 'light-primary', '1rem')
-      .buildColor('primary')
+    this.editButtonModel = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('edit', faSquare, 'primary')
       .build()
-    this.deleteButtonModel = this.controlButton
-      .buildBase('delete')
-      .buildIsSquare(true)
-      .buildIcon(faTrash, 'light-primary', '1rem')
-      .buildColor('error')
+    this.deleteButtonModel = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('delete', faTrash, 'error')
       .build()
   }
 
