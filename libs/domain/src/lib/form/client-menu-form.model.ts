@@ -8,12 +8,3 @@ export interface ClientMenuFormModel {
   clientMedicalRecord: ControlButtonModel
   clientClinics: ControlButtonModel
 }
-
-export interface ClientMenuModel {
-  clientSettings: boolean
-  clientPets: boolean
-  clientAppointment: boolean
-  clientInvoice: boolean
-  clientMedicalRecord: boolean
-  clientClinics: boolean
-}

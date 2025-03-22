@@ -11,6 +11,7 @@ interface ControlBaseModel<TControl> {
   defaultValue: string
   control: TControl
   validators: ValidatorFn[]
+  fullWidth: boolean
 }
 
 export interface ControlInputModel extends ControlBaseModel<InputControlModel> {

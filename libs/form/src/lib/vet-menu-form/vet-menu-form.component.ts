@@ -1,10 +1,19 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import {
+  BaseFormBuilder,
+  BaseFormComponent,
+  BaseFormService,
+} from '@vet-client/lib-base-form'
+import { VetMenuDomainModel, VetMenuFormModel } from '@vet-client/lib-domain'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { VetMenuFormModel, VetMenuModel } from './vet-menu-form.model'
-import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, routeSetAction } from '@vet-client/lib-store'
+import {
+  RoutePageEnum,
+  RouteSectionEnum,
+  routeSetAction,
+  RouteStoreModel,
+} from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-vet-menu-form',
@@ -13,8 +22,8 @@ import { RoutePageEnum, RouteSectionEnum, RouteStoreModel, routeSetAction } from
   hostDirectives: [BaseComponentDirective],
 })
 export class VetMenuFormComponent
-  extends BaseFormService<VetMenuFormModel, VetMenuModel>
-  implements OnInit {
+  extends BaseFormService<VetMenuFormModel, VetMenuDomainModel>
+  implements OnInit, OnDestroy {
   constructor(
     private store: Store<RouteStoreModel>,
     private baseForm: BaseFormBuilder,
@@ -24,19 +33,47 @@ export class VetMenuFormComponent
 
   ngOnInit() {
     this.initBaseForm({
-      vetSettings: this.baseForm.buildButton('vetSettings', 'Settings', 'primary').build(),
-      vetClinic: this.baseForm.buildButton('vetClinic', 'Clinic', 'primary').build(),
-      vetMedicalRecord: this.baseForm.buildButton('vetMedicalRecord', 'Medical Record', 'primary').build(),
-      vetMedication: this.baseForm.buildButton('vetMedication', 'Medication', 'primary').build(),
-      vetServices: this.baseForm.buildButton('vetServices', 'Services', 'primary').build(),
-      vetAppointment: this.baseForm.buildButton('vetAppointment', 'Appointment', 'primary').build(),
-      vetInvoice: this.baseForm.buildButton('vetInvoice', 'Invoice', 'primary').build(),
-      vetPatients: this.baseForm.buildButton('vetPatients', 'Patients', 'primary').build(),
+      vetSettings: this.baseForm
+        .buildButton('vetSettings', 'Settings', 'primary')
+        .buildFullWidth()
+        .build(),
+      vetClinic: this.baseForm
+        .buildButton('vetClinic', 'Clinic', 'primary')
+        .buildFullWidth()
+        .build(),
+      vetMedicalRecord: this.baseForm
+        .buildButton('vetMedicalRecord', 'Medical Record', 'primary')
+        .buildFullWidth()
+        .build(),
+      vetMedication: this.baseForm
+        .buildButton('vetMedication', 'Medication', 'primary')
+        .buildFullWidth()
+        .build(),
+      vetServices: this.baseForm
+        .buildButton('vetServices', 'Services', 'primary')
+        .buildFullWidth()
+        .build(),
+      vetAppointment: this.baseForm
+        .buildButton('vetAppointment', 'Appointment', 'primary')
+        .buildFullWidth()
+        .build(),
+      vetInvoice: this.baseForm
+        .buildButton('vetInvoice', 'Invoice', 'primary')
+        .buildFullWidth()
+        .build(),
+      vetPatients: this.baseForm
+        .buildButton('vetPatients', 'Patients', 'primary')
+        .buildFullWidth()
+        .build(),
     })
   }
 
-  override onSubmit(model: VetMenuModel) {
-    if (model.vetSettings) {
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
+  override onSubmit(domain: VetMenuDomainModel) {
+    if (domain.vetSettings) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardVetSettings,
@@ -44,7 +81,7 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (model.vetClinic) {
+    else if (domain.vetClinic) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardVetClinic,
@@ -52,7 +89,7 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (model.vetMedicalRecord) {
+    else if (domain.vetMedicalRecord) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardVetMedicalRecord,
@@ -60,7 +97,7 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (model.vetMedication) {
+    else if (domain.vetMedication) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardVetMedication,
@@ -68,7 +105,7 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (model.vetServices) {
+    else if (domain.vetServices) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardVetServices,
@@ -76,7 +113,7 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (model.vetAppointment) {
+    else if (domain.vetAppointment) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardVetAppointment,
@@ -84,7 +121,7 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (model.vetInvoice) {
+    else if (domain.vetInvoice) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardVetInvoice,
@@ -92,7 +129,7 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (model.vetPatients) {
+    else if (domain.vetPatients) {
       this.store.dispatch(
         routeSetAction({
           page: RoutePageEnum.dashboardVetPatients,

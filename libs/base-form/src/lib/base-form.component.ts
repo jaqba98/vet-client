@@ -10,7 +10,7 @@ import {
   TextareaControlComponent,
 } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ControlButtonModel, ControlsType, ControlType } from './base-form.model'
+import { ControlButtonModel, ControlsType } from './base-form.model'
 import { BaseFormBuilder } from './base-form.builder'
 
 @Component({

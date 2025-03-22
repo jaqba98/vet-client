@@ -26,6 +26,7 @@ export class BaseFormBuilder {
         placeholder: '',
       },
       validators: [],
+      fullWidth: false,
     }
     return this
   }
@@ -42,6 +43,7 @@ export class BaseFormBuilder {
         color: 'light-primary',
       },
       validators: [],
+      fullWidth: false,
     }
     return this
   }
@@ -59,6 +61,7 @@ export class BaseFormBuilder {
         fontSize: '1rem',
       },
       validators: [],
+      fullWidth: false,
     }
     return this
   }
@@ -73,6 +76,7 @@ export class BaseFormBuilder {
         height,
       },
       validators: [],
+      fullWidth: false,
     }
     return this
   }
@@ -83,12 +87,18 @@ export class BaseFormBuilder {
       defaultValue: '',
       control: { name, options },
       validators: [],
+      fullWidth: false,
     }
     return this
   }
 
   buildValidators(validators: ValidatorFn[]): this {
     this.control = <ControlType> { ...this.control, validators }
+    return this
+  }
+
+  buildFullWidth(): this {
+    this.control = { ...this.control, fullWidth: true }
     return this
   }
 

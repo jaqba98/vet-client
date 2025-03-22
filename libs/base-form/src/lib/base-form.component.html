@@ -15,6 +15,7 @@
         <lib-button-control
           *ngIf="control.model.kind === 'button'"
           [model]="control.model.control"
+          [fullWidth]="control.model.fullWidth"
           (event)="onButtonEvent(control.name)"
         ></lib-button-control>
         <!-- textarea -->

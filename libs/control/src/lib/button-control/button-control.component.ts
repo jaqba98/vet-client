@@ -18,6 +18,8 @@ export class ButtonControlComponent {
 
   @Input({ required: true }) model!: ButtonControlModel
 
+  @Input() fullWidth = false
+
   onClick(event: string) {
     this.event.emit(event)
   }
@@ -27,7 +29,7 @@ export class ButtonControlComponent {
       'button-control__button--text': this.model.type === 'text',
       'button-control__button--icon': this.model.type === 'icon',
       'button-control__button--link': this.model.type === 'link',
-      // 'button-control__button--full-width': this.model.fullWidth,
+      'button-control__button--full-width': this.fullWidth,
       'button-control__button--transparent': this.model.buttonColor === 'transparent',
       'button-control__button--primary': this.model.buttonColor === 'primary',
       'button-control__button--dark-primary': this.model.buttonColor === 'dark-primary',
