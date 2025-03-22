@@ -18,6 +18,7 @@ import { IsClientHttpPostService } from '../dom-service/guard/is-client-http-pos
 import { IsVetHttpPostService } from '../dom-service/guard/is-vet-http-post.service'
 import { ValidTokenHttpPostService } from '../dom-service/guard/valid-token-http-post.service'
 import { HasNotRoleHttpPostService } from '../dom-service/guard/has-not-role-http-post.service'
+import { InvalidTokenHttpPostService } from '../dom-service/guard/invalid-token-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -33,6 +34,7 @@ export class HttpPostAppService {
     private isClientHttpPost: IsClientHttpPostService,
     private isVetHttpPost: IsVetHttpPostService,
     private validTokenHttpPost: ValidTokenHttpPostService,
+    private invalidTokenHttpPost: InvalidTokenHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -89,5 +91,9 @@ export class HttpPostAppService {
 
   validTokenPost() {
     return this.validTokenHttpPost.validTokenPost()
+  }
+
+  invalidTokenPost() {
+    return this.invalidTokenHttpPost.invalidTokenPost()
   }
 }

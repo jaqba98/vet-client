@@ -11,14 +11,14 @@ import { GuardRequestDtoModel } from '../../model/request/guard/guard-request-dt
 import { ResponseDtoModel } from '../../model/response/response-dto.model'
 
 @Injectable({ providedIn: 'root' })
-export class ValidTokenHttpPostService {
+export class InvalidTokenHttpPostService {
   constructor(
     private cookie: CookieService,
     private httpExecute: HttpExecuteService,
     private routeStore: Store<RouteStoreType>,
   ) {}
 
-  validTokenPost() {
+  invalidTokenPost() {
     const request: GuardRequestDtoModel = { token: this.cookie.getToken() }
     return this.httpExecute
       .exec<ResponseDtoModel>({
@@ -29,15 +29,15 @@ export class ValidTokenHttpPostService {
         take(1),
         map((res) => {
           if (res.success) {
-            return true
+            this.routeStore.dispatch(
+              routeSetAction({
+                page: RoutePageEnum.dashboard,
+                section: RouteSectionEnum.dashboard,
+              }),
+            )
+            return false
           }
-          this.routeStore.dispatch(
-            routeSetAction({
-              page: RoutePageEnum.home,
-              section: RouteSectionEnum.home,
-            }),
-          )
-          return false
+          return true
         }),
       )
   }

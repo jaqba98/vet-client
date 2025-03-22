@@ -29,8 +29,8 @@ import {
   HasRoleGuard,
   IsClientGuard,
   IsVetGuard,
-  LoggedInGuard,
-  LoggedOutGuard,
+  ValidTokenGuard,
+  InvalidTokenGuard,
   HasNotRoleGuard,
 } from '@vet-client/lib-guard'
 
@@ -43,22 +43,22 @@ export const route: Route[] = [
   {
     path: 'home',
     component: HomePageComponent,
-    canActivate: [LoggedOutGuard],
+    canActivate: [InvalidTokenGuard],
   },
   {
     path: 'login',
     component: LoginPageComponent,
-    canActivate: [LoggedOutGuard],
+    canActivate: [InvalidTokenGuard],
   },
   {
     path: 'registration',
     component: RegistrationPageComponent,
-    canActivate: [LoggedOutGuard],
+    canActivate: [InvalidTokenGuard],
   },
   {
     path: 'dashboard',
     component: DashboardPageComponent,
-    canActivate: [LoggedInGuard, GetAccountGuard],
+    canActivate: [ValidTokenGuard, GetAccountGuard],
     children: [
       {
         path: '',
