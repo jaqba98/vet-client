@@ -25,7 +25,7 @@ export class ChooseRoleFormComponent
 
   ngOnInit() {
     this.initBaseForm({
-      role: this.baseForm.buildRadioButton('vet', ['vet', 'client']).build(),
+      role: this.baseForm.buildRadioButton('role', ['vet', 'client']).build(),
     })
   }
 
