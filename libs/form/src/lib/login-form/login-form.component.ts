@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Subscription } from 'rxjs'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { CardControlComponent } from '@vet-client/lib-control'
-import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { LoginDomainModel, LoginFormModel } from '@vet-client/lib-domain'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { LoginNotification } from '@vet-client/lib-http'
 
 @Component({
@@ -16,16 +15,11 @@ import { LoginNotification } from '@vet-client/lib-http'
 export class LoginFormComponent
   extends BaseFormService<LoginFormModel, LoginDomainModel>
   implements OnInit, OnDestroy {
-  private readonly sub: Subscription
-
-  title = 'Login'
-
   constructor(
-    private login: LoginNotification,
     private baseForm: BaseFormBuilder,
+    private login: LoginNotification,
   ) {
-    super()
-    this.sub = new Subscription()
+    super('Login', login)
   }
 
   ngOnInit() {
@@ -33,20 +27,10 @@ export class LoginFormComponent
       email: this.baseForm.buildInput('text', 'Email').build(),
       password: this.baseForm.buildInput('text', 'Password').build(),
     })
-    this.sub.add(this.login.response$.subscribe((res) => {
-      this.success = ''
-      this.error = ''
-      if (res.success) {
-        this.success = res.message
-      }
-      else {
-        this.error = res.message
-      }
-    }))
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe()
+    this.onDestroy()
   }
 
   override onSubmit(domain: LoginDomainModel) {

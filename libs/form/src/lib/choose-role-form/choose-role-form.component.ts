@@ -16,32 +16,17 @@ import { ChooseRoleNotification } from '@vet-client/lib-http'
 export class ChooseRoleFormComponent
   extends BaseFormService<ChooseRoleFormModel, ChooseRoleDomainModel>
   implements OnInit, OnDestroy {
-  private readonly sub: Subscription
-
-  title = 'Choose role'
-
   constructor(
     private chooseRole: ChooseRoleNotification,
     private baseForm: BaseFormBuilder,
   ) {
-    super()
-    this.sub = new Subscription()
+    super('Choose role', chooseRole)
   }
 
   ngOnInit() {
     this.initBaseForm({
       role: this.baseForm.buildRadioButton('vet', ['vet', 'client']).build(),
     })
-    this.sub.add(this.chooseRole.response$.subscribe((res) => {
-      this.success = ''
-      this.error = ''
-      if (res.success) {
-        this.success = res.message
-      }
-      else {
-        this.error = res.message
-      }
-    }))
   }
 
   ngOnDestroy() {

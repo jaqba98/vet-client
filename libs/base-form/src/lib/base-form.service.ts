@@ -1,21 +1,51 @@
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
+import { Subscription } from 'rxjs'
 
+import { ResponseNotification } from '@vet-client/lib-utils'
 import { BaseFormModel, ControlsType, ControlType } from './base-form.model'
 
 @Injectable()
 export class BaseFormService<TFormModel, TDomainModel> {
+  protected readonly sub: Subscription
+
   formGroup!: FormGroup
 
   controlsArray!: ControlsType
+
+  title = ''
 
   success = ''
 
   error = ''
 
+  constructor(
+    @Inject('title') title = '',
+    @Inject('response') response?: ResponseNotification,
+  ) {
+    this.sub = new Subscription()
+    this.title = title
+    if (response) {
+      this.sub.add(response.response$.subscribe((res) => {
+        this.success = ''
+        this.error = ''
+        if (res.success) {
+          this.success = res.message
+        }
+        else {
+          this.error = res.message
+        }
+      }))
+    }
+  }
+
   initBaseForm(baseForm: BaseFormModel<TFormModel>) {
     this.formGroup = this.createFormGroup(baseForm)
     this.controlsArray = this.getControlsArray(baseForm)
+  }
+
+  onDestroy() {
+    this.sub.unsubscribe()
   }
 
   resetBaseForm() {

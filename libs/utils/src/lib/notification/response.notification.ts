@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs'
 
-import { ResponseModel } from '@vet-client/lib-domain'
+import { ResponseModel } from './response.model'
 
 @Injectable()
 export class ResponseNotification {

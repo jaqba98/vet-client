@@ -17,16 +17,11 @@ import { RegistrationNotification } from '@vet-client/lib-http'
 export class RegistrationFormComponent
   extends BaseFormService<RegistrationFormModel, RegistrationDomainModel>
   implements OnInit, OnDestroy {
-  private readonly sub: Subscription
-
-  title = 'Registration'
-
   constructor(
     private registration: RegistrationNotification,
     private baseForm: BaseFormBuilder,
   ) {
-    super()
-    this.sub = new Subscription()
+    super('Registration')
   }
 
   ngOnInit() {
