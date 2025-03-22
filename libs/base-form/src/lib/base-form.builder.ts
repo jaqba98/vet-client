@@ -10,6 +10,7 @@ import {
   ControlTextareaModel,
   ControlType,
 } from './base-form.model'
+import { RadioButtonOptionModel } from '@vet-client/lib-control'
 
 @Injectable({ providedIn: 'root' })
 export class BaseFormBuilder {
@@ -76,7 +77,7 @@ export class BaseFormBuilder {
     return this
   }
 
-  buildRadioButton(name: string, options: string[]): this {
+  buildRadioButton(name: string, options: RadioButtonOptionModel[]): this {
     this.control = <ControlRadioButtonModel> {
       kind: 'radio-button',
       defaultValue: '',

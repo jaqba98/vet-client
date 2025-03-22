@@ -5,11 +5,11 @@
         type="radio"
         [id]="option"
         [name]="model.name"
-        [value]="option"
+        [value]="option.value"
         [formControlName]="controlName"
       >
       <label [for]="option">
-        <lib-text-control textControlColor="dark-secondary">{{ option }}</lib-text-control>
+        <lib-text-control textControlColor="dark-secondary">{{ option.label }}</lib-text-control>
       </label>
     </div>
   </ng-container>

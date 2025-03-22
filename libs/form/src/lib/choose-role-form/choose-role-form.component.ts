@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Subscription } from 'rxjs'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { CardControlComponent } from '@vet-client/lib-control'
-import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ChooseRoleDomainModel, ChooseRoleFormModel } from '@vet-client/lib-domain'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ChooseRoleNotification } from '@vet-client/lib-http'
 
 @Component({
@@ -25,7 +24,12 @@ export class ChooseRoleFormComponent
 
   ngOnInit() {
     this.initBaseForm({
-      role: this.baseForm.buildRadioButton('role', ['vet', 'client']).build(),
+      role: this.baseForm
+        .buildRadioButton('role', [
+          { label: 'Vet', value: 'vet' },
+          { label: 'Client', value: 'client' },
+        ])
+        .build(),
     })
   }
 
