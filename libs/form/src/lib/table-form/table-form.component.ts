@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { Store } from '@ngrx/store'
 
 import {
   BaseComponentDirective,
@@ -12,7 +13,7 @@ import { TableDataFormComponent } from './table-data-form/table-data-form.compon
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
-import { TableFormRowsModel } from './model/table-form.rows.model'
+import { BaseTableFormRowModel } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-table-form',
@@ -29,7 +30,8 @@ import { TableFormRowsModel } from './model/table-form.rows.model'
 export class TableFormComponent<TFormModel, TDomainModel> {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
   @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
-  @Input({ required: true }) rows!: TableFormRowsModel<TDomainModel>
+  @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
+  @Input({ required: true }) store!: Store
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true

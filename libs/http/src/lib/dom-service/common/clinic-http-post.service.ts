@@ -55,7 +55,7 @@ export class ClinicHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormCreateAction<ClinicDomainModel>()({
-            rows: res.data,
+            rows: res.data.map(row => ({ id: row.id, isSelected: false, row })),
             page: 0,
             maxPage: 0,
           }))

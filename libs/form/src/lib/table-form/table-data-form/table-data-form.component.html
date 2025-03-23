@@ -1,6 +1,7 @@
 <div class="wrapper">
   <table class="table">
     <tr class="table__row">
+      <td class="table__button"></td>
       <ng-container *ngFor="let header of getHeaders()">
         <td class="table__column">
           <lib-text-control textControlColor="dark-primary">{{ header }}</lib-text-control>
@@ -9,9 +10,23 @@
     </tr>
     <ng-container *ngFor="let row of rows">
       <tr class="table__row">
+        <td class="table__button">
+          <ng-container *ngIf="row.isSelected; else unselected">
+            <lib-button-control
+              [model]="selectedButtonModel.control"
+              (event)="onUnselectRowEvent(row.id)"
+            ></lib-button-control>
+          </ng-container>
+          <ng-template #unselected>
+            <lib-button-control
+              [model]="unselectedButtonModel.control"
+              (event)="onSelectRowEvent(row.id)"
+            ></lib-button-control>
+          </ng-template>
+        </td>
         <ng-container *ngFor="let key of getHeaderKeys()">
           <td class="table__column">
-            <lib-text-control textControlColor="dark-primary">{{ getColumn(row, key) }}</lib-text-control>
+            <lib-text-control textControlColor="dark-primary">{{ getColumn(row.row, key) }}</lib-text-control>
           </td>
         </ng-container>
       </tr>
