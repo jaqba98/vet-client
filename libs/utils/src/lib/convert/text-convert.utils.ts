@@ -7,4 +7,13 @@ export class TextConvertUtils {
     const otherCharacters = text.slice(1).toLowerCase()
     return `${firstLetter}${otherCharacters}`
   }
+
+  camelToPascalWithSpaces(input: string): string {
+    if (!input) return ''
+    const spaced = input.replace(/([a-z])([A-Z])/g, '$1 $2')
+    return spaced
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+  }
 }

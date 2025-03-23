@@ -1,4 +1,3 @@
-// done
 export enum TableFormTabEnum {
   table = 'table',
   create = 'create',

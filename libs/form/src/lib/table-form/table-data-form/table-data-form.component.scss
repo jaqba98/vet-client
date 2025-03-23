@@ -1,34 +1,53 @@
-// done
 @use 'libs/scss/src/base/colors';
-@use 'libs/scss/src/abstracts/variables';
+
+.wrapper {
+  overflow: auto;
+  margin: -1px -1px -1px -1px;
+}
 
 .table {
-  display: block;
+  width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
-  overflow: auto;
 
-  &__row {
-    display: flex;
-
-    &--head {
-      background-color: colors.$color-surface;
-    }
-  }
+  &__row {}
 
   &__column {
-    flex: 1;
-    min-width: 200px;
-    padding: 0.5rem;
-    border: 1px solid colors.$color-border;
-    display: flex;
-    align-items: center;
-    text-transform: capitalize;
-  }
-
-  &__button {
-    min-width: 60px;
-    padding: 0.5rem;
+    min-width: 100px;
+    padding: 1rem;
     border: 1px solid colors.$color-border;
   }
 }
+
+//@use 'libs/scss/src/base/colors';
+//@use 'libs/scss/src/abstracts/variables';
+//
+//.table {
+//  display: block;
+//  border-collapse: collapse;
+//  table-layout: fixed;
+//  overflow: auto;
+//
+//  &__row {
+//    display: flex;
+//
+//    &--head {
+//      background-color: colors.$color-surface;
+//    }
+//  }
+//
+//  &__column {
+//    flex: 1;
+//    min-width: 200px;
+//    padding: 0.5rem;
+//    border: 1px solid colors.$color-border;
+//    display: flex;
+//    align-items: center;
+//    text-transform: capitalize;
+//  }
+//
+//  &__button {
+//    min-width: 60px;
+//    padding: 0.5rem;
+//    border: 1px solid colors.$color-border;
+//  }
+//}
