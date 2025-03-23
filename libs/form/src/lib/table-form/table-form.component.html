@@ -14,7 +14,11 @@
   <ng-container content>
     <ng-container [ngSwitch]="tab">
       <ng-container *ngSwitchCase="'table'">
-        <lib-table-data-form [formModel]="formModel"></lib-table-data-form>
+        <lib-table-data-form
+          [formModel]="formModel"
+          [crudNotification]="crudNotification"
+          [rows]="rows"
+        ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'create'">
         <lib-table-create-form [formModel]="formModel" [crudNotification]="crudNotification"></lib-table-create-form>

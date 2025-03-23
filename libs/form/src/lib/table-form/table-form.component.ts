@@ -28,10 +28,8 @@ import { TableFormRowsModel } from './model/table-form.rows.model'
 })
 export class TableFormComponent<TFormModel, TDomainModel> {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
-  @Input({ required: true }) crudNotification!: CrudNotification<
-    TDomainModel,
-    DeleteDomainModel
-  >
+  @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
+  @Input({ required: true }) rows!: TableFormRowsModel<TDomainModel>
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true

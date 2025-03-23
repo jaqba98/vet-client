@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { BaseComponentDirective, TextConvertUtils } from '@vet-client/lib-utils'
+import { BaseComponentDirective, CrudNotification, ObjectTypeUtils, TextConvertUtils } from '@vet-client/lib-utils'
 import { TableFormModel } from '../model/table-form.model'
 import { TextControlComponent } from '@vet-client/lib-control'
+import { DeleteDomainModel } from '@vet-client/lib-domain'
+import { TableFormRowsModel } from '../model/table-form.rows.model'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -12,10 +14,25 @@ import { TextControlComponent } from '@vet-client/lib-control'
   styleUrl: './table-data-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableDataFormComponent<TFormModel> {
+export class TableDataFormComponent<TFormModel, TDomainModel>
+implements OnInit {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
+  @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
+  @Input({ required: true }) rows!: TableFormRowsModel<TDomainModel>
 
-  constructor(private textConvert: TextConvertUtils) {}
+  constructor(
+    private textConvert: TextConvertUtils,
+    private objectType: ObjectTypeUtils,
+  ) {
+  }
+
+  ngOnInit() {
+    this.crudNotification.runNotificationRead()
+  }
+
+  getHeaderKeys() {
+    return Object.keys(this.formModel)
+  }
 
   getHeaders() {
     return this.getHeaderKeys().map(header => this.textConvert.camelToPascalWithSpaces(header))
