@@ -73,6 +73,7 @@ export class BaseFormService<TFormModel, TDomainModel> {
 
   getControlsArray(baseForm: BaseFormModel<TFormModel>): ControlsType {
     return Object.entries(baseForm as Record<string, ControlType>)
+      .filter(([, value]) => value.isEnabled)
       .map(([key, value]) => ({ name: key, model: value }))
   }
 

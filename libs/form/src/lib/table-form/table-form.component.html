@@ -1,6 +1,15 @@
 <lib-table-panel-control>
   <ng-container nav>
-    <p>nav</p>
+    <lib-table-nav-form
+      [tableButtonEnabled]="tableButtonEnabled"
+      [createButtonEnabled]="createButtonEnabled"
+      [deleteButtonEnabled]="deleteButtonEnabled"
+      [refreshButtonEnabled]="refreshButtonEnabled"
+      [searchButtonEnabled]="searchButtonEnabled"
+      (tableNavTabEvent)="onTableNavTabEvent($event)"
+      (tableNavDeleteEvent)="onTableNavDeleteEvent()"
+      (tableNavRefreshEvent)="onTableNavRefreshEvent()"
+    ></lib-table-nav-form>
   </ng-container>
   <ng-container content>
     <ng-container [ngSwitch]="tab">
@@ -15,19 +24,6 @@
 </lib-table-panel-control>
 
 <!--<lib-table-panel-control [isPaginator]="tab === 'table'">-->
-
-<!--  <ng-container nav>-->
-<!--    <lib-table-nav-form-->
-<!--      [tableButtonEnabled]="tableButtonEnabled"-->
-<!--      [createButtonEnabled]="createButtonEnabled"-->
-<!--      [deleteButtonEnabled]="deleteButtonEnabled"-->
-<!--      [refreshButtonEnabled]="refreshButtonEnabled"-->
-<!--      [searchButtonEnabled]="searchButtonEnabled"-->
-<!--      (tableNavEvent)="onTableNavEvent($event)"-->
-<!--      (deleteSelectedEvent)="onDeleteSelectedEvent()"-->
-<!--      (refreshEvent)="onRefreshEvent()"-->
-<!--    ></lib-table-nav-form>-->
-<!--  </ng-container>-->
 
 <!--  <ng-container content>-->
 <!--    <ng-container [ngSwitch]="tab">-->

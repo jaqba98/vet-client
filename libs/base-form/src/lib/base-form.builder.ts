@@ -27,6 +27,7 @@ export class BaseFormBuilder {
       },
       validators: [],
       fullWidth: false,
+      isEnabled: true,
     }
     return this
   }
@@ -44,6 +45,7 @@ export class BaseFormBuilder {
       },
       validators: [],
       fullWidth: false,
+      isEnabled: true,
     }
     return this
   }
@@ -62,6 +64,7 @@ export class BaseFormBuilder {
       },
       validators: [],
       fullWidth: false,
+      isEnabled: true,
     }
     return this
   }
@@ -77,6 +80,7 @@ export class BaseFormBuilder {
       },
       validators: [],
       fullWidth: false,
+      isEnabled: true,
     }
     return this
   }
@@ -88,6 +92,7 @@ export class BaseFormBuilder {
       control: { name, options },
       validators: [],
       fullWidth: false,
+      isEnabled: true,
     }
     return this
   }
@@ -99,6 +104,11 @@ export class BaseFormBuilder {
 
   buildFullWidth(): this {
     this.control = { ...this.control, fullWidth: true }
+    return this
+  }
+
+  buildIsEnabled(isEnabled: boolean): this {
+    this.control = { ...this.control, isEnabled }
     return this
   }
 

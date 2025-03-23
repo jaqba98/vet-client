@@ -1,14 +1,9 @@
-// done
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { faArrowsRotate, faMagnifyingGlass, faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import {
-  BaseFormBuilder,
-  BaseFormComponent,
-  BaseFormService,
-} from '@vet-client/lib-base-form'
+import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { TableNavDataModel, TableNavFormModel } from './table-nav-form.model'
+import { TableNavDomainModel, TableNavFormModel } from '@vet-client/lib-domain'
 import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 
 @Component({
@@ -17,16 +12,18 @@ import { TableFormTabEnum } from '../enum/table-form-tab.enum'
   templateUrl: './table-nav-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableNavFormComponent extends BaseFormService<TableNavFormModel, TableNavDataModel> implements OnInit {
-  @Output() tableNavEvent = new EventEmitter<TableFormTabEnum>()
-  @Output() deleteSelectedEvent = new EventEmitter<boolean>()
-  @Output() refreshEvent = new EventEmitter<boolean>()
+export class TableNavFormComponent
+  extends BaseFormService<TableNavFormModel, TableNavDomainModel>
+  implements OnInit, OnDestroy {
+  @Output() tableNavTabEvent = new EventEmitter<TableFormTabEnum>()
+  @Output() tableNavDeleteEvent = new EventEmitter()
+  @Output() tableNavRefreshEvent = new EventEmitter()
 
-  @Input({ required: true }) tableButtonEnabled!: boolean
-  @Input({ required: true }) createButtonEnabled!: boolean
-  @Input({ required: true }) deleteButtonEnabled!: boolean
-  @Input({ required: true }) refreshButtonEnabled!: boolean
-  @Input({ required: true }) searchButtonEnabled!: boolean
+  @Input({ required: true }) tableButtonEnabled = true
+  @Input({ required: true }) createButtonEnabled = true
+  @Input({ required: true }) deleteButtonEnabled = true
+  @Input({ required: true }) refreshButtonEnabled = true
+  @Input({ required: true }) searchButtonEnabled = true
 
   constructor(private baseForm: BaseFormBuilder) {
     super()
@@ -34,34 +31,48 @@ export class TableNavFormComponent extends BaseFormService<TableNavFormModel, Ta
 
   ngOnInit() {
     this.initBaseForm({
-      table: this.baseForm.buildButtonIcon('table', faTable, 'dark-primary').build(),
-      create: this.baseForm.buildButtonIcon('create', faPlus, 'success').build(),
-      delete: this.baseForm.buildButtonIcon('delete', faTrash, 'error').build(),
-      refresh: this.baseForm.buildButtonIcon('refresh', faArrowsRotate, 'primary').build(),
-      search: this.baseForm.buildButtonIcon('search', faMagnifyingGlass, 'dark-secondary').build(),
+      table: this.baseForm
+        .buildButtonIcon('table', faTable, 'dark-primary')
+        .buildIsEnabled(this.tableButtonEnabled)
+        .build(),
+      create: this.baseForm
+        .buildButtonIcon('create', faPlus, 'success')
+        .buildIsEnabled(this.createButtonEnabled)
+        .build(),
+      delete: this.baseForm
+        .buildButtonIcon('delete', faTrash, 'error')
+        .buildIsEnabled(this.deleteButtonEnabled)
+        .build(),
+      refresh: this.baseForm
+        .buildButtonIcon('refresh', faArrowsRotate, 'primary')
+        .buildIsEnabled(this.refreshButtonEnabled)
+        .build(),
+      search: this.baseForm
+        .buildButtonIcon('search', faMagnifyingGlass, 'dark-secondary')
+        .buildIsEnabled(this.searchButtonEnabled)
+        .build(),
     })
   }
 
-  override onSubmit(event: TableNavDataModel) {
-    if (event.table) {
-      this.tableNavEvent.emit(TableFormTabEnum.table)
-      return
+  ngOnDestroy() {
+    this.onDestroy()
+  }
+
+  override onSubmit(domain: TableNavDomainModel) {
+    if (domain.table) {
+      this.tableNavTabEvent.emit(TableFormTabEnum.table)
     }
-    if (event.create) {
-      this.tableNavEvent.emit(TableFormTabEnum.create)
-      return
+    else if (domain.create) {
+      this.tableNavTabEvent.emit(TableFormTabEnum.create)
     }
-    if (event.delete) {
-      this.deleteSelectedEvent.emit(true)
-      return
+    else if (domain.delete) {
+      this.tableNavDeleteEvent.emit()
     }
-    if (event.refresh) {
-      this.refreshEvent.emit(true)
-      return
+    else if (domain.refresh) {
+      this.tableNavRefreshEvent.emit()
     }
-    if (event.search) {
-      this.tableNavEvent.emit(TableFormTabEnum.search)
-      return
+    else if (domain.search) {
+      this.tableNavTabEvent.emit(TableFormTabEnum.search)
     }
   }
 }

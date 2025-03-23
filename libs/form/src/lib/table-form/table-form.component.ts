@@ -6,17 +6,40 @@ import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { TableFormModel } from './model/table-form.model'
 import { TableFormTabEnum } from './enum/table-form-tab.enum'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
+import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 
 @Component({
   selector: 'lib-table-form',
-  imports: [CommonModule, TablePanelControlComponent, TableDataFormComponent],
+  imports: [
+    CommonModule,
+    TablePanelControlComponent,
+    TableDataFormComponent,
+    TableNavFormComponent,
+  ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TFormModel> {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
+  @Input() tableButtonEnabled = true
+  @Input() createButtonEnabled = true
+  @Input() deleteButtonEnabled = true
+  @Input() refreshButtonEnabled = true
+  @Input() searchButtonEnabled = true
 
   tab = TableFormTabEnum.table
+
+  onTableNavTabEvent(tab: TableFormTabEnum) {
+    this.tab = tab
+  }
+
+  onTableNavDeleteEvent() {
+    //
+  }
+
+  onTableNavRefreshEvent() {
+    //
+  }
 
   // I am here
   // @Output() selectAllEvent = new EventEmitter<number>()

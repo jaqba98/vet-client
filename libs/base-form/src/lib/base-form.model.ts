@@ -12,6 +12,7 @@ interface ControlBaseModel<TControl> {
   control: TControl
   validators: ValidatorFn[]
   fullWidth: boolean
+  isEnabled: boolean
 }
 
 export interface ControlInputModel extends ControlBaseModel<InputControlModel> {
