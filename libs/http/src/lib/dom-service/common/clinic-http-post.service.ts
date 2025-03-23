@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core'
 import { map, take } from 'rxjs'
+import { Store } from '@ngrx/store'
 
 import { ClinicDomainModel, DeleteDomainModel } from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
+import { baseTableFormCreateAction, ClinicTableFormType } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { ClinicRequestDtoModel } from '../../model/request/controller/clinic-request-dto.model'
 import { ResponseDtoModel } from '../../model/response/response-dto.model'
@@ -11,7 +13,6 @@ import { MethodEnum } from '../../enum/method.enum'
 import { DeleteRequestDtoModel } from '../../model/request/crud/delete-request-dto.model'
 import { TokenRequestDtoModel } from '../../model/base/token-request-dto.model'
 import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
-import { RoutePageEnum, RouteSectionEnum, routeSetAction } from '@vet-client/lib-store'
 import { ClinicNotification } from '../../notification/clinic.notification'
 
 @Injectable({ providedIn: 'root' })
@@ -20,6 +21,7 @@ export class ClinicHttpPostService {
     private cookie: CookieService,
     private httpExecute: HttpExecuteService,
     private clinic: ClinicNotification,
+    private store: Store<ClinicTableFormType>,
   ) {}
 
   createClinicPost(domain: ClinicDomainModel) {
@@ -49,7 +51,16 @@ export class ClinicHttpPostService {
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicRead, request },
       })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map((res) => {
+          this.store.dispatch(baseTableFormCreateAction<ClinicDomainModel>()({
+            rows: res.data,
+            page: 0,
+            maxPage: 0,
+          }))
+        }),
+      )
   }
 
   updateClinicPost(domain: ClinicDomainModel) {

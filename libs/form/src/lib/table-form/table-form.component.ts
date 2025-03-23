@@ -12,6 +12,7 @@ import { TableDataFormComponent } from './table-data-form/table-data-form.compon
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
+import { TableFormRowsModel } from './model/table-form.rows.model'
 
 @Component({
   selector: 'lib-table-form',
@@ -72,7 +73,6 @@ export class TableFormComponent<TFormModel, TDomainModel> {
 
   // @Input() page!: number
   // @Input() maxPage!: number
-  // @Input() rows!: TableFormRowsModel<TRows>
   // @Input() createSuccess!: string
   // @Input() createError!: string
   // @Input() editSuccess!: string

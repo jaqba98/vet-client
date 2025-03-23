@@ -1,12 +1,16 @@
 import { Component } from '@angular/core'
 import { Validators } from '@angular/forms'
+import { Store } from '@ngrx/store'
 
+import { ClinicTableFormType } from '@vet-client/lib-store'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ClinicFormModel } from '@vet-client/lib-domain'
+import { ClinicDomainModel, ClinicFormModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
+import { clinicTableFormSelector } from '@vet-client/lib-store'
 import { ClinicNotification } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormModel } from '../table-form/model/table-form.model'
+import { skip } from 'rxjs'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -16,9 +20,11 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 })
 export class VetClinicFormComponent {
   formModel: TableFormModel<ClinicFormModel>
+  rows: ClinicDomainModel[] = []
 
   constructor(
     private baseForm: BaseFormBuilder,
+    private store: Store<ClinicTableFormType>,
     public clinicNotification: ClinicNotification,
   ) {
     this.formModel = {
@@ -63,6 +69,9 @@ export class VetClinicFormComponent {
         .buildValidators([Validators.required, Validators.maxLength(20)])
         .build(),
     }
+    this.store.select(clinicTableFormSelector().selectRows).pipe(skip(1)).subscribe((rows) => {
+      this.rows = rows
+    })
   }
 
   // I am here

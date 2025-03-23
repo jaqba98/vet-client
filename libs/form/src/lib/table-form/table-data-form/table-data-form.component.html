@@ -7,6 +7,15 @@
         </td>
       </ng-container>
     </tr>
+    <ng-container *ngFor="let row of rows">
+      <tr class="table__row">
+        <ng-container *ngFor="let key of getHeaderKeys()">
+          <td class="table__column">
+            <lib-text-control textControlColor="dark-primary">{{ getColumn(row, key) }}</lib-text-control>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-container>
   </table>
 </div>
 

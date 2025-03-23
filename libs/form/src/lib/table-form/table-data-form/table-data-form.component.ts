@@ -18,9 +18,11 @@ export class TableDataFormComponent<TFormModel> {
   constructor(private textConvert: TextConvertUtils) {}
 
   getHeaders() {
-    return Object.keys(this.formModel).map(header =>
-      this.textConvert.camelToPascalWithSpaces(header),
-    )
+    return this.getHeaderKeys().map(header => this.textConvert.camelToPascalWithSpaces(header))
+  }
+
+  getColumn(row: TDomainModel, header: string) {
+    return this.objectType.getPropertyByDynamicKey(row, header)
   }
 
   // I am here
@@ -41,7 +43,6 @@ export class TableDataFormComponent<TFormModel> {
   // readonly deleteButtonModel: ControlButtonModel
   //
   // constructor(
-  //   private readonly objectType: ObjectTypeUtils,
   //   private readonly controlButton: BaseFormBuilder,
   //   private baseForm: BaseFormBuilder,
   // ) {
@@ -59,9 +60,6 @@ export class TableDataFormComponent<TFormModel> {
   //     .build()
   // }
   //
-  // getColumn(row: TableFormRowModel<TRows>['domain'], header: string) {
-  //   return this.objectType.getPropertyByDynamicKey(row, header)
-  // }
   //
   // onSelectEvent(id: number) {
   //   this.selectEvent.emit(id)
