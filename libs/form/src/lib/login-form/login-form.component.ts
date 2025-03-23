@@ -19,10 +19,11 @@ export class LoginFormComponent
     private baseForm: BaseFormBuilder,
     private login: LoginNotification,
   ) {
-    super('Login', login)
+    super()
   }
 
   ngOnInit() {
+    this.onInit('Login', this.login.response$)
     this.initBaseForm({
       email: this.baseForm.buildInput('text', 'Email').build(),
       password: this.baseForm.buildInput('password', 'Password').build(),

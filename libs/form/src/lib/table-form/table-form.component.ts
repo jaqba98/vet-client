@@ -1,12 +1,17 @@
 import { Component, Input } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { BaseComponentDirective } from '@vet-client/lib-utils'
+import {
+  BaseComponentDirective,
+  CrudNotification,
+} from '@vet-client/lib-utils'
 import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { TableFormModel } from './model/table-form.model'
 import { TableFormTabEnum } from './enum/table-form-tab.enum'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
+import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
+import { DeleteDomainModel } from '@vet-client/lib-domain'
 
 @Component({
   selector: 'lib-table-form',
@@ -15,12 +20,18 @@ import { TableNavFormComponent } from './table-nav-form/table-nav-form.component
     TablePanelControlComponent,
     TableDataFormComponent,
     TableNavFormComponent,
+    TableCreateFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TFormModel> {
+export class TableFormComponent<TFormModel, TDomainModel> {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
+  @Input({ required: true }) crudNotification!: CrudNotification<
+    TDomainModel,
+    DeleteDomainModel
+  >
+
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true
   @Input() deleteButtonEnabled = true
@@ -39,6 +50,10 @@ export class TableFormComponent<TFormModel> {
 
   onTableNavRefreshEvent() {
     //
+  }
+
+  isPaginator() {
+    return this.tab === TableFormTabEnum.table
   }
 
   // I am here

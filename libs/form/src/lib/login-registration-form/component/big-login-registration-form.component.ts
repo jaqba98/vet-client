@@ -33,6 +33,7 @@ export class BigLoginRegistrationFormComponent
   }
 
   ngOnInit() {
+    this.onInit()
     this.initBaseForm({
       login: this.baseForm.buildButton('login', 'Login', 'primary').build(),
       registration: this.baseForm

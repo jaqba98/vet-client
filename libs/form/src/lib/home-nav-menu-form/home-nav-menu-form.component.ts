@@ -34,6 +34,7 @@ export class HomeNavMenuFormComponent
   }
 
   ngOnInit() {
+    this.onInit()
     this.initBaseForm({
       home: this.baseForm
         .buildButton('home', 'Home', 'primary')

@@ -20,10 +20,11 @@ export class RegistrationFormComponent
     private registration: RegistrationNotification,
     private baseForm: BaseFormBuilder,
   ) {
-    super('Registration', registration)
+    super()
   }
 
   ngOnInit() {
+    this.onInit('Registration', this.registration.response$)
     this.initBaseForm({
       email: this.baseForm
         .buildInput('text', 'Email')

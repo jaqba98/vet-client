@@ -1,10 +1,11 @@
 import { Component } from '@angular/core'
+import { Validators } from '@angular/forms'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { TableFormComponent } from '../table-form/table-form.component'
 import { ClinicFormModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
-import { Validators } from '@angular/forms'
+import { ClinicNotification } from '@vet-client/lib-http'
+import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormModel } from '../table-form/model/table-form.model'
 
 @Component({
@@ -16,7 +17,10 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 export class VetClinicFormComponent {
   formModel: TableFormModel<ClinicFormModel>
 
-  constructor(private baseForm: BaseFormBuilder) {
+  constructor(
+    private baseForm: BaseFormBuilder,
+    public clinicNotification: ClinicNotification,
+  ) {
     this.formModel = {
       name: this.baseForm
         .buildInput('text', 'Name')

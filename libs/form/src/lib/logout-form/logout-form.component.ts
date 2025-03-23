@@ -19,10 +19,11 @@ export class LogoutFormComponent
     private logout: LogoutNotification,
     private baseForm: BaseFormBuilder,
   ) {
-    super('Logout', logout)
+    super()
   }
 
   ngOnInit() {
+    this.onInit('Logout', this.logout.response$)
     this.initBaseForm({
       logout: this.baseForm.buildButtonIcon('logout', faRightFromBracket, 'primary').build(),
     })

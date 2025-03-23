@@ -19,10 +19,11 @@ export class ChooseRoleFormComponent
     private chooseRole: ChooseRoleNotification,
     private baseForm: BaseFormBuilder,
   ) {
-    super('Choose role', chooseRole)
+    super()
   }
 
   ngOnInit() {
+    this.onInit('Choose role', this.chooseRole.response$)
     this.initBaseForm({
       role: this.baseForm
         .buildRadioButton('role', [

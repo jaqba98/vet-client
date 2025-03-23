@@ -1,13 +1,13 @@
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
-import { Subscription } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 
-import { ResponseNotification } from '@vet-client/lib-utils'
+import { ResponseModel } from '@vet-client/lib-utils'
 import { BaseFormModel, ControlsType, ControlType } from './base-form.model'
 
 @Injectable()
 export class BaseFormService<TFormModel, TDomainModel> {
-  protected readonly sub: Subscription
+  protected sub!: Subscription
 
   formGroup!: FormGroup
 
@@ -19,14 +19,11 @@ export class BaseFormService<TFormModel, TDomainModel> {
 
   error = ''
 
-  constructor(
-    @Inject('title') title = '',
-    @Inject('response') response?: ResponseNotification,
-  ) {
+  onInit(title = '', response$?: Observable<ResponseModel>) {
     this.sub = new Subscription()
     this.title = title
-    if (response) {
-      this.sub.add(response.response$.subscribe((res) => {
+    if (response$) {
+      this.sub.add(response$.subscribe((res) => {
         this.success = ''
         this.error = ''
         if (res.success) {

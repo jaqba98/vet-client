@@ -34,6 +34,7 @@ export class SmallLoginRegistrationFormComponent
   }
 
   ngOnInit() {
+    this.onInit()
     this.initBaseForm({
       login: this.baseForm.buildButtonIcon('login', faRightToBracket, 'primary').build(),
       registration: this.baseForm

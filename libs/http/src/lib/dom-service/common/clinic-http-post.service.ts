@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { take } from 'rxjs'
+import { map, take } from 'rxjs'
 
 import { ClinicDomainModel, DeleteDomainModel } from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
@@ -11,12 +11,15 @@ import { MethodEnum } from '../../enum/method.enum'
 import { DeleteRequestDtoModel } from '../../model/request/crud/delete-request-dto.model'
 import { TokenRequestDtoModel } from '../../model/base/token-request-dto.model'
 import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
+import { RoutePageEnum, RouteSectionEnum, routeSetAction } from '@vet-client/lib-store'
+import { ClinicNotification } from '../../notification/clinic.notification'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicHttpPostService {
   constructor(
     private cookie: CookieService,
     private httpExecute: HttpExecuteService,
+    private clinic: ClinicNotification,
   ) {}
 
   createClinicPost(domain: ClinicDomainModel) {
@@ -29,7 +32,12 @@ export class ClinicHttpPostService {
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicCreate, request },
       })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map((res) => {
+          this.clinic.runResponseCreate({ success: res.success, message: res.messages[0] })
+        }),
+      )
   }
 
   readClinicPost() {

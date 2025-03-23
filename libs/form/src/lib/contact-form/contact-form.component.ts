@@ -16,10 +16,11 @@ export class ContactFormComponent
   extends BaseFormService<ContactFormModel, ContactDomainModel>
   implements OnInit, OnDestroy {
   constructor(private baseForm: BaseFormBuilder) {
-    super('Contact')
+    super()
   }
 
   ngOnInit() {
+    this.onInit('Contact')
     this.initBaseForm({
       email: this.baseForm
         .buildInput('text', 'Email')

@@ -1,4 +1,4 @@
-<lib-table-panel-control>
+<lib-table-panel-control [isPaginator]="isPaginator()">
   <ng-container nav>
     <lib-table-nav-form
       [tableButtonEnabled]="tableButtonEnabled"
@@ -16,14 +16,15 @@
       <ng-container *ngSwitchCase="'table'">
         <lib-table-data-form [formModel]="formModel"></lib-table-data-form>
       </ng-container>
+      <ng-container *ngSwitchCase="'create'">
+        <lib-table-create-form [formModel]="formModel" [crudNotification]="crudNotification"></lib-table-create-form>
+      </ng-container>
     </ng-container>
   </ng-container>
   <ng-container paginator>
     <p>paginator</p>
   </ng-container>
 </lib-table-panel-control>
-
-<!--<lib-table-panel-control [isPaginator]="tab === 'table'">-->
 
 <!--  <ng-container content>-->
 <!--    <ng-container [ngSwitch]="tab">-->
@@ -38,14 +39,6 @@
 <!--          (unselectEvent)="onUnselectEvent($event)"-->
 <!--          (editSelectEvent)="onEditSelectEvent($event)"-->
 <!--        ></lib-table-data-form>-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngSwitchCase="'create'">-->
-<!--        <lib-table-create-form-->
-<!--          [formModel]="formModel"-->
-<!--          [createSuccess]="createSuccess"-->
-<!--          [createError]="createError"-->
-<!--          (createEvent)="onCreateEvent($event)"-->
-<!--        ></lib-table-create-form>-->
 <!--      </ng-container>-->
 <!--      <ng-container *ngSwitchCase="'update'">-->
 <!--        <lib-table-edit-form-->
@@ -73,4 +66,3 @@
 <!--      (tablePaginatorEvent)="onTablePaginatorEvent($event)"-->
 <!--    ></lib-table-paginator-form>-->
 <!--  </ng-container>-->
-<!--</lib-table-panel-control>-->
