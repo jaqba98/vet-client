@@ -16,6 +16,12 @@ import {
   ValidTokenPostDtoModel,
 } from './post/guard/guard-post-dto.model'
 import { MethodEnum } from '../enum/method.enum'
+import {
+  CreateServicePostDtoModel,
+  DeleteServicePostDtoModel,
+  ReadServicePostDtoModel,
+  UpdateServicePostDtoModel,
+} from './post/controller/service-post-dto.model'
 
 type HttpPostType =
   | ChooseRolePostDtoModel
@@ -31,6 +37,10 @@ type HttpPostType =
   | IsClientPostDtoModel
   | IsVetPostDtoModel
   | ValidTokenPostDtoModel
+  | CreateServicePostDtoModel
+  | ReadServicePostDtoModel
+  | UpdateServicePostDtoModel
+  | DeleteServicePostDtoModel
 
 interface HttpModel {
   method: MethodEnum.post

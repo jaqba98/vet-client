@@ -9,6 +9,7 @@ import { LoginNotification } from '../notification/login.notification'
 import { LogoutNotification } from '../notification/logout.notification'
 import { RegistrationNotification } from '../notification/registration.notification'
 import { ValidTokenNotification } from '../notification/valid-token.notification'
+import { ServiceNotification } from '../notification/service.notification'
 
 @Component({
   selector: 'lib-http',
@@ -26,6 +27,7 @@ export class HttpComponent implements OnInit, OnDestroy {
     private registration: RegistrationNotification,
     private validToken: ValidTokenNotification,
     private httpPost: HttpPostAppService,
+    private service: ServiceNotification,
   ) {
     this.sub = new Subscription()
   }
@@ -57,6 +59,18 @@ export class HttpComponent implements OnInit, OnDestroy {
     ).subscribe())
     this.sub.add(this.validToken.notification$.pipe(
       switchMap(() => this.httpPost.validTokenPost()),
+    ).subscribe())
+    this.sub.add(this.service.notificationCreate$.pipe(
+      switchMap(domain => this.httpPost.createServicePost(domain)),
+    ).subscribe())
+    this.sub.add(this.service.notificationRead$.pipe(
+      switchMap(() => this.httpPost.readServicePost()),
+    ).subscribe())
+    this.sub.add(this.service.notificationUpdate$.pipe(
+      switchMap(domain => this.httpPost.updateServicePost(domain)),
+    ).subscribe())
+    this.sub.add(this.service.notificationDelete$.pipe(
+      switchMap(domain => this.httpPost.deleteServicePost(domain)),
     ).subscribe())
   }
 

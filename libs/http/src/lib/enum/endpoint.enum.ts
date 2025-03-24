@@ -12,4 +12,8 @@ export enum EndpointEnum {
   clinicRead = 'clinic-read',
   clinicUpdate = 'clinic-update',
   clinicDelete = 'clinic-delete',
+  serviceCreate = 'service-create',
+  serviceRead = 'service-read',
+  serviceUpdate = 'service-update',
+  serviceDelete = 'service-delete',
 }

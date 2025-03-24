@@ -6,7 +6,7 @@ import {
   ClinicDomainModel,
   DeleteDomainModel,
   LoginDomainModel, LogoutDomainModel,
-  RegistrationDomainModel,
+  RegistrationDomainModel, ServiceDomainModel,
 } from '@vet-client/lib-domain'
 import { ClinicHttpPostService } from '../dom-service/common/clinic-http-post.service'
 import { LoginHttpPostService } from '../dom-service/common/login-http-post.service'
@@ -19,6 +19,7 @@ import { IsVetHttpPostService } from '../dom-service/guard/is-vet-http-post.serv
 import { ValidTokenHttpPostService } from '../dom-service/guard/valid-token-http-post.service'
 import { HasNotRoleHttpPostService } from '../dom-service/guard/has-not-role-http-post.service'
 import { InvalidTokenHttpPostService } from '../dom-service/guard/invalid-token-http-post.service'
+import { ServiceHttpPostService } from '../dom-service/common/service-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -35,6 +36,7 @@ export class HttpPostAppService {
     private isVetHttpPost: IsVetHttpPostService,
     private validTokenHttpPost: ValidTokenHttpPostService,
     private invalidTokenHttpPost: InvalidTokenHttpPostService,
+    private serviceHttpPost: ServiceHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -95,5 +97,21 @@ export class HttpPostAppService {
 
   invalidTokenPost() {
     return this.invalidTokenHttpPost.invalidTokenPost()
+  }
+
+  createServicePost(domain: ServiceDomainModel) {
+    return this.serviceHttpPost.createServicePost(domain)
+  }
+
+  readServicePost() {
+    return this.serviceHttpPost.readServicePost()
+  }
+
+  updateServicePost(domain: ServiceDomainModel) {
+    return this.serviceHttpPost.updateServicePost(domain)
+  }
+
+  deleteServicePost(domain: DeleteDomainModel) {
+    return this.serviceHttpPost.deleteServicePost(domain)
   }
 }
