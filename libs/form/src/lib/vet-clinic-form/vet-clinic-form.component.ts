@@ -27,6 +27,7 @@ export class VetClinicFormComponent {
     private baseForm: BaseFormBuilder,
     public store: Store<ClinicTableFormType>,
     public clinicNotification: ClinicNotification,
+    public clinic: ClinicNotification,
   ) {
     this.formModel = {
       name: this.baseForm
@@ -72,7 +73,7 @@ export class VetClinicFormComponent {
     }
     this.store.select('clinicTableForm').subscribe((data) => {
       this.rows = data.rows
-      this.allSelected = !data.rows.some(row => !row.isSelected)
+      this.allSelected = !data.rows.some(row => !row.isSelected) && data.rows.length > 0
       this.tab = <TableFormTabEnum> data.tab
     })
   }

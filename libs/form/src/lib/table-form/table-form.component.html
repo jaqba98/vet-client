@@ -1,13 +1,14 @@
 <lib-table-panel-control [isPaginator]="isPaginator()">
   <ng-container nav>
     <lib-table-nav-form
+      [rows]="rows"
       [store]="store"
+      [crud]="crud"
       [tableButtonEnabled]="tableButtonEnabled"
       [createButtonEnabled]="createButtonEnabled"
       [deleteButtonEnabled]="deleteButtonEnabled"
       [refreshButtonEnabled]="refreshButtonEnabled"
       [searchButtonEnabled]="searchButtonEnabled"
-      (tableNavDeleteEvent)="onTableNavDeleteEvent()"
       (tableNavRefreshEvent)="onTableNavRefreshEvent()"
     ></lib-table-nav-form>
   </ng-container>
@@ -20,6 +21,7 @@
           [rows]="rows"
           [store]="store"
           [allSelected]="allSelected"
+          [crud]="crud"
         ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'create'">

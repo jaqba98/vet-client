@@ -24,6 +24,7 @@ implements OnInit {
   @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
   @Input({ required: true }) store!: Store
+  @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) allSelected!: boolean
 
   readonly selectedButtonModel: ControlButtonModel
@@ -35,7 +36,6 @@ implements OnInit {
     private baseForm: BaseFormBuilder,
     private textConvert: TextConvertUtils,
     private objectType: ObjectTypeUtils,
-    private clinic: ClinicNotification,
   ) {
     this.selectedButtonModel = this.baseForm
       .buildButtonIcon('checked', faSquareCheck, 'dark-secondary')
@@ -92,7 +92,7 @@ implements OnInit {
   }
 
   onDeleteRowEvent(id: number) {
-    this.clinic.runNotificationDelete({ ids: [id] })
+    this.crud.runNotificationDelete({ ids: [id] })
   }
 
   // I am here

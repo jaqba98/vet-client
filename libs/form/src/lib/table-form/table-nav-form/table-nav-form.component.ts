@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { faArrowsRotate, faMagnifyingGlass, faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
-import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { TableNavDomainModel, TableNavFormModel } from '@vet-client/lib-domain'
+import { BaseComponentDirective, CrudNotification } from '@vet-client/lib-utils'
+import { DeleteDomainModel, TableNavDomainModel, TableNavFormModel } from '@vet-client/lib-domain'
 import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 import { Store } from '@ngrx/store'
-import { baseTableFormTabAction } from '@vet-client/lib-store'
+import { BaseTableFormRowModel, baseTableFormTabAction } from '@vet-client/lib-store'
+import { ClinicNotification } from '@vet-client/lib-http'
 
 @Component({
   selector: 'lib-table-nav-form',
@@ -14,13 +15,14 @@ import { baseTableFormTabAction } from '@vet-client/lib-store'
   templateUrl: './table-nav-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableNavFormComponent
+export class TableNavFormComponent<TDomainModel>
   extends BaseFormService<TableNavFormModel, TableNavDomainModel>
   implements OnInit, OnDestroy {
-  @Output() tableNavDeleteEvent = new EventEmitter()
   @Output() tableNavRefreshEvent = new EventEmitter()
 
+  @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
   @Input({ required: true }) store!: Store
+  @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) tableButtonEnabled = true
   @Input({ required: true }) createButtonEnabled = true
   @Input({ required: true }) deleteButtonEnabled = true
@@ -68,7 +70,10 @@ export class TableNavFormComponent
       this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.create }))
     }
     else if (domain.delete) {
-      this.tableNavDeleteEvent.emit()
+      const ids = this.rows
+        .filter(row => row.isSelected)
+        .map(row => row.id)
+      this.crud.runNotificationDelete({ ids })
     }
     else if (domain.refresh) {
       this.tableNavRefreshEvent.emit()
