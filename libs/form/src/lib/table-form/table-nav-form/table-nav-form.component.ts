@@ -6,7 +6,8 @@ import { BaseComponentDirective, CrudNotification } from '@vet-client/lib-utils'
 import { DeleteDomainModel, TableNavDomainModel, TableNavFormModel } from '@vet-client/lib-domain'
 import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 import { Store } from '@ngrx/store'
-import { BaseTableFormRowModel, baseTableFormTabAction } from '@vet-client/lib-store'
+import { BaseTableFormRowModel, BaseTableFormStoreModel, baseTableFormTabAction } from '@vet-client/lib-store'
+import { TableFormStoreModel } from '../model/table-form-store.model'
 
 @Component({
   selector: 'lib-table-nav-form',
@@ -17,9 +18,8 @@ import { BaseTableFormRowModel, baseTableFormTabAction } from '@vet-client/lib-s
 export class TableNavFormComponent<TDomainModel>
   extends BaseFormService<TableNavFormModel, TableNavDomainModel>
   implements OnInit, OnDestroy {
-  @Output() tableNavRefreshEvent = new EventEmitter()
-
-  @Input({ required: true }) store!: Store
+  @Input({ required: true }) select!: string
+  @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: false }) tableButtonEnabled = true
   @Input({ required: false }) createButtonEnabled = true
@@ -34,6 +34,7 @@ export class TableNavFormComponent<TDomainModel>
   }
 
   ngOnInit() {
+    this.onInit()
     this.initBaseForm({
       table: this.baseForm
         .buildButtonIcon('table', faTable, 'dark-primary')
@@ -56,6 +57,9 @@ export class TableNavFormComponent<TDomainModel>
         .buildIsEnabled(this.searchButtonEnabled)
         .build(),
     })
+    this.sub.add(this.store.select(this.select).subscribe(async (data: BaseTableFormStoreModel<TDomainModel>) => {
+      this.rows = data.rows
+    }))
   }
 
   ngOnDestroy() {
@@ -76,7 +80,7 @@ export class TableNavFormComponent<TDomainModel>
       this.crud.runNotificationDelete({ ids })
     }
     else if (domain.refresh) {
-      this.tableNavRefreshEvent.emit()
+      this.crud.runNotificationRead()
     }
     else if (domain.search) {
       this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.search }))

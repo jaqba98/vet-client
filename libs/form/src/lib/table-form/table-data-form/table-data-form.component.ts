@@ -15,6 +15,7 @@ import {
 } from '@vet-client/lib-store'
 import { TableFormModel } from '../model/table-form.model'
 import { TableFormTabEnum } from '../enum/table-form-tab.enum'
+import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -64,7 +65,7 @@ implements OnInit, OnDestroy {
   ngOnInit() {
     this.crud.runNotificationRead()
     this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
-      this.rows = data.rows
+      this.selectRows(data.rows, data.page)
       this.allSelected = !data.rows.some(row => !row.isSelected) && data.rows.length > 0
     }))
   }
@@ -125,5 +126,11 @@ implements OnInit, OnDestroy {
 
   onDeleteRowEvent(id: number) {
     this.crud.runNotificationDelete({ ids: [id] })
+  }
+
+  private selectRows(rows: BaseTableFormRowModel<TDomainModel>[], page: number) {
+    const firstItem = (page - 1) * NUMBER_OF_ROWS_PER_PAGE
+    const lastItem = firstItem + NUMBER_OF_ROWS_PER_PAGE
+    this.rows = rows.filter((_, index) => index >= firstItem && index < lastItem)
   }
 }

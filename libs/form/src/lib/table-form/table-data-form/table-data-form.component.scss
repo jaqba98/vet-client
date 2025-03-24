@@ -1,4 +1,5 @@
 @use 'libs/scss/src/base/colors';
+@use 'libs/scss/src/abstracts/variables';
 
 .wrapper {
   overflow: auto;
@@ -6,15 +7,27 @@
 }
 
 .table {
-  width: 100%;
+  display: block;
   border-collapse: collapse;
+  table-layout: fixed;
+  overflow: auto;
 
-  &__row {}
+  &__row {
+    display: flex;
+
+    &--head {
+      background-color: colors.$color-surface;
+    }
+  }
 
   &__column {
+    flex: 1;
     min-width: 200px;
     padding: 0.5rem;
     border: 1px solid colors.$color-border;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
   }
 
   &__button {
@@ -23,37 +36,3 @@
     border: 1px solid colors.$color-border;
   }
 }
-
-//@use 'libs/scss/src/base/colors';
-//@use 'libs/scss/src/abstracts/variables';
-//
-//.table {
-//  display: block;
-//  border-collapse: collapse;
-//  table-layout: fixed;
-//  overflow: auto;
-//
-//  &__row {
-//    display: flex;
-//
-//    &--head {
-//      background-color: colors.$color-surface;
-//    }
-//  }
-//
-//  &__column {
-//    flex: 1;
-//    min-width: 200px;
-//    padding: 0.5rem;
-//    border: 1px solid colors.$color-border;
-//    display: flex;
-//    align-items: center;
-//    text-transform: capitalize;
-//  }
-//
-//  &__button {
-//    min-width: 60px;
-//    padding: 0.5rem;
-//    border: 1px solid colors.$color-border;
-//  }
-//}
