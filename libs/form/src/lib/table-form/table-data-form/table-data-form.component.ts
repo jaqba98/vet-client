@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { Store } from '@ngrx/store'
 import { faPenToSquare, faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { Subscription } from 'rxjs'
 
 import { BaseComponentDirective, CrudNotification, ObjectTypeUtils, TextConvertUtils } from '@vet-client/lib-utils'
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
@@ -9,7 +10,7 @@ import { DeleteDomainModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
 import {
   baseTableFormIsSelectedAction,
-  BaseTableFormRowModel,
+  BaseTableFormRowModel, BaseTableFormStoreModel,
   baseTableFormTabAction, baseTableFormUpdateSelectedRow,
 } from '@vet-client/lib-store'
 import { TableFormModel } from '../model/table-form.model'
@@ -23,24 +24,29 @@ import { TableFormTabEnum } from '../enum/table-form-tab.enum'
   hostDirectives: [BaseComponentDirective],
 })
 export class TableDataFormComponent<TFormModel, TDomainModel>
-implements OnInit {
+implements OnInit, OnDestroy {
+  private readonly sub: Subscription
+
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
-  @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
-  @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
-  @Input({ required: true }) store!: Store
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
-  @Input({ required: true }) allSelected!: boolean
+  // eslint-disable-next-line
+  @Input({ required: true }) store!: Store<any>;
+  @Input({ required: true }) select!: string
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel
   readonly deleteButtonModel: ControlButtonModel
   readonly editButtonModel: ControlButtonModel
 
+  rows!: BaseTableFormRowModel<TDomainModel>[]
+  allSelected!: boolean
+
   constructor(
     private baseForm: BaseFormBuilder,
     private textConvert: TextConvertUtils,
     private objectType: ObjectTypeUtils,
   ) {
+    this.sub = new Subscription()
     this.selectedButtonModel = this.baseForm
       .buildButtonIcon('checked', faSquareCheck, 'dark-secondary')
       .build()
@@ -56,7 +62,15 @@ implements OnInit {
   }
 
   ngOnInit() {
-    this.crudNotification.runNotificationRead()
+    this.crud.runNotificationRead()
+    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
+      this.rows = data.rows
+      this.allSelected = !data.rows.some(row => !row.isSelected) && data.rows.length > 0
+    }))
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
   getHeaderKeys() {
@@ -75,26 +89,36 @@ implements OnInit {
 
   onSelectAllEvent() {
     const ids = this.rows.map(row => row.id)
-    this.store.dispatch(baseTableFormIsSelectedAction({ ids, isSelected: true }))
+    this.store.dispatch(
+      baseTableFormIsSelectedAction({ ids, isSelected: true }),
+    )
   }
 
   onUnselectAllEvent() {
     const ids = this.rows.map(row => row.id)
-    this.store.dispatch(baseTableFormIsSelectedAction({ ids, isSelected: false }))
+    this.store.dispatch(
+      baseTableFormIsSelectedAction({ ids, isSelected: false }),
+    )
   }
 
   onSelectRowEvent(id: number) {
-    this.store.dispatch(baseTableFormIsSelectedAction({ ids: [id], isSelected: true }))
+    this.store.dispatch(
+      baseTableFormIsSelectedAction({ ids: [id], isSelected: true }),
+    )
   }
 
   onUnselectRowEvent(id: number) {
-    this.store.dispatch(baseTableFormIsSelectedAction({ ids: [id], isSelected: false }))
+    this.store.dispatch(
+      baseTableFormIsSelectedAction({ ids: [id], isSelected: false }),
+    )
   }
 
   onEditRowEvent(id: number) {
     const row = this.rows.find(row => row.id === id)
     if (row) {
-      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.update }))
+      this.store.dispatch(
+        baseTableFormTabAction()({ tab: TableFormTabEnum.update }),
+      )
       this.store.dispatch(baseTableFormUpdateSelectedRow()({ row: row }))
     }
   }
@@ -102,29 +126,4 @@ implements OnInit {
   onDeleteRowEvent(id: number) {
     this.crud.runNotificationDelete({ ids: [id] })
   }
-
-  // I am here
-  // @Output() selectAllEvent = new EventEmitter<number>()
-  // @Output() unselectAllEvent = new EventEmitter<number>()
-  // @Output() deleteEvent = new EventEmitter<number>()
-  // @Output() editSelectEvent = new EventEmitter<number>()
-  //
-  // @Input({ required: true }) headers!: string[]
-  // @Input({ required: true }) rows!: TableFormRowsModel<TRows>
-  //
-  // onSelectEvent(id: number) {
-  //   this.selectEvent.emit(id)
-  // }
-  //
-  // onUnselectEvent(id: number) {
-  //   this.unselectEvent.emit(id)
-  // }
-  //
-  // onDeleteEvent(id: number) {
-  //   this.deleteEvent.emit(id)
-  // }
-  //
-  // onEditSelectEvent(id: number) {
-  //   this.editSelectEvent.emit(id)
-  // }
 }

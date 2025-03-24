@@ -9,7 +9,6 @@ import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { ClinicNotification } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormModel } from '../table-form/model/table-form.model'
-import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-vet-clinic-form',
@@ -19,9 +18,6 @@ import { TableFormTabEnum } from '../table-form/enum/table-form-tab.enum'
 })
 export class VetClinicFormComponent {
   formModel: TableFormModel<ClinicFormModel>
-  rows!: BaseTableFormRowModel<ClinicDomainModel>[]
-  allSelected!: boolean
-  tab!: TableFormTabEnum
   selectedRow!: BaseTableFormRowModel<ClinicDomainModel>
 
   constructor(
@@ -77,9 +73,6 @@ export class VetClinicFormComponent {
         .build(),
     }
     this.store.select('clinicTableForm').subscribe((data) => {
-      this.rows = data.rows
-      this.allSelected = !data.rows.some(row => !row.isSelected) && data.rows.length > 0
-      this.tab = <TableFormTabEnum> data.tab
       if (data.selectedRow) {
         this.selectedRow = data.selectedRow
       }

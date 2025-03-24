@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
 
 import {
   BaseComponentDirective,
@@ -13,7 +14,7 @@ import { TableDataFormComponent } from './table-data-form/table-data-form.compon
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
 import { ClinicDomainModel, DeleteDomainModel } from '@vet-client/lib-domain'
-import { BaseTableFormRowModel, ClinicTableFormType } from '@vet-client/lib-store'
+import { BaseTableFormRowModel, BaseTableFormStoreModel } from '@vet-client/lib-store'
 import { TableUpdateFormComponent } from './table-update-form/table-update-form.component'
 
 @Component({
@@ -29,18 +30,21 @@ import { TableUpdateFormComponent } from './table-update-form/table-update-form.
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TFormModel, TDomainModel> {
+export class TableFormComponent<TFormModel, TDomainModel>
+implements OnInit, OnDestroy {
+  private readonly sub: Subscription
+
+  // eslint-disable-next-line
+  @Input({ required: true }) store!: Store<any>;
+  @Input({ required: true }) select!: string
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
   @Input({ required: true }) crudNotification!: CrudNotification<
     TDomainModel,
     DeleteDomainModel
   >
 
-  @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
-  @Input({ required: true }) store!: Store<ClinicTableFormType>
-  @Input({ required: true }) allSelected!: boolean
-  @Input({ required: true }) tab!: TableFormTabEnum
   @Input({ required: true }) selectedRow!: BaseTableFormRowModel<ClinicDomainModel>
+
   @Input({ required: true }) crud!: CrudNotification<
     TDomainModel,
     DeleteDomainModel
@@ -51,6 +55,22 @@ export class TableFormComponent<TFormModel, TDomainModel> {
   @Input() deleteButtonEnabled = true
   @Input() refreshButtonEnabled = true
   @Input() searchButtonEnabled = true
+
+  tab!: TableFormTabEnum
+
+  constructor() {
+    this.sub = new Subscription()
+  }
+
+  ngOnInit() {
+    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
+      this.tab = <TableFormTabEnum> data.tab
+    }))
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
 
   onTableNavRefreshEvent() {
     //

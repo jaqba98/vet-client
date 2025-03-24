@@ -1,7 +1,6 @@
 <lib-table-panel-control [isPaginator]="isPaginator()">
   <ng-container nav>
     <lib-table-nav-form
-      [rows]="rows"
       [store]="store"
       [crud]="crud"
       [tableButtonEnabled]="tableButtonEnabled"
@@ -17,15 +16,13 @@
       <ng-container *ngSwitchCase="'table'">
         <lib-table-data-form
           [formModel]="formModel"
-          [crudNotification]="crudNotification"
-          [rows]="rows"
+          [crud]="crudNotification"
           [store]="store"
-          [allSelected]="allSelected"
-          [crud]="crud"
+          [select]="select"
         ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'create'">
-        <lib-table-create-form [formModel]="formModel" [crudNotification]="crudNotification"></lib-table-create-form>
+        <lib-table-create-form [formModel]="formModel" [crud]="crudNotification"></lib-table-create-form>
       </ng-container>
       <ng-container *ngSwitchCase="'update'">
         <lib-table-update-form

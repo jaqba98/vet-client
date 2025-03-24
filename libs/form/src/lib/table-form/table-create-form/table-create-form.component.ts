@@ -16,14 +16,14 @@ export class TableCreateFormComponent<TFormModel, TDomainModel>
   extends BaseFormService<TableFormModel<TFormModel>, TDomainModel>
   implements OnInit, OnDestroy {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
-  @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
+  @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
 
   constructor() {
     super()
   }
 
   ngOnInit() {
-    this.onInit('Create', this.crudNotification.responseCreate$)
+    this.onInit('Create', this.crud.responseCreate$)
     this.initBaseForm(this.formModel)
   }
 
@@ -32,6 +32,6 @@ export class TableCreateFormComponent<TFormModel, TDomainModel>
   }
 
   override onSubmit(domain: TDomainModel) {
-    this.crudNotification.runNotificationCreate(domain)
+    this.crud.runNotificationCreate(domain)
   }
 }

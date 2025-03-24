@@ -7,7 +7,6 @@ import { DeleteDomainModel, TableNavDomainModel, TableNavFormModel } from '@vet-
 import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 import { Store } from '@ngrx/store'
 import { BaseTableFormRowModel, baseTableFormTabAction } from '@vet-client/lib-store'
-import { ClinicNotification } from '@vet-client/lib-http'
 
 @Component({
   selector: 'lib-table-nav-form',
@@ -20,7 +19,6 @@ export class TableNavFormComponent<TDomainModel>
   implements OnInit, OnDestroy {
   @Output() tableNavRefreshEvent = new EventEmitter()
 
-  @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
   @Input({ required: true }) store!: Store
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) tableButtonEnabled = true
@@ -28,6 +26,8 @@ export class TableNavFormComponent<TDomainModel>
   @Input({ required: true }) deleteButtonEnabled = true
   @Input({ required: true }) refreshButtonEnabled = true
   @Input({ required: true }) searchButtonEnabled = true
+
+  rows!: BaseTableFormRowModel<TDomainModel>[]
 
   constructor(private baseForm: BaseFormBuilder) {
     super()
