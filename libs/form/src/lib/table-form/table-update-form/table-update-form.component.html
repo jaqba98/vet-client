@@ -1,10 +1,9 @@
-<lib-table-card-control title="Edit">
+<lib-table-card-control [title]="title">
   <lib-base-form
     [formGroup]="formGroup"
     [controls]="controlsArray"
-    [success]="editSuccess"
-    [error]="editError"
-    [resetForm]="false"
+    [success]="success"
+    [error]="error"
     (dataEvent)="onSubmit($event)"
   ></lib-base-form>
 </lib-table-card-control>

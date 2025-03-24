@@ -74,6 +74,13 @@ export class BaseFormService<TFormModel, TDomainModel> {
       .map(([key, value]) => ({ name: key, model: value }))
   }
 
+  setControlValues(columns: [string, string | number][]) {
+    columns.forEach(([key, value]) => {
+      console.log(key, value)
+      this.formGroup.get(key)?.setValue(value)
+    })
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onSubmit(domain: TDomainModel) {
     throw new Error('Unimplemented method name!')

@@ -7,9 +7,13 @@ import { BaseComponentDirective, CrudNotification, ObjectTypeUtils, TextConvertU
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
-import { baseTableFormIsSelectedAction, BaseTableFormRowModel } from '@vet-client/lib-store'
-import { ClinicNotification } from '@vet-client/lib-http'
+import {
+  baseTableFormIsSelectedAction,
+  BaseTableFormRowModel,
+  baseTableFormTabAction, baseTableFormUpdateSelectedRow,
+} from '@vet-client/lib-store'
 import { TableFormModel } from '../model/table-form.model'
+import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -88,7 +92,11 @@ implements OnInit {
   }
 
   onEditRowEvent(id: number) {
-    console.log(id)
+    const row = this.rows.find(row => row.id === id)
+    if (row) {
+      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.update }))
+      this.store.dispatch(baseTableFormUpdateSelectedRow()({ row: row }))
+    }
   }
 
   onDeleteRowEvent(id: number) {

@@ -27,6 +27,14 @@
       <ng-container *ngSwitchCase="'create'">
         <lib-table-create-form [formModel]="formModel" [crudNotification]="crudNotification"></lib-table-create-form>
       </ng-container>
+      <ng-container *ngSwitchCase="'update'">
+        <lib-table-update-form
+          [formModel]="formModel"
+          [crudNotification]="crudNotification"
+          [selectedRow]="selectedRow"
+          [store]="store"
+        ></lib-table-update-form>
+      </ng-container>
     </ng-container>
   </ng-container>
   <ng-container paginator>
@@ -47,15 +55,6 @@
 <!--          (unselectEvent)="onUnselectEvent($event)"-->
 <!--          (editSelectEvent)="onEditSelectEvent($event)"-->
 <!--        ></lib-table-data-form>-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngSwitchCase="'update'">-->
-<!--        <lib-table-edit-form-->
-<!--          [formModel]="formModel"-->
-<!--          [editSuccess]="editSuccess"-->
-<!--          [editError]="editError"-->
-<!--          [selectedClinic]="selectedClinic"-->
-<!--          (updateEvent)="onUpdateEvent($event)"-->
-<!--        ></lib-table-edit-form>-->
 <!--      </ng-container>-->
 <!--      <ng-container *ngSwitchCase="'search'">-->
 <!--        <p>search</p>-->

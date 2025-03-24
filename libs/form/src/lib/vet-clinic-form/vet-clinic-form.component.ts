@@ -22,6 +22,7 @@ export class VetClinicFormComponent {
   rows!: BaseTableFormRowModel<ClinicDomainModel>[]
   allSelected!: boolean
   tab!: TableFormTabEnum
+  selectedRow!: BaseTableFormRowModel<ClinicDomainModel>
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -30,6 +31,10 @@ export class VetClinicFormComponent {
     public clinic: ClinicNotification,
   ) {
     this.formModel = {
+      id: this.baseForm
+        .buildInput('text', 'Id')
+        .buildIsEnabled(false)
+        .build(),
       name: this.baseForm
         .buildInput('text', 'Name')
         .buildValidators([Validators.required, Validators.maxLength(150)])
@@ -75,6 +80,9 @@ export class VetClinicFormComponent {
       this.rows = data.rows
       this.allSelected = !data.rows.some(row => !row.isSelected) && data.rows.length > 0
       this.tab = <TableFormTabEnum> data.tab
+      if (data.selectedRow) {
+        this.selectedRow = data.selectedRow
+      }
     })
   }
 

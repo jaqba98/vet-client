@@ -9,4 +9,5 @@ export interface BaseTableFormStoreModel<TRow> {
   page: number
   maxPage: number
   tab: string
+  selectedRow?: BaseTableFormRowModel<TRow>
 }

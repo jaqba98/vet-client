@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { BaseTableFormStoreModel } from '../../model/base/base-table-form-store.model'
+import { BaseTableFormRowModel, BaseTableFormStoreModel } from '../../model/base/base-table-form-store.model'
 
 export const baseTableFormCreateAction = <TRow>() => createAction(
   '[Base Table Form] Create Action', props<BaseTableFormStoreModel<TRow>>(),
@@ -15,4 +15,12 @@ export const baseTableFormDeleteAction = createAction(
 
 export const baseTableFormTabAction = <TRow>() => createAction(
   '[Base Table Form] Tab Action', props<Pick<BaseTableFormStoreModel<TRow>, 'tab'>>(),
+)
+
+export const baseTableFormUpdateRow = <TRow>() => createAction(
+  '[Base Table Form] Update Row Action', props<{ row: BaseTableFormRowModel<TRow> }>(),
+)
+
+export const baseTableFormUpdateSelectedRow = <TRow>() => createAction(
+  '[Base Table Form] Update Row Selected Action', props<{ row: BaseTableFormRowModel<TRow> }>(),
 )

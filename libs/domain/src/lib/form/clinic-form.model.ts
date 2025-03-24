@@ -1,6 +1,7 @@
 import { ControlInputModel } from '@vet-client/lib-base-form'
 
 export interface ClinicFormModel {
+  id: ControlInputModel
   name: ControlInputModel
   street: ControlInputModel
   buildingNumber: ControlInputModel

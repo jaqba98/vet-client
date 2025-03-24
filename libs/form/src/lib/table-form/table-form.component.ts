@@ -12,8 +12,9 @@ import { TableFormTabEnum } from './enum/table-form-tab.enum'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TableCreateFormComponent } from './table-create-form/table-create-form.component'
-import { DeleteDomainModel } from '@vet-client/lib-domain'
-import { BaseTableFormRowModel } from '@vet-client/lib-store'
+import { ClinicDomainModel, DeleteDomainModel } from '@vet-client/lib-domain'
+import { BaseTableFormRowModel, ClinicTableFormType } from '@vet-client/lib-store'
+import { TableUpdateFormComponent } from './table-update-form/table-update-form.component'
 
 @Component({
   selector: 'lib-table-form',
@@ -23,18 +24,27 @@ import { BaseTableFormRowModel } from '@vet-client/lib-store'
     TableDataFormComponent,
     TableNavFormComponent,
     TableCreateFormComponent,
+    TableUpdateFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
 export class TableFormComponent<TFormModel, TDomainModel> {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
-  @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
+  @Input({ required: true }) crudNotification!: CrudNotification<
+    TDomainModel,
+    DeleteDomainModel
+  >
+
   @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
-  @Input({ required: true }) store!: Store
+  @Input({ required: true }) store!: Store<ClinicTableFormType>
   @Input({ required: true }) allSelected!: boolean
   @Input({ required: true }) tab!: TableFormTabEnum
-  @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
+  @Input({ required: true }) selectedRow!: BaseTableFormRowModel<ClinicDomainModel>
+  @Input({ required: true }) crud!: CrudNotification<
+    TDomainModel,
+    DeleteDomainModel
+  >
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true
