@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store'
 
 import { ClinicDomainModel, DeleteDomainModel } from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
-import { baseTableFormCreateAction, ClinicTableFormType } from '@vet-client/lib-store'
+import { baseTableFormCreateAction, baseTableFormDeleteAction, ClinicTableFormType } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { ClinicRequestDtoModel } from '../../model/request/controller/clinic-request-dto.model'
 import { ResponseDtoModel } from '../../model/response/response-dto.model'
@@ -86,6 +86,13 @@ export class ClinicHttpPostService {
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicDelete, request },
       })
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map(() => {
+          domain.ids.forEach((id) => {
+            this.store.dispatch(baseTableFormDeleteAction({ id }))
+          })
+        }),
+      )
   }
 }

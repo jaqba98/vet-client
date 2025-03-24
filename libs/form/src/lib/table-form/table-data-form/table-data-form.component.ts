@@ -7,8 +7,9 @@ import { BaseComponentDirective, CrudNotification, ObjectTypeUtils, TextConvertU
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
-import { TableFormModel } from '../model/table-form.model'
 import { baseTableFormDeleteAction, baseTableFormIsSelectedAction, BaseTableFormRowModel } from '@vet-client/lib-store'
+import { ClinicNotification } from '@vet-client/lib-http'
+import { TableFormModel } from '../model/table-form.model'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -32,6 +33,7 @@ implements OnInit {
     private baseForm: BaseFormBuilder,
     private textConvert: TextConvertUtils,
     private objectType: ObjectTypeUtils,
+    private clinic: ClinicNotification,
   ) {
     this.selectedButtonModel = this.baseForm
       .buildButtonIcon('checked', faSquareCheck, 'dark-secondary')
@@ -71,7 +73,7 @@ implements OnInit {
   }
 
   onDeleteEvent(id: number) {
-    this.store.dispatch(baseTableFormDeleteAction({ id }))
+    this.clinic.runNotificationDelete({ ids: [id] })
   }
 
   // I am here
