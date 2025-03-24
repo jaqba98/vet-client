@@ -1,18 +1,36 @@
 @use 'libs/scss/src/base/colors';
-@use 'libs/scss/src/abstracts/variables';
 
 .wrapper {
   overflow: auto;
-  margin: -1px -1px -1px -1px;
+  overflow-y: hidden;
+  margin: -1px 0 -1px -1px;
+  height: 100%;
 }
 
 .table {
-  display: block;
   border-collapse: collapse;
   table-layout: fixed;
-  overflow: auto;
+
+  &__select {
+    position: sticky;
+    left: 0;
+    background-color: colors.$color-surface;
+  }
+
+  &__edit {
+    position: sticky;
+    right: 60px;
+    background-color: colors.$color-surface;
+  }
+
+  &__delete {
+    position: sticky;
+    right: 0;
+    background-color: colors.$color-surface;
+  }
 
   &__row {
+    height: 60px;
     display: flex;
 
     &--head {
@@ -21,8 +39,7 @@
   }
 
   &__column {
-    flex: 1;
-    min-width: 200px;
+    min-width: 150px;
     padding: 0.5rem;
     border: 1px solid colors.$color-border;
     display: flex;

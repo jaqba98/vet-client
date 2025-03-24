@@ -1,21 +1,37 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { faPenToSquare, faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Subscription } from 'rxjs'
+import {
+  faPenToSquare,
+  faSquare,
+  faSquareCheck,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons'
 
-import { BaseComponentDirective, CrudNotification, ObjectTypeUtils, TextConvertUtils } from '@vet-client/lib-utils'
-import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
+import {
+  ButtonControlComponent,
+  TextControlComponent,
+} from '@vet-client/lib-control'
+import {
+  BaseComponentDirective,
+  CrudNotification,
+  ObjectTypeUtils,
+  TextConvertUtils,
+} from '@vet-client/lib-utils'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
-import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
 import {
   baseTableFormIsSelectedAction,
-  BaseTableFormRowModel, BaseTableFormStoreModel,
-  baseTableFormTabAction, baseTableFormUpdateSelectedRow,
+  BaseTableFormRowModel,
+  BaseTableFormStoreModel,
+  baseTableFormTabAction,
+  baseTableFormUpdateSelectedRow,
 } from '@vet-client/lib-store'
-import { TableFormModel } from '../model/table-form.model'
-import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
+import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
+import { TableFormModel } from '../model/table-form.model'
+import { TableFormStoreModel } from '../model/table-form-store.model'
+import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -26,12 +42,9 @@ import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 })
 export class TableDataFormComponent<TFormModel, TDomainModel>
 implements OnInit, OnDestroy {
-  private readonly sub: Subscription
-
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
-  // eslint-disable-next-line
-  @Input({ required: true }) store!: Store<any>;
+  @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string
 
   readonly selectedButtonModel: ControlButtonModel
@@ -41,6 +54,8 @@ implements OnInit, OnDestroy {
 
   rows!: BaseTableFormRowModel<TDomainModel>[]
   allSelected!: boolean
+
+  private readonly sub: Subscription
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -79,47 +94,39 @@ implements OnInit, OnDestroy {
   }
 
   getHeaders() {
-    return this.getHeaderKeys().map(header =>
-      this.textConvert.camelToPascalWithSpaces(header),
-    )
+    return this.getHeaderKeys().map(header => this.textConvert.camelToPascalWithSpaces(header))
   }
 
   getColumn(row: TDomainModel, header: string) {
     return this.objectType.getPropertyByDynamicKey(row, header)
   }
 
+  getRemainRows() {
+    return new Array(10 - this.rows.length + 1)
+  }
+
   onSelectAllEvent() {
     const ids = this.rows.map(row => row.id)
-    this.store.dispatch(
-      baseTableFormIsSelectedAction({ ids, isSelected: true }),
-    )
+    this.store.dispatch(baseTableFormIsSelectedAction({ ids, isSelected: true }))
   }
 
   onUnselectAllEvent() {
     const ids = this.rows.map(row => row.id)
-    this.store.dispatch(
-      baseTableFormIsSelectedAction({ ids, isSelected: false }),
-    )
+    this.store.dispatch(baseTableFormIsSelectedAction({ ids, isSelected: false }))
   }
 
   onSelectRowEvent(id: number) {
-    this.store.dispatch(
-      baseTableFormIsSelectedAction({ ids: [id], isSelected: true }),
-    )
+    this.store.dispatch(baseTableFormIsSelectedAction({ ids: [id], isSelected: true }))
   }
 
   onUnselectRowEvent(id: number) {
-    this.store.dispatch(
-      baseTableFormIsSelectedAction({ ids: [id], isSelected: false }),
-    )
+    this.store.dispatch(baseTableFormIsSelectedAction({ ids: [id], isSelected: false }))
   }
 
   onEditRowEvent(id: number) {
     const row = this.rows.find(row => row.id === id)
     if (row) {
-      this.store.dispatch(
-        baseTableFormTabAction()({ tab: TableFormTabEnum.update }),
-      )
+      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.update }))
       this.store.dispatch(baseTableFormUpdateSelectedRow()({ row: row }))
     }
   }
