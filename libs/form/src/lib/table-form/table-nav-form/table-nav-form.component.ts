@@ -21,11 +21,11 @@ export class TableNavFormComponent<TDomainModel>
 
   @Input({ required: true }) store!: Store
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
-  @Input({ required: true }) tableButtonEnabled = true
-  @Input({ required: true }) createButtonEnabled = true
-  @Input({ required: true }) deleteButtonEnabled = true
-  @Input({ required: true }) refreshButtonEnabled = true
-  @Input({ required: true }) searchButtonEnabled = true
+  @Input({ required: false }) tableButtonEnabled = true
+  @Input({ required: false }) createButtonEnabled = true
+  @Input({ required: false }) deleteButtonEnabled = true
+  @Input({ required: false }) refreshButtonEnabled = true
+  @Input({ required: false }) searchButtonEnabled = true
 
   rows!: BaseTableFormRowModel<TDomainModel>[]
 

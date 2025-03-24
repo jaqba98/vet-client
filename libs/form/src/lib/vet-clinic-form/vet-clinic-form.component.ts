@@ -1,10 +1,10 @@
 import { Component } from '@angular/core'
-import { Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
+import { Validators } from '@angular/forms'
 
-import { BaseTableFormRowModel, ClinicTableFormType } from '@vet-client/lib-store'
+import { ClinicTableFormType } from '@vet-client/lib-store'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ClinicDomainModel, ClinicFormModel } from '@vet-client/lib-domain'
+import { ClinicFormModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { ClinicNotification } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
@@ -18,13 +18,11 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 })
 export class VetClinicFormComponent {
   formModel: TableFormModel<ClinicFormModel>
-  selectedRow!: BaseTableFormRowModel<ClinicDomainModel>
 
   constructor(
     private baseForm: BaseFormBuilder,
     public store: Store<ClinicTableFormType>,
-    public clinicNotification: ClinicNotification,
-    public clinic: ClinicNotification,
+    public crud: ClinicNotification,
   ) {
     this.formModel = {
       id: this.baseForm
@@ -72,176 +70,5 @@ export class VetClinicFormComponent {
         .buildValidators([Validators.required, Validators.maxLength(20)])
         .build(),
     }
-    this.store.select('clinicTableForm').subscribe((data) => {
-      if (data.selectedRow) {
-        this.selectedRow = data.selectedRow
-      }
-    })
   }
-
-  // I am here
-  // private readonly sub: Subscription
-  // page = 1
-  // maxPage = 1
-  // tab = TableFormTabEnum.table
-  // clinics: ClinicTableModel[] = []
-  // allClinics: ClinicTableModel[] = []
-  // createSuccess = ''
-  // createError = ''
-  // editSuccess = ''
-  // editError = ''
-  // allSelected = false
-  // selectedClinic!: ClinicTableModel
-  //
-  // constructor(
-  //   private readonly route: ActivatedRoute,
-  //   private readonly router: Router,
-  //   private readonly clinicDomainDataCreateNotification: ClinicDomainDataCreateNotification,
-  //   private readonly clinicDomainDataReadNotification: ClinicDomainDataReadNotification,
-  //   private readonly clinicDomainDataDeleteNotification: ClinicDomainDataDeleteNotification,
-  //   private readonly clinicDomainDataUpdateNotification: ClinicDomainDataUpdateNotification,
-  //   private readonly dataStore: Store<ClinicDomainDataType>,
-  //   private readonly responseStore: Store<ClinicDomainResponseType>,
-  //   private baseForm: BaseFormBuilder,
-  // ) {
-  //   this.sub = new Subscription()
-  // }
-  //
-  // ngOnInit() {
-  //   this.sub.add(this.route.paramMap.subscribe(async (paramMap) => {
-  //     const page = Number(paramMap.get('page'))
-  //     if (!page) {
-  //       await this.router.navigate(['dashboard/vet/clinic/1'])
-  //       this.dataStore.dispatch(clinicDomainDataPageAction({ page: 1 }))
-  //     }
-  //     else {
-  //       this.dataStore.dispatch(clinicDomainDataPageAction({ page }))
-  //     }
-  //   }))
-  //   this.sub.add(this.responseStore.select('clinicDomainResponse').pipe(skip(1)).subscribe((response) => {
-  //     this.createSuccess = ''
-  //     this.createError = ''
-  //     if (response.createResponse.success) this.createSuccess = response.createResponse.message
-  //     else this.createError = response.createResponse.message
-  //   }))
-  //   this.sub.add(this.dataStore.select(selectClinicDomainDataPage).pipe(take(1)).subscribe(async (page) => {
-  //     this.page = page
-  //     this.clinicDomainDataReadNotification.runNotification()
-  //   }))
-  //   // this.sub.add(this.dataStore.select(selectClinicDomainDataPage).pipe(
-  //   //   skip(1),
-  //   //   withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
-  //   // ).subscribe(async ([page, clinics]) => {
-  //   //   this.page = page
-  //   //   this.selectClinics(clinics)
-  //   // }))
-  //   // this.sub.add(this.dataStore.select(selectClinicDomainDataClinics).pipe(skip(1)).subscribe((clinics) => {
-  //   //   this.selectClinics(clinics)
-  //   // }))
-  //   this.sub.add(this.dataStore.select(selectClinicDomainDataMaxPage).pipe(skip(1)).subscribe(async (maxPage) => {
-  //     this.maxPage = maxPage
-  //     if (this.page < 1) {
-  //       await this.router.navigate(['dashboard/vet/clinic/1'])
-  //     }
-  //     else if (this.page > this.maxPage) {
-  //       await this.router.navigate(['dashboard/vet/clinic/' + this.maxPage])
-  //     }
-  //   }))
-  //   this.sub.add(this.dataStore.select(selectClinicDomainDataTab).subscribe((tab) => {
-  //     this.tab = tab as TableFormTabEnum
-  //   }))
-  //   // this.sub.add(this.dataStore.select(selectClinicDomainDataSelectedClinic).subscribe((selectedClinic) => {
-  //   //   if (selectedClinic)
-  //   //     this.selectedClinic = selectedClinic
-  //   // }))
-  // }
-  //
-  // ngOnDestroy() {
-  //   this.sub.unsubscribe()
-  // }
-  //
-  // onTablePaginatorEvent(page: number) {
-  //   this.dataStore.dispatch(clinicDomainDataPageAction({ page }))
-  //   this.router.navigate(['dashboard/vet/clinic/' + page])
-  // }
-  //
-  // onTableNavEvent(tab: TableFormTabEnum) {
-  //   this.dataStore.dispatch(clinicDomainDataTabAction({ tab }))
-  // }
-  //
-  // onDeleteEvent(id: number) {
-  //   this.clinicDomainDataDeleteNotification.runNotification([id])
-  // }
-  //
-  // onCreateEvent(model: ClinicTableModel) {
-  //   this.clinicDomainDataCreateNotification.runNotification(model)
-  // }
-  //
-  // onSelectEvent(id: number) {
-  //   this.dataStore.dispatch(clinicDomainDataSelectAction({ id, isSelected: true }))
-  // }
-  //
-  // onUnselectEvent(id: number) {
-  //   this.dataStore.dispatch(clinicDomainDataSelectAction({ id, isSelected: false }))
-  // }
-  //
-  // onDeleteSelectedEvent() {
-  //   // of(true).pipe(
-  //   //   take(1),
-  //   //   withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
-  //   //   map(([, clinics]) => clinics.filter(clinic => clinic.isSelected)),
-  //   //   map(clinics => clinics.map(clinic => clinic.id)),
-  //   //   map(ids => this.clinicDomainDataDeleteNotification.runNotification(ids)),
-  //   // ).subscribe()
-  // }
-  //
-  // onSelectAllEvent() {
-  //   of(this.clinics).pipe(
-  //     take(1),
-  //     map(clinics => clinics.map(clinic => clinic.id)),
-  //   ).subscribe((clinics) => {
-  //     clinics.forEach((id) => {
-  //       this.dataStore.dispatch(clinicDomainDataSelectAction({ id, isSelected: true }))
-  //     })
-  //   })
-  // }
-  //
-  // onUnselectAllEvent() {
-  //   of(this.clinics).pipe(
-  //     take(1),
-  //     map(clinics => clinics.map(clinic => clinic.id)),
-  //   ).subscribe((clinics) => {
-  //     clinics.forEach((id) => {
-  //       this.dataStore.dispatch(clinicDomainDataSelectAction({ id, isSelected: false }))
-  //     })
-  //   })
-  // }
-  //
-  // onRefreshEvent() {
-  //   //
-  // }
-  //
-  // onEditSelectEvent(id: number) {
-  //   // of(true).pipe(
-  //   //   take(1),
-  //   //   withLatestFrom(this.dataStore.select(selectClinicDomainDataClinics)),
-  //   //   map(([, clinics]) => clinics.find(clinic => clinic.id === id)),
-  //   //   map((clinic) => {
-  //   //     this.dataStore.dispatch(clinicDomainDataSelectedClinicAction({ selectedClinic: clinic }))
-  //   //   }),
-  //   //   map(() => this.dataStore.dispatch(clinicDomainDataTabAction({ tab: TableFormTabEnum.update }))),
-  //   // ).subscribe()
-  // }
-  //
-  // onUpdateEvent(model: ClinicTableModel['domain']) {
-  //   this.clinicDomainDataUpdateNotification.runNotification({ ...model })
-  // }
-  //
-  // private selectClinics(clinics: ClinicTableModel[]) {
-  //   const firstItem = (this.page - 1) * NUMBER_OF_ROWS_PER_PAGE
-  //   const lastItem = firstItem + NUMBER_OF_ROWS_PER_PAGE
-  //   this.clinics = clinics.filter((_, index) => index >= firstItem && index < lastItem)
-  //   this.allSelected = this.clinics.length === 0 ? false : !this.clinics.find(clinic => !clinic.isSelected)
-  //   this.dataStore.dispatch(clinicDomainDataMaxPageAction())
-  // }
 }

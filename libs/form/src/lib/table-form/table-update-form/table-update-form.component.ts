@@ -3,9 +3,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, CrudNotification } from '@vet-client/lib-utils'
-import { ClinicDomainModel, DeleteDomainModel } from '@vet-client/lib-domain'
+import { DeleteDomainModel } from '@vet-client/lib-domain'
 import { TableFormModel } from '../model/table-form.model'
-import { BaseTableFormRowModel, ClinicTableFormType } from '@vet-client/lib-store'
+import { ClinicTableFormType } from '@vet-client/lib-store'
 import { Store } from '@ngrx/store'
 
 @Component({
@@ -19,7 +19,6 @@ export class TableUpdateFormComponent<TFormModel, TDomainModel>
   implements OnInit, OnDestroy {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
   @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
-  @Input({ required: true }) selectedRow!: BaseTableFormRowModel<ClinicDomainModel>
   @Input({ required: true }) store!: Store<ClinicTableFormType>
 
   constructor() {

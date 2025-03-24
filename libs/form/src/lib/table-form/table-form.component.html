@@ -1,34 +1,24 @@
 <lib-table-panel-control [isPaginator]="isPaginator()">
   <ng-container nav>
-    <lib-table-nav-form
-      [store]="store"
-      [crud]="crud"
-      [tableButtonEnabled]="tableButtonEnabled"
-      [createButtonEnabled]="createButtonEnabled"
-      [deleteButtonEnabled]="deleteButtonEnabled"
-      [refreshButtonEnabled]="refreshButtonEnabled"
-      [searchButtonEnabled]="searchButtonEnabled"
-      (tableNavRefreshEvent)="onTableNavRefreshEvent()"
-    ></lib-table-nav-form>
+    <lib-table-nav-form [store]="store" [crud]="crud"></lib-table-nav-form>
   </ng-container>
   <ng-container content>
     <ng-container [ngSwitch]="tab">
       <ng-container *ngSwitchCase="'table'">
         <lib-table-data-form
           [formModel]="formModel"
-          [crud]="crudNotification"
+          [crud]="crud"
           [store]="store"
           [select]="select"
         ></lib-table-data-form>
       </ng-container>
       <ng-container *ngSwitchCase="'create'">
-        <lib-table-create-form [formModel]="formModel" [crud]="crudNotification"></lib-table-create-form>
+        <lib-table-create-form [formModel]="formModel" [crud]="crud"></lib-table-create-form>
       </ng-container>
       <ng-container *ngSwitchCase="'update'">
         <lib-table-update-form
           [formModel]="formModel"
-          [crudNotification]="crudNotification"
-          [selectedRow]="selectedRow"
+          [crudNotification]="crud"
           [store]="store"
         ></lib-table-update-form>
       </ng-container>
@@ -38,35 +28,3 @@
     <p>paginator</p>
   </ng-container>
 </lib-table-panel-control>
-
-<!--  <ng-container content>-->
-<!--    <ng-container [ngSwitch]="tab">-->
-<!--      <ng-container *ngSwitchCase="'table'">-->
-<!--        <lib-table-data-form-->
-<!--          [rows]="rows"-->
-<!--          [allSelected]="allSelected"-->
-<!--          (selectAllEvent)="onSelectAllEvent()"-->
-<!--          (unselectAllEvent)="onUnselectAllEvent()"-->
-<!--          (deleteEvent)="onDeleteEvent($event)"-->
-<!--          (selectEvent)="onSelectEvent($event)"-->
-<!--          (unselectEvent)="onUnselectEvent($event)"-->
-<!--          (editSelectEvent)="onEditSelectEvent($event)"-->
-<!--        ></lib-table-data-form>-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngSwitchCase="'search'">-->
-<!--        <p>search</p>-->
-<!--&lt;!&ndash;        <lib-table-edit-form [dispatchTab]="dispatchTab" [formModel]="formModel"></lib-table-edit-form>&ndash;&gt;-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngSwitchDefault>-->
-<!--        <p>default</p>-->
-<!--      </ng-container>-->
-<!--    </ng-container>-->
-<!--  </ng-container>-->
-
-<!--  <ng-container paginator>-->
-<!--    <lib-table-paginator-form-->
-<!--      [page]="page"-->
-<!--      [maxPage]="maxPage"-->
-<!--      (tablePaginatorEvent)="onTablePaginatorEvent($event)"-->
-<!--    ></lib-table-paginator-form>-->
-<!--  </ng-container>-->
