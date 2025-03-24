@@ -1,19 +1,22 @@
-// done
-import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { ActivatedRoute, Router } from '@angular/router'
 import {
   faBackward,
   faBackwardFast,
-  faForward,
-  faForwardFast,
+  faForward, faForwardFast,
 } from '@fortawesome/free-solid-svg-icons'
+import { Subscription, take } from 'rxjs'
 
-import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
+import { baseTableFormPageAction, BaseTableFormStoreModel } from '@vet-client/lib-store'
 import {
-  BaseFormBuilder,
-  ControlButtonModel,
-} from '@vet-client/lib-base-form'
+  ButtonControlComponent,
+  TextControlComponent,
+} from '@vet-client/lib-control'
+import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
+import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { TableFormStoreModel } from '../model/table-form-store.model'
 
 @Component({
   selector: 'lib-table-paginator-form',
@@ -22,63 +25,98 @@ import {
   styleUrl: './table-paginator-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TablePaginatorFormComponent {
-  @Output() tablePaginatorOnInitEvent = new EventEmitter()
-  @Output() tablePaginatorEvent = new EventEmitter<number>()
+export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDestroy {
+  @Input({ required: true }) select!: string
+  @Input({ required: true }) store!: Store<TableFormStoreModel>
+  @Input({ required: true }) path!: string
 
-  @Input({ required: true }) page!: number
-  @Input({ required: true }) maxPage!: number
+  page!: number
+  maxPage!: number
 
   readonly first: ControlButtonModel
   readonly previous: ControlButtonModel
   readonly next: ControlButtonModel
   readonly last: ControlButtonModel
 
+  private readonly sub: Subscription
+
   constructor(
-    private readonly controlButton: BaseFormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
     private baseForm: BaseFormBuilder,
   ) {
-    this.first = <ControlButtonModel> this.baseForm
+    this.sub = new Subscription()
+    this.first = <ControlButtonModel>(this.baseForm
       .buildButtonIcon('first', faBackwardFast, 'dark-secondary')
-      .build()
-    this.previous = <ControlButtonModel> this.baseForm
+      .build())
+    this.previous = <ControlButtonModel>(this.baseForm
       .buildButtonIcon('previous', faBackward, 'dark-secondary')
-      .build()
-    this.next = <ControlButtonModel> this.baseForm
+      .build())
+    this.next = <ControlButtonModel>(this.baseForm
       .buildButtonIcon('next', faForward, 'dark-secondary')
-      .build()
-    this.last = <ControlButtonModel> this.baseForm
+      .build())
+    this.last = <ControlButtonModel>(this.baseForm
       .buildButtonIcon('last', faForwardFast, 'dark-secondary')
-      .build()
+      .build())
+  }
+
+  ngOnInit() {
+    this.sub.add(this.route.paramMap.pipe(take(1)).subscribe(async (paramMap) => {
+      const page = Number(paramMap.get('page'))
+      if (!page) {
+        await this.router.navigate([`${this.path}/1`])
+        this.store.dispatch(baseTableFormPageAction({ page: 1 }))
+      }
+      else {
+        this.store.dispatch(baseTableFormPageAction({ page }))
+      }
+    }))
+    this.sub.add(this.store.select(this.select).subscribe(async (data: BaseTableFormStoreModel<TDomainModel>) => {
+      this.page = data.page
+      this.maxPage = data.maxPage
+      if (this.page < 1) {
+        await this.router.navigate([`${this.path}/1`])
+      }
+      else if (this.page > this.maxPage) {
+        await this.router.navigate([`${this.path}/${this.maxPage}`])
+      }
+      else {
+        await this.router.navigate([`${this.path}/${this.page}`])
+      }
+    }))
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
   onFirstPageEvent() {
     if (this.page !== 1) {
-      this.tablePaginatorEvent.emit(1)
+      this.store.dispatch(baseTableFormPageAction({ page: 1 }))
     }
   }
 
   onPreviousPageEvent() {
     if (this.page > 1) {
-      this.tablePaginatorEvent.emit(this.page - 1)
+      this.store.dispatch(baseTableFormPageAction({ page: this.page - 1 }))
     }
   }
 
   onSpecificPageEvent(id: string) {
     if (this.page >= 1 && this.page <= this.maxPage) {
-      this.tablePaginatorEvent.emit(Number(id))
+      this.store.dispatch(baseTableFormPageAction({ page: Number(id) }))
     }
   }
 
   onNextPageEvent() {
     if (this.page < this.maxPage) {
-      this.tablePaginatorEvent.emit(this.page + 1)
+      this.store.dispatch(baseTableFormPageAction({ page: this.page + 1 }))
     }
   }
 
   onLastPageEvent() {
     if (this.page !== this.maxPage) {
-      this.tablePaginatorEvent.emit(this.maxPage)
+      this.store.dispatch(baseTableFormPageAction({ page: this.maxPage }))
     }
   }
 
@@ -103,19 +141,19 @@ export class TablePaginatorFormComponent {
         break
       }
     }
-    const sortedPages = Array.from(pages).sort()
+    const sortedPages = Array.from(pages).sort((a, b) => a - b)
     sortedPages.forEach((index: number) => {
       const id = index.toString()
       if (index === this.page) {
-        const control = <ControlButtonModel> this.baseForm
-          .buildButton(id, id, 'primary')
-          .build()
+        const control = <ControlButtonModel>(
+          this.baseForm.buildButton(id, id, 'primary').build()
+        )
         controls.push(control)
       }
       else {
-        const control = <ControlButtonModel> this.baseForm
-          .buildButton(id, id, 'dark-secondary')
-          .build()
+        const control = <ControlButtonModel>(
+          this.baseForm.buildButton(id, id, 'dark-secondary').build()
+        )
         controls.push(control)
       }
     })

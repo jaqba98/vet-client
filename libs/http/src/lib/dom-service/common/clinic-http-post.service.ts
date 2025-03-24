@@ -5,10 +5,12 @@ import { Store } from '@ngrx/store'
 import { ClinicDomainModel, DeleteDomainModel } from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
 import {
-  baseTableFormCreateAction,
+  baseTableFormRowsAction,
   baseTableFormDeleteAction,
-  baseTableFormUpdateRow, baseTableFormUpdateSelectedRow,
+  baseTableFormUpdateRow,
+  baseTableFormUpdateSelectedRow,
   ClinicTableFormType,
+  baseTableFormMaxPageAction,
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { ClinicRequestDtoModel } from '../../model/request/controller/clinic-request-dto.model'
@@ -59,12 +61,10 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormCreateAction<ClinicDomainModel>()({
+          this.store.dispatch(baseTableFormRowsAction<ClinicDomainModel>()({
             rows: res.data.map(row => ({ id: row.id, isSelected: false, row })),
-            page: 0,
-            maxPage: 0,
-            tab: 'table',
           }))
+          this.store.dispatch(baseTableFormMaxPageAction())
         }),
       )
   }

@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store'
 import { BaseTableFormRowModel, BaseTableFormStoreModel } from '../../model/base/base-table-form-store.model'
 
-export const baseTableFormCreateAction = <TRow>() => createAction(
-  '[Base Table Form] Create Action', props<BaseTableFormStoreModel<TRow>>(),
+export const baseTableFormRowsAction = <TRow>() => createAction(
+  '[Base Table Form] Rows Action', props<Pick<BaseTableFormStoreModel<TRow>, 'rows'>>(),
 )
 
 export const baseTableFormIsSelectedAction = createAction(
@@ -24,3 +24,9 @@ export const baseTableFormUpdateRow = <TRow>() => createAction(
 export const baseTableFormUpdateSelectedRow = <TRow>() => createAction(
   '[Base Table Form] Update Row Selected Action', props<{ row: BaseTableFormRowModel<TRow> }>(),
 )
+
+export const baseTableFormPageAction = createAction(
+  '[Base Table Form] Page Action', props<{ page: number }>(),
+)
+
+export const baseTableFormMaxPageAction = createAction('[Base Table Form] Max Page Action')

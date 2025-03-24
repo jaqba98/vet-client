@@ -14,6 +14,7 @@ import { TableCreateFormComponent } from './table-create-form/table-create-form.
 import { TableUpdateFormComponent } from './table-update-form/table-update-form.component'
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
+import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
 
 @Component({
   selector: 'lib-table-form',
@@ -24,15 +25,18 @@ import { TableNavFormComponent } from './table-nav-form/table-nav-form.component
     TableNavFormComponent,
     TableCreateFormComponent,
     TableUpdateFormComponent,
+    TablePaginatorFormComponent,
   ],
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TFormModel, TDomainModel> implements OnInit, OnDestroy {
-  @Input() select!: string
-  @Input() store!: Store<TableFormStoreModel>
-  @Input() crud!: CrudNotification<TDomainModel, DeleteDomainModel>
-  @Input() formModel!: TableFormModel<TFormModel>
+export class TableFormComponent<TFormModel, TDomainModel>
+implements OnInit, OnDestroy {
+  @Input({ required: true }) select!: string
+  @Input({ required: true }) store!: Store<TableFormStoreModel>
+  @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
+  @Input({ required: true }) formModel!: TableFormModel<TFormModel>
+  @Input({ required: true }) path!: string
 
   tab!: string
 

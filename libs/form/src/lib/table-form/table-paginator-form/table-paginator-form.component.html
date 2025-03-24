@@ -1,10 +1,12 @@
-<!-- done -->
 <div class="paginator">
   <lib-button-control [model]="first.control" (event)="onFirstPageEvent()"></lib-button-control>
   <lib-button-control [model]="previous.control" (event)="onPreviousPageEvent()"></lib-button-control>
   <div class="paginator__center">
     <ng-container *ngFor="let control of getPageControls()">
-      <lib-button-control [model]="control.control" (event)="onSpecificPageEvent(control.control.id)"></lib-button-control>
+      <lib-button-control
+        [model]="control.control"
+        (event)="onSpecificPageEvent(control.control.id)"
+      ></lib-button-control>
     </ng-container>
   </div>
   <div class="paginator__legend">

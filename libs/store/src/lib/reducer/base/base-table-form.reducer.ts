@@ -1,13 +1,14 @@
 import { createReducer, on } from '@ngrx/store'
 
+import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 import { BaseTableFormStoreModel } from '../../model/base/base-table-form-store.model'
 import {
-  baseTableFormCreateAction,
+  baseTableFormRowsAction,
   baseTableFormDeleteAction,
-  baseTableFormIsSelectedAction,
+  baseTableFormIsSelectedAction, baseTableFormPageAction,
   baseTableFormTabAction,
   baseTableFormUpdateRow,
-  baseTableFormUpdateSelectedRow,
+  baseTableFormUpdateSelectedRow, baseTableFormMaxPageAction,
 } from '../../actions/base/base-table-form-action.service'
 
 export const baseTableFormReducer = <TRow>() => {
@@ -19,8 +20,8 @@ export const baseTableFormReducer = <TRow>() => {
   }
   return createReducer<BaseTableFormStoreModel<TRow>>(
     initialState,
-    on(baseTableFormCreateAction<TRow>(), (state: BaseTableFormStoreModel<TRow>, payload) => ({
-      ...state, ...payload,
+    on(baseTableFormRowsAction<TRow>(), (state: BaseTableFormStoreModel<TRow>, { rows }) => ({
+      ...state, rows,
     })),
     on(baseTableFormIsSelectedAction, (state: BaseTableFormStoreModel<TRow>, { ids, isSelected }) => ({
       ...state, rows: state.rows.map(row => ids.includes(row.id) ? { ...row, isSelected } : row),
@@ -37,5 +38,14 @@ export const baseTableFormReducer = <TRow>() => {
       ...state,
       selectedRow: row,
     })),
+    on(baseTableFormPageAction, (state: BaseTableFormStoreModel<TRow>, { page }) => ({
+      ...state, page,
+    })),
+    on(baseTableFormMaxPageAction, (state: BaseTableFormStoreModel<TRow>) => {
+      return {
+        ...state,
+        maxPage: state.rows.length === 0 ? 1 : Math.ceil(state.rows.length / NUMBER_OF_ROWS_PER_PAGE),
+      }
+    }),
   )
 }
