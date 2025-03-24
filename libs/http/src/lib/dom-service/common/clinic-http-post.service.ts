@@ -58,6 +58,7 @@ export class ClinicHttpPostService {
             rows: res.data.map(row => ({ id: row.id, isSelected: false, row })),
             page: 0,
             maxPage: 0,
+            tab: 'table',
           }))
         }),
       )

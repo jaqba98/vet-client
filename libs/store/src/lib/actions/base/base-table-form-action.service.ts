@@ -12,3 +12,7 @@ export const baseTableFormIsSelectedAction = createAction(
 export const baseTableFormDeleteAction = createAction(
   '[Base Table Form] Delete Action', props<{ ids: number[] }>(),
 )
+
+export const baseTableFormTabAction = <TRow>() => createAction(
+  '[Base Table Form] Tab Action', props<Pick<BaseTableFormStoreModel<TRow>, 'tab'>>(),
+)

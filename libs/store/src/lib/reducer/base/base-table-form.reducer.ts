@@ -3,11 +3,11 @@ import { createReducer, on } from '@ngrx/store'
 import { BaseTableFormStoreModel } from '../../model/base/base-table-form-store.model'
 import {
   baseTableFormCreateAction, baseTableFormDeleteAction,
-  baseTableFormIsSelectedAction,
+  baseTableFormIsSelectedAction, baseTableFormTabAction,
 } from '../../actions/base/base-table-form-action.service'
 
 export const baseTableFormReducer = <TRow>() => {
-  const initialState: BaseTableFormStoreModel<TRow> = { rows: [], page: 0, maxPage: 0 }
+  const initialState: BaseTableFormStoreModel<TRow> = { rows: [], page: 0, maxPage: 0, tab: 'table' }
   return createReducer<BaseTableFormStoreModel<TRow>>(
     initialState,
     on(baseTableFormCreateAction<TRow>(), (state: BaseTableFormStoreModel<TRow>, payload) => ({
@@ -21,5 +21,6 @@ export const baseTableFormReducer = <TRow>() => {
       ...state,
       rows: state.rows.filter(row => ids.includes(row.id)),
     })),
+    on(baseTableFormTabAction(), (state: BaseTableFormStoreModel<TRow>, { tab }) => ({ ...state, tab })),
   )
 }

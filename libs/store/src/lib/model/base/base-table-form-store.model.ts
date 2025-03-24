@@ -8,4 +8,5 @@ export interface BaseTableFormStoreModel<TRow> {
   rows: BaseTableFormRowModel<TRow>[]
   page: number
   maxPage: number
+  tab: string
 }

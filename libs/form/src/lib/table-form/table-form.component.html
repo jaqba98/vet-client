@@ -1,12 +1,12 @@
 <lib-table-panel-control [isPaginator]="isPaginator()">
   <ng-container nav>
     <lib-table-nav-form
+      [store]="store"
       [tableButtonEnabled]="tableButtonEnabled"
       [createButtonEnabled]="createButtonEnabled"
       [deleteButtonEnabled]="deleteButtonEnabled"
       [refreshButtonEnabled]="refreshButtonEnabled"
       [searchButtonEnabled]="searchButtonEnabled"
-      (tableNavTabEvent)="onTableNavTabEvent($event)"
       (tableNavDeleteEvent)="onTableNavDeleteEvent()"
       (tableNavRefreshEvent)="onTableNavRefreshEvent()"
     ></lib-table-nav-form>

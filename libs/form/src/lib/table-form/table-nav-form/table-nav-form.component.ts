@@ -5,6 +5,8 @@ import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TableNavDomainModel, TableNavFormModel } from '@vet-client/lib-domain'
 import { TableFormTabEnum } from '../enum/table-form-tab.enum'
+import { Store } from '@ngrx/store'
+import { baseTableFormTabAction } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-table-nav-form',
@@ -15,10 +17,10 @@ import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 export class TableNavFormComponent
   extends BaseFormService<TableNavFormModel, TableNavDomainModel>
   implements OnInit, OnDestroy {
-  @Output() tableNavTabEvent = new EventEmitter<TableFormTabEnum>()
   @Output() tableNavDeleteEvent = new EventEmitter()
   @Output() tableNavRefreshEvent = new EventEmitter()
 
+  @Input({ required: true }) store!: Store
   @Input({ required: true }) tableButtonEnabled = true
   @Input({ required: true }) createButtonEnabled = true
   @Input({ required: true }) deleteButtonEnabled = true
@@ -60,10 +62,10 @@ export class TableNavFormComponent
 
   override onSubmit(domain: TableNavDomainModel) {
     if (domain.table) {
-      this.tableNavTabEvent.emit(TableFormTabEnum.table)
+      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.table }))
     }
     else if (domain.create) {
-      this.tableNavTabEvent.emit(TableFormTabEnum.create)
+      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.create }))
     }
     else if (domain.delete) {
       this.tableNavDeleteEvent.emit()
@@ -72,7 +74,7 @@ export class TableNavFormComponent
       this.tableNavRefreshEvent.emit()
     }
     else if (domain.search) {
-      this.tableNavTabEvent.emit(TableFormTabEnum.search)
+      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.search }))
     }
   }
 }

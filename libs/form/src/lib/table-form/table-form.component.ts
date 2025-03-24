@@ -33,18 +33,13 @@ export class TableFormComponent<TFormModel, TDomainModel> {
   @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
   @Input({ required: true }) store!: Store
   @Input({ required: true }) allSelected!: boolean
+  @Input({ required: true }) tab!: TableFormTabEnum
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true
   @Input() deleteButtonEnabled = true
   @Input() refreshButtonEnabled = true
   @Input() searchButtonEnabled = true
-
-  tab = TableFormTabEnum.table
-
-  onTableNavTabEvent(tab: TableFormTabEnum) {
-    this.tab = tab
-  }
 
   onTableNavDeleteEvent() {
     //
