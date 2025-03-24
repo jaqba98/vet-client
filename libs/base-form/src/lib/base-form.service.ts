@@ -76,7 +76,6 @@ export class BaseFormService<TFormModel, TDomainModel> {
 
   setControlValues(columns: [string, string | number][]) {
     columns.forEach(([key, value]) => {
-      console.log(key, value)
       this.formGroup.get(key)?.setValue(value)
     })
   }

@@ -38,7 +38,6 @@ export class TableNavFormComponent<TDomainModel>
   @Input({ required: false }) createButtonEnabled = true
   @Input({ required: false }) deleteButtonEnabled = true
   @Input({ required: false }) refreshButtonEnabled = true
-  @Input({ required: false }) searchButtonEnabled = true
 
   rows!: BaseTableFormRowModel<TDomainModel>[]
 
@@ -65,10 +64,6 @@ export class TableNavFormComponent<TDomainModel>
         .buildButtonIcon('refresh', faArrowsRotate, 'primary')
         .buildIsEnabled(this.refreshButtonEnabled)
         .build(),
-      search: this.baseForm
-        .buildButtonIcon('refresh', faMagnifyingGlass, 'dark-secondary')
-        .buildIsEnabled(this.searchButtonEnabled)
-        .build(),
     })
     this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
       this.rows = data.rows
@@ -94,9 +89,6 @@ export class TableNavFormComponent<TDomainModel>
     }
     else if (domain.refresh) {
       this.crud.runNotificationRead()
-    }
-    else if (domain.search) {
-      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.search }))
     }
   }
 }
