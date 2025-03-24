@@ -49,7 +49,7 @@ export class VetMenuFormComponent
         .buildButton('vetMedication', 'Medication', 'primary')
         .buildFullWidth()
         .build(),
-      vetServices: this.baseForm
+      vetService: this.baseForm
         .buildButton('vetServices', 'Services', 'primary')
         .buildFullWidth()
         .build(),
@@ -105,11 +105,11 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (domain.vetServices) {
+    else if (domain.vetService) {
       this.store.dispatch(
         routeSetAction({
-          page: RoutePageEnum.dashboardVetServices,
-          section: RouteSectionEnum.dashboardVetServices,
+          page: RoutePageEnum.dashboardVetService,
+          section: RouteSectionEnum.dashboardVetService,
         }),
       )
     }

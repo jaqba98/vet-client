@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Validators } from '@angular/forms'
 

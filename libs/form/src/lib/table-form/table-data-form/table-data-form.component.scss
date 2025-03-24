@@ -5,11 +5,16 @@
   overflow-y: hidden;
   margin: -1px 0 -1px -1px;
   height: 100%;
+  width: 100%;
+  margin: auto;
 }
 
 .table {
   border-collapse: collapse;
   table-layout: fixed;
+  min-width: 960px;
+  width: 100%;
+  margin: auto;
 
   &__select {
     position: sticky;
@@ -32,19 +37,21 @@
   &__row {
     height: 58px;
     display: flex;
-
-    &--head {
-      background-color: colors.$color-surface;
-    }
+    width: 100%;
   }
 
   &__column {
     min-width: 150px;
     padding: 0.5rem;
+    width: 100%;
     border: 1px solid colors.$color-border;
     display: flex;
     align-items: center;
     text-transform: capitalize;
+
+    &--head {
+      background-color: colors.$color-surface;
+    }
   }
 
   &__button {

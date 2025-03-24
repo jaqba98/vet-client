@@ -3,7 +3,7 @@ export interface VetMenuDomainModel {
   vetClinic: boolean
   vetMedicalRecord: boolean
   vetMedication: boolean
-  vetServices: boolean
+  vetService: boolean
   vetAppointment: boolean
   vetInvoice: boolean
   vetPatients: boolean

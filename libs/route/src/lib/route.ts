@@ -101,7 +101,12 @@ export const route: Route[] = [
             component: VetMedicationPageComponent,
           },
           {
-            path: 'services',
+            path: 'service',
+            redirectTo: 'service/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'service/:page',
             component: VetServicesPageComponent,
           },
           {

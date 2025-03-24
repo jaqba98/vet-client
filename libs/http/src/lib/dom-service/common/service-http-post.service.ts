@@ -13,14 +13,12 @@ import {
   baseTableFormMaxPageAction, ActionTypeEnum,
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
-import { ClinicRequestDtoModel } from '../../model/request/controller/clinic-request-dto.model'
 import { ResponseDtoModel } from '../../model/response/response-dto.model'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { MethodEnum } from '../../enum/method.enum'
 import { DeleteRequestDtoModel } from '../../model/request/crud/delete-request-dto.model'
 import { TokenRequestDtoModel } from '../../model/base/token-request-dto.model'
 import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
-import { ClinicNotification } from '../../notification/clinic.notification'
 import { ServiceRequestDtoModel } from '../../model/request/controller/service-request-dto.model'
 import { ServiceNotification } from '../../notification/service.notification'
 
