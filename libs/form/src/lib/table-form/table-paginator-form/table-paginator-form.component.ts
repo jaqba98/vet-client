@@ -61,7 +61,7 @@ export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDest
   }
 
   ngOnInit() {
-    this.sub.add(this.route.paramMap.pipe(take(1)).subscribe(async (paramMap) => {
+    this.sub.add(this.route.paramMap.subscribe(async (paramMap) => {
       const page = Number(paramMap.get('page'))
       if (!page) {
         await this.router.navigate([`${this.path}/1`])

@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { faArrowsRotate, faMagnifyingGlass, faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { Store } from '@ngrx/store'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective, CrudNotification } from '@vet-client/lib-utils'
 import { DeleteDomainModel, TableNavDomainModel, TableNavFormModel } from '@vet-client/lib-domain'
-import { TableFormTabEnum } from '../enum/table-form-tab.enum'
-import { Store } from '@ngrx/store'
 import { BaseTableFormRowModel, BaseTableFormStoreModel, baseTableFormTabAction } from '@vet-client/lib-store'
+import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 import { TableFormStoreModel } from '../model/table-form-store.model'
 
 @Component({
@@ -25,7 +25,6 @@ export class TableNavFormComponent<TDomainModel>
   @Input({ required: false }) createButtonEnabled = true
   @Input({ required: false }) deleteButtonEnabled = true
   @Input({ required: false }) refreshButtonEnabled = true
-  @Input({ required: false }) searchButtonEnabled = true
 
   rows!: BaseTableFormRowModel<TDomainModel>[]
 
@@ -52,10 +51,6 @@ export class TableNavFormComponent<TDomainModel>
         .buildButtonIcon('refresh', faArrowsRotate, 'primary')
         .buildIsEnabled(this.refreshButtonEnabled)
         .build(),
-      search: this.baseForm
-        .buildButtonIcon('search', faMagnifyingGlass, 'dark-secondary')
-        .buildIsEnabled(this.searchButtonEnabled)
-        .build(),
     })
     this.sub.add(this.store.select(this.select).subscribe(async (data: BaseTableFormStoreModel<TDomainModel>) => {
       this.rows = data.rows
@@ -81,9 +76,6 @@ export class TableNavFormComponent<TDomainModel>
     }
     else if (domain.refresh) {
       this.crud.runNotificationRead()
-    }
-    else if (domain.search) {
-      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.search }))
     }
   }
 }

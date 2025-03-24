@@ -107,6 +107,7 @@ export class ClinicHttpPostService {
         take(1),
         map(() => {
           this.store.dispatch(baseTableFormDeleteAction({ ids: domain.ids }))
+          this.store.dispatch(baseTableFormMaxPageAction())
         }),
       )
   }
