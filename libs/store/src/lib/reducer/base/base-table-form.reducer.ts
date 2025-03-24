@@ -13,13 +13,13 @@ export const baseTableFormReducer = <TRow>() => {
     on(baseTableFormCreateAction<TRow>(), (state: BaseTableFormStoreModel<TRow>, payload) => ({
       ...state, ...payload,
     })),
-    on(baseTableFormIsSelectedAction, (state: BaseTableFormStoreModel<TRow>, { id, isSelected }) => ({
+    on(baseTableFormIsSelectedAction, (state: BaseTableFormStoreModel<TRow>, { ids, isSelected }) => ({
       ...state,
-      rows: state.rows.map(row => row.id === id ? { ...row, isSelected } : row),
+      rows: state.rows.map(row => ids.includes(row.id) ? { ...row, isSelected } : row),
     })),
-    on(baseTableFormDeleteAction, (state: BaseTableFormStoreModel<TRow>, { id }) => ({
+    on(baseTableFormDeleteAction, (state: BaseTableFormStoreModel<TRow>, { ids }) => ({
       ...state,
-      rows: state.rows.filter(row => row.id !== id),
+      rows: state.rows.filter(row => ids.includes(row.id)),
     })),
   )
 }

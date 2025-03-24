@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { Store } from '@ngrx/store'
-import { faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { BaseComponentDirective, CrudNotification, ObjectTypeUtils, TextConvertUtils } from '@vet-client/lib-utils'
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
-import { baseTableFormDeleteAction, baseTableFormIsSelectedAction, BaseTableFormRowModel } from '@vet-client/lib-store'
+import { baseTableFormIsSelectedAction, BaseTableFormRowModel } from '@vet-client/lib-store'
 import { ClinicNotification } from '@vet-client/lib-http'
 import { TableFormModel } from '../model/table-form.model'
 
@@ -24,10 +24,12 @@ implements OnInit {
   @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
   @Input({ required: true }) store!: Store
+  @Input({ required: true }) allSelected!: boolean
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel
   readonly deleteButtonModel: ControlButtonModel
+  readonly editButtonModel: ControlButtonModel
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -41,8 +43,11 @@ implements OnInit {
     this.unselectedButtonModel = this.baseForm
       .buildButtonIcon('unchecked', faSquare, 'dark-secondary')
       .build()
-    this.deleteButtonModel = <ControlButtonModel> this.baseForm
+    this.deleteButtonModel = this.baseForm
       .buildButtonIcon('delete', faTrash, 'error')
+      .build()
+    this.editButtonModel = this.baseForm
+      .buildButtonIcon('edit', faPenToSquare, 'primary')
       .build()
   }
 
@@ -64,15 +69,29 @@ implements OnInit {
     return this.objectType.getPropertyByDynamicKey(row, header)
   }
 
+  onSelectAllEvent() {
+    const ids = this.rows.map(row => row.id)
+    this.store.dispatch(baseTableFormIsSelectedAction({ ids, isSelected: true }))
+  }
+
+  onUnselectAllEvent() {
+    const ids = this.rows.map(row => row.id)
+    this.store.dispatch(baseTableFormIsSelectedAction({ ids, isSelected: false }))
+  }
+
   onSelectRowEvent(id: number) {
-    this.store.dispatch(baseTableFormIsSelectedAction({ id, isSelected: true }))
+    this.store.dispatch(baseTableFormIsSelectedAction({ ids: [id], isSelected: true }))
   }
 
   onUnselectRowEvent(id: number) {
-    this.store.dispatch(baseTableFormIsSelectedAction({ id, isSelected: false }))
+    this.store.dispatch(baseTableFormIsSelectedAction({ ids: [id], isSelected: false }))
   }
 
-  onDeleteEvent(id: number) {
+  onEditRowEvent(id: number) {
+    console.log(id)
+  }
+
+  onDeleteRowEvent(id: number) {
     this.clinic.runNotificationDelete({ ids: [id] })
   }
 
@@ -84,19 +103,6 @@ implements OnInit {
   //
   // @Input({ required: true }) headers!: string[]
   // @Input({ required: true }) rows!: TableFormRowsModel<TRows>
-  // @Input({ required: true }) allSelected!: boolean
-  //
-  // readonly editButtonModel: ControlButtonModel
-  //
-  // constructor(
-  //   private readonly controlButton: BaseFormBuilder,
-  //   private baseForm: BaseFormBuilder,
-  // ) {
-  //   this.editButtonModel = <ControlButtonModel> this.baseForm
-  //     .buildButtonIcon('edit', faSquare, 'primary')
-  //     .build()
-  // }
-  //
   //
   // onSelectEvent(id: number) {
   //   this.selectEvent.emit(id)

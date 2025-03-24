@@ -6,9 +6,9 @@ export const baseTableFormCreateAction = <TRow>() => createAction(
 )
 
 export const baseTableFormIsSelectedAction = createAction(
-  '[Base Table Form] Is Selected Action', props<{ id: number, isSelected: boolean }>(),
+  '[Base Table Form] Is Selected Action', props<{ ids: number[], isSelected: boolean }>(),
 )
 
 export const baseTableFormDeleteAction = createAction(
-  '[Base Table Form] Is Selected Action', props<{ id: number }>(),
+  '[Base Table Form] Delete Action', props<{ ids: number[] }>(),
 )

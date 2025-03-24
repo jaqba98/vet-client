@@ -89,9 +89,7 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          domain.ids.forEach((id) => {
-            this.store.dispatch(baseTableFormDeleteAction({ id }))
-          })
+          this.store.dispatch(baseTableFormDeleteAction({ ids: domain.ids }))
         }),
       )
   }

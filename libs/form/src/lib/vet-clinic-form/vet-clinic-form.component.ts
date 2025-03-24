@@ -19,6 +19,7 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 export class VetClinicFormComponent {
   formModel: TableFormModel<ClinicFormModel>
   rows!: BaseTableFormRowModel<ClinicDomainModel>[]
+  allSelected!: boolean
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -69,6 +70,7 @@ export class VetClinicFormComponent {
     }
     this.store.select('clinicTableForm').subscribe((data) => {
       this.rows = data.rows
+      this.allSelected = !data.rows.some(row => !row.isSelected)
     })
   }
 

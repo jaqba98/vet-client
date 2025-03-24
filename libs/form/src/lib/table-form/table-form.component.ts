@@ -32,6 +32,7 @@ export class TableFormComponent<TFormModel, TDomainModel> {
   @Input({ required: true }) crudNotification!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) rows!: BaseTableFormRowModel<TDomainModel>[]
   @Input({ required: true }) store!: Store
+  @Input({ required: true }) allSelected!: boolean
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true
