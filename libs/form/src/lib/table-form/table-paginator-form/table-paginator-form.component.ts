@@ -1,21 +1,19 @@
-import { CommonModule } from '@angular/common'
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { CommonModule } from '@angular/common'
 import { Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'
 import {
   faBackward,
   faBackwardFast,
-  faForward, faForwardFast,
+  faForward,
+  faForwardFast,
 } from '@fortawesome/free-solid-svg-icons'
-import { Subscription, take } from 'rxjs'
 
-import { baseTableFormPageAction, BaseTableFormStoreModel } from '@vet-client/lib-store'
-import {
-  ButtonControlComponent,
-  TextControlComponent,
-} from '@vet-client/lib-control'
-import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
+import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
+import { baseTableFormPageAction, BaseTableFormStoreModel } from '@vet-client/lib-store'
 import { TableFormStoreModel } from '../model/table-form-store.model'
 
 @Component({
@@ -26,8 +24,8 @@ import { TableFormStoreModel } from '../model/table-form-store.model'
   hostDirectives: [BaseComponentDirective],
 })
 export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDestroy {
-  @Input({ required: true }) select!: string
   @Input({ required: true }) store!: Store<TableFormStoreModel>
+  @Input({ required: true }) select!: string
   @Input({ required: true }) path!: string
 
   page!: number
@@ -46,29 +44,29 @@ export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDest
     private baseForm: BaseFormBuilder,
   ) {
     this.sub = new Subscription()
-    this.first = <ControlButtonModel>(this.baseForm
+    this.first = this.baseForm
       .buildButtonIcon('first', faBackwardFast, 'dark-secondary')
-      .build())
-    this.previous = <ControlButtonModel>(this.baseForm
+      .build()
+    this.previous = this.baseForm
       .buildButtonIcon('previous', faBackward, 'dark-secondary')
-      .build())
-    this.next = <ControlButtonModel>(this.baseForm
+      .build()
+    this.next = this.baseForm
       .buildButtonIcon('next', faForward, 'dark-secondary')
-      .build())
-    this.last = <ControlButtonModel>(this.baseForm
+      .build()
+    this.last = this.baseForm
       .buildButtonIcon('last', faForwardFast, 'dark-secondary')
-      .build())
+      .build()
   }
 
   ngOnInit() {
     this.sub.add(this.route.paramMap.subscribe(async (paramMap) => {
       const page = Number(paramMap.get('page'))
-      if (!page) {
-        await this.router.navigate([`${this.path}/1`])
-        this.store.dispatch(baseTableFormPageAction({ page: 1 }))
+      if (page) {
+        this.store.dispatch(baseTableFormPageAction({ page }))
       }
       else {
-        this.store.dispatch(baseTableFormPageAction({ page }))
+        await this.router.navigate([`${this.path}/1`])
+        this.store.dispatch(baseTableFormPageAction({ page: 1 }))
       }
     }))
     this.sub.add(this.store.select(this.select).subscribe(async (data: BaseTableFormStoreModel<TDomainModel>) => {
