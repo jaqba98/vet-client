@@ -18,10 +18,6 @@ export class TableCreateFormComponent<TFormModel, TDomainModel>
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
 
-  constructor() {
-    super()
-  }
-
   ngOnInit() {
     this.onInit('Create', this.crud.responseCreate$)
     this.initBaseForm(this.formModel)
