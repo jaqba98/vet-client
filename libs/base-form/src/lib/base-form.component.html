@@ -1,7 +1,7 @@
 <form class="base-form" [ngClass]="getClassList()" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <!-- controls -->
   <div class="base-form__controls">
-    <ng-container *ngFor="let control of controls">
+    <ng-container *ngFor="let control of controlsArray">
       <div class="base-form__control">
         <!-- input -->
         <lib-input-control

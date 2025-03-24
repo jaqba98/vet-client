@@ -3,4 +3,5 @@ export interface TableNavDomainModel {
   create: boolean
   delete: boolean
   refresh: boolean
+  search: boolean
 }

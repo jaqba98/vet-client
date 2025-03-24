@@ -5,4 +5,5 @@ export interface TableNavFormModel {
   create: ControlButtonModel
   delete: ControlButtonModel
   refresh: ControlButtonModel
+  search: ControlButtonModel
 }

@@ -1,13 +1,25 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { faArrowsRotate, faMagnifyingGlass, faPlus, faTable, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Store } from '@ngrx/store'
+import {
+  faArrowsRotate, faMagnifyingGlass,
+  faPlus,
+  faTable,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
-import { BaseComponentDirective, CrudNotification } from '@vet-client/lib-utils'
+import {
+  BaseFormBuilder,
+  BaseFormComponent,
+  BaseFormService,
+} from '@vet-client/lib-base-form'
 import { DeleteDomainModel, TableNavDomainModel, TableNavFormModel } from '@vet-client/lib-domain'
+import {
+  BaseComponentDirective,
+  CrudNotification,
+} from '@vet-client/lib-utils'
 import { BaseTableFormRowModel, BaseTableFormStoreModel, baseTableFormTabAction } from '@vet-client/lib-store'
-import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 import { TableFormStoreModel } from '../model/table-form-store.model'
+import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 
 @Component({
   selector: 'lib-table-nav-form',
@@ -18,13 +30,15 @@ import { TableFormStoreModel } from '../model/table-form-store.model'
 export class TableNavFormComponent<TDomainModel>
   extends BaseFormService<TableNavFormModel, TableNavDomainModel>
   implements OnInit, OnDestroy {
-  @Input({ required: true }) select!: string
   @Input({ required: true }) store!: Store<TableFormStoreModel>
+  @Input({ required: true }) select!: string
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
+
   @Input({ required: false }) tableButtonEnabled = true
   @Input({ required: false }) createButtonEnabled = true
   @Input({ required: false }) deleteButtonEnabled = true
   @Input({ required: false }) refreshButtonEnabled = true
+  @Input({ required: false }) searchButtonEnabled = true
 
   rows!: BaseTableFormRowModel<TDomainModel>[]
 
@@ -51,8 +65,12 @@ export class TableNavFormComponent<TDomainModel>
         .buildButtonIcon('refresh', faArrowsRotate, 'primary')
         .buildIsEnabled(this.refreshButtonEnabled)
         .build(),
+      search: this.baseForm
+        .buildButtonIcon('refresh', faMagnifyingGlass, 'dark-secondary')
+        .buildIsEnabled(this.searchButtonEnabled)
+        .build(),
     })
-    this.sub.add(this.store.select(this.select).subscribe(async (data: BaseTableFormStoreModel<TDomainModel>) => {
+    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
       this.rows = data.rows
     }))
   }
@@ -76,6 +94,9 @@ export class TableNavFormComponent<TDomainModel>
     }
     else if (domain.refresh) {
       this.crud.runNotificationRead()
+    }
+    else if (domain.search) {
+      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.search }))
     }
   }
 }

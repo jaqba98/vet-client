@@ -35,7 +35,7 @@ export class BaseFormComponent implements OnInit {
   @Output() dataEvent = new EventEmitter()
 
   @Input({ required: true }) formGroup!: FormGroup
-  @Input({ required: true }) controls!: ControlsType
+  @Input({ required: true }) controlsArray!: ControlsType
   @Input() resetForm = true
   @Input() isSubmit = true
   @Input() submitText = 'Submit'
@@ -98,14 +98,14 @@ export class BaseFormComponent implements OnInit {
   }
 
   private setBaseFormNotValid() {
-    this.controls.forEach((control) => {
+    this.controlsArray.forEach((control) => {
       this.formGroup.controls[control.name].markAsUntouched()
     })
     this.formGroup.markAllAsTouched()
   }
 
   private resetBaseForm() {
-    this.controls.forEach((control) => {
+    this.controlsArray.forEach((control) => {
       this.formGroup.controls[control.name].patchValue(
         control.model.defaultValue,
       )
