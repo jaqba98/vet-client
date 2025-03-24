@@ -33,6 +33,7 @@ export class DashboardNavMenuFormComponent
   }
 
   ngOnInit() {
+    this.onInit()
     this.initBaseForm({
       dashboard: this.baseForm
         .buildButton('dashboard', 'Dashboard', 'primary')

@@ -14,12 +14,10 @@ export const baseTableFormReducer = <TRow>() => {
       ...state, ...payload,
     })),
     on(baseTableFormIsSelectedAction, (state: BaseTableFormStoreModel<TRow>, { ids, isSelected }) => ({
-      ...state,
-      rows: state.rows.map(row => ids.includes(row.id) ? { ...row, isSelected } : row),
+      ...state, rows: state.rows.map(row => ids.includes(row.id) ? { ...row, isSelected } : row),
     })),
     on(baseTableFormDeleteAction, (state: BaseTableFormStoreModel<TRow>, { ids }) => ({
-      ...state,
-      rows: state.rows.filter(row => ids.includes(row.id)),
+      ...state, rows: state.rows.filter(row => !ids.includes(row.id)),
     })),
     on(baseTableFormTabAction(), (state: BaseTableFormStoreModel<TRow>, { tab }) => ({ ...state, tab })),
   )
