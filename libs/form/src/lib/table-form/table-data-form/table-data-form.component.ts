@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { faSquare, faSquareCheck } from '@fortawesome/free-solid-svg-icons'
+import { Store } from '@ngrx/store'
+import { faSquare, faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { BaseComponentDirective, CrudNotification, ObjectTypeUtils, TextConvertUtils } from '@vet-client/lib-utils'
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
 import { TableFormModel } from '../model/table-form.model'
-import { baseTableFormIsSelectedAction, BaseTableFormRowModel } from '@vet-client/lib-store'
-import { Store } from '@ngrx/store'
+import { baseTableFormDeleteAction, baseTableFormIsSelectedAction, BaseTableFormRowModel } from '@vet-client/lib-store'
 
 @Component({
   selector: 'lib-table-data-form',
@@ -26,6 +26,7 @@ implements OnInit {
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel
+  readonly deleteButtonModel: ControlButtonModel
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -37,6 +38,9 @@ implements OnInit {
       .build()
     this.unselectedButtonModel = this.baseForm
       .buildButtonIcon('unchecked', faSquare, 'dark-secondary')
+      .build()
+    this.deleteButtonModel = <ControlButtonModel> this.baseForm
+      .buildButtonIcon('delete', faTrash, 'error')
       .build()
   }
 
@@ -66,6 +70,10 @@ implements OnInit {
     this.store.dispatch(baseTableFormIsSelectedAction({ id, isSelected: false }))
   }
 
+  onDeleteEvent(id: number) {
+    this.store.dispatch(baseTableFormDeleteAction({ id }))
+  }
+
   // I am here
   // @Output() selectAllEvent = new EventEmitter<number>()
   // @Output() unselectAllEvent = new EventEmitter<number>()
@@ -77,7 +85,6 @@ implements OnInit {
   // @Input({ required: true }) allSelected!: boolean
   //
   // readonly editButtonModel: ControlButtonModel
-  // readonly deleteButtonModel: ControlButtonModel
   //
   // constructor(
   //   private readonly controlButton: BaseFormBuilder,
@@ -85,9 +92,6 @@ implements OnInit {
   // ) {
   //   this.editButtonModel = <ControlButtonModel> this.baseForm
   //     .buildButtonIcon('edit', faSquare, 'primary')
-  //     .build()
-  //   this.deleteButtonModel = <ControlButtonModel> this.baseForm
-  //     .buildButtonIcon('delete', faTrash, 'error')
   //     .build()
   // }
   //

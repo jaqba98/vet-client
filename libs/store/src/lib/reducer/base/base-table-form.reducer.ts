@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store'
 
 import { BaseTableFormStoreModel } from '../../model/base/base-table-form-store.model'
 import {
-  baseTableFormCreateAction,
+  baseTableFormCreateAction, baseTableFormDeleteAction,
   baseTableFormIsSelectedAction,
 } from '../../actions/base/base-table-form-action.service'
 
@@ -16,6 +16,10 @@ export const baseTableFormReducer = <TRow>() => {
     on(baseTableFormIsSelectedAction, (state: BaseTableFormStoreModel<TRow>, { id, isSelected }) => ({
       ...state,
       rows: state.rows.map(row => row.id === id ? { ...row, isSelected } : row),
+    })),
+    on(baseTableFormDeleteAction, (state: BaseTableFormStoreModel<TRow>, { id }) => ({
+      ...state,
+      rows: state.rows.filter(row => row.id !== id),
     })),
   )
 }
