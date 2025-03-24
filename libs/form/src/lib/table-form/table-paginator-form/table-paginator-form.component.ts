@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { Store } from '@ngrx/store'
+import { ActionType, Store } from '@ngrx/store'
 import { Subscription } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'
 import {
@@ -13,7 +13,7 @@ import {
 import { ButtonControlComponent, TextControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { BaseFormBuilder, ControlButtonModel } from '@vet-client/lib-base-form'
-import { baseTableFormPageAction, BaseTableFormStoreModel } from '@vet-client/lib-store'
+import { ActionTypeEnum, baseTableFormPageAction, BaseTableFormStoreModel } from '@vet-client/lib-store'
 import { TableFormStoreModel } from '../model/table-form-store.model'
 
 @Component({
@@ -27,6 +27,7 @@ export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDest
   @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string
   @Input({ required: true }) path!: string
+  @Input({ required: true }) name!: ActionTypeEnum
 
   page!: number
   maxPage!: number
@@ -62,11 +63,11 @@ export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDest
     this.sub.add(this.route.paramMap.subscribe(async (paramMap) => {
       const page = Number(paramMap.get('page'))
       if (page) {
-        this.store.dispatch(baseTableFormPageAction({ page }))
+        this.store.dispatch(baseTableFormPageAction(this.name)({ page }))
       }
       else {
         await this.router.navigate([`${this.path}/1`])
-        this.store.dispatch(baseTableFormPageAction({ page: 1 }))
+        this.store.dispatch(baseTableFormPageAction(this.name)({ page: 1 }))
       }
     }))
     this.sub.add(this.store.select(this.select).subscribe(async (data: BaseTableFormStoreModel<TDomainModel>) => {
@@ -90,31 +91,31 @@ export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDest
 
   onFirstPageEvent() {
     if (this.page !== 1) {
-      this.store.dispatch(baseTableFormPageAction({ page: 1 }))
+      this.store.dispatch(baseTableFormPageAction(this.name)({ page: 1 }))
     }
   }
 
   onPreviousPageEvent() {
     if (this.page > 1) {
-      this.store.dispatch(baseTableFormPageAction({ page: this.page - 1 }))
+      this.store.dispatch(baseTableFormPageAction(this.name)({ page: this.page - 1 }))
     }
   }
 
   onSpecificPageEvent(id: string) {
     if (this.page >= 1 && this.page <= this.maxPage) {
-      this.store.dispatch(baseTableFormPageAction({ page: Number(id) }))
+      this.store.dispatch(baseTableFormPageAction(this.name)({ page: Number(id) }))
     }
   }
 
   onNextPageEvent() {
     if (this.page < this.maxPage) {
-      this.store.dispatch(baseTableFormPageAction({ page: this.page + 1 }))
+      this.store.dispatch(baseTableFormPageAction(this.name)({ page: this.page + 1 }))
     }
   }
 
   onLastPageEvent() {
     if (this.page !== this.maxPage) {
-      this.store.dispatch(baseTableFormPageAction({ page: this.maxPage }))
+      this.store.dispatch(baseTableFormPageAction(this.name)({ page: this.maxPage }))
     }
   }
 

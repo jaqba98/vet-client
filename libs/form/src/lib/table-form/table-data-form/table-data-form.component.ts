@@ -21,6 +21,7 @@ import {
 } from '@vet-client/lib-utils'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
 import {
+  ActionTypeEnum,
   baseTableFormIsSelectedAction,
   BaseTableFormRowModel,
   BaseTableFormStoreModel,
@@ -46,6 +47,7 @@ implements OnInit, OnDestroy {
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string
+  @Input({ required: true }) name!: ActionTypeEnum
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel
@@ -102,32 +104,32 @@ implements OnInit, OnDestroy {
   }
 
   getRemainRows() {
-    return new Array(10 - this.rows.length + 1)
+    return new Array(10 - this.rows.length)
   }
 
   onSelectAllEvent() {
     const ids = this.rows.map(row => row.id)
-    this.store.dispatch(baseTableFormIsSelectedAction({ ids, isSelected: true }))
+    this.store.dispatch(baseTableFormIsSelectedAction(this.name)({ ids, isSelected: true }))
   }
 
   onUnselectAllEvent() {
     const ids = this.rows.map(row => row.id)
-    this.store.dispatch(baseTableFormIsSelectedAction({ ids, isSelected: false }))
+    this.store.dispatch(baseTableFormIsSelectedAction(this.name)({ ids, isSelected: false }))
   }
 
   onSelectRowEvent(id: number) {
-    this.store.dispatch(baseTableFormIsSelectedAction({ ids: [id], isSelected: true }))
+    this.store.dispatch(baseTableFormIsSelectedAction(this.name)({ ids: [id], isSelected: true }))
   }
 
   onUnselectRowEvent(id: number) {
-    this.store.dispatch(baseTableFormIsSelectedAction({ ids: [id], isSelected: false }))
+    this.store.dispatch(baseTableFormIsSelectedAction(this.name)({ ids: [id], isSelected: false }))
   }
 
   onEditRowEvent(id: number) {
     const row = this.rows.find(row => row.id === id)
     if (row) {
-      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.update }))
-      this.store.dispatch(baseTableFormUpdateSelectedRow()({ row: row }))
+      this.store.dispatch(baseTableFormTabAction(this.name)({ tab: TableFormTabEnum.update }))
+      this.store.dispatch(baseTableFormUpdateSelectedRow(this.name)({ row: row }))
     }
   }
 

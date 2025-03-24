@@ -1,8 +1,8 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Validators } from '@angular/forms'
 
-import { ClinicTableFormType } from '@vet-client/lib-store'
+import { ActionTypeEnum, ClinicTableFormType } from '@vet-client/lib-store'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ClinicFormModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
@@ -18,6 +18,7 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 })
 export class VetClinicFormComponent {
   formModel: TableFormModel<ClinicFormModel>
+  name = ActionTypeEnum.clinic
 
   constructor(
     private baseForm: BaseFormBuilder,

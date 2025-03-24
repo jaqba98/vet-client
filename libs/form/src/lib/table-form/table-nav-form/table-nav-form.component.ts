@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import {
-  faArrowsRotate, faMagnifyingGlass,
+  faArrowsRotate,
   faPlus,
   faTable,
   faTrash,
@@ -17,7 +17,12 @@ import {
   BaseComponentDirective,
   CrudNotification,
 } from '@vet-client/lib-utils'
-import { BaseTableFormRowModel, BaseTableFormStoreModel, baseTableFormTabAction } from '@vet-client/lib-store'
+import {
+  ActionTypeEnum,
+  BaseTableFormRowModel,
+  BaseTableFormStoreModel,
+  baseTableFormTabAction,
+} from '@vet-client/lib-store'
 import { TableFormStoreModel } from '../model/table-form-store.model'
 import { TableFormTabEnum } from '../enum/table-form-tab.enum'
 
@@ -33,6 +38,7 @@ export class TableNavFormComponent<TDomainModel>
   @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
+  @Input({ required: true }) name!: ActionTypeEnum
 
   @Input({ required: false }) tableButtonEnabled = true
   @Input({ required: false }) createButtonEnabled = true
@@ -76,10 +82,10 @@ export class TableNavFormComponent<TDomainModel>
 
   override onSubmit(domain: TableNavDomainModel) {
     if (domain.table) {
-      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.table }))
+      this.store.dispatch(baseTableFormTabAction(this.name)({ tab: TableFormTabEnum.table }))
     }
     else if (domain.create) {
-      this.store.dispatch(baseTableFormTabAction()({ tab: TableFormTabEnum.create }))
+      this.store.dispatch(baseTableFormTabAction(this.name)({ tab: TableFormTabEnum.create }))
     }
     else if (domain.delete) {
       const ids = this.rows

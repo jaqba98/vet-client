@@ -17,8 +17,8 @@
   }
 
   &__content {
-    flex: 1;
-    min-height: calc(100% - #{variables.$table-nav-height} - #{variables.$table-paginator-height});
+    //flex: 1;
+    //min-height: calc(100% - #{variables.$table-nav-height} - #{variables.$table-paginator-height});
     background-color: colors.$color-background;
     overflow: hidden;
   }

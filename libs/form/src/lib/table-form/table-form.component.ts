@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs'
 
 import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, CrudNotification } from '@vet-client/lib-utils'
-import { BaseTableFormStoreModel } from '@vet-client/lib-store'
+import { ActionTypeEnum, BaseTableFormStoreModel } from '@vet-client/lib-store'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
 import { TableFormStoreModel } from './model/table-form-store.model'
 import { TableFormModel } from './model/table-form.model'
@@ -37,6 +37,7 @@ implements OnInit, OnDestroy {
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
   @Input({ required: true }) path!: string
+  @Input({ required: true }) name!: ActionTypeEnum
 
   tab!: string
 

@@ -10,7 +10,7 @@ import {
   baseTableFormUpdateRow,
   baseTableFormUpdateSelectedRow,
   ClinicTableFormType,
-  baseTableFormMaxPageAction,
+  baseTableFormMaxPageAction, ActionTypeEnum,
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { ClinicRequestDtoModel } from '../../model/request/controller/clinic-request-dto.model'
@@ -61,10 +61,10 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormRowsAction<ClinicDomainModel>()({
+          this.store.dispatch(baseTableFormRowsAction<ClinicDomainModel>(ActionTypeEnum.clinic)({
             rows: res.data.map(row => ({ id: row.id, isSelected: false, row })),
           }))
-          this.store.dispatch(baseTableFormMaxPageAction())
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinic)())
         }),
       )
   }
@@ -82,10 +82,10 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormUpdateRow<ClinicDomainModel>()({
+          this.store.dispatch(baseTableFormUpdateRow<ClinicDomainModel>(ActionTypeEnum.clinic)({
             row: { id: res.data.id, isSelected: false, row: res.data },
           }))
-          this.store.dispatch(baseTableFormUpdateSelectedRow<ClinicDomainModel>()({
+          this.store.dispatch(baseTableFormUpdateSelectedRow<ClinicDomainModel>(ActionTypeEnum.clinic)({
             row: { id: res.data.id, isSelected: false, row: res.data },
           }))
           this.clinic.runResponseUpdate({ success: res.success, message: res.messages[0] })
@@ -106,8 +106,8 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          this.store.dispatch(baseTableFormDeleteAction({ ids: domain.ids }))
-          this.store.dispatch(baseTableFormMaxPageAction())
+          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.clinic)({ ids: domain.ids }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinic)())
         }),
       )
   }
