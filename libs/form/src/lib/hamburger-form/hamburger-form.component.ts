@@ -25,6 +25,7 @@ export class HamburgerFormComponent
   }
 
   ngOnInit() {
+    this.onInit()
     this.initBaseForm({
       hamburger: this.baseForm
         .buildButtonIcon('hamburger', faBars, 'primary')

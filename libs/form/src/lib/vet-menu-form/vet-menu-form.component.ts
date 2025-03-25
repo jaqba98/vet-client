@@ -32,6 +32,7 @@ export class VetMenuFormComponent
   }
 
   ngOnInit() {
+    this.onInit()
     this.initBaseForm({
       vetSettings: this.baseForm
         .buildButton('vetSettings', 'Settings', 'primary')

@@ -35,6 +35,7 @@ export class ClientMenuFormComponent
   }
 
   ngOnInit() {
+    this.onInit()
     this.initBaseForm({
       clientSettings: this.baseForm
         .buildButton('clientSettings', 'Settings', 'primary')
