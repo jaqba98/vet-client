@@ -25,10 +25,11 @@ import {
 } from '@vet-client/lib-store'
 import { TableFormStoreModel } from '../model/table-form-store.model'
 import { TableFormTabEnum } from '../enum/table-form-tab.enum'
+import { TextControlComponent } from '@vet-client/lib-control'
 
 @Component({
   selector: 'lib-table-nav-form',
-  imports: [BaseFormComponent],
+  imports: [BaseFormComponent, TextControlComponent],
   templateUrl: './table-nav-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
@@ -37,7 +38,11 @@ export class TableNavFormComponent<TDomainModel>
   implements OnInit, OnDestroy {
   @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string
-  @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
+  @Input({ required: true }) crud!: CrudNotification<
+    TDomainModel,
+    DeleteDomainModel
+  >
+
   @Input({ required: true }) name!: ActionTypeEnum
 
   @Input({ required: true }) tableButtonEnabled = true
@@ -71,9 +76,13 @@ export class TableNavFormComponent<TDomainModel>
         .buildIsEnabled(this.refreshButtonEnabled)
         .build(),
     })
-    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
-      this.rows = data.rows
-    }))
+    this.sub.add(
+      this.store
+        .select(this.select)
+        .subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
+          this.rows = data.rows
+        }),
+    )
   }
 
   ngOnDestroy() {
@@ -82,10 +91,14 @@ export class TableNavFormComponent<TDomainModel>
 
   override onSubmit(domain: TableNavDomainModel) {
     if (domain.table) {
-      this.store.dispatch(baseTableFormTabAction(this.name)({ tab: TableFormTabEnum.table }))
+      this.store.dispatch(
+        baseTableFormTabAction(this.name)({ tab: TableFormTabEnum.table }),
+      )
     }
     else if (domain.create) {
-      this.store.dispatch(baseTableFormTabAction(this.name)({ tab: TableFormTabEnum.create }))
+      this.store.dispatch(
+        baseTableFormTabAction(this.name)({ tab: TableFormTabEnum.create }),
+      )
     }
     else if (domain.delete) {
       const ids = this.rows

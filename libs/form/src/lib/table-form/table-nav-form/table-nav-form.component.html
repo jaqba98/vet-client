@@ -1,7 +1,12 @@
-<lib-base-form
-  [formGroup]="formGroup"
-  [controlsArray]="controlsArray"
-  [isHorizontal]="true"
-  [isSubmit]="false"
-  (dataEvent)="onSubmit($event)"
-></lib-base-form>
+<div>
+  <lib-text-control textControlColor="dark-secondary">{{ name }}</lib-text-control>
+</div>
+<div>
+  <lib-base-form
+    [formGroup]="formGroup"
+    [controlsArray]="controlsArray"
+    [isHorizontal]="true"
+    [isSubmit]="false"
+    (dataEvent)="onSubmit($event)"
+  ></lib-base-form>
+</div>
