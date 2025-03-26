@@ -6,6 +6,7 @@ import {
   ErrorControlComponent,
   InputControlComponent,
   RadioButtonControlComponent,
+  SelectControlComponent,
   SuccessControlComponent,
   TextareaControlComponent,
 } from '@vet-client/lib-control'
@@ -24,6 +25,7 @@ import { BaseFormBuilder } from './base-form.builder'
     RadioButtonControlComponent,
     ErrorControlComponent,
     SuccessControlComponent,
+    SelectControlComponent,
   ],
   templateUrl: './base-form.component.html',
   styleUrl: './base-form.component.scss',
@@ -45,11 +47,12 @@ export class BaseFormComponent implements OnInit {
 
   submit!: ControlButtonModel
 
-  constructor(private baseForm: BaseFormBuilder) {
-  }
+  constructor(private baseForm: BaseFormBuilder) {}
 
   ngOnInit() {
-    this.submit = this.baseForm.buildButton('submit', this.submitText, 'primary').build()
+    this.submit = this.baseForm
+      .buildButton('submit', this.submitText, 'primary')
+      .build()
     this.resetEvent.emit()
   }
 
@@ -85,7 +88,9 @@ export class BaseFormComponent implements OnInit {
       return 'This field is required!'
     }
     if (control.hasError('maxlength')) {
-      return `Maximum length is ${control.getError('maxlength').requiredLength} characters!`
+      return `Maximum length is ${
+        control.getError('maxlength').requiredLength
+      } characters!`
     }
     if (control.hasError('email')) {
       return 'Please enter a valid email address'

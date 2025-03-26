@@ -17,7 +17,7 @@ import { EndpointEnum } from '../../enum/endpoint.enum'
 import { MethodEnum } from '../../enum/method.enum'
 import { TokenRequestDtoModel } from '../../model/base/token-request-dto.model'
 import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
-import { ServiceNotification } from '../../notification/service.notification'
+import { VetClinicOpeningHoursNotification } from '../../notification/vet-clinic-opening-hours.notification'
 import { ClinicOpeningHoursRequestDtoModel } from '../../model/request/controller/clinic-opening-hours-request-dto.model'
 
 @Injectable({ providedIn: 'root' })
@@ -25,7 +25,7 @@ export class ClinicOpeningHoursHttpPostService {
   constructor(
     private cookie: CookieService,
     private httpExecute: HttpExecuteService,
-    private service: ServiceNotification,
+    private vetClinicOpeningHours: VetClinicOpeningHoursNotification,
     private store: Store<ClinicTableFormType>,
   ) {}
 
@@ -68,7 +68,7 @@ export class ClinicOpeningHoursHttpPostService {
           this.store.dispatch(baseTableFormUpdateSelectedRow<OpeningHoursDomainModel>(ActionTypeEnum.clinicOpeningHours)({
             row: { id: res.data.id, isSelected: false, row: res.data },
           }))
-          this.service.runResponseUpdate({ success: res.success, message: res.messages[0] })
+          this.vetClinicOpeningHours.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

@@ -59,6 +59,7 @@ export class BaseFormService<TFormModel, TDomainModel> {
           case 'button':
           case 'textarea':
           case 'radio-button':
+          case 'select':
             formGroup.addControl(key, new FormControl(control.defaultValue, control.validators))
             break
           default:

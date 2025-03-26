@@ -7,10 +7,11 @@ import {
   ControlButtonModel,
   ControlInputModel,
   ControlRadioButtonModel,
+  ControlSelectModel,
   ControlTextareaModel,
   ControlType,
 } from './base-form.model'
-import { RadioButtonOptionModel } from '@vet-client/lib-control'
+import { RadioButtonOptionModel, SelectOptionModel } from '@vet-client/lib-control'
 
 @Injectable({ providedIn: 'root' })
 export class BaseFormBuilder {
@@ -97,6 +98,19 @@ export class BaseFormBuilder {
     return this
   }
 
+  // eslint-disable-next-line
+  buildSelect(label: string, defaultOption: any, options: SelectOptionModel[]): this {
+    this.control = <ControlSelectModel> {
+      kind: 'select',
+      defaultValue: '',
+      control: { label, defaultOption, options },
+      validators: [],
+      fullWidth: false,
+      isEnabled: true,
+    }
+    return this
+  }
+
   buildValidators(validators: ValidatorFn[]): this {
     this.control = <ControlType> { ...this.control, validators }
     return this
@@ -109,6 +123,11 @@ export class BaseFormBuilder {
 
   buildIsEnabled(isEnabled: boolean): this {
     this.control = { ...this.control, isEnabled }
+    return this
+  }
+
+  buildDefaultValue(defaultValue: string): this {
+    this.control = { ...this.control, defaultValue }
     return this
   }
 

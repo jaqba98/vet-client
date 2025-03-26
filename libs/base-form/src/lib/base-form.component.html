@@ -33,6 +33,13 @@
           [controlName]="control.name"
           [model]="control.model.control"
         ></lib-radio-button-control>
+        <!-- select -->
+        <lib-select-control
+          *ngIf="control.model.kind === 'select'"
+          [formGroup]="formGroup"
+          [controlName]="control.name"
+          [model]="control.model.control"
+        ></lib-select-control>
         <ng-container *ngIf="isControlError(control.name)">
           <lib-error-control>{{ getControlErrorMessage(control.name) }}</lib-error-control>
         </ng-container>

@@ -9,6 +9,7 @@ import { ClinicOpeningHoursTableFormType } from '@vet-client/lib-store'
 import { VetClinicOpeningHoursNotification } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormModel } from '../table-form/model/table-form.model'
+import { Validators } from '@angular/forms'
 
 @Component({
   selector: 'lib-vet-clinic-opening-hours-form',
@@ -73,7 +74,8 @@ export class VetClinicOpeningHoursFormComponent {
         .buildInput('text', 'Sunday To')
         .build(),
       isArchived: this.baseForm
-        .buildInput('text', 'Is Archived')
+        .buildSelect('Is Archived', false, [{ label: 'Not archived', value: false }, { label: 'Archived', value: true }])
+        .buildValidators([Validators.required])
         .build(),
     }
   }

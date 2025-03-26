@@ -1,0 +1,30 @@
+@use 'libs/scss/src/base/colors';
+
+.select-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  &__input {
+    padding: 0.6rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: colors.$color-surface;
+    border: 1px solid colors.$color-border;
+    color: colors.$color-text-dark-secondary;
+
+    &:focus {
+      outline-color: colors.$color-accent;
+    }
+
+    &--error {
+      border: 1px solid colors.$color-error;
+      outline-color: colors.$color-error;
+      color: colors.$color-error;
+
+      &:focus {
+        outline-color: colors.$color-error;
+        color: colors.$color-error;
+      }
+    }
+  }
+}

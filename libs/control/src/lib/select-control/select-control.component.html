@@ -1,0 +1,12 @@
+<div class="select-control" [formGroup]="formGroup">
+  <ng-container *ngIf="isLabel()">
+    <label [for]="controlName">
+      <lib-text-control [textControlColor]="getLabelColor()">{{ model.label }}</lib-text-control>
+    </label>
+  </ng-container>
+  <select class="select-control__input" [formControlName]="controlName" [(ngModel)]="model.defaultOption">
+    <ng-container *ngFor="let option of model.options">
+      <option [value]="option.value">{{ option.label }}</option>
+    </ng-container>
+  </select>
+</div>

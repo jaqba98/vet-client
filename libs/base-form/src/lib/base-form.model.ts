@@ -4,6 +4,7 @@ import {
   ButtonControlModel,
   InputControlModel,
   RadioButtonControlModel,
+  SelectControlModel,
   TextareaControlModel,
 } from '@vet-client/lib-control'
 
@@ -31,11 +32,16 @@ export interface ControlRadioButtonModel extends ControlBaseModel<RadioButtonCon
   kind: 'radio-button'
 }
 
+export interface ControlSelectModel extends ControlBaseModel<SelectControlModel> {
+  kind: 'select'
+}
+
 export type ControlType =
   | ControlInputModel
   | ControlButtonModel
   | ControlTextareaModel
   | ControlRadioButtonModel
+  | ControlSelectModel
 
 export type BaseFormModel<TKey> = Record<keyof TKey, ControlType>
 
