@@ -10,5 +10,6 @@ export interface ClinicDatabaseModel {
   country: string
   email: string
   phoneNumber: string
+  isArchived: boolean
   openingHoursId: number
 }

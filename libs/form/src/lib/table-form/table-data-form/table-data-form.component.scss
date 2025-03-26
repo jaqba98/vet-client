@@ -37,13 +37,11 @@
   &__row {
     height: 58px;
     display: flex;
-    width: 100%;
   }
 
   &__column {
     min-width: 150px;
     padding: 0.5rem;
-    width: 100%;
     border: 1px solid colors.$color-border;
     display: flex;
     align-items: center;

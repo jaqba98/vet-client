@@ -12,4 +12,6 @@ export interface ClinicFormModel {
   country: ControlInputModel
   email: ControlInputModel
   phoneNumber: ControlInputModel
+  isArchived: ControlInputModel
+  openingHoursId: ControlInputModel
 }

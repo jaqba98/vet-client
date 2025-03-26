@@ -70,6 +70,14 @@ export class VetClinicFormComponent {
         .buildInput('text', 'Phone number')
         .buildValidators([Validators.required, Validators.maxLength(20)])
         .build(),
+      isArchived: this.baseForm
+        .buildInput('text', 'Is Archived')
+        .buildValidators([Validators.required, Validators.maxLength(20)])
+        .build(),
+      openingHoursId: this.baseForm
+        .buildInput('text', 'Opening Hours Id')
+        .buildValidators([Validators.required, Validators.maxLength(150)])
+        .build(),
     }
   }
 }
