@@ -22,6 +22,10 @@ import {
   ReadServicePostDtoModel,
   UpdateServicePostDtoModel,
 } from './post/controller/service-post-dto.model'
+import {
+  ReadClinicOpeningHoursPostDtoModel,
+  UpdateClinicOpeningHoursPostDtoModel,
+} from './post/controller/clinic-opening-hours-post-dto.model'
 
 type HttpPostType =
   | ChooseRolePostDtoModel
@@ -41,6 +45,8 @@ type HttpPostType =
   | ReadServicePostDtoModel
   | UpdateServicePostDtoModel
   | DeleteServicePostDtoModel
+  | ReadClinicOpeningHoursPostDtoModel
+  | UpdateClinicOpeningHoursPostDtoModel
 
 interface HttpModel {
   method: MethodEnum.post

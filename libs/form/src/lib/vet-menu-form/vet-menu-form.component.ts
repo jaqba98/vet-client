@@ -42,6 +42,10 @@ export class VetMenuFormComponent
         .buildButton('vetClinic', 'Clinic', 'primary')
         .buildFullWidth()
         .build(),
+      vetClinicOpeningHours: this.baseForm
+        .buildButton('vetClinicOpeningHours', 'Clinic Opening Hours', 'primary')
+        .buildFullWidth()
+        .build(),
       vetMedicalRecord: this.baseForm
         .buildButton('vetMedicalRecord', 'Medical Record', 'primary')
         .buildFullWidth()
@@ -87,6 +91,14 @@ export class VetMenuFormComponent
         routeSetAction({
           page: RoutePageEnum.dashboardVetClinic,
           section: RouteSectionEnum.dashboardVetClinic,
+        }),
+      )
+    }
+    else if (domain.vetClinicOpeningHours) {
+      this.store.dispatch(
+        routeSetAction({
+          page: RoutePageEnum.dashboardVetClinicOpeningHours,
+          section: RouteSectionEnum.dashboardVetClinicOpeningHours,
         }),
       )
     }

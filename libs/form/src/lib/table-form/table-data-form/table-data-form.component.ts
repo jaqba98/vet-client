@@ -48,6 +48,7 @@ implements OnInit, OnDestroy {
   @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string
   @Input({ required: true }) name!: ActionTypeEnum
+  @Input({ required: true }) deleteButtonEnabled = true
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel
@@ -134,7 +135,9 @@ implements OnInit, OnDestroy {
   }
 
   onDeleteRowEvent(id: number) {
-    this.crud.runNotificationDelete({ ids: [id] })
+    if (this.deleteButtonEnabled) {
+      this.crud.runNotificationDelete({ ids: [id] })
+    }
   }
 
   private selectRows(rows: BaseTableFormRowModel<TDomainModel>[], page: number) {

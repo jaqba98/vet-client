@@ -40,10 +40,10 @@ export class TableNavFormComponent<TDomainModel>
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
   @Input({ required: true }) name!: ActionTypeEnum
 
-  @Input({ required: false }) tableButtonEnabled = true
-  @Input({ required: false }) createButtonEnabled = true
-  @Input({ required: false }) deleteButtonEnabled = true
-  @Input({ required: false }) refreshButtonEnabled = true
+  @Input({ required: true }) tableButtonEnabled = true
+  @Input({ required: true }) createButtonEnabled = true
+  @Input({ required: true }) deleteButtonEnabled = true
+  @Input({ required: true }) refreshButtonEnabled = true
 
   rows!: BaseTableFormRowModel<TDomainModel>[]
 

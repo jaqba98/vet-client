@@ -10,6 +10,7 @@ import { LogoutNotification } from '../notification/logout.notification'
 import { RegistrationNotification } from '../notification/registration.notification'
 import { ValidTokenNotification } from '../notification/valid-token.notification'
 import { ServiceNotification } from '../notification/service.notification'
+import { VetClinicOpeningHoursNotification } from '../notification/vet-clinic-opening-hours.notification'
 
 @Component({
   selector: 'lib-http',
@@ -28,6 +29,7 @@ export class HttpComponent implements OnInit, OnDestroy {
     private validToken: ValidTokenNotification,
     private httpPost: HttpPostAppService,
     private service: ServiceNotification,
+    private vetClinicOpeningHours: VetClinicOpeningHoursNotification,
   ) {
     this.sub = new Subscription()
   }
@@ -71,6 +73,12 @@ export class HttpComponent implements OnInit, OnDestroy {
     ).subscribe())
     this.sub.add(this.service.notificationDelete$.pipe(
       switchMap(domain => this.httpPost.deleteServicePost(domain)),
+    ).subscribe())
+    this.sub.add(this.vetClinicOpeningHours.notificationRead$.pipe(
+      switchMap(() => this.httpPost.readClinicOpeningHoursPost()),
+    ).subscribe())
+    this.sub.add(this.vetClinicOpeningHours.notificationUpdate$.pipe(
+      switchMap(domain => this.httpPost.updateClinicOpeningHoursPost(domain)),
     ).subscribe())
   }
 

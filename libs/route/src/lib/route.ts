@@ -33,6 +33,7 @@ import {
   InvalidTokenGuard,
   HasNotRoleGuard,
 } from '@vet-client/lib-guard'
+import { VetClinicOpeningHoursFormComponent } from '@vet-client/lib-form'
 
 export const route: Route[] = [
   {
@@ -108,6 +109,15 @@ export const route: Route[] = [
           {
             path: 'service/:page',
             component: VetServicesPageComponent,
+          },
+          {
+            path: 'clinic-opening-hours',
+            redirectTo: 'clinic-opening-hours/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'clinic-opening-hours/:page',
+            component: VetClinicOpeningHoursFormComponent,
           },
           {
             path: 'appointment',

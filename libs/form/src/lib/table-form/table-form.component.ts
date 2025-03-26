@@ -39,6 +39,11 @@ implements OnInit, OnDestroy {
   @Input({ required: true }) path!: string
   @Input({ required: true }) name!: ActionTypeEnum
 
+  @Input() tableButtonEnabled = true
+  @Input() createButtonEnabled = true
+  @Input() deleteButtonEnabled = true
+  @Input() refreshButtonEnabled = true
+
   tab!: string
 
   private readonly sub: Subscription
