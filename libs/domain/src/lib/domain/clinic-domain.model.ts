@@ -1,3 +1,3 @@
 import { ClinicDatabaseModel } from '../database/clinic-database.model'
 
-export type ClinicDomainModel = Omit<ClinicDatabaseModel, 'openingHoursId'>
+export type ClinicDomainModel = ClinicDatabaseModel

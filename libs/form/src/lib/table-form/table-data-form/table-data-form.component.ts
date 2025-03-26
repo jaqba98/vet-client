@@ -98,8 +98,7 @@ implements OnInit, OnDestroy {
   }
 
   getColumn(row: TDomainModel, header: string) {
-    const value = this.objectType.getPropertyByDynamicKey(row, header)
-    return value === null ? 'Value not set!' : value
+    return this.objectType.getPropertyByDynamicKey(row, header)
   }
 
   getRemainRows() {

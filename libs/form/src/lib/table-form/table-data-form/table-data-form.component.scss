@@ -12,9 +12,7 @@
 .table {
   border-collapse: collapse;
   table-layout: fixed;
-  min-width: 960px;
-  width: 100%;
-  margin: auto;
+  min-width: 100%;
 
   &__select {
     position: sticky;
@@ -46,7 +44,6 @@
     border: 1px solid colors.$color-border;
     display: flex;
     align-items: center;
-    text-transform: capitalize;
 
     &--head {
       background-color: colors.$color-surface;

@@ -73,7 +73,11 @@ export class VetClinicFormComponent {
         .build(),
       isArchived: this.baseForm
         .buildSelect('Is Archived', false, [{ label: 'Not archived', value: false }, { label: 'Archived', value: true }])
-        .buildValidators([Validators.required])
+        .buildIsEnabled(false)
+        .build(),
+      openingHoursId: this.baseForm
+        .buildInput('text', 'Opening Hours Id')
+        .buildIsEnabled(false)
         .build(),
     }
     this.headers = Object.entries(this.formModel)
