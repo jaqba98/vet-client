@@ -19,6 +19,7 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 export class VetServiceFormComponent {
   formModel: TableFormModel<ServiceFormModel>
   name = ActionTypeEnum.service
+  headers: string[] = []
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -55,5 +56,8 @@ export class VetServiceFormComponent {
         .buildValidators([Validators.required, Validators.maxLength(255)])
         .build(),
     }
+    this.headers = Object.entries(this.formModel)
+      .filter(([, value]) => value.isEnabled)
+      .map(([key]) => key)
   }
 }

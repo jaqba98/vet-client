@@ -39,7 +39,7 @@
             ></lib-button-control>
           </ng-template>
         </td>
-        <ng-container *ngFor="let key of getHeaderKeys()">
+        <ng-container *ngFor="let key of headers">
           <td class="table__column">
             <lib-text-control textControlColor="dark-primary">{{ getColumn(row.row, key) }}</lib-text-control>
           </td>
@@ -57,7 +57,7 @@
     <ng-container *ngFor="let row of getRemainRows()">
       <tr class="table__row">
         <td class="table__button table__select"></td>
-        <ng-container *ngFor="let key of getHeaderKeys()">
+        <ng-container *ngFor="let key of headers">
           <td class="table__column"></td>
         </ng-container>
         <td class="table__button table__edit"></td>

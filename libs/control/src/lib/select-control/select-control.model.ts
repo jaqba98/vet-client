@@ -8,6 +8,5 @@ export interface SelectOptionModel {
 
 export interface SelectControlModel {
   label: string
-  defaultOption: SelectOptionType
   options: SelectOptionModel[]
 }

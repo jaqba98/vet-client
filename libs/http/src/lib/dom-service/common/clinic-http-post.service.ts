@@ -44,7 +44,6 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          console.log(res)
           this.clinic.runResponseCreate({ success: res.success, message: res.messages[0] })
         }),
       )

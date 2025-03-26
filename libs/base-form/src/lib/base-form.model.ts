@@ -9,7 +9,7 @@ import {
 } from '@vet-client/lib-control'
 
 interface ControlBaseModel<TControl> {
-  defaultValue: string
+  defaultValue: unknown
   control: TControl
   validators: ValidatorFn[]
   fullWidth: boolean

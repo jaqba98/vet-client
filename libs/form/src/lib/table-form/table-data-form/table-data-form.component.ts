@@ -49,6 +49,7 @@ implements OnInit, OnDestroy {
   @Input({ required: true }) select!: string
   @Input({ required: true }) name!: ActionTypeEnum
   @Input({ required: true }) deleteButtonEnabled = true
+  @Input({ required: true }) headers!: string[]
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel
@@ -92,12 +93,8 @@ implements OnInit, OnDestroy {
     this.sub.unsubscribe()
   }
 
-  getHeaderKeys() {
-    return Object.keys(this.formModel)
-  }
-
   getHeaders() {
-    return this.getHeaderKeys().map(header => this.textConvert.camelToPascalWithSpaces(header))
+    return this.headers.map(header => this.textConvert.camelToPascalWithSpaces(header))
   }
 
   getColumn(row: TDomainModel, header: string) {

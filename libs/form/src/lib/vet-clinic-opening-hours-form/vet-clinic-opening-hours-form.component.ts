@@ -10,6 +10,7 @@ import { VetClinicOpeningHoursNotification } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormModel } from '../table-form/model/table-form.model'
 import { Validators } from '@angular/forms'
+import { HOURS } from '@vet-client/lib-const'
 
 @Component({
   selector: 'lib-vet-clinic-opening-hours-form',
@@ -20,6 +21,7 @@ import { Validators } from '@angular/forms'
 export class VetClinicOpeningHoursFormComponent {
   formModel: TableFormModel<OpeningHoursFormModel>
   name = ActionTypeEnum.clinicOpeningHours
+  headers: string[] = []
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -32,51 +34,55 @@ export class VetClinicOpeningHoursFormComponent {
         .buildIsEnabled(false)
         .build(),
       mondayFrom: this.baseForm
-        .buildInput('text', 'Monday From')
+        .buildSelect('Monday From', '00:00', HOURS)
+        .buildValidators([Validators.required])
         .build(),
       mondayTo: this.baseForm
-        .buildInput('text', 'Monday To')
+        .buildSelect('Monday To', '00:00', HOURS)
         .build(),
       tuesdayFrom: this.baseForm
-        .buildInput('text', 'Tuesday From')
+        .buildSelect('Tuesday From', '00:00', HOURS)
         .build(),
       tuesdayTo: this.baseForm
-        .buildInput('text', 'tuesday To')
+        .buildSelect('tuesday To', '00:00', HOURS)
         .build(),
       wednesdayFrom: this.baseForm
-        .buildInput('text', 'Wednesday From')
+        .buildSelect('Wednesday From', '00:00', HOURS)
         .build(),
       wednesdayTo: this.baseForm
-        .buildInput('text', 'Wednesday To')
+        .buildSelect('Wednesday To', '00:00', HOURS)
         .build(),
       thursdayFrom: this.baseForm
-        .buildInput('text', 'Thursday From')
+        .buildSelect('Thursday From', '00:00', HOURS)
         .build(),
       thursdayTo: this.baseForm
-        .buildInput('text', 'Thursday To')
+        .buildSelect('Thursday To', '00:00', HOURS)
         .build(),
       fridayFrom: this.baseForm
-        .buildInput('text', 'Friday From')
+        .buildSelect('Friday From', '00:00', HOURS)
         .build(),
       fridayTo: this.baseForm
-        .buildInput('text', 'Friday To')
+        .buildSelect('Friday To', '00:00', HOURS)
         .build(),
       saturdayFrom: this.baseForm
-        .buildInput('text', 'Saturday From')
+        .buildSelect('Saturday From', '00:00', HOURS)
         .build(),
       saturdayTo: this.baseForm
-        .buildInput('text', 'Saturday To')
+        .buildSelect('Saturday To', '00:00', HOURS)
         .build(),
       sundayFrom: this.baseForm
-        .buildInput('text', 'Sunday From')
+        .buildSelect('Sunday From', '00:00', HOURS)
         .build(),
       sundayTo: this.baseForm
-        .buildInput('text', 'Sunday To')
+        .buildSelect('Sunday To', '00:00', HOURS)
         .build(),
       isArchived: this.baseForm
         .buildSelect('Is Archived', false, [{ label: 'Not archived', value: false }, { label: 'Archived', value: true }])
         .buildValidators([Validators.required])
         .build(),
     }
+    this.headers = Object.entries(this.formModel)
+      .filter(([, value]) => value.isEnabled)
+      .map(([key]) => key)
   }
 }

@@ -19,6 +19,7 @@ import { EmploymentNotification } from '@vet-client/lib-http'
 export class VetEmploymentFormComponent {
   formModel: TableFormModel<EmploymentFormModel>
   name = ActionTypeEnum.employment
+  headers: string[] = []
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -47,5 +48,8 @@ export class VetEmploymentFormComponent {
         .buildValidators([Validators.required])
         .build(),
     }
+    this.headers = Object.entries(this.formModel)
+      .filter(([, value]) => value.isEnabled)
+      .map(([key]) => key)
   }
 }

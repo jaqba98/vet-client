@@ -19,6 +19,7 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 export class VetClinicFormComponent {
   formModel: TableFormModel<ClinicFormModel>
   name = ActionTypeEnum.clinic
+  headers: string[] = []
 
   constructor(
     private baseForm: BaseFormBuilder,
@@ -75,5 +76,8 @@ export class VetClinicFormComponent {
         .buildValidators([Validators.required])
         .build(),
     }
+    this.headers = Object.entries(this.formModel)
+      .filter(([, value]) => value.isEnabled)
+      .map(([key]) => key)
   }
 }

@@ -98,12 +98,11 @@ export class BaseFormBuilder {
     return this
   }
 
-  // eslint-disable-next-line
-  buildSelect(label: string, defaultOption: any, options: SelectOptionModel[]): this {
+  buildSelect(label: string, defaultValue: unknown, options: SelectOptionModel[]): this {
     this.control = <ControlSelectModel> {
       kind: 'select',
-      defaultValue: '',
-      control: { label, defaultOption, options },
+      defaultValue,
+      control: { label, options },
       validators: [],
       fullWidth: false,
       isEnabled: true,

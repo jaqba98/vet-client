@@ -38,6 +38,7 @@ implements OnInit, OnDestroy {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
   @Input({ required: true }) path!: string
   @Input({ required: true }) name!: ActionTypeEnum
+  @Input({ required: true }) headers!: string[]
 
   @Input() tableButtonEnabled = true
   @Input() createButtonEnabled = true

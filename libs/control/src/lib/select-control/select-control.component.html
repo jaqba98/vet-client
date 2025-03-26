@@ -4,7 +4,7 @@
       <lib-text-control [textControlColor]="getLabelColor()">{{ model.label }}</lib-text-control>
     </label>
   </ng-container>
-  <select class="select-control__input" [formControlName]="controlName" [(ngModel)]="model.defaultOption">
+  <select class="select-control__input" [formControlName]="controlName">
     <ng-container *ngFor="let option of model.options">
       <option [value]="option.value">{{ option.label }}</option>
     </ng-container>
