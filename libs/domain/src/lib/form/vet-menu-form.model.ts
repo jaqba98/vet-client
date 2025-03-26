@@ -4,6 +4,7 @@ export interface VetMenuFormModel {
   vetSettings: ControlButtonModel
   vetClinic: ControlButtonModel
   vetClinicOpeningHours: ControlButtonModel
+  vetEmployment: ControlButtonModel
   vetMedicalRecord: ControlButtonModel
   vetMedication: ControlButtonModel
   vetService: ControlButtonModel

@@ -4,7 +4,7 @@ import { ChooseRoleHttpPostService } from '../dom-service/common/choose-role-htt
 import {
   ChooseRoleDomainModel,
   ClinicDomainModel,
-  DeleteDomainModel,
+  DeleteDomainModel, EmploymentDomainModel,
   LoginDomainModel, LogoutDomainModel, OpeningHoursDomainModel,
   RegistrationDomainModel, ServiceDomainModel,
 } from '@vet-client/lib-domain'
@@ -21,6 +21,7 @@ import { HasNotRoleHttpPostService } from '../dom-service/guard/has-not-role-htt
 import { InvalidTokenHttpPostService } from '../dom-service/guard/invalid-token-http-post.service'
 import { ServiceHttpPostService } from '../dom-service/common/service-http-post.service'
 import { ClinicOpeningHoursHttpPostService } from '../dom-service/common/clinic-opening-hours-http-post.service'
+import { EmploymentHttpPostService } from '../dom-service/common/employment-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -39,6 +40,7 @@ export class HttpPostAppService {
     private invalidTokenHttpPost: InvalidTokenHttpPostService,
     private serviceHttpPost: ServiceHttpPostService,
     private clinicOpeningHoursHttpPost: ClinicOpeningHoursHttpPostService,
+    private employmentHttpPost: EmploymentHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -123,5 +125,21 @@ export class HttpPostAppService {
 
   updateClinicOpeningHoursPost(domain: OpeningHoursDomainModel) {
     return this.clinicOpeningHoursHttpPost.updateClinicOpeningHoursPost(domain)
+  }
+
+  createEmploymentPost(domain: EmploymentDomainModel) {
+    return this.employmentHttpPost.createEmploymentPost(domain)
+  }
+
+  readEmploymentPost() {
+    return this.employmentHttpPost.readEmploymentPost()
+  }
+
+  updateEmploymentPost(domain: EmploymentDomainModel) {
+    return this.employmentHttpPost.updateEmploymentPost(domain)
+  }
+
+  deleteEmploymentPost(domain: DeleteDomainModel) {
+    return this.employmentHttpPost.deleteEmploymentPost(domain)
   }
 }

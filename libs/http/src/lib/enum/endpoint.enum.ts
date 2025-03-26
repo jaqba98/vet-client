@@ -18,4 +18,8 @@ export enum EndpointEnum {
   serviceDelete = 'service-delete',
   clinicOpeningHoursRead = 'clinic-opening-hours-read',
   clinicOpeningHoursUpdate = 'clinic-opening-hours-update',
+  employmentCreate = 'employment-create',
+  employmentRead = 'employment-read',
+  employmentUpdate = 'employment-update',
+  employmentDelete = 'employment-delete',
 }

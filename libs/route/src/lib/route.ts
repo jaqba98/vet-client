@@ -15,7 +15,7 @@ import {
   ProfilePageComponent,
   RegistrationPageComponent,
   VetAppointmentPageComponent,
-  VetClinicPageComponent,
+  VetClinicPageComponent, VetEmploymentPageComponent,
   VetInvoicePageComponent, VetMainPageComponent,
   VetMedicalRecordPageComponent,
   VetMedicationPageComponent,
@@ -118,6 +118,15 @@ export const route: Route[] = [
           {
             path: 'clinic-opening-hours/:page',
             component: VetClinicOpeningHoursFormComponent,
+          },
+          {
+            path: 'employment',
+            redirectTo: 'employment/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'employment/:page',
+            component: VetEmploymentPageComponent,
           },
           {
             path: 'appointment',

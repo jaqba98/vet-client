@@ -11,6 +11,7 @@ import { RegistrationNotification } from '../notification/registration.notificat
 import { ValidTokenNotification } from '../notification/valid-token.notification'
 import { ServiceNotification } from '../notification/service.notification'
 import { VetClinicOpeningHoursNotification } from '../notification/vet-clinic-opening-hours.notification'
+import { EmploymentNotification } from '../notification/employment.notification'
 
 @Component({
   selector: 'lib-http',
@@ -29,6 +30,7 @@ export class HttpComponent implements OnInit, OnDestroy {
     private validToken: ValidTokenNotification,
     private httpPost: HttpPostAppService,
     private service: ServiceNotification,
+    private employment: EmploymentNotification,
     private vetClinicOpeningHours: VetClinicOpeningHoursNotification,
   ) {
     this.sub = new Subscription()
@@ -79,6 +81,18 @@ export class HttpComponent implements OnInit, OnDestroy {
     ).subscribe())
     this.sub.add(this.vetClinicOpeningHours.notificationUpdate$.pipe(
       switchMap(domain => this.httpPost.updateClinicOpeningHoursPost(domain)),
+    ).subscribe())
+    this.sub.add(this.employment.notificationCreate$.pipe(
+      switchMap(domain => this.httpPost.createEmploymentPost(domain)),
+    ).subscribe())
+    this.sub.add(this.employment.notificationRead$.pipe(
+      switchMap(() => this.httpPost.readEmploymentPost()),
+    ).subscribe())
+    this.sub.add(this.employment.notificationUpdate$.pipe(
+      switchMap(domain => this.httpPost.updateEmploymentPost(domain)),
+    ).subscribe())
+    this.sub.add(this.employment.notificationDelete$.pipe(
+      switchMap(domain => this.httpPost.deleteEmploymentPost(domain)),
     ).subscribe())
   }
 
