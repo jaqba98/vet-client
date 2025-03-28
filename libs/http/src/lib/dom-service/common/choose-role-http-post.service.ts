@@ -9,7 +9,7 @@ import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { ChooseRoleRequestDtoModel } from '../../model/request/controller/choose-role-request-dto.model'
-import { ResponseDtoModel } from '../../model/response/response-dto.model'
+import { ResponseModel } from '../../model/response/response.model'
 import { ChooseRoleNotification } from '../../notification/choose-role.notification'
 
 @Injectable({ providedIn: 'root' })
@@ -27,7 +27,7 @@ export class ChooseRoleHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.chooseRole, request },
       })

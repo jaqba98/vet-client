@@ -16,9 +16,9 @@ import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { MethodEnum } from '../../enum/method.enum'
 import { TokenRequestDtoModel } from '../../model/base/token-request-dto.model'
-import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
 import { VetClinicOpeningHoursNotification } from '../../notification/vet-clinic-opening-hours.notification'
 import { ClinicOpeningHoursRequestDtoModel } from '../../model/request/controller/clinic-opening-hours-request-dto.model'
+import { ResponseModel } from '../../model/response/response.model'
 
 @Injectable({ providedIn: 'root' })
 export class ClinicOpeningHoursHttpPostService {
@@ -34,7 +34,7 @@ export class ClinicOpeningHoursHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<OpeningHoursDomainModel[]>>({
+      .exec<ResponseModel<OpeningHoursDomainModel[]>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicOpeningHoursRead, request },
       })
@@ -55,7 +55,7 @@ export class ClinicOpeningHoursHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<OpeningHoursDomainModel>>({
+      .exec<ResponseModel<OpeningHoursDomainModel>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicOpeningHoursUpdate, request },
       })

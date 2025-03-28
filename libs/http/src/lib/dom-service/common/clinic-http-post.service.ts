@@ -14,12 +14,11 @@ import {
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { ClinicRequestDtoModel } from '../../model/request/controller/clinic-request-dto.model'
-import { ResponseDtoModel } from '../../model/response/response-dto.model'
+import { ResponseModel } from '../../model/response/response.model'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { MethodEnum } from '../../enum/method.enum'
 import { DeleteRequestDtoModel } from '../../model/request/crud/delete-request-dto.model'
 import { TokenRequestDtoModel } from '../../model/base/token-request-dto.model'
-import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
 import { ClinicNotification } from '../../notification/clinic.notification'
 
 @Injectable({ providedIn: 'root' })
@@ -37,7 +36,7 @@ export class ClinicHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicCreate, request },
       })
@@ -54,7 +53,7 @@ export class ClinicHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<ClinicDomainModel[]>>({
+      .exec<ResponseModel<ClinicDomainModel[]>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicRead, request },
       })
@@ -75,7 +74,7 @@ export class ClinicHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<ClinicDomainModel>>({
+      .exec<ResponseModel<ClinicDomainModel>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicUpdate, request },
       })
@@ -99,7 +98,7 @@ export class ClinicHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicDelete, request },
       })

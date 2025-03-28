@@ -13,12 +13,11 @@ import {
   baseTableFormMaxPageAction, ActionTypeEnum,
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
-import { ResponseDtoModel } from '../../model/response/response-dto.model'
+import { ResponseModel } from '../../model/response/response.model'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { MethodEnum } from '../../enum/method.enum'
 import { DeleteRequestDtoModel } from '../../model/request/crud/delete-request-dto.model'
 import { TokenRequestDtoModel } from '../../model/base/token-request-dto.model'
-import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
 import { ServiceRequestDtoModel } from '../../model/request/controller/service-request-dto.model'
 import { ServiceNotification } from '../../notification/service.notification'
 
@@ -37,7 +36,7 @@ export class ServiceHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.serviceCreate, request },
       })
@@ -54,7 +53,7 @@ export class ServiceHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<ServiceDomainModel[]>>({
+      .exec<ResponseModel<ServiceDomainModel[]>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.serviceRead, request },
       })
@@ -75,7 +74,7 @@ export class ServiceHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<ServiceDomainModel>>({
+      .exec<ResponseModel<ServiceDomainModel>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.serviceUpdate, request },
       })
@@ -99,7 +98,7 @@ export class ServiceHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.serviceDelete, request },
       })

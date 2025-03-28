@@ -14,8 +14,8 @@ import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { LoginRequestDtoModel } from '../../model/request/controller/login-request-dto.model'
-import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
 import { LoginNotification } from '../../notification/login.notification'
+import { ResponseModel } from '../../model/response/response.model'
 
 @Injectable({ providedIn: 'root' })
 export class LoginHttpPostService {
@@ -29,7 +29,7 @@ export class LoginHttpPostService {
   loginPost(domain: LoginDomainModel) {
     const request: LoginRequestDtoModel = { ...domain }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<string>>({
+      .exec<ResponseModel<string>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.login, request },
       })

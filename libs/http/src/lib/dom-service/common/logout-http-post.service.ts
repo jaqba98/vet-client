@@ -9,7 +9,7 @@ import {
 } from '@vet-client/lib-store'
 import { CookieService } from '@vet-client/lib-system'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
-import { ResponseDtoModel } from '../../model/response/response-dto.model'
+import { ResponseModel } from '../../model/response/response.model'
 import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { Store } from '@ngrx/store'
@@ -27,7 +27,7 @@ export class LogoutHttpPostService {
   logoutPost(domain: LogoutDomainModel) {
     const request: LogoutRequestDtoModel = { ...domain }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.logout, request },
       })

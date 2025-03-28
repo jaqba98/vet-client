@@ -6,7 +6,7 @@ import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { RegistrationRequestDtoModel } from '../../model/request/controller/registration-request-dto.model'
-import { ResponseDtoModel } from '../../model/response/response-dto.model'
+import { ResponseModel } from '../../model/response/response.model'
 import { RegistrationNotification } from '../../notification/registration.notification'
 
 @Injectable({ providedIn: 'root' })
@@ -19,7 +19,7 @@ export class RegistrationHttpPostService {
   registrationPost(domain: RegistrationDomainModel) {
     const request: RegistrationRequestDtoModel = { ...domain }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.registration, request },
       })

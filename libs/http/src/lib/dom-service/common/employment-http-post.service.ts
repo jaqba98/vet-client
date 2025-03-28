@@ -12,12 +12,11 @@ import {
   baseTableFormMaxPageAction, ActionTypeEnum, EmploymentTableFormType,
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
-import { ResponseDtoModel } from '../../model/response/response-dto.model'
+import { ResponseModel } from '../../model/response/response.model'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { MethodEnum } from '../../enum/method.enum'
 import { DeleteRequestDtoModel } from '../../model/request/crud/delete-request-dto.model'
 import { TokenRequestDtoModel } from '../../model/base/token-request-dto.model'
-import { ResponseDataDtoModel } from '../../model/response/response-data-dto.model'
 import { EmploymentRequestDtoModel } from '../../model/request/controller/employment-request-dto.model'
 import { EmploymentNotification } from '../../notification/employment.notification'
 
@@ -36,7 +35,7 @@ export class EmploymentHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.employmentCreate, request },
       })
@@ -53,7 +52,7 @@ export class EmploymentHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<EmploymentDomainModel[]>>({
+      .exec<ResponseModel<EmploymentDomainModel[]>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.employmentRead, request },
       })
@@ -74,7 +73,7 @@ export class EmploymentHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDataDtoModel<EmploymentDomainModel>>({
+      .exec<ResponseModel<EmploymentDomainModel>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.employmentUpdate, request },
       })
@@ -98,7 +97,7 @@ export class EmploymentHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseDtoModel>({
+      .exec<ResponseModel>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.employmentDelete, request },
       })
