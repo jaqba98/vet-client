@@ -16,6 +16,8 @@ import { EndpointEnum } from '../../enum/endpoint.enum'
 import { LoginRequestDtoModel } from '../../model/request/controller/login-request-dto.model'
 import { LoginNotification } from '../../notification/login.notification'
 import { ResponseModel } from '../../model/response/response.model'
+import { LoginDataModel } from '../../model/data/login-data.model'
+import { LoginMetadataModel } from '../../model/metadata/login-metadata.model'
 
 @Injectable({ providedIn: 'root' })
 export class LoginHttpPostService {
@@ -29,7 +31,7 @@ export class LoginHttpPostService {
   loginPost(domain: LoginDomainModel) {
     const request: LoginRequestDtoModel = { ...domain }
     return this.httpExecute
-      .exec<ResponseModel<string>>({
+      .exec<ResponseModel<LoginDataModel, LoginMetadataModel>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.login, request },
       })
@@ -37,7 +39,7 @@ export class LoginHttpPostService {
         take(1),
         map((res) => {
           if (res.success) {
-            this.cookie.updateToken(res.data)
+            this.cookie.updateToken(res.data.token)
             this.storeRoute.dispatch(
               routeSetAction({
                 page: RoutePageEnum.dashboard,
