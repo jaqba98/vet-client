@@ -4,9 +4,12 @@ import { ChooseRoleHttpPostService } from '../dom-service/common/choose-role-htt
 import {
   ChooseRoleDomainModel,
   ClinicDomainModel,
-  DeleteDomainModel, EmploymentDomainModel,
-  LoginDomainModel, LogoutDomainModel, OpeningHoursDomainModel,
-  RegistrationDomainModel, ServiceDomainModel,
+  DeleteDomainModel,
+  EmploymentDomainModel,
+  LoginDomainModel,
+  OpeningHoursDomainModel,
+  RegistrationDomainModel,
+  ServiceDomainModel,
 } from '@vet-client/lib-domain'
 import { ClinicHttpPostService } from '../dom-service/common/clinic-http-post.service'
 import { LoginHttpPostService } from '../dom-service/common/login-http-post.service'
@@ -67,8 +70,8 @@ export class HttpPostAppService {
     return this.loginHttpPost.loginPost(domain)
   }
 
-  logoutPost(domain: LogoutDomainModel) {
-    return this.logoutHttpPost.logoutPost(domain)
+  logoutPost() {
+    return this.logoutHttpPost.logoutPost()
   }
 
   registrationPost(domain: RegistrationDomainModel) {

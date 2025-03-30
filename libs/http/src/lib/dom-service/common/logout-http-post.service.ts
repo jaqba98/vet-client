@@ -13,8 +13,6 @@ import { ResponseModel } from '../../model/response/response.model'
 import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { Store } from '@ngrx/store'
-import { LogoutDomainModel } from '@vet-client/lib-domain'
-import { LogoutRequestDtoModel } from '../../model/request/controller/logout-request-dto.model'
 
 @Injectable({ providedIn: 'root' })
 export class LogoutHttpPostService {
@@ -24,12 +22,11 @@ export class LogoutHttpPostService {
     private storeRoute: Store<RouteStoreType>,
   ) {}
 
-  logoutPost(domain: LogoutDomainModel) {
-    const request: LogoutRequestDtoModel = { ...domain }
+  logoutPost() {
     return this.httpExecute
       .exec<ResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.logout, request },
+        type: { endpoint: EndpointEnum.logout, request: undefined },
       })
       .pipe(
         take(1),
