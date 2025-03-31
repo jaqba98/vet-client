@@ -53,7 +53,7 @@ export class ClinicHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseModel<ClinicDomainModel[]>>({
+      .exec<ResponseModel<{ clinics: ClinicDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicRead, request },
       })
@@ -61,7 +61,7 @@ export class ClinicHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormRowsAction<ClinicDomainModel>(ActionTypeEnum.clinic)({
-            rows: res.data.map(row => ({ id: row.id, isSelected: false, row })),
+            rows: res.data.clinics.map(row => ({ id: row.id, isSelected: false, row })),
           }))
           this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinic)())
         }),
@@ -74,7 +74,7 @@ export class ClinicHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<ClinicDomainModel>>({
+      .exec<ResponseModel<{ clinic: ClinicDomainModel }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicUpdate, request },
       })
@@ -82,10 +82,10 @@ export class ClinicHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormUpdateRow<ClinicDomainModel>(ActionTypeEnum.clinic)({
-            row: { id: res.data.id, isSelected: false, row: res.data },
+            row: { id: res.data.clinic.id, isSelected: false, row: res.data.clinic },
           }))
           this.store.dispatch(baseTableFormUpdateSelectedRow<ClinicDomainModel>(ActionTypeEnum.clinic)({
-            row: { id: res.data.id, isSelected: false, row: res.data },
+            row: { id: res.data.clinic.id, isSelected: false, row: res.data.clinic },
           }))
           this.clinic.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
