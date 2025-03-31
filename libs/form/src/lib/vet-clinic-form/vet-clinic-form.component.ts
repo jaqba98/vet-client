@@ -72,7 +72,7 @@ export class VetClinicFormComponent {
         .buildValidators([Validators.required, Validators.maxLength(20)])
         .build(),
       isArchived: this.baseForm
-        .buildSelect('Is Archived', false, [{ label: 'Not archived', value: false }, { label: 'Archived', value: true }])
+        .buildSelect('Is Archived', false, [])
         .buildIsEnabled(false)
         .build(),
       openingHoursId: this.baseForm

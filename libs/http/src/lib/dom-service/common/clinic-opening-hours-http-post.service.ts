@@ -55,7 +55,7 @@ export class ClinicOpeningHoursHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<{ newOpeningHours: OpeningHoursDomainModel }>>({
+      .exec<ResponseModel<{ openingHours: OpeningHoursDomainModel }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicOpeningHoursUpdate, request },
       })
@@ -66,14 +66,14 @@ export class ClinicOpeningHoursHttpPostService {
             baseTableFormUpdateRow<OpeningHoursDomainModel>(
               ActionTypeEnum.clinicOpeningHours,
             )({
-              row: { id: res.data.newOpeningHours.id, isSelected: false, row: res.data.newOpeningHours },
+              row: { id: res.data.openingHours.id, isSelected: false, row: res.data.openingHours },
             }),
           )
           this.store.dispatch(
             baseTableFormUpdateSelectedRow<OpeningHoursDomainModel>(
               ActionTypeEnum.clinicOpeningHours,
             )({
-              row: { id: res.data.newOpeningHours.id, isSelected: false, row: res.data.newOpeningHours },
+              row: { id: res.data.openingHours.id, isSelected: false, row: res.data.openingHours },
             }),
           )
           this.vetClinicOpeningHours.runResponseUpdate({
