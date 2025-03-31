@@ -34,7 +34,7 @@ export class ClinicOpeningHoursHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseModel<OpeningHoursDomainModel[]>>({
+      .exec<ResponseModel<{ openingHours: OpeningHoursDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicOpeningHoursRead, request },
       })
@@ -42,7 +42,7 @@ export class ClinicOpeningHoursHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormRowsAction<OpeningHoursDomainModel>(ActionTypeEnum.clinicOpeningHours)({
-            rows: res.data.map(row => ({ id: row.id, isSelected: false, row })),
+            rows: res.data.openingHours.map(row => ({ id: row.id, isSelected: false, row })),
           }))
           this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinicOpeningHours)())
         }),
@@ -55,20 +55,31 @@ export class ClinicOpeningHoursHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<OpeningHoursDomainModel>>({
+      .exec<ResponseModel<{ newOpeningHours: OpeningHoursDomainModel }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicOpeningHoursUpdate, request },
       })
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormUpdateRow<OpeningHoursDomainModel>(ActionTypeEnum.clinicOpeningHours)({
-            row: { id: res.data.id, isSelected: false, row: res.data },
-          }))
-          this.store.dispatch(baseTableFormUpdateSelectedRow<OpeningHoursDomainModel>(ActionTypeEnum.clinicOpeningHours)({
-            row: { id: res.data.id, isSelected: false, row: res.data },
-          }))
-          this.vetClinicOpeningHours.runResponseUpdate({ success: res.success, message: res.messages[0] })
+          this.store.dispatch(
+            baseTableFormUpdateRow<OpeningHoursDomainModel>(
+              ActionTypeEnum.clinicOpeningHours,
+            )({
+              row: { id: res.data.newOpeningHours.id, isSelected: false, row: res.data.newOpeningHours },
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormUpdateSelectedRow<OpeningHoursDomainModel>(
+              ActionTypeEnum.clinicOpeningHours,
+            )({
+              row: { id: res.data.newOpeningHours.id, isSelected: false, row: res.data.newOpeningHours },
+            }),
+          )
+          this.vetClinicOpeningHours.runResponseUpdate({
+            success: res.success,
+            message: res.messages[0],
+          })
         }),
       )
   }
