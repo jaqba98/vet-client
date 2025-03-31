@@ -11,8 +11,6 @@ import { RegistrationPostDtoModel } from './post/controller/registration-post-dt
 import {
   GetAccountPostDtoModel,
   HasRolePostDtoModel,
-  IsClientPostDtoModel,
-  IsVetPostDtoModel,
   ValidTokenPostDtoModel,
 } from './post/guard/guard-post-dto.model'
 import { MethodEnum } from '../enum/method.enum'
@@ -49,8 +47,6 @@ type HttpPostType =
   | RegistrationPostDtoModel
   | GetAccountPostDtoModel
   | HasRolePostDtoModel
-  | IsClientPostDtoModel
-  | IsVetPostDtoModel
   | ValidTokenPostDtoModel
   | CreateServicePostDtoModel
   | ReadServicePostDtoModel

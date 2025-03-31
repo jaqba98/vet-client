@@ -6,8 +6,4 @@ export type GetAccountPostDtoModel = BaseEndpointModel<EndpointEnum.getAccount, 
 
 export type HasRolePostDtoModel = BaseEndpointModel<EndpointEnum.hasRole, GuardRequestDtoModel>
 
-export type IsClientPostDtoModel = BaseEndpointModel<EndpointEnum.isClient, GuardRequestDtoModel>
-
-export type IsVetPostDtoModel = BaseEndpointModel<EndpointEnum.isVet, GuardRequestDtoModel>
-
 export type ValidTokenPostDtoModel = BaseEndpointModel<EndpointEnum.validToken, GuardRequestDtoModel>

@@ -28,7 +28,6 @@ export class ChooseRoleFormComponent
       role: this.baseForm
         .buildRadioButton('role', [
           { label: 'Vet', value: 'vet' },
-          { label: 'Client', value: 'client' },
         ])
         .build(),
     })

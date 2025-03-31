@@ -17,8 +17,6 @@ import { LogoutHttpPostService } from '../dom-service/common/logout-http-post.se
 import { RegistrationHttpPostService } from '../dom-service/common/registration-http-post.service'
 import { GetAccountHttpPostService } from '../dom-service/guard/get-account-http-post.service'
 import { HasRoleHttpPostService } from '../dom-service/guard/has-role-http-post.service'
-import { IsClientHttpPostService } from '../dom-service/guard/is-client-http-post.service'
-import { IsVetHttpPostService } from '../dom-service/guard/is-vet-http-post.service'
 import { ValidTokenHttpPostService } from '../dom-service/guard/valid-token-http-post.service'
 import { HasNotRoleHttpPostService } from '../dom-service/guard/has-not-role-http-post.service'
 import { InvalidTokenHttpPostService } from '../dom-service/guard/invalid-token-http-post.service'
@@ -38,8 +36,6 @@ export class HttpPostAppService {
     private getAccountHttpPost: GetAccountHttpPostService,
     private hasRoleHttpPost: HasRoleHttpPostService,
     private hasNotRoleHttpPost: HasNotRoleHttpPostService,
-    private isClientHttpPost: IsClientHttpPostService,
-    private isVetHttpPost: IsVetHttpPostService,
     private validTokenHttpPost: ValidTokenHttpPostService,
     private invalidTokenHttpPost: InvalidTokenHttpPostService,
     private serviceHttpPost: ServiceHttpPostService,
@@ -90,14 +86,6 @@ export class HttpPostAppService {
 
   hasNotRolePost() {
     return this.hasNotRoleHttpPost.hasNotRolePost()
-  }
-
-  isClientPost() {
-    return this.isClientHttpPost.isClientPost()
-  }
-
-  isVetPost() {
-    return this.isVetHttpPost.isVetPost()
   }
 
   validTokenPost() {

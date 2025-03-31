@@ -3,20 +3,16 @@ import { Route } from '@angular/router'
 import {
   AccountSettingsPageComponent,
   ChooseRolePageComponent,
-  ClientAppointmentPageComponent, ClientClinicsPageComponent,
-  ClientInvoicePageComponent, ClientMainPageComponent, ClientMedicalRecordPageComponent,
-  ClientPageComponent,
-  ClientPetsPageComponent,
-  ClientSettingsPageComponent,
-  DashboardMainPageComponent,
   DashboardPageComponent,
   HomePageComponent,
   LoginPageComponent,
   ProfilePageComponent,
   RegistrationPageComponent,
   VetAppointmentPageComponent,
-  VetClinicPageComponent, VetEmploymentPageComponent,
-  VetInvoicePageComponent, VetMainPageComponent,
+  VetClinicPageComponent,
+  VetEmploymentPageComponent,
+  VetInvoicePageComponent,
+  VetMainPageComponent,
   VetMedicalRecordPageComponent,
   VetMedicationPageComponent,
   VetPageComponent,
@@ -27,8 +23,6 @@ import {
 import {
   GetAccountGuard,
   HasRoleGuard,
-  IsClientGuard,
-  IsVetGuard,
   ValidTokenGuard,
   InvalidTokenGuard,
   HasNotRoleGuard,
@@ -63,8 +57,8 @@ export const route: Route[] = [
     children: [
       {
         path: '',
-        component: DashboardMainPageComponent,
-        canActivate: [HasRoleGuard, IsVetGuard, IsClientGuard],
+        redirectTo: '/dashboard/vet',
+        pathMatch: 'full',
       },
       {
         path: 'choose-role',
@@ -74,7 +68,7 @@ export const route: Route[] = [
       {
         path: 'vet',
         component: VetPageComponent,
-        canActivate: [HasRoleGuard, IsVetGuard],
+        canActivate: [HasRoleGuard],
         children: [
           {
             path: '',
@@ -148,46 +142,6 @@ export const route: Route[] = [
           {
             path: 'dashboard/vet/**',
             redirectTo: 'dashboard/vet/',
-            pathMatch: 'full',
-          },
-        ],
-      },
-      {
-        path: 'client',
-        component: ClientPageComponent,
-        canActivate: [HasRoleGuard, IsClientGuard],
-        children: [
-          {
-            path: '',
-            component: ClientMainPageComponent,
-          },
-          {
-            path: 'settings',
-            component: ClientSettingsPageComponent,
-          },
-          {
-            path: 'pets',
-            component: ClientPetsPageComponent,
-          },
-          {
-            path: 'appointment',
-            component: ClientAppointmentPageComponent,
-          },
-          {
-            path: 'invoice',
-            component: ClientInvoicePageComponent,
-          },
-          {
-            path: 'medical-record',
-            component: ClientMedicalRecordPageComponent,
-          },
-          {
-            path: 'clinics',
-            component: ClientClinicsPageComponent,
-          },
-          {
-            path: 'dashboard/client/**',
-            redirectTo: 'dashboard/client/',
             pathMatch: 'full',
           },
         ],

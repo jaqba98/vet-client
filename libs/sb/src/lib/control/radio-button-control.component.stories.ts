@@ -15,7 +15,6 @@ export const Default: Story = {
       name: 'role',
       options: [
         { id: 'vet', value: 'Vet' },
-        { id: 'client', value: 'Client' },
       ],
     },
   },

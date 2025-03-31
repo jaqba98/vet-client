@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { CardControlComponent } from '../card-control/card-control.component'
-import { ButtonControlComponent } from '../button-control/button-control.component'
 import { TextControlComponent } from '../text-control/text-control.component'
-import { ButtonControlModel } from '../button-control/button-control.model'
 
 @Component({
   selector: 'lib-price-control',

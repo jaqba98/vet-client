@@ -5,8 +5,6 @@ export enum EndpointEnum {
   registration = 'registration',
   getAccount = 'get-account',
   hasRole = 'has-role',
-  isClient = 'is-client',
-  isVet = 'is-vet',
   validToken = 'valid-token',
   clinicCreate = 'clinic-create',
   clinicRead = 'clinic-read',
