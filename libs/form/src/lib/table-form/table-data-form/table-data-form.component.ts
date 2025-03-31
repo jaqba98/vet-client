@@ -50,6 +50,7 @@ implements OnInit, OnDestroy {
   @Input({ required: true }) name!: ActionTypeEnum
   @Input({ required: true }) deleteButtonEnabled = true
   @Input({ required: true }) headers!: string[]
+  @Input({ required: true }) updateButtonEnabled = true
 
   readonly selectedButtonModel: ControlButtonModel
   readonly unselectedButtonModel: ControlButtonModel

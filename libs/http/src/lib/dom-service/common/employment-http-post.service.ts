@@ -52,7 +52,7 @@ export class EmploymentHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseModel<EmploymentDomainModel[]>>({
+      .exec<ResponseModel<{ employments: EmploymentDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.employmentRead, request },
       })
@@ -60,7 +60,7 @@ export class EmploymentHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormRowsAction<EmploymentDomainModel>(ActionTypeEnum.employment)({
-            rows: res.data.map(row => ({ id: row.id, isSelected: false, row })),
+            rows: res.data.employments.map(row => ({ id: row.id, isSelected: false, row })),
           }))
           this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.employment)())
         }),

@@ -36,8 +36,8 @@ export class VetEmploymentFormComponent {
         .buildValidators([Validators.required])
         .build(),
       isArchived: this.baseForm
-        .buildSelect('Is Archived', false, [{ label: 'Not archived', value: false }, { label: 'Archived', value: true }])
-        .buildValidators([Validators.required])
+        .buildSelect('Is Archived', false, [])
+        .buildIsEnabled(false)
         .build(),
       accountId: this.baseForm
         .buildInput('text', 'Account Id')

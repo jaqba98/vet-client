@@ -45,7 +45,9 @@
           </td>
         </ng-container>
         <td class="table__button table__edit">
-          <lib-button-control [model]="editButtonModel.control" (click)="onEditRowEvent(row.id)"></lib-button-control>
+          <ng-container *ngIf="updateButtonEnabled">
+            <lib-button-control [model]="editButtonModel.control" (click)="onEditRowEvent(row.id)"></lib-button-control>
+          </ng-container>
         </td>
         <td class="table__button table__delete">
           <ng-container *ngIf="deleteButtonEnabled">

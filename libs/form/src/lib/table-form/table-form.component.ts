@@ -44,6 +44,7 @@ implements OnInit, OnDestroy {
   @Input() createButtonEnabled = true
   @Input() deleteButtonEnabled = true
   @Input() refreshButtonEnabled = true
+  @Input() updateButtonEnabled = true
 
   tab!: string
 
