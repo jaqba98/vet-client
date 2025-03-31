@@ -99,6 +99,11 @@ export const route: Route[] = [
           },
           {
             path: 'medication',
+            redirectTo: 'medication/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'medication/:page',
             component: VetMedicationPageComponent,
           },
           {

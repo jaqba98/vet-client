@@ -29,7 +29,6 @@ export class VetClinicFormComponent {
     this.formModel = {
       id: this.baseForm
         .buildInput('text', 'Id')
-        .buildIsEnabled(false)
         .build(),
       name: this.baseForm
         .buildInput('text', 'Name')

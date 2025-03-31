@@ -24,7 +24,7 @@ export class VetEmploymentFormComponent {
   constructor(
     private baseForm: BaseFormBuilder,
     public store: Store<EmploymentTableFormType>,
-    public crud: EmploymentNotification,
+    public employment: EmploymentNotification,
   ) {
     this.formModel = {
       id: this.baseForm

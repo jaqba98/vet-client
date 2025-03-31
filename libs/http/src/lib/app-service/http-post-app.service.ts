@@ -6,7 +6,7 @@ import {
   ClinicDomainModel,
   DeleteDomainModel,
   EmploymentDomainModel,
-  LoginDomainModel,
+  LoginDomainModel, MedicationDomainModel,
   OpeningHoursDomainModel,
   RegistrationDomainModel,
   ServiceDomainModel,
@@ -25,6 +25,7 @@ import { InvalidTokenHttpPostService } from '../dom-service/guard/invalid-token-
 import { ServiceHttpPostService } from '../dom-service/common/service-http-post.service'
 import { ClinicOpeningHoursHttpPostService } from '../dom-service/common/clinic-opening-hours-http-post.service'
 import { EmploymentHttpPostService } from '../dom-service/common/employment-http-post.service'
+import { MedicationHttpPostService } from '../dom-service/common/medication-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -44,6 +45,7 @@ export class HttpPostAppService {
     private serviceHttpPost: ServiceHttpPostService,
     private clinicOpeningHoursHttpPost: ClinicOpeningHoursHttpPostService,
     private employmentHttpPost: EmploymentHttpPostService,
+    private medicationHttpPost: MedicationHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -144,5 +146,21 @@ export class HttpPostAppService {
 
   deleteEmploymentPost(domain: DeleteDomainModel) {
     return this.employmentHttpPost.deleteEmploymentPost(domain)
+  }
+
+  createMedicationPost(domain: MedicationDomainModel) {
+    return this.medicationHttpPost.createMedicationPost(domain)
+  }
+
+  readMedicationPost() {
+    return this.medicationHttpPost.readMedicationPost()
+  }
+
+  updateMedicationPost(domain: MedicationDomainModel) {
+    return this.medicationHttpPost.updateMedicationPost(domain)
+  }
+
+  deleteMedicationPost(domain: DeleteDomainModel) {
+    return this.medicationHttpPost.deleteMedicationPost(domain)
   }
 }

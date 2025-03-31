@@ -22,4 +22,8 @@ export enum EndpointEnum {
   employmentRead = 'employment-read',
   employmentUpdate = 'employment-update',
   employmentDelete = 'employment-delete',
+  medicationCreate = 'medication-create',
+  medicationRead = 'medication-read',
+  medicationUpdate = 'medication-update',
+  medicationDelete = 'medication-delete',
 }

@@ -32,6 +32,11 @@ import {
   ReadEmploymentPostDtoModel,
   UpdateEmploymentPostDtoModel,
 } from './post/controller/employment-post-dto.model'
+import {
+  CreateMedicationPostDtoModel, DeleteMedicationPostDtoModel,
+  ReadMedicationPostDtoModel,
+  UpdateMedicationPostDtoModel,
+} from './post/controller/medication-post-dto.model'
 
 type HttpPostType =
   | ChooseRolePostDtoModel
@@ -57,6 +62,10 @@ type HttpPostType =
   | ReadEmploymentPostDtoModel
   | UpdateEmploymentPostDtoModel
   | DeleteEmploymentPostDtoModel
+  | CreateMedicationPostDtoModel
+  | ReadMedicationPostDtoModel
+  | UpdateMedicationPostDtoModel
+  | DeleteMedicationPostDtoModel
 
 interface HttpModel {
   method: MethodEnum.post
