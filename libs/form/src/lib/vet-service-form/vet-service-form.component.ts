@@ -31,6 +31,9 @@ export class VetServiceFormComponent {
         .buildInput('text', 'Id')
         .buildIsEnabled(false)
         .build(),
+      isArchived: this.baseForm
+        .buildInput('text', 'Is Archived')
+        .build(),
       name: this.baseForm
         .buildInput('text', 'Name')
         .buildValidators([Validators.required, Validators.maxLength(255)])
@@ -54,6 +57,10 @@ export class VetServiceFormComponent {
       isAvailable: this.baseForm
         .buildInput('text', 'Is Available')
         .buildValidators([Validators.required, Validators.maxLength(255)])
+        .build(),
+      clinicId: this.baseForm
+        .buildInput('text', 'Clinic ID')
+        .buildValidators([Validators.required])
         .build(),
     }
     this.headers = Object.entries(this.formModel)

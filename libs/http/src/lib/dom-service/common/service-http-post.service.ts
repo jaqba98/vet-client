@@ -38,7 +38,7 @@ export class ServiceHttpPostService {
     return this.httpExecute
       .exec<ResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.serviceCreate, request },
+        type: { endpoint: EndpointEnum.vetServiceCreate, request },
       })
       .pipe(
         take(1),
@@ -55,7 +55,7 @@ export class ServiceHttpPostService {
     return this.httpExecute
       .exec<ResponseModel<ServiceDomainModel[]>>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.serviceRead, request },
+        type: { endpoint: EndpointEnum.vetServiceRead, request },
       })
       .pipe(
         take(1),
@@ -76,7 +76,7 @@ export class ServiceHttpPostService {
     return this.httpExecute
       .exec<ResponseModel<ServiceDomainModel>>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.serviceUpdate, request },
+        type: { endpoint: EndpointEnum.vetServiceUpdate, request },
       })
       .pipe(
         take(1),
@@ -100,7 +100,7 @@ export class ServiceHttpPostService {
     return this.httpExecute
       .exec<ResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.serviceDelete, request },
+        type: { endpoint: EndpointEnum.vetServiceDelete, request },
       })
       .pipe(
         take(1),
