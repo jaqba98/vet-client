@@ -53,7 +53,7 @@ export class ServiceHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseModel<ServiceDomainModel[]>>({
+      .exec<ResponseModel<{ vetServices: ServiceDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.vetServiceRead, request },
       })
@@ -61,7 +61,7 @@ export class ServiceHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormRowsAction<ServiceDomainModel>(ActionTypeEnum.service)({
-            rows: res.data.map(row => ({ id: row.id, isSelected: false, row })),
+            rows: res.data.vetServices.map(row => ({ id: row.id, isSelected: false, row })),
           }))
           this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.service)())
         }),
