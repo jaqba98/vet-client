@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 
 import { ChooseRoleHttpPostService } from '../dom-service/common/choose-role-http-post.service'
 import {
-  ChooseRoleDomainModel,
+  ChooseRoleDomainModel, ClientDomainModel,
   ClinicDomainModel,
   DeleteDomainModel,
   EmploymentDomainModel,
@@ -24,6 +24,7 @@ import { ServiceHttpPostService } from '../dom-service/common/service-http-post.
 import { ClinicOpeningHoursHttpPostService } from '../dom-service/common/clinic-opening-hours-http-post.service'
 import { EmploymentHttpPostService } from '../dom-service/common/employment-http-post.service'
 import { MedicationHttpPostService } from '../dom-service/common/medication-http-post.service'
+import { ClientHttpPostService } from '../dom-service/common/client-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -42,6 +43,7 @@ export class HttpPostAppService {
     private clinicOpeningHoursHttpPost: ClinicOpeningHoursHttpPostService,
     private employmentHttpPost: EmploymentHttpPostService,
     private medicationHttpPost: MedicationHttpPostService,
+    private clientHttpPost: ClientHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -150,5 +152,21 @@ export class HttpPostAppService {
 
   deleteMedicationPost(domain: DeleteDomainModel) {
     return this.medicationHttpPost.deleteMedicationPost(domain)
+  }
+
+  createClientPost(domain: ClientDomainModel) {
+    return this.clientHttpPost.createClientPost(domain)
+  }
+
+  readClientPost() {
+    return this.clientHttpPost.readClientPost()
+  }
+
+  updateClientPost(domain: ClientDomainModel) {
+    return this.clientHttpPost.updateClientPost(domain)
+  }
+
+  deleteClientPost(domain: DeleteDomainModel) {
+    return this.clientHttpPost.deleteClientPost(domain)
   }
 }

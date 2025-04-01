@@ -10,5 +10,6 @@ export interface VetMenuFormModel {
   vetService: ControlButtonModel
   vetAppointment: ControlButtonModel
   vetInvoice: ControlButtonModel
+  vetClients: ControlButtonModel
   vetPatients: ControlButtonModel
 }

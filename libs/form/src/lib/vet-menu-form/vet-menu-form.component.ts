@@ -70,6 +70,10 @@ export class VetMenuFormComponent
         .buildButton('vetInvoice', 'Invoice', 'primary')
         .buildFullWidth()
         .build(),
+      vetClients: this.baseForm
+        .buildButton('vetClients', 'Clients', 'primary')
+        .buildFullWidth()
+        .build(),
       vetPatients: this.baseForm
         .buildButton('vetPatients', 'Patients', 'primary')
         .buildFullWidth()
@@ -151,6 +155,14 @@ export class VetMenuFormComponent
         routeSetAction({
           page: RoutePageEnum.dashboardVetInvoice,
           section: RouteSectionEnum.dashboardVetInvoice,
+        }),
+      )
+    }
+    else if (domain.vetClients) {
+      this.store.dispatch(
+        routeSetAction({
+          page: RoutePageEnum.dashboardVetClients,
+          section: RouteSectionEnum.dashboardVetClients,
         }),
       )
     }

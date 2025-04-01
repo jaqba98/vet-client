@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core'
 import { map, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 
-import { ClinicDomainModel, DeleteDomainModel, ServiceDomainModel } from '@vet-client/lib-domain'
+import { DeleteDomainModel, ServiceDomainModel } from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
 import {
   baseTableFormRowsAction,
   baseTableFormDeleteAction,
   baseTableFormUpdateRow,
   baseTableFormUpdateSelectedRow,
-  ClinicTableFormType,
-  baseTableFormMaxPageAction, ActionTypeEnum,
+  baseTableFormMaxPageAction, ActionTypeEnum, ServiceTableFormType,
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { ResponseModel } from '../../model/response/response.model'
@@ -27,7 +26,7 @@ export class ServiceHttpPostService {
     private cookie: CookieService,
     private httpExecute: HttpExecuteService,
     private service: ServiceNotification,
-    private store: Store<ClinicTableFormType>,
+    private store: Store<ServiceTableFormType>,
   ) {}
 
   createServicePost(domain: ServiceDomainModel) {

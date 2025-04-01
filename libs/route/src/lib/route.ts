@@ -8,7 +8,7 @@ import {
   LoginPageComponent,
   ProfilePageComponent,
   RegistrationPageComponent,
-  VetAppointmentPageComponent,
+  VetAppointmentPageComponent, VetClientsPageComponent,
   VetClinicPageComponent,
   VetEmploymentPageComponent,
   VetInvoicePageComponent,
@@ -134,6 +134,15 @@ export const route: Route[] = [
           {
             path: 'invoice',
             component: VetInvoicePageComponent,
+          },
+          {
+            path: 'clients',
+            redirectTo: 'clients/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'clients/:page',
+            component: VetClientsPageComponent,
           },
           {
             path: 'patients',

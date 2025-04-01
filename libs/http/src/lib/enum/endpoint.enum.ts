@@ -24,4 +24,8 @@ export enum EndpointEnum {
   medicationRead = 'medication-read',
   medicationUpdate = 'medication-update',
   medicationDelete = 'medication-delete',
+  clientCreate = 'client-create',
+  clientRead = 'client-read',
+  clientUpdate = 'client-update',
+  clientDelete = 'client-delete',
 }

@@ -19,3 +19,4 @@ export * from './lib/root/dashboard/vet/vet-appointment/vet-appointment-page.com
 export * from './lib/root/dashboard/vet/vet-invoice/vet-invoice-page.component'
 export * from './lib/root/dashboard/vet/vet-patients/vet-patients-page.component'
 export * from './lib/root/dashboard/vet/vet-employment/vet-employment-page.component'
+export * from './lib/root/dashboard/vet/vet-clients/vet-clients-page.component'
