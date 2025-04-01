@@ -6,4 +6,5 @@ export enum ActionTypeEnum {
   medication = 'Medication',
   client = 'Client',
   pet = 'Pet',
+  appointment = 'Appointment',
 }

@@ -32,4 +32,8 @@ export enum EndpointEnum {
   petRead = 'pet-read',
   petUpdate = 'pet-update',
   petDelete = 'pet-delete',
+  appointmentCreate = 'appointment-create',
+  appointmentRead = 'appointment-read',
+  appointmentUpdate = 'appointment-update',
+  appointmentDelete = 'appointment-delete',
 }

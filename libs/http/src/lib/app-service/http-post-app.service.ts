@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 
 import { ChooseRoleHttpPostService } from '../dom-service/common/choose-role-http-post.service'
 import {
+  AppointmentDomainModel,
   ChooseRoleDomainModel, ClientDomainModel,
   ClinicDomainModel,
   DeleteDomainModel,
@@ -26,6 +27,7 @@ import { EmploymentHttpPostService } from '../dom-service/common/employment-http
 import { MedicationHttpPostService } from '../dom-service/common/medication-http-post.service'
 import { ClientHttpPostService } from '../dom-service/common/client-http-post.service'
 import { PetHttpPostService } from '../dom-service/common/pet-http-post.service'
+import { AppointmentHttpPostService } from '../dom-service/common/appointment-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -46,6 +48,7 @@ export class HttpPostAppService {
     private medicationHttpPost: MedicationHttpPostService,
     private clientHttpPost: ClientHttpPostService,
     private petHttpPost: PetHttpPostService,
+    private appointmentHttpPost: AppointmentHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -186,5 +189,21 @@ export class HttpPostAppService {
 
   deletePetPost(domain: DeleteDomainModel) {
     return this.petHttpPost.deletePetPost(domain)
+  }
+
+  createAppointmentPost(domain: AppointmentDomainModel) {
+    return this.appointmentHttpPost.createAppointmentPost(domain)
+  }
+
+  readAppointmentPost() {
+    return this.appointmentHttpPost.readAppointmentPost()
+  }
+
+  updateAppointmentPost(domain: AppointmentDomainModel) {
+    return this.appointmentHttpPost.updateAppointmentPost(domain)
+  }
+
+  deleteAppointmentPost(domain: DeleteDomainModel) {
+    return this.appointmentHttpPost.deleteAppointmentPost(domain)
   }
 }

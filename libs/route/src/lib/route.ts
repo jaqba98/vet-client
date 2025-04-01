@@ -129,6 +129,11 @@ export const route: Route[] = [
           },
           {
             path: 'appointment',
+            redirectTo: 'appointment/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'appointment/:page',
             component: VetAppointmentPageComponent,
           },
           {
