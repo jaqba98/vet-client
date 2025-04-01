@@ -6,7 +6,7 @@ import {
   ChooseRoleDomainModel, ClientDomainModel,
   ClinicDomainModel,
   DeleteDomainModel,
-  EmploymentDomainModel,
+  EmploymentDomainModel, InvoiceDomainModel,
   LoginDomainModel, MedicationDomainModel,
   OpeningHoursDomainModel, PetDomainModel,
   RegistrationDomainModel,
@@ -28,6 +28,7 @@ import { MedicationHttpPostService } from '../dom-service/common/medication-http
 import { ClientHttpPostService } from '../dom-service/common/client-http-post.service'
 import { PetHttpPostService } from '../dom-service/common/pet-http-post.service'
 import { AppointmentHttpPostService } from '../dom-service/common/appointment-http-post.service'
+import { InvoiceHttpPostService } from '../dom-service/common/invoice-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -49,6 +50,7 @@ export class HttpPostAppService {
     private clientHttpPost: ClientHttpPostService,
     private petHttpPost: PetHttpPostService,
     private appointmentHttpPost: AppointmentHttpPostService,
+    private invoiceHttpPost: InvoiceHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -205,5 +207,21 @@ export class HttpPostAppService {
 
   deleteAppointmentPost(domain: DeleteDomainModel) {
     return this.appointmentHttpPost.deleteAppointmentPost(domain)
+  }
+
+  createInvoicePost(domain: InvoiceDomainModel) {
+    return this.invoiceHttpPost.createInvoicePost(domain)
+  }
+
+  readInvoicePost() {
+    return this.invoiceHttpPost.readInvoicePost()
+  }
+
+  updateInvoicePost(domain: InvoiceDomainModel) {
+    return this.invoiceHttpPost.updateInvoicePost(domain)
+  }
+
+  deleteInvoicePost(domain: DeleteDomainModel) {
+    return this.invoiceHttpPost.deleteInvoicePost(domain)
   }
 }

@@ -49,6 +49,11 @@ import {
   CreateAppointmentPostDtoModel, DeleteAppointmentPostDtoModel,
   ReadAppointmentPostDtoModel, UpdateAppointmentPostDtoModel,
 } from './post/controller/appointment-post-dto.model'
+import {
+  CreateInvoicePostDtoModel, DeleteInvoicePostDtoModel,
+  ReadInvoicePostDtoModel,
+  UpdateInvoicePostDtoModel,
+} from './post/controller/invoice-post-dto.model'
 
 type HttpPostType =
   | ChooseRolePostDtoModel
@@ -88,6 +93,10 @@ type HttpPostType =
   | ReadAppointmentPostDtoModel
   | UpdateAppointmentPostDtoModel
   | DeleteAppointmentPostDtoModel
+  | CreateInvoicePostDtoModel
+  | ReadInvoicePostDtoModel
+  | UpdateInvoicePostDtoModel
+  | DeleteInvoicePostDtoModel
 
 interface HttpModel {
   method: MethodEnum.post

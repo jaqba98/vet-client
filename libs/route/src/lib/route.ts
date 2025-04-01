@@ -138,6 +138,11 @@ export const route: Route[] = [
           },
           {
             path: 'invoice',
+            redirectTo: 'invoice/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'invoice/:page',
             component: VetInvoicePageComponent,
           },
           {

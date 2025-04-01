@@ -7,4 +7,5 @@ export enum ActionTypeEnum {
   client = 'Client',
   pet = 'Pet',
   appointment = 'Appointment',
+  invoice = 'Invoice',
 }

@@ -36,4 +36,8 @@ export enum EndpointEnum {
   appointmentRead = 'appointment-read',
   appointmentUpdate = 'appointment-update',
   appointmentDelete = 'appointment-delete',
+  invoiceCreate = 'invoice-create',
+  invoiceRead = 'invoice-read',
+  invoiceUpdate = 'invoice-update',
+  invoiceDelete = 'invoice-delete',
 }
