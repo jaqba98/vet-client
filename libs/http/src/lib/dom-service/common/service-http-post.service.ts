@@ -74,20 +74,29 @@ export class ServiceHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<ServiceDomainModel>>({
+      .exec<ResponseModel<{ vetService: ServiceDomainModel }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.vetServiceUpdate, request },
       })
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormUpdateRow<ServiceDomainModel>(ActionTypeEnum.service)({
-            row: { id: res.data.id, isSelected: false, row: res.data },
-          }))
-          this.store.dispatch(baseTableFormUpdateSelectedRow<ServiceDomainModel>(ActionTypeEnum.service)({
-            row: { id: res.data.id, isSelected: false, row: res.data },
-          }))
-          this.service.runResponseUpdate({ success: res.success, message: res.messages[0] })
+          this.store.dispatch(
+            baseTableFormUpdateRow<ServiceDomainModel>(ActionTypeEnum.service)({
+              row: { id: res.data.vetService.id, isSelected: false, row: res.data.vetService },
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormUpdateSelectedRow<ServiceDomainModel>(
+              ActionTypeEnum.service,
+            )({
+              row: { id: res.data.vetService.id, isSelected: false, row: res.data.vetService },
+            }),
+          )
+          this.service.runResponseUpdate({
+            success: res.success,
+            message: res.messages[0],
+          })
         }),
       )
   }
