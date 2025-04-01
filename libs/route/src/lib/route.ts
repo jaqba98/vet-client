@@ -89,6 +89,11 @@ export const route: Route[] = [
           },
           {
             path: 'medical-record',
+            redirectTo: 'medical-record/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'medical-record/:page',
             component: VetMedicalRecordPageComponent,
           },
           {

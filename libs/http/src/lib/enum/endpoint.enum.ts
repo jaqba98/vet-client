@@ -40,4 +40,8 @@ export enum EndpointEnum {
   invoiceRead = 'invoice-read',
   invoiceUpdate = 'invoice-update',
   invoiceDelete = 'invoice-delete',
+  medicalRecordCreate = 'medical-record-create',
+  medicalRecordRead = 'medical-record-read',
+  medicalRecordUpdate = 'medical-record-update',
+  medicalRecordDelete = 'medical-record-delete',
 }

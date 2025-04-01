@@ -54,6 +54,10 @@ import {
   ReadInvoicePostDtoModel,
   UpdateInvoicePostDtoModel,
 } from './post/controller/invoice-post-dto.model'
+import {
+  CreateMedicalRecordPostDtoModel, DeleteMedicalRecordPostDtoModel,
+  ReadMedicalRecordPostDtoModel, UpdateMedicalRecordPostDtoModel,
+} from './post/controller/medical-record-post-dto.model'
 
 type HttpPostType =
   | ChooseRolePostDtoModel
@@ -97,6 +101,10 @@ type HttpPostType =
   | ReadInvoicePostDtoModel
   | UpdateInvoicePostDtoModel
   | DeleteInvoicePostDtoModel
+  | CreateMedicalRecordPostDtoModel
+  | ReadMedicalRecordPostDtoModel
+  | UpdateMedicalRecordPostDtoModel
+  | DeleteMedicalRecordPostDtoModel
 
 interface HttpModel {
   method: MethodEnum.post
