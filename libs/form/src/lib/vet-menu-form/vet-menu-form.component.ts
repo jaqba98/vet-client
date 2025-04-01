@@ -74,8 +74,8 @@ export class VetMenuFormComponent
         .buildButton('vetClients', 'Clients', 'primary')
         .buildFullWidth()
         .build(),
-      vetPatients: this.baseForm
-        .buildButton('vetPatients', 'Patients', 'primary')
+      vetPets: this.baseForm
+        .buildButton('vetPets', 'Pets', 'primary')
         .buildFullWidth()
         .build(),
     })
@@ -166,11 +166,11 @@ export class VetMenuFormComponent
         }),
       )
     }
-    else if (domain.vetPatients) {
+    else if (domain.vetPets) {
       this.store.dispatch(
         routeSetAction({
-          page: RoutePageEnum.dashboardVetPatients,
-          section: RouteSectionEnum.dashboardVetPatients,
+          page: RoutePageEnum.dashboardVetPets,
+          section: RouteSectionEnum.dashboardVetPets,
         }),
       )
     }

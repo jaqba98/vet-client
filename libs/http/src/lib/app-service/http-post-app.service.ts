@@ -7,7 +7,7 @@ import {
   DeleteDomainModel,
   EmploymentDomainModel,
   LoginDomainModel, MedicationDomainModel,
-  OpeningHoursDomainModel,
+  OpeningHoursDomainModel, PetDomainModel,
   RegistrationDomainModel,
   ServiceDomainModel,
 } from '@vet-client/lib-domain'
@@ -25,6 +25,7 @@ import { ClinicOpeningHoursHttpPostService } from '../dom-service/common/clinic-
 import { EmploymentHttpPostService } from '../dom-service/common/employment-http-post.service'
 import { MedicationHttpPostService } from '../dom-service/common/medication-http-post.service'
 import { ClientHttpPostService } from '../dom-service/common/client-http-post.service'
+import { PetHttpPostService } from '../dom-service/common/pet-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -44,6 +45,7 @@ export class HttpPostAppService {
     private employmentHttpPost: EmploymentHttpPostService,
     private medicationHttpPost: MedicationHttpPostService,
     private clientHttpPost: ClientHttpPostService,
+    private petHttpPost: PetHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -168,5 +170,21 @@ export class HttpPostAppService {
 
   deleteClientPost(domain: DeleteDomainModel) {
     return this.clientHttpPost.deleteClientPost(domain)
+  }
+
+  createPetPost(domain: PetDomainModel) {
+    return this.petHttpPost.createPetPost(domain)
+  }
+
+  readPetPost() {
+    return this.petHttpPost.readPetPost()
+  }
+
+  updatePetPost(domain: PetDomainModel) {
+    return this.petHttpPost.updatePetPost(domain)
+  }
+
+  deletePetPost(domain: DeleteDomainModel) {
+    return this.petHttpPost.deletePetPost(domain)
   }
 }

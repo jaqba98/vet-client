@@ -17,6 +17,6 @@ export * from './lib/root/dashboard/vet/vet-services/vet-services-page.component
 export * from './lib/root/dashboard/vet/vet-clinic-opening-hours/vet-clinic-opening-hours-page.component'
 export * from './lib/root/dashboard/vet/vet-appointment/vet-appointment-page.component'
 export * from './lib/root/dashboard/vet/vet-invoice/vet-invoice-page.component'
-export * from './lib/root/dashboard/vet/vet-patients/vet-patients-page.component'
+export * from './lib/root/dashboard/vet/vet-pets/vet-pets-page.component'
 export * from './lib/root/dashboard/vet/vet-employment/vet-employment-page.component'
 export * from './lib/root/dashboard/vet/vet-clients/vet-clients-page.component'

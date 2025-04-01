@@ -17,3 +17,4 @@ export * from './lib/vet-clinic-opening-hours-form/vet-clinic-opening-hours-form
 export * from './lib/vet-employment-form/vet-employment-form.component'
 export * from './lib/vet-medication-form/vet-medication-form.component'
 export * from './lib/client-form/client-form.component'
+export * from './lib/vet-pets-form/vet-pets-form.component'

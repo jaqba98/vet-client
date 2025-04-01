@@ -14,6 +14,7 @@ import { VetClinicOpeningHoursNotification } from '../notification/vet-clinic-op
 import { EmploymentNotification } from '../notification/employment.notification'
 import { MedicationNotification } from '../notification/medication.notification'
 import { ClientNotification } from '../notification/client.notification'
+import { PetNotification } from '../notification/pet.notification'
 
 @Component({
   selector: 'lib-http',
@@ -36,6 +37,7 @@ export class HttpComponent implements OnInit, OnDestroy {
     private vetClinicOpeningHours: VetClinicOpeningHoursNotification,
     private medication: MedicationNotification,
     private client: ClientNotification,
+    private pet: PetNotification,
   ) {
     this.sub = new Subscription()
   }
@@ -121,6 +123,18 @@ export class HttpComponent implements OnInit, OnDestroy {
     ).subscribe())
     this.sub.add(this.client.notificationDelete$.pipe(
       switchMap(domain => this.httpPost.deleteClientPost(domain)),
+    ).subscribe())
+    this.sub.add(this.pet.notificationCreate$.pipe(
+      switchMap(domain => this.httpPost.createPetPost(domain)),
+    ).subscribe())
+    this.sub.add(this.pet.notificationRead$.pipe(
+      switchMap(() => this.httpPost.readPetPost()),
+    ).subscribe())
+    this.sub.add(this.pet.notificationUpdate$.pipe(
+      switchMap(domain => this.httpPost.updatePetPost(domain)),
+    ).subscribe())
+    this.sub.add(this.pet.notificationDelete$.pipe(
+      switchMap(domain => this.httpPost.deletePetPost(domain)),
     ).subscribe())
   }
 

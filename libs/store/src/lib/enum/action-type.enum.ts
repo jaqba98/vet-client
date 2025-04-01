@@ -5,4 +5,5 @@ export enum ActionTypeEnum {
   employment = 'Employment',
   medication = 'Medication',
   client = 'Client',
+  pet = 'Pet',
 }

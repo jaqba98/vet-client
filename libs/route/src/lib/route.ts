@@ -16,7 +16,7 @@ import {
   VetMedicalRecordPageComponent,
   VetMedicationPageComponent,
   VetPageComponent,
-  VetPatientsPageComponent,
+  VetPetsPageComponent,
   VetServicesPageComponent,
   VetSettingsPageComponent,
 } from '@vet-client/lib-page'
@@ -145,8 +145,13 @@ export const route: Route[] = [
             component: VetClientsPageComponent,
           },
           {
-            path: 'patients',
-            component: VetPatientsPageComponent,
+            path: 'pets',
+            redirectTo: 'pets/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'pets/:page',
+            component: VetPetsPageComponent,
           },
           {
             path: 'dashboard/vet/**',

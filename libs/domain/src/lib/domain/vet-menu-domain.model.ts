@@ -9,5 +9,5 @@ export interface VetMenuDomainModel {
   vetAppointment: boolean
   vetInvoice: boolean
   vetClients: boolean
-  vetPatients: boolean
+  vetPets: boolean
 }

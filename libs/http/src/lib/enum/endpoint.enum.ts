@@ -28,4 +28,8 @@ export enum EndpointEnum {
   clientRead = 'client-read',
   clientUpdate = 'client-update',
   clientDelete = 'client-delete',
+  petCreate = 'pet-create',
+  petRead = 'pet-read',
+  petUpdate = 'pet-update',
+  petDelete = 'pet-delete',
 }

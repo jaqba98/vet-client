@@ -11,6 +11,7 @@ import { clinicOpeningHoursTableFormReducer } from './reducer/domain/clinic-open
 import { employmentTableFormReducer } from './reducer/domain/employment-table-form.reducer'
 import { medicationTableFormReducer } from './reducer/domain/medication-table-form.reducer'
 import { clientTableFormReducer } from './reducer/domain/client-table-form.reducer'
+import { petTableFormReducer } from './reducer/domain/pet-table-form.reducer'
 
 export const storeConfig: ApplicationConfig = {
   providers: [
@@ -24,6 +25,7 @@ export const storeConfig: ApplicationConfig = {
       employmentTableForm: employmentTableFormReducer,
       medicationTableForm: medicationTableFormReducer,
       clientTableForm: clientTableFormReducer,
+      petTableForm: petTableFormReducer,
     }),
     provideStoreDevtools(),
   ],
