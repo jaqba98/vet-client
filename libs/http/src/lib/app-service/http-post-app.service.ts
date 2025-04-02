@@ -10,7 +10,7 @@ import {
   LoginDomainModel, MedicalRecordDomainModel, MedicationDomainModel,
   OpeningHoursDomainModel, PetDomainModel,
   RegistrationDomainModel,
-  ServiceDomainModel,
+  ServiceDomainModel, VetDomainModel,
 } from '@vet-client/lib-domain'
 import { ClinicHttpPostService } from '../dom-service/common/clinic-http-post.service'
 import { LoginHttpPostService } from '../dom-service/common/login-http-post.service'
@@ -30,6 +30,8 @@ import { PetHttpPostService } from '../dom-service/common/pet-http-post.service'
 import { AppointmentHttpPostService } from '../dom-service/common/appointment-http-post.service'
 import { InvoiceHttpPostService } from '../dom-service/common/invoice-http-post.service'
 import { MedicalRecordHttpPostService } from '../dom-service/common/medical-record-http-post.service'
+import { VetRequestDtoModel } from '../model/request/controller/vet-request-dto.model'
+import { VetHttpPostService } from '../dom-service/common/vet-http-post.service'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -53,6 +55,7 @@ export class HttpPostAppService {
     private appointmentHttpPost: AppointmentHttpPostService,
     private invoiceHttpPost: InvoiceHttpPostService,
     private medicalRecordHttpPost: MedicalRecordHttpPostService,
+    private vetHttpPost: VetHttpPostService,
   ) {}
 
   chooseRolePost(domain: ChooseRoleDomainModel) {
@@ -241,5 +244,13 @@ export class HttpPostAppService {
 
   deleteMedicalRecordPost(domain: DeleteDomainModel) {
     return this.medicalRecordHttpPost.deleteMedicalRecordPost(domain)
+  }
+
+  readVetPost() {
+    return this.vetHttpPost.readVetPost()
+  }
+
+  updateVetPost(domain: VetDomainModel) {
+    return this.vetHttpPost.updateVetPost(domain)
   }
 }

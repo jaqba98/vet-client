@@ -3,10 +3,11 @@ import { Component } from '@angular/core'
 import { SectionControlComponent } from '@vet-client/lib-control'
 import { RouteSectionEnum } from '@vet-client/lib-store'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
+import { VetFormComponent } from '@vet-client/lib-form'
 
 @Component({
   selector: 'lib-vet-settings-view',
-  imports: [SectionControlComponent],
+  imports: [SectionControlComponent, VetFormComponent],
   templateUrl: './vet-settings-view.component.html',
   hostDirectives: [BaseComponentDirective],
 })

@@ -44,4 +44,6 @@ export enum EndpointEnum {
   medicalRecordRead = 'medical-record-read',
   medicalRecordUpdate = 'medical-record-update',
   medicalRecordDelete = 'medical-record-delete',
+  vetRead = 'vet-read',
+  vetUpdate = 'vet-update',
 }

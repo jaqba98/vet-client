@@ -58,6 +58,7 @@ import {
   CreateMedicalRecordPostDtoModel, DeleteMedicalRecordPostDtoModel,
   ReadMedicalRecordPostDtoModel, UpdateMedicalRecordPostDtoModel,
 } from './post/controller/medical-record-post-dto.model'
+import { ReadVetPostDtoModel, UpdateVetPostDtoModel } from './post/controller/vet-post-dto.model'
 
 type HttpPostType =
   | ChooseRolePostDtoModel
@@ -105,6 +106,8 @@ type HttpPostType =
   | ReadMedicalRecordPostDtoModel
   | UpdateMedicalRecordPostDtoModel
   | DeleteMedicalRecordPostDtoModel
+  | ReadVetPostDtoModel
+  | UpdateVetPostDtoModel
 
 interface HttpModel {
   method: MethodEnum.post

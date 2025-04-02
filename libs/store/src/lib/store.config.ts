@@ -15,6 +15,7 @@ import { petTableFormReducer } from './reducer/domain/pet-table-form.reducer'
 import { appointmentTableFormReducer } from './reducer/domain/appointment-table-form.reducer'
 import { invoiceTableFormReducer } from './reducer/domain/invoice-table-form.reducer'
 import { medicalRecordTableFormReducer } from './reducer/domain/medical-record-table-form.reducer'
+import { vetFormReducer } from './reducer/domain/vet-form.reducer'
 
 export const storeConfig: ApplicationConfig = {
   providers: [
@@ -32,6 +33,7 @@ export const storeConfig: ApplicationConfig = {
       appointmentTableForm: appointmentTableFormReducer,
       invoiceTableForm: invoiceTableFormReducer,
       medicalRecordTableForm: medicalRecordTableFormReducer,
+      vetForm: vetFormReducer,
     }),
     provideStoreDevtools(),
   ],

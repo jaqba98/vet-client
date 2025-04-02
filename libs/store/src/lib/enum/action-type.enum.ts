@@ -9,4 +9,5 @@ export enum ActionTypeEnum {
   appointment = 'Appointment',
   invoice = 'Invoice',
   medicalRecord = 'MedicalRecord',
+  vet = 'Vet',
 }
