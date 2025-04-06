@@ -74,7 +74,7 @@ export class ClinicHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<{ updatedClinic: ClinicDomainModel }>>({
+      .exec<ResponseModel<{ clinics: ClinicDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clinicUpdate, request },
       })
@@ -82,10 +82,10 @@ export class ClinicHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormUpdateRow<ClinicDomainModel>(ActionTypeEnum.clinic)({
-            row: { id: res.data.updatedClinic.id, isSelected: false, row: res.data.updatedClinic },
+            row: { id: res.data.clinics[0].id, isSelected: false, row: res.data.clinics[0] },
           }))
           this.store.dispatch(baseTableFormUpdateSelectedRow<ClinicDomainModel>(ActionTypeEnum.clinic)({
-            row: { id: res.data.updatedClinic.id, isSelected: false, row: res.data.updatedClinic },
+            row: { id: res.data.clinics[0].id, isSelected: false, row: res.data.clinics[0] },
           }))
           this.clinic.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),

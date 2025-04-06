@@ -1,6 +1,6 @@
 export interface ClinicDatabaseModel {
   id: number
-  name: string
+  fullName: string
   street: string
   buildingNumber: string
   apartmentNumber: string

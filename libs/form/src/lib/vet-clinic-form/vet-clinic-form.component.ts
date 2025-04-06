@@ -30,8 +30,8 @@ export class VetClinicFormComponent {
       id: this.baseForm
         .buildInput('text', 'Id')
         .build(),
-      name: this.baseForm
-        .buildInput('text', 'Name')
+      fullName: this.baseForm
+        .buildInput('text', 'Full name')
         .buildValidators([Validators.required, Validators.maxLength(150)])
         .build(),
       street: this.baseForm
