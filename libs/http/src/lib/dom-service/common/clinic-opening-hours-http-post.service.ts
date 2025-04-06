@@ -36,7 +36,7 @@ export class ClinicOpeningHoursHttpPostService {
     return this.httpExecute
       .exec<ResponseModel<{ openingHours: OpeningHoursDomainModel[] }>>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicOpeningHoursRead, request },
+        type: { endpoint: EndpointEnum.openingHourRead, request },
       })
       .pipe(
         take(1),
@@ -57,7 +57,7 @@ export class ClinicOpeningHoursHttpPostService {
     return this.httpExecute
       .exec<ResponseModel<{ openingHours: OpeningHoursDomainModel }>>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.clinicOpeningHoursUpdate, request },
+        type: { endpoint: EndpointEnum.openingHourUpdate, request },
       })
       .pipe(
         take(1),
