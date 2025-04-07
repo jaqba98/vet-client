@@ -1,7 +1,7 @@
 export interface PetDatabaseModel {
   id: number
   isArchived: boolean
-  name: string
+  fullName: string
   species: string
   breed: string
   dateOfBirth: string

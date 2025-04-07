@@ -3,7 +3,7 @@ import { ControlInputModel } from '@vet-client/lib-base-form'
 export interface PetFormModel {
   id: ControlInputModel
   isArchived: ControlInputModel
-  name: ControlInputModel
+  fullName: ControlInputModel
   species: ControlInputModel
   breed: ControlInputModel
   dateOfBirth: ControlInputModel
