@@ -4,10 +4,10 @@ import { DeleteRequestDtoModel } from '../../request/crud/delete-request-dto.mod
 import { TokenRequestDtoModel } from '../../base/token-request-dto.model'
 import { ServiceRequestDtoModel } from '../../request/controller/service-request-dto.model'
 
-export type CreateServicePostDtoModel = BaseEndpointModel<EndpointEnum.vetServiceCreate, ServiceRequestDtoModel>
+export type CreateServicePostDtoModel = BaseEndpointModel<EndpointEnum.serviceClinicCreate, ServiceRequestDtoModel>
 
-export type ReadServicePostDtoModel = BaseEndpointModel<EndpointEnum.vetServiceRead, TokenRequestDtoModel>
+export type ReadServicePostDtoModel = BaseEndpointModel<EndpointEnum.serviceClinicRead, TokenRequestDtoModel>
 
-export type UpdateServicePostDtoModel = BaseEndpointModel<EndpointEnum.vetServiceUpdate, ServiceRequestDtoModel>
+export type UpdateServicePostDtoModel = BaseEndpointModel<EndpointEnum.serviceClinicUpdate, ServiceRequestDtoModel>
 
-export type DeleteServicePostDtoModel = BaseEndpointModel<EndpointEnum.vetServiceDelete, DeleteRequestDtoModel>
+export type DeleteServicePostDtoModel = BaseEndpointModel<EndpointEnum.serviceClinicDelete, DeleteRequestDtoModel>

@@ -29,13 +29,12 @@ export class VetServiceFormComponent {
     this.formModel = {
       id: this.baseForm
         .buildInput('text', 'Id')
-        .buildIsEnabled(false)
         .build(),
       isArchived: this.baseForm
         .buildInput('text', 'Is Archived')
         .build(),
-      name: this.baseForm
-        .buildInput('text', 'Name')
+      fullName: this.baseForm
+        .buildInput('text', 'Full name')
         .buildValidators([Validators.required, Validators.maxLength(255)])
         .build(),
       description: this.baseForm

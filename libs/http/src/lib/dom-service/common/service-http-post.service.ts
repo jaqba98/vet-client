@@ -37,7 +37,7 @@ export class ServiceHttpPostService {
     return this.httpExecute
       .exec<ResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.vetServiceCreate, request },
+        type: { endpoint: EndpointEnum.serviceClinicCreate, request },
       })
       .pipe(
         take(1),
@@ -52,15 +52,15 @@ export class ServiceHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseModel<{ vetServices: ServiceDomainModel[] }>>({
+      .exec<ResponseModel<{ serviceClinics: ServiceDomainModel[] }>>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.vetServiceRead, request },
+        type: { endpoint: EndpointEnum.serviceClinicRead, request },
       })
       .pipe(
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormRowsAction<ServiceDomainModel>(ActionTypeEnum.service)({
-            rows: res.data.vetServices.map(row => ({ id: row.id, isSelected: false, row })),
+            rows: res.data.serviceClinics.map(row => ({ id: row.id, isSelected: false, row })),
           }))
           this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.service)())
         }),
@@ -75,7 +75,7 @@ export class ServiceHttpPostService {
     return this.httpExecute
       .exec<ResponseModel<{ vetService: ServiceDomainModel }>>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.vetServiceUpdate, request },
+        type: { endpoint: EndpointEnum.serviceClinicUpdate, request },
       })
       .pipe(
         take(1),
@@ -108,7 +108,7 @@ export class ServiceHttpPostService {
     return this.httpExecute
       .exec<ResponseModel>({
         method: MethodEnum.post,
-        type: { endpoint: EndpointEnum.vetServiceDelete, request },
+        type: { endpoint: EndpointEnum.serviceClinicDelete, request },
       })
       .pipe(
         take(1),
