@@ -1,7 +1,7 @@
 export interface MedicationDatabaseModel {
   id: number
   isArchived: boolean
-  name: string
+  fullName: string
   description: string
   manufacturer: string
   dose: string
