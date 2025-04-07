@@ -2,18 +2,21 @@ import { Injectable } from '@angular/core'
 import { map, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 
-import { ClinicDomainModel, DeleteDomainModel, MedicationDomainModel } from '@vet-client/lib-domain'
+import {
+  DeleteDomainModel,
+  MedicationDomainModel,
+} from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
 import {
-  baseTableFormRowsAction,
+  ActionTypeEnum,
   baseTableFormDeleteAction,
+  baseTableFormMaxPageAction,
+  baseTableFormRowsAction,
   baseTableFormUpdateRow,
   baseTableFormUpdateSelectedRow,
-  ClinicTableFormType,
-  baseTableFormMaxPageAction, ActionTypeEnum, MedicationTableFormType,
+  MedicationTableFormType,
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
-import { ClinicRequestDtoModel } from '../../model/request/controller/clinic-request-dto.model'
 import { ResponseModel } from '../../model/response/response.model'
 import { EndpointEnum } from '../../enum/endpoint.enum'
 import { MethodEnum } from '../../enum/method.enum'
@@ -44,7 +47,10 @@ export class MedicationHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.medication.runResponseCreate({ success: res.success, message: res.messages[0] })
+          this.medication.runResponseCreate({
+            success: res.success,
+            message: res.messages[0],
+          })
         }),
       )
   }
@@ -61,10 +67,20 @@ export class MedicationHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormRowsAction<MedicationDomainModel>(ActionTypeEnum.medication)({
-            rows: res.data.medications.map(row => ({ id: row.id, isSelected: false, row })),
-          }))
-          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.medication)())
+          this.store.dispatch(
+            baseTableFormRowsAction<MedicationDomainModel>(
+              ActionTypeEnum.medication,
+            )({
+              rows: res.data.medications.map(row => ({
+                id: row.id,
+                isSelected: false,
+                row,
+              })),
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormMaxPageAction(ActionTypeEnum.medication)(),
+          )
         }),
       )
   }
@@ -75,20 +91,39 @@ export class MedicationHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<{ medication: MedicationDomainModel }>>({
+      .exec<ResponseModel<{ medications: MedicationDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.medicationUpdate, request },
       })
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormUpdateRow<MedicationDomainModel>(ActionTypeEnum.medication)({
-            row: { id: res.data.medication.id, isSelected: false, row: res.data.medication },
-          }))
-          this.store.dispatch(baseTableFormUpdateSelectedRow<MedicationDomainModel>(ActionTypeEnum.medication)({
-            row: { id: res.data.medication.id, isSelected: false, row: res.data.medication },
-          }))
-          this.medication.runResponseUpdate({ success: res.success, message: res.messages[0] })
+          this.store.dispatch(
+            baseTableFormUpdateRow<MedicationDomainModel>(
+              ActionTypeEnum.medication,
+            )({
+              row: {
+                id: res.data.medications[0].id,
+                isSelected: false,
+                row: res.data.medications[0],
+              },
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormUpdateSelectedRow<MedicationDomainModel>(
+              ActionTypeEnum.medication,
+            )({
+              row: {
+                id: res.data.medications[0].id,
+                isSelected: false,
+                row: res.data.medications[0],
+              },
+            }),
+          )
+          this.medication.runResponseUpdate({
+            success: res.success,
+            message: res.messages[0],
+          })
         }),
       )
   }
@@ -106,8 +141,14 @@ export class MedicationHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.medication)({ ids: domain.ids }))
-          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.medication)())
+          this.store.dispatch(
+            baseTableFormDeleteAction(ActionTypeEnum.medication)({
+              ids: domain.ids,
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormMaxPageAction(ActionTypeEnum.medication)(),
+          )
         }),
       )
   }
