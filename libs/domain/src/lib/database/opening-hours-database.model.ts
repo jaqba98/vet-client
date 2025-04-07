@@ -14,5 +14,5 @@ export interface OpeningHoursDatabaseModel {
   saturdayTo: string
   sundayFrom: string
   sundayTo: string
-  isArchived: boolean
+  clinicId: number
 }

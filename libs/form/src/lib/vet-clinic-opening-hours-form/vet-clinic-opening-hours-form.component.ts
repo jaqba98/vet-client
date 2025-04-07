@@ -76,9 +76,8 @@ export class VetClinicOpeningHoursFormComponent {
       sundayTo: this.baseForm
         .buildSelect('Sunday To', '00:00', HOURS)
         .build(),
-      isArchived: this.baseForm
-        .buildSelect('Is Archived', false, [])
-        .buildIsEnabled(false)
+      clinicId: this.baseForm
+        .buildInput('text', 'Clinic id')
         .buildValidators([Validators.required])
         .build(),
     }

@@ -16,5 +16,5 @@ export interface OpeningHoursFormModel {
   saturdayTo: ControlInputModel
   sundayFrom: ControlInputModel
   sundayTo: ControlInputModel
-  isArchived: ControlInputModel
+  clinicId: ControlInputModel
 }
