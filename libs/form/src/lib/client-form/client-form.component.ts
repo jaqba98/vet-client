@@ -29,7 +29,6 @@ export class ClientFormComponent {
     this.formModel = {
       id: this.baseForm
         .buildInput('text', 'Id')
-        .buildIsEnabled(false)
         .build(),
       isArchived: this.baseForm
         .buildInput('text', 'Is Archived')
