@@ -73,7 +73,7 @@ export class ClientHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<{ client: ClientDomainModel }>>({
+      .exec<ResponseModel<{ clients: ClientDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.clientUpdate, request },
       })
@@ -82,14 +82,14 @@ export class ClientHttpPostService {
         map((res) => {
           this.store.dispatch(
             baseTableFormUpdateRow<ClientDomainModel>(ActionTypeEnum.client)({
-              row: { id: res.data.client.id, isSelected: false, row: res.data.client },
+              row: { id: res.data.clients[0].id, isSelected: false, row: res.data.clients[0] },
             }),
           )
           this.store.dispatch(
             baseTableFormUpdateSelectedRow<ClientDomainModel>(
               ActionTypeEnum.client,
             )({
-              row: { id: res.data.client.id, isSelected: false, row: res.data.client },
+              row: { id: res.data.clients[0].id, isSelected: false, row: res.data.clients[0] },
             }),
           )
           this.client.runResponseUpdate({
