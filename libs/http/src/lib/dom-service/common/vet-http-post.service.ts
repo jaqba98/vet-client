@@ -48,7 +48,7 @@ export class VetHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<{ vet: VetDomainModel }>>({
+      .exec<ResponseModel<{ vets: VetDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.vetUpdate, request },
       })
@@ -56,7 +56,7 @@ export class VetHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseFormAction<VetDomainModel>(ActionTypeEnum.vet)({
-            form: res.data.vet,
+            form: res.data.vets[0],
           }))
           this.vet.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
