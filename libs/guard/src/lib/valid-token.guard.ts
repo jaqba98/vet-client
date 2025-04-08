@@ -9,6 +9,7 @@ export class ValidTokenGuard implements CanActivate {
   constructor(private httpPost: HttpPostAppService) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    return this.httpPost.validTokenPost()
+    // return this.httpPost.validTokenPost()
+    return true
   }
 }

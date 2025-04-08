@@ -9,6 +9,7 @@ export class HasRoleGuard implements CanActivate {
   constructor(private httpPost: HttpPostAppService) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    return this.httpPost.hasRolePost()
+    // return this.httpPost.hasRolePost()
+    return true
   }
 }
