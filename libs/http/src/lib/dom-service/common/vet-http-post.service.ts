@@ -28,7 +28,7 @@ export class VetHttpPostService {
       token: this.cookie.getToken(),
     }
     return this.httpExecute
-      .exec<ResponseModel<{ vet: VetDomainModel }>>({
+      .exec<ResponseModel<{ vets: VetDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.vetRead, request },
       })
@@ -36,7 +36,7 @@ export class VetHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseFormAction<VetDomainModel>(ActionTypeEnum.vet)({
-            form: res.data.vet,
+            form: res.data.vets[0],
           }))
         }),
       )
