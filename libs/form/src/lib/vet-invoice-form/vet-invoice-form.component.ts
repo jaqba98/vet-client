@@ -66,6 +66,10 @@ export class VetInvoiceFormComponent {
         .buildInput('text', 'Notes')
         .buildValidators([Validators.required, Validators.maxLength(255)])
         .build(),
+      appointmentId: this.baseForm
+        .buildInput('text', 'Appointment id')
+        .buildValidators([Validators.required])
+        .build(),
     }
     this.headers = Object.entries(this.formModel)
       .filter(([, value]) => value.isEnabled)

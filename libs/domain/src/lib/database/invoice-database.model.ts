@@ -9,4 +9,5 @@ export interface InvoiceDatabaseModel {
   paymentStatus: string
   paymentMethod: string
   notes: string
+  appointmentId: number
 }

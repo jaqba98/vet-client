@@ -11,4 +11,5 @@ export interface InvoiceFormModel {
   paymentStatus: ControlInputModel
   paymentMethod: ControlInputModel
   notes: ControlInputModel
+  appointmentId: ControlInputModel
 }
