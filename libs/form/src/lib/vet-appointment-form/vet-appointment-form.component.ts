@@ -30,6 +30,10 @@ export class VetAppointmentFormComponent {
       id: this.baseForm
         .buildInput('text', 'Id')
         .build(),
+      fullName: this.baseForm
+        .buildInput('text', 'Full name')
+        .buildValidators([Validators.required, Validators.maxLength(255)])
+        .build(),
       isArchived: this.baseForm
         .buildInput('text', 'Is archived')
         .buildValidators([Validators.required])

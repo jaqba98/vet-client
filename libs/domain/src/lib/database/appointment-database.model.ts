@@ -1,5 +1,6 @@
 export interface AppointmentDatabaseModel {
   id: number
+  fullName: string
   isArchived: boolean
   dateAndHour: string
   type: string

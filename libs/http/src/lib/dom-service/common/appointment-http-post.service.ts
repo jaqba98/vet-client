@@ -2,14 +2,19 @@ import { Injectable } from '@angular/core'
 import { map, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 
-import { AppointmentDomainModel, DeleteDomainModel, MedicationDomainModel } from '@vet-client/lib-domain'
+import {
+  AppointmentDomainModel,
+  DeleteDomainModel,
+} from '@vet-client/lib-domain'
 import { CookieService } from '@vet-client/lib-system'
 import {
-  baseTableFormRowsAction,
+  ActionTypeEnum,
+  AppointmentTableFormType,
   baseTableFormDeleteAction,
+  baseTableFormMaxPageAction,
+  baseTableFormRowsAction,
   baseTableFormUpdateRow,
   baseTableFormUpdateSelectedRow,
-  baseTableFormMaxPageAction, ActionTypeEnum, AppointmentTableFormType,
 } from '@vet-client/lib-store'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { ResponseModel } from '../../model/response/response.model'
@@ -42,7 +47,10 @@ export class AppointmentHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.appointment.runResponseCreate({ success: res.success, message: res.messages[0] })
+          this.appointment.runResponseCreate({
+            success: res.success,
+            message: res.messages[0],
+          })
         }),
       )
   }
@@ -59,10 +67,20 @@ export class AppointmentHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormRowsAction<AppointmentDomainModel>(ActionTypeEnum.appointment)({
-            rows: res.data.appointments.map(row => ({ id: row.id, isSelected: false, row })),
-          }))
-          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.appointment)())
+          this.store.dispatch(
+            baseTableFormRowsAction<AppointmentDomainModel>(
+              ActionTypeEnum.appointment,
+            )({
+              rows: res.data.appointments.map(row => ({
+                id: row.id,
+                isSelected: false,
+                row,
+              })),
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormMaxPageAction(ActionTypeEnum.appointment)(),
+          )
         }),
       )
   }
@@ -73,20 +91,39 @@ export class AppointmentHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<{ appointment: AppointmentDomainModel }>>({
+      .exec<ResponseModel<{ appointments: AppointmentDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.appointmentUpdate, request },
       })
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormUpdateRow<AppointmentDomainModel>(ActionTypeEnum.appointment)({
-            row: { id: res.data.appointment.id, isSelected: false, row: res.data.appointment },
-          }))
-          this.store.dispatch(baseTableFormUpdateSelectedRow<AppointmentDomainModel>(ActionTypeEnum.appointment)({
-            row: { id: res.data.appointment.id, isSelected: false, row: res.data.appointment },
-          }))
-          this.appointment.runResponseUpdate({ success: res.success, message: res.messages[0] })
+          this.store.dispatch(
+            baseTableFormUpdateRow<AppointmentDomainModel>(
+              ActionTypeEnum.appointment,
+            )({
+              row: {
+                id: res.data.appointments[0].id,
+                isSelected: false,
+                row: res.data.appointments[0],
+              },
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormUpdateSelectedRow<AppointmentDomainModel>(
+              ActionTypeEnum.appointment,
+            )({
+              row: {
+                id: res.data.appointments[0].id,
+                isSelected: false,
+                row: res.data.appointments[0],
+              },
+            }),
+          )
+          this.appointment.runResponseUpdate({
+            success: res.success,
+            message: res.messages[0],
+          })
         }),
       )
   }
@@ -104,8 +141,14 @@ export class AppointmentHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.appointment)({ ids: domain.ids }))
-          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.appointment)())
+          this.store.dispatch(
+            baseTableFormDeleteAction(ActionTypeEnum.appointment)({
+              ids: domain.ids,
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormMaxPageAction(ActionTypeEnum.appointment)(),
+          )
         }),
       )
   }
