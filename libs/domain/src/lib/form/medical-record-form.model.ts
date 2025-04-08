@@ -9,4 +9,5 @@ export interface MedicalRecordFormModel {
   nextAppointment: ControlInputModel
   status: ControlInputModel
   notes: ControlInputModel
+  appointmentId: ControlInputModel
 }

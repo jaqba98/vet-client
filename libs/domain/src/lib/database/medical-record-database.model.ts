@@ -7,4 +7,5 @@ export interface MedicalRecordDatabaseModel {
   nextAppointment: string
   status: string
   notes: string
+  appointmentId: number
 }

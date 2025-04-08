@@ -73,7 +73,7 @@ export class MedicalRecordHttpPostService {
       ...domain,
     }
     return this.httpExecute
-      .exec<ResponseModel<{ medicalRecord: MedicalRecordDomainModel }>>({
+      .exec<ResponseModel<{ medicalRecords: MedicalRecordDomainModel[] }>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.medicalRecordUpdate, request },
       })
@@ -81,10 +81,10 @@ export class MedicalRecordHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(baseTableFormUpdateRow<MedicalRecordDomainModel>(ActionTypeEnum.medicalRecord)({
-            row: { id: res.data.medicalRecord.id, isSelected: false, row: res.data.medicalRecord },
+            row: { id: res.data.medicalRecords[0].id, isSelected: false, row: res.data.medicalRecords[0] },
           }))
           this.store.dispatch(baseTableFormUpdateSelectedRow<MedicalRecordDomainModel>(ActionTypeEnum.medicalRecord)({
-            row: { id: res.data.medicalRecord.id, isSelected: false, row: res.data.medicalRecord },
+            row: { id: res.data.medicalRecords[0].id, isSelected: false, row: res.data.medicalRecords[0] },
           }))
           this.medicalRecord.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
