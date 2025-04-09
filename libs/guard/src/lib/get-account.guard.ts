@@ -9,7 +9,6 @@ export class GetAccountGuard implements CanActivate {
   constructor(private httpPost: HttpPostAppService) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    // return this.httpPost.getAccountPost()
-    return true
+    return this.httpPost.getAccountPost()
   }
 }
