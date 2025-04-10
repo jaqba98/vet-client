@@ -13,10 +13,12 @@ import {
   VetClinicPageComponent,
   VetEmploymentPageComponent,
   VetInvoicePageComponent,
-  VetMainPageComponent, VetMedicalRecordPageComponent,
-  VetMedicationPageComponent,
+  VetMainPageComponent,
+  VetMedicalRecordPageComponent,
+  VetMedicationPageComponent, VetOpeningHourPageComponent,
   VetPageComponent,
-  VetPetsPageComponent, VetServiceClinicPageComponent,
+  VetPetsPageComponent,
+  VetServiceClinicPageComponent,
   VetSettingsPageComponent,
 } from '@vet-client/lib-page'
 import {
@@ -35,21 +37,6 @@ export const route: Route[] = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
-    component: HomePageComponent,
-    canActivate: [InvalidTokenGuard],
-  },
-  {
-    path: 'login',
-    component: LoginPageComponent,
-    canActivate: [InvalidTokenGuard],
-  },
-  {
-    path: 'registration',
-    component: RegistrationPageComponent,
-    canActivate: [InvalidTokenGuard],
-  },
-  {
     path: 'dashboard',
     component: DashboardPageComponent,
     canActivate: [ValidTokenGuard, GetAccountGuard],
@@ -60,22 +47,31 @@ export const route: Route[] = [
         pathMatch: 'full',
       },
       {
-        path: 'choose-role',
-        component: ChooseRolePageComponent,
-        canActivate: [HasNotRoleGuard],
-      },
-      {
         path: 'vet',
         component: VetPageComponent,
         canActivate: [HasRoleGuard],
         children: [
           {
             path: '',
-            component: VetMainPageComponent,
+            redirectTo: '/dashboard/vet/main',
           },
           {
-            path: 'settings',
-            component: VetSettingsPageComponent,
+            path: 'appointment',
+            redirectTo: 'appointment/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'appointment/:page',
+            component: VetAppointmentPageComponent,
+          },
+          {
+            path: 'clients',
+            redirectTo: 'clients/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'clients/:page',
+            component: VetClientsPageComponent,
           },
           {
             path: 'clinic',
@@ -85,6 +81,28 @@ export const route: Route[] = [
           {
             path: 'clinic/:page',
             component: VetClinicPageComponent,
+          },
+          {
+            path: 'employment',
+            redirectTo: 'employment/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'employment/:page',
+            component: VetEmploymentPageComponent,
+          },
+          {
+            path: 'invoice',
+            redirectTo: 'invoice/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'invoice/:page',
+            component: VetInvoicePageComponent,
+          },
+          {
+            path: 'main',
+            component: VetMainPageComponent,
           },
           {
             path: 'medical-record',
@@ -105,58 +123,13 @@ export const route: Route[] = [
             component: VetMedicationPageComponent,
           },
           {
-            path: 'service',
-            redirectTo: 'service/1',
+            path: 'opening-hour',
+            redirectTo: 'opening-hour/1',
             pathMatch: 'full',
           },
           {
-            path: 'service/:page',
-            component: VetServiceClinicPageComponent,
-          },
-          {
-            path: 'clinic-opening-hours',
-            redirectTo: 'clinic-opening-hours/1',
-            pathMatch: 'full',
-          },
-          {
-            path: 'clinic-opening-hours/:page',
-            component: VetClinicOpeningHoursFormComponent,
-          },
-          {
-            path: 'employment',
-            redirectTo: 'employment/1',
-            pathMatch: 'full',
-          },
-          {
-            path: 'employment/:page',
-            component: VetEmploymentPageComponent,
-          },
-          {
-            path: 'appointment',
-            redirectTo: 'appointment/1',
-            pathMatch: 'full',
-          },
-          {
-            path: 'appointment/:page',
-            component: VetAppointmentPageComponent,
-          },
-          {
-            path: 'invoice',
-            redirectTo: 'invoice/1',
-            pathMatch: 'full',
-          },
-          {
-            path: 'invoice/:page',
-            component: VetInvoicePageComponent,
-          },
-          {
-            path: 'clients',
-            redirectTo: 'clients/1',
-            pathMatch: 'full',
-          },
-          {
-            path: 'clients/:page',
-            component: VetClientsPageComponent,
+            path: 'opening-hour/:page',
+            component: VetOpeningHourPageComponent,
           },
           {
             path: 'pets',
@@ -166,6 +139,19 @@ export const route: Route[] = [
           {
             path: 'pets/:page',
             component: VetPetsPageComponent,
+          },
+          {
+            path: 'service-clinic',
+            redirectTo: 'service-clinic/1',
+            pathMatch: 'full',
+          },
+          {
+            path: 'service-clinic/:page',
+            component: VetServiceClinicPageComponent,
+          },
+          {
+            path: 'settings',
+            component: VetSettingsPageComponent,
           },
           {
             path: 'dashboard/vet/**',
@@ -180,11 +166,31 @@ export const route: Route[] = [
         canActivate: [HasRoleGuard],
       },
       {
+        path: 'choose-role',
+        component: ChooseRolePageComponent,
+        canActivate: [HasNotRoleGuard],
+      },
+      {
         path: 'profile',
         component: ProfilePageComponent,
         canActivate: [HasRoleGuard],
       },
     ],
+  },
+  {
+    path: 'home',
+    component: HomePageComponent,
+    canActivate: [InvalidTokenGuard],
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent,
+    canActivate: [InvalidTokenGuard],
+  },
+  {
+    path: 'registration',
+    component: RegistrationPageComponent,
+    canActivate: [InvalidTokenGuard],
   },
   {
     path: '**',
