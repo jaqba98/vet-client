@@ -54,6 +54,7 @@ export const route: Route[] = [
           {
             path: '',
             redirectTo: '/dashboard/vet/main',
+            pathMatch: 'full',
           },
           {
             path: 'appointment',
