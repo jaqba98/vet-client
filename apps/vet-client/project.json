@@ -22,7 +22,7 @@
             "input": "apps/vet-client/public"
           }
         ],
-        "styles": ["apps/vet-client/src/styles.scss"],
+        "styles": ["libs/scss/src/index.scss"],
         "scripts": []
       },
       "configurations": {

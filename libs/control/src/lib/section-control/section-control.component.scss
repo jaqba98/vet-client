@@ -22,13 +22,8 @@
   &--background-surface { background-color: colors.$color-surface; }
 
   &--background-header {
-    background:
-      linear-gradient(
-          rgba(colors.$color-primary, 0.8),
-          rgba(colors.$color-primary, 0.8)
-      ),
-      url("../../../../../apps/vet-client/public/guinea-pig.jpg");
-    background-size: cover;
+    background: url("/guinea-pig.jpg");
+    background-size: contain;
     background-position: center;
   }
 
