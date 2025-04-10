@@ -1,55 +1,56 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { RouterModule } from '@angular/router'
-import { Subscription } from 'rxjs'
+import { RouterOutlet } from '@angular/router'
 import { Store } from '@ngrx/store'
 
-import { NavStoreType, RouteStoreType } from '@vet-client/lib-store'
-import { RouterService } from '@vet-client/lib-system'
+import { HttpComponent } from '@vet-client/lib-http'
 import {
   FooterViewComponent,
   MainViewComponent,
   MobileNavMenuViewComponent,
   NavViewComponent,
 } from '@vet-client/lib-view'
-import { HttpComponent } from '@vet-client/lib-http'
+import { BaseComponent } from '@vet-client/lib-utils'
+import { NavStoreType, RouteStoreType } from '@vet-client/lib-store'
+import { RouterService } from '@vet-client/lib-system'
 
 @Component({
   selector: 'lib-root-page',
   imports: [
-    RouterModule,
-    FooterViewComponent,
+    HttpComponent,
     NavViewComponent,
     MainViewComponent,
+    FooterViewComponent,
     MobileNavMenuViewComponent,
-    HttpComponent,
+    RouterOutlet,
   ],
-  templateUrl: './root-page.component.html',
+  template: `
+    <lib-http></lib-http>
+    <lib-nav-view></lib-nav-view>
+    <lib-main-view>
+      <router-outlet></router-outlet>
+    </lib-main-view>
+    <lib-footer-view></lib-footer-view>
+    <lib-mobile-nav-menu-view></lib-mobile-nav-menu-view>
+  `,
 })
-export class RootPageComponent implements OnInit, OnDestroy {
-  private sub!: Subscription
-
+export class RootPageComponent extends BaseComponent implements OnInit, OnDestroy {
   constructor(
-    private readonly routeStore: Store<RouteStoreType>,
-    private readonly navStore: Store<NavStoreType>,
+    private readonly storeRoute: Store<RouteStoreType>,
+    private readonly storeNav: Store<NavStoreType>,
     private readonly router: RouterService,
   ) {
-    this.sub = new Subscription()
+    super()
   }
 
   ngOnInit() {
-    this.sub.add(
-      this.routeStore
-        .select('route')
-        .subscribe(route => this.router.navigate(route.page, route.section)),
-    )
-    this.sub.add(
-      this.navStore.select('nav').subscribe((nav) => {
-        document.body.style.overflow = nav.isOpen ? 'hidden' : 'auto'
-      }),
-    )
+    this.initSubscription()
+    this.addSubscription(this.storeRoute.select('route')
+      .subscribe(route => this.router.navigate(route.page, route.section)))
+    this.addSubscription(this.storeNav.select('nav')
+      .subscribe(nav => document.body.style.overflow = nav.isOpen ? 'hidden' : 'auto'))
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe()
+    this.removeSubscriptions()
   }
 }

@@ -8,16 +8,15 @@ import {
   LoginPageComponent,
   ProfilePageComponent,
   RegistrationPageComponent,
-  VetAppointmentPageComponent, VetClientsPageComponent,
+  VetAppointmentPageComponent,
+  VetClientsPageComponent,
   VetClinicPageComponent,
   VetEmploymentPageComponent,
   VetInvoicePageComponent,
-  VetMainPageComponent,
-  VetMedicalRecordPageComponent,
+  VetMainPageComponent, VetMedicalRecordPageComponent,
   VetMedicationPageComponent,
   VetPageComponent,
-  VetPetsPageComponent,
-  VetServicesPageComponent,
+  VetPetsPageComponent, VetServiceClinicPageComponent,
   VetSettingsPageComponent,
 } from '@vet-client/lib-page'
 import {
@@ -112,7 +111,7 @@ export const route: Route[] = [
           },
           {
             path: 'service/:page',
-            component: VetServicesPageComponent,
+            component: VetServiceClinicPageComponent,
           },
           {
             path: 'clinic-opening-hours',
