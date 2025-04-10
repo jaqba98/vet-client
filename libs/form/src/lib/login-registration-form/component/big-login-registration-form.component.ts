@@ -7,7 +7,7 @@ import {
   BaseFormService,
 } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { LoginRegistrationDomainModel, LoginRegistrationFormModel } from '@vet-client/lib-domain'
+import { LoginRegistrationDomainModel, LoginRegistrationNavMenuFormModel } from '@vet-client/lib-domain'
 import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service'
 
 @Component({
@@ -19,7 +19,7 @@ import { BaseLoginRegistrationFormService } from '../base/base-login-registratio
 })
 export class BigLoginRegistrationFormComponent
   extends BaseFormService<
-    LoginRegistrationFormModel,
+    LoginRegistrationNavMenuFormModel,
     LoginRegistrationDomainModel
   >
   implements OnInit, OnDestroy {

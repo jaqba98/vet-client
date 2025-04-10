@@ -12,7 +12,7 @@ import {
   BaseFormComponent,
   BaseFormService,
 } from '@vet-client/lib-base-form'
-import { DeleteDomainModel, TableNavDomainModel, TableNavFormModel } from '@vet-client/lib-domain'
+import { DeleteDomainModel, TableNavDomainModel, TableNavMenuFormModel } from '@vet-client/lib-domain'
 import {
   BaseComponentDirective,
   CrudNotification,
@@ -34,7 +34,7 @@ import { TextControlComponent } from '@vet-client/lib-control'
   hostDirectives: [BaseComponentDirective],
 })
 export class TableNavFormComponent<TDomainModel>
-  extends BaseFormService<TableNavFormModel, TableNavDomainModel>
+  extends BaseFormService<TableNavMenuFormModel, TableNavDomainModel>
   implements OnInit, OnDestroy {
   @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string

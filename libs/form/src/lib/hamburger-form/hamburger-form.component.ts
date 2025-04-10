@@ -4,7 +4,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { take } from 'rxjs'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
-import { HamburgerDomainModel, HamburgerFormModel } from '@vet-client/lib-domain'
+import { HamburgerDomainModel, HamburgerNavMenuFormModel } from '@vet-client/lib-domain'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store'
 
@@ -15,7 +15,7 @@ import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store'
   hostDirectives: [BaseComponentDirective],
 })
 export class HamburgerFormComponent
-  extends BaseFormService<HamburgerFormModel, HamburgerDomainModel>
+  extends BaseFormService<HamburgerNavMenuFormModel, HamburgerDomainModel>
   implements OnInit, OnDestroy {
   constructor(
     private store: Store<NavStoreType>,

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store'
 
 import { ActionTypeEnum } from '@vet-client/lib-store'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { OpeningHoursFormModel } from '@vet-client/lib-domain'
+import { OpeningHourFormModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { ClinicOpeningHoursTableFormType } from '@vet-client/lib-store'
 import { VetClinicOpeningHoursNotification } from '@vet-client/lib-http'
@@ -19,7 +19,7 @@ import { HOURS } from '@vet-client/lib-const'
   hostDirectives: [BaseComponentDirective],
 })
 export class VetClinicOpeningHoursFormComponent {
-  formModel: TableFormModel<OpeningHoursFormModel>
+  formModel: TableFormModel<OpeningHourFormModel>
   name = ActionTypeEnum.clinicOpeningHours
   headers: string[] = []
 

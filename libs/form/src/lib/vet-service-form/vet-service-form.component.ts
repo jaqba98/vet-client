@@ -4,7 +4,7 @@ import { Validators } from '@angular/forms'
 
 import { ActionTypeEnum, ServiceTableFormType } from '@vet-client/lib-store'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ServiceFormModel } from '@vet-client/lib-domain'
+import { ServiceClinicFormModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
 import { ServiceNotification } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
@@ -17,7 +17,7 @@ import { TableFormModel } from '../table-form/model/table-form.model'
   hostDirectives: [BaseComponentDirective],
 })
 export class VetServiceFormComponent {
-  formModel: TableFormModel<ServiceFormModel>
+  formModel: TableFormModel<ServiceClinicFormModel>
   name = ActionTypeEnum.service
   headers: string[] = []
 

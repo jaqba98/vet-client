@@ -1,0 +1,1 @@
+export type LogoutRequestModel = object
