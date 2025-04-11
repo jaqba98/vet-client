@@ -41,10 +41,10 @@ export class ClinicOpeningHoursHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormRowsAction<OpeningHoursDomainModel>(ActionTypeEnum.clinicOpeningHours)({
+          this.store.dispatch(baseTableFormRowsAction<OpeningHoursDomainModel>(ActionTypeEnum.openingHour)({
             rows: res.data.openingHours.map(row => ({ id: row.id, isSelected: false, row })),
           }))
-          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinicOpeningHours)())
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.openingHour)())
         }),
       )
   }
@@ -64,14 +64,14 @@ export class ClinicOpeningHoursHttpPostService {
         map((res) => {
           this.store.dispatch(
             baseTableFormUpdateRow<OpeningHoursDomainModel>(
-              ActionTypeEnum.clinicOpeningHours,
+              ActionTypeEnum.openingHour,
             )({
               row: { id: res.data.openingHours[0].id, isSelected: false, row: res.data.openingHours[0] },
             }),
           )
           this.store.dispatch(
             baseTableFormUpdateSelectedRow<OpeningHoursDomainModel>(
-              ActionTypeEnum.clinicOpeningHours,
+              ActionTypeEnum.openingHour,
             )({
               row: { id: res.data.openingHours[0].id, isSelected: false, row: res.data.openingHours[0] },
             }),

@@ -105,8 +105,8 @@ export class VetMenuFormComponent
     else if (domain.vetClinicOpeningHours) {
       this.store.dispatch(
         routeSetAction({
-          page: RoutePageEnum.dashboardVetClinicOpeningHours,
-          section: RouteSectionEnum.dashboardVetClinicOpeningHours,
+          page: RoutePageEnum.dashboardVetOpeningHour,
+          section: RouteSectionEnum.dashboardVetOpeningHour,
         }),
       )
     }
@@ -137,8 +137,8 @@ export class VetMenuFormComponent
     else if (domain.vetService) {
       this.store.dispatch(
         routeSetAction({
-          page: RoutePageEnum.dashboardVetService,
-          section: RouteSectionEnum.dashboardVetService,
+          page: RoutePageEnum.dashboardVetServiceClinic,
+          section: RouteSectionEnum.dashboardVetServiceClinic,
         }),
       )
     }
@@ -161,16 +161,16 @@ export class VetMenuFormComponent
     else if (domain.vetClients) {
       this.store.dispatch(
         routeSetAction({
-          page: RoutePageEnum.dashboardVetClients,
-          section: RouteSectionEnum.dashboardVetClients,
+          page: RoutePageEnum.dashboardVetClient,
+          section: RouteSectionEnum.dashboardVetClient,
         }),
       )
     }
     else if (domain.vetPets) {
       this.store.dispatch(
         routeSetAction({
-          page: RoutePageEnum.dashboardVetPets,
-          section: RouteSectionEnum.dashboardVetPets,
+          page: RoutePageEnum.dashboardVetPet,
+          section: RouteSectionEnum.dashboardVetPet,
         }),
       )
     }

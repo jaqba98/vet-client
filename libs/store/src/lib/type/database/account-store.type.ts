@@ -1,3 +1,3 @@
-import { AccountStoreModel } from '../../model/database/account-store.model'
+import { GetAccountDataModel } from '@vet-client/lib-domain'
 
-export type AccountStoreType = { account: AccountStoreModel }
+export type AccountStoreType = { account: GetAccountDataModel }

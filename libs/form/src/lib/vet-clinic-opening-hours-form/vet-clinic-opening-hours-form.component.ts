@@ -20,7 +20,7 @@ import { HOURS } from '@vet-client/lib-const'
 })
 export class VetClinicOpeningHoursFormComponent {
   formModel: TableFormModel<OpeningHourFormModel>
-  name = ActionTypeEnum.clinicOpeningHours
+  name = ActionTypeEnum.openingHour
   headers: string[] = []
 
   constructor(

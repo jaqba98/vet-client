@@ -15,5 +15,5 @@ import { VetClinicOpeningHoursFormComponent } from '@vet-client/lib-form'
   hostDirectives: [BaseComponentDirective],
 })
 export class VetOpeningHourViewComponent {
-  sectionId = RouteSectionEnum.dashboardVetClinicOpeningHours
+  sectionId = RouteSectionEnum.dashboardVetOpeningHour
 }

@@ -18,7 +18,7 @@ import { TableFormModel } from '../table-form/model/table-form.model'
 })
 export class VetServiceFormComponent {
   formModel: TableFormModel<ServiceClinicFormModel>
-  name = ActionTypeEnum.service
+  name = ActionTypeEnum.serviceClinic
   headers: string[] = []
 
   constructor(

@@ -1,17 +1,17 @@
 import { createReducer, on } from '@ngrx/store'
 
-import { AccountStoreModel } from '../../model/database/account-store.model'
-import { accountSetAction } from '../../actions/database/account.action'
+import { GetAccountDataModel } from '@vet-client/lib-domain'
+import { accountSetAction } from '../../action/domain/account.action'
 
-const initialAccount: AccountStoreModel = {
+const initialAccount: GetAccountDataModel = {
   email: '',
   firstName: '',
   lastName: '',
-  role: '',
   pictureUrl: '',
+  role: '',
 }
 
 export const accountReducer = createReducer(
   initialAccount,
-  on(accountSetAction, (state: AccountStoreModel, payload) => ({ ...state, ...payload })),
+  on(accountSetAction, (state: GetAccountDataModel, payload) => ({ ...state, ...payload })),
 )

@@ -2,17 +2,17 @@ import { createReducer, on } from '@ngrx/store'
 
 import { NUMBER_OF_ROWS_PER_PAGE } from '@vet-client/lib-const'
 import { BaseTableFormStoreModel } from '../../model/base/base-table-form-store.model'
+import { ActionTypeEnum } from '../../enum/action-type.enum'
 import {
-  baseTableFormRowsAction,
   baseTableFormDeleteAction,
   baseTableFormIsSelectedAction,
+  baseTableFormMaxPageAction,
   baseTableFormPageAction,
+  baseTableFormRowsAction,
   baseTableFormTabAction,
   baseTableFormUpdateRow,
   baseTableFormUpdateSelectedRow,
-  baseTableFormMaxPageAction,
-} from '../../actions/base/base-table-form-action.service'
-import { ActionTypeEnum } from '../../enum/action-type.enum'
+} from '../../action/base/base-table-form-action.service'
 
 export const baseTableFormReducer = <TRow>(name: ActionTypeEnum) => {
   const initialState: BaseTableFormStoreModel<TRow> = {
@@ -23,9 +23,7 @@ export const baseTableFormReducer = <TRow>(name: ActionTypeEnum) => {
   }
   return createReducer<BaseTableFormStoreModel<TRow>>(
     initialState,
-    on(baseTableFormRowsAction<TRow>(name), (state: BaseTableFormStoreModel<TRow>, { rows }) => ({
-      ...state, rows,
-    })),
+    on(baseTableFormRowsAction<TRow>(name), (state: BaseTableFormStoreModel<TRow>, { rows }) => ({ ...state, rows })),
     on(baseTableFormIsSelectedAction(name), (state: BaseTableFormStoreModel<TRow>, { ids, isSelected }) => ({
       ...state, rows: state.rows.map(row => ids.includes(row.id) ? { ...row, isSelected } : row),
     })),
@@ -41,9 +39,7 @@ export const baseTableFormReducer = <TRow>(name: ActionTypeEnum) => {
       ...state,
       selectedRow: row,
     })),
-    on(baseTableFormPageAction(name), (state: BaseTableFormStoreModel<TRow>, { page }) => ({
-      ...state, page,
-    })),
+    on(baseTableFormPageAction(name), (state: BaseTableFormStoreModel<TRow>, { page }) => ({ ...state, page })),
     on(baseTableFormMaxPageAction(name), (state: BaseTableFormStoreModel<TRow>) => {
       return {
         ...state,

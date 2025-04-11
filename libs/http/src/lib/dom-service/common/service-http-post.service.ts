@@ -59,10 +59,10 @@ export class ServiceHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          this.store.dispatch(baseTableFormRowsAction<ServiceDomainModel>(ActionTypeEnum.service)({
+          this.store.dispatch(baseTableFormRowsAction<ServiceDomainModel>(ActionTypeEnum.serviceClinic)({
             rows: res.data.serviceClinics.map(row => ({ id: row.id, isSelected: false, row })),
           }))
-          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.service)())
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.serviceClinic)())
         }),
       )
   }
@@ -81,13 +81,13 @@ export class ServiceHttpPostService {
         take(1),
         map((res) => {
           this.store.dispatch(
-            baseTableFormUpdateRow<ServiceDomainModel>(ActionTypeEnum.service)({
+            baseTableFormUpdateRow<ServiceDomainModel>(ActionTypeEnum.serviceClinic)({
               row: { id: res.data.serviceClinics[0].id, isSelected: false, row: res.data.serviceClinics[0] },
             }),
           )
           this.store.dispatch(
             baseTableFormUpdateSelectedRow<ServiceDomainModel>(
-              ActionTypeEnum.service,
+              ActionTypeEnum.serviceClinic,
             )({
               row: { id: res.data.serviceClinics[0].id, isSelected: false, row: res.data.serviceClinics[0] },
             }),
@@ -113,8 +113,8 @@ export class ServiceHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.service)({ ids: domain.ids }))
-          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.service)())
+          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.serviceClinic)({ ids: domain.ids }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.serviceClinic)())
         }),
       )
   }

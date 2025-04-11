@@ -12,5 +12,5 @@ import { VetPetsFormComponent } from '@vet-client/lib-form'
   hostDirectives: [BaseComponentDirective],
 })
 export class VetPetsViewComponent {
-  sectionId = RouteSectionEnum.dashboardVetPets
+  sectionId = RouteSectionEnum.dashboardVetPet
 }
