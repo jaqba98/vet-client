@@ -1,13 +1,14 @@
-export interface BaseTableFormRowModel<TRow> {
+export interface BaseTableFormRowModel<TData> {
   id: number
   isSelected: boolean
-  row: TRow
+  data: TData
 }
 
-export interface BaseTableFormStoreModel<TRow> {
-  rows: BaseTableFormRowModel<TRow>[]
+export interface BaseTableFormStoreModel<TData, TMetadata> {
+  rows: BaseTableFormRowModel<TData>[]
   page: number
   maxPage: number
   tab: string
-  selectedRow?: BaseTableFormRowModel<TRow>
+  metadata: TMetadata
+  selectedRow?: BaseTableFormRowModel<TData>
 }

@@ -4,12 +4,15 @@ import { ActionTypeEnum } from '../../enum/action-type.enum'
 import { BaseFormStoreModel } from '../../model/base/base-form-store.model'
 import { baseFormAction } from '../../action/base/base-form-action.service'
 
-export const baseFormReducer = <TRow>(name: ActionTypeEnum) => {
-  const initialState: BaseFormStoreModel<TRow> = {
-    form: <TRow>{},
+export const baseFormReducer = <TData, TMetadata>(name: ActionTypeEnum) => {
+  const initialState: BaseFormStoreModel<TData, TMetadata> = {
+    data: <TData>{},
+    metadata: <TMetadata>{},
   }
-  return createReducer<BaseFormStoreModel<TRow>>(
+  return createReducer<BaseFormStoreModel<TData, TMetadata>>(
     initialState,
-    on(baseFormAction<TRow>(name), (state: BaseFormStoreModel<TRow>, { form }) => ({ ...state, form })),
+    on(baseFormAction<TData, TMetadata>(name), (state: BaseFormStoreModel<TData, TMetadata>, { data, metadata }) => ({
+      ...state, data, metadata,
+    })),
   )
 }

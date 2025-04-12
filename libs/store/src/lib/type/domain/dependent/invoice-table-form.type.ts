@@ -1,4 +1,6 @@
-import { InvoiceDomainModel } from '@vet-client/lib-domain'
+import { InvoiceDomainModel, InvoiceMetadataModel } from '@vet-client/lib-domain'
 import { BaseTableFormStoreModel } from '../../../model/base/base-table-form-store.model'
 
-export type InvoiceTableFormType = { invoiceTableForm: BaseTableFormStoreModel<InvoiceDomainModel> }
+export type InvoiceTableFormType = {
+  invoiceTableForm: BaseTableFormStoreModel<InvoiceDomainModel, InvoiceMetadataModel>
+}

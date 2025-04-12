@@ -1,3 +1,4 @@
-export interface BaseFormStoreModel<TForm> {
-  form: TForm
+export interface BaseFormStoreModel<TData, TMetadata> {
+  data: TData
+  metadata: TMetadata
 }
