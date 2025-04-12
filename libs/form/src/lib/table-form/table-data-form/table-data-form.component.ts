@@ -41,7 +41,7 @@ import { TableFormTabEnum } from '../enum/table-form-tab.enum'
   styleUrl: './table-data-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableDataFormComponent<TFormModel, TDomainModel>
+export class TableDataFormComponent<TFormModel, TDomainModel, TMetadata>
 implements OnInit, OnDestroy {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
   @Input({ required: true }) crud!: CrudNotification<TDomainModel, DeleteDomainModel>
@@ -84,7 +84,7 @@ implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.crud.runNotificationRead()
-    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
+    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel, TMetadata>) => {
       this.selectRows(data.rows, data.page)
       this.allSelected = !data.rows.some(row => !row.isSelected) && data.rows.length > 0
     }))

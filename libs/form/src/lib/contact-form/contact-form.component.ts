@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { CardControlComponent } from '@vet-client/lib-control'
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ContactDomainModel, ContactFormModel } from '@vet-client/lib-domain'
+import { ContactFormModel, ContactLogicModel } from '@vet-client/lib-domain'
 import { Validators } from '@angular/forms'
 
 @Component({
@@ -13,7 +13,7 @@ import { Validators } from '@angular/forms'
   hostDirectives: [BaseComponentDirective],
 })
 export class ContactFormComponent
-  extends BaseFormService<ContactFormModel, ContactDomainModel>
+  extends BaseFormService<ContactFormModel, ContactLogicModel>
   implements OnInit, OnDestroy {
   constructor(private baseForm: BaseFormBuilder) {
     super()
@@ -41,7 +41,7 @@ export class ContactFormComponent
     this.onDestroy()
   }
 
-  override onSubmit(domain: ContactDomainModel) {
+  override onSubmit(domain: ContactLogicModel) {
     console.log(domain)
   }
 }

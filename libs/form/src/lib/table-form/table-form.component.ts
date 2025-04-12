@@ -30,7 +30,7 @@ import { TablePaginatorFormComponent } from './table-paginator-form/table-pagina
   templateUrl: './table-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableFormComponent<TFormModel, TDomainModel>
+export class TableFormComponent<TFormModel, TDomainModel, TMetadata>
 implements OnInit, OnDestroy {
   @Input({ required: true }) select!: string
   @Input({ required: true }) store!: Store<TableFormStoreModel>
@@ -55,7 +55,7 @@ implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
+    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel, TMetadata>) => {
       this.tab = data.tab
     }))
   }

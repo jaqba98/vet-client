@@ -1,9 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
-import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
+import {
+  BaseFormBuilder,
+  BaseFormComponent,
+  BaseFormService,
+} from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { LogoutFormModel } from '@vet-client/lib-domain'
+import { LogoutDomainModel, LogoutFormModel } from '@vet-client/lib-domain'
 import { LogoutNotification } from '@vet-client/lib-http'
 
 @Component({
@@ -13,7 +17,7 @@ import { LogoutNotification } from '@vet-client/lib-http'
   hostDirectives: [BaseComponentDirective],
 })
 export class LogoutFormComponent
-  extends BaseFormService<LogoutFormModel, void>
+  extends BaseFormService<LogoutFormModel, LogoutDomainModel>
   implements OnInit, OnDestroy {
   constructor(
     private logout: LogoutNotification,
@@ -25,7 +29,9 @@ export class LogoutFormComponent
   ngOnInit() {
     this.onInit('Logout', this.logout.response$)
     this.initBaseForm({
-      logout: this.baseForm.buildButtonIcon('logout', faRightFromBracket, 'primary').build(),
+      logout: this.baseForm
+        .buildButtonIcon('logout', faRightFromBracket, 'primary')
+        .build(),
     })
   }
 
@@ -33,7 +39,7 @@ export class LogoutFormComponent
     this.onDestroy()
   }
 
-  override onSubmit() {
-    this.logout.runNotification()
+  override onSubmit(event: LogoutDomainModel) {
+    this.logout.runNotification(event)
   }
 }

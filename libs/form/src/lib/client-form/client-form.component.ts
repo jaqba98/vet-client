@@ -30,9 +30,6 @@ export class ClientFormComponent {
       id: this.baseForm
         .buildInput('text', 'Id')
         .build(),
-      isArchived: this.baseForm
-        .buildInput('text', 'Is Archived')
-        .build(),
       email: this.baseForm
         .buildInput('text', 'Email')
         .buildValidators([Validators.required, Validators.maxLength(255)])

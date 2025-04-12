@@ -70,14 +70,6 @@ export class VetClinicFormComponent {
         .buildInput('text', 'Phone number')
         .buildValidators([Validators.required, Validators.maxLength(20)])
         .build(),
-      isArchived: this.baseForm
-        .buildSelect('Is Archived', false, [])
-        .buildIsEnabled(false)
-        .build(),
-      openingHoursId: this.baseForm
-        .buildInput('text', 'Opening Hours Id')
-        .buildIsEnabled(false)
-        .build(),
     }
     this.headers = Object.entries(this.formModel)
       .filter(([, value]) => value.isEnabled)

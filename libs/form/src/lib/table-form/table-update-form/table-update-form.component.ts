@@ -15,7 +15,7 @@ import { TableFormStoreModel } from '../model/table-form-store.model'
   templateUrl: './table-update-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableUpdateFormComponent<TFormModel, TDomainModel>
+export class TableUpdateFormComponent<TFormModel, TDomainModel, TMetadata>
   extends BaseFormService<TableFormModel<TFormModel>, TDomainModel>
   implements OnInit, OnDestroy {
   @Input({ required: true }) formModel!: TableFormModel<TFormModel>
@@ -26,9 +26,9 @@ export class TableUpdateFormComponent<TFormModel, TDomainModel>
   ngOnInit() {
     this.onInit('Update', this.crud.responseUpdate$)
     this.initBaseForm(this.formModel)
-    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
-      if (data.selectedRow?.row) {
-        this.setControlValues(Object.entries(data.selectedRow.row))
+    this.sub.add(this.store.select(this.select).subscribe((data: BaseTableFormStoreModel<TDomainModel, TMetadata>) => {
+      if (data.selectedRow?.data) {
+        this.setControlValues(Object.entries(data.selectedRow.data))
       }
     }))
   }

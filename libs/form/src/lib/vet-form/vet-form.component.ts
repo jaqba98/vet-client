@@ -30,17 +30,15 @@ export class VetFormComponent
     this.onInit('Vet', this.vet.responseUpdate$)
     this.initBaseForm({
       id: this.baseForm.buildInput('text', 'ID').build(),
-      isArchived: this.baseForm.buildInput('text', 'Is Archived').build(),
       licenseNumber: this.baseForm.buildInput('text', 'License Number').build(),
       licenseIssueDate: this.baseForm.buildInput('text', 'License Issue Date').build(),
       licenseExpiryDate: this.baseForm.buildInput('text', 'License Expiry Date').build(),
       specialization: this.baseForm.buildInput('text', 'Specialization').build(),
       yearsOfExperience: this.baseForm.buildInput('text', 'Years Of Experience').build(),
       accountId: this.baseForm.buildInput('text', 'Account Id').build(),
-      openingHoursId: this.baseForm.buildInput('text', 'Opening Hours Id').build(),
     })
     this.store.select('vetForm').subscribe((form) => {
-      this.setControlValues(Object.entries(form.form))
+      this.setControlValues(Object.entries(form.metadata))
     })
   }
 

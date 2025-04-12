@@ -42,8 +42,8 @@ export class VetMenuFormComponent
         .buildButton('vetClinic', 'Clinic', 'primary')
         .buildFullWidth()
         .build(),
-      vetClinicOpeningHours: this.baseForm
-        .buildButton('vetClinicOpeningHours', 'Clinic Opening Hours', 'primary')
+      vetOpeningHour: this.baseForm
+        .buildButton('vetOpeningHour', 'Opening Hour', 'primary')
         .buildFullWidth()
         .build(),
       vetEmployment: this.baseForm
@@ -58,8 +58,8 @@ export class VetMenuFormComponent
         .buildButton('vetMedication', 'Medication', 'primary')
         .buildFullWidth()
         .build(),
-      vetService: this.baseForm
-        .buildButton('vetServices', 'Services', 'primary')
+      vetServiceClinic: this.baseForm
+        .buildButton('vetServiceClinic', 'Services', 'primary')
         .buildFullWidth()
         .build(),
       vetAppointment: this.baseForm

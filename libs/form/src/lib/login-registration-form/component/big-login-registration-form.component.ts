@@ -7,7 +7,7 @@ import {
   BaseFormService,
 } from '@vet-client/lib-base-form'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { LoginRegistrationDomainModel, LoginRegistrationNavMenuFormModel } from '@vet-client/lib-domain'
+import { LoginRegistrationNavMenuLogicModel, LoginRegistrationNavMenuFormModel } from '@vet-client/lib-domain'
 import { BaseLoginRegistrationFormService } from '../base/base-login-registration-form.service'
 
 @Component({
@@ -20,7 +20,7 @@ import { BaseLoginRegistrationFormService } from '../base/base-login-registratio
 export class BigLoginRegistrationFormComponent
   extends BaseFormService<
     LoginRegistrationNavMenuFormModel,
-    LoginRegistrationDomainModel
+    LoginRegistrationNavMenuLogicModel
   >
   implements OnInit, OnDestroy {
   formClass = 'form--big'
@@ -46,7 +46,7 @@ export class BigLoginRegistrationFormComponent
     this.onDestroy()
   }
 
-  override onSubmit(domain: LoginRegistrationDomainModel) {
+  override onSubmit(domain: LoginRegistrationNavMenuLogicModel) {
     this.baseLoginRegistrationForm.onSubmit(domain)
   }
 }

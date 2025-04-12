@@ -35,10 +35,6 @@ export class VetEmploymentFormComponent {
         .buildInput('text', 'Is Owner')
         .buildValidators([Validators.required])
         .build(),
-      isArchived: this.baseForm
-        .buildSelect('Is Archived', false, [])
-        .buildIsEnabled(false)
-        .build(),
       accountId: this.baseForm
         .buildInput('text', 'Account Id')
         .buildValidators([Validators.required])

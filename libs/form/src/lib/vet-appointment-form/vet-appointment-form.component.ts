@@ -34,10 +34,6 @@ export class VetAppointmentFormComponent {
         .buildInput('text', 'Full name')
         .buildValidators([Validators.required, Validators.maxLength(255)])
         .build(),
-      isArchived: this.baseForm
-        .buildInput('text', 'Is archived')
-        .buildValidators([Validators.required])
-        .build(),
       dateAndHour: this.baseForm
         .buildInput('text', 'dateAndHour')
         .buildValidators([Validators.required, Validators.maxLength(255)])
@@ -68,14 +64,6 @@ export class VetAppointmentFormComponent {
         .build(),
       petId: this.baseForm
         .buildInput('text', 'petId')
-        .buildValidators([Validators.required])
-        .build(),
-      invoiceId: this.baseForm
-        .buildInput('text', 'invoiceId')
-        .buildValidators([Validators.required])
-        .build(),
-      medicalRecordId: this.baseForm
-        .buildInput('text', 'medicalRecordId')
         .buildValidators([Validators.required])
         .build(),
     }

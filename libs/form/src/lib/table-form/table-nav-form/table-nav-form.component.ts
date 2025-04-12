@@ -12,7 +12,7 @@ import {
   BaseFormComponent,
   BaseFormService,
 } from '@vet-client/lib-base-form'
-import { DeleteDomainModel, TableNavDomainModel, TableNavMenuFormModel } from '@vet-client/lib-domain'
+import { DeleteDomainModel, TableNavMenuLogicModel, TableNavMenuFormModel } from '@vet-client/lib-domain'
 import {
   BaseComponentDirective,
   CrudNotification,
@@ -33,8 +33,8 @@ import { TextControlComponent } from '@vet-client/lib-control'
   templateUrl: './table-nav-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class TableNavFormComponent<TDomainModel>
-  extends BaseFormService<TableNavMenuFormModel, TableNavDomainModel>
+export class TableNavFormComponent<TDomainModel, TMetadata>
+  extends BaseFormService<TableNavMenuFormModel, TableNavMenuLogicModel>
   implements OnInit, OnDestroy {
   @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string
@@ -79,7 +79,7 @@ export class TableNavFormComponent<TDomainModel>
     this.sub.add(
       this.store
         .select(this.select)
-        .subscribe((data: BaseTableFormStoreModel<TDomainModel>) => {
+        .subscribe((data: BaseTableFormStoreModel<TDomainModel, TMetadata>) => {
           this.rows = data.rows
         }),
     )
@@ -89,7 +89,7 @@ export class TableNavFormComponent<TDomainModel>
     this.onDestroy()
   }
 
-  override onSubmit(domain: TableNavDomainModel) {
+  override onSubmit(domain: TableNavMenuLogicModel) {
     if (domain.table) {
       this.store.dispatch(
         baseTableFormTabAction(this.name)({ tab: TableFormTabEnum.table }),

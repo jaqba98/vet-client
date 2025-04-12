@@ -2,11 +2,11 @@ import { Component } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Validators } from '@angular/forms'
 
-import { ActionTypeEnum, ServiceTableFormType } from '@vet-client/lib-store'
+import { ActionTypeEnum, ServiceClinicTableFormType } from '@vet-client/lib-store'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ServiceClinicFormModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
-import { ServiceNotification } from '@vet-client/lib-http'
+import { ServiceClinicNotification } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormModel } from '../table-form/model/table-form.model'
 
@@ -23,15 +23,12 @@ export class VetServiceClinicFormComponent {
 
   constructor(
     private baseForm: BaseFormBuilder,
-    public store: Store<ServiceTableFormType>,
-    public crud: ServiceNotification,
+    public store: Store<ServiceClinicTableFormType>,
+    public crud: ServiceClinicNotification,
   ) {
     this.formModel = {
       id: this.baseForm
         .buildInput('text', 'Id')
-        .build(),
-      isArchived: this.baseForm
-        .buildInput('text', 'Is Archived')
         .build(),
       fullName: this.baseForm
         .buildInput('text', 'Full name')

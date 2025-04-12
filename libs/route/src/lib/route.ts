@@ -28,7 +28,6 @@ import {
   InvalidTokenGuard,
   HasNotRoleGuard,
 } from '@vet-client/lib-guard'
-import { VetClinicOpeningHoursFormComponent } from '@vet-client/lib-form'
 
 export const route: Route[] = [
   {

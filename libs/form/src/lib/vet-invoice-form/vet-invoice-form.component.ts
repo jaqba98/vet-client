@@ -30,10 +30,6 @@ export class VetInvoiceFormComponent {
       id: this.baseForm
         .buildInput('text', 'Id')
         .build(),
-      isArchived: this.baseForm
-        .buildInput('text', 'Is archived')
-        .buildValidators([Validators.required])
-        .build(),
       invoiceDate: this.baseForm
         .buildInput('text', 'Invoice Date')
         .buildValidators([Validators.required])

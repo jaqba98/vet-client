@@ -5,8 +5,8 @@ import { ActionTypeEnum } from '@vet-client/lib-store'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { OpeningHourFormModel } from '@vet-client/lib-domain'
 import { BaseFormBuilder } from '@vet-client/lib-base-form'
-import { ClinicOpeningHoursTableFormType } from '@vet-client/lib-store'
-import { VetClinicOpeningHoursNotification } from '@vet-client/lib-http'
+import { OpeningHourTableFormType } from '@vet-client/lib-store'
+import { OpeningHourNotification } from '@vet-client/lib-http'
 import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormModel } from '../table-form/model/table-form.model'
 import { Validators } from '@angular/forms'
@@ -25,8 +25,8 @@ export class VetOpeningHourFormComponent {
 
   constructor(
     private baseForm: BaseFormBuilder,
-    public store: Store<ClinicOpeningHoursTableFormType>,
-    public crud: VetClinicOpeningHoursNotification,
+    public store: Store<OpeningHourTableFormType>,
+    public crud: OpeningHourNotification,
   ) {
     this.formModel = {
       id: this.baseForm

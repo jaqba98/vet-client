@@ -26,14 +26,9 @@ export class VetMedicalRecordFormComponent {
     public store: Store<MedicalRecordTableFormType>,
     public crud: MedicalRecordNotification,
   ) {
-    //
     this.formModel = {
       id: this.baseForm
         .buildInput('text', 'Id')
-        .build(),
-      isArchived: this.baseForm
-        .buildInput('text', 'Is archived')
-        .buildValidators([Validators.required])
         .build(),
       diagnosis: this.baseForm
         .buildInput('text', 'Diagnosis')

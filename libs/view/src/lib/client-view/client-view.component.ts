@@ -6,7 +6,7 @@ import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { ClientFormComponent } from '@vet-client/lib-form'
 
 @Component({
-  selector: 'lib-clients-view',
+  selector: 'lib-client-view',
   imports: [
     SectionControlComponent,
     ClientFormComponent,

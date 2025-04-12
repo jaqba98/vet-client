@@ -4,7 +4,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { take } from 'rxjs'
 
 import { BaseFormBuilder, BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
-import { HamburgerDomainModel, HamburgerNavMenuFormModel } from '@vet-client/lib-domain'
+import { HamburgerLogicModel, HamburgerNavMenuFormModel } from '@vet-client/lib-domain'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store'
 
@@ -15,7 +15,7 @@ import { NavStoreType, navSwitchIsOpen } from '@vet-client/lib-store'
   hostDirectives: [BaseComponentDirective],
 })
 export class HamburgerFormComponent
-  extends BaseFormService<HamburgerNavMenuFormModel, HamburgerDomainModel>
+  extends BaseFormService<HamburgerNavMenuFormModel, HamburgerLogicModel>
   implements OnInit, OnDestroy {
   constructor(
     private store: Store<NavStoreType>,
@@ -37,7 +37,7 @@ export class HamburgerFormComponent
     this.onDestroy()
   }
 
-  override onSubmit(domain: HamburgerDomainModel) {
+  override onSubmit(domain: HamburgerLogicModel) {
     if (domain.hamburger) {
       this.store.select('nav').pipe(take(1)).subscribe((data) => {
         this.store.dispatch(navSwitchIsOpen({ isOpen: !data.isOpen }))

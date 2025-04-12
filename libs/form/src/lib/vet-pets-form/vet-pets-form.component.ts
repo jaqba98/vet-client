@@ -30,10 +30,6 @@ export class VetPetsFormComponent {
       id: this.baseForm
         .buildInput('text', 'Id')
         .build(),
-      isArchived: this.baseForm
-        .buildInput('text', 'Is archived')
-        .buildValidators([Validators.required])
-        .build(),
       fullName: this.baseForm
         .buildInput('text', 'Name')
         .buildValidators([Validators.required, Validators.maxLength(255)])

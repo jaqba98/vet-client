@@ -23,7 +23,7 @@ import { TableFormStoreModel } from '../model/table-form-store.model'
   styleUrl: './table-paginator-form.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDestroy {
+export class TablePaginatorFormComponent<TDomainModel, TMetadata> implements OnInit, OnDestroy {
   @Input({ required: true }) store!: Store<TableFormStoreModel>
   @Input({ required: true }) select!: string
   @Input({ required: true }) path!: string
@@ -70,7 +70,7 @@ export class TablePaginatorFormComponent<TDomainModel> implements OnInit, OnDest
         this.store.dispatch(baseTableFormPageAction(this.name)({ page: 1 }))
       }
     }))
-    this.sub.add(this.store.select(this.select).subscribe(async (data: BaseTableFormStoreModel<TDomainModel>) => {
+    this.sub.add(this.store.select(this.select).subscribe(async (data: BaseTableFormStoreModel<TDomainModel, TMetadata>) => {
       this.page = data.page
       this.maxPage = data.maxPage
       if (this.page < 1) {
