@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core'
-import { map, take } from 'rxjs'
 import { Store } from '@ngrx/store'
+import { map, take } from 'rxjs'
 
-import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreType } from '@vet-client/lib-store'
 import { CookieService } from '@vet-client/lib-system'
+import { RouteStoreType } from '@vet-client/lib-store'
+import { HasRoleDataModel, HasRoleMetadataModel, HasRoleRequestModel, ResponseModel } from '@vet-client/lib-domain'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
 import { EndpointEnum } from '../../enum/endpoint.enum'
-import { GuardRequestDtoModel } from '../../model/request/guard/guard-request-dto.model'
-import { ResponseModel } from '../../model/response/response.model'
 
 @Injectable({ providedIn: 'root' })
 export class HasNotRoleHttpPostService {
@@ -19,25 +18,26 @@ export class HasNotRoleHttpPostService {
   ) {}
 
   hasNotRolePost() {
-    const request: GuardRequestDtoModel = { token: this.cookie.getToken() }
+    const request: HasRoleRequestModel = { token: this.cookie.getToken() }
     return this.httpExecute
-      .exec<ResponseModel>({
+      .exec<ResponseModel<HasRoleDataModel, HasRoleMetadataModel>>({
         method: MethodEnum.post,
         type: { endpoint: EndpointEnum.hasRole, request },
       })
       .pipe(
         take(1),
         map((res) => {
-          if (res.success) {
-            this.routeStore.dispatch(
-              routeSetAction({
-                page: RoutePageEnum.dashboard,
-                section: RouteSectionEnum.dashboard,
-              }),
-            )
-            return false
-          }
-          return true
+          // todo: Refactor it
+          // if (res.success) {
+          //   this.routeStore.dispatch(
+          //     routeSetAction({
+          //       page: RoutePageEnum.dashboard,
+          //       section: RouteSectionEnum.dashboard,
+          //     }),
+          //   )
+          //   return false
+          // }
+          // return true
         }),
       )
   }

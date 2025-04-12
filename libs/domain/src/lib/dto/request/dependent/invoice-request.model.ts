@@ -1,5 +1,4 @@
 import { TokenRequestModel } from '../base/token-request.model'
-import { InvoiceDataModel } from '../../data/dependent/invoice-data.model'
+import { InvoiceDomainModel } from '../../../domain/dependent/invoice-domain.model'
 
-export interface InvoiceRequestModel extends TokenRequestModel, InvoiceDataModel {
-}
+export interface InvoiceRequestModel extends TokenRequestModel, InvoiceDomainModel {}

@@ -2,23 +2,23 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Subscription, switchMap } from 'rxjs'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ChooseRoleNotification } from '../notification/choose-role.notification'
+import { ChooseRoleNotification } from '../notification/domain/logic/choose-role.notification'
+import { ClinicNotification } from '../notification/domain/independent/clinic.notification'
+import { LoginNotification } from '../notification/domain/logic/login.notification'
+import { LogoutNotification } from '../notification/domain/logic/logout.notification'
+import { RegistrationNotification } from '../notification/domain/logic/registration.notification'
+import { ValidTokenNotification } from '../notification/domain/guard/valid-token.notification'
 import { HttpPostAppService } from '../app-service/http-post-app.service'
-import { ClinicNotification } from '../notification/clinic.notification'
-import { LoginNotification } from '../notification/login.notification'
-import { LogoutNotification } from '../notification/logout.notification'
-import { RegistrationNotification } from '../notification/registration.notification'
-import { ValidTokenNotification } from '../notification/valid-token.notification'
-import { ServiceNotification } from '../notification/service.notification'
-import { VetClinicOpeningHoursNotification } from '../notification/vet-clinic-opening-hours.notification'
-import { EmploymentNotification } from '../notification/employment.notification'
-import { MedicationNotification } from '../notification/medication.notification'
-import { ClientNotification } from '../notification/client.notification'
-import { PetNotification } from '../notification/pet.notification'
-import { AppointmentNotification } from '../notification/appointment.notification'
-import { InvoiceNotification } from '../notification/invoice.notification'
-import { MedicalRecordNotification } from '../notification/medical-record.notification'
-import { VetNotification } from '../notification/vet.notification'
+import { ServiceClinicNotification } from '../notification/domain/dependent/service-clinic.notification'
+import { EmploymentNotification } from '../notification/domain/dependent/employment.notification'
+import { OpeningHourNotification } from '../notification/domain/dependent/opening-hour.notification'
+import { MedicationNotification } from '../notification/domain/dependent/medication.notification'
+import { ClientNotification } from '../notification/domain/dependent/client.notification'
+import { PetNotification } from '../notification/domain/dependent/pet.notification'
+import { AppointmentNotification } from '../notification/domain/dependent/appointment.notification'
+import { InvoiceNotification } from '../notification/domain/dependent/invoice.notification'
+import { MedicalRecordNotification } from '../notification/domain/dependent/medical-record.notification'
+import { VetNotification } from '../notification/domain/dependent/vet.notification'
 
 @Component({
   selector: 'lib-http',
@@ -36,9 +36,9 @@ export class HttpComponent implements OnInit, OnDestroy {
     private registration: RegistrationNotification,
     private validToken: ValidTokenNotification,
     private httpPost: HttpPostAppService,
-    private service: ServiceNotification,
+    private serviceClinic: ServiceClinicNotification,
     private employment: EmploymentNotification,
-    private vetClinicOpeningHours: VetClinicOpeningHoursNotification,
+    private openingHour: OpeningHourNotification,
     private medication: MedicationNotification,
     private client: ClientNotification,
     private pet: PetNotification,
@@ -78,22 +78,22 @@ export class HttpComponent implements OnInit, OnDestroy {
     this.sub.add(this.validToken.notification$.pipe(
       switchMap(() => this.httpPost.validTokenPost()),
     ).subscribe())
-    this.sub.add(this.service.notificationCreate$.pipe(
+    this.sub.add(this.serviceClinic.notificationCreate$.pipe(
       switchMap(domain => this.httpPost.createServicePost(domain)),
     ).subscribe())
-    this.sub.add(this.service.notificationRead$.pipe(
+    this.sub.add(this.serviceClinic.notificationRead$.pipe(
       switchMap(() => this.httpPost.readServicePost()),
     ).subscribe())
-    this.sub.add(this.service.notificationUpdate$.pipe(
+    this.sub.add(this.serviceClinic.notificationUpdate$.pipe(
       switchMap(domain => this.httpPost.updateServicePost(domain)),
     ).subscribe())
-    this.sub.add(this.service.notificationDelete$.pipe(
+    this.sub.add(this.serviceClinic.notificationDelete$.pipe(
       switchMap(domain => this.httpPost.deleteServicePost(domain)),
     ).subscribe())
-    this.sub.add(this.vetClinicOpeningHours.notificationRead$.pipe(
+    this.sub.add(this.openingHour.notificationRead$.pipe(
       switchMap(() => this.httpPost.readClinicOpeningHoursPost()),
     ).subscribe())
-    this.sub.add(this.vetClinicOpeningHours.notificationUpdate$.pipe(
+    this.sub.add(this.openingHour.notificationUpdate$.pipe(
       switchMap(domain => this.httpPost.updateClinicOpeningHoursPost(domain)),
     ).subscribe())
     this.sub.add(this.employment.notificationCreate$.pipe(

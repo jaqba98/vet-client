@@ -1,37 +1,42 @@
 import { Injectable } from '@angular/core'
 
-import { ChooseRoleHttpPostService } from '../dom-service/common/choose-role-http-post.service'
-import {
-  AppointmentDomainModel,
-  ChooseRoleDomainModel, ClientDomainModel,
-  ClinicDomainModel,
-  DeleteDomainModel,
-  EmploymentDomainModel, InvoiceDomainModel,
-  LoginDomainModel, MedicalRecordDomainModel, MedicationDomainModel,
-  OpeningHoursDomainModel, PetDomainModel,
-  RegistrationDomainModel,
-  ServiceDomainModel, VetDomainModel,
-} from '@vet-client/lib-domain'
-import { ClinicHttpPostService } from '../dom-service/common/clinic-http-post.service'
-import { LoginHttpPostService } from '../dom-service/common/login-http-post.service'
-import { LogoutHttpPostService } from '../dom-service/common/logout-http-post.service'
-import { RegistrationHttpPostService } from '../dom-service/common/registration-http-post.service'
+import { ChooseRoleHttpPostService } from '../dom-service/domain/logic/choose-role-http-post.service'
+import { ClinicHttpPostService } from '../dom-service/domain/independent/clinic-http-post.service'
+import { LoginHttpPostService } from '../dom-service/domain/logic/login-http-post.service'
+import { LogoutHttpPostService } from '../dom-service/domain/logic/logout-http-post.service'
+import { RegistrationHttpPostService } from '../dom-service/domain/logic/registration-http-post.service'
 import { GetAccountHttpPostService } from '../dom-service/guard/get-account-http-post.service'
 import { HasRoleHttpPostService } from '../dom-service/guard/has-role-http-post.service'
-import { ValidTokenHttpPostService } from '../dom-service/guard/valid-token-http-post.service'
 import { HasNotRoleHttpPostService } from '../dom-service/guard/has-not-role-http-post.service'
+import { ValidTokenHttpPostService } from '../dom-service/guard/valid-token-http-post.service'
 import { InvalidTokenHttpPostService } from '../dom-service/guard/invalid-token-http-post.service'
-import { ServiceHttpPostService } from '../dom-service/common/service-http-post.service'
-import { ClinicOpeningHoursHttpPostService } from '../dom-service/common/clinic-opening-hours-http-post.service'
-import { EmploymentHttpPostService } from '../dom-service/common/employment-http-post.service'
-import { MedicationHttpPostService } from '../dom-service/common/medication-http-post.service'
-import { ClientHttpPostService } from '../dom-service/common/client-http-post.service'
-import { PetHttpPostService } from '../dom-service/common/pet-http-post.service'
-import { AppointmentHttpPostService } from '../dom-service/common/appointment-http-post.service'
-import { InvoiceHttpPostService } from '../dom-service/common/invoice-http-post.service'
-import { MedicalRecordHttpPostService } from '../dom-service/common/medical-record-http-post.service'
-import { VetRequestDtoModel } from '../model/request/controller/vet-request-dto.model'
-import { VetHttpPostService } from '../dom-service/common/vet-http-post.service'
+import { ServiceClinicHttpPostService } from '../dom-service/domain/dependent/service-clinic-http-post.service'
+import { OpeningHourHttpPostService } from '../dom-service/domain/dependent/opening-hour-http-post.service'
+import { EmploymentHttpPostService } from '../dom-service/domain/dependent/employment-http-post.service'
+import { MedicationHttpPostService } from '../dom-service/domain/dependent/medication-http-post.service'
+import { ClientHttpPostService } from '../dom-service/domain/dependent/client-http-post.service'
+import { PetHttpPostService } from '../dom-service/domain/dependent/pet-http-post.service'
+import { AppointmentHttpPostService } from '../dom-service/domain/dependent/appointment-http-post.service'
+import { InvoiceHttpPostService } from '../dom-service/domain/dependent/invoice-http-post.service'
+import { MedicalRecordHttpPostService } from '../dom-service/domain/dependent/medical-record-http-post.service'
+import { VetHttpPostService } from '../dom-service/domain/dependent/vet-http-post.service'
+import {
+  AppointmentDomainModel,
+  ChooseRoleDomainModel,
+  ClientDomainModel,
+  ClinicDomainModel,
+  DeleteDomainModel,
+  EmploymentDomainModel,
+  InvoiceDomainModel,
+  LoginDomainModel,
+  MedicalRecordDomainModel,
+  MedicationDomainModel,
+  OpeningHourDomainModel,
+  PetDomainModel,
+  RegistrationDomainModel,
+  ServiceClinicDomainModel,
+  VetDomainModel,
+} from '@vet-client/lib-domain'
 
 @Injectable({ providedIn: 'root' })
 export class HttpPostAppService {
@@ -46,8 +51,8 @@ export class HttpPostAppService {
     private hasNotRoleHttpPost: HasNotRoleHttpPostService,
     private validTokenHttpPost: ValidTokenHttpPostService,
     private invalidTokenHttpPost: InvalidTokenHttpPostService,
-    private serviceHttpPost: ServiceHttpPostService,
-    private clinicOpeningHoursHttpPost: ClinicOpeningHoursHttpPostService,
+    private serviceClinicHttpPost: ServiceClinicHttpPostService,
+    private openingHourHttpPost: OpeningHourHttpPostService,
     private employmentHttpPost: EmploymentHttpPostService,
     private medicationHttpPost: MedicationHttpPostService,
     private clientHttpPost: ClientHttpPostService,
@@ -110,28 +115,28 @@ export class HttpPostAppService {
     return this.invalidTokenHttpPost.invalidTokenPost()
   }
 
-  createServicePost(domain: ServiceDomainModel) {
-    return this.serviceHttpPost.createServicePost(domain)
+  createServicePost(domain: ServiceClinicDomainModel) {
+    return this.serviceClinicHttpPost.createServicePost(domain)
   }
 
   readServicePost() {
-    return this.serviceHttpPost.readServicePost()
+    return this.serviceClinicHttpPost.readServicePost()
   }
 
-  updateServicePost(domain: ServiceDomainModel) {
-    return this.serviceHttpPost.updateServicePost(domain)
+  updateServicePost(domain: ServiceClinicDomainModel) {
+    return this.serviceClinicHttpPost.updateServicePost(domain)
   }
 
   deleteServicePost(domain: DeleteDomainModel) {
-    return this.serviceHttpPost.deleteServicePost(domain)
+    return this.serviceClinicHttpPost.deleteServicePost(domain)
   }
 
   readClinicOpeningHoursPost() {
-    return this.clinicOpeningHoursHttpPost.readClinicOpeningHoursPost()
+    return this.openingHourHttpPost.readOpeningHourPost()
   }
 
-  updateClinicOpeningHoursPost(domain: OpeningHoursDomainModel) {
-    return this.clinicOpeningHoursHttpPost.updateClinicOpeningHoursPost(domain)
+  updateClinicOpeningHoursPost(domain: OpeningHourDomainModel) {
+    return this.openingHourHttpPost.updateOpeningHourPost(domain)
   }
 
   createEmploymentPost(domain: EmploymentDomainModel) {

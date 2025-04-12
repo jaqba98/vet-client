@@ -1,3 +1,3 @@
 export interface TokenRequestModel {
-  token: string
+  token: string | null
 }

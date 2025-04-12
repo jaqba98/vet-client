@@ -1,64 +1,69 @@
-import { ChooseRolePostDtoModel } from './post/controller/choose-role-post-dto.model'
 import {
   CreateClinicPostDtoModel,
   DeleteClinicPostDtoModel,
   ReadClinicPostDtoModel,
   UpdateClinicPostDtoModel,
-} from './post/controller/clinic-post-dto.model'
-import { LoginPostDtoModel } from './post/controller/login-post-dto.model'
-import { LogoutPostDtoModel } from './post/controller/logout-post-dto.model'
-import { RegistrationPostDtoModel } from './post/controller/registration-post-dto.model'
+} from './post/domain/independent/clinic-post-dto.model'
+import { ChooseRolePostDtoModel } from './post/domain/logic/choose-role-post-dto.model'
+import { LoginPostDtoModel } from './post/domain/logic/login-post-dto.model'
+import { LogoutPostDtoModel } from './post/domain/logic/logout-post-dto.model'
+import { RegistrationPostDtoModel } from './post/domain/logic/registration-post-dto.model'
 import {
   GetAccountPostDtoModel,
   HasRolePostDtoModel,
   ValidTokenPostDtoModel,
 } from './post/guard/guard-post-dto.model'
-import { MethodEnum } from '../enum/method.enum'
 import {
-  CreateServicePostDtoModel,
-  DeleteServicePostDtoModel,
-  ReadServicePostDtoModel,
-  UpdateServicePostDtoModel,
-} from './post/controller/service-post-dto.model'
+  CreateServiceClinicPostDtoModel,
+  DeleteServiceClinicPostDtoModel,
+  ReadServiceClinicPostDtoModel,
+  UpdateServiceClinicPostDtoModel,
+} from './post/domain/dependent/service-clinic-post-dto.model'
 import {
-  ReadClinicOpeningHoursPostDtoModel,
-  UpdateClinicOpeningHoursPostDtoModel,
-} from './post/controller/clinic-opening-hours-post-dto.model'
+  ReadOpeningHourPostDtoModel,
+  UpdateOpeningHourPostDtoModel,
+} from './post/domain/dependent/opening-hour-post-dto.model'
 import {
   CreateEmploymentPostDtoModel,
   DeleteEmploymentPostDtoModel,
   ReadEmploymentPostDtoModel,
   UpdateEmploymentPostDtoModel,
-} from './post/controller/employment-post-dto.model'
+} from './post/domain/dependent/employment-post-dto.model'
 import {
-  CreateMedicationPostDtoModel, DeleteMedicationPostDtoModel,
+  CreateMedicationPostDtoModel,
+  DeleteMedicationPostDtoModel,
   ReadMedicationPostDtoModel,
   UpdateMedicationPostDtoModel,
-} from './post/controller/medication-post-dto.model'
+} from './post/domain/dependent/medication-post-dto.model'
 import {
   CreateClientPostDtoModel, DeleteClientPostDtoModel,
   ReadClientPostDtoModel,
   UpdateClientPostDtoModel,
-} from './post/controller/client-post-dto.model'
+} from './post/domain/dependent/client-post-dto.model'
 import {
-  CreatePetPostDtoModel, DeletePetPostDtoModel,
+  CreatePetPostDtoModel,
+  DeletePetPostDtoModel,
   ReadPetPostDtoModel,
   UpdatePetPostDtoModel,
-} from './post/controller/pet-post-dto.model'
+} from './post/domain/dependent/pet-post-dto.model'
 import {
-  CreateAppointmentPostDtoModel, DeleteAppointmentPostDtoModel,
-  ReadAppointmentPostDtoModel, UpdateAppointmentPostDtoModel,
-} from './post/controller/appointment-post-dto.model'
+  CreateAppointmentPostDtoModel,
+  DeleteAppointmentPostDtoModel,
+  ReadAppointmentPostDtoModel,
+  UpdateAppointmentPostDtoModel,
+} from './post/domain/dependent/appointment-post-dto.model'
 import {
   CreateInvoicePostDtoModel, DeleteInvoicePostDtoModel,
   ReadInvoicePostDtoModel,
   UpdateInvoicePostDtoModel,
-} from './post/controller/invoice-post-dto.model'
+} from './post/domain/dependent/invoice-post-dto.model'
 import {
   CreateMedicalRecordPostDtoModel, DeleteMedicalRecordPostDtoModel,
-  ReadMedicalRecordPostDtoModel, UpdateMedicalRecordPostDtoModel,
-} from './post/controller/medical-record-post-dto.model'
-import { ReadVetPostDtoModel, UpdateVetPostDtoModel } from './post/controller/vet-post-dto.model'
+  ReadMedicalRecordPostDtoModel,
+  UpdateMedicalRecordPostDtoModel,
+} from './post/domain/dependent/medical-record-post-dto.model'
+import { ReadVetPostDtoModel, UpdateVetPostDtoModel } from './post/domain/dependent/vet-post-dto.model'
+import { MethodEnum } from '../enum/method.enum'
 
 type HttpPostType =
   | ChooseRolePostDtoModel
@@ -72,12 +77,12 @@ type HttpPostType =
   | GetAccountPostDtoModel
   | HasRolePostDtoModel
   | ValidTokenPostDtoModel
-  | CreateServicePostDtoModel
-  | ReadServicePostDtoModel
-  | UpdateServicePostDtoModel
-  | DeleteServicePostDtoModel
-  | ReadClinicOpeningHoursPostDtoModel
-  | UpdateClinicOpeningHoursPostDtoModel
+  | CreateServiceClinicPostDtoModel
+  | ReadServiceClinicPostDtoModel
+  | UpdateServiceClinicPostDtoModel
+  | DeleteServiceClinicPostDtoModel
+  | ReadOpeningHourPostDtoModel
+  | UpdateOpeningHourPostDtoModel
   | CreateEmploymentPostDtoModel
   | ReadEmploymentPostDtoModel
   | UpdateEmploymentPostDtoModel
