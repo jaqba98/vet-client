@@ -4,7 +4,7 @@ import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
 import {
-  ActionTypeEnum, baseTableFormMaxPageAction,
+  ActionTypeEnum, baseTableFormDeleteAction, baseTableFormMaxPageAction,
   baseTableFormRowsAction,
   MedicationTableFormType,
 } from '@vet-client/lib-store'
@@ -131,15 +131,8 @@ export class MedicationHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormDeleteAction(ActionTypeEnum.medication)({
-          //     ids: domain.ids,
-          //   }),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormMaxPageAction(ActionTypeEnum.medication)(),
-          // )
+          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.medication)({ ids: domain.ids }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.medication)())
         }),
       )
   }

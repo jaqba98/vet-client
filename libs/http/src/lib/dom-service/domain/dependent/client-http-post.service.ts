@@ -5,6 +5,7 @@ import { map, take } from 'rxjs'
 import { CookieService } from '@vet-client/lib-system'
 import {
   ActionTypeEnum,
+  baseTableFormDeleteAction,
   baseTableFormMaxPageAction,
   baseTableFormRowsAction,
   ClientTableFormType,
@@ -119,9 +120,8 @@ export class ClientHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          // todo: Refactor it
-          // this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.client)({ ids: domain.ids }))
-          // this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.client)())
+          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.client)({ ids: domain.ids }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.client)())
         }),
       )
   }

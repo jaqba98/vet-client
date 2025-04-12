@@ -6,6 +6,7 @@ import { CookieService } from '@vet-client/lib-system'
 import {
   ActionTypeEnum,
   AppointmentTableFormType,
+  baseTableFormDeleteAction,
   baseTableFormMaxPageAction,
   baseTableFormRowsAction,
 } from '@vet-client/lib-store'
@@ -137,15 +138,8 @@ export class AppointmentHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormDeleteAction(ActionTypeEnum.appointment)({
-          //     ids: domain.ids,
-          //   }),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormMaxPageAction(ActionTypeEnum.appointment)(),
-          // )
+          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.appointment)({ ids: domain.ids }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.appointment)())
         }),
       )
   }

@@ -110,9 +110,8 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map(() => {
-          // todo: Refactor it
-          // this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.clinic)({ ids: domain.ids }))
-          // this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinic)())
+          this.store.dispatch(baseTableFormDeleteAction(ActionTypeEnum.clinic)({ ids: domain.ids }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinic)())
         }),
       )
   }
