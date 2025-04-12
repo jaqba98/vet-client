@@ -8,6 +8,8 @@ import {
   baseTableFormDeleteAction,
   baseTableFormMaxPageAction,
   baseTableFormRowsAction,
+  baseTableFormUpdateRow,
+  baseTableFormUpdateSelectedRow,
   EmploymentTableFormType,
 } from '@vet-client/lib-store'
 import {
@@ -86,14 +88,13 @@ export class EmploymentHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(baseTableFormUpdateRow<EmploymentDomainModel>(ActionTypeEnum.employment)({
-          //   row: { id: res.data.id, isSelected: false, row: res.data },
-          // }))
-          // this.store.dispatch(baseTableFormUpdateSelectedRow<EmploymentDomainModel>(ActionTypeEnum.employment)({
-          //   row: { id: res.data.id, isSelected: false, row: res.data },
-          // }))
-          // this.employment.runResponseUpdate({ success: res.success, message: res.messages[0] })
+          this.store.dispatch(baseTableFormUpdateRow<EmploymentDomainModel>(ActionTypeEnum.employment)({
+            row: { id: res.data.employments[0].id, isSelected: false, data: res.data.employments[0] },
+          }))
+          this.store.dispatch(baseTableFormUpdateSelectedRow<EmploymentDomainModel>(ActionTypeEnum.employment)({
+            row: { id: res.data.employments[0].id, isSelected: false, data: res.data.employments[0] },
+          }))
+          this.employment.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

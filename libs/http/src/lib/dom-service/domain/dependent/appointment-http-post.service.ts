@@ -8,7 +8,7 @@ import {
   AppointmentTableFormType,
   baseTableFormDeleteAction,
   baseTableFormMaxPageAction,
-  baseTableFormRowsAction,
+  baseTableFormRowsAction, baseTableFormUpdateRow, baseTableFormUpdateSelectedRow,
 } from '@vet-client/lib-store'
 import {
   AppointmentDataModel,
@@ -94,33 +94,25 @@ export class AppointmentHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormUpdateRow<AppointmentDomainModel>(
-          //     ActionTypeEnum.appointment,
-          //   )({
-          //     row: {
-          //       id: res.data.appointments[0].id,
-          //       isSelected: false,
-          //       row: res.data.appointments[0],
-          //     },
-          //   }),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormUpdateSelectedRow<AppointmentDomainModel>(
-          //     ActionTypeEnum.appointment,
-          //   )({
-          //     row: {
-          //       id: res.data.appointments[0].id,
-          //       isSelected: false,
-          //       row: res.data.appointments[0],
-          //     },
-          //   }),
-          // )
-          // this.appointment.runResponseUpdate({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          this.store.dispatch(
+            baseTableFormUpdateRow<AppointmentDomainModel>(ActionTypeEnum.appointment)({
+              row: {
+                id: res.data.appointments[0].id,
+                isSelected: false,
+                data: res.data.appointments[0],
+              },
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormUpdateSelectedRow<AppointmentDomainModel>(ActionTypeEnum.appointment)({
+              row: {
+                id: res.data.appointments[0].id,
+                isSelected: false,
+                data: res.data.appointments[0],
+              },
+            }),
+          )
+          this.appointment.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

@@ -8,6 +8,7 @@ import {
   baseTableFormDeleteAction,
   baseTableFormMaxPageAction,
   baseTableFormRowsAction,
+  baseTableFormUpdateRow, baseTableFormUpdateSelectedRow,
   ClientTableFormType,
 } from '@vet-client/lib-store'
 import {
@@ -86,23 +87,13 @@ export class ClientHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormUpdateRow<ClientDomainModel>(ActionTypeEnum.client)({
-          //     row: { id: res.data.clients[0].id, isSelected: false, row: res.data.clients[0] },
-          //   }),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormUpdateSelectedRow<ClientDomainModel>(
-          //     ActionTypeEnum.client,
-          //   )({
-          //     row: { id: res.data.clients[0].id, isSelected: false, row: res.data.clients[0] },
-          //   }),
-          // )
-          // this.client.runResponseUpdate({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          this.store.dispatch(baseTableFormUpdateRow<ClientDomainModel>(ActionTypeEnum.client)({
+            row: { id: res.data.clients[0].id, isSelected: false, data: res.data.clients[0] },
+          }))
+          this.store.dispatch(baseTableFormUpdateSelectedRow<ClientDomainModel>(ActionTypeEnum.client)({
+            row: { id: res.data.clients[0].id, isSelected: false, data: res.data.clients[0] },
+          }))
+          this.client.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

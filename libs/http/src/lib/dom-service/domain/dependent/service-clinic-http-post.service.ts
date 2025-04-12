@@ -5,7 +5,7 @@ import { map, take } from 'rxjs'
 import { CookieService } from '@vet-client/lib-system'
 import {
   ActionTypeEnum, baseTableFormDeleteAction, baseTableFormMaxPageAction,
-  baseTableFormRowsAction,
+  baseTableFormRowsAction, baseTableFormUpdateRow, baseTableFormUpdateSelectedRow,
   ServiceClinicTableFormType,
 } from '@vet-client/lib-store'
 import {
@@ -84,23 +84,22 @@ export class ServiceClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormUpdateRow<ServiceDomainModel>(ActionTypeEnum.serviceClinic)({
-          //     row: { id: res.data.serviceClinics[0].id, isSelected: false, row: res.data.serviceClinics[0] },
-          //   }),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormUpdateSelectedRow<ServiceDomainModel>(
-          //     ActionTypeEnum.serviceClinic,
-          //   )({
-          //     row: { id: res.data.serviceClinics[0].id, isSelected: false, row: res.data.serviceClinics[0] },
-          //   }),
-          // )
-          // this.service.runResponseUpdate({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          this.store.dispatch(
+            baseTableFormUpdateRow<ServiceClinicDomainModel>(ActionTypeEnum.serviceClinic)({
+              row: { id: res.data.serviceClinics[0].id, isSelected: false, data: res.data.serviceClinics[0] },
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormUpdateSelectedRow<ServiceClinicDomainModel>(
+              ActionTypeEnum.serviceClinic,
+            )({
+              row: { id: res.data.serviceClinics[0].id, isSelected: false, data: res.data.serviceClinics[0] },
+            }),
+          )
+          this.service.runResponseUpdate({
+            success: res.success,
+            message: res.messages[0],
+          })
         }),
       )
   }

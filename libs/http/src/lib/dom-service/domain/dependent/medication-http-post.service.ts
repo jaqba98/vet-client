@@ -5,7 +5,7 @@ import { map, take } from 'rxjs'
 import { CookieService } from '@vet-client/lib-system'
 import {
   ActionTypeEnum, baseTableFormDeleteAction, baseTableFormMaxPageAction,
-  baseTableFormRowsAction,
+  baseTableFormRowsAction, baseTableFormUpdateRow, baseTableFormUpdateSelectedRow,
   MedicationTableFormType,
 } from '@vet-client/lib-store'
 import {
@@ -87,33 +87,21 @@ export class MedicationHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormUpdateRow<MedicationDomainModel>(
-          //     ActionTypeEnum.medication,
-          //   )({
-          //     row: {
-          //       id: res.data.medications[0].id,
-          //       isSelected: false,
-          //       row: res.data.medications[0],
-          //     },
-          //   }),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormUpdateSelectedRow<MedicationDomainModel>(
-          //     ActionTypeEnum.medication,
-          //   )({
-          //     row: {
-          //       id: res.data.medications[0].id,
-          //       isSelected: false,
-          //       row: res.data.medications[0],
-          //     },
-          //   }),
-          // )
-          // this.medication.runResponseUpdate({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          this.store.dispatch(baseTableFormUpdateRow<MedicationDomainModel>(ActionTypeEnum.medication)({
+            row: {
+              id: res.data.medications[0].id,
+              isSelected: false,
+              data: res.data.medications[0],
+            },
+          }))
+          this.store.dispatch(baseTableFormUpdateSelectedRow<MedicationDomainModel>(ActionTypeEnum.medication)({
+            row: {
+              id: res.data.medications[0].id,
+              isSelected: false,
+              data: res.data.medications[0],
+            },
+          }))
+          this.medication.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

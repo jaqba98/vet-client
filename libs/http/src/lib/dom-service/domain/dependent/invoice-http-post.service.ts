@@ -4,8 +4,11 @@ import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
 import {
-  ActionTypeEnum, baseTableFormDeleteAction, baseTableFormMaxPageAction,
+  ActionTypeEnum,
+  baseTableFormDeleteAction,
+  baseTableFormMaxPageAction,
   baseTableFormRowsAction,
+  baseTableFormUpdateRow, baseTableFormUpdateSelectedRow,
   InvoiceTableFormType,
 } from '@vet-client/lib-store'
 import {
@@ -87,33 +90,23 @@ export class InvoiceHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // if (res.success) {
-          //   this.store.dispatch(
-          //     baseTableFormUpdateRow<InvoiceDomainModel>(ActionTypeEnum.invoice)({
-          //       row: {
-          //         id: res.data.invoices[0].id,
-          //         isSelected: false,
-          //         row: res.data.invoices[0],
-          //       },
-          //     }),
-          //   )
-          //   this.store.dispatch(
-          //     baseTableFormUpdateSelectedRow<InvoiceDomainModel>(
-          //       ActionTypeEnum.invoice,
-          //     )({
-          //       row: {
-          //         id: res.data.invoices[0].id,
-          //         isSelected: false,
-          //         row: res.data.invoices[0],
-          //       },
-          //     }),
-          //   )
-          // }
-          // this.invoice.runResponseUpdate({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          if (res.success) {
+            this.store.dispatch(baseTableFormUpdateRow<InvoiceDomainModel>(ActionTypeEnum.invoice)({
+              row: {
+                id: res.data.invoices[0].id,
+                isSelected: false,
+                data: res.data.invoices[0],
+              },
+            }))
+            this.store.dispatch(baseTableFormUpdateSelectedRow<InvoiceDomainModel>(ActionTypeEnum.invoice)({
+              row: {
+                id: res.data.invoices[0].id,
+                isSelected: false,
+                data: res.data.invoices[0],
+              },
+            }))
+          }
+          this.invoice.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

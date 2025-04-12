@@ -4,8 +4,11 @@ import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
 import {
-  ActionTypeEnum, baseTableFormDeleteAction, baseTableFormMaxPageAction,
+  ActionTypeEnum,
+  baseTableFormDeleteAction,
+  baseTableFormMaxPageAction,
   baseTableFormRowsAction,
+  baseTableFormUpdateRow, baseTableFormUpdateSelectedRow,
   PetTableFormType,
 } from '@vet-client/lib-store'
 import {
@@ -87,29 +90,28 @@ export class PetHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormUpdateRow<PetDomainModel>(ActionTypeEnum.pet)({
-          //     row: {
-          //       id: res.data.pets[0].id,
-          //       isSelected: false,
-          //       row: res.data.pets[0],
-          //     },
-          //   }),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormUpdateSelectedRow<PetDomainModel>(ActionTypeEnum.pet)({
-          //     row: {
-          //       id: res.data.pets[0].id,
-          //       isSelected: false,
-          //       row: res.data.pets[0],
-          //     },
-          //   }),
-          // )
-          // this.pet.runResponseUpdate({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          this.store.dispatch(
+            baseTableFormUpdateRow<PetDomainModel>(ActionTypeEnum.pet)({
+              row: {
+                id: res.data.pets[0].id,
+                isSelected: false,
+                data: res.data.pets[0],
+              },
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormUpdateSelectedRow<PetDomainModel>(ActionTypeEnum.pet)({
+              row: {
+                id: res.data.pets[0].id,
+                isSelected: false,
+                data: res.data.pets[0],
+              },
+            }),
+          )
+          this.pet.runResponseUpdate({
+            success: res.success,
+            message: res.messages[0],
+          })
         }),
       )
   }

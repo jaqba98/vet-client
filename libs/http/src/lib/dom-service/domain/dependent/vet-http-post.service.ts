@@ -58,11 +58,11 @@ export class VetHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(baseFormAction<VetDomainModel>(ActionTypeEnum.vet)({
-          //   form: res.data.vets[0],
-          // }))
-          // this.vet.runResponseUpdate({ success: res.success, message: res.messages[0] })
+          this.store.dispatch(baseFormAction<VetDomainModel, VetMetadataModel>(ActionTypeEnum.vet)({
+            data: res.data.vets[0],
+            metadata: res.metadata,
+          }))
+          this.vet.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

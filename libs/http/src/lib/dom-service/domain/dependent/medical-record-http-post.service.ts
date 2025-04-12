@@ -4,9 +4,12 @@ import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
 import {
-  ActionTypeEnum, baseTableFormDeleteAction,
+  ActionTypeEnum,
+  baseTableFormDeleteAction,
   baseTableFormMaxPageAction,
   baseTableFormRowsAction,
+  baseTableFormUpdateRow,
+  baseTableFormUpdateSelectedRow,
   MedicalRecordTableFormType,
 } from '@vet-client/lib-store'
 import {
@@ -85,14 +88,13 @@ export class MedicalRecordHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(baseTableFormUpdateRow<MedicalRecordDomainModel>(ActionTypeEnum.medicalRecord)({
-          //   row: { id: res.data.medicalRecords[0].id, isSelected: false, row: res.data.medicalRecords[0] },
-          // }))
-          // this.store.dispatch(baseTableFormUpdateSelectedRow<MedicalRecordDomainModel>(ActionTypeEnum.medicalRecord)({
-          //   row: { id: res.data.medicalRecords[0].id, isSelected: false, row: res.data.medicalRecords[0] },
-          // }))
-          // this.medicalRecord.runResponseUpdate({ success: res.success, message: res.messages[0] })
+          this.store.dispatch(baseTableFormUpdateRow<MedicalRecordDomainModel>(ActionTypeEnum.medicalRecord)({
+            row: { id: res.data.medicalRecords[0].id, isSelected: false, data: res.data.medicalRecords[0] },
+          }))
+          this.store.dispatch(baseTableFormUpdateSelectedRow<MedicalRecordDomainModel>(ActionTypeEnum.medicalRecord)({
+            row: { id: res.data.medicalRecords[0].id, isSelected: false, data: res.data.medicalRecords[0] },
+          }))
+          this.medicalRecord.runResponseUpdate({ success: res.success, message: res.messages[0] })
         }),
       )
   }
