@@ -11,9 +11,9 @@ import { ClientFormComponent } from '@vet-client/lib-form'
     SectionControlComponent,
     ClientFormComponent,
   ],
-  templateUrl: './clients-view.component.html',
+  templateUrl: './client-view.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class ClientsViewComponent {
+export class ClientViewComponent {
   sectionId = RouteSectionEnum.dashboardVetClient
 }

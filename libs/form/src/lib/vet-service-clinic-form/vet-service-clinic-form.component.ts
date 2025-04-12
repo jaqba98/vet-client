@@ -11,12 +11,12 @@ import { TableFormComponent } from '../table-form/table-form.component'
 import { TableFormModel } from '../table-form/model/table-form.model'
 
 @Component({
-  selector: 'lib-vet-service-form',
+  selector: 'lib-vet-service-clinic-form',
   imports: [TableFormComponent],
-  templateUrl: './vet-service-form.component.html',
+  templateUrl: './vet-service-clinic-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class VetServiceFormComponent {
+export class VetServiceClinicFormComponent {
   formModel: TableFormModel<ServiceClinicFormModel>
   name = ActionTypeEnum.serviceClinic
   headers: string[] = []

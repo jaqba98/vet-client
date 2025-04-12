@@ -11,11 +11,15 @@ import {
   NavStoreModel,
   NavStoreType,
 } from '@vet-client/lib-store'
-import { BaseFormBuilder, ControlType } from '@vet-client/lib-base-form'
+import { BaseFormBuilder } from '@vet-client/lib-base-form'
+import {
+  ButtonControlComponent,
+  ButtonControlModel,
+} from '@vet-client/lib-control'
 
 @Component({
   selector: 'lib-dashboard-view',
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, ButtonControlComponent],
   templateUrl: './dashboard-view.component.html',
   styleUrl: './dashboard-view.component.scss',
   hostDirectives: [BaseComponentDirective],
@@ -23,13 +27,15 @@ import { BaseFormBuilder, ControlType } from '@vet-client/lib-base-form'
 export class DashboardViewComponent {
   isOpen = false
 
-  hamburgerModel!: ControlType
+  hamburgerModel!: ButtonControlModel
 
   constructor(
     private readonly store: Store<NavStoreType>,
     private baseForm: BaseFormBuilder,
   ) {
-    this.hamburgerModel = this.baseForm.buildButtonIcon('hamburger', faBars, 'primary').build()
+    this.hamburgerModel = this.baseForm
+      .buildButtonIcon('hamburger', faBars, 'primary')
+      .build()
   }
 
   onClick() {

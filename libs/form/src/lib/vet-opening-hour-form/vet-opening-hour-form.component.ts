@@ -13,12 +13,12 @@ import { Validators } from '@angular/forms'
 import { HOURS } from '@vet-client/lib-const'
 
 @Component({
-  selector: 'lib-vet-clinic-opening-hours-form',
+  selector: 'lib-vet-opening-hour-form',
   imports: [TableFormComponent],
-  templateUrl: './vet-clinic-opening-hours-form.component.html',
+  templateUrl: './vet-opening-hour-form.component.html',
   hostDirectives: [BaseComponentDirective],
 })
-export class VetClinicOpeningHoursFormComponent {
+export class VetOpeningHourFormComponent {
   formModel: TableFormModel<OpeningHourFormModel>
   name = ActionTypeEnum.openingHour
   headers: string[] = []

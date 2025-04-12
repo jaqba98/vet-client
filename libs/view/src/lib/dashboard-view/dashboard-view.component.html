@@ -1,7 +1,7 @@
 <div class="dashboard-view">
   <div class="dashboard-view__menu" [ngClass]="getMenuClassList()">
     <div class="dashboard-view__menu--hamburger">
-<!--      <lib-button-control [model]="hamburgerModel.control" (event)="onClick()"></lib-button-control>-->
+      <lib-button-control [model]="hamburgerModel" (event)="onClick()"></lib-button-control>
     </div>
     <div class="dashboard-view__menu--content" [ngClass]="getMenuContentClassList()">
       <ng-content></ng-content>
