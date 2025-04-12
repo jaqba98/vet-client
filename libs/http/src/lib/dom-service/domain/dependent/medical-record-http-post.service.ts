@@ -41,8 +41,7 @@ export class MedicalRecordHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.medicalRecord.runResponseCreate({ success: res.success, message: res.messages[0] })
+          this.medicalRecord.runResponseCreate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

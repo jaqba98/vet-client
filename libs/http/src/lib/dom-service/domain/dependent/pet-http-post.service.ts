@@ -40,11 +40,7 @@ export class PetHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.pet.runResponseCreate({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          this.pet.runResponseCreate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

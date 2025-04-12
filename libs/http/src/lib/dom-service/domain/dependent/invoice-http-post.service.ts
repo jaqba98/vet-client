@@ -40,11 +40,7 @@ export class InvoiceHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.invoice.runResponseCreate({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          this.invoice.runResponseCreate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

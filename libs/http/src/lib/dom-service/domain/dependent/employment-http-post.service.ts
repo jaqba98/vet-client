@@ -41,8 +41,7 @@ export class EmploymentHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.employment.runResponseCreate({ success: res.success, message: res.messages[0] })
+          this.employment.runResponseCreate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

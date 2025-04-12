@@ -41,8 +41,7 @@ export class ClientHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.client.runResponseCreate({ success: res.success, message: res.messages[0] })
+          this.client.runResponseCreate({ success: res.success, message: res.messages[0] })
         }),
       )
   }

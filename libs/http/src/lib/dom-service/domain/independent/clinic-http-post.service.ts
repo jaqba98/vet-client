@@ -41,8 +41,7 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.clinic.runResponseCreate({ success: res.success, message: res.messages[0] })
+          this.clinic.runResponseCreate({ success: res.success, message: res.messages[0] })
         }),
       )
   }
