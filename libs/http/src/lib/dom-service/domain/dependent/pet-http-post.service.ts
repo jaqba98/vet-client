@@ -3,7 +3,11 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { PetTableFormType } from '@vet-client/lib-store'
+import {
+  ActionTypeEnum, baseTableFormMaxPageAction,
+  baseTableFormRowsAction,
+  PetTableFormType,
+} from '@vet-client/lib-store'
 import {
   DeleteDomainModel, DeleteRequestModel,
   PetDataModel,
@@ -57,17 +61,15 @@ export class PetHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormRowsAction<PetDomainModel>(ActionTypeEnum.pet)({
-          //     rows: res.data.pets.map(row => ({
-          //       id: row.id,
-          //       isSelected: false,
-          //       row,
-          //     })),
-          //   }),
-          // )
-          // this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.pet)())
+          this.store.dispatch(baseTableFormRowsAction<PetDomainModel, PetMetadataModel>(ActionTypeEnum.pet)({
+            rows: res.data.pets.map(row => ({
+              id: row.id,
+              isSelected: false,
+              data: row,
+            })),
+            metadata: res.metadata,
+          }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.pet)())
         }),
       )
   }

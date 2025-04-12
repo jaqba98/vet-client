@@ -24,7 +24,9 @@ export const baseTableFormReducer = <TData, TMetadata>(name: ActionTypeEnum) => 
   }
   return createReducer<BaseTableFormStoreModel<TData, TMetadata>>(
     initialState,
-    on(baseTableFormRowsAction<TData, TMetadata>(name), (state: BaseTableFormStoreModel<TData, TMetadata>, { rows }) => ({ ...state, rows })),
+    on(baseTableFormRowsAction<TData, TMetadata>(name), (state: BaseTableFormStoreModel<TData, TMetadata>, { rows, metadata }) => ({
+      ...state, rows, metadata,
+    })),
     on(baseTableFormIsSelectedAction(name), (state: BaseTableFormStoreModel<TData, TMetadata>, { ids, isSelected }) => ({
       ...state, rows: state.rows.map(row => ids.includes(row.id) ? { ...row, isSelected } : row),
     })),

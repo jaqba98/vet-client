@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { RouteStoreType } from '@vet-client/lib-store'
+import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreType } from '@vet-client/lib-store'
 import {
   ChooseRoleDataModel,
   ChooseRoleDomainModel,
@@ -38,19 +38,12 @@ export class ChooseRoleHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // if (res.success) {
-          //   this.storeRoute.dispatch(
-          //     routeSetAction({
-          //       page: RoutePageEnum.dashboard,
-          //       section: RouteSectionEnum.dashboard,
-          //     }),
-          //   )
-          // }
-          // this.chooseRole.runResponse({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          if (res.success) {
+            this.storeRoute.dispatch(
+              routeSetAction({ page: RoutePageEnum.dashboard, section: RouteSectionEnum.dashboard }),
+            )
+          }
+          this.chooseRole.runResponse({ success: res.success, message: res.messages[0] })
         }),
       )
   }

@@ -3,7 +3,12 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { ClientTableFormType } from '@vet-client/lib-store'
+import {
+  ActionTypeEnum,
+  baseTableFormMaxPageAction,
+  baseTableFormRowsAction,
+  ClientTableFormType,
+} from '@vet-client/lib-store'
 import {
   ClientDataModel,
   ClientDomainModel,
@@ -58,11 +63,11 @@ export class ClientHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(baseTableFormRowsAction<ClientDomainModel>(ActionTypeEnum.client)({
-          //   rows: res.data.clients.map(row => ({ id: row.id, isSelected: false, row })),
-          // }))
-          // this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.client)())
+          this.store.dispatch(baseTableFormRowsAction<ClientDomainModel, ClientMetadataModel>(ActionTypeEnum.client)({
+            rows: res.data.clients.map(row => ({ id: row.id, isSelected: false, data: row })),
+            metadata: res.metadata,
+          }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.client)())
         }),
       )
   }

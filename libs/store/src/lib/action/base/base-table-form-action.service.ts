@@ -4,7 +4,7 @@ import { BaseTableFormRowModel, BaseTableFormStoreModel } from '../../model/base
 import { ActionTypeEnum } from '../../enum/action-type.enum'
 
 export const baseTableFormRowsAction = <TData, TMetadata>(name: ActionTypeEnum) => createAction(
-  `[${name}] rows action`, props<Pick<BaseTableFormStoreModel<TData, TMetadata>, 'rows'>>(),
+  `[${name}] rows action`, props<Pick<BaseTableFormStoreModel<TData, TMetadata>, 'rows' | 'metadata'>>(),
 )
 
 export const baseTableFormIsSelectedAction = (name: ActionTypeEnum) => createAction(

@@ -3,7 +3,12 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { baseTableFormDeleteAction, ClinicTableFormType } from '@vet-client/lib-store'
+import {
+  ActionTypeEnum,
+  baseTableFormDeleteAction, baseTableFormMaxPageAction,
+  baseTableFormRowsAction,
+  ClinicTableFormType,
+} from '@vet-client/lib-store'
 import {
   ClinicDataModel,
   ClinicDomainModel,
@@ -58,11 +63,11 @@ export class ClinicHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(baseTableFormRowsAction<ClinicDomainModel>(ActionTypeEnum.clinic)({
-          //   rows: res.data.clinics.map(row => ({ id: row.id, isSelected: false, row })),
-          // }))
-          // this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinic)())
+          this.store.dispatch(baseTableFormRowsAction<ClinicDomainModel, ClinicMetadataModel>(ActionTypeEnum.clinic)({
+            rows: res.data.clinics.map(row => ({ id: row.id, isSelected: false, data: row })),
+            metadata: res.metadata,
+          }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.clinic)())
         }),
       )
   }

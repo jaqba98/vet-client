@@ -3,7 +3,11 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { InvoiceTableFormType } from '@vet-client/lib-store'
+import {
+  ActionTypeEnum, baseTableFormMaxPageAction,
+  baseTableFormRowsAction,
+  InvoiceTableFormType,
+} from '@vet-client/lib-store'
 import {
   DeleteDomainModel, DeleteRequestModel,
   InvoiceDataModel,
@@ -57,21 +61,15 @@ export class InvoiceHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormRowsAction<InvoiceDomainModel>(ActionTypeEnum.invoice)(
-          //     {
-          //       rows: res.data.invoices.map(row => ({
-          //         id: row.id,
-          //         isSelected: false,
-          //         row,
-          //       })),
-          //     },
-          //   ),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormMaxPageAction(ActionTypeEnum.invoice)(),
-          // )
+          this.store.dispatch(baseTableFormRowsAction<InvoiceDomainModel, InvoiceMetadataModel>(ActionTypeEnum.invoice)({
+            rows: res.data.invoices.map(row => ({
+              id: row.id,
+              isSelected: false,
+              data: row,
+            })),
+            metadata: res.metadata,
+          }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.invoice)())
         }),
       )
   }

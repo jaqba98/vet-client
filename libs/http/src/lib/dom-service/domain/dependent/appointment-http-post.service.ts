@@ -3,7 +3,12 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { AppointmentTableFormType } from '@vet-client/lib-store'
+import {
+  ActionTypeEnum,
+  AppointmentTableFormType,
+  baseTableFormMaxPageAction,
+  baseTableFormRowsAction,
+} from '@vet-client/lib-store'
 import {
   AppointmentDataModel,
   AppointmentDomainModel,
@@ -58,21 +63,19 @@ export class AppointmentHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(
-          //   baseTableFormRowsAction<AppointmentDomainModel>(
-          //     ActionTypeEnum.appointment,
-          //   )({
-          //     rows: res.data.appointments.map(row => ({
-          //       id: row.id,
-          //       isSelected: false,
-          //       row,
-          //     })),
-          //   }),
-          // )
-          // this.store.dispatch(
-          //   baseTableFormMaxPageAction(ActionTypeEnum.appointment)(),
-          // )
+          this.store.dispatch(
+            baseTableFormRowsAction<AppointmentDomainModel, AppointmentMetadataModel>(ActionTypeEnum.appointment)({
+              rows: res.data.appointments.map(row => ({
+                id: row.id,
+                isSelected: false,
+                data: row,
+              })),
+              metadata: res.metadata,
+            }),
+          )
+          this.store.dispatch(
+            baseTableFormMaxPageAction(ActionTypeEnum.appointment)(),
+          )
         }),
       )
   }

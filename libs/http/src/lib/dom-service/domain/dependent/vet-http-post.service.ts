@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { VetFormType } from '@vet-client/lib-store'
+import { ActionTypeEnum, baseFormAction, VetFormType } from '@vet-client/lib-store'
 import {
   ResponseModel,
   TokenRequestModel,
@@ -37,10 +37,10 @@ export class VetHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(baseFormAction<VetDomainModel>(ActionTypeEnum.vet)({
-          //   form: res.data.vets[0],
-          // }))
+          this.store.dispatch(baseFormAction<VetDomainModel, VetMetadataModel>(ActionTypeEnum.vet)({
+            data: res.data.vets[0],
+            metadata: res.metadata,
+          }))
         }),
       )
   }

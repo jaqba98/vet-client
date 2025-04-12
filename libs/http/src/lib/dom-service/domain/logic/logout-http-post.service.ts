@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { RouteStoreType } from '@vet-client/lib-store'
+import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreType } from '@vet-client/lib-store'
 import { LogoutDataModel, LogoutMetadataModel, ResponseModel } from '@vet-client/lib-domain'
 import { HttpExecuteService } from '../../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../../enum/method.enum'
@@ -26,13 +26,12 @@ export class LogoutHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // if (res.success) {
-          //   this.cookie.deleteCookie('token')
-          //   this.storeRoute.dispatch(
-          //     routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.home }),
-          //   )
-          // }
+          if (res.success) {
+            this.cookie.deleteCookie('token')
+            this.storeRoute.dispatch(
+              routeSetAction({ page: RoutePageEnum.home, section: RouteSectionEnum.home }),
+            )
+          }
         }),
       )
   }

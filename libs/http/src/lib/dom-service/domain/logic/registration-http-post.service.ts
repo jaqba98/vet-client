@@ -30,11 +30,7 @@ export class RegistrationHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.registration.runResponse({
-          //   success: res.success,
-          //   message: res.messages[0],
-          // })
+          this.registration.runResponse({ success: res.success, message: res.messages[0] })
         }),
       )
   }

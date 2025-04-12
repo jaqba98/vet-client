@@ -3,7 +3,12 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { ClinicTableFormType } from '@vet-client/lib-store'
+import {
+  ActionTypeEnum,
+  baseTableFormMaxPageAction,
+  baseTableFormRowsAction,
+  ClinicTableFormType,
+} from '@vet-client/lib-store'
 import {
   OpeningHourDataModel,
   OpeningHourDomainModel,
@@ -38,11 +43,11 @@ export class OpeningHourHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // this.store.dispatch(baseTableFormRowsAction<OpeningHoursDomainModel>(ActionTypeEnum.openingHour)({
-          //   rows: res.data.openingHours.map(row => ({ id: row.id, isSelected: false, row })),
-          // }))
-          // this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.openingHour)())
+          this.store.dispatch(baseTableFormRowsAction<OpeningHourDomainModel, OpeningHourMetadataModel>(ActionTypeEnum.openingHour)({
+            rows: res.data.openingHours.map(row => ({ id: row.id, isSelected: false, data: row })),
+            metadata: res.metadata,
+          }))
+          this.store.dispatch(baseTableFormMaxPageAction(ActionTypeEnum.openingHour)())
         }),
       )
   }
