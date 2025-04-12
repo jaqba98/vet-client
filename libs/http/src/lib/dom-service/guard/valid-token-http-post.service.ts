@@ -3,7 +3,14 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { NavStoreType, RouteStoreType } from '@vet-client/lib-store'
+import {
+  MenuTypeEnum,
+  navSetMenuType,
+  NavStoreType,
+  RoutePageEnum, RouteSectionEnum,
+  routeSetAction,
+  RouteStoreType,
+} from '@vet-client/lib-store'
 import {
   ResponseModel,
   ValidTokenDataModel,
@@ -33,23 +40,22 @@ export class ValidTokenHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // if (res.success) {
-          //   this.storeNav.dispatch(
-          //     navSetMenuType({ menuType: MenuTypeEnum.dashboard }),
-          //   )
-          //   return true
-          // }
-          // this.routeStore.dispatch(
-          //   routeSetAction({
-          //     page: RoutePageEnum.home,
-          //     section: RouteSectionEnum.home,
-          //   }),
-          // )
-          // this.storeNav.dispatch(
-          //   navSetMenuType({ menuType: MenuTypeEnum.home }),
-          // )
-          // return false
+          if (res.success) {
+            this.storeNav.dispatch(
+              navSetMenuType({ menuType: MenuTypeEnum.dashboard }),
+            )
+            return true
+          }
+          this.routeStore.dispatch(
+            routeSetAction({
+              page: RoutePageEnum.home,
+              section: RouteSectionEnum.home,
+            }),
+          )
+          this.storeNav.dispatch(
+            navSetMenuType({ menuType: MenuTypeEnum.home }),
+          )
+          return false
         }),
       )
   }

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store'
 import { map, take } from 'rxjs'
 
 import { CookieService } from '@vet-client/lib-system'
-import { RouteStoreType } from '@vet-client/lib-store'
+import { RoutePageEnum, RouteSectionEnum, routeSetAction, RouteStoreType } from '@vet-client/lib-store'
 import { HasRoleDataModel, HasRoleMetadataModel, HasRoleRequestModel, ResponseModel } from '@vet-client/lib-domain'
 import { HttpExecuteService } from '../../infrastructure/http-execute.service'
 import { MethodEnum } from '../../enum/method.enum'
@@ -27,17 +27,16 @@ export class HasNotRoleHttpPostService {
       .pipe(
         take(1),
         map((res) => {
-          // todo: Refactor it
-          // if (res.success) {
-          //   this.routeStore.dispatch(
-          //     routeSetAction({
-          //       page: RoutePageEnum.dashboard,
-          //       section: RouteSectionEnum.dashboard,
-          //     }),
-          //   )
-          //   return false
-          // }
-          // return true
+          if (res.success) {
+            this.routeStore.dispatch(
+              routeSetAction({
+                page: RoutePageEnum.dashboard,
+                section: RouteSectionEnum.dashboard,
+              }),
+            )
+            return false
+          }
+          return true
         }),
       )
   }
