@@ -1,36 +1,33 @@
-import { CommonModule } from '@angular/common'
-import { Component, Input } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { ColorType, TextTagType } from '@vet-client/lib-type'
-import { TextControlModel } from './text-control.model'
+import { TextControlTagEnum } from './text-control-tag.enum'
 
 @Component({
   selector: 'lib-text-control',
-  imports: [CommonModule],
-  templateUrl: './text-control.component.html',
-  styleUrl: './text-control.component.scss',
+  template: '<div #container></div>',
   hostDirectives: [BaseComponentDirective],
 })
-export class TextControlComponent {
-  @Input() tag: TextTagType = 'p'
+export class TextControlComponent implements OnInit {
+  @ViewChild('container', { static: true }) container!: ElementRef
 
-  @Input() textControlColor: ColorType = 'dark-primary'
-  @Input() textControlLineHeight = false
-  @Input() textControlJustify = false
-  @Input() textControlBold = false
+  @Input() tag = TextControlTagEnum.paragraph
+  @Input() text = ''
 
-  getClassList(): TextControlModel {
-    return {
-      'text-control--dark-primary': this.textControlColor === 'dark-primary',
-      'text-control--dark-secondary': this.textControlColor === 'dark-secondary',
-      'text-control--light-primary': this.textControlColor === 'light-primary',
-      'text-control--primary': this.textControlColor === 'primary',
-      'text-control--error': this.textControlColor === 'error',
-      'text-control--success': this.textControlColor === 'success',
-      'text-control--line-height': this.textControlLineHeight,
-      'text-control--justify': this.textControlJustify,
-      'text-control--bold': this.textControlBold,
-    }
+  constructor(private readonly renderer: Renderer2) {
+  }
+
+  ngOnInit() {
+    const element = this.renderer.createElement(this.tag)
+    const text = this.renderer.createText(this.text)
+    this.renderer.appendChild(element, text)
+    this.renderer.appendChild(this.container.nativeElement, element)
   }
 }
