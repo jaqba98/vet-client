@@ -38,7 +38,7 @@
         "configDir": "libs/sb/.storybook",
         "browserTarget": "lib-sb:build-storybook",
         "compodoc": false,
-        "styles": ["apps/vet-client/src/styles.scss"]
+        "styles": ["libs/scss/src/index.scss"]
       },
       "configurations": {
         "ci": {
