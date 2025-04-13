@@ -1,23 +1,20 @@
-import { IconControlModel } from '../icon-control/icon-control.model'
-import { ColorType } from '@vet-client/lib-type'
+import { ButtonControlTypeEnum } from './button-control-type.enum'
 
-interface BaseValueModel {
-  id: string
-  buttonColor: ColorType
-}
-
-interface TextValueModel extends BaseValueModel {
-  type: 'text'
+interface ButtonControlTextModel {
+  type: ButtonControlTypeEnum.text
   text: string
 }
 
-interface IconValueModel extends BaseValueModel, IconControlModel {
-  type: 'icon'
+interface ButtonControlIconModel {
+  type: ButtonControlTypeEnum.icon
 }
 
-interface LinkValueModel extends BaseValueModel {
-  type: 'link'
+interface ButtonControlLinkModel {
+  type: ButtonControlTypeEnum.link
   text: string
 }
 
-export type ButtonControlModel = TextValueModel | IconValueModel | LinkValueModel
+export type ButtonControlModel =
+  | ButtonControlTextModel
+  | ButtonControlIconModel
+  | ButtonControlLinkModel
