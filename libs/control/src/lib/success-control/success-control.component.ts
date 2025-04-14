@@ -16,7 +16,7 @@ import { IconControlModel } from '../icon-control/icon-control.model'
 export class SuccessControlComponent {
   readonly model: IconControlModel = {
     icon: faCircleCheck,
-    color: 'success',
-    fontSize: '1rem',
+    // color: 'success',
+    // fontSize: '1rem',
   }
 }

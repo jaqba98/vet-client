@@ -16,7 +16,7 @@ import { IconControlModel } from '../icon-control/icon-control.model'
 export class ErrorControlComponent {
   readonly model: IconControlModel = {
     icon: faCircleExclamation,
-    color: 'error',
-    fontSize: '1rem',
+    // color: 'error',
+    // fontSize: '1rem',
   }
 }

@@ -19,7 +19,7 @@ export class BigLogoControlComponent {
 
   readonly logoModel: IconControlModel = {
     icon: faPaw,
-    color: 'light-primary',
-    fontSize: '6rem',
+    // color: 'light-primary',
+    // fontSize: '6rem',
   }
 }

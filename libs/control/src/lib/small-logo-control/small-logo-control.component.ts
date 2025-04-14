@@ -19,7 +19,7 @@ export class SmallLogoControlComponent {
 
   readonly logoModel: IconControlModel = {
     icon: faPaw,
-    color: 'primary',
-    fontSize: '1rem',
+    // color: 'primary',
+    // fontSize: '1rem',
   }
 }
