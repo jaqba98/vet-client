@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular'
 
 import { ButtonControlComponent } from '@vet-client/lib-control'
 import { ButtonControlTypeEnum } from '@vet-client/lib-control'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 
 const meta: Meta<ButtonControlComponent> = {
   component: ButtonControlComponent,
@@ -15,6 +16,17 @@ export const Button: Story = {
     model: {
       type: ButtonControlTypeEnum.text,
       text: 'Hello World',
+    },
+  },
+}
+
+export const Icon: Story = {
+  args: {
+    model: {
+      type: ButtonControlTypeEnum.icon,
+      modelIcon: {
+        icon: faCircleCheck,
+      },
     },
   },
 }

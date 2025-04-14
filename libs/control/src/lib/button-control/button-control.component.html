@@ -1,7 +1,8 @@
 <button class="button" (click)="onClick()">
-  <ng-container [ngSwitch]="model.type">
-    <ng-container *ngSwitchCase="'text'">
-      <lib-text-control [text]="model.text"></lib-text-control>
-    </ng-container>
+  <ng-container *ngIf="model.type === 'text'">
+    <lib-text-control [text]="model.text"></lib-text-control>
+  </ng-container>
+  <ng-container *ngIf="model.type === 'icon'">
+    <lib-icon-control [model]="model.modelIcon"></lib-icon-control>
   </ng-container>
 </button>
