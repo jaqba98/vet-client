@@ -1,5 +1,6 @@
 export * from './lib/button-control/button-control.component'
 export * from './lib/button-control/button-control.model'
+export * from './lib/button-control/button-control-type.enum'
 export * from './lib/text-control/text-control.component'
 export * from './lib/text-control/text-control-tag.enum'
 

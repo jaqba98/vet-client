@@ -1,15 +1,15 @@
 import { ButtonControlTypeEnum } from './button-control-type.enum'
 
-interface ButtonControlTextModel {
+export interface ButtonControlTextModel {
   type: ButtonControlTypeEnum.text
   text: string
 }
 
-interface ButtonControlIconModel {
+export interface ButtonControlIconModel {
   type: ButtonControlTypeEnum.icon
 }
 
-interface ButtonControlLinkModel {
+export interface ButtonControlLinkModel {
   type: ButtonControlTypeEnum.link
   text: string
 }

@@ -1,0 +1,11 @@
+@use 'libs/scss/src/abstracts/variables';
+@use 'libs/scss/src/base/colors';
+
+.button {
+  padding: variables.$control-padding;
+  border: variables.$control-border;
+  border-radius: variables.$control-border-radius;
+  background-color: colors.$color-primary;
+  color: colors.$color-text-light-primary;
+  cursor: pointer;
+}
