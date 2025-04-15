@@ -1,14 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core'
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { TextControlTagEnum } from './text-control-tag.enum'
 
 @Component({
   selector: 'lib-text-control',
@@ -18,10 +10,10 @@ import { TextControlTagEnum } from './text-control-tag.enum'
 export class TextControlComponent implements OnInit {
   @ViewChild('container', { static: true }) container!: ElementRef
 
-  @Input() tag = TextControlTagEnum.paragraph
+  @Input() tag: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'p'
   @Input() text = ''
 
-  constructor(private readonly renderer: Renderer2) {
+  constructor(private renderer: Renderer2) {
   }
 
   ngOnInit() {

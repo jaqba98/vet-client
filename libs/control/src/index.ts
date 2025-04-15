@@ -1,11 +1,10 @@
+export * from './lib/text-control/text-control.component'
+
 export * from './lib/button-control/button-control.component'
 export * from './lib/button-control/button-control.model'
 export * from './lib/button-control/button-control-type.enum'
 export * from './lib/icon-control/icon-control.component'
 export * from './lib/icon-control/icon-control.model'
-export * from './lib/text-control/text-control.component'
-export * from './lib/text-control/text-control-tag.enum'
-
 export * from './lib/big-logo-control/big-logo-control.component'
 export * from './lib/card-control/card-control.component'
 export * from './lib/price-control/price-control.component'
