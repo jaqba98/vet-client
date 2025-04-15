@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TextControlComponent } from '../text-control/text-control.component'
-import { ButtonControlModel } from './button-control.model'
 import { IconControlComponent } from '../icon-control/icon-control.component'
+import { ButtonControlModel } from './button-control.model'
 
 @Component({
   selector: 'lib-button-control',

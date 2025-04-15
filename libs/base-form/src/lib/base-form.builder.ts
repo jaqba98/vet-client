@@ -58,7 +58,7 @@ export class BaseFormBuilder {
       control: {
         type: 'icon',
         id,
-        modelIcon: {
+        icon: {
           icon: icon,
         },
         buttonColor,
