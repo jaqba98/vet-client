@@ -3,10 +3,11 @@
 
 .success {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.25rem;
   color: color.$success;
   background-color: rgba(color.$success, 0.1);
-  padding: control.$control-padding;
+  padding: calc(#{control.$control-padding} / 2);
   border-radius: control.$control-border_radius;
   outline: control.$control-outline color.$success;
 }

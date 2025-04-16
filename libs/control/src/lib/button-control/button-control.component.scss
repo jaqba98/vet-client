@@ -10,11 +10,11 @@
   cursor: pointer;
 
   &:active {
-    outline: control.$control-outline rgba(color.$primary, 0.5);
-    outline-offset: control.$control-outline-offset;
+    background-color: darken(color.$primary, 10%);
   }
 
   &:focus {
     outline: control.$control-outline rgba(color.$primary, 0.5);
+    outline-offset: control.$control-outline-offset;
   }
 }
