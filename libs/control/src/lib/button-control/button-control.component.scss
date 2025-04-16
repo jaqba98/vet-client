@@ -13,4 +13,8 @@
     outline: control.$control-outline rgba(color.$primary, 0.5);
     outline-offset: control.$control-outline-offset;
   }
+
+  &:focus {
+    outline: control.$control-outline rgba(color.$primary, 0.5);
+  }
 }
