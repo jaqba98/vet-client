@@ -12,7 +12,6 @@ export * from './lib/textarea-control/textarea-control.model'
 
 export * from './lib/big-logo-control/big-logo-control.component'
 export * from './lib/card-control/card-control.component'
-export * from './lib/price-control/price-control.component'
 export * from './lib/small-logo-control/small-logo-control.component'
 export * from './lib/section-control/section-control.component'
 export * from './lib/error-control/error-control.component'
