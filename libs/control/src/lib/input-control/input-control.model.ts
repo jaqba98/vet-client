@@ -4,7 +4,7 @@ export interface InputControlModel {
   type: 'text' | 'password' | 'email'
   label: string
   placeholder: string
-  formGroup: FormGroup
+  formGroup?: FormGroup
   controlName: string
   isError: boolean
 }

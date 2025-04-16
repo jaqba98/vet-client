@@ -1,12 +1,12 @@
-<div class="input" [formGroup]="model.formGroup">
+<div class="input" #input>
   <ng-container *ngIf="model.label.length > 0">
     <label [for]="model.controlName">
       <lib-text-control [text]="model.label" tag="h5"></lib-text-control>
     </label>
   </ng-container>
   <input
+    #inputControl
     [id]="model.controlName"
-    [formControlName]="model.controlName"
     [type]="model.type"
     [placeholder]="model.placeholder"
   >
