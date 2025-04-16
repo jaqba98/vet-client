@@ -1,5 +1,9 @@
+import { FormGroup } from '@angular/forms'
+
 export interface TextareaControlModel {
   label: string
   placeholder: string
-  height: string
+  formGroup?: FormGroup
+  controlName: string
+  isError: boolean
 }

@@ -82,7 +82,9 @@ export class BaseFormBuilder {
       control: {
         label,
         placeholder: '',
-        height,
+        controlName: '',
+        formGroup: new FormGroup({}),
+        isError: false,
       },
       validators: [],
       fullWidth: false,
