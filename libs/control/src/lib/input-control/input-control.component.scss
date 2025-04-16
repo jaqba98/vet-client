@@ -18,11 +18,13 @@
     width: 100%;
     padding: control.$control-padding;
     border-radius: control.$control-border_radius;
+    background-color: color.$surface;
     border: control.$control-border;
     color: color.$dark-secondary;
     outline: control.$control-outline color.$border;
 
     &:focus {
+      background-color: rgba(color.$primary, 0.1);
       outline-color: color.$primary;
       color: color.$primary;
 
