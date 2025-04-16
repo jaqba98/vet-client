@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/angular'
+import { Meta, StoryObj } from '@storybook/angular'
+import { FormGroup } from '@angular/forms'
 
 import { InputControlComponent } from '@vet-client/lib-control'
-import { FormGroup } from '@angular/forms'
 
 const meta: Meta<InputControlComponent> = {
   component: InputControlComponent,
-  title: 'Control/Input',
+  title: 'Control/InputControl',
 }
 export default meta
 type Story = StoryObj<InputControlComponent>
@@ -16,8 +16,9 @@ export const Default: Story = {
       type: 'text',
       label: 'Login',
       placeholder: 'Enter your login',
+      formGroup: new FormGroup({}),
+      controlName: 'login',
+      isError: false,
     },
-    formGroup: new FormGroup({}),
-    controlName: 'login',
   },
 }

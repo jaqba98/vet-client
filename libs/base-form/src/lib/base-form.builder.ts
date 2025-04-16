@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { ValidatorFn } from '@angular/forms'
+import { FormGroup, ValidatorFn } from '@angular/forms'
 import { IconDefinition } from '@fortawesome/angular-fontawesome'
 
 import { ColorType, InputType } from '@vet-client/lib-type'
@@ -25,6 +25,9 @@ export class BaseFormBuilder {
         type,
         label,
         placeholder: '',
+        controlName: '',
+        formGroup: new FormGroup({}),
+        isError: false,
       },
       validators: [],
       fullWidth: false,

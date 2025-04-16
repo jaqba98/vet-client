@@ -1,15 +1,13 @@
-<div class="input-control" [formGroup]="formGroup">
-  <ng-container *ngIf="isLabel()">
-    <label [for]="controlName">
-      <lib-text-control [textControlColor]="getLabelColor()">{{ model.label }}</lib-text-control>
+<div class="input" [formGroup]="model.formGroup">
+  <ng-container *ngIf="model.label.length > 0">
+    <label [for]="model.controlName">
+      <lib-text-control [text]="model.label" tag="h5"></lib-text-control>
     </label>
   </ng-container>
   <input
-    class="input-control__input"
-    [id]="controlName"
-    [formControlName]="controlName"
+    [id]="model.controlName"
+    [formControlName]="model.controlName"
     [type]="model.type"
     [placeholder]="model.placeholder"
-    [ngClass]="{ 'input-control__input--error': isError }"
   >
 </div>

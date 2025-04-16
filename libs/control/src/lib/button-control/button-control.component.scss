@@ -1,15 +1,15 @@
-@use 'libs/control/src/lib/scss/variables';
-@use 'libs/control/src/lib/scss/colors';
+@use 'libs/control/src/lib/scss/control';
+@use 'libs/control/src/lib/scss/color';
 
 .button {
-  padding: variables.$button-padding;
-  border-radius: variables.$button-border_radius;
-  border: variables.$button-border colors.$button;
-  background-color: colors.$button;
-  color: colors.$button-text;
+  padding: control.$control-padding;
+  border-radius: control.$control-border_radius;
+  border: control.$control-border;
+  background-color: color.$primary;
+  color: color.$light-primary;
   cursor: pointer;
 
   &:active {
-    outline: variables.$button-outline colors.$button-active;
+    outline: control.$control-outline rgba(color.$primary, 0.5);
   }
 }

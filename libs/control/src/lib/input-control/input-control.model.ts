@@ -1,7 +1,10 @@
-import { InputType } from '@vet-client/lib-type'
+import { FormGroup } from '@angular/forms'
 
 export interface InputControlModel {
-  type: InputType
+  type: 'text' | 'password' | 'email'
   label: string
   placeholder: string
+  formGroup: FormGroup
+  controlName: string
+  isError: boolean
 }

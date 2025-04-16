@@ -1,29 +1,33 @@
-@use 'libs/scss/src/base/colors';
+@use 'libs/control/src/lib/scss/control';
+@use 'libs/control/src/lib/scss/color';
 
-.input-control {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.input {
+  color: color.$dark-secondary;
 
-  &__input {
-    padding: 0.6rem 0.5rem;
-    border-radius: 0.25rem;
-    background-color: colors.$color-surface;
-    border: 1px solid colors.$color-border;
-    color: colors.$color-text-dark-secondary;
+  &:has(input:focus) {
+    color: color.$primary;
+  }
+
+  label {
+    display: inline-block;
+    margin-bottom: control.$control-margin-bottom;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    padding: control.$control-padding;
+    border-radius: control.$control-border_radius;
+    border: control.$control-border;
+    color: color.$dark-secondary;
+    outline: control.$control-outline color.$border;
 
     &:focus {
-      outline-color: colors.$color-accent;
-    }
+      outline-color: color.$primary;
+      color: color.$primary;
 
-    &--error {
-      border: 1px solid colors.$color-error;
-      outline-color: colors.$color-error;
-      color: colors.$color-error;
-
-      &:focus {
-        outline-color: colors.$color-error;
-        color: colors.$color-error;
+      &::placeholder {
+        color: color.$primary;
       }
     }
   }
