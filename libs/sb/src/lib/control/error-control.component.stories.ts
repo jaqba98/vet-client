@@ -4,9 +4,13 @@ import { ErrorControlComponent } from '@vet-client/lib-control'
 
 const meta: Meta<ErrorControlComponent> = {
   component: ErrorControlComponent,
-  title: 'Control/Error',
+  title: 'Control/ErrorControl',
 }
 export default meta
 type Story = StoryObj<ErrorControlComponent>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    message: 'Lorem ipsum dolor sit amet',
+  },
+}

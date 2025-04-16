@@ -1,8 +1,4 @@
-<div class="error-control">
-  <lib-icon-control [model]="model"></lib-icon-control>
-  <lib-text-control tag="h5" textControlColor="error">
-    <ng-container h5>
-      <ng-content></ng-content>
-    </ng-container>
-  </lib-text-control>
+<div class="error">
+  <lib-icon-control [model]="icon"></lib-icon-control>
+  <lib-text-control [text]="message"></lib-text-control>
 </div>
