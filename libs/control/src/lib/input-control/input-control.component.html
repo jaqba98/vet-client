@@ -1,4 +1,4 @@
-<div class="input" #input>
+<div class="input" [ngClass]="{ 'input--error': model.isError }" #input>
   <ng-container *ngIf="model.label.length > 0">
     <label [for]="model.controlName">
       <lib-text-control [text]="model.label" tag="h5"></lib-text-control>

@@ -30,3 +30,14 @@ export const Placeholder: Story = {
     },
   },
 }
+
+export const IsError: Story = {
+  args: {
+    model: {
+      label: 'Login',
+      placeholder: 'Enter your login',
+      controlName: 'login',
+      isError: true,
+    },
+  },
+}

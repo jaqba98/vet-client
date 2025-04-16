@@ -35,4 +35,31 @@
       }
     }
   }
+
+  &--error {
+    color: color.$error;
+
+    &:has(textarea:focus) {
+      color: color.$error;
+    }
+
+    textarea {
+      color: color.$error;
+      outline-color: color.$error;
+
+      &:focus {
+        background-color: rgba(color.$error, 0.1);
+        outline-color: color.$error;
+        color: color.$error;
+
+        &::placeholder {
+          color: color.$error;
+        }
+      }
+
+      &::placeholder {
+        color: color.$error;
+      }
+    }
+  }
 }

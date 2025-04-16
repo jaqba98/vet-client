@@ -1,4 +1,4 @@
-<div class="textarea" #textarea>
+<div class="textarea" [ngClass]="{ 'textarea--error': model.isError }" #textarea>
   <ng-container *ngIf="model.label.length > 0">
     <label [for]="model.controlName">
       <lib-text-control [text]="model.label" tag="h5"></lib-text-control>
