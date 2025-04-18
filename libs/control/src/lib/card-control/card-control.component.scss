@@ -1,19 +1,21 @@
-@use 'libs/scss/src/base/colors';
+@use 'libs/control/src/lib/scss/color';
+@use 'libs/control/src/lib/scss/control';
 
-.card-control {
-  background-color: colors.$color-surface;
-  border: 1px solid colors.$color-border;
-  border-radius: 0.5rem;
+.card {
+  background-color: color.$surface;
+  border: 1px solid color.$border;
+  border-radius: control.$control-border_radius;
 
   &__headline {
-    padding: 1rem;
-    border-bottom: 1px solid colors.$color-border;
+    padding: control.$control-padding;
+    border-bottom: 1px solid color.$border;
+    color: color.$dark-secondary;
   }
 
   &__content {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
+    padding: control.$control-padding;
   }
 }

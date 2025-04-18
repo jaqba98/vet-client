@@ -1,10 +1,10 @@
-<div class="card-control" [ngStyle]="{ width: width }">
-  <div class="card-control__headline">
-    <lib-text-control tag="h3" textControlColor="primary">
-      <ng-container h3>{{ title }}</ng-container>
-    </lib-text-control>
-  </div>
-  <div class="card-control__content">
+<div class="card">
+  <ng-container *ngIf="title.length > 0">
+    <div class="card__headline">
+      <lib-text-control [text]="title" tag="h3"></lib-text-control>
+    </div>
+  </ng-container>
+  <div class="card__content">
     <ng-content></ng-content>
   </div>
 </div>
