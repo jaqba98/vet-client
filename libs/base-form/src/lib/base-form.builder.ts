@@ -6,12 +6,11 @@ import { ColorType, InputType } from '@vet-client/lib-type'
 import {
   ControlButtonModel,
   ControlInputModel,
-  ControlRadioButtonModel,
   ControlSelectModel,
   ControlTextareaModel,
   ControlType,
 } from './base-form.model'
-import { RadioButtonOptionModel, SelectOptionModel } from '@vet-client/lib-control'
+import { RadioOptionModel, SelectOptionModel } from '@vet-client/lib-control'
 
 @Injectable({ providedIn: 'root' })
 export class BaseFormBuilder {
@@ -93,15 +92,15 @@ export class BaseFormBuilder {
     return this
   }
 
-  buildRadioButton(name: string, options: RadioButtonOptionModel[]): this {
-    this.control = <ControlRadioButtonModel> {
-      kind: 'radio-button',
-      defaultValue: '',
-      control: { name, options },
-      validators: [],
-      fullWidth: false,
-      isEnabled: true,
-    }
+  buildRadioButton(name: string, options: RadioOptionModel[]): this {
+    // this.control = <ControlRadioButtonModel> {
+    //   kind: 'radio-button',
+    //   defaultValue: '',
+    //   control: { name, options },
+    //   validators: [],
+    //   fullWidth: false,
+    //   isEnabled: true,
+    // }
     return this
   }
 

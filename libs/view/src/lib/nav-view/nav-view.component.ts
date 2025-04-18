@@ -11,7 +11,6 @@ import {
   HomeNavMenuFormComponent, LogoutFormComponent,
   SmallLoginRegistrationFormComponent,
 } from '@vet-client/lib-form'
-import { SmallLogoControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 
 @Component({
@@ -19,7 +18,6 @@ import { BaseComponentDirective } from '@vet-client/lib-utils'
   imports: [
     CommonModule,
     HamburgerFormComponent,
-    SmallLogoControlComponent,
     HomeNavMenuFormComponent,
     DashboardNavMenuFormComponent,
     SmallLoginRegistrationFormComponent,

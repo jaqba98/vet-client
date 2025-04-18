@@ -1,0 +1,16 @@
+<div class="radio" #radio>
+  <ng-container *ngFor="let option of model.options">
+    <div class="radio__control">
+      <input
+        #radioControl
+        type="radio"
+        [id]="model.controlName"
+        [name]="model.name"
+        [value]="option.value"
+      >
+      <label [for]="option">
+        <lib-text-control [text]="option.label"></lib-text-control>
+      </label>
+    </div>
+  </ng-container>
+</div>

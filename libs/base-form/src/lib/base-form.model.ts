@@ -3,7 +3,7 @@ import { ValidatorFn } from '@angular/forms'
 import {
   ButtonControlModel,
   InputControlModel,
-  RadioButtonControlModel,
+  RadioControlModel,
   SelectControlModel,
   TextareaControlModel,
 } from '@vet-client/lib-control'
@@ -28,7 +28,7 @@ export interface ControlTextareaModel extends ControlBaseModel<TextareaControlMo
   kind: 'textarea'
 }
 
-export interface ControlRadioButtonModel extends ControlBaseModel<RadioButtonControlModel> {
+export interface ControlRadioButtonModel extends ControlBaseModel<RadioControlModel> {
   kind: 'radio-button'
 }
 

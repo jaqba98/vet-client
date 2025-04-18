@@ -27,12 +27,12 @@
           [isError]="isControlError(control.name)"
         ></lib-textarea-control>
         <!-- radio button -->
-        <lib-radio-button-control
+        <lib-radio-control
           *ngIf="control.model.kind === 'radio-button'"
           [formGroup]="formGroup"
           [controlName]="control.name"
           [model]="control.model.control"
-        ></lib-radio-button-control>
+        ></lib-radio-control>
         <!-- select -->
         <lib-select-control
           *ngIf="control.model.kind === 'select'"
