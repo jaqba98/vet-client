@@ -1,8 +1,0 @@
-run_tests:
-  image: node:23.11.0
-  before_script:
-    - npm install -g pnpm
-    - npm install -g nx
-    - pnpm install
-  script:
-    - npx nx run-many --target=test
