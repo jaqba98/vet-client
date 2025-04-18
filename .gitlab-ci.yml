@@ -5,4 +5,4 @@ run_tests:
     - npm install nx
     - pnpm install
   script:
-    - nx run-many --target=test
+    - npx nx run-many --target=test
