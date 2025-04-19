@@ -3,7 +3,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Subscription } from 'rxjs'
 
-import { TablePanelControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, CrudNotification } from '@vet-client/lib-utils'
 import { ActionTypeEnum, BaseTableFormStoreModel } from '@vet-client/lib-store'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
@@ -15,6 +14,7 @@ import { TableUpdateFormComponent } from './table-update-form/table-update-form.
 import { TableDataFormComponent } from './table-data-form/table-data-form.component'
 import { TableNavFormComponent } from './table-nav-form/table-nav-form.component'
 import { TablePaginatorFormComponent } from './table-paginator-form/table-paginator-form.component'
+import { TablePanelControlComponent } from '../table-panel-control/table-panel-control.component'
 
 @Component({
   selector: 'lib-table-form',

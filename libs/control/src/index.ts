@@ -14,7 +14,5 @@ export * from './lib/textarea-control/textarea-control.component'
 export * from './lib/textarea-control/textarea-control.model'
 
 export * from './lib/section-control/section-control.component'
-export * from './lib/table-panel-control/table-panel-control.component'
-export * from './lib/table-card-control/table-card-control.component'
 export * from './lib/select-control/select-control.component'
 export * from './lib/select-control/select-control.model'

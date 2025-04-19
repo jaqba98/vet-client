@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { BaseComponentDirective } from '@vet-client/lib-utils'
-import { TextControlComponent } from '../text-control/text-control.component'
+import { TextControlComponent } from '@vet-client/lib-control'
 
 @Component({
   selector: 'lib-table-card-control',

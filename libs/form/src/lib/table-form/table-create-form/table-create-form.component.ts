@@ -1,10 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 
 import { BaseFormComponent, BaseFormService } from '@vet-client/lib-base-form'
-import { TableCardControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective, CrudNotification } from '@vet-client/lib-utils'
 import { DeleteDomainModel } from '@vet-client/lib-domain'
 import { TableFormModel } from '../model/table-form.model'
+import { TableCardControlComponent } from '../../table-card-control/table-card-control.component'
 
 @Component({
   selector: 'lib-table-create-form',
