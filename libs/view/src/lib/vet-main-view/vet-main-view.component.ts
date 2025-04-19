@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store'
 import { Subscription } from 'rxjs'
 
 import {
-  SectionControlComponent,
   TextControlComponent,
 } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { AccountStoreType, RouteSectionEnum } from '@vet-client/lib-store'
+import { SectionControlComponent } from '../section-control/section-control.component'
 
 @Component({
   selector: 'lib-vet-main-view',

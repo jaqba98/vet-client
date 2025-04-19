@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
 
-import { SectionControlComponent } from '@vet-client/lib-control'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { RouteSectionEnum } from '@vet-client/lib-store'
 import { LoginFormComponent } from '@vet-client/lib-form'
+import { SectionControlComponent } from '../section-control/section-control.component'
 
 @Component({
   selector: 'lib-login-view',
