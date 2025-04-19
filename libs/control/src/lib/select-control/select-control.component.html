@@ -1,10 +1,14 @@
-<div class="select-control" [formGroup]="formGroup">
-  <ng-container *ngIf="isLabel()">
-    <label [for]="controlName">
-      <lib-text-control [textControlColor]="getLabelColor()">{{ model.label }}</lib-text-control>
+<div class="select" #select>
+  <ng-container *ngIf="model.label.length > 0">
+    <label [for]="model.controlName">
+      <lib-text-control [text]="model.label" tag="h5"></lib-text-control>
     </label>
   </ng-container>
-  <select class="select-control__input" [formControlName]="controlName">
+  <select
+    #selectControl
+    [id]="model.controlName"
+    [formControlName]="model.controlName"
+  >
     <ng-container *ngFor="let option of model.options">
       <option [value]="option.value">{{ option.label }}</option>
     </ng-container>

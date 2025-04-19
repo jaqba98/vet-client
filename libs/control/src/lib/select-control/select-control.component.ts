@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core'
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 
-import { ColorType } from '@vet-client/lib-type'
 import { BaseComponentDirective } from '@vet-client/lib-utils'
 import { TextControlComponent } from '../text-control/text-control.component'
 import { SelectControlModel } from './select-control.model'
@@ -14,20 +13,16 @@ import { SelectControlModel } from './select-control.model'
   styleUrl: './select-control.component.scss',
   hostDirectives: [BaseComponentDirective],
 })
-export class SelectControlComponent {
+export class SelectControlComponent implements OnInit {
+  @ViewChild('select') select!: ElementRef
+  @ViewChild('selectControl') selectControl!: ElementRef
+
   @Input({ required: true }) model!: SelectControlModel
 
-  @Input({ required: true }) formGroup!: FormGroup
-
-  @Input({ required: true }) controlName!: string
-
-  @Input() isError = false
-
-  isLabel() {
-    return this.model.label !== ''
-  }
-
-  getLabelColor(): ColorType {
-    return this.isError ? 'error' : 'dark-secondary'
+  ngOnInit() {
+    if (this.model.formGroup) {
+      this.select.nativeElement.setAttribute('formGroup', this.model.formGroup)
+      this.selectControl.nativeElement.setAttribute('formControlName', this.model.controlName)
+    }
   }
 }

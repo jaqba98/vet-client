@@ -105,14 +105,14 @@ export class BaseFormBuilder {
   }
 
   buildSelect(label: string, defaultValue: unknown, options: SelectOptionModel[]): this {
-    this.control = <ControlSelectModel> {
-      kind: 'select',
-      defaultValue,
-      control: { label, options },
-      validators: [],
-      fullWidth: false,
-      isEnabled: true,
-    }
+    // this.control = <ControlSelectModel> {
+    //   kind: 'select',
+    //   defaultValue,
+    //   control: { label, options },
+    //   validators: [],
+    //   fullWidth: false,
+    //   isEnabled: true,
+    // }
     return this
   }
 
