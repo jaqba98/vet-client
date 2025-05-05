@@ -14,4 +14,8 @@ export class BaseStore<TData> {
   getData() {
     return this.data();
   }
+
+  reset() {
+    this.data.set(this.initialData);
+  }
 }
