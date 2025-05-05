@@ -1,30 +1,31 @@
 import { Routes } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
+import { LoginViewComponent } from './view/login/login-view.component';
+import { ProfileViewComponent } from './view/profile/profile-view.component';
 import { LoginGuard } from './guard/login.guard';
 import { AuthGuard } from './guard/auth.guard';
 import { RouteEnum } from './enum/route.enum';
 import { FetchUserGuard } from './guard/fetch-user.guard';
+import { RouteIdEnum } from './enum/route-id.enum';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: RouteIdEnum.empty,
     redirectTo: RouteEnum.login,
     pathMatch: 'full',
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: RouteIdEnum.login,
+    component: LoginViewComponent,
     canActivate: [LoginGuard],
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: RouteIdEnum.profile,
+    component: ProfileViewComponent,
     canActivate: [AuthGuard, FetchUserGuard],
   },
   {
-    path: '**',
+    path: RouteIdEnum.other,
     redirectTo: RouteEnum.login,
     pathMatch: 'full',
   },

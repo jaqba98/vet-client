@@ -1,6 +1,6 @@
 import { Configuration } from '@azure/msal-browser';
 
-export const MSAL_CONFIG: Configuration = {
+export const msalConfig: Configuration = {
   auth: {
     clientId: '7724a444-6429-4af6-b14c-752e4cc07cd7',
     authority:

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AccountInfo, PublicClientApplication } from '@azure/msal-browser';
 
-import { MSAL_CONFIG } from './msal.config';
+import { msalConfig } from './msal.config';
 
 @Injectable({ providedIn: 'root' })
 export class MsalService {
@@ -9,7 +9,7 @@ export class MsalService {
   private initialized: boolean;
 
   constructor() {
-    this.msalInstance = new PublicClientApplication(MSAL_CONFIG);
+    this.msalInstance = new PublicClientApplication(msalConfig);
     this.initialized = false;
   }
 
