@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {AccountInfo, PublicClientApplication} from '@azure/msal-browser';
+import { Injectable } from '@angular/core';
+import { AccountInfo, PublicClientApplication } from '@azure/msal-browser';
 
-import {MSAL_CONFIG} from './msal.config';
+import { MSAL_CONFIG } from './msal.config';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class MsalService {
   private msalInstance: PublicClientApplication;
   private initialized: boolean;
@@ -20,7 +20,8 @@ export class MsalService {
 
   async logout(): Promise<void> {
     await this.ensureInitialized();
-    const currentAccount: AccountInfo | null = this.msalInstance.getAllAccounts()[0];
+    const currentAccount: AccountInfo | null =
+      this.msalInstance.getAllAccounts()[0];
     return this.msalInstance.logoutPopup({ account: currentAccount });
   }
 

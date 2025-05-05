@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import {MsalService} from '../msal/msal.service';
+import { MsalService } from '../msal/msal.service';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +11,8 @@ import {MsalService} from '../msal/msal.service';
 export class LoginComponent {
   constructor(
     private msal: MsalService,
-    private router: Router
-  ) {
-  }
+    private router: Router,
+  ) {}
 
   async login() {
     await this.msal.login();

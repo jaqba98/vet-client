@@ -1,12 +1,14 @@
-import {Injectable} from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 
-import {MsalService} from '../msal/msal.service';
+import { MsalService } from '../msal/msal.service';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class LoginGuard implements CanActivate {
-  constructor(private msalService: MsalService, private router: Router) {
-  }
+  constructor(
+    private msalService: MsalService,
+    private router: Router,
+  ) {}
 
   async canActivate(): Promise<boolean> {
     const account = await this.msalService.getAccount();

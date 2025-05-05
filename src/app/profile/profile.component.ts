@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MsalService } from '../msal/msal.service';
@@ -9,12 +9,12 @@ import { MsalService } from '../msal/msal.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  name = signal("");
-  username = signal("");
+  name = signal('');
+  username = signal('');
 
   constructor(
     private msal: MsalService,
-    private router: Router
+    private router: Router,
   ) {}
 
   async ngOnInit() {
