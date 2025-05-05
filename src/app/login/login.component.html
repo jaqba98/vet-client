@@ -1,1 +1,4 @@
-<p>login works!</p>
+<div *ngIf="!user">
+  <h1>Login with Microsoft</h1>
+  <button (click)="login()">Login</button>
+</div>
