@@ -1,37 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { MsalService } from '../msal/msal.service';
+import {Component, OnInit, signal} from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
+import { MsalService } from '../msal/msal.service';
 
 @Component({
   selector: 'app-profile',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  user: any;
+  name = signal("");
+  username = signal("");
 
-  constructor(private msalService: MsalService, private router: Router) {}
+  constructor(
+    private msal: MsalService,
+    private router: Router
+  ) {}
 
   async ngOnInit() {
-    const account: any = await this.msalService.getAccount();
-    console.log(account)
-
-    if (!account?.username) {
-      // Brak konta → przekierowanie na login
-      this.router.navigate(['/login']);
-    } else {
-      this.user = account;
-    }
+    const user = await this.msal.getAccount();
+    this.name.set(user?.name ?? 'unknown');
+    this.username.set(user?.username ?? 'unknown');
   }
 
-  logout() {
-    this.msalService.logout().then(() => {
-      this.router.navigate(['/login']);
-    }).catch((err) => {
-      console.error('Logout failed', err);
-    });
+  async logout() {
+    await this.msal.logout();
+    await this.router.navigate(['/login']);
   }
 }
