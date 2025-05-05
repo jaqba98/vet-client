@@ -2,13 +2,15 @@ import { Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { LoginGuard } from './guards/login.guard';
-import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guard/login.guard';
+import { AuthGuard } from './guard/auth.guard';
+import { RouteEnum } from './enum/route.enum';
+import { FetchUserGuard } from './guard/fetch-user.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: RouteEnum.login,
     pathMatch: 'full',
   },
   {
@@ -19,11 +21,11 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, FetchUserGuard],
   },
   {
     path: '**',
-    redirectTo: '/login',
+    redirectTo: RouteEnum.login,
     pathMatch: 'full',
   },
 ];

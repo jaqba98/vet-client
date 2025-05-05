@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
 import { MsalService } from '../msal/msal.service';
+import { RouteEnum } from '../enum/route.enum';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGuard implements CanActivate {
@@ -12,8 +13,8 @@ export class LoginGuard implements CanActivate {
 
   async canActivate(): Promise<boolean> {
     const account = await this.msalService.getAccount();
-    if (account?.username) {
-      await this.router.navigate(['/profile']);
+    if (account) {
+      await this.router.navigate([RouteEnum.profile]);
       return false;
     }
     return true;
