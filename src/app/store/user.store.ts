@@ -7,6 +7,7 @@ import { UserModel } from '../model/user.model';
 export class UserStore extends BaseStore<UserModel> {
   constructor() {
     super({
+      homeAccountId: '',
       name: '',
       username: '',
     });

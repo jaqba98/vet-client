@@ -1,4 +1,4 @@
-<h1>Welcome, {{ userSignal().name }}</h1>
-<p>Email: {{ userSignal().username }}</p>
-<p>Result: {{ result() }}</p>
+<h1>Welcome, {{ user().name }}</h1>
+<p>Email: {{ user().username }}</p>
+<p>Result: {{ message() }}</p>
 <button (click)="logout()">Logout</button>

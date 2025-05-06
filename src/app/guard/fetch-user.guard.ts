@@ -13,10 +13,11 @@ export class FetchUserGuard implements CanActivate {
 
   async canActivate(): Promise<boolean> {
     const user = await this.msalService.getAccount();
+    const homeAccountId = user?.homeAccountId;
     const name = user?.name;
     const username = user?.username;
-    if (!name || !username) return false;
-    this.userStore.setData({ name, username });
+    if (!homeAccountId || !name || !username) return false;
+    this.userStore.setData({ homeAccountId, name, username });
     return true;
   }
 }
