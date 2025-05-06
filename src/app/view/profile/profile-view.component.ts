@@ -1,4 +1,5 @@
-import { Component, WritableSignal } from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { MsalService } from '../../msal/msal.service';
@@ -10,8 +11,11 @@ import { UserModel } from '../../model/user.model';
   selector: 'profile-view',
   templateUrl: './profile-view.component.html',
 })
-export class ProfileViewComponent {
+export class ProfileViewComponent implements OnInit {
   userSignal: WritableSignal<UserModel>;
+  result = signal('unknown');
+
+  private http = inject(HttpClient);
 
   constructor(
     private msalService: MsalService,
@@ -19,6 +23,12 @@ export class ProfileViewComponent {
     private userStore: UserStore,
   ) {
     this.userSignal = userStore.data;
+  }
+
+  ngOnInit() {
+    this.http.get<{ message: string }>('http://localhost:8080/hello-world').subscribe(result => {
+      this.result.set(result.message);
+    });
   }
 
   async logout() {
