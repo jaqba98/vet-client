@@ -1,9 +1,14 @@
-<div class="recorder">
-  <button (click)="startRecording()" [disabled]="isRecording">🎙️ Start</button>
-  <button (click)="stopRecording()" [disabled]="!isRecording">⏹ Stop</button>
+<div>
+  <button (click)="startRecording()" [disabled]="isRecording">Start</button>
+  <button (click)="stopRecording()" [disabled]="!isRecording">Stop</button>
+</div>
 
-  <div *ngIf="audioUrl" style="margin-top: 1rem;">
-    <p>Nagranie:</p>
-    <audio [src]="audioUrl" controls></audio>
-  </div>
+<div *ngIf="audioUrl">
+  <h3>Nagranie:</h3>
+  <audio [src]="audioUrl" controls></audio>
+</div>
+
+<div *ngIf="transcribedText">
+  <h3>Transkrypcja:</h3>
+  <p>{{ transcribedText }}</p>
 </div>
