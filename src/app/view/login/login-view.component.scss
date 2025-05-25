@@ -1,0 +1,101 @@
+:host, html, body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* zawsze wycentrowane */
+  background-color: #f3f3f3;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  overflow: hidden; /* żadnych scrolli */
+}
+
+.login-wrapper {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  max-width: 380px;
+  width: 90%;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-sizing: border-box;
+  max-height: 100vh;
+}
+
+/* Duży tytuł */
+.login-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: #0078d7;
+  user-select: none;
+}
+
+/* Przycisk */
+.login-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: #0078d7;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.25s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 120, 215, 0.4);
+
+  svg.ms-icon {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    fill: #fff;
+  }
+
+  &:hover {
+    background-color: #005a9e;
+    box-shadow: 0 6px 16px rgba(0, 90, 158, 0.6);
+  }
+
+  &:focus-visible {
+    outline: 3px solid #004578;
+    outline-offset: 3px;
+  }
+
+  &:active {
+    background-color: #004578;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    background-color: #c7c7c7;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+/* Responsywność - dopasowanie na bardzo małych ekranach i niskich wysokościach */
+@media (max-height: 500px), (max-width: 360px) {
+  .login-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .login-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .login-button {
+    font-size: 1rem;
+    padding: 0.6rem 2rem;
+
+    svg.ms-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
