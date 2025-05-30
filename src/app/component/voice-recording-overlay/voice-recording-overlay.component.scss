@@ -1,0 +1,62 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.recording-box {
+  text-align: center;
+  background: #1c1c1c;
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+
+  .recording-icon {
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+    margin: 0 auto 1rem auto;
+    animation: blink 1s infinite;
+  }
+
+  h2 {
+    margin: 0.5rem 0;
+    font-size: 1.8rem;
+  }
+
+  .elapsed {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  button {
+    background: #e81123;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #c50f1f;
+    }
+  }
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
