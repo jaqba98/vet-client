@@ -1,8 +1,3 @@
-<div>
-  <button (click)="startRecording()" [disabled]="isRecording">Start</button>
-  <button (click)="stopRecording()" [disabled]="!isRecording">Stop</button>
-</div>
-
 <div *ngIf="audioUrl">
   <h3>Nagranie:</h3>
   <audio [src]="audioUrl" controls></audio>
