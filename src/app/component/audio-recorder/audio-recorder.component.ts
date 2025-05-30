@@ -1,7 +1,7 @@
 import { Component, NgZone, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { VoiceRecorderService } from '../../store/voice-recorder.service';  // dostosuj ścieżkę
+import { VoiceRecorderService } from '../../store/voice-recorder.service';
 import { Subscription } from 'rxjs';
 
 @Component({
