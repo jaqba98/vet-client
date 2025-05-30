@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   selector: 'audio-recorder',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './audio-recorder.component.html'
+  templateUrl: './audio-recorder.component.html',
 })
 export class AudioRecorderComponent {
   private mediaRecorder!: MediaRecorder;
@@ -14,7 +14,8 @@ export class AudioRecorderComponent {
 
   isRecording = false;
   audioUrl: string | null = null;
-  transcribedText: any | null = 'Pies rasy Labrador Retriever, 5 lat, samiec, zgłaszany z objawami: apatia, brak apetytu trwający 3 dni, nawracające wymioty, biegunka o luźnej konsystencji, gorączka 39,5°C, nieznaczna odwodnienie. W badaniu klinicznym stwierdzono obniżony odruch ssania, suchą błonę śluzową jamy ustnej oraz nieznaczne powiększenie węzłów chłonnych. Badania laboratoryjne wykazały leukocytozę (WBC 18 000/μl) z przewagą neutrofili, co sugeruje aktywny proces zapalny. W badaniu kału potwierdzono obecność pasożytów jelitowych – Toxocara canis. Ultrasonografia jamy brzusznej wykazała nieznaczne powiększenie wątroby i śledziony, bez widocznych ognisk martwicy czy zmian ogniskowych.\n' +
+  transcribedText: any | null =
+    'Pies rasy Labrador Retriever, 5 lat, samiec, zgłaszany z objawami: apatia, brak apetytu trwający 3 dni, nawracające wymioty, biegunka o luźnej konsystencji, gorączka 39,5°C, nieznaczna odwodnienie. W badaniu klinicznym stwierdzono obniżony odruch ssania, suchą błonę śluzową jamy ustnej oraz nieznaczne powiększenie węzłów chłonnych. Badania laboratoryjne wykazały leukocytozę (WBC 18 000/μl) z przewagą neutrofili, co sugeruje aktywny proces zapalny. W badaniu kału potwierdzono obecność pasożytów jelitowych – Toxocara canis. Ultrasonografia jamy brzusznej wykazała nieznaczne powiększenie wątroby i śledziony, bez widocznych ognisk martwicy czy zmian ogniskowych.\n' +
     '\n' +
     'Rozpoznanie: infekcyjne zapalenie jelit wtórne do inwazji pasożytów jelitowych (Toxocara canis), prowadzące do ostrego stanu zapalnego przewodu pokarmowego.\n' +
     '\n' +
@@ -24,26 +25,34 @@ export class AudioRecorderComponent {
 
   analysisResult: any;
 
-  constructor(private ngZone: NgZone, private http: HttpClient) {}
+  constructor(
+    private ngZone: NgZone,
+    private http: HttpClient,
+  ) {}
 
   startRecording() {
     this.audioUrl = null;
     this.transcribedText = null;
 
-    navigator.mediaDevices.getUserMedia({ audio: true })
-      .then(stream => {
-        const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/ogg';
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        const mimeType = MediaRecorder.isTypeSupported('audio/webm')
+          ? 'audio/webm'
+          : 'audio/ogg';
         this.mediaRecorder = new MediaRecorder(stream, { mimeType });
         this.audioChunks = [];
 
-        this.mediaRecorder.ondataavailable = event => {
+        this.mediaRecorder.ondataavailable = (event) => {
           if (event.data.size > 0) {
             this.audioChunks.push(event.data);
           }
         };
 
         this.mediaRecorder.onstop = () => {
-          const audioBlob = new Blob(this.audioChunks, { type: this.mediaRecorder.mimeType });
+          const audioBlob = new Blob(this.audioChunks, {
+            type: this.mediaRecorder.mimeType,
+          });
           if (audioBlob.size > 0) {
             const url = URL.createObjectURL(audioBlob);
             this.ngZone.run(() => {
@@ -56,7 +65,7 @@ export class AudioRecorderComponent {
         this.mediaRecorder.start();
         this.isRecording = true;
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('Błąd mikrofonu:', err);
       });
   }
@@ -77,9 +86,12 @@ export class AudioRecorderComponent {
     const formData = new FormData();
     formData.append('file', blob, 'audio.webm');
 
-    this.http.post('http://localhost:8080/api/speech-to-text', formData, { responseType: 'text' })
+    this.http
+      .post('http://localhost:8080/api/speech-to-text', formData, {
+        responseType: 'text',
+      })
       .subscribe({
-        next: response => {
+        next: (response) => {
           const result = JSON.parse(response);
           this.transcribedText = result.DisplayText;
 
@@ -88,22 +100,21 @@ export class AudioRecorderComponent {
           const analyzePayload = { text: this.transcribedText };
 
           this.http.post<any>(analyzeUrl, analyzePayload).subscribe({
-            next: analysis => {
+            next: (analysis) => {
               console.log('Wynik analizy tekstu:', analysis);
               this.analysisResult = analysis; // Możesz użyć tej zmiennej w szablonie
             },
-            error: err => {
+            error: (err) => {
               console.error('Błąd analizy tekstu:', err);
-            }
+            },
           });
         },
-        error: err => {
+        error: (err) => {
           this.transcribedText = 'Błąd podczas rozpoznawania mowy.';
           console.error(err);
-        }
+        },
       });
   }
-
 
   aaa() {
     // od razu analizujemy tekst przez drugi request
@@ -111,13 +122,13 @@ export class AudioRecorderComponent {
     const analyzePayload = { text: this.transcribedText };
 
     this.http.post<any>(analyzeUrl, analyzePayload).subscribe({
-      next: analysis => {
+      next: (analysis) => {
         console.log('Wynik analizy tekstu:', analysis);
         this.analysisResult = analysis; // Możesz użyć tej zmiennej w szablonie
       },
-      error: err => {
+      error: (err) => {
         console.error('Błąd analizy tekstu:', err);
-      }
+      },
     });
   }
 }

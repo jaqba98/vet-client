@@ -8,14 +8,12 @@ import { UserModel } from '../../model/user.model';
 import { HttpService } from '../../service/http.service';
 import { EndpointEnum } from '../../enum/endpoint.enum';
 import { MessageModel } from '../../model/message.model';
-import {AudioRecorderComponent} from '../../component/audio-recorder/audio-recorder.component';
+import { AudioRecorderComponent } from '../../component/audio-recorder/audio-recorder.component';
 
 @Component({
   selector: 'profile-view',
   templateUrl: './profile-view.component.html',
-  imports: [
-    AudioRecorderComponent
-  ]
+  imports: [AudioRecorderComponent],
 })
 export class ProfileViewComponent {
   user: WritableSignal<UserModel>;
