@@ -1,0 +1,136 @@
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(25, 25, 25, 0.85);
+    color: #eee;
+  }
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #0078d7;
+
+    @media (prefers-color-scheme: dark) {
+      color: #61a0ff;
+    }
+  }
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .logout-btn {
+    background-color: #e81123;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #c50f1f;
+    }
+
+    &:active {
+      background-color: #a80000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      background-color: #f1707b;
+      color: #111;
+    }
+  }
+
+  .dropdown-wrapper {
+    position: relative;
+
+    .services-button {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0.5rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      padding: 0.5rem 0;
+      min-width: 180px;
+      z-index: 10;
+
+      li {
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+          background-color: #f3f3f3;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        background: #2c2c2c;
+
+        li {
+          color: #eee;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+          }
+        }
+      }
+    }
+  }
+}
