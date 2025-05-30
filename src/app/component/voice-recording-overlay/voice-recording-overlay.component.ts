@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output, OnDestroy } from '@angular/core';
+import {VoiceRecorderService} from '../../store/voice-recorder.service';
 
 @Component({
   selector: 'voice-recording-overlay',
@@ -13,7 +14,7 @@ export class VoiceRecordingOverlayComponent implements OnDestroy {
   elapsed = '00:00:00';
   private intervalId: any;
 
-  constructor() {
+  constructor(private voiceRecorderService: VoiceRecorderService) {
     this.intervalId = setInterval(() => {
       const diff = Date.now() - this.startTime;
       const hours = Math.floor(diff / 3600000).toString().padStart(2, '0');
@@ -24,7 +25,7 @@ export class VoiceRecordingOverlayComponent implements OnDestroy {
   }
 
   stopRecording() {
-    this.stop.emit();
+    this.voiceRecorderService.stopRecording();
   }
 
   ngOnDestroy(): void {

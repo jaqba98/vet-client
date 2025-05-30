@@ -7,6 +7,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {VoiceRecorderService} from '../../store/voice-recorder.service';
 
 @Component({
   selector: 'top-nav',
@@ -21,6 +22,9 @@ export class TopNavComponent {
 
   @ViewChild('dropdownWrapper') dropdownRef!: ElementRef;
   serviceMenuOpen = false;
+
+  constructor(private voiceRecorderService: VoiceRecorderService) {
+  }
 
   toggleServiceMenu(event: MouseEvent) {
     event.stopPropagation();
@@ -44,8 +48,8 @@ export class TopNavComponent {
   }
 
   startVoiceRecording() {
-    console.log('🎙️ Rozpoczęto nagrywanie głosu');
     this.serviceMenuOpen = false;
+    this.voiceRecorderService.startRecording();
   }
 
   openAssistant() {

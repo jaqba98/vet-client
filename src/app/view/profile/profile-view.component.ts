@@ -13,21 +13,25 @@ import { TopNavComponent } from '../../component/top-nav/top-nav.component';
 import {
   VoiceRecordingOverlayComponent
 } from '../../component/voice-recording-overlay/voice-recording-overlay.component';
+import {VoiceRecorderService} from '../../store/voice-recorder.service';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'profile-view',
   templateUrl: './profile-view.component.html',
-  imports: [AudioRecorderComponent, TopNavComponent, VoiceRecordingOverlayComponent],
+  imports: [AudioRecorderComponent, TopNavComponent, VoiceRecordingOverlayComponent, CommonModule],
 })
 export class ProfileViewComponent {
   user: WritableSignal<UserModel>;
   message = signal('unknown');
+  recording = false;
 
   constructor(
     private msalService: MsalService,
     private router: Router,
     private userStore: UserStore,
     private httpService: HttpService<ProfileViewComponent>,
+    private voiceRecorderService: VoiceRecorderService
   ) {
     this.user = userStore.data;
     effect(() => {
@@ -39,6 +43,9 @@ export class ProfileViewComponent {
           self.message.set(response.message);
         },
       );
+    });
+    this.voiceRecorderService.recording$.subscribe(recording => {
+      this.recording = recording;
     });
   }
 
