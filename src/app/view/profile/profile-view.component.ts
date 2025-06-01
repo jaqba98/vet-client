@@ -19,6 +19,7 @@ import {CommonModule} from '@angular/common';
 @Component({
   selector: 'profile-view',
   templateUrl: './profile-view.component.html',
+  styleUrl: './profile-view.component.scss',
   imports: [AudioRecorderComponent, TopNavComponent, VoiceRecordingOverlayComponent, CommonModule],
 })
 export class ProfileViewComponent {

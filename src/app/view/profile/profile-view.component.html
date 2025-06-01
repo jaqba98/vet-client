@@ -1,6 +1,7 @@
 <top-nav (logoutClicked)="logout()"></top-nav>
 <voice-recording-overlay *ngIf="recording"></voice-recording-overlay>
-<h1>Welcome, {{ user().name }}</h1>
-<p>Email: {{ user().username }}</p>
-<p>Result: {{ message() }}</p>
+<div class="profile-card">
+  <h1>Welcome, {{ user().name }}</h1>
+  <p><span>Email:</span> {{ user().username }}</p>
+</div>
 <audio-recorder></audio-recorder>
