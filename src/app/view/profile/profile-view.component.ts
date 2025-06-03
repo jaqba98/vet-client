@@ -21,7 +21,7 @@ import {RecordingsListComponent} from './recordings-list/recordings-list-view.co
   selector: 'profile-view',
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.scss',
-  imports: [TopNavComponent, VoiceRecordingOverlayComponent, CommonModule, RecordingsListComponent],
+  imports: [TopNavComponent, VoiceRecordingOverlayComponent, CommonModule, RecordingsListComponent, AudioRecorderComponent],
 })
 export class ProfileViewComponent {
   user: WritableSignal<UserModel>;

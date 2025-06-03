@@ -12,3 +12,8 @@
 <p>{{ analysisResult | json }}</p>
 
 <button (click)="aaa()">resend</button>
+
+<!-- Popup zapisania nagrania -->
+<div *ngIf="showSavedPopup" class="saved-popup">
+  Nagranie zostało zapisane ✅
+</div>
