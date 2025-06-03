@@ -15,12 +15,13 @@ import {
 } from '../../component/voice-recording-overlay/voice-recording-overlay.component';
 import {VoiceRecorderService} from '../../store/voice-recorder.service';
 import {CommonModule} from '@angular/common';
+import {RecordingsListComponent} from './recordings-list/recordings-list-view.component';
 
 @Component({
   selector: 'profile-view',
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.scss',
-  imports: [AudioRecorderComponent, TopNavComponent, VoiceRecordingOverlayComponent, CommonModule],
+  imports: [TopNavComponent, VoiceRecordingOverlayComponent, CommonModule, RecordingsListComponent],
 })
 export class ProfileViewComponent {
   user: WritableSignal<UserModel>;

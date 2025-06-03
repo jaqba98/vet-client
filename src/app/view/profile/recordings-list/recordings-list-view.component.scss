@@ -1,0 +1,89 @@
+.recordings-list {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  .recording-item {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    .recording-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+
+      .actions {
+        display: flex;
+        gap: 0.5rem;
+
+        .btn {
+          min-width: 120px;
+          text-align: center;
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+          font-weight: 500;
+          border: none;
+          border-radius: 0.4rem;
+          cursor: pointer;
+          transition: background 0.2s, transform 0.1s;
+
+          &:hover {
+            transform: scale(1.03);
+          }
+
+          &.btn-neutral {
+            background: #6c757d;
+            color: #fff;
+
+            &:hover {
+              background: #5a6268;
+            }
+          }
+
+          &.btn-info {
+            background: #17a2b8;
+            color: #fff;
+
+            &:hover {
+              background: #138496;
+            }
+          }
+
+          &.btn-danger {
+            background: #dc3545;
+            color: #fff;
+
+            &:hover {
+              background: #c82333;
+            }
+          }
+        }
+      }
+    }
+
+    .transcript {
+      margin-top: 0.8rem;
+      background: #fff;
+      padding: 0.8rem;
+      border-left: 3px solid #0078d4;
+      border-radius: 0.3rem;
+      font-style: italic;
+      white-space: pre-wrap;
+    }
+  }
+}

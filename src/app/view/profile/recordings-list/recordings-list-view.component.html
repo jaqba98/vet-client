@@ -1,0 +1,23 @@
+<div class="recordings-list">
+  <h2>Lista nagrań</h2>
+
+  <div *ngFor="let recording of recordings" class="recording-item">
+    <div class="recording-header">
+      <div class="info">
+        <strong>{{ recording.fileName }}</strong>
+        <span class="date">{{ recording.createdAt | date: 'short' }}</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-neutral" (click)="toggleTranscript(recording)">
+          {{ recording.showTranscript ? 'Ukryj tekst' : 'Zobacz tekst' }}
+        </button>
+        <button class="btn btn-info" (click)="analyzeRecording(recording)">🔍 Analizuj</button>
+        <button class="btn btn-danger" (click)="deleteRecording(recording)">🗑 Usuń</button>
+      </div>
+    </div>
+
+    <div *ngIf="recording.showTranscript" class="transcript">
+      <p>{{ recording.transcript }}</p>
+    </div>
+  </div>
+</div>
