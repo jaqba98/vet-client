@@ -1,36 +1,37 @@
-import { Component } from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 interface Recording {
   id: string;
   fileName: string;
-  createdAt: Date;
+  createdAt: string;
   transcript: string;
   showTranscript?: boolean;
 }
 
 @Component({
   selector: 'app-recordings-list',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './recordings-list-view.component.html',
   styleUrls: ['./recordings-list-view.component.scss'],
-  standalone: true
 })
-export class RecordingsListComponent {
-  recordings: Recording[] = [
-    {
-      id: '1',
-      fileName: 'nagranie-01.wav',
-      createdAt: new Date(),
-      transcript: 'To jest transkrypcja nagrania 01.'
-    },
-    {
-      id: '2',
-      fileName: 'nagranie-02.wav',
-      createdAt: new Date(),
-      transcript: 'To jest transkrypcja nagrania 02.'
-    }
-  ];
+export class RecordingsListComponent implements OnInit {
+  recordings: Recording[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.loadRecordings();
+  }
+
+  loadRecordings() {
+    this.http.get<Recording[]>('http://localhost:8080/api/recordings').subscribe({
+      next: (data) => (this.recordings = data),
+      error: (err) => console.error('Błąd ładowania nagrań:', err),
+    });
+  }
 
   toggleTranscript(recording: Recording) {
     recording.showTranscript = !recording.showTranscript;
@@ -42,9 +43,17 @@ export class RecordingsListComponent {
 
   deleteRecording(recording: Recording) {
     const confirmed = confirm(`Czy na pewno chcesz usunąć "${recording.fileName}"?`);
-    if (confirmed) {
-      this.recordings = this.recordings.filter(r => r.id !== recording.id);
-      alert('Nagranie zostało usunięte (testowo).');
-    }
+    if (!confirmed) return;
+
+    this.http.delete(`http://localhost:8080/api/recordings/${recording.id}`).subscribe({
+      next: () => {
+        this.recordings = this.recordings.filter(r => r.id !== recording.id);
+        alert('Nagranie zostało usunięte.');
+      },
+      error: (err) => {
+        console.error('Błąd usuwania nagrania:', err);
+        alert('Wystąpił błąd podczas usuwania.');
+      }
+    });
   }
 }
