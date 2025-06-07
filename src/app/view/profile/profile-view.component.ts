@@ -15,6 +15,7 @@ import {
 } from '../../component/voice-recording-overlay/voice-recording-overlay.component';
 import {VoiceRecorderService} from '../../store/voice-recorder.service';
 import {CommonModule} from '@angular/common';
+import {HealthBotComponent} from '../../component/health-bot/health-bot.component';
 
 @Component({
   selector: 'profile-view',
