@@ -7,6 +7,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { RouteEnum } from './enum/route.enum';
 import { FetchUserGuard } from './guard/fetch-user.guard';
 import { RouteIdEnum } from './enum/route-id.enum';
+import {RecordingsListComponent} from './view/profile/recordings-list/recordings-list-view.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,17 @@ export const routes: Routes = [
     path: RouteIdEnum.profile,
     component: ProfileViewComponent,
     canActivate: [AuthGuard, FetchUserGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: '/profile/recordings',
+        pathMatch: 'full',
+      },
+      {
+        path: 'recordings',
+        component: RecordingsListComponent,
+      }
+    ]
   },
   {
     path: RouteIdEnum.other,
