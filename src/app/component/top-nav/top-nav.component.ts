@@ -6,8 +6,9 @@ import {
   ElementRef,
   ViewChild
 } from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {VoiceRecorderService} from '../../store/voice-recorder.service';
+import { CommonModule } from '@angular/common';
+import { VoiceRecorderService } from '../../store/voice-recorder.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'top-nav',
@@ -23,8 +24,10 @@ export class TopNavComponent {
   @ViewChild('dropdownWrapper') dropdownRef!: ElementRef;
   serviceMenuOpen = false;
 
-  constructor(private voiceRecorderService: VoiceRecorderService) {
-  }
+  constructor(
+    private voiceRecorderService: VoiceRecorderService,
+    private router: Router
+  ) {}
 
   toggleServiceMenu(event: MouseEvent) {
     event.stopPropagation();
@@ -57,8 +60,8 @@ export class TopNavComponent {
     this.serviceMenuOpen = false;
   }
 
-  enterPresentationMode() {
-    console.log('🖥️ Włączam tryb prezentacji');
+  healthBot() {
     this.serviceMenuOpen = false;
+    this.router.navigate(['./profile/health-bot']);
   }
 }

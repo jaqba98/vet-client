@@ -2,7 +2,8 @@ import { Component, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-health-bot',
-  template: '<div id="webchat" role="main" style="height: 500px; width: 400px;"></div>',
+  templateUrl: './health-bot.component.html',
+  styleUrls: ['./health-bot.component.scss']
 })
 export class HealthBotComponent implements AfterViewInit {
   ngAfterViewInit(): void {
