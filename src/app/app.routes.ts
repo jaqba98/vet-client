@@ -9,6 +9,7 @@ import {FetchUserGuard} from './guard/fetch-user.guard';
 import {RouteIdEnum} from './enum/route-id.enum';
 import {RecordingsListComponent} from './view/profile/recordings-list/recordings-list-view.component';
 import {HealthBotViewComponent} from './view/profile/health-bot/health-bot-view.component';
+import {RecordViewComponent} from './view/profile/record/record-view.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
         path: '',
         redirectTo: '/profile/recordings',
         pathMatch: 'full',
+      },
+      {
+        path: 'record',
+        component: RecordViewComponent,
       },
       {
         path: 'recordings',

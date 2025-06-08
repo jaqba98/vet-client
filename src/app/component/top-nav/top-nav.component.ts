@@ -25,7 +25,6 @@ export class TopNavComponent {
   serviceMenuOpen = false;
 
   constructor(
-    private voiceRecorderService: VoiceRecorderService,
     private router: Router
   ) {}
 
@@ -51,8 +50,8 @@ export class TopNavComponent {
   }
 
   startVoiceRecording() {
+    this.router.navigate(['./profile/record']);
     this.serviceMenuOpen = false;
-    this.voiceRecorderService.startRecording();
   }
 
   recordings() {
