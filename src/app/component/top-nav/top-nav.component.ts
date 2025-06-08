@@ -55,8 +55,8 @@ export class TopNavComponent {
     this.voiceRecorderService.startRecording();
   }
 
-  openAssistant() {
-    console.log('🤖 Otwieram asystenta AI');
+  recordings() {
+    this.router.navigate(['./profile/recordings']);
     this.serviceMenuOpen = false;
   }
 
