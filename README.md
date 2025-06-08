@@ -41,6 +41,7 @@ VetApp łączy klasyczne rozwiązania aplikacji medycznej z nowoczesną, konwers
 - **Backend:** Spring Boot
 - **Baza danych:** PostgreSQL
 - **Inteligentne usługi:** Microsoft Azure (Speech to Text, Chatbot, AI)
+- **Autoryzacja i logowanie:** Microsoft Entra
 
 ---
 
