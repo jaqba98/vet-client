@@ -46,74 +46,57 @@ VetApp łączy klasyczne rozwiązania aplikacji medycznej z nowoczesną, konwers
 
 ## ⚙️ Instalacja i uruchomienie
 
-### 📦 Backend (Spring Boot)
+### 1️⃣ Uruchomienie backendu z Docker Compose
 
-#### Wymagania:
-- Java 17+
-- Maven
-- PostgreSQL
+- Przejdź do repozytorium backendu:  
+  [https://github.com/jaqba98/vet-server](https://github.com/jaqba98/vet-server)
 
-#### Instalacja:
+- W katalogu projektu uruchom Docker Compose, który uruchomi wszystkie niezbędne usługi (np. bazę danych PostgreSQL):
+  ```bash
+  docker-compose up -d
+  ```
 
-```bash
-git clone https://github.com/twoj-uzytkownik/vet-app-backend.git
-cd vet-app-backend
-```
-
-Skonfiguruj `application.yml`:
-
-```yaml
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/vet_db
-    username: postgres
-    password: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-```
-
-Uruchom:
-
-```bash
-./mvnw spring-boot:run
-```
+- Sprawdź, czy usługi działają poprawnie (np. `docker ps`).
 
 ---
 
-### 🌐 Frontend (Angular)
+### 2️⃣ Uruchomienie serwera Spring Boot
 
-#### Wymagania:
-- Node.js 18+
-- Angular CLI
+- W tym samym repozytorium, po uruchomieniu Docker Compose, uruchom backend Spring Boot:
+  ```bash
+  ./mvnw spring-boot:run
+  ```
 
-#### Instalacja:
-
-```bash
-git clone https://github.com/twoj-uzytkownik/vet-app-frontend.git
-cd vet-app-frontend
-npm install
-```
-
-Konfiguracja API URL w `environment.ts`:
-
-```ts
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/api'
-};
-```
-
-Uruchom:
-
-```bash
-ng serve
-```
+- Backend powinien nasłuchiwać pod domyślnym portem (np. 8080).
 
 ---
 
-## ☁️ Integracja z Azure
+### 3️⃣ Uruchomienie frontendu Angular
+
+- Przejdź do repozytorium frontendu:  
+  [https://github.com/jaqba98/vet-client](https://github.com/jaqba98/vet-client)
+
+- Zainstaluj zależności:
+  ```bash
+  npm install
+  ```
+
+- Skonfiguruj URL API w pliku `environment.ts` (domyślnie `http://localhost:8080/api`).
+
+- Uruchom aplikację frontendową:
+  ```bash
+  ng serve
+  ```
+
+- Frontend będzie dostępny pod adresem `http://localhost:4200`.
+
+---
+
+**Teraz możesz korzystać z aplikacji, która komunikuje się z backendem i wykorzystuje inteligentne usługi Azure.**
+
+---
+
+## ☁️ Integracja z Azure ---
 
 ### Backend
 1. Utwórz **Azure App Service** (Java 17, Linux).
