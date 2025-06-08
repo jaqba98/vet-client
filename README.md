@@ -37,11 +37,10 @@ VetApp łączy klasyczne rozwiązania aplikacji medycznej z nowoczesną, konwers
 
 ## 🏗 Architektura systemu
 
-- **Frontend:** Angular 17
-- **Backend:** Spring Boot 3.x
+- **Frontend:** Angular
+- **Backend:** Spring Boot
 - **Baza danych:** PostgreSQL
-- **Hosting:** Azure App Services (BE), Azure Static Web Apps (FE)
-- **CI/CD:** GitHub Actions (opcjonalnie)
+- **Hosting:** Azure App Services (backend), Azure Static Web Apps (frontend)
 
 ---
 
