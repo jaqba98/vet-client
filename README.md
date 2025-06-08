@@ -2,17 +2,16 @@
 
 ## 📚 Spis treści
 1. [Opis projektu](#opis-projektu)
-2. [Architektura systemu](#architektura-systemu)
-3. [Technologie](#technologie)
-4. [Instalacja i uruchomienie](#instalacja-i-uruchomienie)
+2. [Technologie](#technologie)
+3. [Instalacja i uruchomienie](#instalacja-i-uruchomienie)
     - [Backend (Spring Boot)](#backend-spring-boot)
     - [Frontend (Angular)](#frontend-angular)
-5. [Integracja z Azure](#integracja-z-azure)
-6. [API REST](#api-rest)
-7. [Bezpieczeństwo](#bezpieczeństwo)
-8. [Baza danych](#baza-danych)
-9. [Przykładowe dane testowe](#przykładowe-dane-testowe)
-10. [Autorzy i licencja](#autorzy-i-licencja)
+4. [Integracja z Azure](#integracja-z-azure)
+5. [API REST](#api-rest)
+6. [Bezpieczeństwo](#bezpieczeństwo)
+7. [Baza danych](#baza-danych)
+8. [Przykładowe dane testowe](#przykładowe-dane-testowe)
+9. [Autorzy i licencja](#autorzy-i-licencja)
 
 ---
 
@@ -35,25 +34,13 @@ VetApp łączy klasyczne rozwiązania aplikacji medycznej z nowoczesną, konwers
 
 ---
 
-## 🏗 Architektura systemu
+## 🧰 Technologie
 
 - **Frontend:** Angular
 - **Backend:** Spring Boot
 - **Baza danych:** PostgreSQL
 - **Inteligentne usługi:** Microsoft Azure (Speech to Text, Chatbot, AI)
-- **Autoryzacja i logowanie:** Microsoft Entra
-
----
-
-## 🧰 Technologie
-
-| Komponent | Technologia |
-|----------|-------------|
-| Frontend | Angular, TypeScript, Angular Material |
-| Backend | Java 17, Spring Boot, Spring Security, Spring Data JPA |
-| Baza danych | PostgreSQL |
-| Hosting | Microsoft Azure |
-| Autoryzacja | JWT (JSON Web Tokens) |
+- **Autoryzacja i logowanie:** Microsoft Entra (Azure AD)
 
 ---
 
