@@ -18,7 +18,20 @@
 
 ## 🐶 Opis projektu
 
-Aplikacja Weterynarza to platforma internetowa umożliwiająca zarządzanie wizytami, pacjentami (zwierzętami), właścicielami oraz personelem weterynaryjnym. Projekt służy do celów edukacyjnych w ramach kursu **"Inteligentne Usługi Internetowe"**.
+**VetApp** to nowoczesna aplikacja internetowa wspierająca codzienną pracę weterynarzy poprzez integrację z inteligentnymi usługami chmurowymi Microsoft Azure. Jej głównym celem jest automatyzacja i usprawnienie procesów diagnostycznych oraz komunikacyjnych w gabinecie weterynaryjnym.
+
+System oferuje szereg funkcji klasycznych (zarządzanie pacjentami, wizytami, personelem), ale jego wyróżnikiem są **inteligentne usługi oparte na AI**, takie jak:
+
+- 🎙️ **Głosowy wywiad z właścicielem zwierzęcia**  
+  Aplikacja umożliwia przeprowadzenie wywiadu medycznego za pomocą mowy – wypowiedzi są automatycznie przekształcane na tekst (usługa Azure Speech to Text), a następnie analizowane pod kątem istotnych objawów lub słów kluczowych.
+
+- 🤖 **Chatbot diagnostyczny oparty na Azure AI**  
+  Użytkownicy (np. właściciele zwierząt lub recepcjoniści) mogą skorzystać z wbudowanego chatbota, który na podstawie kilku pytań potrafi wstępnie ocenić, czy dane zwierzę wymaga natychmiastowej konsultacji weterynaryjnej.
+
+- 📈 **Analiza danych i raportowanie**  
+  Dzięki integracji z usługami Azure możliwe jest zbieranie danych o wizytach, objawach i diagnozach w celu generowania statystyk oraz wniosków diagnostycznych w czasie rzeczywistym.
+
+VetApp łączy klasyczne rozwiązania aplikacji medycznej z nowoczesną, konwersacyjną i inteligentną obsługą, stając się narzędziem przyszłości w pracy każdego weterynarza.
 
 ---
 
