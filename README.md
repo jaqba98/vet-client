@@ -8,10 +8,9 @@
     - [Frontend (Angular)](#frontend-angular)
 4. [Integracja z Azure](#integracja-z-azure)
 5. [API REST](#api-rest)
-6. [Bezpieczeństwo](#bezpieczeństwo)
-7. [Baza danych](#baza-danych)
-8. [Przykładowe dane testowe](#przykładowe-dane-testowe)
-9. [Autorzy i licencja](#autorzy-i-licencja)
+6. [Baza danych](#baza-danych)
+7. [Przykładowe dane testowe](#przykładowe-dane-testowe)
+8. [Autorzy i licencja](#autorzy-i-licencja)
 
 ---
 
@@ -123,55 +122,79 @@ azure.language.key=YOUR_AZURE_LANGUAGE_KEY
 
 ---
 
-## 🔗 API REST ---
+## 🔗 API REST
 
-Przykładowe endpointy:
+## 1. Analiza tekstu (Azure Language Service)
 
-| Metoda | Endpoint | Opis |
-|--------|----------|------|
-| `GET` | `/api/pets` | Lista zwierząt |
-| `POST` | `/api/appointments` | Dodaj wizytę |
-| `GET` | `/api/owners/{id}` | Szczegóły właściciela |
-| `POST` | `/api/auth/login` | Logowanie |
+* **Endpoint:** `POST /api/analyze`
+* **Opis:** Analizuje tekst przy pomocy usługi Azure Language.
+* **Request Body:** JSON z polem `text`, np.:
 
-**Autoryzacja:** `Authorization: Bearer <token>`
+## 2. Obsługa nagrań (Recording)
 
----
+* `POST /api/recordings` – Zapisuje nowe nagranie, zwraca zapisany obiekt.
+* `GET /api/recordings` – Pobiera listę wszystkich nagrań.
+* `GET /api/recordings/{id}` – Pobiera nagranie po id.
+* `PUT /api/recordings/{id}` – Aktualizuje nagranie.
+* `DELETE /api/recordings/{id}` – Usuwa nagranie.
 
-## 🔐 Bezpieczeństwo
+## 3. Transkrypcja mowy (Speech to Text)
 
-- JWT dla autoryzacji
-- Role użytkowników: `ADMIN`, `VET`, `RECEPCJONISTA`
-- Hashowanie haseł za pomocą BCrypt
+* **Endpoint:** `POST /api/speech-to-text`
+* **Opis:** Przesyła plik audio (format webm), konwertuje go do wav, a następnie wysyła do Azure Speech to Text w celu rozpoznania mowy.
+
+## 4. Zarządzanie użytkownikami
+
+* **Endpoint:** `POST /api/v1/create-user`
+* **Opis:** Tworzy nowego użytkownika lub informuje o jego istnieniu.
 
 ---
 
 ## 🗃️ Baza danych
 
-Struktura tabel (skrót):
-
-- `users(id, username, password, role)`
-- `owners(id, name, phone)`
-- `pets(id, name, species, owner_id)`
-- `appointments(id, date, pet_id, vet_id)`
-
----
-
-## 🧪 Przykładowe dane testowe
-
 ```sql
-INSERT INTO users (username, password, role)
-VALUES ('admin', '$2a$10$xyz...', 'ADMIN');
-
-INSERT INTO owners (name, phone) VALUES ('Jan Kowalski', '123456789');
-INSERT INTO pets (name, species, owner_id) VALUES ('Burek', 'Pies', 1);
-```
+# 💾 Struktura Bazy Danych
 
 ---
 
-## 👨‍💻 Autorzy i licencja
+Poniżej przedstawiono schemat tabel bazy danych, które odpowiadają modelom encji używanym w aplikacji.
 
-- **Autor:** [Twoje imię i nazwisko]
-- **Uczelnia:** [Nazwa uczelni]
-- **Przedmiot:** Inteligentne Usługi Internetowe
-- **Licencja:** MIT
+---
+
+## Tabela: `recordings`
+
+Ta tabela przechowuje informacje o nagraniach audio.
+
+| Kolumna       | Typ danych SQL | Opis                                             | Ograniczenia            |
+| :------------ | :------------- | :----------------------------------------------- | :---------------------- |
+| `id`          | `UUID`         | **Klucz główny**. Unikalny identyfikator nagrania. | `NOT NULL`, `PRIMARY KEY` |
+| `file_name`   | `VARCHAR(...)` | Nazwa pliku nagrania.                            | `NOT NULL`              |
+| `created_at`  | `DATETIME`     | Data i czas utworzenia nagrania.                 | `NOT NULL`              |
+| `transcript`  | `TEXT`         | Transkrypcja nagrania. Może być pusta.           | `NULL` (domyślnie)      |
+
+---
+
+## Tabela: `recording_analysis`
+
+Tabela ta jest przeznaczona do przechowywania wyników analizy nagrań.
+
+| Kolumna | Typ danych SQL   | Opis                                     | Ograniczenia            |
+| :------ | :--------------- | :--------------------------------------- | :---------------------- |
+| `id`    | `BIGINT`         | **Klucz główny**. Unikalny identyfikator analizy. | `NOT NULL`, `PRIMARY KEY` |
+| `data`  | *Brak bezpośredniego mapowania* | Lista par klucz-wartość (szczegóły mogą zależeć od implementacji `KeyValuePair` i specyfiki bazy danych). |                        |
+
+*Uwaga: W kontekście relacyjnej bazy danych, `List<KeyValuePair>` często jest implementowany jako osobna tabela, np. `recording_analysis_data`, z kolumnami takimi jak `analysis_id`, `key` i `value`, gdzie `analysis_id` byłoby kluczem obcym do tabeli `recording_analysis`.*
+
+---
+
+## Tabela: `users`
+
+Ta tabela przechowuje informacje o użytkownikach systemu.
+
+| Kolumna           | Typ danych SQL | Opis                                       | Ograniczenia                                                                    |
+| :---------------- | :------------- | :----------------------------------------- | :------------------------------------------------------------------------------ |
+| `id`              | `BIGINT`       | **Klucz główny**. Unikalny identyfikator użytkownika. | `NOT NULL`, `PRIMARY KEY`, `AUTO_INCREMENT` (lub sekwencja)                      |
+| `home_account_id` | `VARCHAR(...)` | Unikalny identyfikator konta domowego użytkownika. | `NOT NULL`, `UNIQUE` (ograniczenie: `users_home_account_id_unique`) |
+| `name`            | `VARCHAR(...)` | Pełne imię i nazwisko użytkownika.         | `NOT NULL`                                                                      |
+| `username`        | `VARCHAR(...)` | Nazwa użytkownika (login).                 | `NOT NULL`                                                                      |
+```
