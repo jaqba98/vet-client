@@ -96,22 +96,34 @@ VetApp łączy klasyczne rozwiązania aplikacji medycznej z nowoczesną, konwers
 
 ---
 
-## ☁️ Integracja z Azure ---
+## ☁️ Integracja z Azure
 
-### Backend
-1. Utwórz **Azure App Service** (Java 17, Linux).
-2. Skonfiguruj **Azure Database for PostgreSQL**.
-3. Wdróż backend przez GitHub Actions lub FTP.
-4. Skonfiguruj zmienne środowiskowe (`SPRING_DATASOURCE_URL`, itp.) w App Service.
+Aby poprawnie uruchomić backend z integracją usług Azure, należy skonfigurować plik `application.yml` lub `application.properties` z następującymi ustawieniami:
 
-### Frontend
-1. Utwórz **Azure Static Web App**.
-2. Wdróż kod z GitHub.
-3. Ustaw `apiUrl` w `environment.prod.ts` do produkcyjnego backendu.
+```properties
+spring.application.name=vet-server
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/vet_db
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+
+# Klucz i region usługi Azure Speech to Text
+azure.speech.key=YOUR_AZURE_SPEECH_KEY
+azure.speech.region=YOUR_AZURE_REGION
+
+# Endpoint i klucz usługi Azure Language (np. do analiz i chatbotów)
+azure.language.endpoint=YOUR_AZURE_LANGUAGE_ENDPOINT
+azure.language.key=YOUR_AZURE_LANGUAGE_KEY
+```
 
 ---
 
-## 🔗 API REST
+## 🔗 API REST ---
 
 Przykładowe endpointy:
 
