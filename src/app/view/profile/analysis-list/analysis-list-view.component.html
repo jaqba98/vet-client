@@ -1,17 +1,27 @@
-<div class="text-analysis-list">
-  <h2>Analiza tekstów</h2>
+<div class="container">
+  <h2>Lista zapisanych analiz</h2>
 
-  <div *ngFor="let analysis of analyses" class="analysis-item">
-    <div class="analysis-header">
-      <div class="info">
-        <strong>{{ analysis.fileName }}</strong>
-        <span class="date">{{ analysis.analyzedAt | date: 'short' }}</span>
-      </div>
-    </div>
+  <div *ngIf="isLoading" class="loading">⏳ Ładowanie danych...</div>
 
-    <div class="analysis-results">
-      <h3>Wyniki analizy:</h3>
-      <pre>{{ analysis.results | json }}</pre>
-    </div>
+  <div *ngIf="!isLoading && analyses.length === 0" class="empty">
+    ⚠️ Brak dostępnych analiz.
+  </div>
+
+  <div *ngFor="let analysis of analyses" class="analysis-card">
+    <div class="card-header">Analiza ID: {{ analysis.id }}</div>
+    <table class="data-table">
+      <thead>
+      <tr>
+        <th>Klucz</th>
+        <th>Wartość</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pair of analysis.data">
+        <td>{{ pair.key }}</td>
+        <td>{{ pair.value }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

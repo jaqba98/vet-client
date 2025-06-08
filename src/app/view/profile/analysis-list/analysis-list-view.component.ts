@@ -1,34 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import {CommonModule} from '@angular/common';
 
-interface TextAnalysis {
-  id: string;
-  fileName: string;
-  analyzedAt: string;
-  results: any; // Can be an object containing text analysis details
+interface KeyValuePair {
+  key: string;
+  value: string;
+}
+
+interface RecordingAnalysis {
+  id: number;
+  data: KeyValuePair[];
 }
 
 @Component({
-  selector: 'app-text-analysis',
-  standalone: true,
+  selector: 'app-recording-list',
   imports: [CommonModule],
   templateUrl: './analysis-list-view.component.html',
-  styleUrls: ['./analysis-list-view.component.scss'],
+  styleUrls: ['./analysis-list-view.component.scss']
 })
-export class TextAnalysisComponent implements OnInit {
-  analyses: TextAnalysis[] = [];
+export class RecordingListComponent implements OnInit {
+  analyses: RecordingAnalysis[] = [];
+  isLoading = true;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadAnalyses();
-  }
-
-  loadAnalyses() {
-    this.http.get<TextAnalysis[]>('http://localhost:8080/api/text-analyses').subscribe({
-      next: (data) => (this.analyses = data),
-      error: (err) => console.error('Błąd ładowania analiz tekstów:', err),
-    });
+    this.http.get<RecordingAnalysis[]>('http://localhost:8080/recordings')
+      .subscribe({
+        next: (data) => {
+          this.analyses = data;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Błąd pobierania analiz:', err);
+          this.isLoading = false;
+        }
+      });
   }
 }

@@ -1,89 +1,52 @@
-.recordings-list {
-  padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
 
-  h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-  }
+h2 {
+  text-align: center;
+  color: #333;
+}
 
-  .recording-item {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
+.loading, .empty {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  margin-top: 20px;
+}
 
-    .recording-header {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1rem;
+.analysis-card {
+  background: #fff;
+  margin: 20px 0;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
 
-      .info {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-      }
+.card-header {
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: #444;
+}
 
-      .actions {
-        display: flex;
-        gap: 0.5rem;
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-        .btn {
-          min-width: 120px;
-          text-align: center;
-          padding: 0.5rem 1rem;
-          font-size: 0.9rem;
-          font-weight: 500;
-          border: none;
-          border-radius: 0.4rem;
-          cursor: pointer;
-          transition: background 0.2s, transform 0.1s;
+.data-table th, .data-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
 
-          &:hover {
-            transform: scale(1.03);
-          }
-
-          &.btn-neutral {
-            background: #6c757d;
-            color: #fff;
-
-            &:hover {
-              background: #5a6268;
-            }
-          }
-
-          &.btn-info {
-            background: #17a2b8;
-            color: #fff;
-
-            &:hover {
-              background: #138496;
-            }
-          }
-
-          &.btn-danger {
-            background: #dc3545;
-            color: #fff;
-
-            &:hover {
-              background: #c82333;
-            }
-          }
-        }
-      }
-    }
-
-    .transcript {
-      margin-top: 0.8rem;
-      background: #fff;
-      padding: 0.8rem;
-      border-left: 3px solid #0078d4;
-      border-radius: 0.3rem;
-      font-style: italic;
-      white-space: pre-wrap;
-    }
-  }
+.data-table th {
+  background-color: #f0f0f0;
+  color: #555;
 }

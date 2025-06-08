@@ -38,8 +38,46 @@ export class RecordingsListComponent implements OnInit {
   }
 
   analyzeRecording(recording: Recording) {
-    alert(`Analiza nagrania: ${recording.fileName}\n(To tylko test – tutaj dodasz logikę analizy)`);
+    const analyzeUrl = 'http://localhost:8080/api/analyze';
+    const analyzePayload = { text: recording.transcript };
+
+    this.http.post<any>(analyzeUrl, analyzePayload).subscribe({
+      next: (analysis) => {
+        console.log('Wynik analizy:', analysis);
+
+        const keyValuePairs = analysis.documents.flatMap((doc: any) =>
+          doc.entities.map((entity: any) => ({
+            key: entity.category + (entity.subcategory ? `.${entity.subcategory}` : ''),
+            value: entity.text
+          }))
+        );
+
+        const saveUrl = 'http://localhost:8080/recordings';
+        this.http.post(saveUrl, { data: keyValuePairs }).subscribe({
+          next: () => {
+            console.log('Zapisano analizę');
+            // 🔽 Po zapisie pobierz wszystkie rekordy
+            this.http.get<any[]>('http://localhost:8080/recordings').subscribe({
+              next: (allRecords) => {
+                console.log('Aktualne rekordy w bazie:', allRecords);
+              },
+              error: (err) => {
+                console.error('Błąd przy pobieraniu danych:', err);
+              }
+            });
+          },
+          error: (err) => {
+            console.error('Błąd zapisu:', err);
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Błąd analizy tekstu:', err);
+      },
+    });
   }
+
+
 
   deleteRecording(recording: Recording) {
     const confirmed = confirm(`Czy na pewno chcesz usunąć "${recording.fileName}"?`);
