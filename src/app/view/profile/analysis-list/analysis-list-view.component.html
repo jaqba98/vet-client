@@ -1,0 +1,17 @@
+<div class="text-analysis-list">
+  <h2>Analiza tekstów</h2>
+
+  <div *ngFor="let analysis of analyses" class="analysis-item">
+    <div class="analysis-header">
+      <div class="info">
+        <strong>{{ analysis.fileName }}</strong>
+        <span class="date">{{ analysis.analyzedAt | date: 'short' }}</span>
+      </div>
+    </div>
+
+    <div class="analysis-results">
+      <h3>Wyniki analizy:</h3>
+      <pre>{{ analysis.results | json }}</pre>
+    </div>
+  </div>
+</div>

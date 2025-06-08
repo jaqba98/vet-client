@@ -59,6 +59,11 @@ export class TopNavComponent {
     this.serviceMenuOpen = false;
   }
 
+  analisis() {
+    this.router.navigate(['./profile/analisis']);
+    this.serviceMenuOpen = false;
+  }
+
   healthBot() {
     this.serviceMenuOpen = false;
     this.router.navigate(['./profile/health-bot']);

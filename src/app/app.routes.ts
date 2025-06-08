@@ -10,6 +10,7 @@ import {RouteIdEnum} from './enum/route-id.enum';
 import {RecordingsListComponent} from './view/profile/recordings-list/recordings-list-view.component';
 import {HealthBotViewComponent} from './view/profile/health-bot/health-bot-view.component';
 import {RecordViewComponent} from './view/profile/record/record-view.component';
+import {TextAnalysisComponent} from './view/profile/analysis-list/analysis-list-view.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,10 @@ export const routes: Routes = [
       {
         path: 'health-bot',
         component: HealthBotViewComponent,
+      },
+      {
+        path: 'analisis',
+        component: TextAnalysisComponent
       }
     ]
   },
