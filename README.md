@@ -1,4 +1,4 @@
-# 🐾 Aplikacja Weterynarza – Dokumentacja Techniczna
+# 🐾 VetApp – Aplikacja Weterynarza – Dokumentacja Techniczna
 
 ## 📚 Spis treści
 1. [Opis projektu](#opis-projektu)
