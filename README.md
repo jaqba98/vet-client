@@ -1,5 +1,8 @@
 # 🐾 VetApp – Aplikacja Weterynarza – Dokumentacja Techniczna
 
+# Wykonał:
+Jakub Olejarczyk - s086748
+
 ## 📚 Spis treści
 1. [Opis projektu](#opis-projektu)
 2. [Technologie](#technologie)
